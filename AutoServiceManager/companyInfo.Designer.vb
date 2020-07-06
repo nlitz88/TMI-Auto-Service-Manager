@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class companyInfo
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class companyInfo
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.companyNameLabel = New System.Windows.Forms.Label()
         Me.companyNameLabel2 = New System.Windows.Forms.Label()
@@ -51,8 +51,6 @@ Partial Class companyInfo
         Me.cancelButton = New System.Windows.Forms.Button()
         Me.stateLabel = New System.Windows.Forms.Label()
         Me.stateTextbox = New System.Windows.Forms.TextBox()
-        Me.companyName2Value = New System.Windows.Forms.Label()
-        Me.companyNameValue = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'companyNameLabel
@@ -144,7 +142,6 @@ Partial Class companyInfo
         Me.companyNameTextbox.Size = New System.Drawing.Size(271, 27)
         Me.companyNameTextbox.TabIndex = 8
         Me.companyNameTextbox.Text = "SChweikharth's Auto Service"
-        Me.companyNameTextbox.Visible = False
         Me.companyNameTextbox.WordWrap = False
         '
         'companyName2Textbox
@@ -154,7 +151,6 @@ Partial Class companyInfo
         Me.companyName2Textbox.Name = "companyName2Textbox"
         Me.companyName2Textbox.Size = New System.Drawing.Size(271, 27)
         Me.companyName2Textbox.TabIndex = 9
-        Me.companyName2Textbox.Visible = False
         '
         'addressLine1Textbox
         '
@@ -336,28 +332,6 @@ Partial Class companyInfo
         Me.stateTextbox.Size = New System.Drawing.Size(110, 27)
         Me.stateTextbox.TabIndex = 28
         '
-        'companyName2Value
-        '
-        Me.companyName2Value.AutoSize = True
-        Me.companyName2Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.companyName2Value.ForeColor = System.Drawing.Color.Black
-        Me.companyName2Value.Location = New System.Drawing.Point(276, 256)
-        Me.companyName2Value.Name = "companyName2Value"
-        Me.companyName2Value.Size = New System.Drawing.Size(51, 20)
-        Me.companyName2Value.TabIndex = 29
-        Me.companyName2Value.Text = "N & W"
-        '
-        'companyNameValue
-        '
-        Me.companyNameValue.AutoSize = True
-        Me.companyNameValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.companyNameValue.ForeColor = System.Drawing.Color.Black
-        Me.companyNameValue.Location = New System.Drawing.Point(276, 220)
-        Me.companyNameValue.Name = "companyNameValue"
-        Me.companyNameValue.Size = New System.Drawing.Size(252, 20)
-        Me.companyNameValue.TabIndex = 30
-        Me.companyNameValue.Text = "SChweikharth's Auto Service"
-        '
         'companyInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -365,8 +339,6 @@ Partial Class companyInfo
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
-        Me.Controls.Add(Me.companyNameValue)
-        Me.Controls.Add(Me.companyName2Value)
         Me.Controls.Add(Me.stateTextbox)
         Me.Controls.Add(Me.stateLabel)
         Me.Controls.Add(Me.cancelButton)
@@ -434,6 +406,4 @@ Partial Class companyInfo
     Friend WithEvents cancelButton As Button
     Friend WithEvents stateLabel As Label
     Friend WithEvents stateTextbox As TextBox
-    Friend WithEvents companyName2Value As Label
-    Friend WithEvents companyNameValue As Label
 End Class
