@@ -5,8 +5,8 @@
         companyInfoLabel.Left = (Me.ClientSize.Width / 2) - (companyInfoLabel.Width / 2) ' ????
 
         ' Data modification controls
-        cancelButton.Hide()
-        saveButton.Hide()
+        'cancelButton.Hide()
+        'saveButton.Hide()
 
     End Sub
 
@@ -35,6 +35,9 @@
                 ' Write changes to database
                 ' Switch back to labels with updated data from database (reload the form essentially)
                 ' Go back to showing edit button
+                cancelButton.Hide()
+                saveButton.Hide()
+                editButton.Show()
             Case DialogResult.No
                 ' Continue making changes or cancel editing
         End Select
