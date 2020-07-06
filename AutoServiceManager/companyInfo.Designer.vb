@@ -369,7 +369,7 @@ Partial Class companyInfo
         Me.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.Name = "companyInfo"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Company Information"
+        Me.Text = "1"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

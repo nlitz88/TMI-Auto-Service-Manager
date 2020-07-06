@@ -1,3 +1,4 @@
-/AutoServiceManager/bin
 .*
 !/.gitignore
+/AutoServiceManager/bin
+/AutoServiceManager/obj/Debug
