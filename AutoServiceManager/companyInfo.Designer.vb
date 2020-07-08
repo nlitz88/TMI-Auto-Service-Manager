@@ -154,7 +154,6 @@ Partial Class companyInfo
         Me.companyNameTextbox.Size = New System.Drawing.Size(271, 27)
         Me.companyNameTextbox.TabIndex = 8
         Me.companyNameTextbox.Tag = "dataField"
-        Me.companyNameTextbox.Text = "SChweikharth's Auto Service"
         Me.companyNameTextbox.Visible = False
         Me.companyNameTextbox.WordWrap = False
         '
@@ -307,6 +306,7 @@ Partial Class companyInfo
         Me.backButton.Name = "backButton"
         Me.backButton.Size = New System.Drawing.Size(110, 30)
         Me.backButton.TabIndex = 23
+        Me.backButton.Tag = "navigation"
         Me.backButton.Text = "Back"
         Me.backButton.UseVisualStyleBackColor = False
         '
