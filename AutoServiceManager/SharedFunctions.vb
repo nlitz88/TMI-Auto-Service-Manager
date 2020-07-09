@@ -1,8 +1,9 @@
 ﻿Module SharedFunctions
 
+    ' ************************ ITEM MANIPULATION ************************
 
     ' Used to return all items of a certain group (items that have the same identifying tag) as an iterable ArrayList.
-    Public Function getAllItemsWithTag(ByVal tag As String)
+    Public Function getAllItemsWithTag(ByVal tag As String) As ArrayList
 
         Dim items As New ArrayList
 
@@ -33,7 +34,7 @@
 
     ' Function used to check if the text of any textbox on a form has been modified.
     ' Currently utilized to determine if save button present on companyInfo form
-    Public Function changesMadeToText(ByVal items As ArrayList, ByVal initialValues As Dictionary(Of String, String))
+    Public Function changesMadeToText(ByVal items As ArrayList, ByVal initialValues As Dictionary(Of String, String)) As Boolean
 
         Dim result As Boolean = False
 
