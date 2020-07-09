@@ -42,12 +42,11 @@
     Private Sub editButton_Click(sender As Object, e As EventArgs) Handles editButton.Click
 
         ' Enable cancelButton and disable editButton
-        cancelButton.Show()
-        editButton.Hide()
+        cancelButton.Enabled = True
+        navigationPlaceholderButton.Enabled = False
 
         ' Disable all navigation controls while editing
         showHide(getAllItemsWithTag("navigation"), 0)
-
         ' disable/enable the dataLabels and dataFields, respectively
         showHide(getAllItemsWithTag("dataLabel"), 0)
         showHide(getAllItemsWithTag("dataField"), 1)
@@ -65,10 +64,10 @@
                 Case DialogResult.Yes
 
                     ' Disable all editing controls
-                    cancelButton.Hide()
-                    saveButton.Hide()
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
                     ' re-enable other hidden form controls
-                    editButton.Show()
+                    editButton.Enabled = True
                     ' re-enable navigation controls
                     showHide(getAllItemsWithTag("navigation"), 1)
                     ' enable/disable the dataLabels and dataFields, respectively
@@ -82,10 +81,10 @@
         Else
 
             ' Disable all editing controls
-            cancelButton.Hide()
-            saveButton.Hide()
+            cancelButton.Enabled = False
+            saveButton.Enabled = False
             ' re-enable other hidden form controls
-            editButton.Show()
+            editButton.Enabled = True
             ' re-enable navigation controls
             showHide(getAllItemsWithTag("navigation"), 1)
             ' enable/disable the dataLabels and dataFields, respectively
@@ -108,10 +107,10 @@
                 ' 3.) Go back to showing edit button and navigation controls
 
                 ' Disable all editing controls
-                cancelButton.Hide()
-                saveButton.Hide()
+                cancelButton.Enabled = False
+                saveButton.Enabled = False
                 ' re-enable other hidden form controls
-                editButton.Show()
+                editButton.Enabled = True
                 ' re-enable navigation controls
                 showHide(getAllItemsWithTag("navigation"), 1)
 
@@ -139,9 +138,9 @@
         ' This applies for this Textbox sub and all dataField tagged Textboxes that follow
         If formLoaded Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
-                saveButton.Show()
+                saveButton.Enabled = True
             Else
-                saveButton.Hide()
+                saveButton.Enabled = False
             End If
         End If
 
@@ -151,9 +150,9 @@
 
         If formLoaded Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
-                saveButton.Show()
+                saveButton.Enabled = True
             Else
-                saveButton.Hide()
+                saveButton.Enabled = False
             End If
         End If
 
@@ -163,9 +162,9 @@
 
         If formLoaded Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
-                saveButton.Show()
+                saveButton.Enabled = True
             Else
-                saveButton.Hide()
+                saveButton.Enabled = False
             End If
         End If
 
@@ -175,9 +174,9 @@
 
         If formLoaded Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
-                saveButton.Show()
+                saveButton.Enabled = True
             Else
-                saveButton.Hide()
+                saveButton.Enabled = False
             End If
         End If
 
@@ -187,9 +186,9 @@
 
         If formLoaded Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
-                saveButton.Show()
+                saveButton.Enabled = True
             Else
-                saveButton.Hide()
+                saveButton.Enabled = False
             End If
         End If
 
@@ -199,9 +198,9 @@
 
         If formLoaded Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
-                saveButton.Show()
+                saveButton.Enabled = True
             Else
-                saveButton.Hide()
+                saveButton.Enabled = False
             End If
         End If
 
@@ -211,9 +210,9 @@
 
         If formLoaded Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
-                saveButton.Show()
+                saveButton.Enabled = True
             Else
-                saveButton.Hide()
+                saveButton.Enabled = False
             End If
         End If
 
@@ -223,9 +222,9 @@
 
         If formLoaded Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
-                saveButton.Show()
+                saveButton.Enabled = True
             Else
-                saveButton.Hide()
+                saveButton.Enabled = False
             End If
         End If
 
@@ -235,9 +234,9 @@
 
         If formLoaded Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
-                saveButton.Show()
+                saveButton.Enabled = True
             Else
-                saveButton.Hide()
+                saveButton.Enabled = False
             End If
         End If
 
@@ -247,9 +246,9 @@
 
         If formLoaded Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
-                saveButton.Show()
+                saveButton.Enabled = True
             Else
-                saveButton.Hide()
+                saveButton.Enabled = False
             End If
         End If
 
@@ -259,9 +258,9 @@
 
         If formLoaded Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
-                saveButton.Show()
+                saveButton.Enabled = True
             Else
-                saveButton.Hide()
+                saveButton.Enabled = False
             End If
         End If
 
@@ -271,13 +270,16 @@
 
         If formLoaded Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
-                saveButton.Show()
+                saveButton.Enabled = True
             Else
-                saveButton.Hide()
+                saveButton.Enabled = False
             End If
         End If
 
     End Sub
 
+    Private Sub navigationPlaceholderButton_Click(sender As Object, e As EventArgs) Handles navigationPlaceholderButton.Click
+        Me.Close()
+    End Sub
 
 End Class

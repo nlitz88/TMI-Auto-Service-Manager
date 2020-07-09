@@ -45,7 +45,7 @@ Partial Class companyInfo
         Me.phone2Label = New System.Windows.Forms.Label()
         Me.taxRateLabel = New System.Windows.Forms.Label()
         Me.laborRateLabel = New System.Windows.Forms.Label()
-        Me.backButton = New System.Windows.Forms.Button()
+        Me.navigationPlaceholderButton = New System.Windows.Forms.Button()
         Me.editButton = New System.Windows.Forms.Button()
         Me.saveButton = New System.Windows.Forms.Button()
         Me.cancelButton = New System.Windows.Forms.Button()
@@ -242,7 +242,7 @@ Partial Class companyInfo
         Me.phone2Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.phone2Textbox.Location = New System.Drawing.Point(655, 384)
         Me.phone2Textbox.Name = "phone2Textbox"
-        Me.phone2Textbox.Size = New System.Drawing.Size(186, 27)
+        Me.phone2Textbox.Size = New System.Drawing.Size(181, 27)
         Me.phone2Textbox.TabIndex = 17
         Me.phone2Textbox.Tag = "dataField"
         Me.phone2Textbox.Visible = False
@@ -297,25 +297,25 @@ Partial Class companyInfo
         Me.laborRateLabel.TabIndex = 22
         Me.laborRateLabel.Text = "Labor Rate :"
         '
-        'backButton
+        'navigationPlaceholderButton
         '
-        Me.backButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.backButton.ForeColor = System.Drawing.Color.White
-        Me.backButton.Location = New System.Drawing.Point(101, 75)
-        Me.backButton.Name = "backButton"
-        Me.backButton.Size = New System.Drawing.Size(110, 30)
-        Me.backButton.TabIndex = 23
-        Me.backButton.Tag = "navigation"
-        Me.backButton.Text = "Back"
-        Me.backButton.UseVisualStyleBackColor = False
+        Me.navigationPlaceholderButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.navigationPlaceholderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.navigationPlaceholderButton.ForeColor = System.Drawing.Color.White
+        Me.navigationPlaceholderButton.Location = New System.Drawing.Point(101, 23)
+        Me.navigationPlaceholderButton.Name = "navigationPlaceholderButton"
+        Me.navigationPlaceholderButton.Size = New System.Drawing.Size(735, 30)
+        Me.navigationPlaceholderButton.TabIndex = 23
+        Me.navigationPlaceholderButton.Tag = "navigation"
+        Me.navigationPlaceholderButton.Text = "Navigation Placeholder"
+        Me.navigationPlaceholderButton.UseVisualStyleBackColor = False
         '
         'editButton
         '
         Me.editButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.editButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.editButton.ForeColor = System.Drawing.Color.White
-        Me.editButton.Location = New System.Drawing.Point(217, 75)
+        Me.editButton.Location = New System.Drawing.Point(101, 84)
         Me.editButton.Name = "editButton"
         Me.editButton.Size = New System.Drawing.Size(110, 30)
         Me.editButton.TabIndex = 24
@@ -325,28 +325,28 @@ Partial Class companyInfo
         'saveButton
         '
         Me.saveButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.saveButton.Enabled = False
         Me.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.saveButton.ForeColor = System.Drawing.Color.White
-        Me.saveButton.Location = New System.Drawing.Point(333, 75)
+        Me.saveButton.Location = New System.Drawing.Point(333, 84)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
         Me.saveButton.TabIndex = 25
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
-        Me.saveButton.Visible = False
         '
         'cancelButton
         '
         Me.cancelButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.cancelButton.Enabled = False
         Me.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cancelButton.ForeColor = System.Drawing.Color.White
-        Me.cancelButton.Location = New System.Drawing.Point(217, 75)
+        Me.cancelButton.Location = New System.Drawing.Point(217, 84)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
         Me.cancelButton.TabIndex = 26
         Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
-        Me.cancelButton.Visible = False
         '
         'stateLabel
         '
@@ -535,7 +535,7 @@ Partial Class companyInfo
         Me.Controls.Add(Me.cancelButton)
         Me.Controls.Add(Me.saveButton)
         Me.Controls.Add(Me.editButton)
-        Me.Controls.Add(Me.backButton)
+        Me.Controls.Add(Me.navigationPlaceholderButton)
         Me.Controls.Add(Me.laborRateLabel)
         Me.Controls.Add(Me.taxRateLabel)
         Me.Controls.Add(Me.phone2Label)
@@ -592,7 +592,7 @@ Partial Class companyInfo
     Friend WithEvents phone2Label As Label
     Friend WithEvents taxRateLabel As Label
     Friend WithEvents laborRateLabel As Label
-    Friend WithEvents backButton As Button
+    Friend WithEvents navigationPlaceholderButton As Button
     Friend WithEvents editButton As Button
     Friend WithEvents saveButton As Button
     Friend WithEvents cancelButton As Button
