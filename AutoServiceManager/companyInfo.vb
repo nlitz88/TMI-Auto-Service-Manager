@@ -4,6 +4,10 @@
     Dim formLoaded As Boolean = False
     ' Dictionary to maintain initial dataLabel/dataField values to compare against when changes are made
     Dim initialDataValues As New Dictionary(Of String, String)
+    ' Datatable for dataAdapter to load data into. This really should be moved to a class
+    Dim CompanyMasterDataTable As DataTable
+    ' Another Connection variable. Describes whether or not connection attempt throws exception
+    Dim connHasException As Boolean = False
 
 
     ' Sub to load load initial data from database
@@ -35,7 +39,7 @@
 
 
         ' ******** DEFINE DATAADAPTER AND DATATABLE ********
-        Dim CompanyMasterDataTable As DataTable              ' Define dataTable that dataAdapter will fill (into internal dataset?)
+        'Dim CompanyMasterDataTable As DataTable              ' Define dataTable that dataAdapter will fill (into internal dataset?)
         Dim accessAdapter As OleDb.OleDbDataAdapter     ' Define OleDB dataAdapter that will interface with the access database
         ' Somewhere to automate adding parameters for more advanced queries?
 
@@ -59,15 +63,30 @@
             ' Use the acesssAdapter to fill the dataTable
             accessAdapter.Fill(CompanyMasterDataTable)
 
-
-            MessageBox.Show(CompanyMasterDataTable.Rows(0)("CompanyName1"))
-
+            MessageBox.Show(CompanyMasterDataTable.Rows(0)("CompanyName2"))
 
         Catch ex As Exception
 
             MessageBox.Show("An erorr has occurred: " & vbNewLine & vbNewLine & ex.Message.ToString(), "Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            connHasException = True
+
+        Finally
+
+            If accessConn.State = ConnectionState.Open Then accessConn.Close()
 
         End Try
+
+
+    End Sub
+
+    Private Sub initializeValues()
+
+        If Not connHasException Then
+            For Each column In CompanyMasterDataTable.Columns
+                initialDataValues.Add(column.ColumnName.ToString(), "test")
+            Next
+        End If
+
 
 
     End Sub
