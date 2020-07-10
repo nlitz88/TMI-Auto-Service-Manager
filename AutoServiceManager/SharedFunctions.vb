@@ -49,7 +49,7 @@
 
             Catch ex As Exception
 
-                Console.WriteLine(item.Name & " apparently isn't a key. Exception : " & vbNewLine & vbNewLine & ex.Message)
+                Console.WriteLine(item.Name & " apparently isn't a key. Exception : " & vbNewLine & ex.Message & vbNewLine & vbNewLine)
 
             End Try
 
@@ -59,6 +59,39 @@
         Return result
 
     End Function
+
+
+    ' ************************ DATABASE DATA INTERACTION/MANIPULATION ************************
+
+    ' Function used to return default value type of empty field from database instead of DBNull
+    Public Sub setNullToDefault(ByRef dataValue As Object, dataType As String)
+
+        ' If the value returned from the database is DBNull
+        If dataValue Is DBNull.Value Then
+
+            ' Determine what the dataType is and then assign corresponding default value
+            Select Case dataType
+                ' For all value types
+                Case "System.DateTime"
+                    dataValue = New DateTime
+                Case "System.Boolean"
+                    dataValue = False
+                Case "System.Decimal"
+                    dataValue = 0.0
+                Case "System.Double"
+                    dataValue = 0.0
+                Case "System.Integer"
+                    dataValue = 0
+                Case "System.Char"
+                    dataValue = 0
+                    ' For all reference types
+                Case "System.String"
+                    dataValue = String.Empty
+            End Select
+
+        End If
+
+    End Sub
 
 
 End Module

@@ -1,7 +1,7 @@
 ﻿Public Class companyInfo
 
     'Temporary variable to keep track of whether form fully loaded or not
-    Dim formLoaded As Boolean = False
+    Dim valuesInitialized As Boolean = False
 
     ' Dictionary to maintain initial dataLabel/dataField values to compare against when changes are made
     Dim initialDataValues As Dictionary(Of String, String)
@@ -9,7 +9,7 @@
     ' Datatable for dataAdapter to load data into. This really should be moved to a class
     Dim CompanyMasterDataTable As DataTable
     ' Another Connection variable. Describes whether or not connection attempt throws exception
-    Dim connHasException As Boolean = False
+    Dim connHasException As Boolean
 
 
     ' Sub to load load initial data from database
@@ -26,7 +26,7 @@
         Dim FullDatabasePath As String      ' Full path built from DatabaseDirectory and DatabaseFilename. Will be used in combination with another parameter to set dbSource Variable
 
         ' Local variables that should be *PULLED FROM AN INI FILE* for deployment
-        DatabaseDirectory = "C:\Users\nlitz\Development\TMI Consulting\Auto Service Manager\AutoServiceManager\AutoServiceManager\Database"
+        DatabaseDirectory = "C:\Users\nlitz88\Development\TMI Consulting\TMI-Auto-Service-Manager\AutoServiceManager\Database"  ' Change from PC to PC until I make INI
         TheDatabaseFilename = "TMI-ServiceMgr.mdb"
         FullDatabasePath = DatabaseDirectory & "\" & TheDatabaseFilename
         dbSource = "Data Source = " & FullDatabasePath      ' Finally, define the dbSource by combinding everywith the appropriate parameter "Data Source"
@@ -65,6 +65,8 @@
             ' Use the acesssAdapter to fill the dataTable
             accessAdapter.Fill(CompanyMasterDataTable)
 
+            connHasException = False
+
             MessageBox.Show("Successful connection to " & TheDatabaseFilename)
 
         Catch ex As Exception
@@ -82,7 +84,9 @@
     End Sub
 
 
-    Private Sub initializeValues()
+    Private Sub initializeValues() ' Consider renaming to "initializeDataFields/Values", as other functions might handle setting other values
+
+        valuesInitialized = False
 
         initialDataValues = New Dictionary(Of String, String)
 
@@ -90,30 +94,38 @@
         ' CAUTION: THESE MUST BE DEFINED IN ORDER KNOWN FROM DATABASE
         ' CAUTION: THESE MUST BE DEFINED AFTER THEY'VE BEEN INITIALIZED IN THE FORM
         ' ********* IF EXCESSIVE/NEEDLESSLY COMPLEX, MOVE TO EXPLICIT DEFINITION IN INITIALIZEVALUES INSTEAD ************
-        Dim dataLabelList As New List(Of Label) From {taxRateValue, shopSupplyChargeValue, companyNameValue, companyName2Value, addressLine1Value, addressLine2Value, zipCodeValue, phone1Value, phone2Value, laborRateValue}
+        Dim dataLabelList As New List(Of Object) From {taxRateValue, shopSupplyChargeValue, companyNameValue, companyName2Value, addressLine1Value, addressLine2Value, zipCodeValue, phone1Value, phone2Value, laborRateValue}
         Dim dataFieldList As New List(Of Object) From {taxRateTextbox, shopSupplyChargeTextbox, companyNameTextbox, companyName2Textbox, addressLine1Textbox, addressLine2Textbox, zipCodeTextbox, phone1Textbox, phone2Textbox, laborRateTextbox}
 
         Dim dataValue As Object
 
-        If Not connHasException Then
+        If Not connHasException Then ' MOVE THIS ABOVE TO TOP OF FUNCTION
             For i As Integer = 0 To CompanyMasterDataTable.Columns.Count - 1
 
                 ' First, get the actual data from the table and see if it exists
                 dataValue = CompanyMasterDataTable.Rows(0)(CompanyMasterDataTable.Columns(i))
 
-                If dataValue IsNot DBNull.Value Then
-                    ' If not DBNull, then assign the value to the respective form item
-                    dataLabelList(i).Text = dataValue.ToString()
-                    dataFieldList(i).Text = dataValue.ToString()
-                End If
+                ' Then, set any DBNull dataValues to their default values (this way we don't try to use DBNull Values)
+                setNullToDefault(dataValue, CompanyMasterDataTable.Columns(i).DataType.ToString())
+
+                ' If not DBNull, then assign the value to the respective form item
+                dataLabelList(i).Text = dataValue   ' .ToString() necessarry??
+                dataFieldList(i).Text = dataValue
 
                 ' After this completed, record the initialValues of the 
                 initialDataValues.Add(dataFieldList(i).Name, dataFieldList(i).Text)
 
             Next
 
+            ' For now, these will be here until CITY and STATE are joined on the ZIP CODE
             initialDataValues.Add(stateTextbox.Name, stateTextbox.Text)
             initialDataValues.Add(cityTextbox.Name, cityTextbox.Text)
+
+            valuesInitialized = True
+
+
+            ' Debug
+            Console.WriteLine("InitializingValues complete")
 
         End If
 
@@ -124,35 +136,8 @@
         ' Dynamically position elements on load.
         companyInfoLabel.Left = (Me.ClientSize.Width / 2) - (companyInfoLabel.Width / 2)
 
-        ' UNTIL DB CONNECTED: initialize textBox with data from corresponding dataValue
-        ' Initial Data values for dataFields are temporarily being mapped to corresponding dataValue fields until DB attached
-
-        ' Manual assignment. Consider mapping using a dictionary and more intuitive function as shown above
-        'companyNameTextbox.Text = companyNameValue.Text
-        'companyName2Textbox.Text = companyName2Value.Text
-        'addressLine1Textbox.Text = addressLine1Value.Text
-        'addressLine2Textbox.Text = addressLine2Value.Text
-        'zipCodeTextbox.Text = zipCodeValue.Text
-        'cityTextbox.Text = cityValue.Text
-        'stateTextbox.Text = stateValue.Text
-        'phone1Textbox.Text = phone1Value.Text
-        'phone2Textbox.Text = phone2Value.Text
-        'taxRateTextbox.Text = taxRateValue.Text
-        'shopSupplyChargeTextbox.Text = shopSupplyChargeValue.Text
-        'laborRateTextbox.Text = laborRateValue.Text
-
-        'Dim dataFields As ArrayList = getAllItemsWithTag("dataField")
-        'For Each dataField In dataFields
-        '    initialDataValues.Add(dataField.Name, dataField.Text)
-        'Next
-
         loadInitialData()
         initializeValues()
-
-
-        formLoaded = True
-
-
 
     End Sub
 
@@ -172,7 +157,7 @@
 
     Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
 
-        ' Ensure that any changes made were saved
+        ' Ensure that any changes made are saved
         If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
 
             Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo)
@@ -257,7 +242,7 @@
         ' In the future (when database implemented, maybe this should change to until the database has been connected to and data has been loaded?
         ' Worker thread or something of the like?
         ' This applies for this Textbox sub and all dataField tagged Textboxes that follow
-        If formLoaded Then
+        If valuesInitialized Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
                 saveButton.Enabled = True
             Else
@@ -269,7 +254,7 @@
 
     Private Sub companyName2Textbox_TextChanged(sender As Object, e As EventArgs) Handles companyName2Textbox.TextChanged
 
-        If formLoaded Then
+        If valuesInitialized Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
                 saveButton.Enabled = True
             Else
@@ -281,7 +266,7 @@
 
     Private Sub addressLine1Textbox_TextChanged(sender As Object, e As EventArgs) Handles addressLine1Textbox.TextChanged
 
-        If formLoaded Then
+        If valuesInitialized Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
                 saveButton.Enabled = True
             Else
@@ -293,7 +278,7 @@
 
     Private Sub addressLine2Textbox_TextChanged(sender As Object, e As EventArgs) Handles addressLine2Textbox.TextChanged
 
-        If formLoaded Then
+        If valuesInitialized Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
                 saveButton.Enabled = True
             Else
@@ -305,7 +290,7 @@
 
     Private Sub zipCodeTextbox_TextChanged(sender As Object, e As EventArgs) Handles zipCodeTextbox.TextChanged
 
-        If formLoaded Then
+        If valuesInitialized Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
                 saveButton.Enabled = True
             Else
@@ -317,7 +302,7 @@
 
     Private Sub cityTextbox_TextChanged(sender As Object, e As EventArgs) Handles cityTextbox.TextChanged
 
-        If formLoaded Then
+        If valuesInitialized Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
                 saveButton.Enabled = True
             Else
@@ -329,7 +314,7 @@
 
     Private Sub stateTextbox_TextChanged(sender As Object, e As EventArgs) Handles stateTextbox.TextChanged
 
-        If formLoaded Then
+        If valuesInitialized Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
                 saveButton.Enabled = True
             Else
@@ -341,7 +326,7 @@
 
     Private Sub phone1Textbox_TextChanged(sender As Object, e As EventArgs) Handles phone1Textbox.TextChanged
 
-        If formLoaded Then
+        If valuesInitialized Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
                 saveButton.Enabled = True
             Else
@@ -353,7 +338,7 @@
 
     Private Sub phone2Textbox_TextChanged(sender As Object, e As EventArgs) Handles phone2Textbox.TextChanged
 
-        If formLoaded Then
+        If valuesInitialized Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
                 saveButton.Enabled = True
             Else
@@ -365,7 +350,7 @@
 
     Private Sub taxRateTextbox_TextChanged(sender As Object, e As EventArgs) Handles taxRateTextbox.TextChanged
 
-        If formLoaded Then
+        If valuesInitialized Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
                 saveButton.Enabled = True
             Else
@@ -377,7 +362,7 @@
 
     Private Sub shopSupplyChargeTextbox_TextChanged(sender As Object, e As EventArgs) Handles shopSupplyChargeTextbox.TextChanged
 
-        If formLoaded Then
+        If valuesInitialized Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
                 saveButton.Enabled = True
             Else
@@ -389,7 +374,7 @@
 
     Private Sub laborRateTextbox_TextChanged(sender As Object, e As EventArgs) Handles laborRateTextbox.TextChanged
 
-        If formLoaded Then
+        If valuesInitialized Then
             If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
                 saveButton.Enabled = True
             Else
