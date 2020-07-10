@@ -375,10 +375,9 @@ Partial Class companyInfo
         Me.companyNameValue.ForeColor = System.Drawing.Color.Black
         Me.companyNameValue.Location = New System.Drawing.Point(276, 216)
         Me.companyNameValue.Name = "companyNameValue"
-        Me.companyNameValue.Size = New System.Drawing.Size(252, 20)
+        Me.companyNameValue.Size = New System.Drawing.Size(0, 20)
         Me.companyNameValue.TabIndex = 29
         Me.companyNameValue.Tag = "dataLabel"
-        Me.companyNameValue.Text = "SChweikharth's Auto Service"
         '
         'companyName2Value
         '
@@ -387,10 +386,9 @@ Partial Class companyInfo
         Me.companyName2Value.ForeColor = System.Drawing.Color.Black
         Me.companyName2Value.Location = New System.Drawing.Point(276, 253)
         Me.companyName2Value.Name = "companyName2Value"
-        Me.companyName2Value.Size = New System.Drawing.Size(45, 20)
+        Me.companyName2Value.Size = New System.Drawing.Size(0, 20)
         Me.companyName2Value.TabIndex = 30
         Me.companyName2Value.Tag = "dataLabel"
-        Me.companyName2Value.Text = "N W"
         '
         'addressLine1Value
         '
@@ -399,10 +397,9 @@ Partial Class companyInfo
         Me.addressLine1Value.ForeColor = System.Drawing.Color.Black
         Me.addressLine1Value.Location = New System.Drawing.Point(224, 337)
         Me.addressLine1Value.Name = "addressLine1Value"
-        Me.addressLine1Value.Size = New System.Drawing.Size(140, 20)
+        Me.addressLine1Value.Size = New System.Drawing.Size(0, 20)
         Me.addressLine1Value.TabIndex = 31
         Me.addressLine1Value.Tag = "dataLabel"
-        Me.addressLine1Value.Text = "4098 Route 130"
         '
         'addressLine2Value
         '
@@ -411,10 +408,9 @@ Partial Class companyInfo
         Me.addressLine2Value.ForeColor = System.Drawing.Color.Black
         Me.addressLine2Value.Location = New System.Drawing.Point(224, 381)
         Me.addressLine2Value.Name = "addressLine2Value"
-        Me.addressLine2Value.Size = New System.Drawing.Size(55, 20)
+        Me.addressLine2Value.Size = New System.Drawing.Size(0, 20)
         Me.addressLine2Value.TabIndex = 32
         Me.addressLine2Value.Tag = "dataLabel"
-        Me.addressLine2Value.Text = "Temp"
         '
         'zipCodeValue
         '
@@ -423,10 +419,9 @@ Partial Class companyInfo
         Me.zipCodeValue.ForeColor = System.Drawing.Color.Black
         Me.zipCodeValue.Location = New System.Drawing.Point(177, 420)
         Me.zipCodeValue.Name = "zipCodeValue"
-        Me.zipCodeValue.Size = New System.Drawing.Size(59, 20)
+        Me.zipCodeValue.Size = New System.Drawing.Size(0, 20)
         Me.zipCodeValue.TabIndex = 33
         Me.zipCodeValue.Tag = "dataLabel"
-        Me.zipCodeValue.Text = "15462"
         '
         'cityValue
         '
@@ -435,10 +430,9 @@ Partial Class companyInfo
         Me.cityValue.ForeColor = System.Drawing.Color.Black
         Me.cityValue.Location = New System.Drawing.Point(143, 464)
         Me.cityValue.Name = "cityValue"
-        Me.cityValue.Size = New System.Drawing.Size(49, 20)
+        Me.cityValue.Size = New System.Drawing.Size(0, 20)
         Me.cityValue.TabIndex = 34
         Me.cityValue.Tag = "dataLabel"
-        Me.cityValue.Text = "Irwin"
         '
         'stateValue
         '
@@ -447,10 +441,9 @@ Partial Class companyInfo
         Me.stateValue.ForeColor = System.Drawing.Color.Black
         Me.stateValue.Location = New System.Drawing.Point(403, 464)
         Me.stateValue.Name = "stateValue"
-        Me.stateValue.Size = New System.Drawing.Size(33, 20)
+        Me.stateValue.Size = New System.Drawing.Size(0, 20)
         Me.stateValue.TabIndex = 35
         Me.stateValue.Tag = "dataLabel"
-        Me.stateValue.Text = "PA"
         '
         'taxRateValue
         '
@@ -459,10 +452,9 @@ Partial Class companyInfo
         Me.taxRateValue.ForeColor = System.Drawing.Color.Black
         Me.taxRateValue.Location = New System.Drawing.Point(655, 464)
         Me.taxRateValue.Name = "taxRateValue"
-        Me.taxRateValue.Size = New System.Drawing.Size(60, 20)
+        Me.taxRateValue.Size = New System.Drawing.Size(0, 20)
         Me.taxRateValue.TabIndex = 36
         Me.taxRateValue.Tag = "dataLabel"
-        Me.taxRateValue.Text = "6.00%"
         '
         'phone1Value
         '
@@ -471,10 +463,9 @@ Partial Class companyInfo
         Me.phone1Value.ForeColor = System.Drawing.Color.Black
         Me.phone1Value.Location = New System.Drawing.Point(655, 342)
         Me.phone1Value.Name = "phone1Value"
-        Me.phone1Value.Size = New System.Drawing.Size(136, 20)
+        Me.phone1Value.Size = New System.Drawing.Size(0, 20)
         Me.phone1Value.TabIndex = 37
         Me.phone1Value.Tag = "dataLabel"
-        Me.phone1Value.Text = "(724) 744-4500"
         '
         'phone2Value
         '
@@ -483,10 +474,9 @@ Partial Class companyInfo
         Me.phone2Value.ForeColor = System.Drawing.Color.Black
         Me.phone2Value.Location = New System.Drawing.Point(655, 387)
         Me.phone2Value.Name = "phone2Value"
-        Me.phone2Value.Size = New System.Drawing.Size(136, 20)
+        Me.phone2Value.Size = New System.Drawing.Size(0, 20)
         Me.phone2Value.TabIndex = 38
         Me.phone2Value.Tag = "dataLabel"
-        Me.phone2Value.Text = "(724) 744-4500"
         '
         'shopSupplyChargeValue
         '
@@ -495,10 +485,9 @@ Partial Class companyInfo
         Me.shopSupplyChargeValue.ForeColor = System.Drawing.Color.Black
         Me.shopSupplyChargeValue.Location = New System.Drawing.Point(250, 547)
         Me.shopSupplyChargeValue.Name = "shopSupplyChargeValue"
-        Me.shopSupplyChargeValue.Size = New System.Drawing.Size(60, 20)
+        Me.shopSupplyChargeValue.Size = New System.Drawing.Size(0, 20)
         Me.shopSupplyChargeValue.TabIndex = 39
         Me.shopSupplyChargeValue.Tag = "dataLabel"
-        Me.shopSupplyChargeValue.Text = "4.00%"
         '
         'laborRateValue
         '
@@ -507,10 +496,9 @@ Partial Class companyInfo
         Me.laborRateValue.ForeColor = System.Drawing.Color.Black
         Me.laborRateValue.Location = New System.Drawing.Point(444, 547)
         Me.laborRateValue.Name = "laborRateValue"
-        Me.laborRateValue.Size = New System.Drawing.Size(64, 20)
+        Me.laborRateValue.Size = New System.Drawing.Size(0, 20)
         Me.laborRateValue.TabIndex = 40
         Me.laborRateValue.Tag = "dataLabel"
-        Me.laborRateValue.Text = "$89.00"
         '
         'companyInfo
         '

@@ -2,8 +2,10 @@
 
     'Temporary variable to keep track of whether form fully loaded or not
     Dim formLoaded As Boolean = False
+
     ' Dictionary to maintain initial dataLabel/dataField values to compare against when changes are made
-    Dim initialDataValues As New Dictionary(Of String, String)
+    Dim initialDataValues As Dictionary(Of String, String)
+
     ' Datatable for dataAdapter to load data into. This really should be moved to a class
     Dim CompanyMasterDataTable As DataTable
     ' Another Connection variable. Describes whether or not connection attempt throws exception
@@ -63,7 +65,7 @@
             ' Use the acesssAdapter to fill the dataTable
             accessAdapter.Fill(CompanyMasterDataTable)
 
-            MessageBox.Show(CompanyMasterDataTable.Rows(0)("CompanyName2"))
+            MessageBox.Show("Successful connection to " & TheDatabaseFilename)
 
         Catch ex As Exception
 
@@ -79,15 +81,41 @@
 
     End Sub
 
+
     Private Sub initializeValues()
 
+        initialDataValues = New Dictionary(Of String, String)
+
+        ' ArrayLists that initializeValues will use to map data from dataTable to these items
+        ' CAUTION: THESE MUST BE DEFINED IN ORDER KNOWN FROM DATABASE
+        ' CAUTION: THESE MUST BE DEFINED AFTER THEY'VE BEEN INITIALIZED IN THE FORM
+        ' ********* IF EXCESSIVE/NEEDLESSLY COMPLEX, MOVE TO EXPLICIT DEFINITION IN INITIALIZEVALUES INSTEAD ************
+        Dim dataLabelList As New List(Of Label) From {taxRateValue, shopSupplyChargeValue, companyNameValue, companyName2Value, addressLine1Value, addressLine2Value, zipCodeValue, phone1Value, phone2Value, laborRateValue}
+        Dim dataFieldList As New List(Of Object) From {taxRateTextbox, shopSupplyChargeTextbox, companyNameTextbox, companyName2Textbox, addressLine1Textbox, addressLine2Textbox, zipCodeTextbox, phone1Textbox, phone2Textbox, laborRateTextbox}
+
+        Dim dataValue As Object
+
         If Not connHasException Then
-            For Each column In CompanyMasterDataTable.Columns
-                initialDataValues.Add(column.ColumnName.ToString(), "test")
+            For i As Integer = 0 To CompanyMasterDataTable.Columns.Count - 1
+
+                ' First, get the actual data from the table and see if it exists
+                dataValue = CompanyMasterDataTable.Rows(0)(CompanyMasterDataTable.Columns(i))
+
+                If dataValue IsNot DBNull.Value Then
+                    ' If not DBNull, then assign the value to the respective form item
+                    dataLabelList(i).Text = dataValue.ToString()
+                    dataFieldList(i).Text = dataValue.ToString()
+                End If
+
+                ' After this completed, record the initialValues of the 
+                initialDataValues.Add(dataFieldList(i).Name, dataFieldList(i).Text)
+
             Next
+
+            initialDataValues.Add(stateTextbox.Name, stateTextbox.Text)
+            initialDataValues.Add(cityTextbox.Name, cityTextbox.Text)
+
         End If
-
-
 
     End Sub
 
@@ -100,25 +128,26 @@
         ' Initial Data values for dataFields are temporarily being mapped to corresponding dataValue fields until DB attached
 
         ' Manual assignment. Consider mapping using a dictionary and more intuitive function as shown above
-        companyNameTextbox.Text = companyNameValue.Text
-        companyName2Textbox.Text = companyName2Value.Text
-        addressLine1Textbox.Text = addressLine1Value.Text
-        addressLine2Textbox.Text = addressLine2Value.Text
-        zipCodeTextbox.Text = zipCodeValue.Text
-        cityTextbox.Text = cityValue.Text
-        stateTextbox.Text = stateValue.Text
-        phone1Textbox.Text = phone1Value.Text
-        phone2Textbox.Text = phone2Value.Text
-        taxRateTextbox.Text = taxRateValue.Text
-        shopSupplyChargeTextbox.Text = shopSupplyChargeValue.Text
-        laborRateTextbox.Text = laborRateValue.Text
+        'companyNameTextbox.Text = companyNameValue.Text
+        'companyName2Textbox.Text = companyName2Value.Text
+        'addressLine1Textbox.Text = addressLine1Value.Text
+        'addressLine2Textbox.Text = addressLine2Value.Text
+        'zipCodeTextbox.Text = zipCodeValue.Text
+        'cityTextbox.Text = cityValue.Text
+        'stateTextbox.Text = stateValue.Text
+        'phone1Textbox.Text = phone1Value.Text
+        'phone2Textbox.Text = phone2Value.Text
+        'taxRateTextbox.Text = taxRateValue.Text
+        'shopSupplyChargeTextbox.Text = shopSupplyChargeValue.Text
+        'laborRateTextbox.Text = laborRateValue.Text
 
-        Dim dataFields As ArrayList = getAllItemsWithTag("dataField")
-        For Each dataField In dataFields
-            initialDataValues.Add(dataField.Name, dataField.Text)
-        Next
+        'Dim dataFields As ArrayList = getAllItemsWithTag("dataField")
+        'For Each dataField In dataFields
+        '    initialDataValues.Add(dataField.Name, dataField.Text)
+        'Next
 
         loadInitialData()
+        initializeValues()
 
 
         formLoaded = True
@@ -150,6 +179,9 @@
 
             Select Case decision
                 Case DialogResult.Yes
+
+                    ' ReInitializeData
+                    initializeValues()
 
                     ' Disable all editing controls
                     cancelButton.Enabled = False
@@ -205,6 +237,7 @@
                 ' show updated dataLabels and hide dataFields
                 showHide(getAllItemsWithTag("dataLabel"), 1)
                 showHide(getAllItemsWithTag("dataField"), 0)
+
 
 
             Case DialogResult.No

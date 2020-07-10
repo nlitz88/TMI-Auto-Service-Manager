@@ -40,10 +40,19 @@
 
         For Each item In items
 
-            If item.Text <> initialValues(item.Name) Then
-                result = True
-                Console.WriteLine("Changes Made")
-            End If
+            Try
+
+                If item.Text <> initialValues(item.Name) Then
+                    result = True
+                    Console.WriteLine("Changes Made")
+                End If
+
+            Catch ex As Exception
+
+                Console.WriteLine(item.Name & " apparently isn't a key. Exception : " & vbNewLine & vbNewLine & ex.Message)
+
+            End Try
+
 
         Next
 
