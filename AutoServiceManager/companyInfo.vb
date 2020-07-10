@@ -86,20 +86,22 @@
 
     Private Sub initializeValues() ' Consider renaming to "initializeDataFields/Values", as other functions might handle setting other values
 
-        valuesInitialized = False
-
-        initialDataValues = New Dictionary(Of String, String)
-
-        ' ArrayLists that initializeValues will use to map data from dataTable to these items
-        ' CAUTION: THESE MUST BE DEFINED IN ORDER KNOWN FROM DATABASE
-        ' CAUTION: THESE MUST BE DEFINED AFTER THEY'VE BEEN INITIALIZED IN THE FORM
-        ' ********* IF EXCESSIVE/NEEDLESSLY COMPLEX, MOVE TO EXPLICIT DEFINITION IN INITIALIZEVALUES INSTEAD ************
-        Dim dataLabelList As New List(Of Object) From {taxRateValue, shopSupplyChargeValue, companyNameValue, companyName2Value, addressLine1Value, addressLine2Value, zipCodeValue, phone1Value, phone2Value, laborRateValue}
-        Dim dataFieldList As New List(Of Object) From {taxRateTextbox, shopSupplyChargeTextbox, companyNameTextbox, companyName2Textbox, addressLine1Textbox, addressLine2Textbox, zipCodeTextbox, phone1Textbox, phone2Textbox, laborRateTextbox}
-
-        Dim dataValue As Object
-
         If Not connHasException Then ' MOVE THIS ABOVE TO TOP OF FUNCTION
+
+            valuesInitialized = False
+
+            initialDataValues = New Dictionary(Of String, String)
+
+            ' ArrayLists that initializeValues will use to map data from dataTable to these items
+            ' CAUTION: THESE MUST BE DEFINED IN ORDER KNOWN FROM DATABASE
+            ' CAUTION: THESE MUST BE DEFINED AFTER THEY'VE BEEN INITIALIZED IN THE FORM
+            ' ********* IF EXCESSIVE/NEEDLESSLY COMPLEX, MOVE TO EXPLICIT DEFINITION IN INITIALIZEVALUES INSTEAD ************
+            Dim dataLabelList As New List(Of Object) From {taxRateValue, shopSupplyChargeValue, companyNameValue, companyName2Value, addressLine1Value, addressLine2Value, zipCodeValue, phone1Value, phone2Value, laborRateValue}
+            Dim dataFieldList As New List(Of Object) From {taxRateTextbox, shopSupplyChargeTextbox, companyNameTextbox, companyName2Textbox, addressLine1Textbox, addressLine2Textbox, zipCodeTextbox, phone1Textbox, phone2Textbox, laborRateTextbox}
+
+            Dim dataValue As Object
+
+
             For i As Integer = 0 To CompanyMasterDataTable.Columns.Count - 1
 
                 ' First, get the actual data from the table and see if it exists
