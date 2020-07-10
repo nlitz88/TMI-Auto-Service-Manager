@@ -5,6 +5,73 @@
     ' Dictionary to maintain initial dataLabel/dataField values to compare against when changes are made
     Dim initialDataValues As New Dictionary(Of String, String)
 
+
+    ' Sub to load load initial data from database
+    Private Sub loadInitialData()
+
+        ' ******** CONNECTION PARAMETERS ********
+        Dim accessConn As New OleDb.OleDbConnection
+
+        ' Variables to build (and paramaterize) our connection string
+        Dim dbProvider As String            ' The data provider (that includes the data adapter) that we want the connection to use to interface with the access database (in this case, Jet 4.0 for mdb files)
+        Dim dbSource As String              ' The location of the actual access database file (will contain the complete composited location that we build with the following variables)
+        Dim DatabaseDirectory As String     ' The working directory where the database is currently setup/stored
+        Dim TheDatabaseFilename As String   ' The address of only the database
+        Dim FullDatabasePath As String      ' Full path built from DatabaseDirectory and DatabaseFilename. Will be used in combination with another parameter to set dbSource Variable
+
+        ' Local variables that should be *PULLED FROM AN INI FILE* for deployment
+        DatabaseDirectory = "C:\Users\nlitz\Development\TMI Consulting\Auto Service Manager\AutoServiceManager\AutoServiceManager\Database"
+        TheDatabaseFilename = "TMI-ServiceMgr.mdb"
+        FullDatabasePath = DatabaseDirectory & "\" & TheDatabaseFilename
+        dbSource = "Data Source = " & FullDatabasePath      ' Finally, define the dbSource by combinding everywith the appropriate parameter "Data Source"
+        dbProvider = "PROVIDER=Microsoft.Jet.OLEDB.4.0;"     ' Utilizing the Jet OLEDB data provider, as we are using an older access database .mdb (2003)
+        ' Then, add the completed/built connectionstring to the access connection
+        accessConn.ConnectionString = dbProvider & dbSource
+
+
+        ' ******** DEFINE COMMAND ********
+        Dim SQLQuery As String
+        Dim accessCmd As OleDb.OleDbCommand     ' Define command (containing conn and query) the dataAdapter will use to fill our dataTable
+
+
+        ' ******** DEFINE DATAADAPTER AND DATATABLE ********
+        Dim CompanyMasterDataTable As DataTable              ' Define dataTable that dataAdapter will fill (into internal dataset?)
+        Dim accessAdapter As OleDb.OleDbDataAdapter     ' Define OleDB dataAdapter that will interface with the access database
+        ' Somewhere to automate adding parameters for more advanced queries?
+
+
+        ' ******** TRY TO OPEN CONNECTION ********
+        Try
+
+            ' Attemp connection
+            accessConn.Open()
+
+            ' Initialize command
+            SQLQuery = "SELECT * FROM CompanyMaster"
+            accessCmd = New OleDb.OleDbCommand
+            accessCmd.Connection = accessConn
+            accessCmd.CommandText = SQLQuery
+
+            ' Initialize dataTable and dataAdapter that will fill it
+            CompanyMasterDataTable = New DataTable
+            accessAdapter = New OleDb.OleDbDataAdapter(accessCmd)       ' Initialize dataAdapter for access database that will use the accessCmd (containing the connection and query we provided)
+
+            ' Use the acesssAdapter to fill the dataTable
+            accessAdapter.Fill(CompanyMasterDataTable)
+
+
+            MessageBox.Show(CompanyMasterDataTable.Rows(0)("CompanyName1"))
+
+
+        Catch ex As Exception
+
+            MessageBox.Show("An erorr has occurred: " & vbNewLine & vbNewLine & ex.Message.ToString(), "Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        End Try
+
+
+    End Sub
+
     Private Sub companyInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ' Dynamically position elements on load.
@@ -31,6 +98,8 @@
         For Each dataField In dataFields
             initialDataValues.Add(dataField.Name, dataField.Text)
         Next
+
+        loadInitialData()
 
 
         formLoaded = True
