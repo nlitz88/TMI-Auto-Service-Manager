@@ -53,7 +53,7 @@
             accessConn.Open()
 
             ' Initialize command
-            SQLQuery = "SELECT * FROM CompanyMaster"
+            SQLQuery = "SELECT cm.TaxRate, cm.ShopSupplyCharge, cm.CompanyName1, cm.CompanyName2, cm.Address1, cm.Address2, cm.ZipCode, cm.Phone1, cm.Phone2, cm.LaborRate, zc.city, zc.State FROM CompanyMaster cm left outer join ZipCodes zc on cm.ZipCode = zc.Zipcode"
             accessCmd = New OleDb.OleDbCommand
             accessCmd.Connection = accessConn
             accessCmd.CommandText = SQLQuery
@@ -96,11 +96,10 @@
             ' CAUTION: THESE MUST BE DEFINED IN ORDER KNOWN FROM DATABASE
             ' CAUTION: THESE MUST BE DEFINED AFTER THEY'VE BEEN INITIALIZED IN THE FORM
             ' ********* IF EXCESSIVE/NEEDLESSLY COMPLEX, MOVE TO EXPLICIT DEFINITION IN INITIALIZEVALUES INSTEAD ************
-            Dim dataLabelList As New List(Of Object) From {taxRateValue, shopSupplyChargeValue, companyNameValue, companyName2Value, addressLine1Value, addressLine2Value, zipCodeValue, phone1Value, phone2Value, laborRateValue}
-            Dim dataFieldList As New List(Of Object) From {taxRateTextbox, shopSupplyChargeTextbox, companyNameTextbox, companyName2Textbox, addressLine1Textbox, addressLine2Textbox, zipCodeTextbox, phone1Textbox, phone2Textbox, laborRateTextbox}
+            Dim dataLabelList As New List(Of Object) From {taxRateValue, shopSupplyChargeValue, companyNameValue, companyName2Value, addressLine1Value, addressLine2Value, zipCodeValue, phone1Value, phone2Value, laborRateValue, cityValue, stateValue}
+            Dim dataFieldList As New List(Of Object) From {taxRateTextbox, shopSupplyChargeTextbox, companyNameTextbox, companyName2Textbox, addressLine1Textbox, addressLine2Textbox, zipCodeTextbox, phone1Textbox, phone2Textbox, laborRateTextbox, cityTextbox, stateTextbox}
 
             Dim dataValue As Object
-
 
             For i As Integer = 0 To CompanyMasterDataTable.Columns.Count - 1
 
@@ -120,8 +119,8 @@
             Next
 
             ' For now, these will be here until CITY and STATE are joined on the ZIP CODE
-            initialDataValues.Add(stateTextbox.Name, stateTextbox.Text)
-            initialDataValues.Add(cityTextbox.Name, cityTextbox.Text)
+            'initialDataValues.Add(stateTextbox.Name, stateTextbox.Text)
+            'initialDataValues.Add(cityTextbox.Name, cityTextbox.Text)
 
             valuesInitialized = True
 
@@ -147,7 +146,8 @@
 
         ' Enable cancelButton and disable editButton
         cancelButton.Enabled = True
-        navigationPlaceholderButton.Enabled = False
+        editButton.Enabled = False
+        'navigationPlaceholderButton.Enabled = False
 
         ' Disable all navigation controls while editing
         showHide(getAllItemsWithTag("navigation"), 0)
