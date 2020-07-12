@@ -4,7 +4,7 @@
     Dim valuesInitialized As Boolean = False
 
     ' Dictionary to maintain initial dataLabel/dataField values to compare against when changes are made
-    Dim initialDataValues As Dictionary(Of String, String)
+    Dim initialTextBoxValues As Dictionary(Of String, String)
 
     ' Datatable for dataAdapter to load data into. This really should be moved to a class
     Dim CompanyMasterDataTable As DataTable
@@ -84,55 +84,78 @@
     End Sub
 
 
-    Private Sub initializeValues() ' Consider renaming to "initializeDataFields/Values", as other functions might handle setting other values
+    'Private Sub initializeValues() ' Consider renaming to "initializeDataFields/Values", as other functions might handle setting other values
 
-        If Not connHasException Then ' MOVE THIS ABOVE TO TOP OF FUNCTION
+    '    If Not connHasException Then ' MOVE THIS ABOVE TO TOP OF FUNCTION
+
+    '        valuesInitialized = False
+
+    '        initialTextboxValues = New Dictionary(Of String, String)
+
+    '        ' ArrayLists that initializeValues will use to map data from dataTable to these items
+    '        ' CAUTION: THESE MUST BE DEFINED IN ORDER KNOWN FROM DATABASE
+    '        ' CAUTION: THESE MUST BE DEFINED AFTER THEY'VE BEEN INITIALIZED IN THE FORM
+    '        ' ********* IF EXCESSIVE/NEEDLESSLY COMPLEX, MOVE TO EXPLICIT DEFINITION IN INITIALIZEVALUES INSTEAD ************
+    '        Dim dataLabelList As New List(Of Object) From {TaxRate_Value, ShopSupplyCharge_Value, CompanyName1_Value, CompanyName2_Value, Address1_Value, Address2_Value, ZipCode_Value, Phone1_Value, Phone2_Value, LaborRate_Value, city_Value, State_Value}
+    '        Dim dataFieldList As New List(Of Object) From {TaxRate_Textbox, ShopSupplyCharge_Textbox, CompanyName1_Textbox, CompanyName2_Textbox, Address1_Textbox, Address2_Textbox, ZipCode_Textbox, Phone1_Textbox, Phone2_Textbox, LaborRate_Textbox, city_Textbox, State_Textbox}
+
+    '        Dim dataValue As Object
+
+    '        For i As Integer = 0 To CompanyMasterDataTable.Columns.Count - 1
+
+    '            ' First, get the actual data from the table and see if it exists
+    '            dataValue = CompanyMasterDataTable.Rows(0)(CompanyMasterDataTable.Columns(i))
+
+    '            ' Then, set any DBNull dataValues to their default values (this way we don't try to use DBNull Values)
+    '            dataValue = setNullToDefault(dataValue, CompanyMasterDataTable.Columns(i).DataType.ToString())
+
+    '            ' If not DBNull, then assign the value to the respective form item
+    '            setControlValue(dataLabelList(i), dataValue)
+    '            setControlValue(dataFieldList(i), dataValue)
+    '            'dataLabelList(i).Text = dataValue
+    '            'dataFieldList(i).Text = dataValue
+
+    '            ' After this completed, record the initialValues of the 
+    '            initialTextboxValues
+
+    '        Next
+
+    '        ' For now, these will be here until CITY and STATE are joined on the ZIP CODE
+    '        'initialTextboxValues.Add(State_Textbox.Name, State_Textbox.Text)
+    '        'initialTextboxValues.Add(city_Textbox.Name, city_Textbox.Text)
+
+    '        valuesInitialized = True
+
+
+    '        ' Debug
+    '        Console.WriteLine("InitializingValues complete")
+
+    '    End If
+
+    'End Sub
+
+    ' Initialize/Set values of controls on form with values from dataTable.
+    ' This function includes all automatic dynamic initialization and any additional initialization
+    Private Sub initializeValues()
+
+        If Not connHasException Then
 
             valuesInitialized = False
 
-            initialDataValues = New Dictionary(Of String, String)
+            initializeControlsFromRow(CompanyMasterDataTable, 0, "_", Me)
 
-            ' ArrayLists that initializeValues will use to map data from dataTable to these items
-            ' CAUTION: THESE MUST BE DEFINED IN ORDER KNOWN FROM DATABASE
-            ' CAUTION: THESE MUST BE DEFINED AFTER THEY'VE BEEN INITIALIZED IN THE FORM
-            ' ********* IF EXCESSIVE/NEEDLESSLY COMPLEX, MOVE TO EXPLICIT DEFINITION IN INITIALIZEVALUES INSTEAD ************
-            Dim dataLabelList As New List(Of Object) From {taxRateValue, shopSupplyChargeValue, companyNameValue, companyName2Value, addressLine1Value, addressLine2Value, zipCodeValue, phone1Value, phone2Value, laborRateValue, cityValue, stateValue}
-            Dim dataFieldList As New List(Of Object) From {taxRateTextbox, shopSupplyChargeTextbox, companyNameTextbox, companyName2Textbox, addressLine1Textbox, addressLine2Textbox, zipCodeTextbox, phone1Textbox, phone2Textbox, laborRateTextbox, cityTextbox, stateTextbox}
-
-            Dim dataValue As Object
-
-            For i As Integer = 0 To CompanyMasterDataTable.Columns.Count - 1
-
-                ' First, get the actual data from the table and see if it exists
-                dataValue = CompanyMasterDataTable.Rows(0)(CompanyMasterDataTable.Columns(i))
-
-                ' Then, set any DBNull dataValues to their default values (this way we don't try to use DBNull Values)
-                setNullToDefault(dataValue, CompanyMasterDataTable.Columns(i).DataType.ToString())
-
-                ' If not DBNull, then assign the value to the respective form item
-                setControlValue(dataLabelList(i), dataValue)
-                setControlValue(dataFieldList(i), dataValue)
-                'dataLabelList(i).Text = dataValue
-                'dataFieldList(i).Text = dataValue
-
-                ' After this completed, record the initialValues of the 
-                initialDataValues.Add(dataFieldList(i).Name, dataFieldList(i).Text)
-
+            ' Temporary. Rebuild with more intuitive method
+            initialTextBoxValues = New Dictionary(Of String, String)
+            For Each tb In getAllItemsWithTag("dataField")
+                initialTextBoxValues.Add(tb.Name, tb.Text)      ' CREATE FUNCTION that dynamically returns data type that control contains (not always text)
             Next
 
-            ' For now, these will be here until CITY and STATE are joined on the ZIP CODE
-            'initialDataValues.Add(stateTextbox.Name, stateTextbox.Text)
-            'initialDataValues.Add(cityTextbox.Name, cityTextbox.Text)
-
             valuesInitialized = True
-
-
-            ' Debug
-            Console.WriteLine("InitializingValues complete")
 
         End If
 
     End Sub
+
 
     Private Sub companyInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -141,6 +164,9 @@
 
         loadInitialData()
         initializeValues()
+
+        ' Test function here first
+        initializeControlsFromRow(CompanyMasterDataTable, 0, "_", Me)
 
     End Sub
 
@@ -162,7 +188,7 @@
     Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
 
         ' Ensure that any changes made are saved
-        If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
+        If changesMadeToText(getAllItemsWithTag("dataField"), initialTextBoxValues) Then
 
             Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo)
 
@@ -240,14 +266,14 @@
     ' ************************ DATAFIELD TEXTBOX SUBS ************************
 
 
-    Private Sub companyNameTextbox_TextChanged(sender As Object, e As EventArgs) Handles companyNameTextbox.TextChanged
+    Private Sub CompanyName1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles CompanyName1_Textbox.TextChanged
 
         ' For now, just check to see if the entire form has been loaded before checking for text changes
         ' In the future (when database implemented, maybe this should change to until the database has been connected to and data has been loaded?
         ' Worker thread or something of the like?
         ' This applies for this Textbox sub and all dataField tagged Textboxes that follow
         If valuesInitialized Then
-            If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
+            If changesMadeToText(getAllItemsWithTag("dataField"), initialTextBoxValues) Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -256,10 +282,10 @@
 
     End Sub
 
-    Private Sub companyName2Textbox_TextChanged(sender As Object, e As EventArgs) Handles companyName2Textbox.TextChanged
+    Private Sub CompanyName2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles CompanyName2_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
+            If changesMadeToText(getAllItemsWithTag("dataField"), initialTextBoxValues) Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -268,10 +294,10 @@
 
     End Sub
 
-    Private Sub addressLine1Textbox_TextChanged(sender As Object, e As EventArgs) Handles addressLine1Textbox.TextChanged
+    Private Sub Address1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Address1_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
+            If changesMadeToText(getAllItemsWithTag("dataField"), initialTextBoxValues) Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -280,10 +306,10 @@
 
     End Sub
 
-    Private Sub addressLine2Textbox_TextChanged(sender As Object, e As EventArgs) Handles addressLine2Textbox.TextChanged
+    Private Sub Address2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Address2_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
+            If changesMadeToText(getAllItemsWithTag("dataField"), initialTextBoxValues) Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -292,10 +318,10 @@
 
     End Sub
 
-    Private Sub zipCodeTextbox_TextChanged(sender As Object, e As EventArgs) Handles zipCodeTextbox.TextChanged
+    Private Sub ZipCode_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ZipCode_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
+            If changesMadeToText(getAllItemsWithTag("dataField"), initialTextBoxValues) Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -304,10 +330,10 @@
 
     End Sub
 
-    Private Sub cityTextbox_TextChanged(sender As Object, e As EventArgs) Handles cityTextbox.TextChanged
+    Private Sub city_Textbox_TextChanged(sender As Object, e As EventArgs) Handles city_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
+            If changesMadeToText(getAllItemsWithTag("dataField"), initialTextBoxValues) Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -316,10 +342,10 @@
 
     End Sub
 
-    Private Sub stateTextbox_TextChanged(sender As Object, e As EventArgs) Handles stateTextbox.TextChanged
+    Private Sub State_Textbox_TextChanged(sender As Object, e As EventArgs) Handles State_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
+            If changesMadeToText(getAllItemsWithTag("dataField"), initialTextBoxValues) Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -328,10 +354,10 @@
 
     End Sub
 
-    Private Sub phone1Textbox_TextChanged(sender As Object, e As EventArgs) Handles phone1Textbox.TextChanged
+    Private Sub Phone1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Phone1_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
+            If changesMadeToText(getAllItemsWithTag("dataField"), initialTextBoxValues) Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -340,10 +366,10 @@
 
     End Sub
 
-    Private Sub phone2Textbox_TextChanged(sender As Object, e As EventArgs) Handles phone2Textbox.TextChanged
+    Private Sub Phone2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Phone2_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
+            If changesMadeToText(getAllItemsWithTag("dataField"), initialTextBoxValues) Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -352,10 +378,10 @@
 
     End Sub
 
-    Private Sub taxRateTextbox_TextChanged(sender As Object, e As EventArgs) Handles taxRateTextbox.TextChanged
+    Private Sub TaxRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles TaxRate_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
+            If changesMadeToText(getAllItemsWithTag("dataField"), initialTextBoxValues) Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -364,10 +390,10 @@
 
     End Sub
 
-    Private Sub shopSupplyChargeTextbox_TextChanged(sender As Object, e As EventArgs) Handles shopSupplyChargeTextbox.TextChanged
+    Private Sub ShopSupplyCharge_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ShopSupplyCharge_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
+            If changesMadeToText(getAllItemsWithTag("dataField"), initialTextBoxValues) Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -376,10 +402,10 @@
 
     End Sub
 
-    Private Sub laborRateTextbox_TextChanged(sender As Object, e As EventArgs) Handles laborRateTextbox.TextChanged
+    Private Sub LaborRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LaborRate_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToText(getAllItemsWithTag("dataField"), initialDataValues) Then
+            If changesMadeToText(getAllItemsWithTag("dataField"), initialTextBoxValues) Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False

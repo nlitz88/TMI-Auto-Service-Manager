@@ -30,17 +30,17 @@ Partial Class companyInfo
         Me.cityLabel = New System.Windows.Forms.Label()
         Me.shopSupplyChargeLabel = New System.Windows.Forms.Label()
         Me.companyInfoLabel = New System.Windows.Forms.Label()
-        Me.companyNameTextbox = New System.Windows.Forms.TextBox()
-        Me.companyName2Textbox = New System.Windows.Forms.TextBox()
-        Me.addressLine1Textbox = New System.Windows.Forms.TextBox()
-        Me.addressLine2Textbox = New System.Windows.Forms.TextBox()
-        Me.zipCodeTextbox = New System.Windows.Forms.TextBox()
-        Me.cityTextbox = New System.Windows.Forms.TextBox()
-        Me.shopSupplyChargeTextbox = New System.Windows.Forms.TextBox()
-        Me.laborRateTextbox = New System.Windows.Forms.TextBox()
-        Me.taxRateTextbox = New System.Windows.Forms.TextBox()
-        Me.phone2Textbox = New System.Windows.Forms.TextBox()
-        Me.phone1Textbox = New System.Windows.Forms.TextBox()
+        Me.CompanyName1_Textbox = New System.Windows.Forms.TextBox()
+        Me.CompanyName2_Textbox = New System.Windows.Forms.TextBox()
+        Me.Address1_Textbox = New System.Windows.Forms.TextBox()
+        Me.Address2_Textbox = New System.Windows.Forms.TextBox()
+        Me.ZipCode_Textbox = New System.Windows.Forms.TextBox()
+        Me.city_Textbox = New System.Windows.Forms.TextBox()
+        Me.ShopSupplyCharge_Textbox = New System.Windows.Forms.TextBox()
+        Me.LaborRate_Textbox = New System.Windows.Forms.TextBox()
+        Me.TaxRate_Textbox = New System.Windows.Forms.TextBox()
+        Me.Phone2_Textbox = New System.Windows.Forms.TextBox()
+        Me.Phone1_Textbox = New System.Windows.Forms.TextBox()
         Me.phone1Label = New System.Windows.Forms.Label()
         Me.phone2Label = New System.Windows.Forms.Label()
         Me.taxRateLabel = New System.Windows.Forms.Label()
@@ -50,19 +50,19 @@ Partial Class companyInfo
         Me.saveButton = New System.Windows.Forms.Button()
         Me.cancelButton = New System.Windows.Forms.Button()
         Me.stateLabel = New System.Windows.Forms.Label()
-        Me.stateTextbox = New System.Windows.Forms.TextBox()
-        Me.companyNameValue = New System.Windows.Forms.Label()
-        Me.companyName2Value = New System.Windows.Forms.Label()
-        Me.addressLine1Value = New System.Windows.Forms.Label()
-        Me.addressLine2Value = New System.Windows.Forms.Label()
-        Me.zipCodeValue = New System.Windows.Forms.Label()
-        Me.cityValue = New System.Windows.Forms.Label()
-        Me.stateValue = New System.Windows.Forms.Label()
-        Me.taxRateValue = New System.Windows.Forms.Label()
-        Me.phone1Value = New System.Windows.Forms.Label()
-        Me.phone2Value = New System.Windows.Forms.Label()
-        Me.shopSupplyChargeValue = New System.Windows.Forms.Label()
-        Me.laborRateValue = New System.Windows.Forms.Label()
+        Me.State_Textbox = New System.Windows.Forms.TextBox()
+        Me.CompanyName1_Value = New System.Windows.Forms.Label()
+        Me.CompanyName2_Value = New System.Windows.Forms.Label()
+        Me.Address1_Value = New System.Windows.Forms.Label()
+        Me.Address2_Value = New System.Windows.Forms.Label()
+        Me.ZipCode_Value = New System.Windows.Forms.Label()
+        Me.city_Value = New System.Windows.Forms.Label()
+        Me.State_Value = New System.Windows.Forms.Label()
+        Me.TaxRate_Value = New System.Windows.Forms.Label()
+        Me.Phone1_Value = New System.Windows.Forms.Label()
+        Me.Phone2_Value = New System.Windows.Forms.Label()
+        Me.ShopSupplyCharge_Value = New System.Windows.Forms.Label()
+        Me.LaborRate_Value = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'companyNameLabel
@@ -146,116 +146,116 @@ Partial Class companyInfo
         Me.companyInfoLabel.TabIndex = 7
         Me.companyInfoLabel.Text = "Company Information"
         '
-        'companyNameTextbox
+        'CompanyName1_Textbox
         '
-        Me.companyNameTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.companyNameTextbox.Location = New System.Drawing.Point(276, 213)
-        Me.companyNameTextbox.Name = "companyNameTextbox"
-        Me.companyNameTextbox.Size = New System.Drawing.Size(271, 27)
-        Me.companyNameTextbox.TabIndex = 8
-        Me.companyNameTextbox.Tag = "dataField"
-        Me.companyNameTextbox.Visible = False
-        Me.companyNameTextbox.WordWrap = False
+        Me.CompanyName1_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CompanyName1_Textbox.Location = New System.Drawing.Point(276, 213)
+        Me.CompanyName1_Textbox.Name = "CompanyName1_Textbox"
+        Me.CompanyName1_Textbox.Size = New System.Drawing.Size(271, 27)
+        Me.CompanyName1_Textbox.TabIndex = 8
+        Me.CompanyName1_Textbox.Tag = "dataField"
+        Me.CompanyName1_Textbox.Visible = False
+        Me.CompanyName1_Textbox.WordWrap = False
         '
-        'companyName2Textbox
+        'CompanyName2_Textbox
         '
-        Me.companyName2Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.companyName2Textbox.Location = New System.Drawing.Point(276, 250)
-        Me.companyName2Textbox.Name = "companyName2Textbox"
-        Me.companyName2Textbox.Size = New System.Drawing.Size(271, 27)
-        Me.companyName2Textbox.TabIndex = 9
-        Me.companyName2Textbox.Tag = "dataField"
-        Me.companyName2Textbox.Visible = False
+        Me.CompanyName2_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CompanyName2_Textbox.Location = New System.Drawing.Point(276, 250)
+        Me.CompanyName2_Textbox.Name = "CompanyName2_Textbox"
+        Me.CompanyName2_Textbox.Size = New System.Drawing.Size(271, 27)
+        Me.CompanyName2_Textbox.TabIndex = 9
+        Me.CompanyName2_Textbox.Tag = "dataField"
+        Me.CompanyName2_Textbox.Visible = False
         '
-        'addressLine1Textbox
+        'Address1_Textbox
         '
-        Me.addressLine1Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.addressLine1Textbox.Location = New System.Drawing.Point(224, 334)
-        Me.addressLine1Textbox.Name = "addressLine1Textbox"
-        Me.addressLine1Textbox.Size = New System.Drawing.Size(289, 27)
-        Me.addressLine1Textbox.TabIndex = 10
-        Me.addressLine1Textbox.Tag = "dataField"
-        Me.addressLine1Textbox.Visible = False
+        Me.Address1_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Address1_Textbox.Location = New System.Drawing.Point(224, 334)
+        Me.Address1_Textbox.Name = "Address1_Textbox"
+        Me.Address1_Textbox.Size = New System.Drawing.Size(289, 27)
+        Me.Address1_Textbox.TabIndex = 10
+        Me.Address1_Textbox.Tag = "dataField"
+        Me.Address1_Textbox.Visible = False
         '
-        'addressLine2Textbox
+        'Address2_Textbox
         '
-        Me.addressLine2Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.addressLine2Textbox.Location = New System.Drawing.Point(224, 378)
-        Me.addressLine2Textbox.Name = "addressLine2Textbox"
-        Me.addressLine2Textbox.Size = New System.Drawing.Size(289, 27)
-        Me.addressLine2Textbox.TabIndex = 11
-        Me.addressLine2Textbox.Tag = "dataField"
-        Me.addressLine2Textbox.Visible = False
+        Me.Address2_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Address2_Textbox.Location = New System.Drawing.Point(224, 378)
+        Me.Address2_Textbox.Name = "Address2_Textbox"
+        Me.Address2_Textbox.Size = New System.Drawing.Size(289, 27)
+        Me.Address2_Textbox.TabIndex = 11
+        Me.Address2_Textbox.Tag = "dataField"
+        Me.Address2_Textbox.Visible = False
         '
-        'zipCodeTextbox
+        'ZipCode_Textbox
         '
-        Me.zipCodeTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.zipCodeTextbox.Location = New System.Drawing.Point(177, 417)
-        Me.zipCodeTextbox.Name = "zipCodeTextbox"
-        Me.zipCodeTextbox.Size = New System.Drawing.Size(114, 27)
-        Me.zipCodeTextbox.TabIndex = 12
-        Me.zipCodeTextbox.Tag = "dataField"
-        Me.zipCodeTextbox.Visible = False
+        Me.ZipCode_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ZipCode_Textbox.Location = New System.Drawing.Point(177, 417)
+        Me.ZipCode_Textbox.Name = "ZipCode_Textbox"
+        Me.ZipCode_Textbox.Size = New System.Drawing.Size(114, 27)
+        Me.ZipCode_Textbox.TabIndex = 12
+        Me.ZipCode_Textbox.Tag = "dataField"
+        Me.ZipCode_Textbox.Visible = False
         '
-        'cityTextbox
+        'city_Textbox
         '
-        Me.cityTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cityTextbox.Location = New System.Drawing.Point(143, 461)
-        Me.cityTextbox.Name = "cityTextbox"
-        Me.cityTextbox.Size = New System.Drawing.Size(184, 27)
-        Me.cityTextbox.TabIndex = 13
-        Me.cityTextbox.Tag = "dataField"
-        Me.cityTextbox.Visible = False
+        Me.city_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.city_Textbox.Location = New System.Drawing.Point(143, 461)
+        Me.city_Textbox.Name = "city_Textbox"
+        Me.city_Textbox.Size = New System.Drawing.Size(184, 27)
+        Me.city_Textbox.TabIndex = 13
+        Me.city_Textbox.Tag = "dataField"
+        Me.city_Textbox.Visible = False
         '
-        'shopSupplyChargeTextbox
+        'ShopSupplyCharge_Textbox
         '
-        Me.shopSupplyChargeTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.shopSupplyChargeTextbox.Location = New System.Drawing.Point(250, 544)
-        Me.shopSupplyChargeTextbox.Name = "shopSupplyChargeTextbox"
-        Me.shopSupplyChargeTextbox.Size = New System.Drawing.Size(82, 27)
-        Me.shopSupplyChargeTextbox.TabIndex = 14
-        Me.shopSupplyChargeTextbox.Tag = "dataField"
-        Me.shopSupplyChargeTextbox.Visible = False
+        Me.ShopSupplyCharge_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ShopSupplyCharge_Textbox.Location = New System.Drawing.Point(250, 544)
+        Me.ShopSupplyCharge_Textbox.Name = "ShopSupplyCharge_Textbox"
+        Me.ShopSupplyCharge_Textbox.Size = New System.Drawing.Size(82, 27)
+        Me.ShopSupplyCharge_Textbox.TabIndex = 14
+        Me.ShopSupplyCharge_Textbox.Tag = "dataField"
+        Me.ShopSupplyCharge_Textbox.Visible = False
         '
-        'laborRateTextbox
+        'LaborRate_Textbox
         '
-        Me.laborRateTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.laborRateTextbox.Location = New System.Drawing.Point(444, 544)
-        Me.laborRateTextbox.Name = "laborRateTextbox"
-        Me.laborRateTextbox.Size = New System.Drawing.Size(69, 27)
-        Me.laborRateTextbox.TabIndex = 15
-        Me.laborRateTextbox.Tag = "dataField"
-        Me.laborRateTextbox.Visible = False
+        Me.LaborRate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LaborRate_Textbox.Location = New System.Drawing.Point(444, 544)
+        Me.LaborRate_Textbox.Name = "LaborRate_Textbox"
+        Me.LaborRate_Textbox.Size = New System.Drawing.Size(69, 27)
+        Me.LaborRate_Textbox.TabIndex = 15
+        Me.LaborRate_Textbox.Tag = "dataField"
+        Me.LaborRate_Textbox.Visible = False
         '
-        'taxRateTextbox
+        'TaxRate_Textbox
         '
-        Me.taxRateTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.taxRateTextbox.Location = New System.Drawing.Point(655, 461)
-        Me.taxRateTextbox.Name = "taxRateTextbox"
-        Me.taxRateTextbox.Size = New System.Drawing.Size(81, 27)
-        Me.taxRateTextbox.TabIndex = 16
-        Me.taxRateTextbox.Tag = "dataField"
-        Me.taxRateTextbox.Visible = False
+        Me.TaxRate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TaxRate_Textbox.Location = New System.Drawing.Point(655, 461)
+        Me.TaxRate_Textbox.Name = "TaxRate_Textbox"
+        Me.TaxRate_Textbox.Size = New System.Drawing.Size(81, 27)
+        Me.TaxRate_Textbox.TabIndex = 16
+        Me.TaxRate_Textbox.Tag = "dataField"
+        Me.TaxRate_Textbox.Visible = False
         '
-        'phone2Textbox
+        'Phone2_Textbox
         '
-        Me.phone2Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.phone2Textbox.Location = New System.Drawing.Point(655, 384)
-        Me.phone2Textbox.Name = "phone2Textbox"
-        Me.phone2Textbox.Size = New System.Drawing.Size(181, 27)
-        Me.phone2Textbox.TabIndex = 17
-        Me.phone2Textbox.Tag = "dataField"
-        Me.phone2Textbox.Visible = False
+        Me.Phone2_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Phone2_Textbox.Location = New System.Drawing.Point(655, 384)
+        Me.Phone2_Textbox.Name = "Phone2_Textbox"
+        Me.Phone2_Textbox.Size = New System.Drawing.Size(181, 27)
+        Me.Phone2_Textbox.TabIndex = 17
+        Me.Phone2_Textbox.Tag = "dataField"
+        Me.Phone2_Textbox.Visible = False
         '
-        'phone1Textbox
+        'Phone1_Textbox
         '
-        Me.phone1Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.phone1Textbox.Location = New System.Drawing.Point(655, 339)
-        Me.phone1Textbox.Name = "phone1Textbox"
-        Me.phone1Textbox.Size = New System.Drawing.Size(181, 27)
-        Me.phone1Textbox.TabIndex = 18
-        Me.phone1Textbox.Tag = "dataField"
-        Me.phone1Textbox.Visible = False
+        Me.Phone1_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Phone1_Textbox.Location = New System.Drawing.Point(655, 339)
+        Me.Phone1_Textbox.Name = "Phone1_Textbox"
+        Me.Phone1_Textbox.Size = New System.Drawing.Size(181, 27)
+        Me.Phone1_Textbox.TabIndex = 18
+        Me.Phone1_Textbox.Tag = "dataField"
+        Me.Phone1_Textbox.Visible = False
         '
         'phone1Label
         '
@@ -358,147 +358,147 @@ Partial Class companyInfo
         Me.stateLabel.TabIndex = 27
         Me.stateLabel.Text = "State :"
         '
-        'stateTextbox
+        'State_Textbox
         '
-        Me.stateTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.stateTextbox.Location = New System.Drawing.Point(403, 461)
-        Me.stateTextbox.Name = "stateTextbox"
-        Me.stateTextbox.Size = New System.Drawing.Size(110, 27)
-        Me.stateTextbox.TabIndex = 28
-        Me.stateTextbox.Tag = "dataField"
-        Me.stateTextbox.Visible = False
+        Me.State_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.State_Textbox.Location = New System.Drawing.Point(403, 461)
+        Me.State_Textbox.Name = "State_Textbox"
+        Me.State_Textbox.Size = New System.Drawing.Size(110, 27)
+        Me.State_Textbox.TabIndex = 28
+        Me.State_Textbox.Tag = "dataField"
+        Me.State_Textbox.Visible = False
         '
-        'companyNameValue
+        'CompanyName1_Value
         '
-        Me.companyNameValue.AutoSize = True
-        Me.companyNameValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.companyNameValue.ForeColor = System.Drawing.Color.Black
-        Me.companyNameValue.Location = New System.Drawing.Point(276, 216)
-        Me.companyNameValue.Name = "companyNameValue"
-        Me.companyNameValue.Size = New System.Drawing.Size(0, 20)
-        Me.companyNameValue.TabIndex = 29
-        Me.companyNameValue.Tag = "dataLabel"
+        Me.CompanyName1_Value.AutoSize = True
+        Me.CompanyName1_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CompanyName1_Value.ForeColor = System.Drawing.Color.Black
+        Me.CompanyName1_Value.Location = New System.Drawing.Point(276, 216)
+        Me.CompanyName1_Value.Name = "CompanyName1_Value"
+        Me.CompanyName1_Value.Size = New System.Drawing.Size(0, 20)
+        Me.CompanyName1_Value.TabIndex = 29
+        Me.CompanyName1_Value.Tag = "dataLabel"
         '
-        'companyName2Value
+        'CompanyName2_Value
         '
-        Me.companyName2Value.AutoSize = True
-        Me.companyName2Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.companyName2Value.ForeColor = System.Drawing.Color.Black
-        Me.companyName2Value.Location = New System.Drawing.Point(276, 253)
-        Me.companyName2Value.Name = "companyName2Value"
-        Me.companyName2Value.Size = New System.Drawing.Size(0, 20)
-        Me.companyName2Value.TabIndex = 30
-        Me.companyName2Value.Tag = "dataLabel"
+        Me.CompanyName2_Value.AutoSize = True
+        Me.CompanyName2_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CompanyName2_Value.ForeColor = System.Drawing.Color.Black
+        Me.CompanyName2_Value.Location = New System.Drawing.Point(276, 253)
+        Me.CompanyName2_Value.Name = "CompanyName2_Value"
+        Me.CompanyName2_Value.Size = New System.Drawing.Size(0, 20)
+        Me.CompanyName2_Value.TabIndex = 30
+        Me.CompanyName2_Value.Tag = "dataLabel"
         '
-        'addressLine1Value
+        'Address1_Value
         '
-        Me.addressLine1Value.AutoSize = True
-        Me.addressLine1Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.addressLine1Value.ForeColor = System.Drawing.Color.Black
-        Me.addressLine1Value.Location = New System.Drawing.Point(224, 337)
-        Me.addressLine1Value.Name = "addressLine1Value"
-        Me.addressLine1Value.Size = New System.Drawing.Size(0, 20)
-        Me.addressLine1Value.TabIndex = 31
-        Me.addressLine1Value.Tag = "dataLabel"
+        Me.Address1_Value.AutoSize = True
+        Me.Address1_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Address1_Value.ForeColor = System.Drawing.Color.Black
+        Me.Address1_Value.Location = New System.Drawing.Point(224, 337)
+        Me.Address1_Value.Name = "Address1_Value"
+        Me.Address1_Value.Size = New System.Drawing.Size(0, 20)
+        Me.Address1_Value.TabIndex = 31
+        Me.Address1_Value.Tag = "dataLabel"
         '
-        'addressLine2Value
+        'Address2_Value
         '
-        Me.addressLine2Value.AutoSize = True
-        Me.addressLine2Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.addressLine2Value.ForeColor = System.Drawing.Color.Black
-        Me.addressLine2Value.Location = New System.Drawing.Point(224, 381)
-        Me.addressLine2Value.Name = "addressLine2Value"
-        Me.addressLine2Value.Size = New System.Drawing.Size(0, 20)
-        Me.addressLine2Value.TabIndex = 32
-        Me.addressLine2Value.Tag = "dataLabel"
+        Me.Address2_Value.AutoSize = True
+        Me.Address2_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Address2_Value.ForeColor = System.Drawing.Color.Black
+        Me.Address2_Value.Location = New System.Drawing.Point(224, 381)
+        Me.Address2_Value.Name = "Address2_Value"
+        Me.Address2_Value.Size = New System.Drawing.Size(0, 20)
+        Me.Address2_Value.TabIndex = 32
+        Me.Address2_Value.Tag = "dataLabel"
         '
-        'zipCodeValue
+        'ZipCode_Value
         '
-        Me.zipCodeValue.AutoSize = True
-        Me.zipCodeValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.zipCodeValue.ForeColor = System.Drawing.Color.Black
-        Me.zipCodeValue.Location = New System.Drawing.Point(177, 420)
-        Me.zipCodeValue.Name = "zipCodeValue"
-        Me.zipCodeValue.Size = New System.Drawing.Size(0, 20)
-        Me.zipCodeValue.TabIndex = 33
-        Me.zipCodeValue.Tag = "dataLabel"
+        Me.ZipCode_Value.AutoSize = True
+        Me.ZipCode_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ZipCode_Value.ForeColor = System.Drawing.Color.Black
+        Me.ZipCode_Value.Location = New System.Drawing.Point(177, 420)
+        Me.ZipCode_Value.Name = "ZipCode_Value"
+        Me.ZipCode_Value.Size = New System.Drawing.Size(0, 20)
+        Me.ZipCode_Value.TabIndex = 33
+        Me.ZipCode_Value.Tag = "dataLabel"
         '
-        'cityValue
+        'city_Value
         '
-        Me.cityValue.AutoSize = True
-        Me.cityValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cityValue.ForeColor = System.Drawing.Color.Black
-        Me.cityValue.Location = New System.Drawing.Point(143, 464)
-        Me.cityValue.Name = "cityValue"
-        Me.cityValue.Size = New System.Drawing.Size(0, 20)
-        Me.cityValue.TabIndex = 34
-        Me.cityValue.Tag = "dataLabel"
+        Me.city_Value.AutoSize = True
+        Me.city_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.city_Value.ForeColor = System.Drawing.Color.Black
+        Me.city_Value.Location = New System.Drawing.Point(143, 464)
+        Me.city_Value.Name = "city_Value"
+        Me.city_Value.Size = New System.Drawing.Size(0, 20)
+        Me.city_Value.TabIndex = 34
+        Me.city_Value.Tag = "dataLabel"
         '
-        'stateValue
+        'State_Value
         '
-        Me.stateValue.AutoSize = True
-        Me.stateValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.stateValue.ForeColor = System.Drawing.Color.Black
-        Me.stateValue.Location = New System.Drawing.Point(403, 464)
-        Me.stateValue.Name = "stateValue"
-        Me.stateValue.Size = New System.Drawing.Size(0, 20)
-        Me.stateValue.TabIndex = 35
-        Me.stateValue.Tag = "dataLabel"
+        Me.State_Value.AutoSize = True
+        Me.State_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.State_Value.ForeColor = System.Drawing.Color.Black
+        Me.State_Value.Location = New System.Drawing.Point(403, 464)
+        Me.State_Value.Name = "State_Value"
+        Me.State_Value.Size = New System.Drawing.Size(0, 20)
+        Me.State_Value.TabIndex = 35
+        Me.State_Value.Tag = "dataLabel"
         '
-        'taxRateValue
+        'TaxRate_Value
         '
-        Me.taxRateValue.AutoSize = True
-        Me.taxRateValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.taxRateValue.ForeColor = System.Drawing.Color.Black
-        Me.taxRateValue.Location = New System.Drawing.Point(655, 464)
-        Me.taxRateValue.Name = "taxRateValue"
-        Me.taxRateValue.Size = New System.Drawing.Size(0, 20)
-        Me.taxRateValue.TabIndex = 36
-        Me.taxRateValue.Tag = "dataLabel"
+        Me.TaxRate_Value.AutoSize = True
+        Me.TaxRate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TaxRate_Value.ForeColor = System.Drawing.Color.Black
+        Me.TaxRate_Value.Location = New System.Drawing.Point(655, 464)
+        Me.TaxRate_Value.Name = "TaxRate_Value"
+        Me.TaxRate_Value.Size = New System.Drawing.Size(0, 20)
+        Me.TaxRate_Value.TabIndex = 36
+        Me.TaxRate_Value.Tag = "dataLabel"
         '
-        'phone1Value
+        'Phone1_Value
         '
-        Me.phone1Value.AutoSize = True
-        Me.phone1Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.phone1Value.ForeColor = System.Drawing.Color.Black
-        Me.phone1Value.Location = New System.Drawing.Point(655, 342)
-        Me.phone1Value.Name = "phone1Value"
-        Me.phone1Value.Size = New System.Drawing.Size(0, 20)
-        Me.phone1Value.TabIndex = 37
-        Me.phone1Value.Tag = "dataLabel"
+        Me.Phone1_Value.AutoSize = True
+        Me.Phone1_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Phone1_Value.ForeColor = System.Drawing.Color.Black
+        Me.Phone1_Value.Location = New System.Drawing.Point(655, 342)
+        Me.Phone1_Value.Name = "Phone1_Value"
+        Me.Phone1_Value.Size = New System.Drawing.Size(0, 20)
+        Me.Phone1_Value.TabIndex = 37
+        Me.Phone1_Value.Tag = "dataLabel"
         '
-        'phone2Value
+        'Phone2_Value
         '
-        Me.phone2Value.AutoSize = True
-        Me.phone2Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.phone2Value.ForeColor = System.Drawing.Color.Black
-        Me.phone2Value.Location = New System.Drawing.Point(655, 387)
-        Me.phone2Value.Name = "phone2Value"
-        Me.phone2Value.Size = New System.Drawing.Size(0, 20)
-        Me.phone2Value.TabIndex = 38
-        Me.phone2Value.Tag = "dataLabel"
+        Me.Phone2_Value.AutoSize = True
+        Me.Phone2_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Phone2_Value.ForeColor = System.Drawing.Color.Black
+        Me.Phone2_Value.Location = New System.Drawing.Point(655, 387)
+        Me.Phone2_Value.Name = "Phone2_Value"
+        Me.Phone2_Value.Size = New System.Drawing.Size(0, 20)
+        Me.Phone2_Value.TabIndex = 38
+        Me.Phone2_Value.Tag = "dataLabel"
         '
-        'shopSupplyChargeValue
+        'ShopSupplyCharge_Value
         '
-        Me.shopSupplyChargeValue.AutoSize = True
-        Me.shopSupplyChargeValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.shopSupplyChargeValue.ForeColor = System.Drawing.Color.Black
-        Me.shopSupplyChargeValue.Location = New System.Drawing.Point(250, 547)
-        Me.shopSupplyChargeValue.Name = "shopSupplyChargeValue"
-        Me.shopSupplyChargeValue.Size = New System.Drawing.Size(0, 20)
-        Me.shopSupplyChargeValue.TabIndex = 39
-        Me.shopSupplyChargeValue.Tag = "dataLabel"
+        Me.ShopSupplyCharge_Value.AutoSize = True
+        Me.ShopSupplyCharge_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ShopSupplyCharge_Value.ForeColor = System.Drawing.Color.Black
+        Me.ShopSupplyCharge_Value.Location = New System.Drawing.Point(250, 547)
+        Me.ShopSupplyCharge_Value.Name = "ShopSupplyCharge_Value"
+        Me.ShopSupplyCharge_Value.Size = New System.Drawing.Size(0, 20)
+        Me.ShopSupplyCharge_Value.TabIndex = 39
+        Me.ShopSupplyCharge_Value.Tag = "dataLabel"
         '
-        'laborRateValue
+        'LaborRate_Value
         '
-        Me.laborRateValue.AutoSize = True
-        Me.laborRateValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.laborRateValue.ForeColor = System.Drawing.Color.Black
-        Me.laborRateValue.Location = New System.Drawing.Point(444, 547)
-        Me.laborRateValue.Name = "laborRateValue"
-        Me.laborRateValue.Size = New System.Drawing.Size(0, 20)
-        Me.laborRateValue.TabIndex = 40
-        Me.laborRateValue.Tag = "dataLabel"
+        Me.LaborRate_Value.AutoSize = True
+        Me.LaborRate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LaborRate_Value.ForeColor = System.Drawing.Color.Black
+        Me.LaborRate_Value.Location = New System.Drawing.Point(444, 547)
+        Me.LaborRate_Value.Name = "LaborRate_Value"
+        Me.LaborRate_Value.Size = New System.Drawing.Size(0, 20)
+        Me.LaborRate_Value.TabIndex = 40
+        Me.LaborRate_Value.Tag = "dataLabel"
         '
         'companyInfo
         '
@@ -507,18 +507,18 @@ Partial Class companyInfo
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
-        Me.Controls.Add(Me.laborRateValue)
-        Me.Controls.Add(Me.shopSupplyChargeValue)
-        Me.Controls.Add(Me.phone2Value)
-        Me.Controls.Add(Me.phone1Value)
-        Me.Controls.Add(Me.taxRateValue)
-        Me.Controls.Add(Me.stateValue)
-        Me.Controls.Add(Me.cityValue)
-        Me.Controls.Add(Me.zipCodeValue)
-        Me.Controls.Add(Me.addressLine2Value)
-        Me.Controls.Add(Me.addressLine1Value)
-        Me.Controls.Add(Me.companyName2Value)
-        Me.Controls.Add(Me.companyNameValue)
+        Me.Controls.Add(Me.LaborRate_Value)
+        Me.Controls.Add(Me.ShopSupplyCharge_Value)
+        Me.Controls.Add(Me.Phone2_Value)
+        Me.Controls.Add(Me.Phone1_Value)
+        Me.Controls.Add(Me.TaxRate_Value)
+        Me.Controls.Add(Me.State_Value)
+        Me.Controls.Add(Me.city_Value)
+        Me.Controls.Add(Me.ZipCode_Value)
+        Me.Controls.Add(Me.Address2_Value)
+        Me.Controls.Add(Me.Address1_Value)
+        Me.Controls.Add(Me.CompanyName2_Value)
+        Me.Controls.Add(Me.CompanyName1_Value)
         Me.Controls.Add(Me.stateLabel)
         Me.Controls.Add(Me.cancelButton)
         Me.Controls.Add(Me.saveButton)
@@ -536,18 +536,18 @@ Partial Class companyInfo
         Me.Controls.Add(Me.addressLine1Label)
         Me.Controls.Add(Me.companyNameLabel2)
         Me.Controls.Add(Me.companyNameLabel)
-        Me.Controls.Add(Me.phone1Textbox)
-        Me.Controls.Add(Me.phone2Textbox)
-        Me.Controls.Add(Me.taxRateTextbox)
-        Me.Controls.Add(Me.stateTextbox)
-        Me.Controls.Add(Me.laborRateTextbox)
-        Me.Controls.Add(Me.addressLine2Textbox)
-        Me.Controls.Add(Me.addressLine1Textbox)
-        Me.Controls.Add(Me.shopSupplyChargeTextbox)
-        Me.Controls.Add(Me.cityTextbox)
-        Me.Controls.Add(Me.zipCodeTextbox)
-        Me.Controls.Add(Me.companyName2Textbox)
-        Me.Controls.Add(Me.companyNameTextbox)
+        Me.Controls.Add(Me.Phone1_Textbox)
+        Me.Controls.Add(Me.Phone2_Textbox)
+        Me.Controls.Add(Me.TaxRate_Textbox)
+        Me.Controls.Add(Me.State_Textbox)
+        Me.Controls.Add(Me.LaborRate_Textbox)
+        Me.Controls.Add(Me.Address2_Textbox)
+        Me.Controls.Add(Me.Address1_Textbox)
+        Me.Controls.Add(Me.ShopSupplyCharge_Textbox)
+        Me.Controls.Add(Me.city_Textbox)
+        Me.Controls.Add(Me.ZipCode_Textbox)
+        Me.Controls.Add(Me.CompanyName2_Textbox)
+        Me.Controls.Add(Me.CompanyName1_Textbox)
         Me.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.Name = "companyInfo"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -565,17 +565,17 @@ Partial Class companyInfo
     Friend WithEvents cityLabel As Label
     Friend WithEvents shopSupplyChargeLabel As Label
     Friend WithEvents companyInfoLabel As Label
-    Friend WithEvents companyNameTextbox As TextBox
-    Friend WithEvents companyName2Textbox As TextBox
-    Friend WithEvents addressLine1Textbox As TextBox
-    Friend WithEvents addressLine2Textbox As TextBox
-    Friend WithEvents zipCodeTextbox As TextBox
-    Friend WithEvents cityTextbox As TextBox
-    Friend WithEvents shopSupplyChargeTextbox As TextBox
-    Friend WithEvents laborRateTextbox As TextBox
-    Friend WithEvents taxRateTextbox As TextBox
-    Friend WithEvents phone2Textbox As TextBox
-    Friend WithEvents phone1Textbox As TextBox
+    Friend WithEvents CompanyName1_Textbox As TextBox
+    Friend WithEvents CompanyName2_Textbox As TextBox
+    Friend WithEvents Address1_Textbox As TextBox
+    Friend WithEvents Address2_Textbox As TextBox
+    Friend WithEvents ZipCode_Textbox As TextBox
+    Friend WithEvents city_Textbox As TextBox
+    Friend WithEvents ShopSupplyCharge_Textbox As TextBox
+    Friend WithEvents LaborRate_Textbox As TextBox
+    Friend WithEvents TaxRate_Textbox As TextBox
+    Friend WithEvents Phone2_Textbox As TextBox
+    Friend WithEvents Phone1_Textbox As TextBox
     Friend WithEvents phone1Label As Label
     Friend WithEvents phone2Label As Label
     Friend WithEvents taxRateLabel As Label
@@ -585,17 +585,17 @@ Partial Class companyInfo
     Friend WithEvents saveButton As Button
     Friend WithEvents cancelButton As Button
     Friend WithEvents stateLabel As Label
-    Friend WithEvents stateTextbox As TextBox
-    Friend WithEvents companyNameValue As Label
-    Friend WithEvents companyName2Value As Label
-    Friend WithEvents addressLine1Value As Label
-    Friend WithEvents addressLine2Value As Label
-    Friend WithEvents zipCodeValue As Label
-    Friend WithEvents cityValue As Label
-    Friend WithEvents stateValue As Label
-    Friend WithEvents taxRateValue As Label
-    Friend WithEvents phone1Value As Label
-    Friend WithEvents phone2Value As Label
-    Friend WithEvents shopSupplyChargeValue As Label
-    Friend WithEvents laborRateValue As Label
+    Friend WithEvents State_Textbox As TextBox
+    Friend WithEvents CompanyName1_Value As Label
+    Friend WithEvents CompanyName2_Value As Label
+    Friend WithEvents Address1_Value As Label
+    Friend WithEvents Address2_Value As Label
+    Friend WithEvents ZipCode_Value As Label
+    Friend WithEvents city_Value As Label
+    Friend WithEvents State_Value As Label
+    Friend WithEvents TaxRate_Value As Label
+    Friend WithEvents Phone1_Value As Label
+    Friend WithEvents Phone2_Value As Label
+    Friend WithEvents ShopSupplyCharge_Value As Label
+    Friend WithEvents LaborRate_Value As Label
 End Class
