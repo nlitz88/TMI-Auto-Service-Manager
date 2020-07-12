@@ -26,7 +26,7 @@
         Dim FullDatabasePath As String      ' Full path built from DatabaseDirectory and DatabaseFilename. Will be used in combination with another parameter to set dbSource Variable
 
         ' Local variables that should be *PULLED FROM AN INI FILE* for deployment
-        DatabaseDirectory = "C:\Users\nlitz88\Development\TMI Consulting\TMI-Auto-Service-Manager\AutoServiceManager\Database"  ' Change from PC to PC until I make INI
+        DatabaseDirectory = "C:\Users\nlitz\Development\TMI Consulting\Auto Service Manager\AutoServiceManager\AutoServiceManager\Database"  ' Change from PC to PC until I make INI
         TheDatabaseFilename = "TMI-ServiceMgr.mdb"
         FullDatabasePath = DatabaseDirectory & "\" & TheDatabaseFilename
         dbSource = "Data Source = " & FullDatabasePath      ' Finally, define the dbSource by combinding everywith the appropriate parameter "Data Source"
@@ -110,8 +110,10 @@
                 setNullToDefault(dataValue, CompanyMasterDataTable.Columns(i).DataType.ToString())
 
                 ' If not DBNull, then assign the value to the respective form item
-                dataLabelList(i).Text = dataValue   ' .ToString() necessarry??
-                dataFieldList(i).Text = dataValue
+                setControlValue(dataLabelList(i), dataValue)
+                setControlValue(dataFieldList(i), dataValue)
+                'dataLabelList(i).Text = dataValue
+                'dataFieldList(i).Text = dataValue
 
                 ' After this completed, record the initialValues of the 
                 initialDataValues.Add(dataFieldList(i).Name, dataFieldList(i).Text)

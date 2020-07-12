@@ -94,4 +94,19 @@
     End Sub
 
 
+    ' Function that can dynamically set value for control based on what type of control the data is being assigned to.
+    Public Sub setControlValue(ByRef control As Object, ByVal value As Object)
+
+        ' Add additional controls here if necessary
+        Select Case control.GetType()
+            Case GetType(System.Windows.Forms.Label)
+                control.Text = value.ToString()
+            Case GetType(System.Windows.Forms.TextBox)
+                control.Text = value.ToString()
+            Case GetType(System.Windows.Forms.CheckBox)
+                control.Checked = value
+        End Select
+
+    End Sub
+
 End Module
