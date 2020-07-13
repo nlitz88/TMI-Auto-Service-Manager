@@ -111,7 +111,7 @@
             columnNameFromCtrl = ctrl.Name.ToString().Substring(0, ctrl.Name.ToString().IndexOf(nameDelimiter))
             columnValue = dataTable.Rows(dataTableRow)(columnNameFromCtrl)
             ' remove this once setNullsToDefault moved to databaseLoading function
-            columnValue = setNullToDefault(columnValue, dataTable.Columns(columnNameFromCtrl).DataType.ToString())
+            columnValue = setNullToDefault(columnValue, dataTable.Columns(columnNameFromCtrl).DataType)
 
             Console.WriteLine(columnNameFromCtrl & " should now have type " & dataTable.Columns(columnNameFromCtrl).DataType.ToString() & " : " & columnValue.GetType().ToString())
 
@@ -132,29 +132,34 @@
     ' ************************ DATABASE DATA INTERACTION/MANIPULATION ************************
 
     ' Function used to return default value type of empty field from database instead of DBNull
-    Public Function setNullToDefault(ByRef dataValue As Object, ByVal dataType As String)
+    Public Function setNullToDefault(ByRef dataValue As Object, ByVal dataType As Object)
 
         ' If the value returned from the database is DBNull
         If dataValue Is DBNull.Value Then
 
+            'Console.WriteLine("Value from Column of type " & dataType.ToString() & " came through as " & dataValue.GetType().ToString())
+
             ' Determine what the dataType is and then assign corresponding default value
+            ' This statement can be expanded to support additional data types
             Select Case dataType
                 ' For all value types
-                Case "System.DateTime"
+                Case GetType(System.DateTime)
                     dataValue = New DateTime
-                Case "System.Boolean"
+                Case GetType(System.Boolean)
                     dataValue = False
-                Case "System.Decimal"
+                Case GetType(System.Decimal)
                     dataValue = 0.0
-                Case "System.Double"
+                Case GetType(System.Double)
                     dataValue = 0.0
-                Case "System.Integer"
+                Case GetType(System.Single)
                     dataValue = 0
-                Case "System.Char"
+                Case GetType(System.Int32)
                     dataValue = 0
-                    ' For all reference types
-                Case "System.String"
+                Case GetType(System.Char)
+                    dataValue = 0
+                Case GetType(System.String)
                     dataValue = String.Empty
+                    'Console.WriteLine("DataType is " & dataValue.GetType().ToString() & ". Does datavalue = String.Empty?: " & (dataValue = String.Empty))
             End Select
 
         End If
@@ -240,7 +245,8 @@
             For Each ctrl In ctrls
 
                 dataValue = dataTable.Rows(dataTableRow)(dataTable.Columns(i).ColumnName)
-                dataValue = setNullToDefault(dataValue, dataTable.Rows(dataTableRow)(dataTable.Columns(i).ColumnName).GetType().ToString())
+                'dataValue = setNullToDefault(dataValue, dataTable.Rows(dataTableRow)(dataTable.Columns(i).ColumnName).GetType())
+                dataValue = setNullToDefault(dataValue, dataTable.Columns(i).DataType)
                 setControlValue(ctrl, dataValue)
 
             Next

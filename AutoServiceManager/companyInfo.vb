@@ -100,6 +100,7 @@
     End Sub
 
 
+
     Private Sub companyInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ' Dynamically position elements on load.
@@ -108,7 +109,12 @@
         loadInitialData()
         initializeValues()
 
+        ' Testing
+
+
     End Sub
+
+
 
     Private Sub editButton_Click(sender As Object, e As EventArgs) Handles editButton.Click
 
