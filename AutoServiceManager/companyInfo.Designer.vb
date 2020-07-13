@@ -199,6 +199,7 @@ Partial Class companyInfo
         '
         'city_Textbox
         '
+        Me.city_Textbox.Enabled = False
         Me.city_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.city_Textbox.Location = New System.Drawing.Point(143, 461)
         Me.city_Textbox.Name = "city_Textbox"
@@ -360,6 +361,7 @@ Partial Class companyInfo
         '
         'State_Textbox
         '
+        Me.State_Textbox.Enabled = False
         Me.State_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.State_Textbox.Location = New System.Drawing.Point(403, 461)
         Me.State_Textbox.Name = "State_Textbox"

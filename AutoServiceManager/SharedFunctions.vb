@@ -164,6 +164,9 @@
     End Function
 
 
+
+
+
     ' Function that can dynamically set value for control based on what type of control the data is being assigned to.
     Public Sub setControlValue(ByRef control As Object, ByVal value As Object)
 
@@ -180,6 +183,7 @@
         End Select
 
     End Sub
+
 
     ' Function that dynamically compares a value to a control's respective value type
     Public Function compareControlValue(ByRef control As Object, ByVal value As Object) As Boolean

@@ -271,29 +271,31 @@
 
     End Sub
 
-    Private Sub city_Textbox_TextChanged(sender As Object, e As EventArgs) Handles city_Textbox.TextChanged
 
-        If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
-                saveButton.Enabled = True
-            Else
-                saveButton.Enabled = False
-            End If
-        End If
 
-    End Sub
+    'Private Sub city_Textbox_TextChanged(sender As Object, e As EventArgs) Handles city_Textbox.TextChanged
 
-    Private Sub State_Textbox_TextChanged(sender As Object, e As EventArgs) Handles State_Textbox.TextChanged
+    '    If valuesInitialized Then
+    '        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
+    '            saveButton.Enabled = True
+    '        Else
+    '            saveButton.Enabled = False
+    '        End If
+    '    End If
 
-        If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
-                saveButton.Enabled = True
-            Else
-                saveButton.Enabled = False
-            End If
-        End If
+    'End Sub
 
-    End Sub
+    'Private Sub State_Textbox_TextChanged(sender As Object, e As EventArgs) Handles State_Textbox.TextChanged
+
+    '    If valuesInitialized Then
+    '        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
+    '            saveButton.Enabled = True
+    '        Else
+    '            saveButton.Enabled = False
+    '        End If
+    '    End If
+
+    'End Sub
 
     Private Sub Phone1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Phone1_Textbox.TextChanged
 
