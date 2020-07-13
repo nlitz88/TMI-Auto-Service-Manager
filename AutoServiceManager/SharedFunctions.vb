@@ -112,15 +112,14 @@
             columnValue = dataTable.Rows(dataTableRow)(columnNameFromCtrl)
             ' remove this once setNullsToDefault moved to databaseLoading function
             columnValue = setNullToDefault(columnValue, dataTable.Columns(columnNameFromCtrl).DataType.ToString())
+
             Console.WriteLine(columnNameFromCtrl & " should now have type " & dataTable.Columns(columnNameFromCtrl).DataType.ToString() & " : " & columnValue.GetType().ToString())
-            ' Call function here that will
-            ' 1.) Determine what type of control is being looked at
-            ' 2.) Based on what type of control is being looked at, compare that controls respective value to that value in the dataTable
 
             ' If the value currently in the control is not equal to the corresponding value in the dataTable
             If Not compareControlValue(ctrl, columnValue) Then
+                Console.WriteLine(ctrl.Name & " has a different value than " & columnValue)
                 result = True
-                ' COULD ACTUALLY BREAK OUT OF FOR LOOP HERE, NO NEED TO WASTE CPU TIME CHECKING IF OTHER ONES ARE MODIFIED TOO
+                Exit For    ' keeps the loop from checking against other controls if it has already found that a change has been made
             End If
 
         Next
@@ -182,8 +181,7 @@
 
     End Sub
 
-
-    ' Function that compares value of 
+    ' Function that dynamically compares a value to a control's respective value type
     Public Function compareControlValue(ByRef control As Object, ByVal value As Object) As Boolean
 
         Dim result As Boolean = False
@@ -191,11 +189,11 @@
         ' Add additional controls here if necessary
         Select Case control.GetType()
             Case GetType(System.Windows.Forms.Label)
-                If control.Text = value Then
+                If control.Text = value.ToString() Then     ' For .text, must compare against string value, as .Text is a string property
                     result = True
                 End If
             Case GetType(System.Windows.Forms.TextBox)
-                If control.Text = value Then
+                If control.Text = value.ToString() Then
                     result = True
                 End If
             Case GetType(System.Windows.Forms.CheckBox)
@@ -241,8 +239,6 @@
                 dataValue = setNullToDefault(dataValue, dataTable.Rows(dataTableRow)(dataTable.Columns(i).ColumnName).GetType().ToString())
                 setControlValue(ctrl, dataValue)
 
-
-                Console.WriteLine(ctrl.Name & " set to " & dataValue.ToString())
             Next
 
 

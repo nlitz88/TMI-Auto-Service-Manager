@@ -3,9 +3,6 @@
     'Temporary variable to keep track of whether form fully loaded or not
     Dim valuesInitialized As Boolean = False
 
-    ' Dictionary to maintain initial dataLabel/dataField values to compare against when changes are made
-    Dim initialTextBoxValues As Dictionary(Of String, String)
-
     ' Datatable for dataAdapter to load data into. This really should be moved to a class
     Dim CompanyMasterDataTable As DataTable
     ' Another Connection variable. Describes whether or not connection attempt throws exception
@@ -96,12 +93,6 @@
 
             initializeControlsFromRow(CompanyMasterDataTable, 0, "_", Me)
 
-            ' Temporary. Rebuild with more intuitive method
-            initialTextBoxValues = New Dictionary(Of String, String)
-            For Each tb In getAllItemsWithTag("dataField")
-                initialTextBoxValues.Add(tb.Name, tb.Text)      ' CREATE FUNCTION that dynamically returns data type that control contains (not always text)
-            Next
-
             valuesInitialized = True
 
         End If
@@ -116,9 +107,6 @@
 
         loadInitialData()
         initializeValues()
-
-        ' Test function here first
-        initializeControlsFromRow(CompanyMasterDataTable, 0, "_", Me)
 
     End Sub
 

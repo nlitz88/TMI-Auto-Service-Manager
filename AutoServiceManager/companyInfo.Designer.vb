@@ -230,7 +230,7 @@ Partial Class companyInfo
         'TaxRate_Textbox
         '
         Me.TaxRate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TaxRate_Textbox.Location = New System.Drawing.Point(655, 461)
+        Me.TaxRate_Textbox.Location = New System.Drawing.Point(650, 461)
         Me.TaxRate_Textbox.Name = "TaxRate_Textbox"
         Me.TaxRate_Textbox.Size = New System.Drawing.Size(81, 27)
         Me.TaxRate_Textbox.TabIndex = 16
@@ -240,7 +240,7 @@ Partial Class companyInfo
         'Phone2_Textbox
         '
         Me.Phone2_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Phone2_Textbox.Location = New System.Drawing.Point(655, 384)
+        Me.Phone2_Textbox.Location = New System.Drawing.Point(650, 384)
         Me.Phone2_Textbox.Name = "Phone2_Textbox"
         Me.Phone2_Textbox.Size = New System.Drawing.Size(181, 27)
         Me.Phone2_Textbox.TabIndex = 17
@@ -250,7 +250,7 @@ Partial Class companyInfo
         'Phone1_Textbox
         '
         Me.Phone1_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Phone1_Textbox.Location = New System.Drawing.Point(655, 339)
+        Me.Phone1_Textbox.Location = New System.Drawing.Point(650, 339)
         Me.Phone1_Textbox.Name = "Phone1_Textbox"
         Me.Phone1_Textbox.Size = New System.Drawing.Size(181, 27)
         Me.Phone1_Textbox.TabIndex = 18
@@ -281,7 +281,7 @@ Partial Class companyInfo
         '
         Me.taxRateLabel.AutoSize = True
         Me.taxRateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.taxRateLabel.Location = New System.Drawing.Point(576, 467)
+        Me.taxRateLabel.Location = New System.Drawing.Point(571, 467)
         Me.taxRateLabel.Name = "taxRateLabel"
         Me.taxRateLabel.Size = New System.Drawing.Size(73, 17)
         Me.taxRateLabel.TabIndex = 21
