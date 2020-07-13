@@ -89,7 +89,7 @@ Partial Class companyInfo
         '
         Me.addressLine1Label.AutoSize = True
         Me.addressLine1Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.addressLine1Label.Location = New System.Drawing.Point(98, 340)
+        Me.addressLine1Label.Location = New System.Drawing.Point(98, 311)
         Me.addressLine1Label.Name = "addressLine1Label"
         Me.addressLine1Label.Size = New System.Drawing.Size(120, 17)
         Me.addressLine1Label.TabIndex = 2
@@ -99,7 +99,7 @@ Partial Class companyInfo
         '
         Me.addressLine2Label.AutoSize = True
         Me.addressLine2Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.addressLine2Label.Location = New System.Drawing.Point(98, 384)
+        Me.addressLine2Label.Location = New System.Drawing.Point(98, 355)
         Me.addressLine2Label.Name = "addressLine2Label"
         Me.addressLine2Label.Size = New System.Drawing.Size(120, 17)
         Me.addressLine2Label.TabIndex = 3
@@ -109,7 +109,7 @@ Partial Class companyInfo
         '
         Me.zipCodeLabel.AutoSize = True
         Me.zipCodeLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.zipCodeLabel.Location = New System.Drawing.Point(98, 423)
+        Me.zipCodeLabel.Location = New System.Drawing.Point(98, 408)
         Me.zipCodeLabel.Name = "zipCodeLabel"
         Me.zipCodeLabel.Size = New System.Drawing.Size(73, 17)
         Me.zipCodeLabel.TabIndex = 4
@@ -119,7 +119,7 @@ Partial Class companyInfo
         '
         Me.cityLabel.AutoSize = True
         Me.cityLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.cityLabel.Location = New System.Drawing.Point(98, 467)
+        Me.cityLabel.Location = New System.Drawing.Point(98, 452)
         Me.cityLabel.Name = "cityLabel"
         Me.cityLabel.Size = New System.Drawing.Size(39, 17)
         Me.cityLabel.TabIndex = 5
@@ -153,7 +153,7 @@ Partial Class companyInfo
         Me.CompanyName1_Textbox.Name = "CompanyName1_Textbox"
         Me.CompanyName1_Textbox.Size = New System.Drawing.Size(271, 27)
         Me.CompanyName1_Textbox.TabIndex = 8
-        Me.CompanyName1_Textbox.Tag = "dataField"
+        Me.CompanyName1_Textbox.Tag = "dataEditingControl"
         Me.CompanyName1_Textbox.Visible = False
         Me.CompanyName1_Textbox.WordWrap = False
         '
@@ -164,48 +164,48 @@ Partial Class companyInfo
         Me.CompanyName2_Textbox.Name = "CompanyName2_Textbox"
         Me.CompanyName2_Textbox.Size = New System.Drawing.Size(271, 27)
         Me.CompanyName2_Textbox.TabIndex = 9
-        Me.CompanyName2_Textbox.Tag = "dataField"
+        Me.CompanyName2_Textbox.Tag = "dataEditingControl"
         Me.CompanyName2_Textbox.Visible = False
         '
         'Address1_Textbox
         '
         Me.Address1_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Address1_Textbox.Location = New System.Drawing.Point(224, 334)
+        Me.Address1_Textbox.Location = New System.Drawing.Point(224, 305)
         Me.Address1_Textbox.Name = "Address1_Textbox"
         Me.Address1_Textbox.Size = New System.Drawing.Size(289, 27)
         Me.Address1_Textbox.TabIndex = 10
-        Me.Address1_Textbox.Tag = "dataField"
+        Me.Address1_Textbox.Tag = "dataEditingControl"
         Me.Address1_Textbox.Visible = False
         '
         'Address2_Textbox
         '
         Me.Address2_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Address2_Textbox.Location = New System.Drawing.Point(224, 378)
+        Me.Address2_Textbox.Location = New System.Drawing.Point(224, 349)
         Me.Address2_Textbox.Name = "Address2_Textbox"
         Me.Address2_Textbox.Size = New System.Drawing.Size(289, 27)
         Me.Address2_Textbox.TabIndex = 11
-        Me.Address2_Textbox.Tag = "dataField"
+        Me.Address2_Textbox.Tag = "dataEditingControl"
         Me.Address2_Textbox.Visible = False
         '
         'ZipCode_Textbox
         '
         Me.ZipCode_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ZipCode_Textbox.Location = New System.Drawing.Point(177, 417)
+        Me.ZipCode_Textbox.Location = New System.Drawing.Point(177, 402)
         Me.ZipCode_Textbox.Name = "ZipCode_Textbox"
         Me.ZipCode_Textbox.Size = New System.Drawing.Size(114, 27)
         Me.ZipCode_Textbox.TabIndex = 12
-        Me.ZipCode_Textbox.Tag = "dataField"
+        Me.ZipCode_Textbox.Tag = "dataEditingControl"
         Me.ZipCode_Textbox.Visible = False
         '
         'city_Textbox
         '
         Me.city_Textbox.Enabled = False
         Me.city_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.city_Textbox.Location = New System.Drawing.Point(143, 461)
+        Me.city_Textbox.Location = New System.Drawing.Point(143, 446)
         Me.city_Textbox.Name = "city_Textbox"
         Me.city_Textbox.Size = New System.Drawing.Size(184, 27)
         Me.city_Textbox.TabIndex = 13
-        Me.city_Textbox.Tag = "dataField"
+        Me.city_Textbox.Tag = "dataEditingControl"
         Me.city_Textbox.Visible = False
         '
         'ShopSupplyCharge_Textbox
@@ -215,7 +215,7 @@ Partial Class companyInfo
         Me.ShopSupplyCharge_Textbox.Name = "ShopSupplyCharge_Textbox"
         Me.ShopSupplyCharge_Textbox.Size = New System.Drawing.Size(82, 27)
         Me.ShopSupplyCharge_Textbox.TabIndex = 14
-        Me.ShopSupplyCharge_Textbox.Tag = "dataField"
+        Me.ShopSupplyCharge_Textbox.Tag = "dataEditingControl"
         Me.ShopSupplyCharge_Textbox.Visible = False
         '
         'LaborRate_Textbox
@@ -225,44 +225,44 @@ Partial Class companyInfo
         Me.LaborRate_Textbox.Name = "LaborRate_Textbox"
         Me.LaborRate_Textbox.Size = New System.Drawing.Size(69, 27)
         Me.LaborRate_Textbox.TabIndex = 15
-        Me.LaborRate_Textbox.Tag = "dataField"
+        Me.LaborRate_Textbox.Tag = "dataEditingControl"
         Me.LaborRate_Textbox.Visible = False
         '
         'TaxRate_Textbox
         '
         Me.TaxRate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TaxRate_Textbox.Location = New System.Drawing.Point(650, 461)
+        Me.TaxRate_Textbox.Location = New System.Drawing.Point(650, 446)
         Me.TaxRate_Textbox.Name = "TaxRate_Textbox"
         Me.TaxRate_Textbox.Size = New System.Drawing.Size(81, 27)
         Me.TaxRate_Textbox.TabIndex = 16
-        Me.TaxRate_Textbox.Tag = "dataField"
+        Me.TaxRate_Textbox.Tag = "dataEditingControl"
         Me.TaxRate_Textbox.Visible = False
         '
         'Phone2_Textbox
         '
         Me.Phone2_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Phone2_Textbox.Location = New System.Drawing.Point(650, 384)
+        Me.Phone2_Textbox.Location = New System.Drawing.Point(655, 355)
         Me.Phone2_Textbox.Name = "Phone2_Textbox"
         Me.Phone2_Textbox.Size = New System.Drawing.Size(181, 27)
         Me.Phone2_Textbox.TabIndex = 17
-        Me.Phone2_Textbox.Tag = "dataField"
+        Me.Phone2_Textbox.Tag = "dataEditingControl"
         Me.Phone2_Textbox.Visible = False
         '
         'Phone1_Textbox
         '
         Me.Phone1_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Phone1_Textbox.Location = New System.Drawing.Point(650, 339)
+        Me.Phone1_Textbox.Location = New System.Drawing.Point(655, 305)
         Me.Phone1_Textbox.Name = "Phone1_Textbox"
         Me.Phone1_Textbox.Size = New System.Drawing.Size(181, 27)
         Me.Phone1_Textbox.TabIndex = 18
-        Me.Phone1_Textbox.Tag = "dataField"
+        Me.Phone1_Textbox.Tag = "dataEditingControl"
         Me.Phone1_Textbox.Visible = False
         '
         'phone1Label
         '
         Me.phone1Label.AutoSize = True
         Me.phone1Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.phone1Label.Location = New System.Drawing.Point(571, 340)
+        Me.phone1Label.Location = New System.Drawing.Point(571, 311)
         Me.phone1Label.Name = "phone1Label"
         Me.phone1Label.Size = New System.Drawing.Size(78, 17)
         Me.phone1Label.TabIndex = 19
@@ -272,7 +272,7 @@ Partial Class companyInfo
         '
         Me.phone2Label.AutoSize = True
         Me.phone2Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.phone2Label.Location = New System.Drawing.Point(571, 390)
+        Me.phone2Label.Location = New System.Drawing.Point(571, 361)
         Me.phone2Label.Name = "phone2Label"
         Me.phone2Label.Size = New System.Drawing.Size(78, 17)
         Me.phone2Label.TabIndex = 20
@@ -282,7 +282,7 @@ Partial Class companyInfo
         '
         Me.taxRateLabel.AutoSize = True
         Me.taxRateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.taxRateLabel.Location = New System.Drawing.Point(571, 467)
+        Me.taxRateLabel.Location = New System.Drawing.Point(571, 452)
         Me.taxRateLabel.Name = "taxRateLabel"
         Me.taxRateLabel.Size = New System.Drawing.Size(73, 17)
         Me.taxRateLabel.TabIndex = 21
@@ -353,7 +353,7 @@ Partial Class companyInfo
         '
         Me.stateLabel.AutoSize = True
         Me.stateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.stateLabel.Location = New System.Drawing.Point(348, 467)
+        Me.stateLabel.Location = New System.Drawing.Point(348, 452)
         Me.stateLabel.Name = "stateLabel"
         Me.stateLabel.Size = New System.Drawing.Size(49, 17)
         Me.stateLabel.TabIndex = 27
@@ -363,11 +363,11 @@ Partial Class companyInfo
         '
         Me.State_Textbox.Enabled = False
         Me.State_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.State_Textbox.Location = New System.Drawing.Point(403, 461)
+        Me.State_Textbox.Location = New System.Drawing.Point(403, 446)
         Me.State_Textbox.Name = "State_Textbox"
         Me.State_Textbox.Size = New System.Drawing.Size(110, 27)
         Me.State_Textbox.TabIndex = 28
-        Me.State_Textbox.Tag = "dataField"
+        Me.State_Textbox.Tag = "dataEditingControl"
         Me.State_Textbox.Visible = False
         '
         'CompanyName1_Value
@@ -379,7 +379,7 @@ Partial Class companyInfo
         Me.CompanyName1_Value.Name = "CompanyName1_Value"
         Me.CompanyName1_Value.Size = New System.Drawing.Size(0, 20)
         Me.CompanyName1_Value.TabIndex = 29
-        Me.CompanyName1_Value.Tag = "dataLabel"
+        Me.CompanyName1_Value.Tag = "dataViewingControl"
         '
         'CompanyName2_Value
         '
@@ -390,95 +390,95 @@ Partial Class companyInfo
         Me.CompanyName2_Value.Name = "CompanyName2_Value"
         Me.CompanyName2_Value.Size = New System.Drawing.Size(0, 20)
         Me.CompanyName2_Value.TabIndex = 30
-        Me.CompanyName2_Value.Tag = "dataLabel"
+        Me.CompanyName2_Value.Tag = "dataViewingControl"
         '
         'Address1_Value
         '
         Me.Address1_Value.AutoSize = True
         Me.Address1_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Address1_Value.ForeColor = System.Drawing.Color.Black
-        Me.Address1_Value.Location = New System.Drawing.Point(224, 337)
+        Me.Address1_Value.Location = New System.Drawing.Point(224, 308)
         Me.Address1_Value.Name = "Address1_Value"
         Me.Address1_Value.Size = New System.Drawing.Size(0, 20)
         Me.Address1_Value.TabIndex = 31
-        Me.Address1_Value.Tag = "dataLabel"
+        Me.Address1_Value.Tag = "dataViewingControl"
         '
         'Address2_Value
         '
         Me.Address2_Value.AutoSize = True
         Me.Address2_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Address2_Value.ForeColor = System.Drawing.Color.Black
-        Me.Address2_Value.Location = New System.Drawing.Point(224, 381)
+        Me.Address2_Value.Location = New System.Drawing.Point(224, 352)
         Me.Address2_Value.Name = "Address2_Value"
         Me.Address2_Value.Size = New System.Drawing.Size(0, 20)
         Me.Address2_Value.TabIndex = 32
-        Me.Address2_Value.Tag = "dataLabel"
+        Me.Address2_Value.Tag = "dataViewingControl"
         '
         'ZipCode_Value
         '
         Me.ZipCode_Value.AutoSize = True
         Me.ZipCode_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ZipCode_Value.ForeColor = System.Drawing.Color.Black
-        Me.ZipCode_Value.Location = New System.Drawing.Point(177, 420)
+        Me.ZipCode_Value.Location = New System.Drawing.Point(177, 405)
         Me.ZipCode_Value.Name = "ZipCode_Value"
         Me.ZipCode_Value.Size = New System.Drawing.Size(0, 20)
         Me.ZipCode_Value.TabIndex = 33
-        Me.ZipCode_Value.Tag = "dataLabel"
+        Me.ZipCode_Value.Tag = "dataViewingControl"
         '
         'city_Value
         '
         Me.city_Value.AutoSize = True
         Me.city_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.city_Value.ForeColor = System.Drawing.Color.Black
-        Me.city_Value.Location = New System.Drawing.Point(143, 464)
+        Me.city_Value.Location = New System.Drawing.Point(143, 449)
         Me.city_Value.Name = "city_Value"
         Me.city_Value.Size = New System.Drawing.Size(0, 20)
         Me.city_Value.TabIndex = 34
-        Me.city_Value.Tag = "dataLabel"
+        Me.city_Value.Tag = "dataViewingControl"
         '
         'State_Value
         '
         Me.State_Value.AutoSize = True
         Me.State_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.State_Value.ForeColor = System.Drawing.Color.Black
-        Me.State_Value.Location = New System.Drawing.Point(403, 464)
+        Me.State_Value.Location = New System.Drawing.Point(403, 449)
         Me.State_Value.Name = "State_Value"
         Me.State_Value.Size = New System.Drawing.Size(0, 20)
         Me.State_Value.TabIndex = 35
-        Me.State_Value.Tag = "dataLabel"
+        Me.State_Value.Tag = "dataViewingControl"
         '
         'TaxRate_Value
         '
         Me.TaxRate_Value.AutoSize = True
         Me.TaxRate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TaxRate_Value.ForeColor = System.Drawing.Color.Black
-        Me.TaxRate_Value.Location = New System.Drawing.Point(655, 464)
+        Me.TaxRate_Value.Location = New System.Drawing.Point(655, 449)
         Me.TaxRate_Value.Name = "TaxRate_Value"
         Me.TaxRate_Value.Size = New System.Drawing.Size(0, 20)
         Me.TaxRate_Value.TabIndex = 36
-        Me.TaxRate_Value.Tag = "dataLabel"
+        Me.TaxRate_Value.Tag = "dataViewingControl"
         '
         'Phone1_Value
         '
         Me.Phone1_Value.AutoSize = True
         Me.Phone1_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Phone1_Value.ForeColor = System.Drawing.Color.Black
-        Me.Phone1_Value.Location = New System.Drawing.Point(655, 342)
+        Me.Phone1_Value.Location = New System.Drawing.Point(655, 313)
         Me.Phone1_Value.Name = "Phone1_Value"
         Me.Phone1_Value.Size = New System.Drawing.Size(0, 20)
         Me.Phone1_Value.TabIndex = 37
-        Me.Phone1_Value.Tag = "dataLabel"
+        Me.Phone1_Value.Tag = "dataViewingControl"
         '
         'Phone2_Value
         '
         Me.Phone2_Value.AutoSize = True
         Me.Phone2_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Phone2_Value.ForeColor = System.Drawing.Color.Black
-        Me.Phone2_Value.Location = New System.Drawing.Point(655, 387)
+        Me.Phone2_Value.Location = New System.Drawing.Point(655, 358)
         Me.Phone2_Value.Name = "Phone2_Value"
         Me.Phone2_Value.Size = New System.Drawing.Size(0, 20)
         Me.Phone2_Value.TabIndex = 38
-        Me.Phone2_Value.Tag = "dataLabel"
+        Me.Phone2_Value.Tag = "dataViewingControl"
         '
         'ShopSupplyCharge_Value
         '
@@ -489,7 +489,7 @@ Partial Class companyInfo
         Me.ShopSupplyCharge_Value.Name = "ShopSupplyCharge_Value"
         Me.ShopSupplyCharge_Value.Size = New System.Drawing.Size(0, 20)
         Me.ShopSupplyCharge_Value.TabIndex = 39
-        Me.ShopSupplyCharge_Value.Tag = "dataLabel"
+        Me.ShopSupplyCharge_Value.Tag = "dataViewingControl"
         '
         'LaborRate_Value
         '
@@ -500,7 +500,7 @@ Partial Class companyInfo
         Me.LaborRate_Value.Name = "LaborRate_Value"
         Me.LaborRate_Value.Size = New System.Drawing.Size(0, 20)
         Me.LaborRate_Value.TabIndex = 40
-        Me.LaborRate_Value.Tag = "dataLabel"
+        Me.LaborRate_Value.Tag = "dataViewingControl"
         '
         'companyInfo
         '

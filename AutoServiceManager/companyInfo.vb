@@ -143,16 +143,16 @@
 
         ' Disable all navigation controls while editing
         showHide(getAllItemsWithTag("navigation"), 0)
-        ' disable/enable the dataLabels and dataFields, respectively
-        showHide(getAllItemsWithTag("dataLabel"), 0)
-        showHide(getAllItemsWithTag("dataField"), 1)
+        ' disable/enable the dataViewingControls and dataEditingControls, respectively
+        showHide(getAllItemsWithTag("dataViewingControl"), 0)
+        showHide(getAllItemsWithTag("dataEditingControl"), 1)
 
     End Sub
 
     Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
 
         ' Ensure that any changes made are saved
-        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
+        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
 
             Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo)
 
@@ -169,9 +169,9 @@
                     editButton.Enabled = True
                     ' re-enable navigation controls
                     showHide(getAllItemsWithTag("navigation"), 1)
-                    ' enable/disable the dataLabels and dataFields, respectively
-                    showHide(getAllItemsWithTag("dataLabel"), 1)
-                    showHide(getAllItemsWithTag("dataField"), 0)
+                    ' enable/disable the dataViewingControls and dataEditingControls, respectively
+                    showHide(getAllItemsWithTag("dataViewingControl"), 1)
+                    showHide(getAllItemsWithTag("dataEditingControl"), 0)
 
                 Case DialogResult.No
 
@@ -186,9 +186,9 @@
             editButton.Enabled = True
             ' re-enable navigation controls
             showHide(getAllItemsWithTag("navigation"), 1)
-            ' enable/disable the dataLabels and dataFields, respectively
-            showHide(getAllItemsWithTag("dataLabel"), 1)
-            showHide(getAllItemsWithTag("dataField"), 0)
+            ' enable/disable the dataViewingControls and dataEditingControls, respectively
+            showHide(getAllItemsWithTag("dataViewingControl"), 1)
+            showHide(getAllItemsWithTag("dataEditingControl"), 0)
 
         End If
 
@@ -213,9 +213,9 @@
                 ' re-enable navigation controls
                 showHide(getAllItemsWithTag("navigation"), 1)
 
-                ' show updated dataLabels and hide dataFields
-                showHide(getAllItemsWithTag("dataLabel"), 1)
-                showHide(getAllItemsWithTag("dataField"), 0)
+                ' show updated dataViewingControls and hide dataEditingControls
+                showHide(getAllItemsWithTag("dataViewingControl"), 1)
+                showHide(getAllItemsWithTag("dataEditingControl"), 0)
 
 
 
@@ -228,7 +228,7 @@
 
 
 
-    ' ************************ DATAFIELD TEXTBOX EVENT HANDLERS ************************
+    ' ************************ dataEditingControl TEXTBOX EVENT HANDLERS ************************
 
 
     Private Sub CompanyName1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles CompanyName1_Textbox.TextChanged
@@ -236,9 +236,9 @@
         ' For now, just check to see if the entire form has been loaded before checking for text changes
         ' In the future (when database implemented, maybe this should change to until the database has been connected to and data has been loaded?
         ' Worker thread or something of the like?
-        ' This applies for this Textbox sub and all dataField tagged Textboxes that follow
+        ' This applies for this Textbox sub and all dataEditingControl tagged Textboxes that follow
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -250,7 +250,7 @@
     Private Sub CompanyName2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles CompanyName2_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -262,7 +262,7 @@
     Private Sub Address1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Address1_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -274,7 +274,7 @@
     Private Sub Address2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Address2_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -286,7 +286,7 @@
     Private Sub ZipCode_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ZipCode_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -300,7 +300,7 @@
     'Private Sub city_Textbox_TextChanged(sender As Object, e As EventArgs) Handles city_Textbox.TextChanged
 
     '    If valuesInitialized Then
-    '        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
+    '        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
     '            saveButton.Enabled = True
     '        Else
     '            saveButton.Enabled = False
@@ -312,7 +312,7 @@
     'Private Sub State_Textbox_TextChanged(sender As Object, e As EventArgs) Handles State_Textbox.TextChanged
 
     '    If valuesInitialized Then
-    '        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
+    '        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
     '            saveButton.Enabled = True
     '        Else
     '            saveButton.Enabled = False
@@ -324,7 +324,7 @@
     Private Sub Phone1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Phone1_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -336,7 +336,7 @@
     Private Sub Phone2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Phone2_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -348,7 +348,7 @@
     Private Sub TaxRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles TaxRate_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -360,7 +360,7 @@
     Private Sub ShopSupplyCharge_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ShopSupplyCharge_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -372,7 +372,7 @@
     Private Sub LaborRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LaborRate_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataField"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
