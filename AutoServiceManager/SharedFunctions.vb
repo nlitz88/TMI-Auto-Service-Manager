@@ -56,12 +56,12 @@
     ' Sub that shows or hides all items passed in.
     ' First param accepts list of items, second param accepts integer: 0 = hide, 1 = show
     ' Commonly used in conjunction with getAllItemsWithTag or similar function that finds items by attribute or type
-    Public Sub showHide(ByVal items As List(Of Object), ByVal showhide As Integer)
-        For Each item In items
+    Public Sub showHide(ByVal ctrls As List(Of Object), ByVal showhide As Integer)
+        For Each ctrl In ctrls
             If showhide = 0 Then
-                item.Hide()
+                ctrl.Hide()
             ElseIf showhide = 1 Then
-                item.Show()
+                ctrl.Show()
             End If
         Next
     End Sub
@@ -105,7 +105,7 @@
         Dim columnNameFromCtrl As String
         Dim columnValue As Object
 
-        For Each ctrl In controls
+        For Each ctrl As Control In controls                    ' As control may pose issues. Remove in the future if so. Added just for good practice.
             ' Lookup initial value of control in dataTable.
             ' Do this by finding the value at the corresponding (row)(column) that the control's value corresponds to.
             columnNameFromCtrl = ctrl.Name.ToString().Substring(0, ctrl.Name.ToString().IndexOf(nameDelimiter))
@@ -141,25 +141,40 @@
 
             ' Determine what the dataType is and then assign corresponding default value
             ' This statement can be expanded to support additional data types
+
+            'Select Case dataType
+
+            '    Case GetType(System.String)
+            '        dataValue = String.Empty
+            '        'Console.WriteLine("DataType is " & dataValue.GetType().ToString() & ". Does datavalue = String.Empty?: " & (dataValue = String.Empty))
+            '    Case GetType(System.DateTime)
+            '        dataValue = New DateTime
+            '    Case GetType(System.Boolean)
+            '        dataValue = False
+            '    Case GetType(System.Decimal)
+            '        dataValue = 0.0
+            '    Case GetType(System.Double)
+            '        dataValue = 0.0
+            '    Case GetType(System.Single)
+            '        dataValue = 0
+            '    Case GetType(System.Int32)
+            '        dataValue = 0
+            '    Case GetType(System.Char)
+            '        dataValue = 0
+            'End Select
+
             Select Case dataType
-                ' For all value types
+
                 Case GetType(System.DateTime)
                     dataValue = New DateTime
-                Case GetType(System.Boolean)
-                    dataValue = False
-                Case GetType(System.Decimal)
-                    dataValue = 0.0
-                Case GetType(System.Double)
-                    dataValue = 0.0
-                Case GetType(System.Single)
-                    dataValue = 0
-                Case GetType(System.Int32)
-                    dataValue = 0
-                Case GetType(System.Char)
-                    dataValue = 0
                 Case GetType(System.String)
                     dataValue = String.Empty
                     'Console.WriteLine("DataType is " & dataValue.GetType().ToString() & ". Does datavalue = String.Empty?: " & (dataValue = String.Empty))
+                Case GetType(System.Boolean)
+                    dataValue = False
+                Case Else
+                    dataValue = 0
+
             End Select
 
         End If
@@ -169,6 +184,40 @@
     End Function
 
 
+
+    ' Sub used to replace DBNull entries in provided DataTable to default entries respective to their dataType
+    ' Receives dataTable as reference, so all changes are made directly on DataTable
+    Public Sub setNullsToDefault(ByRef dataTable As DataTable)
+
+        For Each row As DataRow In dataTable.Rows
+            For Each column As DataColumn In dataTable.Columns
+
+                Dim dataValue As Object = row(column)
+
+                If dataValue = DBNull.Value Then
+
+                    Dim dataType = column.DataType
+
+                    Select Case dataType
+
+                        Case GetType(System.DateTime)
+                            dataValue = New DateTime
+                        Case GetType(System.String)
+                            dataValue = String.Empty
+                    'Console.WriteLine("DataType is " & dataValue.GetType().ToString() & ". Does datavalue = String.Empty?: " & (dataValue = String.Empty))
+                        Case GetType(System.Boolean)
+                            dataValue = False
+                        Case Else
+                            dataValue = 0
+
+                    End Select
+
+                End If
+
+            Next
+        Next
+
+    End Sub
 
 
 
