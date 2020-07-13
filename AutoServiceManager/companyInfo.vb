@@ -62,7 +62,10 @@
             ' Use the acesssAdapter to fill the dataTable
             accessAdapter.Fill(CompanyMasterDataTable)
 
-            ' ****Set all nulls to default here at some point****
+            ' ****Set all DBNull values in dataTable to the respective default value of their type here****
+            ' This will also eventually get moved into the database control class
+            setNullsToDefault(CompanyMasterDataTable)
+
 
             connHasException = False
 
@@ -91,14 +94,16 @@
 
             valuesInitialized = False
 
+            ' Initialize Form controls from CompanyMasterDataTable
             initializeControlsFromRow(CompanyMasterDataTable, 0, "_", Me)
+            ' Initialize any additional controls from additional DataTables here
+
 
             valuesInitialized = True
 
         End If
 
     End Sub
-
 
 
     Private Sub companyInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load

@@ -105,21 +105,17 @@
         Dim columnNameFromCtrl As String
         Dim columnValue As Object
 
-        For Each ctrl As Control In controls                    ' As control may pose issues. Remove in the future if so. Added just for good practice.
+        For Each ctrl As Control In controls                            ' "As Control" may pose issues. Remove in the future if so. Added just for good practice.
             ' Lookup initial value of control in dataTable.
             ' Do this by finding the value at the corresponding (row)(column) that the control's value corresponds to.
             columnNameFromCtrl = ctrl.Name.ToString().Substring(0, ctrl.Name.ToString().IndexOf(nameDelimiter))
             columnValue = dataTable.Rows(dataTableRow)(columnNameFromCtrl)
-            ' remove this once setNullsToDefault moved to databaseLoading function
-            columnValue = setNullToDefault(columnValue, dataTable.Columns(columnNameFromCtrl).DataType)
-
-            Console.WriteLine(columnNameFromCtrl & " should now have type " & dataTable.Columns(columnNameFromCtrl).DataType.ToString() & " : " & columnValue.GetType().ToString())
 
             ' If the value currently in the control is not equal to the corresponding value in the dataTable
             If Not compareControlValue(ctrl, columnValue) Then
                 Console.WriteLine(ctrl.Name & " has a different value than " & columnValue)
                 result = True
-                Exit For    ' keeps the loop from checking against other controls if it has already found that a change has been made
+                Exit For                                                ' Keeps the loop from checking against other controls if it has already found that a change has been made
             End If
 
         Next
@@ -131,62 +127,10 @@
 
     ' ************************ DATABASE DATA INTERACTION/MANIPULATION ************************
 
-    ' Function used to return default value type of empty field from database instead of DBNull
-    Public Function setNullToDefault(ByRef dataValue As Object, ByVal dataType As Object)
-
-        ' If the value returned from the database is DBNull
-        If dataValue Is DBNull.Value Then
-
-            'Console.WriteLine("Value from Column of type " & dataType.ToString() & " came through as " & dataValue.GetType().ToString())
-
-            ' Determine what the dataType is and then assign corresponding default value
-            ' This statement can be expanded to support additional data types
-
-            'Select Case dataType
-
-            '    Case GetType(System.String)
-            '        dataValue = String.Empty
-            '        'Console.WriteLine("DataType is " & dataValue.GetType().ToString() & ". Does datavalue = String.Empty?: " & (dataValue = String.Empty))
-            '    Case GetType(System.DateTime)
-            '        dataValue = New DateTime
-            '    Case GetType(System.Boolean)
-            '        dataValue = False
-            '    Case GetType(System.Decimal)
-            '        dataValue = 0.0
-            '    Case GetType(System.Double)
-            '        dataValue = 0.0
-            '    Case GetType(System.Single)
-            '        dataValue = 0
-            '    Case GetType(System.Int32)
-            '        dataValue = 0
-            '    Case GetType(System.Char)
-            '        dataValue = 0
-            'End Select
-
-            Select Case dataType
-
-                Case GetType(System.DateTime)
-                    dataValue = New DateTime
-                Case GetType(System.String)
-                    dataValue = String.Empty
-                    'Console.WriteLine("DataType is " & dataValue.GetType().ToString() & ". Does datavalue = String.Empty?: " & (dataValue = String.Empty))
-                Case GetType(System.Boolean)
-                    dataValue = False
-                Case Else
-                    dataValue = 0
-
-            End Select
-
-        End If
-
-        Return dataValue
-
-    End Function
-
-
 
     ' Sub used to replace DBNull entries in provided DataTable to default entries respective to their dataType
     ' Receives dataTable as reference, so all changes are made directly on DataTable
+    ' Eventually, move this in with the database control class.
     Public Sub setNullsToDefault(ByRef dataTable As DataTable)
 
         For Each row As DataRow In dataTable.Rows
@@ -194,22 +138,20 @@
 
                 Dim dataValue As Object = row(column)
 
-                If dataValue = DBNull.Value Then
+                If IsDBNull(dataValue) Then
 
                     Dim dataType = column.DataType
 
                     Select Case dataType
-
                         Case GetType(System.DateTime)
                             dataValue = New DateTime
                         Case GetType(System.String)
                             dataValue = String.Empty
-                    'Console.WriteLine("DataType is " & dataValue.GetType().ToString() & ". Does datavalue = String.Empty?: " & (dataValue = String.Empty))
+                            'Console.WriteLine("DataType is " & dataValue.GetType().ToString() & ". Does datavalue = String.Empty?: " & (dataValue = String.Empty))
                         Case GetType(System.Boolean)
                             dataValue = False
                         Case Else
                             dataValue = 0
-
                     End Select
 
                 End If
@@ -294,8 +236,6 @@
             For Each ctrl In ctrls
 
                 dataValue = dataTable.Rows(dataTableRow)(dataTable.Columns(i).ColumnName)
-                'dataValue = setNullToDefault(dataValue, dataTable.Rows(dataTableRow)(dataTable.Columns(i).ColumnName).GetType())
-                dataValue = setNullToDefault(dataValue, dataTable.Columns(i).DataType)
                 setControlValue(ctrl, dataValue)
 
             Next
