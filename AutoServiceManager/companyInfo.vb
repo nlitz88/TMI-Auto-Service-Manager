@@ -86,7 +86,14 @@
     End Sub
 
 
+    ' Sub that will contain calls to all of the instances of the database controller class that loads data from the database into DataTables
+    Private Sub loadDataTablesFromDatabase()
+
+    End Sub
+
+
     ' Initialize/Set values of controls on form with values from dataTable.
+    ' Use this function to initialize various control groups from various DataTables that may have been loaded from the database.
     ' This function includes all automatic dynamic initialization and any additional initialization
     Private Sub initializeValues()
 
@@ -102,6 +109,12 @@
             valuesInitialized = True
 
         End If
+
+    End Sub
+
+
+    ' Sub that will call formatting functions to the add certain formats to initialized controls (i.e. phone numbers, currency, etc.).
+    Private Sub addFormatting()
 
     End Sub
 
