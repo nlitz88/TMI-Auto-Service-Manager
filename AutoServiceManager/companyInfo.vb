@@ -103,6 +103,7 @@
 
             ' Initialize Form controls from CompanyMasterDataTable
             initializeControlsFromRow(CompanyMasterDataTable, 0, "_", Me)
+
             ' Initialize any additional controls from additional DataTables here
 
 
