@@ -79,6 +79,7 @@
     <Compile Include="companyInfo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dbControl.vb" />
     <Compile Include="loginForm.vb">
       <SubType>Form</SubType>
     </Compile>

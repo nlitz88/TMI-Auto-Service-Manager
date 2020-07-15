@@ -1,93 +1,16 @@
 ﻿Public Class companyInfo
 
+    ' Initialize new database control instances
+    Private CompanyMasterDbController As New dbControl()
+
     'Temporary variable to keep track of whether form fully loaded or not
     Dim valuesInitialized As Boolean = False
-
-    ' Datatable for dataAdapter to load data into. This really should be moved to a class
-    Dim CompanyMasterDataTable As DataTable
-    ' Another Connection variable. Describes whether or not connection attempt throws exception
-    Dim connHasException As Boolean
-
-
-    ' Sub to load load initial data from database
-    Private Sub loadInitialData()
-
-        ' ******** CONNECTION PARAMETERS ********
-        Dim accessConn As New OleDb.OleDbConnection
-
-        ' Variables to build (and paramaterize) our connection string
-        Dim dbProvider As String            ' The data provider (that includes the data adapter) that we want the connection to use to interface with the access database (in this case, Jet 4.0 for mdb files)
-        Dim dbSource As String              ' The location of the actual access database file (will contain the complete composited location that we build with the following variables)
-        Dim DatabaseDirectory As String     ' The working directory where the database is currently setup/stored
-        Dim TheDatabaseFilename As String   ' The address of only the database
-        Dim FullDatabasePath As String      ' Full path built from DatabaseDirectory and DatabaseFilename. Will be used in combination with another parameter to set dbSource Variable
-
-        ' Local variables that should be *PULLED FROM AN INI FILE* for deployment
-        DatabaseDirectory = "C:\Users\nlitz\Development\TMI Consulting\Auto Service Manager\AutoServiceManager\AutoServiceManager\Database"  ' Change from PC to PC until I make INI
-        TheDatabaseFilename = "TMI-ServiceMgr.mdb"
-        FullDatabasePath = DatabaseDirectory & "\" & TheDatabaseFilename
-        dbSource = "Data Source = " & FullDatabasePath      ' Finally, define the dbSource by combinding everywith the appropriate parameter "Data Source"
-        dbProvider = "PROVIDER=Microsoft.Jet.OLEDB.4.0;"     ' Utilizing the Jet OLEDB data provider, as we are using an older access database .mdb (2003)
-        ' Then, add the completed/built connectionstring to the access connection
-        accessConn.ConnectionString = dbProvider & dbSource
-
-
-        ' ******** DEFINE COMMAND ********
-        Dim SQLQuery As String
-        Dim accessCmd As OleDb.OleDbCommand     ' Define command (containing conn and query) the dataAdapter will use to fill our dataTable
-
-
-        ' ******** DEFINE DATAADAPTER AND DATATABLE ********
-        'Dim CompanyMasterDataTable As DataTable              ' Define dataTable that dataAdapter will fill (into internal dataset?)
-        Dim accessAdapter As OleDb.OleDbDataAdapter     ' Define OleDB dataAdapter that will interface with the access database
-        ' Somewhere to automate adding parameters for more advanced queries?
-
-
-        ' ******** TRY TO OPEN CONNECTION ********
-        Try
-
-            ' Attemp connection
-            accessConn.Open()
-
-            ' Initialize command
-            SQLQuery = "SELECT cm.TaxRate, cm.ShopSupplyCharge, cm.CompanyName1, cm.CompanyName2, cm.Address1, cm.Address2, cm.ZipCode, cm.Phone1, cm.Phone2, cm.LaborRate, zc.city, zc.State FROM CompanyMaster cm left outer join ZipCodes zc on cm.ZipCode = zc.Zipcode"
-            accessCmd = New OleDb.OleDbCommand
-            accessCmd.Connection = accessConn
-            accessCmd.CommandText = SQLQuery
-
-            ' Initialize dataTable and dataAdapter that will fill it
-            CompanyMasterDataTable = New DataTable
-            accessAdapter = New OleDb.OleDbDataAdapter(accessCmd)       ' Initialize dataAdapter for access database that will use the accessCmd (containing the connection and query we provided)
-
-            ' Use the acesssAdapter to fill the dataTable
-            accessAdapter.Fill(CompanyMasterDataTable)
-
-            ' ****Set all DBNull values in dataTable to the respective default value of their type here****
-            ' This will also eventually get moved into the database control class
-            setNullsToDefault(CompanyMasterDataTable)
-
-
-            connHasException = False
-
-            MessageBox.Show("Successful connection to " & TheDatabaseFilename)
-
-        Catch ex As Exception
-
-            MessageBox.Show("An erorr has occurred: " & vbNewLine & vbNewLine & ex.Message.ToString(), "Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            connHasException = True
-
-        Finally
-
-            If accessConn.State = ConnectionState.Open Then accessConn.Close()
-
-        End Try
-
-
-    End Sub
 
 
     ' Sub that will contain calls to all of the instances of the database controller class that loads data from the database into DataTables
     Private Sub loadDataTablesFromDatabase()
+
+        CompanyMasterDbController.ExecQuery("SELECT cm.TaxRate, cm.ShopSupplyCharge, cm.CompanyName1, cm.CompanyName2, cm.Address1, cm.Address2, cm.ZipCode, cm.Phone1, cm.Phone2, cm.LaborRate, zc.city, zc.State FROM CompanyMaster cm left outer join ZipCodes zc on cm.ZipCode = zc.Zipcode")
 
     End Sub
 
@@ -97,12 +20,12 @@
     ' This function includes all automatic dynamic initialization and any additional initialization
     Private Sub initializeValues()
 
-        If Not connHasException Then
+        If Not CompanyMasterDbController.HasException() Then
 
             valuesInitialized = False
 
-            ' Initialize Form controls from CompanyMasterDataTable
-            initializeControlsFromRow(CompanyMasterDataTable, 0, "_", Me)
+            ' Initialize Form controls from CompanyMasterDbController.dbDataTable
+            initializeControlsFromRow(CompanyMasterDbController.dbDataTable, 0, "_", Me)
 
             ' Initialize any additional controls from additional DataTables here
 
@@ -125,7 +48,7 @@
         ' Dynamically position elements on load.
         companyInfoLabel.Left = (Me.ClientSize.Width / 2) - (companyInfoLabel.Width / 2)
 
-        loadInitialData()
+        loadDataTablesFromDatabase()
         initializeValues()
 
         ' Testing
@@ -153,7 +76,7 @@
     Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
 
         ' Ensure that any changes made are saved
-        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
+        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
 
             Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo)
 
@@ -239,7 +162,7 @@
         ' Worker thread or something of the like?
         ' This applies for this Textbox sub and all dataEditingControl tagged Textboxes that follow
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -251,7 +174,7 @@
     Private Sub CompanyName2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles CompanyName2_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -263,7 +186,7 @@
     Private Sub Address1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Address1_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -275,7 +198,7 @@
     Private Sub Address2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Address2_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -287,7 +210,7 @@
     Private Sub ZipCode_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ZipCode_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -301,7 +224,7 @@
     'Private Sub city_Textbox_TextChanged(sender As Object, e As EventArgs) Handles city_Textbox.TextChanged
 
     '    If valuesInitialized Then
-    '        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
+    '        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
     '            saveButton.Enabled = True
     '        Else
     '            saveButton.Enabled = False
@@ -313,7 +236,7 @@
     'Private Sub State_Textbox_TextChanged(sender As Object, e As EventArgs) Handles State_Textbox.TextChanged
 
     '    If valuesInitialized Then
-    '        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
+    '        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
     '            saveButton.Enabled = True
     '        Else
     '            saveButton.Enabled = False
@@ -325,7 +248,7 @@
     Private Sub Phone1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Phone1_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -337,7 +260,7 @@
     Private Sub Phone2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Phone2_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -349,7 +272,7 @@
     Private Sub TaxRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles TaxRate_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -361,7 +284,7 @@
     Private Sub ShopSupplyCharge_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ShopSupplyCharge_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -373,7 +296,7 @@
     Private Sub LaborRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LaborRate_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
