@@ -26,7 +26,7 @@
 
             valuesInitialized = False
 
-            ' Initialize any additional controls from additional DataTables here
+            ' Initialize additional/unique controls from additional DataTables here
             ZipCode_ComboBox.DataSource = ZipCodesDbController.dbDataTable
             ' ZipCode_ComboBox's datasource is from a separate query, but its initial selectedValue is set from CompanyMasterDataTable
             ZipCode_ComboBox.ValueMember = "Zipcode"
