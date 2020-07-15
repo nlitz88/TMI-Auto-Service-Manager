@@ -63,6 +63,7 @@ Partial Class companyInfo
         Me.Phone2_Value = New System.Windows.Forms.Label()
         Me.ShopSupplyCharge_Value = New System.Windows.Forms.Label()
         Me.LaborRate_Value = New System.Windows.Forms.Label()
+        Me.ZipCode_ComboBox = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'companyNameLabel
@@ -190,7 +191,7 @@ Partial Class companyInfo
         'ZipCode_Textbox
         '
         Me.ZipCode_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ZipCode_Textbox.Location = New System.Drawing.Point(177, 402)
+        Me.ZipCode_Textbox.Location = New System.Drawing.Point(690, 595)
         Me.ZipCode_Textbox.Name = "ZipCode_Textbox"
         Me.ZipCode_Textbox.Size = New System.Drawing.Size(114, 27)
         Me.ZipCode_Textbox.TabIndex = 12
@@ -502,6 +503,17 @@ Partial Class companyInfo
         Me.LaborRate_Value.TabIndex = 40
         Me.LaborRate_Value.Tag = "dataViewingControl"
         '
+        'ZipCode_ComboBox
+        '
+        Me.ZipCode_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ZipCode_ComboBox.FormattingEnabled = True
+        Me.ZipCode_ComboBox.Location = New System.Drawing.Point(177, 402)
+        Me.ZipCode_ComboBox.Name = "ZipCode_ComboBox"
+        Me.ZipCode_ComboBox.Size = New System.Drawing.Size(150, 28)
+        Me.ZipCode_ComboBox.TabIndex = 41
+        Me.ZipCode_ComboBox.Tag = "dataEditingControl"
+        Me.ZipCode_ComboBox.Visible = False
+        '
         'companyInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -509,6 +521,7 @@ Partial Class companyInfo
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.ZipCode_ComboBox)
         Me.Controls.Add(Me.LaborRate_Value)
         Me.Controls.Add(Me.ShopSupplyCharge_Value)
         Me.Controls.Add(Me.Phone2_Value)
@@ -600,4 +613,5 @@ Partial Class companyInfo
     Friend WithEvents Phone2_Value As Label
     Friend WithEvents ShopSupplyCharge_Value As Label
     Friend WithEvents LaborRate_Value As Label
+    Friend WithEvents ZipCode_ComboBox As ComboBox
 End Class

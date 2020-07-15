@@ -174,8 +174,10 @@
                 control.Text = value.ToString()
             Case GetType(System.Windows.Forms.CheckBox)
                 control.Checked = value
-            Case GetType(System.Windows.Forms.ComboBox)     ' Not sure if this one will pan out properly. We'll test and see
-                control.SelectedItem = value
+            Case GetType(System.Windows.Forms.ComboBox)
+                ' May need debugging
+                'Console.WriteLine("Value to write: " & value.ToString() & " " & value.GetType().ToString())
+                control.SelectedValue = value
         End Select
 
     End Sub
@@ -201,7 +203,7 @@
                     result = True
                 End If
             Case GetType(System.Windows.Forms.ComboBox)     ' Not sure if this one will pan out properly. We'll test and see
-                If control.SelectedItem = value Then
+                If control.SelectedValue = value Then
                     result = True
                 End If
         End Select
