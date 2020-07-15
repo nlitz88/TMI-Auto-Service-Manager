@@ -1,22 +1,22 @@
 ﻿' Import OleDb namespace
 Imports System.Data.OleDb
 
-Public Class dbControl
+Public Class DbControl
 
     ' New connection object. Connection string will be set in BuildConnString
-    Private dbConn As New OleDbConnection()
+    Private DbConn As New OleDbConnection()
 
     ' Connection string parameters
-    Private dbProvider As String            ' The data provider (that includes the data adapter) that we want the connection to use to interface with the access database (in this case, Jet 4.0 for mdb files)
-    Private dbSource As String              ' The location of the actual access database file (will contain the complete composited location that we build with the following variables)
-    Private dbDirectory As String           ' The working directory where the database is currently setup/stored
-    Private dbFileName As String            ' The address of only the database
-    Private dbFullPath As String            ' Full path built from DatabaseDirectory and DatabaseFilename. Will be used in combination with another parameter to set dbSource Variable
+    Private DbProvider As String            ' The data provider (that includes the data adapter) that we want the connection to use to interface with the access database (in this case, Jet 4.0 for mDb files)
+    Private DbSource As String              ' The location of the actual access database file (will contain the complete composited location that we build with the following variables)
+    Private DbDirectory As String           ' The working directory where the database is currently setup/stored
+    Private DbFileName As String            ' The address of only the database
+    Private DbFullPath As String            ' Full path built from DatabaseDirectory and DatabaseFilename. Will be used in combination with another parameter to set DbSource Variable
 
     ' Database Command, DataAdapter, and DataTable for instance. Regenerated every query, so reference only.
-    Private dbCmd As OleDbCommand
-    Public dbDataTable As DataTable
-    Public dbAdapter As OleDbDataAdapter
+    Private DbCmd As OleDbCommand
+    Public DbDataTable As DataTable
+    Public DbAdapter As OleDbDataAdapter
 
     ' Query parameters
     Public queryParams As New List(Of OleDbParameter)
@@ -32,7 +32,7 @@ Public Class dbControl
 
     ' Constructor override for custom connection string
     Public Sub New(ByVal connectionString As String)
-        dbConn.ConnectionString = connectionString      ' might be replaced
+        DbConn.ConnectionString = connectionString      ' might be replaced
     End Sub
 
 
@@ -45,26 +45,26 @@ Public Class dbControl
         ' Try to open connection and execute query
         Try
 
-            dbConn.Open()
+            DbConn.Open()
 
 
-            ' Create new dbCmd from connection and query
-            dbCmd = New OleDbCommand(query, dbConn)
+            ' Create new DbCmd from connection and query
+            DbCmd = New OleDbCommand(query, DbConn)
 
-            ' Load query parameters into db command
+            ' Load query parameters into Db command
             For Each param In queryParams
-                dbCmd.Parameters.Add(param)
+                DbCmd.Parameters.Add(param)
             Next
             ' Clear before next query is run
             queryParams.Clear()
 
 
             ' Create new DataTable, execute query, and fill DataTable using adapter
-            dbDataTable = New DataTable
-            dbAdapter = New OleDbDataAdapter(dbCmd)
-            dbAdapter.Fill(dbDataTable)
+            DbDataTable = New DataTable
+            DbAdapter = New OleDbDataAdapter(DbCmd)
+            DbAdapter.Fill(DbDataTable)
 
-            MessageBox.Show("Successfully queried " & dbFileName)
+            MessageBox.Show("Successfully queried " & DbFileName)
 
         Catch ex As Exception
 
@@ -73,7 +73,7 @@ Public Class dbControl
 
         Finally
 
-            If dbConn.State = ConnectionState.Open Then dbConn.Close()
+            If DbConn.State = ConnectionState.Open Then DbConn.Close()
 
         End Try
 
@@ -104,13 +104,13 @@ Public Class dbControl
     ' Move this functionality to globals.vb? Or keep here...?
     Private Sub BuildConnString()
 
-        dbDirectory = "C:\Users\nlitz\Development\TMI Consulting\Auto Service Manager\AutoServiceManager\AutoServiceManager\Database"
-        dbFileName = "TMI-ServiceMgr.mdb"
-        dbFullPath = dbDirectory & "\" & dbFileName
-        dbSource = "Data Source = " & dbFullPath                ' Finally, define the dbSource by combinding everywith the appropriate parameter "Data Source"
-        dbProvider = "PROVIDER=Microsoft.Jet.OLEDB.4.0;"        ' Utilizing the Jet OLEDB data provider, as we are using an older access database .mdb (2003)
+        DbDirectory = "C:\Users\nlitz\Development\TMI Consulting\Auto Service Manager\AutoServiceManager\AutoServiceManager\Database"
+        DbFileName = "TMI-ServiceMgr.mDb"
+        DbFullPath = DbDirectory & "\" & DbFileName
+        DbSource = "Data Source = " & DbFullPath                ' Finally, define the DbSource by combinding everywith the appropriate parameter "Data Source"
+        DbProvider = "PROVIDER=Microsoft.Jet.OLEDB.4.0;"        ' Utilizing the Jet OLEDB data provider, as we are using an older access database .mDb (2003)
 
-        dbConn.ConnectionString = dbProvider & dbSource
+        DbConn.ConnectionString = DbProvider & DbSource
 
     End Sub
 

@@ -1,7 +1,7 @@
 ﻿Public Class companyInfo
 
     ' Initialize new database control instances
-    Private CompanyMasterDbController As New dbControl()
+    Private CompanyMasterDbController As New DbControl()
 
     'Temporary variable to keep track of whether form fully loaded or not
     Dim valuesInitialized As Boolean = False
@@ -24,8 +24,8 @@
 
             valuesInitialized = False
 
-            ' Initialize Form controls from CompanyMasterDbController.dbDataTable
-            initializeControlsFromRow(CompanyMasterDbController.dbDataTable, 0, "_", Me)
+            ' Initialize Form controls from CompanyMasterDbController.DbDataTable
+            initializeControlsFromRow(CompanyMasterDbController.DbDataTable, 0, "_", Me)
 
             ' Initialize any additional controls from additional DataTables here
 
@@ -76,7 +76,7 @@
     Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
 
         ' Ensure that any changes made are saved
-        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
+        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
 
             Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo)
 
@@ -162,7 +162,7 @@
         ' Worker thread or something of the like?
         ' This applies for this Textbox sub and all dataEditingControl tagged Textboxes that follow
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -174,7 +174,7 @@
     Private Sub CompanyName2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles CompanyName2_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -186,7 +186,7 @@
     Private Sub Address1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Address1_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -198,7 +198,7 @@
     Private Sub Address2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Address2_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -210,7 +210,7 @@
     Private Sub ZipCode_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ZipCode_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -224,7 +224,7 @@
     'Private Sub city_Textbox_TextChanged(sender As Object, e As EventArgs) Handles city_Textbox.TextChanged
 
     '    If valuesInitialized Then
-    '        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
+    '        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
     '            saveButton.Enabled = True
     '        Else
     '            saveButton.Enabled = False
@@ -236,7 +236,7 @@
     'Private Sub State_Textbox_TextChanged(sender As Object, e As EventArgs) Handles State_Textbox.TextChanged
 
     '    If valuesInitialized Then
-    '        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
+    '        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
     '            saveButton.Enabled = True
     '        Else
     '            saveButton.Enabled = False
@@ -248,7 +248,7 @@
     Private Sub Phone1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Phone1_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -260,7 +260,7 @@
     Private Sub Phone2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Phone2_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -272,7 +272,7 @@
     Private Sub TaxRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles TaxRate_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -284,7 +284,7 @@
     Private Sub ShopSupplyCharge_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ShopSupplyCharge_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
@@ -296,7 +296,7 @@
     Private Sub LaborRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LaborRate_Textbox.TextChanged
 
         If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then
+            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
                 saveButton.Enabled = True
             Else
                 saveButton.Enabled = False
