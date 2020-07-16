@@ -1,5 +1,5 @@
-﻿' Import OleDb namespace
-Imports System.Data.OleDb
+﻿Imports System.Data.OleDb
+Imports System.Configuration
 
 Public Class DbControl
 
@@ -28,7 +28,11 @@ Public Class DbControl
 
     ' Default Constructor
     Public Sub New()
-        BuildConnString()                               ' might be replaced
+
+        ' Consider making this into class Sub
+        Dim AppConfig As Configuration = ConfigurationManager.OpenExeConfiguration(Application.StartupPath & "\AutoServiceManager.exe")
+        DbConn.ConnectionString = AppConfig.ConnectionStrings.ConnectionStrings("TMI-ServiceMgr").ConnectionString
+
     End Sub
 
     ' Constructor override for custom connection string
@@ -102,21 +106,6 @@ Public Class DbControl
         Return True
 
     End Function
-
-
-    ' Eventually, this will be the function that uses .config file to import these connection parameters
-    ' Move this functionality to globals.vb? Or keep here...?
-    Private Sub BuildConnString()
-
-        DbDirectory = "C:\Users\nlitz\Development\TMI Consulting\Auto Service Manager\AutoServiceManager\AutoServiceManager\Database"
-        DbFileName = "TMI-ServiceMgr.mDb"
-        DbFullPath = DbDirectory & "\" & DbFileName
-        DbSource = "Data Source = " & DbFullPath                ' Finally, define the DbSource by combinding everywith the appropriate parameter "Data Source"
-        DbProvider = "PROVIDER=Microsoft.Jet.OLEDB.4.0;"        ' Utilizing the Jet OLEDB data provider, as we are using an older access database .mDb (2003)
-
-        DbConn.ConnectionString = DbProvider & DbSource
-
-    End Sub
 
 
     ' Sub used to replace DBNull entries in provided DataTable to default entries respective to their dataType
