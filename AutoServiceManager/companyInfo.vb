@@ -12,7 +12,7 @@
     Private Sub loadDataTablesFromDatabase()
 
         CompanyMasterDbController.ExecQuery("SELECT cm.TaxRate, cm.ShopSupplyCharge, cm.CompanyName1, cm.CompanyName2, cm.Address1, cm.Address2, cm.ZipCode, cm.Phone1, cm.Phone2, cm.LaborRate, zc.city, zc.State FROM CompanyMaster cm left outer join ZipCodes zc on cm.ZipCode = zc.Zipcode")
-        ZipCodesDbController.ExecQuery("SELECT zc.Zipcode from ZipCodes zc")  ' Too slow for quick access, only load once at beginning (don't reload)
+        ZipCodesDbController.ExecQuery("SELECT * from ZipCodes zc")  ' Too slow for quick access, only load once at beginning (don't reload)
 
     End Sub
 
@@ -26,7 +26,8 @@
 
             valuesInitialized = False
 
-            ' Initialize additional/unique controls from additional DataTables here
+            ' Initialize additional/unique controls from additional DataTables here\
+            ZipCode_ComboBox.Items.Clear()
             ZipCode_ComboBox.DataSource = ZipCodesDbController.dbDataTable
             ' ZipCode_ComboBox's datasource is from a separate query, but its initial selectedValue is set from CompanyMasterDataTable
             ZipCode_ComboBox.ValueMember = "Zipcode"
@@ -316,10 +317,10 @@
     End Sub
 
 
-    Private Sub ZipCode_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ZipCode_ComboBox.SelectedIndexChanged
+    Private Sub ZipCode_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ZipCode_ComboBox.SelectedIndexChanged, ZipCode_ComboBox.TextChanged
 
-        Console.WriteLine("Selected Index: " & ZipCode_ComboBox.SelectedIndex)
-        Console.WriteLine("Selected Item: " & ZipCode_ComboBox.SelectedItem(0).ToString() & " Type: " & ZipCode_ComboBox.SelectedItem(0).GetType().ToString())
+        'Console.WriteLine("Selected Index: " & ZipCode_ComboBox.SelectedIndex)
+        'Console.WriteLine("Selected Item: " & ZipCode_ComboBox.SelectedItem(0).ToString() & " Type: " & ZipCode_ComboBox.SelectedItem(0).GetType().ToString())
 
         If valuesInitialized Then
             If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.dbDataTable, 0, "_") Then

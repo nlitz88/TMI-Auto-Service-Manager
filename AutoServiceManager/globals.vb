@@ -203,7 +203,7 @@
                     result = True
                 End If
             Case GetType(System.Windows.Forms.ComboBox)     ' Not sure if this one will pan out properly. We'll test and see
-                If control.SelectedValue = value Then
+                If (control.SelectedValue = value) Or (control.Text = value) Then
                     result = True
                 End If
         End Select
