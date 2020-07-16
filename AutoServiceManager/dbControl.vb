@@ -9,6 +9,7 @@ Public Class DbControl
     ' Connection string parameters
     Private DbProvider As String            ' The data provider (that includes the data adapter) that we want the connection to use to interface with the access database (in this case, Jet 4.0 for mDb files)
     Private DbSource As String              ' The location of the actual access database file (will contain the complete composited location that we build with the following variables)
+
     Private DbDirectory As String           ' The working directory where the database is currently setup/stored
     Private DbFileName As String            ' The address of only the database
     Private DbFullPath As String            ' Full path built from DatabaseDirectory and DatabaseFilename. Will be used in combination with another parameter to set DbSource Variable
@@ -64,6 +65,9 @@ Public Class DbControl
             DbAdapter = New OleDbDataAdapter(DbCmd)
             DbAdapter.Fill(DbDataTable)
 
+            ' Setll all null values to defaults in newly filled DataTable
+            SetNullsToDefault()
+
             MessageBox.Show("Successfully queried " & DbFileName)
 
         Catch ex As Exception
@@ -114,6 +118,39 @@ Public Class DbControl
 
     End Sub
 
+
+    ' Sub used to replace DBNull entries in provided DataTable to default entries respective to their dataType
+    ' Receives dataTable as reference, so all changes are made directly on DataTable
+    ' Eventually, move this in with the database control class.
+    Private Sub SetNullsToDefault()
+
+        For Each row As DataRow In DbDataTable.Rows
+            For Each column As DataColumn In DbDataTable.Columns
+
+                Dim dataValue As Object = row(column)
+
+                If IsDBNull(dataValue) Then
+
+                    Dim dataType = column.DataType
+
+                    Select Case dataType
+                        Case GetType(System.DateTime)
+                            dataValue = New DateTime
+                        Case GetType(System.String)
+                            dataValue = String.Empty
+                            'Console.WriteLine("DataType is " & dataValue.GetType().ToString() & ". Does datavalue = String.Empty?: " & (dataValue = String.Empty))
+                        Case GetType(System.Boolean)
+                            dataValue = False
+                        Case Else
+                            dataValue = 0
+                    End Select
+
+                End If
+
+            Next
+        Next
+
+    End Sub
 
 
 End Class

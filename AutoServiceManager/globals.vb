@@ -128,41 +128,6 @@
     ' ************************ DATABASE DATA INTERACTION/MANIPULATION ************************
 
 
-    ' Sub used to replace DBNull entries in provided DataTable to default entries respective to their dataType
-    ' Receives dataTable as reference, so all changes are made directly on DataTable
-    ' Eventually, move this in with the database control class.
-    Public Sub setNullsToDefault(ByRef dataTable As DataTable)
-
-        For Each row As DataRow In dataTable.Rows
-            For Each column As DataColumn In dataTable.Columns
-
-                Dim dataValue As Object = row(column)
-
-                If IsDBNull(dataValue) Then
-
-                    Dim dataType = column.DataType
-
-                    Select Case dataType
-                        Case GetType(System.DateTime)
-                            dataValue = New DateTime
-                        Case GetType(System.String)
-                            dataValue = String.Empty
-                            'Console.WriteLine("DataType is " & dataValue.GetType().ToString() & ". Does datavalue = String.Empty?: " & (dataValue = String.Empty))
-                        Case GetType(System.Boolean)
-                            dataValue = False
-                        Case Else
-                            dataValue = 0
-                    End Select
-
-                End If
-
-            Next
-        Next
-
-    End Sub
-
-
-
     ' Function that can dynamically set value for control based on what type of control the data is being assigned to.
     Public Sub setControlValue(ByRef control As Object, ByVal value As Object)
 
@@ -210,8 +175,7 @@
 
     End Function
 
-    ' OR just make function that somehow returns control.ATTRIBUTE
-    ' This woudld replace both setControlValue and compareControlValue
+    ' OR just make function that somehow returns control.ATTRIBUTE (could take heavy lifting from these subs if possible)
 
 
 
