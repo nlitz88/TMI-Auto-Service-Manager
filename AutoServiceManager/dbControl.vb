@@ -6,14 +6,6 @@ Public Class DbControl
     ' New connection object. Connection string will be set in BuildConnString
     Private DbConn As New OleDbConnection()
 
-    ' Connection string parameters
-    Private DbProvider As String            ' The data provider (that includes the data adapter) that we want the connection to use to interface with the access database (in this case, Jet 4.0 for mDb files)
-    Private DbSource As String              ' The location of the actual access database file (will contain the complete composited location that we build with the following variables)
-
-    Private DbDirectory As String           ' The working directory where the database is currently setup/stored
-    Private DbFileName As String            ' The address of only the database
-    Private DbFullPath As String            ' Full path built from DatabaseDirectory and DatabaseFilename. Will be used in combination with another parameter to set DbSource Variable
-
     ' Database Command, DataAdapter, and DataTable for instance. Regenerated every query, so reference only.
     Private DbCmd As OleDbCommand
     Public DbDataTable As DataTable
@@ -72,7 +64,7 @@ Public Class DbControl
             ' Setll all null values to defaults in newly filled DataTable
             SetNullsToDefault()
 
-            MessageBox.Show("Successfully queried " & DbFileName)
+            MessageBox.Show("Successfully queried Database")
 
         Catch ex As Exception
 
