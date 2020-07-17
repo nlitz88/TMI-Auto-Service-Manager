@@ -340,6 +340,9 @@
 
                     End If
                 Next
+            Else
+                city_Textbox.Text = String.Empty
+                State_Textbox.Text = String.Empty
             End If
 
         End If
