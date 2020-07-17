@@ -125,6 +125,45 @@
     End Function
 
 
+    ' Function that determines if any controls that correspond with values from a given datatable have had their values changed.
+    ' Must be used with each DataTable from which dataEditingControls are initialized
+    Public Function editingControlChanged(ByVal dataTable As DataTable, ByVal dataTableRow As Integer, ByVal nameDelimiter As String, ByRef form As Form) As Boolean
+
+        Dim result As Boolean = False
+        Dim ctrls As List(Of Object)
+        Dim initialValue As Object
+
+        For i As Integer = 0 To dataTable.Columns.Count - 1
+
+            ' Get all of the controls beginning with that column name from the respective dataTable
+            ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, nameDelimiter, form)
+
+            ' For each ctrl that has that name (that corresponds to that value in the dataTable)
+            For Each ctrl In ctrls
+
+                ' We only want to check against the controls with tag "dataEditingControl"
+                If ctrl.Tag <> "dataEditingControl" Then Continue For
+
+                ' Get the initial value that these controls should contain 
+                initialValue = dataTable.Rows(dataTableRow)(dataTable.Columns(i).ColumnName)
+
+                ' Compare the controls value to the initialValue that is in the dataTable at that row, column
+                If Not compareControlValue(ctrl, initialValue) Then
+
+                    result = True
+                    Exit For
+
+                End If
+
+            Next
+
+        Next
+
+        Return result
+
+    End Function
+
+
     ' ************************ DATABASE DATA INTERACTION/MANIPULATION ************************
 
 

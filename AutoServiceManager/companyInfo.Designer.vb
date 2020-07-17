@@ -34,7 +34,6 @@ Partial Class companyInfo
         Me.CompanyName2_Textbox = New System.Windows.Forms.TextBox()
         Me.Address1_Textbox = New System.Windows.Forms.TextBox()
         Me.Address2_Textbox = New System.Windows.Forms.TextBox()
-        Me.ZipCode_Textbox = New System.Windows.Forms.TextBox()
         Me.city_Textbox = New System.Windows.Forms.TextBox()
         Me.ShopSupplyCharge_Textbox = New System.Windows.Forms.TextBox()
         Me.LaborRate_Textbox = New System.Windows.Forms.TextBox()
@@ -187,16 +186,6 @@ Partial Class companyInfo
         Me.Address2_Textbox.TabIndex = 11
         Me.Address2_Textbox.Tag = "dataEditingControl"
         Me.Address2_Textbox.Visible = False
-        '
-        'ZipCode_Textbox
-        '
-        Me.ZipCode_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ZipCode_Textbox.Location = New System.Drawing.Point(690, 595)
-        Me.ZipCode_Textbox.Name = "ZipCode_Textbox"
-        Me.ZipCode_Textbox.Size = New System.Drawing.Size(114, 27)
-        Me.ZipCode_Textbox.TabIndex = 12
-        Me.ZipCode_Textbox.Tag = "dataEditingControl"
-        Me.ZipCode_Textbox.Visible = False
         '
         'city_Textbox
         '
@@ -560,7 +549,6 @@ Partial Class companyInfo
         Me.Controls.Add(Me.Address1_Textbox)
         Me.Controls.Add(Me.ShopSupplyCharge_Textbox)
         Me.Controls.Add(Me.city_Textbox)
-        Me.Controls.Add(Me.ZipCode_Textbox)
         Me.Controls.Add(Me.CompanyName2_Textbox)
         Me.Controls.Add(Me.CompanyName1_Textbox)
         Me.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
@@ -584,7 +572,6 @@ Partial Class companyInfo
     Friend WithEvents CompanyName2_Textbox As TextBox
     Friend WithEvents Address1_Textbox As TextBox
     Friend WithEvents Address2_Textbox As TextBox
-    Friend WithEvents ZipCode_Textbox As TextBox
     Friend WithEvents city_Textbox As TextBox
     Friend WithEvents ShopSupplyCharge_Textbox As TextBox
     Friend WithEvents LaborRate_Textbox As TextBox
