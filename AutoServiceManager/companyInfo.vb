@@ -26,8 +26,7 @@
 
             valuesInitialized = False
 
-            ' Initialize additional/unique controls from additional DataTables here\
-            ZipCode_ComboBox.Items.Clear()
+            ' Initialize additional/unique controls from additional DataTables here
             ZipCode_ComboBox.DataSource = ZipCodesDbController.dbDataTable
             ' ZipCode_ComboBox's datasource is from a separate query, but its initial selectedValue is set from CompanyMasterDataTable
             ZipCode_ComboBox.ValueMember = "Zipcode"
@@ -328,6 +327,21 @@
             Else
                 saveButton.Enabled = False
             End If
+
+            ' Basic Validation
+            If ZipCode_ComboBox.Text.Length = 5 Then
+                For Each row In ZipCodesDbController.dbDataTable.Rows
+                    If ZipCode_ComboBox.Text = row("Zipcode") Then
+
+                        ' If in the table, then update city and state accordingly
+                        city_Textbox.Text = ZipCodesDbController.dbDataTable.Select("Zipcode = '" & ZipCode_ComboBox.Text.ToString() & "'")(0).Item("city")
+                        State_Textbox.Text = ZipCodesDbController.dbDataTable.Select("Zipcode = '" & ZipCode_ComboBox.Text.ToString() & "'")(0).Item("State")
+                        Exit For
+
+                    End If
+                Next
+            End If
+
         End If
 
     End Sub
