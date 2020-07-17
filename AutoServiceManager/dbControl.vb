@@ -20,7 +20,7 @@ Public Class DbControl
 
     ' Default Constructor
     Public Sub New()
-        GetConnStringFromINI()
+        DbConn.ConnectionString = GetConnStringFromINI()
     End Sub
 
     ' Constructor override for custom connection string
@@ -98,13 +98,14 @@ Public Class DbControl
 
     ' Eventually, this will be the function that uses .config file to import these connection parameters
     ' Move this functionality to globals.vb? Or keep here...?
-    Private Sub GetConnStringFromINI()
+    Private Function GetConnStringFromINI() As String
 
         Dim line As String = String.Empty
         Dim connString = String.Empty
         Dim key As String = "CONNECTION-STRING="
         Dim INIFile As New StreamReader(Application.StartupPath & "\connection.ini")
 
+        ' Do loop in case connection string is eventually moved to a different row in the ini configuration file
         Do Until INIFile.EndOfStream
             line = INIFile.ReadLine()
             If line.IndexOf(key) <> -1 Then
@@ -113,11 +114,12 @@ Public Class DbControl
         Loop
 
         If Not String.IsNullOrEmpty(line) Then
-            connString = line.Substring((line.IndexOf(key) + key.Length - 1), line.Length - 1)
-            Console.WriteLine(connString)
+            connString = line.Substring((line.IndexOf(key) + key.Length), (line.Length - key.Length))
         End If
 
-    End Sub
+        Return connString
+
+    End Function
 
 
     ' Sub used to replace DBNull entries in provided DataTable to default entries respective to their dataType
