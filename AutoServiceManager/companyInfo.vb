@@ -2,39 +2,66 @@
 
     ' Initialize new database control instances
     Private CompanyMasterDbController As New DbControl()
+    Private ZipCodesDbController As New DbControl()
 
     'Temporary variable to keep track of whether form fully loaded or not
     Dim valuesInitialized As Boolean = False
 
+    ' Row index variables used for DataTable lookups
+    Dim cmRow As Integer
+    Dim zcRow As Integer
 
     ' Sub that will contain calls to all of the instances of the database controller class that loads data from the database into DataTables
     Private Sub loadDataTablesFromDatabase()
 
-        CompanyMasterDbController.ExecQuery("SELECT cm.TaxRate, cm.ShopSupplyCharge, cm.CompanyName1, cm.CompanyName2, cm.Address1, cm.Address2, cm.ZipCode, cm.Phone1, cm.Phone2, cm.LaborRate, zc.city, zc.State FROM CompanyMaster cm left outer join ZipCodes zc on cm.ZipCode = zc.Zipcode")
+        CompanyMasterDbController.ExecQuery("SELECT cm.TaxRate, cm.ShopSupplyCharge, cm.CompanyName1, cm.CompanyName2, cm.Address1, cm.Address2, cm.ZipCode, cm.Phone1, cm.Phone2, cm.LaborRate FROM CompanyMaster cm")
+        ZipCodesDbController.ExecQuery("SELECT * from ZipCodes zc")  ' Too slow for quick access, only load once at beginning (don't reload)
 
     End Sub
 
 
-    ' Initialize/Set values of controls on form with values from dataTable.
-    ' Use this function to initialize various control groups from various DataTables that may have been loaded from the database.
-    ' This function includes all automatic dynamic initialization and any additional initialization
-    Private Sub initializeValues()
+    Private Sub InitializeCompanyMasterControls()
 
-        If Not CompanyMasterDbController.HasException() Then
+        If CompanyMasterDbController.HasException(True) Then Exit Sub
 
-            valuesInitialized = False
+        ' If no exceptions with the database controller and query,
+        ' initialize all the dataEditingControls that have a value from ComanyMasterDbController.DbDataTable
+        cmRow = 0
+        initializeControlsFromRow(CompanyMasterDbController.DbDataTable, cmRow, "_", Me)
 
-            ' Initialize Form controls from CompanyMasterDbController.DbDataTable
-            initializeControlsFromRow(CompanyMasterDbController.DbDataTable, 0, "_", Me)
-
-            ' Initialize any additional controls from additional DataTables here
+    End Sub
 
 
-            valuesInitialized = True
+    Private Sub InitializeZipCodesControls()
+
+        If ZipCodesDbController.HasException(True) Then Exit Sub
+
+        Try
+
+            Dim zipRow As DataRow = ZipCodesDbController.DbDataTable.Select("Zipcode = '" & ZipCode_ComboBox.Text.ToString() & "'")(0)
+            zcRow = ZipCodesDbController.DbDataTable.Rows.IndexOf(zipRow)
+
+            initializeControlsFromRow(ZipCodesDbController.DbDataTable, zcRow, "_", Me)
+
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        End Try
+
+    End Sub
+
+
+    ' Function that calls editingControlChanged for each dataTable and returns the result.
+    ' Simplifies call from control event handlers
+    Private Function editingControlsChanged() As Boolean
+
+        If (editingControlChanged(CompanyMasterDbController.DbDataTable, cmRow, "_", Me) Or
+           editingControlChanged(ZipCodesDbController.DbDataTable, zcRow, "_", Me)) Then
+
+            Return True
 
         End If
 
-    End Sub
+    End Function
 
 
     ' Sub that will call formatting functions to the add certain formats to initialized controls (i.e. phone numbers, currency, etc.).
@@ -48,14 +75,27 @@
         ' Dynamically position elements on load.
         companyInfoLabel.Left = (Me.ClientSize.Width / 2) - (companyInfoLabel.Width / 2)
 
+        ' Load datatables from database
         loadDataTablesFromDatabase()
-        initializeValues()
+
+        ' SETUP CONTROLS HERE
+        ZipCode_ComboBox.DataSource = ZipCodesDbController.DbDataTable      ' ZipCode_ComboBox's datasource is from a separate query, but its initial selectedValue is set from CompanyMasterDataTable
+        ZipCode_ComboBox.ValueMember = "Zipcode"
+        ZipCode_ComboBox.DisplayMember = "Zipcode"
+
+        ' INITIALIZE CONTROL VALUES FOR FIRST TIME
+        valuesInitialized = False
+        InitializeCompanyMasterControls()
+        InitializeZipCodesControls()
+        valuesInitialized = True
 
         ' Testing
 
 
     End Sub
 
+
+    ' **************** CONTROL SUBS ****************
 
 
     Private Sub editButton_Click(sender As Object, e As EventArgs) Handles editButton.Click
@@ -76,7 +116,7 @@
     Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
 
         ' Ensure that any changes made are saved
-        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
+        If editingControlsChanged() Then
 
             Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo)
 
@@ -84,7 +124,8 @@
                 Case DialogResult.Yes
 
                     ' ReInitializeData
-                    initializeValues()
+                    InitializeCompanyMasterControls()
+                    InitializeZipCodesControls()
 
                     ' Disable all editing controls
                     cancelButton.Enabled = False
@@ -151,162 +192,162 @@
     End Sub
 
 
-
-    ' ************************ dataEditingControl TEXTBOX EVENT HANDLERS ************************
+    ' ************************ dataEditingControls TEXTBOX EVENT HANDLERS ************************
 
 
     Private Sub CompanyName1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles CompanyName1_Textbox.TextChanged
 
-        ' For now, just check to see if the entire form has been loaded before checking for text changes
-        ' In the future (when database implemented, maybe this should change to until the database has been connected to and data has been loaded?
-        ' Worker thread or something of the like?
-        ' This applies for this Textbox sub and all dataEditingControl tagged Textboxes that follow
-        If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
-                saveButton.Enabled = True
-            Else
-                saveButton.Enabled = False
-            End If
+        ' Ensure that all editing control values have been initialized before anything else (so events on form load don't have any effect)
+        If Not valuesInitialized Then Exit Sub
+
+        If editingControlsChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
         End If
 
     End Sub
 
     Private Sub CompanyName2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles CompanyName2_Textbox.TextChanged
 
-        If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
-                saveButton.Enabled = True
-            Else
-                saveButton.Enabled = False
-            End If
+        If Not valuesInitialized Then Exit Sub
+
+        If editingControlsChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
         End If
 
     End Sub
 
     Private Sub Address1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Address1_Textbox.TextChanged
 
-        If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
-                saveButton.Enabled = True
-            Else
-                saveButton.Enabled = False
-            End If
+        If Not valuesInitialized Then Exit Sub
+
+        If editingControlsChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
         End If
 
     End Sub
 
     Private Sub Address2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Address2_Textbox.TextChanged
 
-        If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
-                saveButton.Enabled = True
-            Else
-                saveButton.Enabled = False
-            End If
+        If Not valuesInitialized Then Exit Sub
+
+        If editingControlsChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
         End If
 
     End Sub
 
-    Private Sub ZipCode_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ZipCode_Textbox.TextChanged
+    Private Sub ZipCode_Textbox_TextChanged(sender As Object, e As EventArgs)
 
-        If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
-                saveButton.Enabled = True
-            Else
-                saveButton.Enabled = False
-            End If
+        If Not valuesInitialized Then Exit Sub
+
+        If editingControlsChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
         End If
 
     End Sub
-
-
-
-    'Private Sub city_Textbox_TextChanged(sender As Object, e As EventArgs) Handles city_Textbox.TextChanged
-
-    '    If valuesInitialized Then
-    '        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
-    '            saveButton.Enabled = True
-    '        Else
-    '            saveButton.Enabled = False
-    '        End If
-    '    End If
-
-    'End Sub
-
-    'Private Sub State_Textbox_TextChanged(sender As Object, e As EventArgs) Handles State_Textbox.TextChanged
-
-    '    If valuesInitialized Then
-    '        If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
-    '            saveButton.Enabled = True
-    '        Else
-    '            saveButton.Enabled = False
-    '        End If
-    '    End If
-
-    'End Sub
 
     Private Sub Phone1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Phone1_Textbox.TextChanged
 
-        If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
-                saveButton.Enabled = True
-            Else
-                saveButton.Enabled = False
-            End If
+        If Not valuesInitialized Then Exit Sub
+
+        If editingControlsChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
         End If
 
     End Sub
 
     Private Sub Phone2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Phone2_Textbox.TextChanged
 
-        If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
-                saveButton.Enabled = True
-            Else
-                saveButton.Enabled = False
-            End If
+        If Not valuesInitialized Then Exit Sub
+
+        If editingControlsChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
         End If
 
     End Sub
 
     Private Sub TaxRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles TaxRate_Textbox.TextChanged
 
-        If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
-                saveButton.Enabled = True
-            Else
-                saveButton.Enabled = False
-            End If
+        If Not valuesInitialized Then Exit Sub
+
+        If editingControlsChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
         End If
 
     End Sub
 
     Private Sub ShopSupplyCharge_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ShopSupplyCharge_Textbox.TextChanged
 
-        If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
-                saveButton.Enabled = True
-            Else
-                saveButton.Enabled = False
-            End If
+        If Not valuesInitialized Then Exit Sub
+
+        If editingControlsChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
         End If
 
     End Sub
 
     Private Sub LaborRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LaborRate_Textbox.TextChanged
 
-        If valuesInitialized Then
-            If changesMadeToEditingControlsOfRow(getAllItemsWithTag("dataEditingControl"), CompanyMasterDbController.DbDataTable, 0, "_") Then
-                saveButton.Enabled = True
-            Else
-                saveButton.Enabled = False
-            End If
+        If Not valuesInitialized Then Exit Sub
+
+        If editingControlsChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
         End If
 
     End Sub
 
+
     Private Sub navigationPlaceholderButton_Click(sender As Object, e As EventArgs) Handles navigationPlaceholderButton.Click
         Me.Close()
     End Sub
+
+
+    Private Sub ZipCode_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ZipCode_ComboBox.SelectedIndexChanged, ZipCode_ComboBox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        If editingControlsChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+        If ZipCode_ComboBox.Text.Length = 5 Then    ' Basic Validation  (replace with function that handles ZipCode validation)
+            For Each row In ZipCodesDbController.DbDataTable.Rows
+                If ZipCode_ComboBox.Text = row("Zipcode") Then
+
+                    ' If in the table, then update city and state accordingly
+                    InitializeZipCodesControls()
+                    Exit For
+
+                End If
+            Next
+        Else
+            city_Textbox.Text = String.Empty
+            State_Textbox.Text = String.Empty
+        End If
+
+    End Sub
+
 
 End Class

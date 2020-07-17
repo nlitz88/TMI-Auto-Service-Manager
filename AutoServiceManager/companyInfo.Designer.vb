@@ -34,7 +34,6 @@ Partial Class companyInfo
         Me.CompanyName2_Textbox = New System.Windows.Forms.TextBox()
         Me.Address1_Textbox = New System.Windows.Forms.TextBox()
         Me.Address2_Textbox = New System.Windows.Forms.TextBox()
-        Me.ZipCode_Textbox = New System.Windows.Forms.TextBox()
         Me.city_Textbox = New System.Windows.Forms.TextBox()
         Me.ShopSupplyCharge_Textbox = New System.Windows.Forms.TextBox()
         Me.LaborRate_Textbox = New System.Windows.Forms.TextBox()
@@ -63,6 +62,7 @@ Partial Class companyInfo
         Me.Phone2_Value = New System.Windows.Forms.Label()
         Me.ShopSupplyCharge_Value = New System.Windows.Forms.Label()
         Me.LaborRate_Value = New System.Windows.Forms.Label()
+        Me.ZipCode_ComboBox = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'companyNameLabel
@@ -186,16 +186,6 @@ Partial Class companyInfo
         Me.Address2_Textbox.TabIndex = 11
         Me.Address2_Textbox.Tag = "dataEditingControl"
         Me.Address2_Textbox.Visible = False
-        '
-        'ZipCode_Textbox
-        '
-        Me.ZipCode_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ZipCode_Textbox.Location = New System.Drawing.Point(177, 402)
-        Me.ZipCode_Textbox.Name = "ZipCode_Textbox"
-        Me.ZipCode_Textbox.Size = New System.Drawing.Size(114, 27)
-        Me.ZipCode_Textbox.TabIndex = 12
-        Me.ZipCode_Textbox.Tag = "dataEditingControl"
-        Me.ZipCode_Textbox.Visible = False
         '
         'city_Textbox
         '
@@ -502,6 +492,17 @@ Partial Class companyInfo
         Me.LaborRate_Value.TabIndex = 40
         Me.LaborRate_Value.Tag = "dataViewingControl"
         '
+        'ZipCode_ComboBox
+        '
+        Me.ZipCode_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ZipCode_ComboBox.FormattingEnabled = True
+        Me.ZipCode_ComboBox.Location = New System.Drawing.Point(177, 402)
+        Me.ZipCode_ComboBox.Name = "ZipCode_ComboBox"
+        Me.ZipCode_ComboBox.Size = New System.Drawing.Size(150, 28)
+        Me.ZipCode_ComboBox.TabIndex = 41
+        Me.ZipCode_ComboBox.Tag = "dataEditingControl"
+        Me.ZipCode_ComboBox.Visible = False
+        '
         'companyInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -509,6 +510,7 @@ Partial Class companyInfo
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.ZipCode_ComboBox)
         Me.Controls.Add(Me.LaborRate_Value)
         Me.Controls.Add(Me.ShopSupplyCharge_Value)
         Me.Controls.Add(Me.Phone2_Value)
@@ -547,7 +549,6 @@ Partial Class companyInfo
         Me.Controls.Add(Me.Address1_Textbox)
         Me.Controls.Add(Me.ShopSupplyCharge_Textbox)
         Me.Controls.Add(Me.city_Textbox)
-        Me.Controls.Add(Me.ZipCode_Textbox)
         Me.Controls.Add(Me.CompanyName2_Textbox)
         Me.Controls.Add(Me.CompanyName1_Textbox)
         Me.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
@@ -571,7 +572,6 @@ Partial Class companyInfo
     Friend WithEvents CompanyName2_Textbox As TextBox
     Friend WithEvents Address1_Textbox As TextBox
     Friend WithEvents Address2_Textbox As TextBox
-    Friend WithEvents ZipCode_Textbox As TextBox
     Friend WithEvents city_Textbox As TextBox
     Friend WithEvents ShopSupplyCharge_Textbox As TextBox
     Friend WithEvents LaborRate_Textbox As TextBox
@@ -600,4 +600,5 @@ Partial Class companyInfo
     Friend WithEvents Phone2_Value As Label
     Friend WithEvents ShopSupplyCharge_Value As Label
     Friend WithEvents LaborRate_Value As Label
+    Friend WithEvents ZipCode_ComboBox As ComboBox
 End Class
