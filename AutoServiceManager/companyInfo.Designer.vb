@@ -494,6 +494,8 @@ Partial Class companyInfo
         '
         'ZipCode_ComboBox
         '
+        Me.ZipCode_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.ZipCode_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.ZipCode_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ZipCode_ComboBox.FormattingEnabled = True
         Me.ZipCode_ComboBox.Location = New System.Drawing.Point(177, 402)
