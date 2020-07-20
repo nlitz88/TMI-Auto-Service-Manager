@@ -4,6 +4,9 @@
     Private CompanyMasterDbController As New DbControl()
     Private ZipCodesDbController As New DbControl()
 
+    ' Initialize instance(s) of initialValues class
+    Private InitialValues As New InitialValues()
+
     'Temporary variable to keep track of whether form fully loaded or not
     Dim valuesInitialized As Boolean = False
 
@@ -50,16 +53,22 @@
     End Sub
 
 
+    ' Sub that calls all individual initialization subs in one (These can be used individually if desired
+    Private Sub InitializeAll()
+
+        ' Automated initializations
+        InitializeCompanyMasterControls()
+        InitializeZipCodesControls()
+
+    End Sub
+
+
     ' Function that calls editingControlChanged for each dataTable and returns the result.
     ' Simplifies call from control event handlers
     Private Function editingControlsChanged() As Boolean
 
-        If (editingControlChanged(CompanyMasterDbController.DbDataTable, cmRow, "_", Me) Or
-           editingControlChanged(ZipCodesDbController.DbDataTable, zcRow, "_", Me)) Then
-
-            Return True
-
-        End If
+        If InitialValues.CtrlValuesChanged() Then Return True
+        Return False
 
     End Function
 
@@ -92,20 +101,17 @@
         ZipCode_ComboBox.DisplayMember = "Zipcode"
 
 
-
-        ' INITIALIZE ALL CONTROLS
+        ' INITIALIZE + FORMAT CONTROL VALUES
         valuesInitialized = False
 
-        ' Automated initialization
-        InitializeCompanyMasterControls()
-        InitializeZipCodesControls()
-
+        ' Initialize all control values
+        InitializeAll()
         ' Formatting + additional configuration here
         addFormatting()
+        ' store initial control values
+        InitialValues.SetInitialValues(getAllControlsWithTag("dataEditingControl"))
 
         valuesInitialized = True
-
-        ' END OF INITIALIZING ALL CONTROLS
 
 
     End Sub
@@ -122,10 +128,10 @@
         'navigationPlaceholderButton.Enabled = False
 
         ' Disable all navigation controls while editing
-        showHide(getAllItemsWithTag("navigation"), 0)
+        showHide(getAllControlsWithTag("navigation"), 0)
         ' disable/enable the dataViewingControls and dataEditingControls, respectively
-        showHide(getAllItemsWithTag("dataViewingControl"), 0)
-        showHide(getAllItemsWithTag("dataEditingControl"), 1)
+        showHide(getAllControlsWithTag("dataViewingControl"), 0)
+        showHide(getAllControlsWithTag("dataEditingControl"), 1)
 
     End Sub
 
@@ -139,10 +145,9 @@
             Select Case decision
                 Case DialogResult.Yes
 
-                    ' ReInitializeData
+                    ' REINITIALIZE ALL CONTROL VALUES
                     valuesInitialized = False
-                    InitializeCompanyMasterControls()
-                    InitializeZipCodesControls()
+                    InitializeAll()
                     addFormatting()
                     valuesInitialized = True
 
@@ -153,10 +158,10 @@
                     ' re-enable other hidden form controls
                     editButton.Enabled = True
                     ' re-enable navigation controls
-                    showHide(getAllItemsWithTag("navigation"), 1)
+                    showHide(getAllControlsWithTag("navigation"), 1)
                     ' enable/disable the dataViewingControls and dataEditingControls, respectively
-                    showHide(getAllItemsWithTag("dataViewingControl"), 1)
-                    showHide(getAllItemsWithTag("dataEditingControl"), 0)
+                    showHide(getAllControlsWithTag("dataViewingControl"), 1)
+                    showHide(getAllControlsWithTag("dataEditingControl"), 0)
 
                 Case DialogResult.No
 
@@ -170,10 +175,10 @@
             ' re-enable other hidden form controls
             editButton.Enabled = True
             ' re-enable navigation controls
-            showHide(getAllItemsWithTag("navigation"), 1)
+            showHide(getAllControlsWithTag("navigation"), 1)
             ' enable/disable the dataViewingControls and dataEditingControls, respectively
-            showHide(getAllItemsWithTag("dataViewingControl"), 1)
-            showHide(getAllItemsWithTag("dataEditingControl"), 0)
+            showHide(getAllControlsWithTag("dataViewingControl"), 1)
+            showHide(getAllControlsWithTag("dataEditingControl"), 0)
 
         End If
 
@@ -191,11 +196,12 @@
                 ' 3.) Go back to showing edit button and navigation controls
 
 
-                ' ReInitializeData
+                ' INITIALIZE + FORMAT CONTROL VALUES
                 valuesInitialized = False
-                InitializeCompanyMasterControls()
-                InitializeZipCodesControls()
+                InitializeAll()
                 addFormatting()
+                ' store new initial control values
+                initialValues.SetInitialValues(getAllControlsWithTag("dataEditingControl"))
                 valuesInitialized = True
 
 
@@ -205,11 +211,11 @@
                 ' re-enable other hidden form controls
                 editButton.Enabled = True
                 ' re-enable navigation controls
-                showHide(getAllItemsWithTag("navigation"), 1)
+                showHide(getAllControlsWithTag("navigation"), 1)
 
                 ' show updated dataViewingControls and hide dataEditingControls
-                showHide(getAllItemsWithTag("dataViewingControl"), 1)
-                showHide(getAllItemsWithTag("dataEditingControl"), 0)
+                showHide(getAllControlsWithTag("dataViewingControl"), 1)
+                showHide(getAllControlsWithTag("dataEditingControl"), 0)
 
             Case DialogResult.No
                 ' Continue making changes or cancel editing

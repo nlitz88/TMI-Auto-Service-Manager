@@ -73,6 +73,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="initialValues.vb" />
     <Compile Include="companyInfo.Designer.vb">
       <DependentUpon>companyInfo.vb</DependentUpon>
     </Compile>

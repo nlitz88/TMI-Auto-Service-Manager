@@ -3,7 +3,7 @@
     ' ************************ CONTROL MANIPULATION ************************
 
     ' Used to return all items of a certain group (items that have the same identifying tag) as an iterable ArrayList.
-    Public Function getAllItemsWithTag(ByVal tag As String) As List(Of Object)
+    Public Function getAllControlsWithTag(ByVal tag As String) As List(Of Object)
 
         Dim ctrls As New List(Of Object)
 
@@ -67,101 +67,6 @@
     End Sub
 
 
-    ' Function used to check if the text of any textbox on a form has been modified.
-    ' Currently utilized to determine if save button present on companyInfo form
-
-    ' UPDATE ACCORDING TO INFO IN TRELLO
-    Public Function changesMadeToText(ByVal items As List(Of Object), ByVal initialValues As Dictionary(Of String, String)) As Boolean
-
-        Dim result As Boolean = False
-
-        For Each item In items
-
-            Try
-
-                If item.Text <> initialValues(item.Name) Then
-                    result = True
-                    Console.WriteLine("Changes Made")
-                End If
-
-            Catch ex As Exception
-
-                Console.WriteLine(item.Name & " apparently isn't a key. Exception : " & vbNewLine & ex.Message & vbNewLine & vbNewLine)
-
-            End Try
-
-
-        Next
-
-        Return result
-
-    End Function
-
-
-    ' UPDATED VERSION
-    Public Function changesMadeToEditingControlsOfRow(ByRef controls As List(Of Object), ByVal dataTable As DataTable, ByVal dataTableRow As Integer, ByVal nameDelimiter As String) As Boolean
-
-        Dim result As Boolean = False
-        Dim columnNameFromCtrl As String
-        Dim columnValue As Object
-
-        For Each ctrl As Control In controls                            ' "As Control" may pose issues. Remove in the future if so. Added just for good practice.
-            ' Lookup initial value of control in dataTable.
-            ' Do this by finding the value at the corresponding (row)(column) that the control's value corresponds to.
-            columnNameFromCtrl = ctrl.Name.ToString().Substring(0, ctrl.Name.ToString().IndexOf(nameDelimiter))
-            columnValue = dataTable.Rows(dataTableRow)(columnNameFromCtrl)
-
-            ' If the value currently in the control is not equal to the corresponding value in the dataTable
-            If Not compareControlValue(ctrl, columnValue) Then
-                Console.WriteLine(ctrl.Name & " has a different value than " & columnValue)
-                result = True
-                Exit For                                                ' Keeps the loop from checking against other controls if it has already found that a change has been made
-            End If
-
-        Next
-
-        Return result
-
-    End Function
-
-
-    ' Function that determines if any controls that correspond with values from a given datatable have had their values changed.
-    ' Must be used with each DataTable from which dataEditingControls are initialized
-    Public Function editingControlChanged(ByVal dataTable As DataTable, ByVal dataTableRow As Integer, ByVal nameDelimiter As String, ByRef form As Form) As Boolean
-
-        Dim result As Boolean = False
-        Dim ctrls As List(Of Object)
-        Dim initialValue As Object
-
-        For i As Integer = 0 To dataTable.Columns.Count - 1
-
-            ' Get all of the controls beginning with that column name from the respective dataTable
-            ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, nameDelimiter, form)
-
-            ' For each ctrl that has that name (that corresponds to that value in the dataTable)
-            For Each ctrl In ctrls
-
-                ' We only want to check against the controls with tag "dataEditingControl"
-                If ctrl.Tag <> "dataEditingControl" Then Continue For
-
-                ' Get the initial value that these controls should contain 
-                initialValue = dataTable.Rows(dataTableRow)(dataTable.Columns(i).ColumnName)
-
-                ' Compare the controls value to the initialValue that is in the dataTable at that row, column
-                If Not compareControlValue(ctrl, initialValue) Then
-
-                    result = True
-                    Exit For
-
-                End If
-
-            Next
-
-        Next
-
-        Return result
-
-    End Function
 
 
     ' ************************ DATABASE DATA INTERACTION/MANIPULATION ************************
@@ -215,9 +120,6 @@
         Return result
 
     End Function
-
-    ' OR just make function that somehow returns control.ATTRIBUTE (could take heavy lifting from these subs if possible)
-
 
 
     ' Function that dynamically dataTable column values (from a provided row) and maps them to their respective fields by name
