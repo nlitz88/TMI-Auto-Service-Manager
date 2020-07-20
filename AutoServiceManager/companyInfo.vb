@@ -67,10 +67,13 @@
     ' Sub that will call formatting functions to the add certain formats to initialized controls (i.e. phone numbers, currency, etc.).
     Private Sub addFormatting()
 
-        ' For now, only add formatting to values, not to dataEditingControls (Subject to change)
         LaborRate_Value.Text = FormatCurrency(LaborRate_Value.Text)
         TaxRate_Value.Text = FormatPercent(TaxRate_Value.Text)
         ShopSupplyCharge_Value.Text = FormatPercent(ShopSupplyCharge_Value.Text)
+
+        LaborRate_Textbox.Text = String.Format("{0:0.00}", Convert.ToDouble(LaborRate_Textbox.Text))
+        TaxRate_Textbox.Text = String.Format("{0:0.00}", Convert.ToDouble(TaxRate_Textbox.Text) * 100)
+        ShopSupplyCharge_Textbox.Text = String.Format("{0:0.00}", Convert.ToDouble(ShopSupplyCharge_Textbox.Text) * 100)
 
     End Sub
 
