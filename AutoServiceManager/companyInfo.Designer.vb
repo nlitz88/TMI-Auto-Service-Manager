@@ -38,8 +38,6 @@ Partial Class companyInfo
         Me.ShopSupplyCharge_Textbox = New System.Windows.Forms.TextBox()
         Me.LaborRate_Textbox = New System.Windows.Forms.TextBox()
         Me.TaxRate_Textbox = New System.Windows.Forms.TextBox()
-        Me.Phone2_Textbox = New System.Windows.Forms.TextBox()
-        Me.Phone1_Textbox = New System.Windows.Forms.TextBox()
         Me.phone1Label = New System.Windows.Forms.Label()
         Me.phone2Label = New System.Windows.Forms.Label()
         Me.taxRateLabel = New System.Windows.Forms.Label()
@@ -63,6 +61,8 @@ Partial Class companyInfo
         Me.ShopSupplyCharge_Value = New System.Windows.Forms.Label()
         Me.LaborRate_Value = New System.Windows.Forms.Label()
         Me.ZipCode_ComboBox = New System.Windows.Forms.ComboBox()
+        Me.Phone1_Textbox = New System.Windows.Forms.MaskedTextBox()
+        Me.Phone2_Textbox = New System.Windows.Forms.MaskedTextBox()
         Me.SuspendLayout()
         '
         'companyNameLabel
@@ -227,26 +227,6 @@ Partial Class companyInfo
         Me.TaxRate_Textbox.TabIndex = 16
         Me.TaxRate_Textbox.Tag = "dataEditingControl"
         Me.TaxRate_Textbox.Visible = False
-        '
-        'Phone2_Textbox
-        '
-        Me.Phone2_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Phone2_Textbox.Location = New System.Drawing.Point(655, 355)
-        Me.Phone2_Textbox.Name = "Phone2_Textbox"
-        Me.Phone2_Textbox.Size = New System.Drawing.Size(181, 27)
-        Me.Phone2_Textbox.TabIndex = 17
-        Me.Phone2_Textbox.Tag = "dataEditingControl"
-        Me.Phone2_Textbox.Visible = False
-        '
-        'Phone1_Textbox
-        '
-        Me.Phone1_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Phone1_Textbox.Location = New System.Drawing.Point(655, 305)
-        Me.Phone1_Textbox.Name = "Phone1_Textbox"
-        Me.Phone1_Textbox.Size = New System.Drawing.Size(181, 27)
-        Me.Phone1_Textbox.TabIndex = 18
-        Me.Phone1_Textbox.Tag = "dataEditingControl"
-        Me.Phone1_Textbox.Visible = False
         '
         'phone1Label
         '
@@ -505,6 +485,38 @@ Partial Class companyInfo
         Me.ZipCode_ComboBox.Tag = "dataEditingControl"
         Me.ZipCode_ComboBox.Visible = False
         '
+        'Phone1_Textbox
+        '
+        Me.Phone1_Textbox.AllowPromptAsInput = False
+        Me.Phone1_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
+        Me.Phone1_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
+        Me.Phone1_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
+        Me.Phone1_Textbox.Location = New System.Drawing.Point(655, 305)
+        Me.Phone1_Textbox.Mask = "(999) 000-0000"
+        Me.Phone1_Textbox.Name = "Phone1_Textbox"
+        Me.Phone1_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.Phone1_Textbox.Size = New System.Drawing.Size(181, 27)
+        Me.Phone1_Textbox.TabIndex = 42
+        Me.Phone1_Textbox.Tag = "dataEditingControl"
+        Me.Phone1_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
+        Me.Phone1_Textbox.Visible = False
+        '
+        'Phone2_Textbox
+        '
+        Me.Phone2_Textbox.AllowPromptAsInput = False
+        Me.Phone2_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
+        Me.Phone2_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
+        Me.Phone2_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
+        Me.Phone2_Textbox.Location = New System.Drawing.Point(655, 355)
+        Me.Phone2_Textbox.Mask = "(999) 000-0000"
+        Me.Phone2_Textbox.Name = "Phone2_Textbox"
+        Me.Phone2_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.Phone2_Textbox.Size = New System.Drawing.Size(181, 27)
+        Me.Phone2_Textbox.TabIndex = 43
+        Me.Phone2_Textbox.Tag = "dataEditingControl"
+        Me.Phone2_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
+        Me.Phone2_Textbox.Visible = False
+        '
         'companyInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -512,6 +524,8 @@ Partial Class companyInfo
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.Phone2_Textbox)
+        Me.Controls.Add(Me.Phone1_Textbox)
         Me.Controls.Add(Me.ZipCode_ComboBox)
         Me.Controls.Add(Me.LaborRate_Value)
         Me.Controls.Add(Me.ShopSupplyCharge_Value)
@@ -542,8 +556,6 @@ Partial Class companyInfo
         Me.Controls.Add(Me.addressLine1Label)
         Me.Controls.Add(Me.companyNameLabel2)
         Me.Controls.Add(Me.companyNameLabel)
-        Me.Controls.Add(Me.Phone1_Textbox)
-        Me.Controls.Add(Me.Phone2_Textbox)
         Me.Controls.Add(Me.TaxRate_Textbox)
         Me.Controls.Add(Me.State_Textbox)
         Me.Controls.Add(Me.LaborRate_Textbox)
@@ -578,8 +590,6 @@ Partial Class companyInfo
     Friend WithEvents ShopSupplyCharge_Textbox As TextBox
     Friend WithEvents LaborRate_Textbox As TextBox
     Friend WithEvents TaxRate_Textbox As TextBox
-    Friend WithEvents Phone2_Textbox As TextBox
-    Friend WithEvents Phone1_Textbox As TextBox
     Friend WithEvents phone1Label As Label
     Friend WithEvents phone2Label As Label
     Friend WithEvents taxRateLabel As Label
@@ -603,4 +613,6 @@ Partial Class companyInfo
     Friend WithEvents ShopSupplyCharge_Value As Label
     Friend WithEvents LaborRate_Value As Label
     Friend WithEvents ZipCode_ComboBox As ComboBox
+    Friend WithEvents Phone1_Textbox As MaskedTextBox
+    Friend WithEvents Phone2_Textbox As MaskedTextBox
 End Class

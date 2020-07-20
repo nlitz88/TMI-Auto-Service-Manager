@@ -150,6 +150,8 @@
                 ' Compare the controls value to the initialValue that is in the dataTable at that row, column
                 If Not compareControlValue(ctrl, initialValue) Then
 
+                    Console.WriteLine(ctrl.Name & " has a different value '" & ctrl.Text & "' than " & initialValue)
+
                     result = True
                     Exit For
 
@@ -174,7 +176,7 @@
         Select Case control.GetType()
             Case GetType(System.Windows.Forms.Label)
                 control.Text = value.ToString()
-            Case GetType(System.Windows.Forms.TextBox)
+            Case GetType(System.Windows.Forms.TextBox), GetType(System.Windows.Forms.MaskedTextBox)
                 control.Text = value.ToString()
             Case GetType(System.Windows.Forms.CheckBox)
                 control.Checked = value
@@ -198,7 +200,7 @@
                 If control.Text = value.ToString() Then     ' For .text, must compare against string value, as .Text is a string property
                     result = True
                 End If
-            Case GetType(System.Windows.Forms.TextBox)
+            Case GetType(System.Windows.Forms.TextBox), GetType(System.Windows.Forms.MaskedTextBox)
                 If control.Text = value.ToString() Then
                     result = True
                 End If

@@ -67,6 +67,11 @@
     ' Sub that will call formatting functions to the add certain formats to initialized controls (i.e. phone numbers, currency, etc.).
     Private Sub addFormatting()
 
+        ' For now, only add formatting to values, not to dataEditingControls (Subject to change)
+        LaborRate_Value.Text = FormatCurrency(LaborRate_Value.Text)
+        TaxRate_Value.Text = FormatPercent(TaxRate_Value.Text)
+        ShopSupplyCharge_Value.Text = FormatPercent(ShopSupplyCharge_Value.Text)
+
     End Sub
 
 
@@ -83,13 +88,20 @@
         ZipCode_ComboBox.ValueMember = "Zipcode"
         ZipCode_ComboBox.DisplayMember = "Zipcode"
 
-        ' INITIALIZE CONTROL VALUES FOR FIRST TIME
+
+        ' INITIALIZE ALL CONTROLS
         valuesInitialized = False
+
+        ' Automated initialization
         InitializeCompanyMasterControls()
         InitializeZipCodesControls()
+
+        ' Formatting + additional configuration here
+        addFormatting()
+
         valuesInitialized = True
 
-        ' Testing
+        ' END OF INITIALIZING ALL CONTROLS
 
 
     End Sub
@@ -256,6 +268,7 @@
 
     End Sub
 
+
     Private Sub Phone1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Phone1_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
@@ -267,6 +280,7 @@
         End If
 
     End Sub
+
 
     Private Sub Phone2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Phone2_Textbox.TextChanged
 
