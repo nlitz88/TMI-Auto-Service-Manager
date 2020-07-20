@@ -150,8 +150,6 @@
                 ' Compare the controls value to the initialValue that is in the dataTable at that row, column
                 If Not compareControlValue(ctrl, initialValue) Then
 
-                    Console.WriteLine(ctrl.Name & " has a different value '" & ctrl.Text & "' than " & initialValue)
-
                     result = True
                     Exit For
 
