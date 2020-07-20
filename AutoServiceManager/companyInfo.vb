@@ -89,6 +89,7 @@
         ZipCode_ComboBox.DisplayMember = "Zipcode"
 
 
+
         ' INITIALIZE ALL CONTROLS
         valuesInitialized = False
 
@@ -136,8 +137,12 @@
                 Case DialogResult.Yes
 
                     ' ReInitializeData
+                    valuesInitialized = False
                     InitializeCompanyMasterControls()
                     InitializeZipCodesControls()
+                    addFormatting()
+                    valuesInitialized = True
+
 
                     ' Disable all editing controls
                     cancelButton.Enabled = False
@@ -182,6 +187,15 @@
                 ' 2.) Switch back to labels with updated data from database (reload the form essentially)
                 ' 3.) Go back to showing edit button and navigation controls
 
+
+                ' ReInitializeData
+                valuesInitialized = False
+                InitializeCompanyMasterControls()
+                InitializeZipCodesControls()
+                addFormatting()
+                valuesInitialized = True
+
+
                 ' Disable all editing controls
                 cancelButton.Enabled = False
                 saveButton.Enabled = False
@@ -193,8 +207,6 @@
                 ' show updated dataViewingControls and hide dataEditingControls
                 showHide(getAllItemsWithTag("dataViewingControl"), 1)
                 showHide(getAllItemsWithTag("dataEditingControl"), 0)
-
-
 
             Case DialogResult.No
                 ' Continue making changes or cancel editing
