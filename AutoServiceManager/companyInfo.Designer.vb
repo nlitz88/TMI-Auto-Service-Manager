@@ -151,7 +151,7 @@ Partial Class companyInfo
         Me.CompanyName1_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CompanyName1_Textbox.Location = New System.Drawing.Point(276, 213)
         Me.CompanyName1_Textbox.Name = "CompanyName1_Textbox"
-        Me.CompanyName1_Textbox.Size = New System.Drawing.Size(271, 27)
+        Me.CompanyName1_Textbox.Size = New System.Drawing.Size(560, 27)
         Me.CompanyName1_Textbox.TabIndex = 8
         Me.CompanyName1_Textbox.Tag = "dataEditingControl"
         Me.CompanyName1_Textbox.Visible = False
@@ -162,7 +162,7 @@ Partial Class companyInfo
         Me.CompanyName2_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CompanyName2_Textbox.Location = New System.Drawing.Point(276, 250)
         Me.CompanyName2_Textbox.Name = "CompanyName2_Textbox"
-        Me.CompanyName2_Textbox.Size = New System.Drawing.Size(271, 27)
+        Me.CompanyName2_Textbox.Size = New System.Drawing.Size(560, 27)
         Me.CompanyName2_Textbox.TabIndex = 9
         Me.CompanyName2_Textbox.Tag = "dataEditingControl"
         Me.CompanyName2_Textbox.Visible = False
