@@ -16,6 +16,7 @@
 
 
 
+
     ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
 
 
@@ -99,10 +100,8 @@
     ' **************** VALIDATION SUBS ****************
 
 
-    ' Function that
+    ' Sub that runs validation for all form controls. Also handles error reporting
     Private Function controlsValid() As Boolean
-
-        Dim valid As Boolean = True
 
         Dim errorMessage As String = String.Empty
         ' Call a function to validate input value in every control that must be validated
@@ -113,15 +112,17 @@
 
         ' ZipCode_Combo box validation
         ' Call zip code validation function on ZipCode_Combobox here
-        If validZipCode(ZipCode_ComboBox.Text, errorMessage) Then
+        If Not validZipCode(ZipCode_ComboBox.Text, errorMessage) Then
             ZipCode_ComboBox.BackColor = Color.LightCoral
+            Console.WriteLine("invalid")
         End If
 
         If Not String.IsNullOrEmpty(errorMessage) Then
-            valid = False
-        End If
 
-        Return valid
+            MessageBox.Show(errorMessage, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+
+        End If
 
     End Function
 
@@ -234,9 +235,8 @@
         Select Case decision
             Case DialogResult.Yes
 
-                If controlsValid() Then
-                    Console.WriteLine("Controls validated")
-                End If
+                If Not controlsValid() Then Exit Sub       ' Maybe put messagebox line here, and make errormessage and controlsValid bool variables class variables that are passed in through controlsValid
+
                 ' 1.) Validate control input to see if changes can be written
                 ' 1.) Write changes to database
                 ' 2.) Switch back to labels with updated data from database (reload the form essentially)

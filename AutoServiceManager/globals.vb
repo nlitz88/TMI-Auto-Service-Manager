@@ -204,13 +204,13 @@
 
 
         If zipCode.Length <> 5 And zipCode.Length <> 10 Then
-            errorMessage += "Must enter a valid ZIP Code before saving"
+            errorMessage += "Must enter a valid ZIP Code before saving" & vbNewLine
             Return False
         End If
 
         If zipCode.Length = 5 Then
             If allValidChars(zipCode, "1234567890") <> -1 Then                  ' Checks to see if any non-numeric characters in value
-                errorMessage += "Invalid character in ZIP Code"
+                errorMessage += "Invalid character in ZIP Code" & vbNewLine
                 Return False
             End If
         End If
@@ -219,7 +219,7 @@
 
             If zipCode.Substring(5, 1) <> "-" Then
 
-                errorMessage += "ZIP Code is not in proper format"
+                errorMessage += "ZIP Code is not in proper format" & vbNewLine
                 Return False
 
             Else
@@ -229,7 +229,7 @@
 
                 If allValidChars(zipBase, "1234567890") <> -1 Or allValidChars(zipExt, "1234567890") Then
 
-                    errorMessage += "Invalid Character in ZIP Code"
+                    errorMessage += "Invalid Character in ZIP Code" & vbNewLine
                     Return False
 
                 End If
@@ -279,17 +279,17 @@
         ' Provide unique error messages respective to their error below
 
         If value = -99999 Then
-            errorMessage += label & " invalid - number entered is out of bounds"
+            errorMessage += label & " invalid - number entered is out of bounds" & vbNewLine
         Else
 
             If includeMin Then
                 If value < min Then
-                    errorMessage += label & " invalid - number must be at least " & min.ToString()
+                    errorMessage += label & " invalid - number must be at least " & min.ToString() & vbNewLine
                     isValid = False
                 End If
             Else
                 If value <= min Then
-                    errorMessage += label & " invalid - number must be greater than " & min.ToString()
+                    errorMessage += label & " invalid - number must be greater than " & min.ToString() & vbNewLine
                     isValid = False
                 End If
             End If
@@ -298,12 +298,12 @@
 
                 If includeMax Then
                     If value > max Then
-                        errorMessage += label & " invalid - number cannot be greater than " & max.ToString()
+                        errorMessage += label & " invalid - number cannot be greater than " & max.ToString() & vbNewLine
                         isValid = False
                     End If
                 Else
                     If value >= max Then
-                        errorMessage += label & " invalid - number must be less than " & max.ToString()
+                        errorMessage += label & " invalid - number must be less than " & max.ToString() & vbNewLine
                         isValid = False
                     End If
                 End If
