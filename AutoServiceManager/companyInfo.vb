@@ -102,6 +102,8 @@
     ' Function that
     Private Function controlsValid() As Boolean
 
+        Dim valid As Boolean = True
+
         Dim errorMessage As String = String.Empty
         ' Call a function to validate input value in every control that must be validated
         ' If one of the validation functions encounters an error, it will append a particular error message tothe errorMessage string
@@ -111,7 +113,15 @@
 
         ' ZipCode_Combo box validation
         ' Call zip code validation function on ZipCode_Combobox here
+        If validZipCode(ZipCode_ComboBox.Text, errorMessage) Then
+            ZipCode_ComboBox.BackColor = Color.LightCoral
+        End If
 
+        If Not String.IsNullOrEmpty(errorMessage) Then
+            valid = False
+        End If
+
+        Return valid
 
     End Function
 
@@ -224,6 +234,10 @@
         Select Case decision
             Case DialogResult.Yes
 
+                If controlsValid() Then
+                    Console.WriteLine("Controls validated")
+                End If
+                ' 1.) Validate control input to see if changes can be written
                 ' 1.) Write changes to database
                 ' 2.) Switch back to labels with updated data from database (reload the form essentially)
                 ' 3.) Go back to showing edit button and navigation controls

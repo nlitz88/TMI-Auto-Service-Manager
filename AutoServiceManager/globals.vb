@@ -196,8 +196,51 @@
     End Function
 
 
+    ' ValidZipCode function. Returns boolean as to whether or not provided zip code is valid.
+    ' This receives an errorMessage string that it will append custom erorr messages to with respect to what made the zip invalid
     Public Function validZipCode(ByVal zipCode As String, ByRef errorMessage As String) As Boolean
 
+        Dim zipBase, zipExt As String
+
+
+        If zipCode.Length <> 5 And zipCode.Length <> 10 Then
+            errorMessage += "Must enter a valid ZIP Code before saving"
+            Return False
+        End If
+
+        If zipCode.Length = 5 Then
+            If allValidChars(zipCode, "1234567890") <> -1 Then                  ' Checks to see if any non-numeric characters in value
+                errorMessage += "Invalid character in ZIP Code"
+                Return False
+            End If
+        End If
+
+        If zipCode.Length = 10 Then
+
+            If zipCode.Substring(5, 1) <> "-" Then
+
+                errorMessage += "ZIP Code is not in proper format"
+                Return False
+
+            Else
+
+                zipBase = zipCode.Split("-")(0)
+                zipExt = zipCode.Split("-")(1)
+
+                If allValidChars(zipBase, "1234567890") <> -1 Or allValidChars(zipExt, "1234567890") Then
+
+                    errorMessage += "Invalid Character in ZIP Code"
+                    Return False
+
+                End If
+
+            End If
+
+
+
+
+
+        End If
 
 
     End Function
