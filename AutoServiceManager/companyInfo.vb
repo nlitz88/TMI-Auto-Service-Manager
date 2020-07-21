@@ -348,25 +348,6 @@
     End Sub
 
 
-    Private Sub TaxRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles TaxRate_Textbox.TextChanged
-
-        If Not valuesInitialized Then Exit Sub
-
-        ' Temporary check for invalid input (from pasting in or other)
-        For Each c In TaxRate_Textbox.Text.ToCharArray()
-            If Not InStr("1234567890.", c) Then
-                TaxRate_Textbox.Clear()
-            End If
-        Next
-
-        If editingControlsChanged() Then
-            saveButton.Enabled = True
-        Else
-            saveButton.Enabled = False
-        End If
-
-    End Sub
-
     Private validTaxRate As Boolean = False
     ' Ensures that shortcuts are still available to user
     Private Sub TaxRate_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles TaxRate_Textbox.KeyDown
@@ -393,10 +374,14 @@
 
     End Sub
 
-
-    Private Sub ShopSupplyCharge_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ShopSupplyCharge_Textbox.TextChanged
+    Private Sub TaxRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles TaxRate_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        ' TEMPORARY VALIDATION FOR PASTING VALUES. REVIEW WITH TONI
+        If Not isNumeric(TaxRate_Textbox.Text, True) Then
+            TaxRate_Textbox.Clear()
+        End If
 
         If editingControlsChanged() Then
             saveButton.Enabled = True
@@ -406,11 +391,12 @@
 
     End Sub
 
+
     Dim validShopSupplyCharge As Boolean = False
     Private Sub ShopSupplyCharge_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles ShopSupplyCharge_Textbox.KeyDown
 
         ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
-        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control)) Then
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
             validShopSupplyCharge = True
         End If
 
@@ -431,10 +417,14 @@
 
     End Sub
 
-
-    Private Sub LaborRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LaborRate_Textbox.TextChanged, LaborRate_Textbox.TextChanged
+    Private Sub ShopSupplyCharge_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ShopSupplyCharge_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        ' TEMPORARY VALIDATION FOR PASTING VALUES. REVIEW WITH TONI
+        If Not isNumeric(ShopSupplyCharge_Textbox.Text, True) Then
+            ShopSupplyCharge_Textbox.Clear()
+        End If
 
         If editingControlsChanged() Then
             saveButton.Enabled = True
@@ -444,11 +434,12 @@
 
     End Sub
 
+
     Private validLaborRate As Boolean = False
     Private Sub LaborRate_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles LaborRate_Textbox.KeyDown
 
         ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
-        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control)) Then
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
             validLaborRate = True
         End If
 
@@ -465,6 +456,24 @@
         If Not percentInputValid(LaborRate_Textbox, e.KeyChar) Then
             e.KeyChar = Chr(0)
             e.Handled = True
+        End If
+
+    End Sub
+
+
+    Private Sub LaborRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LaborRate_Textbox.TextChanged, LaborRate_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        ' TEMPORARY VALIDATION FOR PASTING VALUES. REVIEW WITH TONI
+        If Not isNumeric(LaborRate_Textbox.Text, True) Then
+            LaborRate_Textbox.Clear()
+        End If
+
+        If editingControlsChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
         End If
 
     End Sub

@@ -159,7 +159,7 @@
 
 
 
-    ' **************** KEYPRESS VALIDATION ****************
+    ' **************** KEYPRESS/INPUT VALIDATION ****************
 
     Public Function percentInputValid(ByVal ctrl As Object, ByVal keyChar As String) As Boolean
 
@@ -185,12 +185,40 @@
 
 
 
-    ' **************** VALIDATION ****************
+
+    ' **************** VALIDATION FOR SPECIFIC TYPES ****************
 
 
-    Public Function isNumeric(ByVal value As String) As Boolean
+    Public Function percentValueValid() As Boolean
+
+        ' Use isNumeric and other CORE validation functions to validate the percentage based textboxes
+
+    End Function
 
 
+
+
+    ' **************** CORE VALIDATION ****************
+
+
+    Public Function isNumeric(ByVal value As String, Optional ByVal includeDecimal As Boolean = False) As Boolean
+
+        Dim numeric As Boolean = True
+        Dim numberString As String = "1234567890"
+
+        If includeDecimal Then
+            numberString = "1234567890."
+        End If
+
+        For Each c In value.ToCharArray
+            If InStr(numberString, c.ToString()) = 0 Then
+                Console.WriteLine(c & " is not numeric")
+                numeric = False
+                Exit For
+            End If
+        Next
+
+        Return numeric
 
     End Function
 
