@@ -270,6 +270,7 @@
     End Sub
 
 
+    ' Function that generates sorted lists from datatable columns. Useful if binary search on values used.
     Public Function getListFromDataTable(ByVal datatable As DataTable, ByVal column As String, Optional ByVal sorted As Boolean = True) As List(Of Object)
 
         Dim values As New List(Of Object)
@@ -682,6 +683,34 @@
         Return isValid
 
     End Function
+
+
+
+
+    ' ****************** FORM CONTROL ******************
+
+
+    ' Function that handles switching screens
+    Public Sub changeScreen(ByRef newScreen As Form, ByVal currentScreen As Form)
+
+        Try
+
+            newScreen.Location = New Point(currentScreen.Location.X, currentScreen.Location.Y)
+
+        Catch ex As Exception
+
+        End Try
+
+        newScreen.Show()
+
+        If currentScreen IsNot Nothing Then
+
+            currentScreen.Hide()
+        End If
+
+    End Sub
+
+
 
 
 End Module
