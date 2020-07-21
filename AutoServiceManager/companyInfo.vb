@@ -500,17 +500,7 @@
             saveButton.Enabled = False
         End If
 
-        If ZipCode_ComboBox.Text.Length = 5 Then    ' Basic Validation  (replace with function that handles ZipCode validation)
-            For Each row In ZipCodesDbController.DbDataTable.Rows
-                If ZipCode_ComboBox.Text = row("Zipcode") Then
-
-                    ' If in the table, then update city and state accordingly
-                    InitializeZipCodesControls()
-                    Exit For
-
-                End If
-            Next
-        ElseIf InStr(ZipCode_ComboBox.Text, "-") <> 0 And ZipCode_ComboBox.Text.Length <= 10 Then
+        If ZipCode_ComboBox.Text.Length >= 5 And ZipCode_ComboBox.Text.Length <= 10 Then
             For Each row In ZipCodesDbController.DbDataTable.Rows
                 If ZipCode_ComboBox.Text.Split("-")(0) = row("Zipcode") Then
 
