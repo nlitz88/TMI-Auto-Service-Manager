@@ -1,6 +1,10 @@
 ﻿Module globals
 
+
+
+
     ' ************************ CONTROL MANIPULATION ************************
+
 
     ' Used to return all items of a certain group (items that have the same identifying tag) as an iterable ArrayList.
     Public Function getAllControlsWithTag(ByVal tag As String) As List(Of Object)
@@ -151,5 +155,93 @@
         Next
 
     End Sub
+
+
+
+
+    ' **************** KEYPRESS VALIDATION ****************
+
+    Public Function percentInputValid(ByVal ctrl As Object, ByVal keyChar As String) As Boolean
+
+        Dim valid As Boolean = True
+
+        ' First, ignore any input that isn't an number, period, or backspace
+        If (InStr("1234567890.", keyChar) = 0 And Asc(keyChar) <> 8) Or (keyChar = "." And InStr(ctrl.Text, ".") > 0) Then
+            valid = False
+            Console.WriteLine("Invalid character")
+            ' If it's a valid number or period, then check for length on right side of decimal, IF there is a decimal
+        ElseIf InStr(ctrl.Text, ".") > 0 Then
+
+            ' If the # of decimal places is already 2, and the cursor is on the right of said decimal place, and the keystroke is not a backspace
+            If ctrl.Text.Split(".")(1).Length = 2 And ctrl.SelectionStart > InStr(ctrl.Text, ".") And Asc(keyChar) <> 8 Then
+                valid = False
+            End If
+
+        End If
+
+        Return valid
+
+    End Function
+
+
+
+    ' **************** VALIDATION ****************
+
+
+    Public Function isNumeric(ByVal value As String) As Boolean
+
+
+
+    End Function
+
+
+    ' Funcion that checks if given number is a valid number
+    Public Function isValidNumber(ByVal label As String, ByVal value As Decimal, ByVal min As Decimal,
+                                  ByVal includeMin As Boolean, ByVal max As Decimal, ByVal includeMax As Boolean,
+                                  ByRef errorMessage As String) As Boolean
+
+        ' Innocent until proven guilty
+        Dim isValid As Boolean = True
+
+        ' Provide unique error messages respective to their error below
+
+        If value = -99999 Then
+            errorMessage += label & " invalid - number entered is out of bounds"
+        Else
+
+            If includeMin Then
+                If value < min Then
+                    errorMessage += label & " invalid - number must be at least " & min.ToString()
+                    isValid = False
+                End If
+            Else
+                If value <= min Then
+                    errorMessage += label & " invalid - number must be greater than " & min.ToString()
+                    isValid = False
+                End If
+            End If
+
+            If max <> 99999 Then
+
+                If includeMax Then
+                    If value > max Then
+                        errorMessage += label & " invalid - number cannot be greater than " & max.ToString()
+                        isValid = False
+                    End If
+                Else
+                    If value >= max Then
+                        errorMessage += label & " invalid - number must be less than " & max.ToString()
+                        isValid = False
+                    End If
+                End If
+
+            End If
+
+        End If
+
+        Return isValid
+
+    End Function
+
 
 End Module

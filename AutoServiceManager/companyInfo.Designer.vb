@@ -588,7 +588,6 @@ Partial Class companyInfo
     Friend WithEvents Address2_Textbox As TextBox
     Friend WithEvents city_Textbox As TextBox
     Friend WithEvents ShopSupplyCharge_Textbox As TextBox
-    Friend WithEvents LaborRate_Textbox As TextBox
     Friend WithEvents TaxRate_Textbox As TextBox
     Friend WithEvents phone1Label As Label
     Friend WithEvents phone2Label As Label
@@ -615,4 +614,5 @@ Partial Class companyInfo
     Friend WithEvents ZipCode_ComboBox As ComboBox
     Friend WithEvents Phone1_Textbox As MaskedTextBox
     Friend WithEvents Phone2_Textbox As MaskedTextBox
+    Friend WithEvents LaborRate_Textbox As TextBox
 End Class

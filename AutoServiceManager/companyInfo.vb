@@ -14,6 +14,11 @@
     Dim cmRow As Integer
     Dim zcRow As Integer
 
+
+
+    ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
+
+
     ' Sub that will contain calls to all of the instances of the database controller class that loads data from the database into DataTables
     Private Sub loadDataTablesFromDatabase()
 
@@ -65,6 +70,7 @@
 
     ' Function that calls editingControlChanged for each dataTable and returns the result.
     ' Simplifies call from control event handlers
+    ' PROBABLY WILL BE REMOVED; NOT NECESSARY
     Private Function editingControlsChanged() As Boolean
 
         If InitialValues.CtrlValuesChanged() Then Return True
@@ -85,6 +91,30 @@
         ShopSupplyCharge_Textbox.Text = String.Format("{0:0.00}", Convert.ToDouble(ShopSupplyCharge_Textbox.Text) * 100)
 
     End Sub
+
+
+
+
+    ' **************** VALIDATION SUBS ****************
+
+
+    ' Function that
+    Private Function controlsValid() As Boolean
+
+        Dim errorMessage As String = String.Empty
+        ' Call a function to validate input value in every control that must be validated
+        ' If one of the validation functions encounters an error, it will append a particular error message tothe errorMessage string
+        '       additionally, each function will set its respective control's background color to misty-red if error there
+        '       IDEA: set text of tooltip to error message until valid
+        ' Once reach end of function, if errorMessage isn't empty, this means error(s) were encountered, and inputs must be fixed
+
+        ' ZipCode_Combo box validation
+        ' Call zip code validation function on ZipCode_Combobox here
+
+
+    End Function
+
+
 
 
     Private Sub companyInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -115,6 +145,8 @@
 
 
     End Sub
+
+
 
 
     ' **************** CONTROL SUBS ****************
@@ -201,7 +233,7 @@
                 InitializeAll()
                 addFormatting()
                 ' store new initial control values
-                initialValues.SetInitialValues(getAllControlsWithTag("dataEditingControl"))
+                InitialValues.SetInitialValues(getAllControlsWithTag("dataEditingControl"))
                 valuesInitialized = True
 
 
@@ -315,6 +347,7 @@
 
     End Sub
 
+
     Private Sub TaxRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles TaxRate_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
@@ -326,6 +359,33 @@
         End If
 
     End Sub
+
+    Private validTaxRate As Boolean = False
+    ' Ensures that shortcuts are still available to user
+    Private Sub TaxRate_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles TaxRate_Textbox.KeyDown
+
+        ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control)) Then
+            validTaxRate = True
+        End If
+
+    End Sub
+
+    Private Sub TaxRate_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TaxRate_Textbox.KeyPress
+
+        ' INPUT HANDLING
+        If validTaxRate Then
+            validTaxRate = False
+            Exit Sub
+        End If
+
+        If Not percentInputValid(TaxRate_Textbox, e.KeyChar) Then
+            e.KeyChar = Chr(0)
+            e.Handled = True
+        End If
+
+    End Sub
+
 
     Private Sub ShopSupplyCharge_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ShopSupplyCharge_Textbox.TextChanged
 
@@ -339,7 +399,33 @@
 
     End Sub
 
-    Private Sub LaborRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LaborRate_Textbox.TextChanged
+    Dim validShopSupplyCharge As Boolean = False
+    Private Sub ShopSupplyCharge_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles ShopSupplyCharge_Textbox.KeyDown
+
+        ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control)) Then
+            validShopSupplyCharge = True
+        End If
+
+    End Sub
+
+    Private Sub ShopSupplyCharge_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ShopSupplyCharge_Textbox.KeyPress
+
+        ' INPUT HANDLING
+        If validShopSupplyCharge Then
+            validShopSupplyCharge = False
+            Exit Sub
+        End If
+
+        If Not percentInputValid(ShopSupplyCharge_Textbox, e.KeyChar) Then
+            e.KeyChar = Chr(0)
+            e.Handled = True
+        End If
+
+    End Sub
+
+
+    Private Sub LaborRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LaborRate_Textbox.TextChanged, LaborRate_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
 
@@ -347,6 +433,31 @@
             saveButton.Enabled = True
         Else
             saveButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private validLaborRate As Boolean = False
+    Private Sub LaborRate_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles LaborRate_Textbox.KeyDown
+
+        ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control)) Then
+            validLaborRate = True
+        End If
+
+    End Sub
+
+    Private Sub LaborRate_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles LaborRate_Textbox.KeyPress
+
+        ' INPUT HANDLING
+        If validLaborRate Then
+            validLaborRate = False
+            Exit Sub
+        End If
+
+        If Not percentInputValid(LaborRate_Textbox, e.KeyChar) Then
+            e.KeyChar = Chr(0)
+            e.Handled = True
         End If
 
     End Sub
