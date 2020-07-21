@@ -189,13 +189,18 @@
     ' **************** VALIDATION FOR SPECIFIC TYPES ****************
 
 
-    Public Function percentValueValid() As Boolean
+    Public Function validPercent() As Boolean
 
         ' Use isNumeric and other CORE validation functions to validate the percentage based textboxes
 
     End Function
 
 
+    Public Function validZipCode(ByVal zipCode As String, ByRef errorMessage As String) As Boolean
+
+
+
+    End Function
 
 
     ' **************** CORE VALIDATION ****************
