@@ -379,8 +379,10 @@
         If Not valuesInitialized Then Exit Sub
 
         ' TEMPORARY VALIDATION FOR PASTING VALUES. REVIEW WITH TONI
-        If Not isNumeric(TaxRate_Textbox.Text, True) Then
-            TaxRate_Textbox.Clear()
+        Dim lastValidIndex As Integer = allValidChars(TaxRate_Textbox.Text, "1234567890.")
+        If lastValidIndex <> -1 Then
+            TaxRate_Textbox.Text = TaxRate_Textbox.Text.Substring(0, lastValidIndex)
+            TaxRate_Textbox.SelectionStart = lastValidIndex
         End If
 
         If editingControlsChanged() Then
@@ -422,8 +424,10 @@
         If Not valuesInitialized Then Exit Sub
 
         ' TEMPORARY VALIDATION FOR PASTING VALUES. REVIEW WITH TONI
-        If Not isNumeric(ShopSupplyCharge_Textbox.Text, True) Then
-            ShopSupplyCharge_Textbox.Clear()
+        Dim lastValidIndex As Integer = allValidChars(ShopSupplyCharge_Textbox.Text, "1234567890.")
+        If lastValidIndex <> -1 Then
+            ShopSupplyCharge_Textbox.Text = ShopSupplyCharge_Textbox.Text.Substring(0, lastValidIndex)
+            ShopSupplyCharge_Textbox.SelectionStart = lastValidIndex
         End If
 
         If editingControlsChanged() Then
@@ -465,9 +469,10 @@
 
         If Not valuesInitialized Then Exit Sub
 
-        ' TEMPORARY VALIDATION FOR PASTING VALUES. REVIEW WITH TONI
-        If Not isNumeric(LaborRate_Textbox.Text, True) Then
-            LaborRate_Textbox.Clear()
+        Dim lastValidIndex As Integer = allValidChars(LaborRate_Textbox.Text, "1234567890.")
+        If lastValidIndex <> -1 Then
+            LaborRate_Textbox.Text = LaborRate_Textbox.Text.Substring(0, lastValidIndex)
+            LaborRate_Textbox.SelectionStart = lastValidIndex
         End If
 
         If editingControlsChanged() Then

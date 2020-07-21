@@ -201,24 +201,21 @@
     ' **************** CORE VALIDATION ****************
 
 
-    Public Function isNumeric(ByVal value As String, Optional ByVal includeDecimal As Boolean = False) As Boolean
+    ' Function that determines if there are any invalid chars in a given value. The valid chars are provided as a string.
+    ' Will return -1 if no invalid chars were found
+    ' Will return the index of the first invalid char it encounters
+    Public Function allValidChars(ByVal value As String, ByVal validChars As String) As Integer
 
-        Dim numeric As Boolean = True
-        Dim numberString As String = "1234567890"
+        Dim lastValidIndex As Integer = -1
+        Dim chars() As Char = value.ToCharArray()
 
-        If includeDecimal Then
-            numberString = "1234567890."
-        End If
-
-        For Each c In value.ToCharArray
-            If InStr(numberString, c.ToString()) = 0 Then
-                Console.WriteLine(c & " is not numeric")
-                numeric = False
-                Exit For
+        For i As Integer = 0 To value.ToCharArray().Count - 1
+            If InStr(validChars, chars(i).ToString()) = 0 Then
+                lastValidIndex = i
             End If
         Next
 
-        Return numeric
+        Return lastValidIndex
 
     End Function
 
