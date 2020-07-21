@@ -173,7 +173,7 @@
         ElseIf InStr(ctrl.Text, ".") > 0 Then
 
             ' If the # of decimal places is already 2, and the cursor is on the right of said decimal place, and the keystroke is not a backspace
-            If ctrl.Text.Split(".")(1).Length = 2 And ctrl.SelectionStart > InStr(ctrl.Text, ".") And Asc(keyChar) <> 8 Then
+            If ctrl.Text.Split(".")(1).Length = 2 And ctrl.SelectionStart >= InStr(ctrl.Text, ".") And Asc(keyChar) <> 8 Then
                 valid = False
             End If
 

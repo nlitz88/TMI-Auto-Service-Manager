@@ -352,6 +352,13 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        ' Temporary check for invalid input (from pasting in or other)
+        For Each c In TaxRate_Textbox.Text.ToCharArray()
+            If Not InStr("1234567890.", c) Then
+                TaxRate_Textbox.Clear()
+            End If
+        Next
+
         If editingControlsChanged() Then
             saveButton.Enabled = True
         Else
@@ -365,7 +372,7 @@
     Private Sub TaxRate_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles TaxRate_Textbox.KeyDown
 
         ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
-        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control)) Then
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
             validTaxRate = True
         End If
 
