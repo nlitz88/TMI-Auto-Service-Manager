@@ -4,17 +4,18 @@
     Private CompanyMasterDbController As New DbControl()
     Private ZipCodesDbController As New DbControl()
 
+    ' Initialize new lists to store certain row values of datatables
+    Private zipCodesList As List(Of Object)
+
     ' Initialize instance(s) of initialValues class
     Private InitialValues As New InitialValues()
 
-    'Temporary variable to keep track of whether form fully loaded or not
-    Dim valuesInitialized As Boolean = False
+    'Variable to keep track of whether form fully loaded or not
+    Private valuesInitialized As Boolean = False
 
     ' Row index variables used for DataTable lookups
-    Dim cmRow As Integer
-    Dim zcRow As Integer
-
-
+    Private cmRow As Integer
+    Private zcRow As Integer
 
 
     ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
@@ -25,6 +26,9 @@
 
         CompanyMasterDbController.ExecQuery("SELECT cm.TaxRate, cm.ShopSupplyCharge, cm.CompanyName1, cm.CompanyName2, cm.Address1, cm.Address2, cm.ZipCode, cm.Phone1, cm.Phone2, cm.LaborRate FROM CompanyMaster cm")
         ZipCodesDbController.ExecQuery("SELECT * from ZipCodes zc")  ' Too slow for quick access, only load once at beginning (don't reload)
+
+        ' Also, populate respective lists with data
+        zipCodesList = getListFromDataTable(ZipCodesDbController.DbDataTable, "Zipcode")
 
     End Sub
 
@@ -47,6 +51,7 @@
 
         Try
 
+            ' Ensures we only lookup base of zipcode (extensions not present in db)
             Dim zipCode As String = ZipCode_ComboBox.Text.Split("-")(0)
             Dim zipRow As DataRow = ZipCodesDbController.DbDataTable.Select("Zipcode = '" & zipCode & "'")(0)
             zcRow = ZipCodesDbController.DbDataTable.Rows.IndexOf(zipRow)
@@ -110,19 +115,24 @@
         '       IDEA: set text of tooltip to error message until valid
         ' Once reach end of function, if errorMessage isn't empty, this means error(s) were encountered, and inputs must be fixed
 
+
         ' ZipCode_Combo box validation
-        ' Call zip code validation function on ZipCode_Combobox here
         If Not validZipCode(ZipCode_ComboBox.Text, errorMessage) Then
             ZipCode_ComboBox.BackColor = Color.LightCoral
-            Console.WriteLine("invalid")
+        ElseIf zipCodesList.BinarySearch(ZipCode_ComboBox.Text.Split("-")(0)) < 0 Then
+            errorMessage += "ZIP Code does not exist" & vbNewLine
         End If
 
+
+        ' Check if any invalid input has been found
         If Not String.IsNullOrEmpty(errorMessage) Then
 
             MessageBox.Show(errorMessage, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
 
         End If
+
+        Return True
 
     End Function
 
@@ -514,16 +524,9 @@
             saveButton.Enabled = False
         End If
 
-        If ZipCode_ComboBox.Text.Length >= 5 And ZipCode_ComboBox.Text.Length <= 10 Then
-            For Each row In ZipCodesDbController.DbDataTable.Rows
-                If ZipCode_ComboBox.Text.Split("-")(0) = row("Zipcode") Then
-
-                    ' If in the table, then update city and state accordingly
-                    InitializeZipCodesControls()
-                    Exit For
-
-                End If
-            Next
+        ' Check if valid and lookup
+        If ZipCode_ComboBox.Text.Length >= 5 And ZipCode_ComboBox.Text.Length <= 10 And zipCodesList.BinarySearch(ZipCode_ComboBox.Text.Split("-")(0)) > 0 Then
+            InitializeZipCodesControls()
         Else
             city_Textbox.Text = String.Empty
             State_Textbox.Text = String.Empty

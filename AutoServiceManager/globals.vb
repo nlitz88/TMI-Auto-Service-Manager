@@ -71,11 +71,6 @@
     End Sub
 
 
-
-
-    ' ************************ DATABASE DATA INTERACTION/MANIPULATION ************************
-
-
     ' Function that can dynamically set value for control based on what type of control the data is being assigned to.
     Public Sub setControlValue(ByRef control As Object, ByVal value As Object)
 
@@ -90,7 +85,7 @@
             Case GetType(System.Windows.Forms.ComboBox)
                 ' May need debugging
                 'Console.WriteLine("Value to write: " & value.ToString() & " " & value.GetType().ToString())
-                control.SelectedValue = value
+                control.SelectedValue = value       ' If this becomes a problem later, revert to just setting the text of the combobox
         End Select
 
     End Sub
@@ -126,6 +121,9 @@
     End Function
 
 
+    ' ************************ DATABASE DATA INTERACTION/MANIPULATION ************************
+
+
     ' Function that dynamically dataTable column values (from a provided row) and maps them to their respective fields by name
     '   Controls on form that are to be set to a value from the dataTable should be NAMED as follows:
     '       <columnName from dataTable>_controlType
@@ -155,6 +153,21 @@
         Next
 
     End Sub
+
+
+    Public Function getListFromDataTable(ByVal datatable As DataTable, ByVal column As String, Optional ByVal sorted As Boolean = True) As List(Of Object)
+
+        Dim values As New List(Of Object)
+
+        For Each row In datatable.Rows
+            values.Add(row(column))
+        Next
+
+        If sorted Then values.Sort()
+
+        Return values
+
+    End Function
 
 
 
@@ -202,7 +215,6 @@
 
         Dim zipBase, zipExt As String
 
-
         If zipCode.Length <> 5 And zipCode.Length <> 10 Then
             errorMessage += "Must enter a valid ZIP Code before saving" & vbNewLine
             Return False
@@ -227,8 +239,9 @@
                 zipBase = zipCode.Split("-")(0)
                 zipExt = zipCode.Split("-")(1)
 
-                If allValidChars(zipBase, "1234567890") <> -1 Or allValidChars(zipExt, "1234567890") Then
+                If allValidChars(zipBase, "1234567890") <> -1 Or allValidChars(zipExt, "1234567890") <> -1 Then
 
+                    Console.WriteLine(zipBase & " | " & zipExt)
                     errorMessage += "Invalid Character in ZIP Code" & vbNewLine
                     Return False
 
@@ -236,12 +249,9 @@
 
             End If
 
-
-
-
-
         End If
 
+        Return True
 
     End Function
 
