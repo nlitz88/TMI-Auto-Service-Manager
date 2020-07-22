@@ -121,16 +121,14 @@
         ' This is why isEmpty is not included in the validation functions: so you can include it
 
         ' Company Name 1 (REQUIRED)
-        If isEmpty("Company Name 1", CompanyName1_Textbox.Text, errorMessage) Then CompanyName1_Textbox.ForeColor = Color.Red
+        If isEmpty("Company Name 1", True, CompanyName1_Textbox.Text, errorMessage) Then CompanyName1_Textbox.ForeColor = Color.Red
         ' Address 1 (REQUIRED)
-        If isEmpty("Address 1", Address1_Textbox.Text, errorMessage) Then Address1_Textbox.ForeColor = Color.Red
+        If isEmpty("Address 1", True, Address1_Textbox.Text, errorMessage) Then Address1_Textbox.ForeColor = Color.Red
 
         ' Phone 1 (REQUIRED)
-        If Not isEmpty("Phone 1", Phone1_Textbox.Text, errorMessage) Then
-            If Not validPhone("Phone 1", Phone1_Textbox.Text, errorMessage) Then Phone1_Textbox.ForeColor = Color.Red
-        End If
+        If Not validPhone("Phone 1", True, Phone1_Textbox.Text, errorMessage) Then Phone1_Textbox.ForeColor = Color.Red
         ' Phone 2 (OPTIONAL)
-        If Not validPhone("Phone 2", Phone2_Textbox.Text, errorMessage) Then Phone2_Textbox.ForeColor = Color.Red
+        If Not validPhone("Phone 2", False, Phone2_Textbox.Text, errorMessage) Then Phone2_Textbox.ForeColor = Color.Red
 
 
         ' ZipCode_Combobox validation
@@ -142,17 +140,11 @@
         End If
 
         ' Tax Rate percent
-        If Not isEmpty("Tax Rate", TaxRate_Textbox.Text, errorMessage) Then
-            If Not validPercent("Tax Rate", TaxRate_Textbox.Text, errorMessage) Then TaxRate_Textbox.ForeColor = Color.Red
-        End If
+        If Not validPercent("Tax Rate", True, TaxRate_Textbox.Text, errorMessage) Then TaxRate_Textbox.ForeColor = Color.Red
         ' Shop Supply Charge percent
-        If Not isEmpty("Shop Supply Charge", ShopSupplyCharge_Textbox.Text, errorMessage) Then
-            If Not validPercent("Shop Supply Charge", ShopSupplyCharge_Textbox.Text, errorMessage) Then ShopSupplyCharge_Textbox.ForeColor = Color.Red
-        End If
+        If Not validPercent("Shop Supply Charge", True, ShopSupplyCharge_Textbox.Text, errorMessage) Then ShopSupplyCharge_Textbox.ForeColor = Color.Red
         ' Labor Rate decimal
-        If Not isEmpty("Labor Rate", LaborRate_Textbox.Text, errorMessage) Then
-            If Not validCurrency("Labor Rate", LaborRate_Textbox.Text, errorMessage) Then LaborRate_Textbox.ForeColor = Color.Red
-        End If
+        If Not validCurrency("Labor Rate", True, LaborRate_Textbox.Text, errorMessage) Then LaborRate_Textbox.ForeColor = Color.Red
 
 
         ' Check if any invalid input has been found

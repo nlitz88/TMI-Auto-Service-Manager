@@ -218,14 +218,17 @@
     End Function
 
 
-    Public Function zipCodeInputValid(ByVal ctrl As Object, ByVal KeyChar As String) As Boolean
+    Public Function zipCodeInputValid(ByVal ctrl As Object, ByRef KeyChar As String) As Boolean
 
         Dim valid As Boolean = True
 
-        If (InStr("1234567890-", KeyChar) = 0 And Asc(KeyChar) <> 8) Or (KeyChar = "-" And InStr(ctrl.Text, "-") > 0) Then
+        If (InStr("1234567890Oo-", KeyChar) = 0 And Asc(KeyChar) <> 8) Or (KeyChar = "-" And InStr(ctrl.Text, "-") > 0) Then
             valid = False
         ElseIf ctrl.Text.Length = 10 And Asc(KeyChar) <> 8 And Not ctrl.SelectionLength > 0 Then
             valid = False
+        ElseIf KeyChar.ToLower() = "o" Then
+            KeyChar = Chr(48)
+            valid = True
         End If
 
         Return valid
@@ -238,7 +241,15 @@
 
 
     ' Function used to validate phone numbers from masked text box. Thanks to the mask, only checks for not empty and length
-    Public Function validPhone(ByVal label As String, ByVal phoneValue As String, ByRef errorMessage As String) As Boolean
+    Public Function validPhone(ByVal label As String, ByVal required As Boolean, ByVal phoneValue As String, ByRef errorMessage As String) As Boolean
+
+        If required Then
+            ' If it is empty, return false, as this is not valid
+            If isEmpty(label, required, phoneValue, errorMessage) Then Return False
+        Else
+            ' If it's not required, and it's empty, then don't append anything to the error message, and report that the value is valid (as it's blank and doesn't matter).
+            If isEmpty(label, required, phoneValue, errorMessage) Then Return True
+        End If
 
         If Not allValidChars(label, phoneValue, "1234567890", errorMessage) Then Return False
 
@@ -252,8 +263,16 @@
     End Function
 
 
-    ' Function used to validate percent based values
-    Public Function validPercent(ByVal label As String, ByVal percentValue As String, ByRef errorMessage As String) As Boolean
+    ' Function used to validate percent based values. Required controls whether or not the validation cares about null values (i.e. for use with optional controls, where you only validate IF they're not empty)
+    Public Function validPercent(ByVal label As String, ByVal required As Boolean, ByVal percentValue As String, ByRef errorMessage As String) As Boolean
+
+        If required Then
+            ' If it is empty, return false, as this is not valid
+            If isEmpty(label, required, percentValue, errorMessage) Then Return False
+        Else
+            ' If it's not required, and it's empty, then don't append anything to the error message, and report that the value is valid (as it's blank and doesn't matter).
+            If isEmpty(label, required, percentValue, errorMessage) Then Return True
+        End If
 
         ' Ensure all chars in percentValue are numbers or a decimal place
         If Not allValidChars(label, percentValue, "1234567890.", errorMessage) Then Return False
@@ -312,7 +331,15 @@
 
 
     ' Function used to validate decimal based values. Very simlar to validPercent. IsEmpty() should be used outside of this function for optional controls
-    Public Function validCurrency(ByVal label As String, ByVal currencyValue As String, ByRef errorMessage As String) As Boolean
+    Public Function validCurrency(ByVal label As String, ByVal required As Boolean, ByVal currencyValue As String, ByRef errorMessage As String) As Boolean
+
+        If required Then
+            ' If it is empty, return false, as this is not valid
+            If isEmpty(label, required, currencyValue, errorMessage) Then Return False
+        Else
+            ' If it's not required, and it's empty, then don't append anything to the error message, and report that the value is valid (as it's blank and doesn't matter).
+            If isEmpty(label, required, currencyValue, errorMessage) Then Return True
+        End If
 
         ' Ensure all chars in currencyValue are numbers or a decimal place
         If Not allValidChars(label, currencyValue, "1234567890.", errorMessage) Then Return False
@@ -407,11 +434,16 @@
 
 
     ' Function that determines if a value/input is empty.
-    Public Function isEmpty(ByVal Label As String, ByVal value As String, ByRef errorMessage As String) As Boolean
+    Public Function isEmpty(ByVal Label As String, ByVal required As Boolean, ByVal value As String, ByRef errorMessage As String) As Boolean
 
         If String.IsNullOrEmpty(value) Then
-            errorMessage += "ERROR: Must enter a valid " & Label & " before saving" & vbNewLine
+
+            If required Then
+                errorMessage += "ERROR: Must enter a valid " & Label & " before saving" & vbNewLine
+            End If
+
             Return True
+
         End If
 
         Return False
