@@ -117,8 +117,7 @@
         Dim errorMessage As String = String.Empty
 
         ' ********
-        ' For optional fields, don't check if it's null first. Only check it's value if IT'S NOT NULL
-        ' This is why isEmpty is not included in the validation functions: so you can include it
+        ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
 
         ' Company Name 1 (REQUIRED)
         If isEmpty("Company Name 1", True, CompanyName1_Textbox.Text, errorMessage) Then CompanyName1_Textbox.ForeColor = Color.Red
@@ -129,7 +128,6 @@
         If Not validPhone("Phone 1", True, Phone1_Textbox.Text, errorMessage) Then Phone1_Textbox.ForeColor = Color.Red
         ' Phone 2 (OPTIONAL)
         If Not validPhone("Phone 2", False, Phone2_Textbox.Text, errorMessage) Then Phone2_Textbox.ForeColor = Color.Red
-
 
         ' ZipCode_Combobox validation
         If Not validZipCode(ZipCode_ComboBox.Text, errorMessage) Then
@@ -145,6 +143,7 @@
         If Not validPercent("Shop Supply Charge", True, ShopSupplyCharge_Textbox.Text, errorMessage) Then ShopSupplyCharge_Textbox.ForeColor = Color.Red
         ' Labor Rate decimal
         If Not validCurrency("Labor Rate", True, LaborRate_Textbox.Text, errorMessage) Then LaborRate_Textbox.ForeColor = Color.Red
+
 
 
         ' Check if any invalid input has been found
