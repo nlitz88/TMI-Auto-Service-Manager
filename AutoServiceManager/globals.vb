@@ -203,15 +203,18 @@
 
 
     ' Function used to validate phone numbers from masked text box. Thanks to the mask, only checks for not empty and length
-    'Public Function validPhone(ByVal label As String, ByVal phoneValue As String, ByRef errorMessage As String) As Boolean
+    Public Function validPhone(ByVal label As String, ByVal phoneValue As String, ByRef errorMessage As String) As Boolean
 
-    '    If isEmpty(label, phoneValue, errorMessage) Then Return False
+        If Not allValidChars(label, phoneValue, "1234567890", errorMessage) Then Return False
 
-    '    If phoneValue.Length <> 10 Then
-    '        errorMessage += "ERROR: "  must be 10 digits"
-    '    End If
+        If Not String.IsNullOrEmpty(phoneValue) And phoneValue.Length <> 10 Then
+            errorMessage += "ERROR: " & label & " must be a valid 10-digit phone number" & vbNewLine
+            Return False
+        End If
 
-    'End Function
+        Return True
+
+    End Function
 
 
     Public Function validPercent(ByVal label As String, ByVal percentValue As String, ByRef errorMessage As String) As Boolean
@@ -229,7 +232,7 @@
         For Each c In percentValue.ToCharArray()
             If c = "." Then dcount += 1
             If dcount > 1 Then
-                errorMessage += "Error: More than one decimal in " & label & vbNewLine
+                errorMessage += "ERROR: More than one decimal in " & label & vbNewLine
                 Return False
             End If
         Next
@@ -243,7 +246,7 @@
             'End If
 
             If percentValue.Split(".")(0).Length > 5 Then
-                errorMessage += "Error: Number too large for " & label & vbNewLine
+                errorMessage += "ERROR: Number too large for " & label & vbNewLine
                 Return False
             End If
 
@@ -260,7 +263,7 @@
             'End If
 
             If percentValue.Split(".")(0).Length > 5 Then
-                errorMessage += "Error: Number too large for " & label & vbNewLine
+                errorMessage += "ERROR: Number too large for " & label & vbNewLine
                 Return False
             End If
 
@@ -301,7 +304,7 @@
                 zipBase = zipCode.Split("-")(0)
                 zipExt = zipCode.Split("-")(1)
 
-                If allValidChars(zipCode, "1234567890") <> -1 Or allValidChars(zipCode, "1234567890") <> -1 Then
+                If allValidChars(zipBase, "1234567890") <> -1 Or allValidChars(zipExt, "1234567890") <> -1 Then
 
                     errorMessage += "ERROR: Invalid Character in ZIP Code" & vbNewLine
                     Return False

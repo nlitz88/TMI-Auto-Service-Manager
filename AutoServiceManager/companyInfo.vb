@@ -17,6 +17,9 @@
     Private cmRow As Integer
     Private zcRow As Integer
 
+    ' Variable that allows certain keystrokes through restricted fields
+    Private allowedKeystroke As Boolean = False
+
 
     ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
 
@@ -112,23 +115,21 @@
     Private Function controlsValid() As Boolean
 
         Dim errorMessage As String = String.Empty
-        ' Call a function to validate input value in every control that must be validated
-        ' If one of the validation functions encounters an error, it will append a particular error message tothe errorMessage string
-        '       additionally, each function will set its respective control's background color to misty-red if error there
-        '       IDEA: set text of tooltip to error message until valid
-        ' Once reach end of function, if errorMessage isn't empty, this means error(s) were encountered, and inputs must be fixed
 
-        ' This function is meant to handle all error gather and reporting. Returns boolean for external actions
+        ' ********
+        ' For optional fields, don't check if it's null first. Only check it's value if IT'S NOT NULL
 
-        ' Validation for general controls.
+        ' Company Name 1 (REQUIRED)
         If isEmpty("Company Name 1", CompanyName1_Textbox.Text, errorMessage) Then CompanyName1_Textbox.ForeColor = Color.Red
-        If isEmpty("Company Name 2", CompanyName2_Textbox.Text, errorMessage) Then CompanyName2_Textbox.ForeColor = Color.Red
+        ' Address 1 (REQUIRED)
         If isEmpty("Address 1", Address1_Textbox.Text, errorMessage) Then Address1_Textbox.ForeColor = Color.Red
-        If isEmpty("Address 2", Address2_Textbox.Text, errorMessage) Then Address2_Textbox.ForeColor = Color.Red
 
-
-        ' ADD VALIDATION FUNCTION FOR PHONE NUMBER
-        '   just check for not empty and length
+        ' Phone 1 (REQUIRED)
+        If Not isEmpty("Phone 1", Phone1_Textbox.Text, errorMessage) Then
+            If Not validPhone("Phone 1", Phone1_Textbox.Text, errorMessage) Then Phone1_Textbox.ForeColor = Color.Red
+        End If
+        ' Phone 2 (OPTIONAL)
+        If Not validPhone("Phone 2", Phone2_Textbox.Text, errorMessage) Then Phone2_Textbox.ForeColor = Color.Red
 
 
         ' ZipCode_Combobox validation
@@ -314,7 +315,7 @@
         ' Ensure that all editing control values have been initialized before anything else (so events on form load don't have any effect)
         If Not valuesInitialized Then Exit Sub
 
-        ZipCode_ComboBox.ForeColor = DefaultForeColor
+        CompanyName1_Textbox.ForeColor = DefaultForeColor
 
         If editingControlsChanged() Then
             saveButton.Enabled = True
@@ -328,7 +329,7 @@
 
         If Not valuesInitialized Then Exit Sub
 
-        ZipCode_ComboBox.ForeColor = DefaultForeColor
+        CompanyName2_Textbox.ForeColor = DefaultForeColor
 
         If editingControlsChanged() Then
             saveButton.Enabled = True
@@ -342,7 +343,7 @@
 
         If Not valuesInitialized Then Exit Sub
 
-        ZipCode_ComboBox.ForeColor = DefaultForeColor
+        Address1_Textbox.ForeColor = DefaultForeColor
 
         If editingControlsChanged() Then
             saveButton.Enabled = True
@@ -356,7 +357,7 @@
 
         If Not valuesInitialized Then Exit Sub
 
-        ZipCode_ComboBox.ForeColor = DefaultForeColor
+        Address2_Textbox.ForeColor = DefaultForeColor
 
         If editingControlsChanged() Then
             saveButton.Enabled = True
@@ -371,7 +372,7 @@
 
         If Not valuesInitialized Then Exit Sub
 
-        ZipCode_ComboBox.ForeColor = DefaultForeColor
+        Phone1_Textbox.ForeColor = DefaultForeColor
 
         If editingControlsChanged() Then
             saveButton.Enabled = True
@@ -386,7 +387,7 @@
 
         If Not valuesInitialized Then Exit Sub
 
-        ZipCode_ComboBox.ForeColor = DefaultForeColor
+        Phone2_Textbox.ForeColor = DefaultForeColor
 
         If editingControlsChanged() Then
             saveButton.Enabled = True
@@ -397,13 +398,12 @@
     End Sub
 
 
-    Private validTaxRate As Boolean = False
     ' Ensures that shortcuts are still available to user
     Private Sub TaxRate_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles TaxRate_Textbox.KeyDown
 
         ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
         If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
-            validTaxRate = True
+            allowedKeystroke = True
         End If
 
     End Sub
@@ -411,8 +411,8 @@
     Private Sub TaxRate_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TaxRate_Textbox.KeyPress
 
         ' INPUT HANDLING
-        If validTaxRate Then
-            validTaxRate = False
+        If allowedKeystroke Then
+            allowedKeystroke = False
             Exit Sub
         End If
 
@@ -445,12 +445,11 @@
     End Sub
 
 
-    Dim validShopSupplyCharge As Boolean = False
     Private Sub ShopSupplyCharge_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles ShopSupplyCharge_Textbox.KeyDown
 
         ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
         If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
-            validShopSupplyCharge = True
+            allowedKeystroke = True
         End If
 
     End Sub
@@ -458,8 +457,8 @@
     Private Sub ShopSupplyCharge_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ShopSupplyCharge_Textbox.KeyPress
 
         ' INPUT HANDLING
-        If validShopSupplyCharge Then
-            validShopSupplyCharge = False
+        If allowedKeystroke Then
+            allowedKeystroke = False
             Exit Sub
         End If
 
@@ -492,12 +491,11 @@
     End Sub
 
 
-    Private validLaborRate As Boolean = False
     Private Sub LaborRate_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles LaborRate_Textbox.KeyDown
 
         ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
         If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
-            validLaborRate = True
+            allowedKeystroke = True
         End If
 
     End Sub
@@ -505,8 +503,8 @@
     Private Sub LaborRate_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles LaborRate_Textbox.KeyPress
 
         ' INPUT HANDLING
-        If validLaborRate Then
-            validLaborRate = False
+        If allowedKeystroke Then
+            allowedKeystroke = False
             Exit Sub
         End If
 
