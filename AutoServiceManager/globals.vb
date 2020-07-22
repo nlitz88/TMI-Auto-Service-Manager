@@ -202,11 +202,21 @@
     ' **************** VALIDATION FOR SPECIFIC TYPES ****************
 
 
+    ' Function used to validate phone numbers from masked text box. Thanks to the mask, only checks for not empty and length
+    'Public Function validPhone(ByVal label As String, ByVal phoneValue As String, ByRef errorMessage As String) As Boolean
+
+    '    If isEmpty(label, phoneValue, errorMessage) Then Return False
+
+    '    If phoneValue.Length <> 10 Then
+    '        errorMessage += "ERROR: "  must be 10 digits"
+    '    End If
+
+    'End Function
+
+
     Public Function validPercent(ByVal label As String, ByVal percentValue As String, ByRef errorMessage As String) As Boolean
 
-        If isEmpty(label, percentValue, errorMessage) Then
-            Return False
-        End If
+        If isEmpty(label, percentValue, errorMessage) Then Return False
 
         ' Ensure all chars in percentValue are numbers or a decimal place
         If Not allValidChars(label, percentValue, "1234567890.", errorMessage) Then
