@@ -120,6 +120,16 @@
 
         ' This function is meant to handle all error gather and reporting. Returns boolean for external actions
 
+        ' Validation for general controls.
+        If isEmpty("Company Name 1", CompanyName1_Textbox.Text, errorMessage) Then CompanyName1_Textbox.ForeColor = Color.Red
+        If isEmpty("Company Name 2", CompanyName2_Textbox.Text, errorMessage) Then CompanyName2_Textbox.ForeColor = Color.Red
+        If isEmpty("Address 1", Address1_Textbox.Text, errorMessage) Then Address1_Textbox.ForeColor = Color.Red
+        If isEmpty("Address 2", Address2_Textbox.Text, errorMessage) Then Address2_Textbox.ForeColor = Color.Red
+
+
+        ' ADD VALIDATION FUNCTION FOR PHONE NUMBER
+        '   just check for not empty and length
+
 
         ' ZipCode_Combobox validation
         If Not validZipCode(ZipCode_ComboBox.Text, errorMessage) Then
@@ -304,6 +314,8 @@
         ' Ensure that all editing control values have been initialized before anything else (so events on form load don't have any effect)
         If Not valuesInitialized Then Exit Sub
 
+        ZipCode_ComboBox.ForeColor = DefaultForeColor
+
         If editingControlsChanged() Then
             saveButton.Enabled = True
         Else
@@ -315,6 +327,8 @@
     Private Sub CompanyName2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles CompanyName2_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        ZipCode_ComboBox.ForeColor = DefaultForeColor
 
         If editingControlsChanged() Then
             saveButton.Enabled = True
@@ -328,6 +342,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        ZipCode_ComboBox.ForeColor = DefaultForeColor
+
         If editingControlsChanged() Then
             saveButton.Enabled = True
         Else
@@ -339,6 +355,8 @@
     Private Sub Address2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Address2_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        ZipCode_ComboBox.ForeColor = DefaultForeColor
 
         If editingControlsChanged() Then
             saveButton.Enabled = True
@@ -353,6 +371,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        ZipCode_ComboBox.ForeColor = DefaultForeColor
+
         If editingControlsChanged() Then
             saveButton.Enabled = True
         Else
@@ -365,6 +385,8 @@
     Private Sub Phone2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Phone2_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        ZipCode_ComboBox.ForeColor = DefaultForeColor
 
         If editingControlsChanged() Then
             saveButton.Enabled = True
