@@ -115,12 +115,14 @@
         '       IDEA: set text of tooltip to error message until valid
         ' Once reach end of function, if errorMessage isn't empty, this means error(s) were encountered, and inputs must be fixed
 
+        ' This function is meant to handle all error gather and reporting. Returns boolean for external actions
 
         ' ZipCode_Combo box validation
         If Not validZipCode(ZipCode_ComboBox.Text, errorMessage) Then
-            ZipCode_ComboBox.BackColor = Color.LightCoral
+            ZipCode_ComboBox.ForeColor = Color.Red
         ElseIf zipCodesList.BinarySearch(ZipCode_ComboBox.Text.Split("-")(0)) < 0 Then
             errorMessage += "ZIP Code does not exist" & vbNewLine
+            ZipCode_ComboBox.ForeColor = Color.Red
         End If
 
 
@@ -284,6 +286,10 @@
 
     ' ************************ dataEditingControls TEXTBOX EVENT HANDLERS ************************
 
+    Private Sub dataEditingControls_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
 
     Private Sub CompanyName1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles CompanyName1_Textbox.TextChanged
 
@@ -323,18 +329,6 @@
     End Sub
 
     Private Sub Address2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Address2_Textbox.TextChanged
-
-        If Not valuesInitialized Then Exit Sub
-
-        If editingControlsChanged() Then
-            saveButton.Enabled = True
-        Else
-            saveButton.Enabled = False
-        End If
-
-    End Sub
-
-    Private Sub ZipCode_Textbox_TextChanged(sender As Object, e As EventArgs)
 
         If Not valuesInitialized Then Exit Sub
 
@@ -523,6 +517,9 @@
         Else
             saveButton.Enabled = False
         End If
+
+        ' If color was changed due to invalid value, reset now.
+        ZipCode_ComboBox.ForeColor = DefaultForeColor
 
         ' Check if valid and lookup
         If ZipCode_ComboBox.Text.Length >= 5 And ZipCode_ComboBox.Text.Length <= 10 And zipCodesList.BinarySearch(ZipCode_ComboBox.Text.Split("-")(0)) > 0 Then
