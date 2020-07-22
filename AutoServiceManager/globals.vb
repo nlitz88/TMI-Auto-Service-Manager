@@ -204,14 +204,13 @@
 
     Public Function validPercent(ByVal label As String, ByVal percentValue As String, ByRef errorMessage As String) As Boolean
 
-        If String.IsNullOrEmpty(percentValue) Then
-            errorMessage += "Error: Must enter a valid percentage in " & label & vbNewLine
+        If isEmpty(label, percentValue, errorMessage) Then
             Return False
         End If
 
         ' Ensure all chars in percentValue are numbers or a decimal place
-        If Not allValidChars(percentValue, "1234567890.") Then
-            errorMessage += "Error: Invalid character in " & label & vbNewLine
+        If Not allValidChars(label, percentValue, "1234567890.", errorMessage) Then
+            'errorMessage += "Error: Invalid character in " & label & vbNewLine
             Return False
         End If
 
@@ -274,8 +273,8 @@
         End If
 
         If zipCode.Length = 5 Then
-            If allValidChars(zipCode, "1234567890") <> -1 Then                  ' Checks to see if any non-numeric characters in value
-                errorMessage += "ERROR: Invalid character in ZIP Code" & vbNewLine
+            If allValidChars("ZIP Code", zipCode, "1234567890", errorMessage) <> -1 Then                  ' Checks to see if any non-numeric characters in value
+                'errorMessage += "ERROR: Invalid character in ZIP Code" & vbNewLine
                 Return False
             End If
         End If
@@ -292,7 +291,7 @@
                 zipBase = zipCode.Split("-")(0)
                 zipExt = zipCode.Split("-")(1)
 
-                If allValidChars(zipBase, "1234567890") <> -1 Or allValidChars(zipExt, "1234567890") <> -1 Then
+                If allValidChars(zipCode, "1234567890") <> -1 Or allValidChars(zipCode, "1234567890") <> -1 Then
 
                     errorMessage += "ERROR: Invalid Character in ZIP Code" & vbNewLine
                     Return False
@@ -311,9 +310,40 @@
     ' **************** CORE VALIDATION ****************
 
 
+    ' Function that determines if a value/input is empty.
+    Public Function isEmpty(ByVal Label As String, ByVal value As String, ByRef errorMessage As String) As Boolean
+
+        If String.IsNullOrEmpty(value) Then
+            errorMessage += "ERROR: Must enter a valid " & Label & " before saving" & vbNewLine
+            Return True
+        End If
+
+        Return False
+
+    End Function
+
+
     ' Function that determines if there are any invalid chars in a given value. The valid chars are provided as a string.
     ' Will return -1 if no invalid chars were found
     ' Will return the index of the first invalid char it encounters
+    Public Function allValidChars(ByVal label As String, ByVal value As String, ByVal validChars As String, ByRef errorMessage As String) As Integer
+
+        Dim lastValidIndex As Integer = -1
+        Dim chars() As Char = value.ToCharArray()
+
+        For i As Integer = 0 To value.ToCharArray().Count - 1
+            If InStr(validChars, chars(i).ToString()) = 0 Then
+                lastValidIndex = i
+                errorMessage += "ERROR: Invalid character in " & label & vbNewLine
+                Return lastValidIndex
+            End If
+        Next
+
+        Return lastValidIndex
+
+    End Function
+
+    ' Overload that doesn't handle error message
     Public Function allValidChars(ByVal value As String, ByVal validChars As String) As Integer
 
         Dim lastValidIndex As Integer = -1
@@ -322,6 +352,7 @@
         For i As Integer = 0 To value.ToCharArray().Count - 1
             If InStr(validChars, chars(i).ToString()) = 0 Then
                 lastValidIndex = i
+                Return lastValidIndex
             End If
         Next
 
