@@ -174,12 +174,12 @@
 
     ' **************** KEYPRESS/INPUT VALIDATION ****************
 
-    Public Function percentInputValid(ByVal ctrl As Object, ByVal keyChar As String) As Boolean
+    Public Function percentInputValid(ByVal ctrl As Object, ByRef keyChar As String) As Boolean
 
         Dim valid As Boolean = True
 
         ' First, ignore any input that isn't an number, period, or backspace
-        If (InStr("1234567890.", keyChar) = 0 And Asc(keyChar) <> 8) Or (keyChar = "." And InStr(ctrl.Text, ".") > 0) Then
+        If (InStr("1234567890Oo.", keyChar) = 0 And Asc(keyChar) <> 8) Or (keyChar = "." And InStr(ctrl.Text, ".") > 0) Then
             valid = False
             ' If it's a valid number or period, then check for length on right side of decimal, IF there is a decimal
         ElseIf InStr(ctrl.Text, ".") > 0 Then
@@ -187,8 +187,14 @@
             ' If the # of decimal places is already 2, and the cursor is on the right of said decimal place, and the keystroke is not a backspace
             If ctrl.Text.Split(".")(1).Length = 2 And ctrl.SelectionStart >= InStr(ctrl.Text, ".") And Asc(keyChar) <> 8 Then
                 valid = False
+            ElseIf keyChar.ToLower() = "o" Then
+                keyChar = Chr(48)
+                valid = True
             End If
 
+        ElseIf keyChar.ToLower() = "o" Then
+            keyChar = Chr(48)
+            valid = True
         End If
 
         Return valid
@@ -196,12 +202,12 @@
     End Function
 
 
-    Public Function currencyInputValid(ByVal ctrl As Object, ByVal keyChar As String) As Boolean
+    Public Function currencyInputValid(ByVal ctrl As Object, ByRef keyChar As String) As Boolean
 
         Dim valid As Boolean = True
 
         ' First, ignore any input that isn't an number, period, or backspace
-        If (InStr("1234567890.", keyChar) = 0 And Asc(keyChar) <> 8) Or (keyChar = "." And InStr(ctrl.Text, ".") > 0) Then
+        If (InStr("1234567890Oo.", keyChar) = 0 And Asc(keyChar) <> 8) Or (keyChar = "." And InStr(ctrl.Text, ".") > 0) Then
             valid = False
             ' If it's a valid number or period, then check for length on right side of decimal, IF there is a decimal
         ElseIf InStr(ctrl.Text, ".") > 0 Then
@@ -209,8 +215,14 @@
             ' If the # of decimal places is already 2, and the cursor is on the right of said decimal place, and the keystroke is not a backspace
             If ctrl.Text.Split(".")(1).Length = 2 And ctrl.SelectionStart >= InStr(ctrl.Text, ".") And Asc(keyChar) <> 8 Then
                 valid = False
+            ElseIf keyChar.ToLower() = "o" Then
+                keyChar = Chr(48)
+                valid = True
             End If
 
+        ElseIf keyChar.ToLower() = "o" Then
+            keyChar = Chr(48)
+            valid = True
         End If
 
         Return valid
@@ -218,16 +230,16 @@
     End Function
 
 
-    Public Function zipCodeInputValid(ByVal ctrl As Object, ByRef KeyChar As String) As Boolean
+    Public Function zipCodeInputValid(ByVal ctrl As Object, ByRef keyChar As String) As Boolean
 
         Dim valid As Boolean = True
 
-        If (InStr("1234567890Oo-", KeyChar) = 0 And Asc(KeyChar) <> 8) Or (KeyChar = "-" And InStr(ctrl.Text, "-") > 0) Then
+        If (InStr("1234567890Oo-", keyChar) = 0 And Asc(keyChar) <> 8) Or (keyChar = "-" And InStr(ctrl.Text, "-") > 0) Then
             valid = False
-        ElseIf ctrl.Text.Length = 10 And Asc(KeyChar) <> 8 And Not ctrl.SelectionLength > 0 Then
+        ElseIf ctrl.Text.Length = 10 And Asc(keyChar) <> 8 And Not ctrl.SelectionLength > 0 Then
             valid = False
-        ElseIf KeyChar.ToLower() = "o" Then
-            KeyChar = Chr(48)
+        ElseIf keyChar.ToLower() = "o" Then
+            keyChar = Chr(48)
             valid = True
         End If
 
