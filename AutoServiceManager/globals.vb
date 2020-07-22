@@ -202,9 +202,62 @@
     ' **************** VALIDATION FOR SPECIFIC TYPES ****************
 
 
-    Public Function validPercent() As Boolean
+    Public Function validPercent(ByVal label As String, ByVal percentValue As String, ByRef errorMessage As String) As Boolean
 
-        ' Use isNumeric and other CORE validation functions to validate the percentage based textboxes
+        If String.IsNullOrEmpty(percentValue) Then
+            errorMessage += "Error: Must enter a valid percentage in " & label & vbNewLine
+            Return False
+        End If
+
+        ' Ensure all chars in percentValue are numbers or a decimal place
+        If Not allValidChars(percentValue, "1234567890.") Then
+            errorMessage += "Error: Invalid character in " & label & vbNewLine
+            Return False
+        End If
+
+        ' Check to see if there are duplicate decimal places in percentValue
+        Dim dcount As Integer = 0
+        For Each c In percentValue.ToCharArray()
+            If c = "." Then dcount += 1
+            If dcount > 1 Then
+                errorMessage += "Error: More than one decimal in " & label & vbNewLine
+                Return False
+            End If
+        Next
+
+        ' Check to see if there is at least one decimal place
+        If dcount = 1 Then
+
+            ' Check to see if number on left is a valid number
+            'If Not isValidNumber(label, Convert.ToDecimal(percentValue.Split(".")(0)), 0, True, 99999, True, errorMessage) Then
+            '    Return False
+            'End If
+
+            If percentValue.Split(".")(0).Length > 5 Then
+                errorMessage += "Error: Number too large for " & label & vbNewLine
+                Return False
+            End If
+
+            ' If there is one, then ensure that there are no more than 2 digits after it
+            'If percentValue.Split(".")(1).Length > 2 Then
+            '    errorMessage += "Error: Too many digits after decimal in " & label & vbNewLine
+            '    Return False
+            'End If
+
+        Else
+
+            'If Not isValidNumber(label, Convert.ToDecimal(percentValue.Split(".")(0)), 0, True, 99999, True, errorMessage) Then
+            '    Return False
+            'End If
+
+            If percentValue.Split(".")(0).Length > 5 Then
+                errorMessage += "Error: Number too large for " & label & vbNewLine
+                Return False
+            End If
+
+        End If
+
+        Return True
 
     End Function
 
@@ -216,13 +269,13 @@
         Dim zipBase, zipExt As String
 
         If zipCode.Length <> 5 And zipCode.Length <> 10 Then
-            errorMessage += "Must enter a valid ZIP Code before saving" & vbNewLine
+            errorMessage += "ERROR: Must enter a valid ZIP Code before saving" & vbNewLine
             Return False
         End If
 
         If zipCode.Length = 5 Then
             If allValidChars(zipCode, "1234567890") <> -1 Then                  ' Checks to see if any non-numeric characters in value
-                errorMessage += "Invalid character in ZIP Code" & vbNewLine
+                errorMessage += "ERROR: Invalid character in ZIP Code" & vbNewLine
                 Return False
             End If
         End If
@@ -231,7 +284,7 @@
 
             If zipCode.Substring(5, 1) <> "-" Then
 
-                errorMessage += "ZIP Code is not in proper format" & vbNewLine
+                errorMessage += "ERROR: ZIP Code is not in proper format" & vbNewLine
                 Return False
 
             Else
@@ -241,8 +294,7 @@
 
                 If allValidChars(zipBase, "1234567890") <> -1 Or allValidChars(zipExt, "1234567890") <> -1 Then
 
-                    Console.WriteLine(zipBase & " | " & zipExt)
-                    errorMessage += "Invalid Character in ZIP Code" & vbNewLine
+                    errorMessage += "ERROR: Invalid Character in ZIP Code" & vbNewLine
                     Return False
 
                 End If

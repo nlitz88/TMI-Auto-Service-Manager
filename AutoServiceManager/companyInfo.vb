@@ -120,14 +120,19 @@
 
         ' This function is meant to handle all error gather and reporting. Returns boolean for external actions
 
-        ' ZipCode_Combo box validation
+
+        ' ZipCode_Combobox validation
         If Not validZipCode(ZipCode_ComboBox.Text, errorMessage) Then
             ZipCode_ComboBox.ForeColor = Color.Red
         ElseIf zipCodesList.BinarySearch(ZipCode_ComboBox.Text.Split("-")(0)) < 0 Then
-            errorMessage += "ZIP Code does not exist" & vbNewLine
+            errorMessage += "ERROR: ZIP Code does not exist" & vbNewLine
             ZipCode_ComboBox.ForeColor = Color.Red
         End If
 
+        ' TaxRate, LaborRate, and ShopSupplyCharge textbox validation
+        If Not validPercent("Tax Rate", TaxRate_Textbox.Text, errorMessage) Then TaxRate_Textbox.ForeColor = Color.Red
+        If Not validPercent("Labor Rate", LaborRate_Textbox.Text, errorMessage) Then LaborRate_Textbox.ForeColor = Color.Red
+        If Not validPercent("Shop Supply Charge", ShopSupplyCharge_Textbox.Text, errorMessage) Then ShopSupplyCharge_Textbox.ForeColor = Color.Red
 
         ' Check if any invalid input has been found
         If Not String.IsNullOrEmpty(errorMessage) Then
@@ -400,6 +405,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        TaxRate_Textbox.ForeColor = DefaultForeColor
+
         ' TEMPORARY VALIDATION FOR PASTING VALUES. REVIEW WITH TONI
         Dim lastValidIndex As Integer = allValidChars(TaxRate_Textbox.Text, "1234567890.")
         If lastValidIndex <> -1 Then
@@ -444,6 +451,8 @@
     Private Sub ShopSupplyCharge_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ShopSupplyCharge_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        ShopSupplyCharge_Textbox.ForeColor = DefaultForeColor
 
         ' TEMPORARY VALIDATION FOR PASTING VALUES. REVIEW WITH TONI
         Dim lastValidIndex As Integer = allValidChars(ShopSupplyCharge_Textbox.Text, "1234567890.")
@@ -490,6 +499,8 @@
     Private Sub LaborRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LaborRate_Textbox.TextChanged, LaborRate_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        LaborRate_Textbox.ForeColor = DefaultForeColor
 
         Dim lastValidIndex As Integer = allValidChars(LaborRate_Textbox.Text, "1234567890.")
         If lastValidIndex <> -1 Then
