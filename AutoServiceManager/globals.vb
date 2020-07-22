@@ -197,6 +197,20 @@
     End Function
 
 
+    Public Function zipCodeInputValid(ByVal ctrl As Object, ByVal KeyChar As String) As Boolean
+
+        Dim valid As Boolean = True
+
+        If (InStr("1234567890-", KeyChar) = 0 And Asc(KeyChar) <> 8) Or (KeyChar = "-" And InStr(ctrl.Text, "-") > 0) Then
+            valid = False
+        ElseIf ctrl.Text.Length = 10 And Asc(KeyChar) <> 8 And Not ctrl.SelectionLength > 0 Then
+            valid = False
+        End If
+
+        Return valid
+
+    End Function
+
 
 
     ' **************** VALIDATION FOR SPECIFIC TYPES ****************
@@ -232,7 +246,7 @@
         For Each c In percentValue.ToCharArray()
             If c = "." Then dcount += 1
             If dcount > 1 Then
-                errorMessage += "ERROR: More than one decimal in " & label & vbNewLine
+                errorMessage += "ERROR: More than one decimal point in " & label & vbNewLine
                 Return False
             End If
         Next
