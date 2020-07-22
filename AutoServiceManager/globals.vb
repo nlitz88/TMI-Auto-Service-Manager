@@ -185,16 +185,25 @@
         ElseIf InStr(ctrl.Text, ".") > 0 Then
 
             ' If the # of decimal places is already 2, and the cursor is on the right of said decimal place, and the keystroke is not a backspace
-            If ctrl.Text.Split(".")(1).Length = 2 And ctrl.SelectionStart >= InStr(ctrl.Text, ".") And Asc(keyChar) <> 8 Then
+            If ctrl.Text.Split(".")(1).Length = 2 And ctrl.SelectionStart >= InStr(ctrl.Text, ".") And Asc(keyChar) <> 8 And Not ctrl.SelectionLength > 0 Then
                 valid = False
-            ElseIf keyChar.ToLower() = "o" Then
-                keyChar = Chr(48)
-                valid = True
+                ' If the # of digits before decimal is already 3, the cursor is behind the decimal, and it's not a backspace
+            ElseIf ctrl.Text.Split(".")(0).Length = 3 And ctrl.SelectionStart < InStr(ctrl.Text, ".") And Asc(keyChar) <> 8 And Not ctrl.SelectionLength > 0 Then
+                valid = False
             End If
 
-        ElseIf keyChar.ToLower() = "o" Then
+            ' If there is no decimal place
+        ElseIf InStr(ctrl.Text, ".") = 0 Then
+
+            ' If the length is 3 and it's not a backspace or a decimal place
+            If ctrl.Text.Length = 3 And Asc(keyChar) <> 8 And Not keyChar = "." And Not ctrl.SelectionLength > 0 Then
+                valid = False
+            End If
+
+        End If
+
+        If keyChar.ToLower() = "o" Then
             keyChar = Chr(48)
-            valid = True
         End If
 
         Return valid
@@ -213,16 +222,25 @@
         ElseIf InStr(ctrl.Text, ".") > 0 Then
 
             ' If the # of decimal places is already 2, and the cursor is on the right of said decimal place, and the keystroke is not a backspace
-            If ctrl.Text.Split(".")(1).Length = 2 And ctrl.SelectionStart >= InStr(ctrl.Text, ".") And Asc(keyChar) <> 8 Then
+            If ctrl.Text.Split(".")(1).Length = 2 And ctrl.SelectionStart >= InStr(ctrl.Text, ".") And Asc(keyChar) <> 8 And Not ctrl.SelectionLength > 0 Then
                 valid = False
-            ElseIf keyChar.ToLower() = "o" Then
-                keyChar = Chr(48)
-                valid = True
+                ' If the # of digits before decimal is already 3, the cursor is behind the decimal, and it's not a backspace
+            ElseIf ctrl.Text.Split(".")(0).Length = 14 And ctrl.SelectionStart < InStr(ctrl.Text, ".") And Asc(keyChar) <> 8 And Not ctrl.SelectionLength > 0 Then
+                valid = False
             End If
 
-        ElseIf keyChar.ToLower() = "o" Then
+            ' If there is no decimal place
+        ElseIf InStr(ctrl.Text, ".") = 0 Then
+
+            ' If the length is 3 and it's not a backspace or a decimal place
+            If ctrl.Text.Length = 14 And Asc(keyChar) <> 8 And Not keyChar = "." And Not ctrl.SelectionLength > 0 Then
+                valid = False
+            End If
+
+        End If
+
+        If keyChar.ToLower() = "o" Then
             keyChar = Chr(48)
-            valid = True
         End If
 
         Return valid
