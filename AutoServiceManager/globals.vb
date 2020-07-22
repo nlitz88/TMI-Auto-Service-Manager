@@ -181,7 +181,28 @@
         ' First, ignore any input that isn't an number, period, or backspace
         If (InStr("1234567890.", keyChar) = 0 And Asc(keyChar) <> 8) Or (keyChar = "." And InStr(ctrl.Text, ".") > 0) Then
             valid = False
-            Console.WriteLine("Invalid character")
+            ' If it's a valid number or period, then check for length on right side of decimal, IF there is a decimal
+        ElseIf InStr(ctrl.Text, ".") > 0 Then
+
+            ' If the # of decimal places is already 2, and the cursor is on the right of said decimal place, and the keystroke is not a backspace
+            If ctrl.Text.Split(".")(1).Length = 2 And ctrl.SelectionStart >= InStr(ctrl.Text, ".") And Asc(keyChar) <> 8 Then
+                valid = False
+            End If
+
+        End If
+
+        Return valid
+
+    End Function
+
+
+    Public Function currencyInputValid(ByVal ctrl As Object, ByVal keyChar As String) As Boolean
+
+        Dim valid As Boolean = True
+
+        ' First, ignore any input that isn't an number, period, or backspace
+        If (InStr("1234567890.", keyChar) = 0 And Asc(keyChar) <> 8) Or (keyChar = "." And InStr(ctrl.Text, ".") > 0) Then
+            valid = False
             ' If it's a valid number or period, then check for length on right side of decimal, IF there is a decimal
         ElseIf InStr(ctrl.Text, ".") > 0 Then
 
@@ -231,15 +252,11 @@
     End Function
 
 
+    ' Function used to validate percent based values
     Public Function validPercent(ByVal label As String, ByVal percentValue As String, ByRef errorMessage As String) As Boolean
 
-        If isEmpty(label, percentValue, errorMessage) Then Return False
-
         ' Ensure all chars in percentValue are numbers or a decimal place
-        If Not allValidChars(label, percentValue, "1234567890.", errorMessage) Then
-            'errorMessage += "Error: Invalid character in " & label & vbNewLine
-            Return False
-        End If
+        If Not allValidChars(label, percentValue, "1234567890.", errorMessage) Then Return False
 
         ' Check to see if there are duplicate decimal places in percentValue
         Dim dcount As Integer = 0
@@ -251,33 +268,85 @@
             End If
         Next
 
+
         ' Check to see if there is at least one decimal place
         If dcount = 1 Then
 
-            ' Check to see if number on left is a valid number
-            'If Not isValidNumber(label, Convert.ToDecimal(percentValue.Split(".")(0)), 0, True, 99999, True, errorMessage) Then
-            '    Return False
-            'End If
+            ' If left side is greater than three in length, then it is too large
+            If percentValue.Split(".")(0).Length > 3 Then
+                errorMessage += "ERROR: Percent exceeds 100.00 in " & label & vbNewLine
+                Return False
+            End If
 
-            If percentValue.Split(".")(0).Length > 5 Then
+            ' If it is not greater than three (meaning that we can most likely PARSE it), ensure that the WHOLE number does not exceed 100.00
+            If Convert.ToDecimal(percentValue) > 100 Then
+                errorMessage += "ERROR: Percent exceeds 100.00 in " & label & vbNewLine
+                Return False
+            End If
+
+            ' If number is not too large, then ensure that there are no more than 2 digits after it
+            If percentValue.Split(".")(1).Length > 2 Then
+                errorMessage += "ERROR: More than 2 digits after decimal place in " & label & vbNewLine
+                Return False
+            End If
+
+        Else
+
+            ' If number is greater than three in length, then it is too large
+            If percentValue.Split(".")(0).Length > 3 Then
                 errorMessage += "ERROR: Number too large for " & label & vbNewLine
                 Return False
             End If
 
-            ' If there is one, then ensure that there are no more than 2 digits after it
-            'If percentValue.Split(".")(1).Length > 2 Then
-            '    errorMessage += "Error: Too many digits after decimal in " & label & vbNewLine
-            '    Return False
-            'End If
+            ' If it is not greater than three (meaning that we can most likely PARSE it), ensure that the WHOLE number does not exceed 100.00
+            If Convert.ToDecimal(percentValue) > 100 Then
+                errorMessage += "ERROR: Percent exceeds 100.00 in " & label & vbNewLine
+                Return False
+            End If
+
+        End If
+
+        Return True
+
+    End Function
+
+
+    ' Function used to validate decimal based values. Very simlar to validPercent. IsEmpty() should be used outside of this function for optional controls
+    Public Function validCurrency(ByVal label As String, ByVal currencyValue As String, ByRef errorMessage As String) As Boolean
+
+        ' Ensure all chars in currencyValue are numbers or a decimal place
+        If Not allValidChars(label, currencyValue, "1234567890.", errorMessage) Then Return False
+
+        ' Check to see if there are duplicate decimal places in currencyValue
+        Dim dcount As Integer = 0
+        For Each c In currencyValue.ToCharArray()
+            If c = "." Then dcount += 1
+            If dcount > 1 Then
+                errorMessage += "ERROR: More than one decimal point in " & label & vbNewLine
+                Return False
+            End If
+        Next
+
+        ' If it contains (at most) one decimal place
+        If dcount = 1 Then
+
+            ' If left side is greater than three in length, then it is too large
+            If currencyValue.Split(".")(0).Length > 14 Then
+                errorMessage += "ERROR: Amount too large in " & label & vbNewLine
+                Return False
+            End If
+
+            ' If number is not too large, then ensure that there are no more than 4 points of precision
+            If currencyValue.Split(".")(1).Length > 2 Then
+                errorMessage += "ERROR: More than 2 digits after decimal place in " & label & vbNewLine
+                Return False
+            End If
 
         Else
 
-            'If Not isValidNumber(label, Convert.ToDecimal(percentValue.Split(".")(0)), 0, True, 99999, True, errorMessage) Then
-            '    Return False
-            'End If
-
-            If percentValue.Split(".")(0).Length > 5 Then
-                errorMessage += "ERROR: Number too large for " & label & vbNewLine
+            ' If number is greater than three in length, then it is too large
+            If currencyValue.Split(".")(0).Length > 14 Then
+                errorMessage += "ERROR: Amount too large in " & label & vbNewLine
                 Return False
             End If
 

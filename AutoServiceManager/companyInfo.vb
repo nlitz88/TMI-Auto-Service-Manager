@@ -118,6 +118,7 @@
 
         ' ********
         ' For optional fields, don't check if it's null first. Only check it's value if IT'S NOT NULL
+        ' This is why isEmpty is not included in the validation functions: so you can include it
 
         ' Company Name 1 (REQUIRED)
         If isEmpty("Company Name 1", CompanyName1_Textbox.Text, errorMessage) Then CompanyName1_Textbox.ForeColor = Color.Red
@@ -140,10 +141,19 @@
             ZipCode_ComboBox.ForeColor = Color.Red
         End If
 
-        ' TaxRate, LaborRate, and ShopSupplyCharge textbox validation
-        If Not validPercent("Tax Rate", TaxRate_Textbox.Text, errorMessage) Then TaxRate_Textbox.ForeColor = Color.Red
-        If Not validPercent("Labor Rate", LaborRate_Textbox.Text, errorMessage) Then LaborRate_Textbox.ForeColor = Color.Red
-        If Not validPercent("Shop Supply Charge", ShopSupplyCharge_Textbox.Text, errorMessage) Then ShopSupplyCharge_Textbox.ForeColor = Color.Red
+        ' Tax Rate percent
+        If Not isEmpty("Tax Rate", TaxRate_Textbox.Text, errorMessage) Then
+            If Not validPercent("Tax Rate", TaxRate_Textbox.Text, errorMessage) Then TaxRate_Textbox.ForeColor = Color.Red
+        End If
+        ' Shop Supply Charge percent
+        If Not isEmpty("Shop Supply Charge", ShopSupplyCharge_Textbox.Text, errorMessage) Then
+            If Not validPercent("Shop Supply Charge", ShopSupplyCharge_Textbox.Text, errorMessage) Then ShopSupplyCharge_Textbox.ForeColor = Color.Red
+        End If
+        ' Labor Rate decimal
+        If Not isEmpty("Labor Rate", LaborRate_Textbox.Text, errorMessage) Then
+            If Not validCurrency("Labor Rate", LaborRate_Textbox.Text, errorMessage) Then LaborRate_Textbox.ForeColor = Color.Red
+        End If
+
 
         ' Check if any invalid input has been found
         If Not String.IsNullOrEmpty(errorMessage) Then
@@ -508,7 +518,7 @@
             Exit Sub
         End If
 
-        If Not percentInputValid(LaborRate_Textbox, e.KeyChar) Then
+        If Not currencyInputValid(LaborRate_Textbox, e.KeyChar) Then
             e.KeyChar = Chr(0)
             e.Handled = True
         End If
