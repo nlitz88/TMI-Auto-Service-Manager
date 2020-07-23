@@ -1,4 +1,6 @@
-﻿Public Class companyInfo
+﻿Imports System.ComponentModel
+
+Public Class companyInfo
 
     ' Initialize new database control instances
     Private CompanyMasterDbController As New DbControl()
@@ -559,11 +561,6 @@
     End Sub
 
 
-    Private Sub navigationPlaceholderButton_Click(sender As Object, e As EventArgs) Handles navigationPlaceholderButton.Click
-        Me.Close()
-    End Sub
-
-
     Private Sub ZipCode_ComboBox_KeyDown(sender As Object, e As KeyEventArgs) Handles ZipCode_ComboBox.KeyDown
 
         ' Allow certain keystrokes through here. Oftentimes, these will be common shortcuts
@@ -618,9 +615,12 @@
 
 
 
-    Private Sub CompanySetupToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompanySetupToolStripMenuItem.Click
 
+    Private Sub companyInfo_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        End
+    End Sub
 
-
+    Private Sub HomeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HomeToolStripMenuItem.Click
+        changeScreen(home, Me)
     End Sub
 End Class

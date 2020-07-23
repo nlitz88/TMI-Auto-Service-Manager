@@ -42,7 +42,6 @@ Partial Class companyInfo
         Me.phone2Label = New System.Windows.Forms.Label()
         Me.taxRateLabel = New System.Windows.Forms.Label()
         Me.laborRateLabel = New System.Windows.Forms.Label()
-        Me.navigationPlaceholderButton = New System.Windows.Forms.Button()
         Me.editButton = New System.Windows.Forms.Button()
         Me.saveButton = New System.Windows.Forms.Button()
         Me.cancelButton = New System.Windows.Forms.Button()
@@ -64,7 +63,7 @@ Partial Class companyInfo
         Me.Phone1_Textbox = New System.Windows.Forms.MaskedTextBox()
         Me.Phone2_Textbox = New System.Windows.Forms.MaskedTextBox()
         Me.mainMs = New System.Windows.Forms.MenuStrip()
-        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HomeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewInvoiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InvoiceMaintenanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FileMaintenanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -275,19 +274,6 @@ Partial Class companyInfo
         Me.laborRateLabel.Size = New System.Drawing.Size(87, 17)
         Me.laborRateLabel.TabIndex = 22
         Me.laborRateLabel.Text = "Labor Rate :"
-        '
-        'navigationPlaceholderButton
-        '
-        Me.navigationPlaceholderButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.navigationPlaceholderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.navigationPlaceholderButton.ForeColor = System.Drawing.Color.White
-        Me.navigationPlaceholderButton.Location = New System.Drawing.Point(101, 48)
-        Me.navigationPlaceholderButton.Name = "navigationPlaceholderButton"
-        Me.navigationPlaceholderButton.Size = New System.Drawing.Size(735, 30)
-        Me.navigationPlaceholderButton.TabIndex = 23
-        Me.navigationPlaceholderButton.Tag = "navigation"
-        Me.navigationPlaceholderButton.Text = "Navigation Placeholder"
-        Me.navigationPlaceholderButton.UseVisualStyleBackColor = False
         '
         'editButton
         '
@@ -528,18 +514,18 @@ Partial Class companyInfo
         'mainMs
         '
         Me.mainMs.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.mainMs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem, Me.NewInvoiceToolStripMenuItem, Me.InvoiceMaintenanceToolStripMenuItem, Me.FileMaintenanceToolStripMenuItem, Me.ReportsToolStripMenuItem})
+        Me.mainMs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HomeToolStripMenuItem, Me.NewInvoiceToolStripMenuItem, Me.InvoiceMaintenanceToolStripMenuItem, Me.FileMaintenanceToolStripMenuItem, Me.ReportsToolStripMenuItem})
         Me.mainMs.Location = New System.Drawing.Point(0, 0)
         Me.mainMs.Name = "mainMs"
         Me.mainMs.Size = New System.Drawing.Size(982, 28)
-        Me.mainMs.TabIndex = 44
+        Me.mainMs.TabIndex = 46
         Me.mainMs.Text = "MenuStrip1"
         '
-        'ExitToolStripMenuItem
+        'HomeToolStripMenuItem
         '
-        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(47, 24)
-        Me.ExitToolStripMenuItem.Text = "Exit"
+        Me.HomeToolStripMenuItem.Name = "HomeToolStripMenuItem"
+        Me.HomeToolStripMenuItem.Size = New System.Drawing.Size(64, 24)
+        Me.HomeToolStripMenuItem.Text = "Home"
         '
         'NewInvoiceToolStripMenuItem
         '
@@ -563,7 +549,7 @@ Partial Class companyInfo
         'CompanySetupToolStripMenuItem
         '
         Me.CompanySetupToolStripMenuItem.Name = "CompanySetupToolStripMenuItem"
-        Me.CompanySetupToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.CompanySetupToolStripMenuItem.Size = New System.Drawing.Size(197, 26)
         Me.CompanySetupToolStripMenuItem.Text = "Company Setup"
         '
         'ReportsToolStripMenuItem
@@ -579,6 +565,7 @@ Partial Class companyInfo
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.mainMs)
         Me.Controls.Add(Me.Phone2_Textbox)
         Me.Controls.Add(Me.Phone1_Textbox)
         Me.Controls.Add(Me.ZipCode_ComboBox)
@@ -598,7 +585,6 @@ Partial Class companyInfo
         Me.Controls.Add(Me.cancelButton)
         Me.Controls.Add(Me.saveButton)
         Me.Controls.Add(Me.editButton)
-        Me.Controls.Add(Me.navigationPlaceholderButton)
         Me.Controls.Add(Me.laborRateLabel)
         Me.Controls.Add(Me.taxRateLabel)
         Me.Controls.Add(Me.phone2Label)
@@ -620,12 +606,10 @@ Partial Class companyInfo
         Me.Controls.Add(Me.city_Textbox)
         Me.Controls.Add(Me.CompanyName2_Textbox)
         Me.Controls.Add(Me.CompanyName1_Textbox)
-        Me.Controls.Add(Me.mainMs)
         Me.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.MainMenuStrip = Me.mainMs
         Me.Name = "companyInfo"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "1"
+        Me.Text = "Company Setup"
         Me.mainMs.ResumeLayout(False)
         Me.mainMs.PerformLayout()
         Me.ResumeLayout(False)
@@ -652,7 +636,6 @@ Partial Class companyInfo
     Friend WithEvents phone2Label As Label
     Friend WithEvents taxRateLabel As Label
     Friend WithEvents laborRateLabel As Label
-    Friend WithEvents navigationPlaceholderButton As Button
     Friend WithEvents editButton As Button
     Friend WithEvents saveButton As Button
     Friend WithEvents cancelButton As Button
@@ -675,7 +658,7 @@ Partial Class companyInfo
     Friend WithEvents Phone2_Textbox As MaskedTextBox
     Friend WithEvents LaborRate_Textbox As TextBox
     Friend WithEvents mainMs As MenuStrip
-    Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HomeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents NewInvoiceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents InvoiceMaintenanceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FileMaintenanceToolStripMenuItem As ToolStripMenuItem
