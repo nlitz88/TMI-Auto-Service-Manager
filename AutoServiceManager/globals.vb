@@ -193,6 +193,83 @@
     End Sub
 
 
+    ' Sub that updates database tables based on their respective values in form
+    Public Sub updatetable(ByRef updateController As DbControl, ByVal dataTable As DataTable,
+                           ByVal nameDelimiter As String, ByVal controlTag As String, ByRef form As Form)
+
+        Dim ctrls As List(Of Object)
+        Dim ctrlValue As Object
+        Dim queryParams As String = String.Empty
+
+        ' Add query parameters for each column value in DataTable
+        For i As Integer = 0 To dataTable.Columns.Count - 1
+
+            ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
+
+            ' Should only be one (dataEditingField) per column
+            For Each ctrl In ctrls
+                ctrlValue = getControlValue(ctrl)
+                If ctrlValue = Nothing Then
+                    ' For compatability with existing columns. This is for fields that do not allow zero-length strings, even though user might want to make field blank.
+                    ctrlValue = DBNull.Value
+                End If
+                updateController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
+                queryParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & ","
+            Next
+
+        Next
+
+        If Not String.IsNullOrEmpty(queryParams) Then
+            ' The substring at the end ensures that there isn't an extra comma at the end
+            queryParams = queryParams.Substring(0, queryParams.Length - 1)
+            updateController.ExecQuery("UPDATE CompanyMaster SET " & queryParams)
+        End If
+
+    End Sub
+
+
+    ' Overload that allows specifying a row to update
+    Public Sub updatetable(ByRef updateController As DbControl, ByVal dataTable As DataTable, ByVal dataTableRow As Integer,
+                           ByVal idName As String, ByVal nameDelimiter As String, ByVal controlTag As String, ByRef form As Form)
+
+        Dim ctrls As List(Of Object)
+        Dim ctrlValue As Object
+        Dim queryParams As String = String.Empty
+
+        ' Add query parameters for each column value in DataTable
+        For i As Integer = 0 To dataTable.Columns.Count - 1
+
+            ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
+
+            ' Should only be one (dataEditingField) per column
+            For Each ctrl In ctrls
+                ctrlValue = getControlValue(ctrl)
+                If ctrlValue = Nothing Then
+                    ' For compatability with existing columns. This is for fields that do not allow zero-length strings, even though user might want to make field blank.
+                    ctrlValue = DBNull.Value
+                End If
+                updateController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
+                queryParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & ","
+            Next
+
+        Next
+
+        ' Add on id paramater if not already done so from a form control
+        If InStr(queryParams, idName) = 0 Then
+            updateController.AddParams("@" & idName, dataTableRow)
+            queryParams += idName & "=@" & idName & ","
+        End If
+
+        ' If query params isn't empty, then run update query
+        If Not String.IsNullOrEmpty(queryParams) Then
+            ' The substring at the end ensures that there isn't an extra comma at the end
+            queryParams = queryParams.Substring(0, queryParams.Length - 1)
+            updateController.ExecQuery("UPDATE CompanyMaster SET " & queryParams)
+        End If
+
+    End Sub
+
+
     Public Function getListFromDataTable(ByVal datatable As DataTable, ByVal column As String, Optional ByVal sorted As Boolean = True) As List(Of Object)
 
         Dim values As New List(Of Object)

@@ -117,63 +117,6 @@
     End Sub
 
 
-    ' Sub that updates entries in CompanyMaster table from respective values
-    Private Sub updateCompanyMaster()
-
-        stripFormatting()
-
-        Dim ctrls As List(Of Object)
-        Dim ctrlValue As Object
-        Dim queryParams As String = String.Empty
-
-        ' Add query parameters for each column value in DataTable
-        For i As Integer = 0 To CompanyMasterDbController.DbDataTable.Columns.Count - 1
-
-            ctrls = getAllControlsWithName(CompanyMasterDbController.DbDataTable.Columns(i).ColumnName, "dataEditingControl", "_", Me)
-
-            ' Should only be one (dataEditingField) per column
-            For Each ctrl In ctrls
-                ctrlValue = getControlValue(ctrl)
-                If ctrlValue = Nothing Then
-                    ' For compatability with existing columns. This is for fields that do not allow zero-length strings, even though user might want to make field blank.
-                    ctrlValue = DBNull.Value
-                End If
-                updateController.AddParams("@" & CompanyMasterDbController.DbDataTable.Columns(i).ColumnName, ctrlValue)
-                queryParams += CompanyMasterDbController.DbDataTable.Columns(i).ColumnName & "=@" & CompanyMasterDbController.DbDataTable.Columns(i).ColumnName & ","
-            Next
-
-        Next
-
-        If Not String.IsNullOrEmpty(queryParams) Then
-            ' The substring at the end ensures that there isn't an extra comma at the end
-            queryParams = queryParams.Substring(0, queryParams.Length - 1)
-            updateController.ExecQuery("UPDATE CompanyMaster SET " & queryParams)
-        End If
-
-        ' For now, build using calls to dataTable, then update the datatable
-        'updateController.AddParams("@TaxRate", Convert.ToDecimal(TaxRate_Textbox.Text))
-        'updateController.AddParams("@ShopSupplyCharge", Convert.ToDecimal(ShopSupplyCharge_Textbox.Text))
-        'updateController.AddParams("@CompanyName1", CompanyName1_Textbox.Text)
-        'updateController.AddParams("@companyname2", CompanyName2_Textbox.Text)
-        'updateController.AddParams("@Address1", Address1_Textbox.Text)
-        'updateController.AddParams("@Address2", Address2_Textbox.Text)
-        ''updateController.AddParams("@ZipCode", ZipCode_ComboBox.Text)
-        'updateController.AddParams("@Phone1", Phone1_Textbox.Text)
-        'updateController.AddParams("@Phone2", Phone2_Textbox.Text)
-        'updateController.AddParams("@LaborRate", Convert.ToDecimal(LaborRate_Textbox.Text))
-
-
-
-
-        ' Could use different DbController instance here; not necessessary to use one controlling companyMaster datatable, as this one is just responsible for updating; doesn't maintain any data in a datatable
-        'updateController.ExecQuery("UPDATE CompanyMaster " &
-        '                           "SET TaxRate=@TaxRate, ShopSupplyCharge=@ShopSupplyCharge, CompanyName1=@CompanyName1, CompanyName2=@CompanyName2, Address1=@Address1, Address2=@Address2, ZipCode=@ZipCode, Phone1=@Phone1, Phone2=@Phone2, LaborRate=@LaborRate")
-        'updateController.ExecQuery("UPDATE CompanyMaster " &
-        '                           "SET TaxRate=@TaxRate, ShopSupplyCharge=@ShopSupplyCharge, CompanyName1=@CompanyName1, CompanyName2=@CompanyName2, Address1=@Address1, Address2=@Address2, Phone1=@Phone1, Phone2=@Phone2")
-
-    End Sub
-
-
 
 
     ' **************** VALIDATION SUBS ****************
@@ -339,7 +282,9 @@
                 If Not controlsValid() Then Exit Sub
 
                 ' 2.) IF VALIDATION PASSED, UPDATE DATATABLE(s) VALUES, THEN UPDATE DATABASE
-                updateCompanyMaster()
+                stripFormatting()
+                ' Only have to update the one table in this case, as it's the only one that experiences changes
+                updatetable(updateController, CompanyMasterDbController.DbDataTable, "_", "dataEditingControl", Me)
                 If updateController.HasException Then
                     MessageBox.Show("Update unsuccessful; Changes not saved")
                 Else
@@ -354,10 +299,10 @@
                 valuesInitialized = False
                 InitializeAll()
                 addFormatting()
-                ' store new initial control values
                 InitialValues.SetInitialValues(getAllControlsWithTag("dataEditingControl"))
                 valuesInitialized = True
 
+                ' 5.) Move UI out of editing mode
 
                 ' Disable all editing controls
                 cancelButton.Enabled = False
