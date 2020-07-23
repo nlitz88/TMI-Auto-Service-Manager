@@ -214,7 +214,7 @@ Public Class companyInfo
         ' Enable cancelButton and disable editButton
         cancelButton.Enabled = True
         editButton.Enabled = False
-        'navigationPlaceholderButton.Enabled = False
+        nav.DisableAll()
 
         ' Disable all navigation controls while editing
         showHide(getAllControlsWithTag("navigation"), 0)
@@ -247,6 +247,7 @@ Public Class companyInfo
                     ' re-enable other hidden form controls
                     editButton.Enabled = True
                     ' re-enable navigation controls
+                    nav.EnableAll()
                     showHide(getAllControlsWithTag("navigation"), 1)
                     ' enable/disable the dataViewingControls and dataEditingControls, respectively
                     showHide(getAllControlsWithTag("dataViewingControl"), 1)
@@ -264,6 +265,7 @@ Public Class companyInfo
             ' re-enable other hidden form controls
             editButton.Enabled = True
             ' re-enable navigation controls
+            nav.EnableAll()
             showHide(getAllControlsWithTag("navigation"), 1)
             ' enable/disable the dataViewingControls and dataEditingControls, respectively
             showHide(getAllControlsWithTag("dataViewingControl"), 1)
@@ -312,6 +314,7 @@ Public Class companyInfo
                 ' re-enable other hidden form controls
                 editButton.Enabled = True
                 ' re-enable navigation controls
+                nav.EnableAll()
                 showHide(getAllControlsWithTag("navigation"), 1)
 
                 ' show updated dataViewingControls and hide dataEditingControls
@@ -609,18 +612,8 @@ Public Class companyInfo
     End Sub
 
 
-
-
-    ' ************************ MENU STRIP ************************
-
-
-
-
     Private Sub companyInfo_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         End
     End Sub
 
-    Private Sub HomeToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        changeScreen(home, Me)
-    End Sub
 End Class

@@ -8,6 +8,19 @@
 
     End Sub
 
+
+    Public Sub DisableAll()
+        For Each btn In Me.Controls
+            btn.Enabled = False
+        Next
+    End Sub
+
+    Public Sub EnableAll()
+        For Each btn In Me.Controls
+            btn.Enabled = True
+        Next
+    End Sub
+
     Private Sub CompanySetupToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompanySetupToolStripMenuItem.Click
         If Me.ParentForm Is companyInfo Then Exit Sub ' Dont change if already on this screen
         changeScreen(companyInfo, Me.ParentForm)

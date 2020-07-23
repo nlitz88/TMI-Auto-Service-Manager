@@ -62,7 +62,7 @@ Partial Class companyInfo
         Me.ZipCode_ComboBox = New System.Windows.Forms.ComboBox()
         Me.Phone1_Textbox = New System.Windows.Forms.MaskedTextBox()
         Me.Phone2_Textbox = New System.Windows.Forms.MaskedTextBox()
-        Me.Navigation1 = New AutoServiceManager.navigation()
+        Me.nav = New AutoServiceManager.navigation()
         Me.SuspendLayout()
         '
         'companyNameLabel
@@ -504,14 +504,14 @@ Partial Class companyInfo
         Me.Phone2_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.Phone2_Textbox.Visible = False
         '
-        'Navigation1
+        'nav
         '
-        Me.Navigation1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Navigation1.Location = New System.Drawing.Point(12, 12)
-        Me.Navigation1.Name = "Navigation1"
-        Me.Navigation1.Size = New System.Drawing.Size(1000, 28)
-        Me.Navigation1.TabIndex = 44
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(982, 28)
+        Me.nav.TabIndex = 44
         '
         'companyInfo
         '
@@ -520,7 +520,7 @@ Partial Class companyInfo
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
-        Me.Controls.Add(Me.Navigation1)
+        Me.Controls.Add(Me.nav)
         Me.Controls.Add(Me.Phone2_Textbox)
         Me.Controls.Add(Me.Phone1_Textbox)
         Me.Controls.Add(Me.ZipCode_ComboBox)
@@ -610,5 +610,5 @@ Partial Class companyInfo
     Friend WithEvents Phone1_Textbox As MaskedTextBox
     Friend WithEvents Phone2_Textbox As MaskedTextBox
     Friend WithEvents LaborRate_Textbox As TextBox
-    Friend WithEvents Navigation1 As navigation
+    Friend WithEvents nav As navigation
 End Class
