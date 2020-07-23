@@ -38,7 +38,7 @@
     End Function
 
 
-    ' Function used to return list of all items beginning with a certain name prefix delimmited by character
+    ' Overload Function used to return list of all items beginning with a certain name prefix delimmited by character
     '   Note: Different delimiters in names can be used to find different elements with nearly similar names
     Public Function getAllControlsWithName(ByVal name As String, ByVal nameDelimiter As String, ByRef form As Form) As List(Of Object)
 
@@ -47,6 +47,23 @@
         For Each ctrl In form.Controls
             If ctrl.Name.ToString().IndexOf(nameDelimiter) > 0 Then
                 If ctrl.Name.ToString().Substring(0, ctrl.Name.ToString().IndexOf(nameDelimiter)) = name Then
+                    ctrls.Add(ctrl)
+                End If
+            End If
+        Next
+
+        Return ctrls
+
+    End Function
+
+    ' overLoad that allows function to filter controls it collects using a tag
+    Public Function getAllControlsWithName(ByVal name As String, ByVal tag As String, ByVal nameDelimiter As String, ByRef form As Form) As List(Of Object)
+
+        Dim ctrls As New List(Of Object)
+
+        For Each ctrl In form.Controls
+            If ctrl.Name.ToString().IndexOf(nameDelimiter) > 0 Then
+                If ctrl.Name.ToString().Substring(0, ctrl.Name.ToString().IndexOf(nameDelimiter)) = name And ctrl.Tag = tag Then
                     ctrls.Add(ctrl)
                 End If
             End If
@@ -69,6 +86,27 @@
             End If
         Next
     End Sub
+
+
+    ' Function that dynamically gets value of a control based on type of control
+    Public Function getControlValue(ByRef ctrl As Object) As Object
+
+        Dim result As Object
+
+        Select Case ctrl.GetType()
+            Case GetType(System.Windows.Forms.Label), GetType(System.Windows.Forms.TextBox), GetType(System.Windows.Forms.MaskedTextBox)
+                result = ctrl.Text
+            Case GetType(System.Windows.Forms.CheckBox)
+                result = ctrl.Checked
+            Case GetType(System.Windows.Forms.ComboBox)
+                result = ctrl.Text                          ' Might have to work with selectedValue
+            Case Else                                       ' redundant
+                result = ctrl.Text
+        End Select
+
+        Return result
+
+    End Function
 
 
     ' Function that can dynamically set value for control based on what type of control the data is being assigned to.

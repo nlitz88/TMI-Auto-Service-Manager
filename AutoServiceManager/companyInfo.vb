@@ -3,6 +3,8 @@
     ' Initialize new database control instances
     Private CompanyMasterDbController As New DbControl()
     Private ZipCodesDbController As New DbControl()
+    ' For updating?
+    Dim updateController As New DbControl()
 
     ' Initialize new lists to store certain row values of datatables
     Private zipCodesList As List(Of Object)
@@ -118,13 +120,42 @@
     ' Sub that updates entries in CompanyMaster table from respective values
     Private Sub updateCompanyMaster()
 
-        ' For now, build using calls to dataTable, then update the datatable
-        CompanyMasterDbController.AddParams("@CompanyName1", CompanyName1_Textbox.Text)
-        CompanyMasterDbController.AddParams("@CompanyName2", CompanyName2_Textbox.Text)
-        CompanyMasterDbController.AddParams("@ZipCode", ZipCode_ComboBox.Text)
+        Dim ctrls As List(Of Object)
+        Dim ctrlValue As Object
 
-        CompanyMasterDbController.ExecQuery("UPDATE CompanyMaster " &
-                                            "SET CompanyName1=@CompanyName1, CompanyName2=@CompanyName2, ZipCode=@ZipCode")
+        ' Add query parameters for each column value in DataTable
+        'For i As Integer = 0 To CompanyMasterDbController.DbDataTable.Columns.Count - 1
+
+        '    ctrls = getAllControlsWithName(CompanyMasterDbController.DbDataTable.Columns(i).ColumnName, "dataEditingControl", "_", Me)
+
+        '    ' Should only be one
+        '    For Each ctrl In ctrls
+        '        ctrlValue = getControlValue(ctrl)
+        '        CompanyMasterDbController.AddParams("@" & CompanyMasterDbController.DbDataTable.Columns(i).ColumnName, ctrlValue)
+        '    Next
+
+        'Next
+
+        ' For now, build using calls to dataTable, then update the datatable
+        CompanyMasterDbController.AddParams("@TaxRate", Convert.ToDecimal(TaxRate_Textbox.Text))
+        CompanyMasterDbController.AddParams("@ShopSupplyCharge", Convert.ToDecimal(ShopSupplyCharge_Textbox.Text))
+        CompanyMasterDbController.AddParams("@CompanyName1", CompanyName1_Textbox.Text)
+        CompanyMasterDbController.AddParams("@CompanyName2", "test")
+        CompanyMasterDbController.AddParams("@Address1", Address1_Textbox.Text)
+        CompanyMasterDbController.AddParams("@Address2", "test")
+        CompanyMasterDbController.AddParams("@ZipCode", ZipCode_ComboBox.Text)
+        CompanyMasterDbController.AddParams("@Phone1", Phone1_Textbox.Text)
+        CompanyMasterDbController.AddParams("@Phone2", "1111111111")
+        CompanyMasterDbController.AddParams("@LaborRate", Convert.ToDecimal(LaborRate_Textbox.Text))
+
+
+
+
+        ' Could use different DbController instance here; not necessessary to use one controlling companyMaster datatable, as this one is just responsible for updating; doesn't maintain any data in a datatable
+        updateController.ExecQuery("UPDATE CompanyMaster " &
+                                   "SET TaxRate=@TaxRate, ShopSupplyCharge=@ShopSupplyCharge, CompanyName1=@CompanyName1, CompanyName2=@CompanyName2, Address1=@Address1, Address2=@Address2, ZipCode=@ZipCode, Phone1=@Phone1, Phone2=@Phone2, LaborRate=@LaborRate")
+        'CompanyMasterDbController.ExecQuery("UPDATE CompanyMaster " &
+        '                                    "SET CompanyName1=@CompanyName1, CompanyName2=@CompanyName2, ZipCode=@ZipCode")
 
     End Sub
 
@@ -295,10 +326,16 @@
 
                 ' 2.) IF VALIDATION PASSED, UPDATE DATATABLE(s) VALUES, THEN UPDATE DATABASE
                 updateCompanyMaster()
-                If CompanyMasterDbController.HasException Then Exit Sub
+                If updateController.HasException Then
+                    Exit Sub
+                Else
+                    MessageBox.Show("Successfully updated Company Master")
+                End If
+
                 ' 3.) IF UPDATE SUCCESSFUL, THEN RELOAD DATABASE TABLES INTO RESPECTIVE DATABLES
                 loadDataTablesFromDatabase()
                 If CompanyMasterDbController.HasException Then Exit Sub
+
                 ' 4.) IF RELOAD SUCCESSFUL, THEN REINITIALIZE ALL CONTROLS
                 valuesInitialized = False
                 InitializeAll()
