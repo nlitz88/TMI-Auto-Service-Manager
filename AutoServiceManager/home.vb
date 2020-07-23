@@ -8,7 +8,7 @@ Public Class home
     ' ************************ MENU STRIP ************************
 
 
-    Private Sub CompanySetupToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompanySetupToolStripMenuItem.Click
+    Private Sub CompanySetupToolStripMenuItem_Click(sender As Object, e As EventArgs)
         changeScreen(companyInfo, Me)
         ' alternative:
         '   
