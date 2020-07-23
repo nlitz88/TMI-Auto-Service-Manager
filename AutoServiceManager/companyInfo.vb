@@ -99,9 +99,32 @@
         TaxRate_Value.Text = FormatPercent(TaxRate_Value.Text)
         ShopSupplyCharge_Value.Text = FormatPercent(ShopSupplyCharge_Value.Text)
 
-        LaborRate_Textbox.Text = String.Format("{0:0.00}", Convert.ToDouble(LaborRate_Textbox.Text))
-        TaxRate_Textbox.Text = String.Format("{0:0.00}", Convert.ToDouble(TaxRate_Textbox.Text) * 100)
-        ShopSupplyCharge_Textbox.Text = String.Format("{0:0.00}", Convert.ToDouble(ShopSupplyCharge_Textbox.Text) * 100)
+        LaborRate_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(LaborRate_Textbox.Text))
+        TaxRate_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TaxRate_Textbox.Text) * 100)
+        ShopSupplyCharge_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(ShopSupplyCharge_Textbox.Text) * 100)
+
+    End Sub
+
+
+    ' Sub that will remove all necessarry formatting that was added before updating values
+    Private Sub stripFormatting()
+
+        TaxRate_Textbox.Text = (Convert.ToDecimal(TaxRate_Textbox.Text) / 100).ToString()
+        ShopSupplyCharge_Textbox.Text = (Convert.ToDecimal(ShopSupplyCharge_Textbox.Text) / 100).ToString()
+
+    End Sub
+
+
+    ' Sub that updates entries in CompanyMaster table from respective values
+    Private Sub updateCompanyMaster()
+
+        ' For now, build using calls to dataTable, then update the datatable
+        CompanyMasterDbController.AddParams("@CompanyName1", CompanyName1_Textbox.Text)
+        CompanyMasterDbController.AddParams("@CompanyName2", CompanyName2_Textbox.Text)
+        CompanyMasterDbController.AddParams("@ZipCode", ZipCode_ComboBox.Text)
+
+        CompanyMasterDbController.ExecQuery("UPDATE CompanyMaster " &
+                                            "SET CompanyName1=@CompanyName1, CompanyName2=@CompanyName2, ZipCode=@ZipCode")
 
     End Sub
 
@@ -267,15 +290,16 @@
         Select Case decision
             Case DialogResult.Yes
 
-                If Not controlsValid() Then Exit Sub       ' Maybe put messagebox line here, and make errormessage and controlsValid bool variables class variables that are passed in through controlsValid
+                ' 1.) VALIDATE CONTROLS. IF NOT VALID, DO NOT CONTINUE (other actions may be taken here if desired)
+                If Not controlsValid() Then Exit Sub
 
-                ' 1.) Validate control input to see if changes can be written
-                ' 1.) Write changes to database
-                ' 2.) Switch back to labels with updated data from database (reload the form essentially)
-                ' 3.) Go back to showing edit button and navigation controls
-
-
-                ' INITIALIZE + FORMAT CONTROL VALUES
+                ' 2.) IF VALIDATION PASSED, UPDATE DATATABLE(s) VALUES, THEN UPDATE DATABASE
+                updateCompanyMaster()
+                If CompanyMasterDbController.HasException Then Exit Sub
+                ' 3.) IF UPDATE SUCCESSFUL, THEN RELOAD DATABASE TABLES INTO RESPECTIVE DATABLES
+                loadDataTablesFromDatabase()
+                If CompanyMasterDbController.HasException Then Exit Sub
+                ' 4.) IF RELOAD SUCCESSFUL, THEN REINITIALIZE ALL CONTROLS
                 valuesInitialized = False
                 InitializeAll()
                 addFormatting()

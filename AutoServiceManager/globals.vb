@@ -466,7 +466,7 @@
     ' Function that determines if a value/input is empty.
     Public Function isEmpty(ByVal Label As String, ByVal required As Boolean, ByVal value As String, ByRef errorMessage As String) As Boolean
 
-        If String.IsNullOrEmpty(value) Then
+        If String.IsNullOrWhiteSpace(value) Then
 
             If required Then
                 errorMessage += "ERROR: Must enter a valid " & Label & " before saving" & vbNewLine

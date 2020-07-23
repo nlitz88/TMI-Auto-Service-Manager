@@ -60,12 +60,13 @@ Public Class DbControl
             ' Setll all null values to defaults in newly filled DataTable
             SetNullsToDefault()
 
-            MessageBox.Show("Successfully queried database")
+            'MessageBox.Show("Successfully queried database" & vbNewLine & query)
 
         Catch ex As Exception
 
             ' Capture error
             Exception = "ExecQuery Error" & vbNewLine & ex.Message
+            MessageBox.Show(Exception, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
         Finally
 
