@@ -706,6 +706,7 @@
         If currentScreen IsNot Nothing Then
 
             currentScreen.Hide()
+
         End If
 
     End Sub
