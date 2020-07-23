@@ -63,6 +63,14 @@ Partial Class companyInfo
         Me.ZipCode_ComboBox = New System.Windows.Forms.ComboBox()
         Me.Phone1_Textbox = New System.Windows.Forms.MaskedTextBox()
         Me.Phone2_Textbox = New System.Windows.Forms.MaskedTextBox()
+        Me.mainMs = New System.Windows.Forms.MenuStrip()
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NewInvoiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InvoiceMaintenanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FileMaintenanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CompanySetupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mainMs.SuspendLayout()
         Me.SuspendLayout()
         '
         'companyNameLabel
@@ -273,7 +281,7 @@ Partial Class companyInfo
         Me.navigationPlaceholderButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.navigationPlaceholderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.navigationPlaceholderButton.ForeColor = System.Drawing.Color.White
-        Me.navigationPlaceholderButton.Location = New System.Drawing.Point(101, 23)
+        Me.navigationPlaceholderButton.Location = New System.Drawing.Point(101, 48)
         Me.navigationPlaceholderButton.Name = "navigationPlaceholderButton"
         Me.navigationPlaceholderButton.Size = New System.Drawing.Size(735, 30)
         Me.navigationPlaceholderButton.TabIndex = 23
@@ -517,6 +525,53 @@ Partial Class companyInfo
         Me.Phone2_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.Phone2_Textbox.Visible = False
         '
+        'mainMs
+        '
+        Me.mainMs.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.mainMs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem, Me.NewInvoiceToolStripMenuItem, Me.InvoiceMaintenanceToolStripMenuItem, Me.FileMaintenanceToolStripMenuItem, Me.ReportsToolStripMenuItem})
+        Me.mainMs.Location = New System.Drawing.Point(0, 0)
+        Me.mainMs.Name = "mainMs"
+        Me.mainMs.Size = New System.Drawing.Size(982, 28)
+        Me.mainMs.TabIndex = 44
+        Me.mainMs.Text = "MenuStrip1"
+        '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(47, 24)
+        Me.ExitToolStripMenuItem.Text = "Exit"
+        '
+        'NewInvoiceToolStripMenuItem
+        '
+        Me.NewInvoiceToolStripMenuItem.Name = "NewInvoiceToolStripMenuItem"
+        Me.NewInvoiceToolStripMenuItem.Size = New System.Drawing.Size(104, 24)
+        Me.NewInvoiceToolStripMenuItem.Text = "New Invoice"
+        '
+        'InvoiceMaintenanceToolStripMenuItem
+        '
+        Me.InvoiceMaintenanceToolStripMenuItem.Name = "InvoiceMaintenanceToolStripMenuItem"
+        Me.InvoiceMaintenanceToolStripMenuItem.Size = New System.Drawing.Size(159, 24)
+        Me.InvoiceMaintenanceToolStripMenuItem.Text = "Invoice Maintenance"
+        '
+        'FileMaintenanceToolStripMenuItem
+        '
+        Me.FileMaintenanceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompanySetupToolStripMenuItem})
+        Me.FileMaintenanceToolStripMenuItem.Name = "FileMaintenanceToolStripMenuItem"
+        Me.FileMaintenanceToolStripMenuItem.Size = New System.Drawing.Size(135, 24)
+        Me.FileMaintenanceToolStripMenuItem.Text = "File Maintenance"
+        '
+        'CompanySetupToolStripMenuItem
+        '
+        Me.CompanySetupToolStripMenuItem.Name = "CompanySetupToolStripMenuItem"
+        Me.CompanySetupToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.CompanySetupToolStripMenuItem.Text = "Company Setup"
+        '
+        'ReportsToolStripMenuItem
+        '
+        Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
+        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(74, 24)
+        Me.ReportsToolStripMenuItem.Text = "Reports"
+        '
         'companyInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -565,10 +620,14 @@ Partial Class companyInfo
         Me.Controls.Add(Me.city_Textbox)
         Me.Controls.Add(Me.CompanyName2_Textbox)
         Me.Controls.Add(Me.CompanyName1_Textbox)
+        Me.Controls.Add(Me.mainMs)
         Me.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.MainMenuStrip = Me.mainMs
         Me.Name = "companyInfo"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "1"
+        Me.mainMs.ResumeLayout(False)
+        Me.mainMs.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -615,4 +674,11 @@ Partial Class companyInfo
     Friend WithEvents Phone1_Textbox As MaskedTextBox
     Friend WithEvents Phone2_Textbox As MaskedTextBox
     Friend WithEvents LaborRate_Textbox As TextBox
+    Friend WithEvents mainMs As MenuStrip
+    Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NewInvoiceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents InvoiceMaintenanceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FileMaintenanceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CompanySetupToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ReportsToolStripMenuItem As ToolStripMenuItem
 End Class
