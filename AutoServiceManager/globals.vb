@@ -254,7 +254,7 @@
 
         If (InStr("1234567890Oo-", keyChar) = 0 And Asc(keyChar) <> 8) Or (keyChar = "-" And InStr(ctrl.Text, "-") > 0) Then
             valid = False
-        ElseIf ctrl.Text.Length = 10 And Asc(keyChar) <> 8 And Not ctrl.SelectionLength > 0 Then
+        ElseIf ctrl.Text.Length = 5 And Asc(keyChar) <> 8 And Not ctrl.SelectionLength > 0 Then
             valid = False
         ElseIf keyChar.ToLower() = "o" Then
             keyChar = Chr(48)
@@ -420,40 +420,41 @@
 
         Dim zipBase, zipExt As String
 
+        'If zipCode.Length <> 5 And zipCode.Length <> 10 Then
         If zipCode.Length <> 5 And zipCode.Length <> 10 Then
-            errorMessage += "ERROR: Must enter a valid ZIP Code before saving" & vbNewLine
-            Return False
-        End If
+                errorMessage += "ERROR: Must enter a valid ZIP Code before saving" & vbNewLine
+                Return False
+            End If
 
-        If zipCode.Length = 5 Then
+            If zipCode.Length = 5 Then
             If allValidChars("ZIP Code", zipCode, "1234567890", errorMessage) <> -1 Then                  ' Checks to see if any non-numeric characters in value
                 'errorMessage += "ERROR: Invalid character in ZIP Code" & vbNewLine
                 Return False
             End If
         End If
 
-        If zipCode.Length = 10 Then
+        'If zipCode.Length = 10 Then
 
-            If zipCode.Substring(5, 1) <> "-" Then
+        '    If zipCode.Substring(5, 1) <> "-" Then
 
-                errorMessage += "ERROR: ZIP Code is not in proper format" & vbNewLine
-                Return False
+        '        errorMessage += "ERROR: ZIP Code is not in proper format" & vbNewLine
+        '        Return False
 
-            Else
+        '    Else
 
-                zipBase = zipCode.Split("-")(0)
-                zipExt = zipCode.Split("-")(1)
+        '        zipBase = zipCode.Split("-")(0)
+        '        zipExt = zipCode.Split("-")(1)
 
-                If allValidChars(zipBase, "1234567890") <> -1 Or allValidChars(zipExt, "1234567890") <> -1 Then
+        '        If allValidChars(zipBase, "1234567890") <> -1 Or allValidChars(zipExt, "1234567890") <> -1 Then
 
-                    errorMessage += "ERROR: Invalid Character in ZIP Code" & vbNewLine
-                    Return False
+        '            errorMessage += "ERROR: Invalid Character in ZIP Code" & vbNewLine
+        '            Return False
 
-                End If
+        '        End If
 
-            End If
+        '    End If
 
-        End If
+        'End If
 
         Return True
 
