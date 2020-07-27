@@ -159,6 +159,16 @@
     End Function
 
 
+    ' Sub that is primarily used to reset forecolor of invalid controls after re-initializing
+    Public Sub setForeColor(ByVal ctrls As List(Of Object), ByVal color As Color)
+
+        For Each ctrl In ctrls
+            ctrl.ForeColor = color
+        Next
+
+    End Sub
+
+
     ' ************************ DATABASE DATA INTERACTION/MANIPULATION ************************
 
 

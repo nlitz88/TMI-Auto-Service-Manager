@@ -85,6 +85,8 @@ Public Class companyInfo
 
         ' Then, add formatting
         addFormatting()
+        ' Set forecolor if not already initially default
+        setForeColor(getAllControlsWithTag("dataEditingControl"), DefaultForeColor)
 
     End Sub
 
