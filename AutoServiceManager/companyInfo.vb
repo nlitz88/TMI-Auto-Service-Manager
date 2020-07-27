@@ -29,20 +29,24 @@ Public Class companyInfo
 
 
     ' Sub that will contain calls to all of the instances of the database controller class that loads data from the database into DataTables
-    Private Sub loadDataTablesFromDatabase()
+    Private Function loadDataTablesFromDatabase() As Boolean
 
         CompanyMasterDbController.ExecQuery("SELECT cm.TaxRate, cm.ShopSupplyCharge, cm.CompanyName1, cm.CompanyName2, cm.Address1, cm.Address2, cm.ZipCode, cm.Phone1, cm.Phone2, cm.LaborRate FROM CompanyMaster cm")
+        If CompanyMasterDbController.HasException() Then Return False
         ZipCodesDbController.ExecQuery("SELECT * from ZipCodes zc")  ' Too slow for quick access, only load once at beginning (don't reload)
+        If ZipCodesDbController.HasException() Then Return False
 
         ' Also, populate respective lists with data
         zipCodesList = getListFromDataTable(ZipCodesDbController.DbDataTable, "Zipcode")
 
-    End Sub
+        Return True
+
+    End Function
 
 
     Private Sub InitializeCompanyMasterControls()
 
-        If CompanyMasterDbController.HasException(True) Then Exit Sub
+        'If CompanyMasterDbController.HasException() Then Exit Sub
 
         ' If no exceptions with the database controller and query,
         ' initialize all the dataEditingControls that have a value from ComanyMasterDbController.DbDataTable
@@ -54,7 +58,7 @@ Public Class companyInfo
 
     Private Sub InitializeZipCodesControls()
 
-        If ZipCodesDbController.HasException(True) Then Exit Sub
+        'If ZipCodesDbController.HasException() Then Exit Sub
 
         Try
 
@@ -66,7 +70,7 @@ Public Class companyInfo
             initializeControlsFromRow(ZipCodesDbController.DbDataTable, zcRow, "_", Me)
 
         Catch ex As Exception
-            Console.WriteLine(ex.Message)
+
         End Try
 
     End Sub
@@ -100,17 +104,18 @@ Public Class companyInfo
     Private Sub addFormatting()
 
         ' Formatting for labels that contain values from DataTable
-        If Not String.IsNullOrEmpty(Phone1_Value.Text) Then Phone1_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(Phone1_Value.Text))
-        If Not String.IsNullOrEmpty(Phone2_Value.Text) Then Phone2_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(Phone2_Value.Text))
+        If Not String.IsNullOrEmpty(Phone1_Value.Text) Then Phone1_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(CompanyMasterDbController.DbDataTable.Rows(cmRow)("Phone1")))
+        If Not String.IsNullOrEmpty(Phone2_Value.Text) Then Phone2_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(CompanyMasterDbController.DbDataTable.Rows(cmRow)("Phone2")))
 
         ' Formatting for DataEditingControls
-        LaborRate_Value.Text = FormatCurrency(LaborRate_Value.Text)
-        TaxRate_Value.Text = FormatPercent(TaxRate_Value.Text)
-        ShopSupplyCharge_Value.Text = FormatPercent(ShopSupplyCharge_Value.Text)
+        LaborRate_Value.Text = FormatCurrency(CompanyMasterDbController.DbDataTable.Rows(cmRow)("LaborRate"))
+        TaxRate_Value.Text = FormatPercent(CompanyMasterDbController.DbDataTable.Rows(cmRow)("TaxRate"))
+        ShopSupplyCharge_Value.Text = FormatPercent(CompanyMasterDbController.DbDataTable.Rows(cmRow)("ShopSupplyCharge"))
 
-        LaborRate_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(LaborRate_Textbox.Text))
-        TaxRate_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TaxRate_Textbox.Text) * 100)
-        ShopSupplyCharge_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(ShopSupplyCharge_Textbox.Text) * 100)
+        LaborRate_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(CompanyMasterDbController.DbDataTable.Rows(cmRow)("LaborRate")))
+        TaxRate_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(CompanyMasterDbController.DbDataTable.Rows(cmRow)("TaxRate")) * 100)
+        ShopSupplyCharge_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(CompanyMasterDbController.DbDataTable.Rows(cmRow)("ShopSupplyCharge")) * 100)
+        ' Switched from formatting values based on their .text value, and instead from their raw value from the dataTable
 
     End Sub
 
@@ -131,8 +136,8 @@ Public Class companyInfo
         stripFormatting()
         ' Then, update all relevant tables that COUDLD have experienced changes
         updateTable(updateController, CompanyMasterDbController.DbDataTable, "_", "dataEditingControl", Me)
-        ' Then, return exception status of updateController. Return false from this function if there is an exception thrown. (do this after each call)
-        If updateController.HasException Then Return False
+        ' Then, return exception status of updateController. Return false andfrom this function and reformat if there is an exception thrown (do this after each call).
+        If updateController.HasException() Then Return False
 
         ' Otherwise, return true
         Return True
@@ -200,7 +205,10 @@ Public Class companyInfo
         companyInfoLabel.Left = (Me.ClientSize.Width / 2) - (companyInfoLabel.Width / 2)
 
         ' Load datatables from database
-        loadDataTablesFromDatabase()
+        If Not loadDataTablesFromDatabase() Then
+            MessageBox.Show("Loading unsuccessful; Please restart and try again")
+            Exit Sub
+        End If
 
         ' SETUP CONTROLS HERE
         ZipCode_ComboBox.DataSource = ZipCodesDbController.DbDataTable      ' ZipCode_ComboBox's datasource is from a separate query, but its initial selectedValue is set from CompanyMasterDataTable
@@ -305,14 +313,14 @@ Public Class companyInfo
                 ' 2.) IF VALIDATION PASSED, UPDATE DATATABLE(s) VALUES, THEN UPDATE DATABASE
                 If Not updateAll() Then
                     MessageBox.Show("Update unsuccessful; Changes not saved")
-                    Exit Sub
                 Else
-                    MessageBox.Show("Successfully updated Company Master")
+                    MessageBox.Show("Successfully updated Company Information")
                 End If
 
                 ' 3.) IF UPDATE SUCCESSFUL, THEN RELOAD DATABASE TABLES INTO RESPECTIVE DATABLES
-                loadDataTablesFromDatabase()
-                If CompanyMasterDbController.HasException Then Exit Sub
+                If Not loadDataTablesFromDatabase() Then
+                    MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again")
+                End If
 
                 ' 4.) IF RELOAD SUCCESSFUL, THEN REINITIALIZE ALL CONTROLS
                 valuesInitialized = False
