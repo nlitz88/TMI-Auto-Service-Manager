@@ -95,6 +95,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="globals.vb" />
+    <Compile Include="mfgMaintenance.Designer.vb">
+      <DependentUpon>mfgMaintenance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="mfgMaintenance.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -127,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="loginForm.resx">
       <DependentUpon>loginForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mfgMaintenance.resx">
+      <DependentUpon>mfgMaintenance.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
