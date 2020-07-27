@@ -79,6 +79,9 @@ Public Class companyInfo
         InitializeCompanyMasterControls()
         InitializeZipCodesControls()
 
+        ' Then, add formatting
+        addFormatting()
+
     End Sub
 
 
@@ -205,8 +208,6 @@ Public Class companyInfo
 
         ' Initialize all control values
         InitializeAll()
-        ' Formatting + additional configuration here
-        addFormatting()
         ' store initial control values
         InitialValues.SetInitialValues(getAllControlsWithTag("dataEditingControl"))
 
@@ -249,7 +250,6 @@ Public Class companyInfo
                     ' REINITIALIZE ALL CONTROL VALUES
                     valuesInitialized = False
                     InitializeAll()
-                    addFormatting()
                     valuesInitialized = True
 
 
@@ -313,7 +313,6 @@ Public Class companyInfo
                 ' 4.) IF RELOAD SUCCESSFUL, THEN REINITIALIZE ALL CONTROLS
                 valuesInitialized = False
                 InitializeAll()
-                addFormatting()
                 InitialValues.SetInitialValues(getAllControlsWithTag("dataEditingControl"))
                 valuesInitialized = True
 
