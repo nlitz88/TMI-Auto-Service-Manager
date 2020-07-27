@@ -125,14 +125,19 @@ Public Class companyInfo
 
 
     ' Function that makes updateTable calls for all relevant DataTables that need updated based on changes
-    Private Sub updateAll()
+    Private Function updateAll() As Boolean
 
         ' First, remove any formatting that was added (specific to the controls on this form)
         stripFormatting()
         ' Then, update all relevant tables that COUDLD have experienced changes
         updateTable(updateController, CompanyMasterDbController.DbDataTable, "_", "dataEditingControl", Me)
+        ' Then, return exception status of updateController. Return false from this function if there is an exception thrown. (do this after each call)
+        If updateController.HasException Then Return False
 
-    End Sub
+        ' Otherwise, return true
+        Return True
+
+    End Function
 
 
 
@@ -298,10 +303,9 @@ Public Class companyInfo
                 If Not controlsValid() Then Exit Sub
 
                 ' 2.) IF VALIDATION PASSED, UPDATE DATATABLE(s) VALUES, THEN UPDATE DATABASE
-                updateAll()
-
-                If updateController.HasException Then
+                If Not updateAll() Then
                     MessageBox.Show("Update unsuccessful; Changes not saved")
+                    Exit Sub
                 Else
                     MessageBox.Show("Successfully updated Company Master")
                 End If
