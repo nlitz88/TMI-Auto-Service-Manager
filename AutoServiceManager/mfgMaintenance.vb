@@ -66,6 +66,7 @@ Public Class mfgMaintenance
         AutoMakeComboBox.Items.Add("Select One")
         For Each row In AutoManufacturersDbController.DbDataTable.Rows
             AutoMakeComboBox.Items.Add(row("AutoMake"))
+            Console.WriteLine(row("AutoMake"))
         Next
         AutoMakeComboBox.SelectedIndex = 0
 
@@ -92,7 +93,7 @@ Public Class mfgMaintenance
 
         Dim input As String = AutoMakeComboBox.Text.ToLower()
 
-        If AutoManufacturersList.BinarySearch(input) > 0 Then
+        If AutoManufacturersList.BinarySearch(input) >= 0 Then
 
             ' Initialize corresponding controls from DataTable values
             InitializeAutoManufacturersControls()

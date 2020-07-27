@@ -620,7 +620,7 @@ Public Class companyInfo
         ZipCode_ComboBox.ForeColor = DefaultForeColor
 
         ' Check if valid and lookup
-        If ZipCode_ComboBox.Text.Length >= 5 And ZipCode_ComboBox.Text.Length <= 10 And zipCodesList.BinarySearch(ZipCode_ComboBox.Text.Split("-")(0)) > 0 Then
+        If ZipCode_ComboBox.Text.Length >= 5 And ZipCode_ComboBox.Text.Length <= 10 And zipCodesList.BinarySearch(ZipCode_ComboBox.Text.Split("-")(0)) >= 0 Then
             InitializeZipCodesControls()
         Else
             city_Textbox.Text = String.Empty
