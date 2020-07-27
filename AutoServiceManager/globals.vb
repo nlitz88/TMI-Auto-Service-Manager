@@ -123,7 +123,8 @@
             Case GetType(System.Windows.Forms.ComboBox)
                 ' May need debugging
                 'Console.WriteLine("Value to write: " & value.ToString() & " " & value.GetType().ToString())
-                control.SelectedValue = value       ' If this becomes a problem later, revert to just setting the text of the combobox
+                'control.SelectedValue = value      ' If this becomes a problem later, revert to just setting the text of the combobox
+                control.Text = value
         End Select
 
     End Sub

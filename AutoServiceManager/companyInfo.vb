@@ -60,18 +60,20 @@ Public Class companyInfo
 
         'If ZipCodesDbController.HasException() Then Exit Sub
 
-        Try
+        'Try
 
-            ' Ensures we only lookup base of zipcode (extensions not present in db)
-            Dim zipCode As String = ZipCode_ComboBox.Text.Split("-")(0)
-            Dim zipRow As DataRow = ZipCodesDbController.DbDataTable.Select("Zipcode = '" & zipCode & "'")(0)
-            zcRow = ZipCodesDbController.DbDataTable.Rows.IndexOf(zipRow)
+        ' Ensures we only lookup base of zipcode (extensions not present in db)
+        Dim zipCode As String = ZipCode_ComboBox.Text.Split("-")(0)
+        Dim zipRow As DataRow = ZipCodesDbController.DbDataTable.Select("Zipcode = '" & zipCode & "'")(0)
+        zcRow = ZipCodesDbController.DbDataTable.Rows.IndexOf(zipRow)
 
             initializeControlsFromRow(ZipCodesDbController.DbDataTable, zcRow, "_", Me)
 
-        Catch ex As Exception
+        'Catch ex As Exception
 
-        End Try
+        '    Console.Write(ex.Message)
+
+        'End Try
 
     End Sub
 
