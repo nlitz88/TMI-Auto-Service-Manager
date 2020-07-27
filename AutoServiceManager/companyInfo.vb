@@ -96,9 +96,11 @@ Public Class companyInfo
     ' Sub that will call formatting functions to the add certain formats to initialized controls (i.e. phone numbers, currency, etc.).
     Private Sub addFormatting()
 
+        ' Formatting for labels that contain values from DataTable
         If Not String.IsNullOrEmpty(Phone1_Value.Text) Then Phone1_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(Phone1_Value.Text))
         If Not String.IsNullOrEmpty(Phone2_Value.Text) Then Phone2_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(Phone2_Value.Text))
 
+        ' Formatting for DataEditingControls
         LaborRate_Value.Text = FormatCurrency(LaborRate_Value.Text)
         TaxRate_Value.Text = FormatPercent(TaxRate_Value.Text)
         ShopSupplyCharge_Value.Text = FormatPercent(ShopSupplyCharge_Value.Text)
