@@ -86,7 +86,7 @@ Public Class companyInfo
         ' Then, add formatting
         addFormatting()
         ' Set forecolor if not already initially default
-        setForeColor(getAllControlsWithTag("dataEditingControl"), DefaultForeColor)
+        setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
 
     End Sub
 
@@ -224,7 +224,7 @@ Public Class companyInfo
         ' Initialize all control values
         InitializeAll()
         ' store initial control values
-        InitialValues.SetInitialValues(getAllControlsWithTag("dataEditingControl"))
+        InitialValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
         valuesInitialized = True
 
@@ -243,12 +243,9 @@ Public Class companyInfo
         cancelButton.Enabled = True
         editButton.Enabled = False
         nav.DisableAll()
-
-        ' Disable all navigation controls while editing
-        showHide(getAllControlsWithTag("navigation"), 0)
         ' disable/enable the dataViewingControls and dataEditingControls, respectively
-        showHide(getAllControlsWithTag("dataViewingControl"), 0)
-        showHide(getAllControlsWithTag("dataEditingControl"), 1)
+        showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+        showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
 
     End Sub
 
@@ -275,10 +272,9 @@ Public Class companyInfo
                     editButton.Enabled = True
                     ' re-enable navigation controls
                     nav.EnableAll()
-                    showHide(getAllControlsWithTag("navigation"), 1)
                     ' enable/disable the dataViewingControls and dataEditingControls, respectively
-                    showHide(getAllControlsWithTag("dataViewingControl"), 1)
-                    showHide(getAllControlsWithTag("dataEditingControl"), 0)
+                    showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+                    showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
 
                 Case DialogResult.No
 
@@ -293,10 +289,9 @@ Public Class companyInfo
             editButton.Enabled = True
             ' re-enable navigation controls
             nav.EnableAll()
-            showHide(getAllControlsWithTag("navigation"), 1)
             ' enable/disable the dataViewingControls and dataEditingControls, respectively
-            showHide(getAllControlsWithTag("dataViewingControl"), 1)
-            showHide(getAllControlsWithTag("dataEditingControl"), 0)
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
 
         End If
 
@@ -327,7 +322,7 @@ Public Class companyInfo
                 ' 4.) IF RELOAD SUCCESSFUL, THEN REINITIALIZE ALL CONTROLS
                 valuesInitialized = False
                 InitializeAll()
-                InitialValues.SetInitialValues(getAllControlsWithTag("dataEditingControl"))
+                InitialValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
                 valuesInitialized = True
 
                 ' 5.) Move UI out of editing mode
@@ -339,11 +334,10 @@ Public Class companyInfo
                 editButton.Enabled = True
                 ' re-enable navigation controls
                 nav.EnableAll()
-                showHide(getAllControlsWithTag("navigation"), 1)
 
                 ' show updated dataViewingControls and hide dataEditingControls
-                showHide(getAllControlsWithTag("dataViewingControl"), 1)
-                showHide(getAllControlsWithTag("dataEditingControl"), 0)
+                showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+                showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
 
             Case DialogResult.No
                 ' Continue making changes or cancel editing

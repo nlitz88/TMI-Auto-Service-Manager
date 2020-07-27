@@ -22,26 +22,17 @@ Partial Class mfgMaintenance
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.nav = New AutoServiceManager.navigation()
         Me.cancelButton = New System.Windows.Forms.Button()
         Me.saveButton = New System.Windows.Forms.Button()
         Me.addButton = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.editButton = New System.Windows.Forms.Button()
         Me.mfgMaintenanceLabel = New System.Windows.Forms.Label()
         Me.AutoMakeComboBox = New System.Windows.Forms.ComboBox()
         Me.mfgLabel = New System.Windows.Forms.Label()
         Me.mfgNameLabel = New System.Windows.Forms.Label()
         Me.AutoMake_Value = New System.Windows.Forms.Label()
+        Me.nav = New AutoServiceManager.navigation()
         Me.SuspendLayout()
-        '
-        'nav
-        '
-        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.nav.Location = New System.Drawing.Point(0, 0)
-        Me.nav.Name = "nav"
-        Me.nav.Size = New System.Drawing.Size(982, 28)
-        Me.nav.TabIndex = 45
         '
         'cancelButton
         '
@@ -81,17 +72,18 @@ Partial Class mfgMaintenance
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = False
         '
-        'Button1
+        'editButton
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Location = New System.Drawing.Point(216, 120)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(110, 30)
-        Me.Button1.TabIndex = 49
-        Me.Button1.Text = "Edit"
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.editButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.editButton.Enabled = False
+        Me.editButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.editButton.ForeColor = System.Drawing.Color.White
+        Me.editButton.Location = New System.Drawing.Point(216, 120)
+        Me.editButton.Name = "editButton"
+        Me.editButton.Size = New System.Drawing.Size(110, 30)
+        Me.editButton.TabIndex = 49
+        Me.editButton.Text = "Edit"
+        Me.editButton.UseVisualStyleBackColor = False
         '
         'mfgMaintenanceLabel
         '
@@ -100,12 +92,14 @@ Partial Class mfgMaintenance
         Me.mfgMaintenanceLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.mfgMaintenanceLabel.Location = New System.Drawing.Point(94, 73)
         Me.mfgMaintenanceLabel.Name = "mfgMaintenanceLabel"
-        Me.mfgMaintenanceLabel.Size = New System.Drawing.Size(371, 32)
+        Me.mfgMaintenanceLabel.Size = New System.Drawing.Size(280, 32)
         Me.mfgMaintenanceLabel.TabIndex = 50
-        Me.mfgMaintenanceLabel.Text = "List of Auto Manufacturers"
+        Me.mfgMaintenanceLabel.Text = "Auto Manufacturers"
         '
         'AutoMakeComboBox
         '
+        Me.AutoMakeComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.AutoMakeComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.AutoMakeComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.AutoMakeComboBox.FormattingEnabled = True
         Me.AutoMakeComboBox.Location = New System.Drawing.Point(203, 194)
@@ -131,7 +125,9 @@ Partial Class mfgMaintenance
         Me.mfgNameLabel.Name = "mfgNameLabel"
         Me.mfgNameLabel.Size = New System.Drawing.Size(141, 17)
         Me.mfgNameLabel.TabIndex = 53
+        Me.mfgNameLabel.Tag = "dataLabel"
         Me.mfgNameLabel.Text = "Manufacturer Name :"
+        Me.mfgNameLabel.Visible = False
         '
         'AutoMake_Value
         '
@@ -143,6 +139,16 @@ Partial Class mfgMaintenance
         Me.AutoMake_Value.Size = New System.Drawing.Size(0, 20)
         Me.AutoMake_Value.TabIndex = 54
         Me.AutoMake_Value.Tag = "dataViewingControl"
+        Me.AutoMake_Value.Visible = False
+        '
+        'nav
+        '
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(982, 28)
+        Me.nav.TabIndex = 45
         '
         'mfgMaintenance
         '
@@ -155,7 +161,7 @@ Partial Class mfgMaintenance
         Me.Controls.Add(Me.mfgLabel)
         Me.Controls.Add(Me.AutoMakeComboBox)
         Me.Controls.Add(Me.mfgMaintenanceLabel)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.editButton)
         Me.Controls.Add(Me.cancelButton)
         Me.Controls.Add(Me.saveButton)
         Me.Controls.Add(Me.addButton)
@@ -172,7 +178,7 @@ Partial Class mfgMaintenance
     Friend WithEvents cancelButton As Button
     Friend WithEvents saveButton As Button
     Friend WithEvents addButton As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents editButton As Button
     Friend WithEvents mfgMaintenanceLabel As Label
     Friend WithEvents AutoMakeComboBox As ComboBox
     Friend WithEvents mfgLabel As Label

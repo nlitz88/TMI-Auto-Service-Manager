@@ -7,11 +7,11 @@
 
 
     ' Used to return all items of a certain group (items that have the same identifying tag) as an iterable ArrayList.
-    Public Function getAllControlsWithTag(ByVal tag As String) As List(Of Object)
+    Public Function getAllControlsWithTag(ByVal tag As String, ByRef form As Form) As List(Of Object)
 
         Dim ctrls As New List(Of Object)
 
-        For Each ctrl In My.Forms.companyInfo.Controls
+        For Each ctrl In form.Controls
             If ctrl.tag = tag Then
                 ctrls.Add(ctrl)
             End If
