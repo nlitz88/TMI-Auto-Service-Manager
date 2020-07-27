@@ -121,6 +121,16 @@ Public Class companyInfo
     End Sub
 
 
+    ' Function that makes updateTable calls for all relevant DataTables that need updated based on changes
+    Private Sub updateAll()
+
+        ' First, remove any formatting that was added (specific to the controls on this form)
+        stripFormatting()
+        ' Then, update all relevant tables that COUDLD have experienced changes
+        updateTable(updateController, CompanyMasterDbController.DbDataTable, "_", "dataEditingControl", Me)
+
+    End Sub
+
 
 
     ' **************** VALIDATION SUBS ****************
@@ -288,9 +298,8 @@ Public Class companyInfo
                 If Not controlsValid() Then Exit Sub
 
                 ' 2.) IF VALIDATION PASSED, UPDATE DATATABLE(s) VALUES, THEN UPDATE DATABASE
-                stripFormatting()
-                ' Only have to update the one table in this case, as it's the only one that experiences changes
-                updatetable(updateController, CompanyMasterDbController.DbDataTable, "_", "dataEditingControl", Me)
+                updateAll()
+
                 If updateController.HasException Then
                     MessageBox.Show("Update unsuccessful; Changes not saved")
                 Else

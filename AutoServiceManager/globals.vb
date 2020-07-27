@@ -194,7 +194,7 @@
 
 
     ' Sub that updates database tables based on their respective values in form
-    Public Sub updatetable(ByRef updateController As DbControl, ByVal dataTable As DataTable,
+    Public Sub updateTable(ByRef updateController As DbControl, ByVal dataTable As DataTable,
                            ByVal nameDelimiter As String, ByVal controlTag As String, ByRef form As Form)
 
         Dim ctrls As List(Of Object)
@@ -229,7 +229,7 @@
 
 
     ' Overload that allows specifying a row to update
-    Public Sub updatetable(ByRef updateController As DbControl, ByVal dataTable As DataTable, ByVal dataTableRow As Integer,
+    Public Sub updateTable(ByRef updateController As DbControl, ByVal dataTable As DataTable, ByVal dataTableRow As Integer,
                            ByVal idName As String, ByVal nameDelimiter As String, ByVal controlTag As String, ByRef form As Form)
 
         Dim ctrls As List(Of Object)
