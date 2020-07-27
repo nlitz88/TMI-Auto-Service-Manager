@@ -119,6 +119,8 @@ Partial Class loginPage
         Me.Controls.Add(Me.userIDTextbox)
         Me.Controls.Add(Me.passwordLabel)
         Me.Controls.Add(Me.userIDLabel)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
         Me.Name = "loginPage"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Login"

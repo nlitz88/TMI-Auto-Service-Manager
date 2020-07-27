@@ -69,7 +69,7 @@ Partial Class companyInfo
         '
         Me.companyNameLabel.AutoSize = True
         Me.companyNameLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.companyNameLabel.Location = New System.Drawing.Point(98, 219)
+        Me.companyNameLabel.Location = New System.Drawing.Point(97, 200)
         Me.companyNameLabel.Name = "companyNameLabel"
         Me.companyNameLabel.Size = New System.Drawing.Size(172, 17)
         Me.companyNameLabel.TabIndex = 0
@@ -79,7 +79,7 @@ Partial Class companyInfo
         '
         Me.companyNameLabel2.AutoSize = True
         Me.companyNameLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.companyNameLabel2.Location = New System.Drawing.Point(98, 256)
+        Me.companyNameLabel2.Location = New System.Drawing.Point(97, 237)
         Me.companyNameLabel2.Name = "companyNameLabel2"
         Me.companyNameLabel2.Size = New System.Drawing.Size(172, 17)
         Me.companyNameLabel2.TabIndex = 1
@@ -89,7 +89,7 @@ Partial Class companyInfo
         '
         Me.addressLine1Label.AutoSize = True
         Me.addressLine1Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.addressLine1Label.Location = New System.Drawing.Point(98, 311)
+        Me.addressLine1Label.Location = New System.Drawing.Point(97, 292)
         Me.addressLine1Label.Name = "addressLine1Label"
         Me.addressLine1Label.Size = New System.Drawing.Size(120, 17)
         Me.addressLine1Label.TabIndex = 2
@@ -99,7 +99,7 @@ Partial Class companyInfo
         '
         Me.addressLine2Label.AutoSize = True
         Me.addressLine2Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.addressLine2Label.Location = New System.Drawing.Point(98, 355)
+        Me.addressLine2Label.Location = New System.Drawing.Point(97, 336)
         Me.addressLine2Label.Name = "addressLine2Label"
         Me.addressLine2Label.Size = New System.Drawing.Size(120, 17)
         Me.addressLine2Label.TabIndex = 3
@@ -109,7 +109,7 @@ Partial Class companyInfo
         '
         Me.zipCodeLabel.AutoSize = True
         Me.zipCodeLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.zipCodeLabel.Location = New System.Drawing.Point(98, 408)
+        Me.zipCodeLabel.Location = New System.Drawing.Point(97, 389)
         Me.zipCodeLabel.Name = "zipCodeLabel"
         Me.zipCodeLabel.Size = New System.Drawing.Size(73, 17)
         Me.zipCodeLabel.TabIndex = 4
@@ -119,7 +119,7 @@ Partial Class companyInfo
         '
         Me.cityLabel.AutoSize = True
         Me.cityLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.cityLabel.Location = New System.Drawing.Point(98, 452)
+        Me.cityLabel.Location = New System.Drawing.Point(97, 433)
         Me.cityLabel.Name = "cityLabel"
         Me.cityLabel.Size = New System.Drawing.Size(39, 17)
         Me.cityLabel.TabIndex = 5
@@ -129,7 +129,7 @@ Partial Class companyInfo
         '
         Me.shopSupplyChargeLabel.AutoSize = True
         Me.shopSupplyChargeLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.shopSupplyChargeLabel.Location = New System.Drawing.Point(98, 550)
+        Me.shopSupplyChargeLabel.Location = New System.Drawing.Point(97, 531)
         Me.shopSupplyChargeLabel.Name = "shopSupplyChargeLabel"
         Me.shopSupplyChargeLabel.Size = New System.Drawing.Size(146, 17)
         Me.shopSupplyChargeLabel.TabIndex = 6
@@ -138,18 +138,18 @@ Partial Class companyInfo
         'companyInfoLabel
         '
         Me.companyInfoLabel.AutoSize = True
-        Me.companyInfoLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.companyInfoLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Bold)
         Me.companyInfoLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.companyInfoLabel.Location = New System.Drawing.Point(93, 140)
+        Me.companyInfoLabel.Location = New System.Drawing.Point(94, 73)
         Me.companyInfoLabel.Name = "companyInfoLabel"
-        Me.companyInfoLabel.Size = New System.Drawing.Size(404, 44)
+        Me.companyInfoLabel.Size = New System.Drawing.Size(304, 32)
         Me.companyInfoLabel.TabIndex = 7
         Me.companyInfoLabel.Text = "Company Information"
         '
         'CompanyName1_Textbox
         '
         Me.CompanyName1_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CompanyName1_Textbox.Location = New System.Drawing.Point(276, 213)
+        Me.CompanyName1_Textbox.Location = New System.Drawing.Point(275, 194)
         Me.CompanyName1_Textbox.Name = "CompanyName1_Textbox"
         Me.CompanyName1_Textbox.Size = New System.Drawing.Size(560, 27)
         Me.CompanyName1_Textbox.TabIndex = 8
@@ -160,7 +160,7 @@ Partial Class companyInfo
         'CompanyName2_Textbox
         '
         Me.CompanyName2_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CompanyName2_Textbox.Location = New System.Drawing.Point(276, 250)
+        Me.CompanyName2_Textbox.Location = New System.Drawing.Point(275, 231)
         Me.CompanyName2_Textbox.Name = "CompanyName2_Textbox"
         Me.CompanyName2_Textbox.Size = New System.Drawing.Size(560, 27)
         Me.CompanyName2_Textbox.TabIndex = 9
@@ -170,7 +170,7 @@ Partial Class companyInfo
         'Address1_Textbox
         '
         Me.Address1_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Address1_Textbox.Location = New System.Drawing.Point(224, 305)
+        Me.Address1_Textbox.Location = New System.Drawing.Point(223, 286)
         Me.Address1_Textbox.Name = "Address1_Textbox"
         Me.Address1_Textbox.Size = New System.Drawing.Size(289, 27)
         Me.Address1_Textbox.TabIndex = 10
@@ -180,7 +180,7 @@ Partial Class companyInfo
         'Address2_Textbox
         '
         Me.Address2_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Address2_Textbox.Location = New System.Drawing.Point(224, 349)
+        Me.Address2_Textbox.Location = New System.Drawing.Point(223, 330)
         Me.Address2_Textbox.Name = "Address2_Textbox"
         Me.Address2_Textbox.Size = New System.Drawing.Size(289, 27)
         Me.Address2_Textbox.TabIndex = 11
@@ -191,7 +191,7 @@ Partial Class companyInfo
         '
         Me.city_Textbox.Enabled = False
         Me.city_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.city_Textbox.Location = New System.Drawing.Point(143, 446)
+        Me.city_Textbox.Location = New System.Drawing.Point(142, 427)
         Me.city_Textbox.Name = "city_Textbox"
         Me.city_Textbox.Size = New System.Drawing.Size(184, 27)
         Me.city_Textbox.TabIndex = 13
@@ -201,7 +201,7 @@ Partial Class companyInfo
         'ShopSupplyCharge_Textbox
         '
         Me.ShopSupplyCharge_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ShopSupplyCharge_Textbox.Location = New System.Drawing.Point(250, 544)
+        Me.ShopSupplyCharge_Textbox.Location = New System.Drawing.Point(249, 525)
         Me.ShopSupplyCharge_Textbox.Name = "ShopSupplyCharge_Textbox"
         Me.ShopSupplyCharge_Textbox.Size = New System.Drawing.Size(82, 27)
         Me.ShopSupplyCharge_Textbox.TabIndex = 14
@@ -211,7 +211,7 @@ Partial Class companyInfo
         'LaborRate_Textbox
         '
         Me.LaborRate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LaborRate_Textbox.Location = New System.Drawing.Point(444, 544)
+        Me.LaborRate_Textbox.Location = New System.Drawing.Point(443, 525)
         Me.LaborRate_Textbox.Name = "LaborRate_Textbox"
         Me.LaborRate_Textbox.Size = New System.Drawing.Size(69, 27)
         Me.LaborRate_Textbox.TabIndex = 15
@@ -221,7 +221,7 @@ Partial Class companyInfo
         'TaxRate_Textbox
         '
         Me.TaxRate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TaxRate_Textbox.Location = New System.Drawing.Point(650, 446)
+        Me.TaxRate_Textbox.Location = New System.Drawing.Point(649, 427)
         Me.TaxRate_Textbox.Name = "TaxRate_Textbox"
         Me.TaxRate_Textbox.Size = New System.Drawing.Size(81, 27)
         Me.TaxRate_Textbox.TabIndex = 16
@@ -232,7 +232,7 @@ Partial Class companyInfo
         '
         Me.phone1Label.AutoSize = True
         Me.phone1Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.phone1Label.Location = New System.Drawing.Point(571, 311)
+        Me.phone1Label.Location = New System.Drawing.Point(570, 292)
         Me.phone1Label.Name = "phone1Label"
         Me.phone1Label.Size = New System.Drawing.Size(78, 17)
         Me.phone1Label.TabIndex = 19
@@ -242,7 +242,7 @@ Partial Class companyInfo
         '
         Me.phone2Label.AutoSize = True
         Me.phone2Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.phone2Label.Location = New System.Drawing.Point(571, 361)
+        Me.phone2Label.Location = New System.Drawing.Point(570, 342)
         Me.phone2Label.Name = "phone2Label"
         Me.phone2Label.Size = New System.Drawing.Size(78, 17)
         Me.phone2Label.TabIndex = 20
@@ -252,7 +252,7 @@ Partial Class companyInfo
         '
         Me.taxRateLabel.AutoSize = True
         Me.taxRateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.taxRateLabel.Location = New System.Drawing.Point(571, 452)
+        Me.taxRateLabel.Location = New System.Drawing.Point(570, 433)
         Me.taxRateLabel.Name = "taxRateLabel"
         Me.taxRateLabel.Size = New System.Drawing.Size(73, 17)
         Me.taxRateLabel.TabIndex = 21
@@ -262,7 +262,7 @@ Partial Class companyInfo
         '
         Me.laborRateLabel.AutoSize = True
         Me.laborRateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.laborRateLabel.Location = New System.Drawing.Point(351, 550)
+        Me.laborRateLabel.Location = New System.Drawing.Point(350, 531)
         Me.laborRateLabel.Name = "laborRateLabel"
         Me.laborRateLabel.Size = New System.Drawing.Size(87, 17)
         Me.laborRateLabel.TabIndex = 22
@@ -273,7 +273,7 @@ Partial Class companyInfo
         Me.editButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.editButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.editButton.ForeColor = System.Drawing.Color.White
-        Me.editButton.Location = New System.Drawing.Point(101, 84)
+        Me.editButton.Location = New System.Drawing.Point(100, 120)
         Me.editButton.Name = "editButton"
         Me.editButton.Size = New System.Drawing.Size(110, 30)
         Me.editButton.TabIndex = 24
@@ -286,7 +286,7 @@ Partial Class companyInfo
         Me.saveButton.Enabled = False
         Me.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.saveButton.ForeColor = System.Drawing.Color.White
-        Me.saveButton.Location = New System.Drawing.Point(333, 84)
+        Me.saveButton.Location = New System.Drawing.Point(332, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
         Me.saveButton.TabIndex = 25
@@ -299,7 +299,7 @@ Partial Class companyInfo
         Me.cancelButton.Enabled = False
         Me.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cancelButton.ForeColor = System.Drawing.Color.White
-        Me.cancelButton.Location = New System.Drawing.Point(217, 84)
+        Me.cancelButton.Location = New System.Drawing.Point(216, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
         Me.cancelButton.TabIndex = 26
@@ -310,7 +310,7 @@ Partial Class companyInfo
         '
         Me.stateLabel.AutoSize = True
         Me.stateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.stateLabel.Location = New System.Drawing.Point(348, 452)
+        Me.stateLabel.Location = New System.Drawing.Point(347, 433)
         Me.stateLabel.Name = "stateLabel"
         Me.stateLabel.Size = New System.Drawing.Size(49, 17)
         Me.stateLabel.TabIndex = 27
@@ -320,7 +320,7 @@ Partial Class companyInfo
         '
         Me.State_Textbox.Enabled = False
         Me.State_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.State_Textbox.Location = New System.Drawing.Point(403, 446)
+        Me.State_Textbox.Location = New System.Drawing.Point(402, 427)
         Me.State_Textbox.Name = "State_Textbox"
         Me.State_Textbox.Size = New System.Drawing.Size(110, 27)
         Me.State_Textbox.TabIndex = 28
@@ -332,7 +332,7 @@ Partial Class companyInfo
         Me.CompanyName1_Value.AutoSize = True
         Me.CompanyName1_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CompanyName1_Value.ForeColor = System.Drawing.Color.Black
-        Me.CompanyName1_Value.Location = New System.Drawing.Point(276, 216)
+        Me.CompanyName1_Value.Location = New System.Drawing.Point(275, 197)
         Me.CompanyName1_Value.Name = "CompanyName1_Value"
         Me.CompanyName1_Value.Size = New System.Drawing.Size(0, 20)
         Me.CompanyName1_Value.TabIndex = 29
@@ -343,7 +343,7 @@ Partial Class companyInfo
         Me.CompanyName2_Value.AutoSize = True
         Me.CompanyName2_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CompanyName2_Value.ForeColor = System.Drawing.Color.Black
-        Me.CompanyName2_Value.Location = New System.Drawing.Point(276, 253)
+        Me.CompanyName2_Value.Location = New System.Drawing.Point(275, 234)
         Me.CompanyName2_Value.Name = "CompanyName2_Value"
         Me.CompanyName2_Value.Size = New System.Drawing.Size(0, 20)
         Me.CompanyName2_Value.TabIndex = 30
@@ -354,7 +354,7 @@ Partial Class companyInfo
         Me.Address1_Value.AutoSize = True
         Me.Address1_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Address1_Value.ForeColor = System.Drawing.Color.Black
-        Me.Address1_Value.Location = New System.Drawing.Point(224, 308)
+        Me.Address1_Value.Location = New System.Drawing.Point(223, 289)
         Me.Address1_Value.Name = "Address1_Value"
         Me.Address1_Value.Size = New System.Drawing.Size(0, 20)
         Me.Address1_Value.TabIndex = 31
@@ -365,7 +365,7 @@ Partial Class companyInfo
         Me.Address2_Value.AutoSize = True
         Me.Address2_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Address2_Value.ForeColor = System.Drawing.Color.Black
-        Me.Address2_Value.Location = New System.Drawing.Point(224, 352)
+        Me.Address2_Value.Location = New System.Drawing.Point(223, 333)
         Me.Address2_Value.Name = "Address2_Value"
         Me.Address2_Value.Size = New System.Drawing.Size(0, 20)
         Me.Address2_Value.TabIndex = 32
@@ -376,7 +376,7 @@ Partial Class companyInfo
         Me.ZipCode_Value.AutoSize = True
         Me.ZipCode_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ZipCode_Value.ForeColor = System.Drawing.Color.Black
-        Me.ZipCode_Value.Location = New System.Drawing.Point(177, 405)
+        Me.ZipCode_Value.Location = New System.Drawing.Point(176, 386)
         Me.ZipCode_Value.Name = "ZipCode_Value"
         Me.ZipCode_Value.Size = New System.Drawing.Size(0, 20)
         Me.ZipCode_Value.TabIndex = 33
@@ -387,7 +387,7 @@ Partial Class companyInfo
         Me.city_Value.AutoSize = True
         Me.city_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.city_Value.ForeColor = System.Drawing.Color.Black
-        Me.city_Value.Location = New System.Drawing.Point(143, 449)
+        Me.city_Value.Location = New System.Drawing.Point(142, 430)
         Me.city_Value.Name = "city_Value"
         Me.city_Value.Size = New System.Drawing.Size(0, 20)
         Me.city_Value.TabIndex = 34
@@ -398,7 +398,7 @@ Partial Class companyInfo
         Me.State_Value.AutoSize = True
         Me.State_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.State_Value.ForeColor = System.Drawing.Color.Black
-        Me.State_Value.Location = New System.Drawing.Point(403, 449)
+        Me.State_Value.Location = New System.Drawing.Point(402, 430)
         Me.State_Value.Name = "State_Value"
         Me.State_Value.Size = New System.Drawing.Size(0, 20)
         Me.State_Value.TabIndex = 35
@@ -409,7 +409,7 @@ Partial Class companyInfo
         Me.TaxRate_Value.AutoSize = True
         Me.TaxRate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TaxRate_Value.ForeColor = System.Drawing.Color.Black
-        Me.TaxRate_Value.Location = New System.Drawing.Point(655, 449)
+        Me.TaxRate_Value.Location = New System.Drawing.Point(654, 430)
         Me.TaxRate_Value.Name = "TaxRate_Value"
         Me.TaxRate_Value.Size = New System.Drawing.Size(0, 20)
         Me.TaxRate_Value.TabIndex = 36
@@ -420,7 +420,7 @@ Partial Class companyInfo
         Me.Phone1_Value.AutoSize = True
         Me.Phone1_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Phone1_Value.ForeColor = System.Drawing.Color.Black
-        Me.Phone1_Value.Location = New System.Drawing.Point(655, 313)
+        Me.Phone1_Value.Location = New System.Drawing.Point(654, 294)
         Me.Phone1_Value.Name = "Phone1_Value"
         Me.Phone1_Value.Size = New System.Drawing.Size(0, 20)
         Me.Phone1_Value.TabIndex = 37
@@ -431,7 +431,7 @@ Partial Class companyInfo
         Me.Phone2_Value.AutoSize = True
         Me.Phone2_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Phone2_Value.ForeColor = System.Drawing.Color.Black
-        Me.Phone2_Value.Location = New System.Drawing.Point(655, 358)
+        Me.Phone2_Value.Location = New System.Drawing.Point(654, 339)
         Me.Phone2_Value.Name = "Phone2_Value"
         Me.Phone2_Value.Size = New System.Drawing.Size(0, 20)
         Me.Phone2_Value.TabIndex = 38
@@ -442,7 +442,7 @@ Partial Class companyInfo
         Me.ShopSupplyCharge_Value.AutoSize = True
         Me.ShopSupplyCharge_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ShopSupplyCharge_Value.ForeColor = System.Drawing.Color.Black
-        Me.ShopSupplyCharge_Value.Location = New System.Drawing.Point(250, 547)
+        Me.ShopSupplyCharge_Value.Location = New System.Drawing.Point(249, 528)
         Me.ShopSupplyCharge_Value.Name = "ShopSupplyCharge_Value"
         Me.ShopSupplyCharge_Value.Size = New System.Drawing.Size(0, 20)
         Me.ShopSupplyCharge_Value.TabIndex = 39
@@ -453,7 +453,7 @@ Partial Class companyInfo
         Me.LaborRate_Value.AutoSize = True
         Me.LaborRate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LaborRate_Value.ForeColor = System.Drawing.Color.Black
-        Me.LaborRate_Value.Location = New System.Drawing.Point(444, 547)
+        Me.LaborRate_Value.Location = New System.Drawing.Point(443, 528)
         Me.LaborRate_Value.Name = "LaborRate_Value"
         Me.LaborRate_Value.Size = New System.Drawing.Size(0, 20)
         Me.LaborRate_Value.TabIndex = 40
@@ -465,7 +465,7 @@ Partial Class companyInfo
         Me.ZipCode_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.ZipCode_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ZipCode_ComboBox.FormattingEnabled = True
-        Me.ZipCode_ComboBox.Location = New System.Drawing.Point(177, 402)
+        Me.ZipCode_ComboBox.Location = New System.Drawing.Point(176, 383)
         Me.ZipCode_ComboBox.Name = "ZipCode_ComboBox"
         Me.ZipCode_ComboBox.Size = New System.Drawing.Size(150, 28)
         Me.ZipCode_ComboBox.TabIndex = 41
@@ -478,7 +478,7 @@ Partial Class companyInfo
         Me.Phone1_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.Phone1_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.Phone1_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
-        Me.Phone1_Textbox.Location = New System.Drawing.Point(655, 305)
+        Me.Phone1_Textbox.Location = New System.Drawing.Point(654, 286)
         Me.Phone1_Textbox.Mask = "(999) 000-0000"
         Me.Phone1_Textbox.Name = "Phone1_Textbox"
         Me.Phone1_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -494,7 +494,7 @@ Partial Class companyInfo
         Me.Phone2_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.Phone2_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.Phone2_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
-        Me.Phone2_Textbox.Location = New System.Drawing.Point(655, 355)
+        Me.Phone2_Textbox.Location = New System.Drawing.Point(654, 336)
         Me.Phone2_Textbox.Mask = "(999) 000-0000"
         Me.Phone2_Textbox.Name = "Phone2_Textbox"
         Me.Phone2_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -562,6 +562,8 @@ Partial Class companyInfo
         Me.Controls.Add(Me.CompanyName2_Textbox)
         Me.Controls.Add(Me.CompanyName1_Textbox)
         Me.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
         Me.Name = "companyInfo"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Company Setup"

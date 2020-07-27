@@ -205,9 +205,6 @@ Public Class companyInfo
 
     Private Sub companyInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        ' Dynamically position elements on load.
-        companyInfoLabel.Left = (Me.ClientSize.Width / 2) - (companyInfoLabel.Width / 2)
-
         ' Load datatables from database
         If Not loadDataTablesFromDatabase() Then
             MessageBox.Show("Loading unsuccessful; Please restart and try again")

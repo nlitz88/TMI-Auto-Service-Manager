@@ -93,6 +93,7 @@ Public Class mfgMaintenance
 
         Dim input As String = AutoMakeComboBox.Text.ToLower()
 
+        ' If the input in the combobox matches an entry in the table that it represents
         If AutoManufacturersList.BinarySearch(input) >= 0 Then
 
             ' Initialize corresponding controls from DataTable values

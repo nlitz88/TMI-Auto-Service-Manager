@@ -127,7 +127,6 @@ Partial Class mfgMaintenance
         Me.mfgNameLabel.TabIndex = 53
         Me.mfgNameLabel.Tag = "dataLabel"
         Me.mfgNameLabel.Text = "Manufacturer Name :"
-        Me.mfgNameLabel.Visible = False
         '
         'AutoMake_Value
         '
@@ -139,7 +138,6 @@ Partial Class mfgMaintenance
         Me.AutoMake_Value.Size = New System.Drawing.Size(0, 20)
         Me.AutoMake_Value.TabIndex = 54
         Me.AutoMake_Value.Tag = "dataViewingControl"
-        Me.AutoMake_Value.Visible = False
         '
         'nav
         '
@@ -166,6 +164,8 @@ Partial Class mfgMaintenance
         Me.Controls.Add(Me.saveButton)
         Me.Controls.Add(Me.addButton)
         Me.Controls.Add(Me.nav)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
         Me.Name = "mfgMaintenance"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "List of Auto Manufacturers"
