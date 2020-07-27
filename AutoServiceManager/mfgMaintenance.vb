@@ -9,13 +9,15 @@ Public Class mfgMaintenance
     Private AutoManufacturersList As List(Of Object)
 
     ' Initialize instance(s) of initialValues class
-    Private InitialValues As New InitialValues()
+    Private InitialAutoManufacturersValues As New InitialValues()
 
     'Variable to keep track of whether form fully loaded or not
     Private valuesInitialized As Boolean = False
 
     ' Row index variables used for DataTable lookups
     Private amRow As Integer
+
+
 
 
     ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
@@ -50,6 +52,19 @@ Public Class mfgMaintenance
     End Sub
 
 
+    ' Sub that calls all individual initialization subs in one (These can be used individually if desired
+    Private Sub InitializeAll()
+
+        ' Automated initializations
+        InitializeAutoManufacturersControls()
+        ' Then, add formatting
+        ' addFormatting()
+        ' Set forecolor if not already initially default
+        setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
+
+    End Sub
+
+
 
 
     Private Sub mfgMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -66,7 +81,6 @@ Public Class mfgMaintenance
         AutoMakeComboBox.Items.Add("Select One")
         For Each row In AutoManufacturersDbController.DbDataTable.Rows
             AutoMakeComboBox.Items.Add(row("AutoMake"))
-            Console.WriteLine(row("AutoMake"))
         Next
         AutoMakeComboBox.SelectedIndex = 0
 
@@ -85,10 +99,13 @@ Public Class mfgMaintenance
 
     End Sub
 
-    Private Sub mfgMaintenance_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        End
-    End Sub
 
+
+
+    ' **************** CONTROL SUBS ****************
+
+
+    ' Main eventhandler that handles most of the initialization for all subsequent elements/controls.
     Private Sub AutoMake_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AutoMakeComboBox.SelectedIndexChanged, AutoMakeComboBox.TextChanged
 
         Dim input As String = AutoMakeComboBox.Text.ToLower()
@@ -97,7 +114,9 @@ Public Class mfgMaintenance
         If AutoManufacturersList.BinarySearch(input) >= 0 Then
 
             ' Initialize corresponding controls from DataTable values
-            InitializeAutoManufacturersControls()
+            valuesInitialized = False
+            InitializeAll()
+            valuesInitialized = True
 
             ' Show labels and corresponding values
             showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
@@ -116,4 +135,84 @@ Public Class mfgMaintenance
         End If
 
     End Sub
+
+
+    Private Sub editButton_Click(sender As Object, e As EventArgs) Handles editButton.Click
+
+        ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
+        editButton.Enabled = False
+        addButton.Enabled = False
+        cancelButton.Enabled = True
+        nav.DisableAll()
+        AutoMakeComboBox.Enabled = False
+
+        ' Hide/Show the dataViewingControls and dataEditingControls, respectively
+        showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+        showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+
+        ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
+        InitialAutoManufacturersValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
+
+    End Sub
+
+    Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
+
+        ' Check for changes before cancelling. Don't need function here that calls all, as only working with one datatable
+        If InitialAutoManufacturersValues.CtrlValuesChanged() Then
+
+            Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo)
+
+            Select Case decision
+                Case DialogResult.Yes
+
+                    editButton.Enabled = True
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    nav.EnableAll()
+                    AutoMakeComboBox.Enabled = True
+
+                    ' Show/Hide the dataViewingControls and dataEditingControls, respectively
+                    showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+                    showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+                Case DialogResult.No
+            End Select
+
+        Else
+
+            editButton.Enabled = True
+            addButton.Enabled = True
+            cancelButton.Enabled = False
+            nav.EnableAll()
+            AutoMakeComboBox.Enabled = True
+
+            ' Show/Hide the dataViewingControls and dataEditingControls, respectively
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+        End If
+
+    End Sub
+
+    Private Sub AutoMake_Textbox_TextChanged(sender As Object, e As EventArgs) Handles AutoMake_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        AutoMake_Textbox.ForeColor = DefaultForeColor
+
+        If InitialAutoManufacturersValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+
+
+    Private Sub mfgMaintenance_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        End
+    End Sub
+
+
 End Class

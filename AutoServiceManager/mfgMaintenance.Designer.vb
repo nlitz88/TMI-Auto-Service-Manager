@@ -32,6 +32,7 @@ Partial Class mfgMaintenance
         Me.mfgNameLabel = New System.Windows.Forms.Label()
         Me.AutoMake_Value = New System.Windows.Forms.Label()
         Me.nav = New AutoServiceManager.navigation()
+        Me.AutoMake_Textbox = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'cancelButton
@@ -148,12 +149,23 @@ Partial Class mfgMaintenance
         Me.nav.Size = New System.Drawing.Size(982, 28)
         Me.nav.TabIndex = 45
         '
+        'AutoMake_Textbox
+        '
+        Me.AutoMake_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AutoMake_Textbox.Location = New System.Drawing.Point(244, 258)
+        Me.AutoMake_Textbox.Name = "AutoMake_Textbox"
+        Me.AutoMake_Textbox.Size = New System.Drawing.Size(210, 27)
+        Me.AutoMake_Textbox.TabIndex = 55
+        Me.AutoMake_Textbox.Tag = "dataEditingControl"
+        Me.AutoMake_Textbox.Visible = False
+        '
         'mfgMaintenance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.AutoMake_Textbox)
         Me.Controls.Add(Me.AutoMake_Value)
         Me.Controls.Add(Me.mfgNameLabel)
         Me.Controls.Add(Me.mfgLabel)
@@ -184,4 +196,5 @@ Partial Class mfgMaintenance
     Friend WithEvents mfgLabel As Label
     Friend WithEvents mfgNameLabel As Label
     Friend WithEvents AutoMake_Value As Label
+    Friend WithEvents AutoMake_Textbox As TextBox
 End Class
