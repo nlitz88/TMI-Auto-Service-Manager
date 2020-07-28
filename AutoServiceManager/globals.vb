@@ -609,6 +609,48 @@
     End Function
 
 
+    ' Function that checks to se if a value does exist to prevent a duplicate. Accepts sorted list of values
+    Public Function isDuplicate(ByVal label As String, ByVal newValue As String, ByRef errorMessage As String, ByVal existingValues As List(Of Object)) As Boolean
+
+        Console.WriteLine("Called isDuplicate!")
+
+        If existingValues.BinarySearch(newValue) >= 0 Then
+            errorMessage += "ERROR: " & newValue & " already exists" & vbNewLine
+            Return True
+        End If
+
+        Return False
+
+    End Function
+
+
+    ' Function that checks to see if a value DOES exist. Accepts sorted list of values
+    Public Function valueExists(ByVal label As String, ByVal value As String, ByRef errorMessage As String, ByVal existingValues As List(Of Object)) As Boolean
+
+        If existingValues.BinarySearch(value) < 0 Then
+            errorMessage += "ERROR: " & value & " does not exist" & vbNewLine
+            Return False
+        End If
+
+        Return True
+
+    End Function
+
+    ' OVERLOAD: uses datatable instead of sorted list
+    Public Function valueExists(ByVal label As String, ByVal value As String, ByRef errorMessage As String, ByVal dataTable As DataTable, ByVal dataColumn As String) As Boolean
+
+        Dim rows As DataRowCollection = dataTable.Rows
+
+        For Each row In rows
+            If row(dataColumn) = value Then Return True
+        Next
+
+        errorMessage += "ERROR: " & value & " does not exist" & vbNewLine
+        Return False
+
+    End Function
+
+
     ' Function that determines if there are any invalid chars in a given value. The valid chars are provided as a string.
     ' Will return -1 if no invalid chars were found
     ' Will return the index of the first invalid char it encounters

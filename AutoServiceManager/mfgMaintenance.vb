@@ -65,6 +65,38 @@ Public Class mfgMaintenance
     End Sub
 
 
+    ' **************** VALIDATION SUBS ****************
+
+
+    ' Sub that runs validation for all form controls. Also handles error reporting
+    Private Function controlsValid() As Boolean
+
+        Dim errorMessage As String = String.Empty
+
+        ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
+
+
+        ' Manufacturer Name (REQUIRED)(MUST BE UNIQUE)
+        If isEmpty("Manufacturer Name", True, AutoMake_Textbox.Text, errorMessage) Then
+            AutoMake_Textbox.ForeColor = Color.Red
+        ElseIf isDuplicate("Manufacturer Name", AutoMake_Textbox.Text.ToLower(), errorMessage, AutoManufacturersList) Then
+            AutoMake_Textbox.ForeColor = Color.Red
+        End If
+
+
+        ' Check if any invalid input has been found
+        If Not String.IsNullOrEmpty(errorMessage) Then
+
+            MessageBox.Show(errorMessage, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+
+        End If
+
+        Return True
+
+    End Function
+
+
 
 
     Private Sub mfgMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -108,10 +140,8 @@ Public Class mfgMaintenance
     ' Main eventhandler that handles most of the initialization for all subsequent elements/controls.
     Private Sub AutoMake_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AutoMakeComboBox.SelectedIndexChanged, AutoMakeComboBox.TextChanged
 
-        Dim input As String = AutoMakeComboBox.Text.ToLower()
-
         ' If the input in the combobox matches an entry in the table that it represents
-        If AutoManufacturersList.BinarySearch(input) >= 0 Then
+        If AutoManufacturersList.BinarySearch(AutoMakeComboBox.Text.ToLower()) >= 0 Then
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
@@ -165,6 +195,11 @@ Public Class mfgMaintenance
             Select Case decision
                 Case DialogResult.Yes
 
+                    ' REINITIALIZE ALL CONTROL VALUES (as unwanted changes have been made)
+                    valuesInitialized = False
+                    InitializeAll()
+                    valuesInitialized = True
+
                     editButton.Enabled = True
                     addButton.Enabled = True
                     cancelButton.Enabled = False
@@ -191,6 +226,27 @@ Public Class mfgMaintenance
             showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
 
         End If
+
+    End Sub
+
+    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+
+        Dim decision As DialogResult = MessageBox.Show("Save Changes?", "Confirm Changes", MessageBoxButtons.YesNo)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                ' 1.) VALIDATE DATAEDITING CONTROLS
+                If Not controlsValid() Then Exit Sub
+                ' 2.) UPDATE DATATABLE(S), THEN UPDATE DATABASE
+                ' 3.) RELOAD DATATABLES FROM DATABASE
+                ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                ' 5.) MOVE UI OUT OF EDITING MODE
+
+            Case DialogResult.No
+                ' Continue making changes or cancel editing
+        End Select
+
 
     End Sub
 
