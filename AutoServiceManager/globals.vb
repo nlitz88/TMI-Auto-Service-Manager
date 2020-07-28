@@ -205,7 +205,7 @@
 
 
     ' Sub that updates database tables based on their respective values in form
-    Public Sub updateTable(ByRef updateController As DbControl, ByVal dataTable As DataTable,
+    Public Sub updateTable(ByRef updateController As DbControl, ByVal dataTable As DataTable, ByVal tableName As String,
                            ByVal nameDelimiter As String, ByVal controlTag As String, ByRef form As Form)
 
         Dim ctrls As List(Of Object)
@@ -233,19 +233,20 @@
         If Not String.IsNullOrEmpty(queryParams) Then
             ' The substring at the end ensures that there isn't an extra comma at the end
             queryParams = queryParams.Substring(0, queryParams.Length - 1)
-            updateController.ExecQuery("UPDATE CompanyMaster SET " & queryParams)
+            updateController.ExecQuery("UPDATE " & tableName & " SET " & queryParams)
         End If
 
     End Sub
 
 
     ' Overload that allows specifying a row to update
-    Public Sub updateTable(ByRef updateController As DbControl, ByVal dataTable As DataTable, ByVal dataTableRow As Integer,
+    Public Sub updateTable(ByRef updateController As DbControl, ByVal dataTable As DataTable, ByVal tableName As String, ByVal id As Object,
                            ByVal idName As String, ByVal nameDelimiter As String, ByVal controlTag As String, ByRef form As Form)
 
         Dim ctrls As List(Of Object)
         Dim ctrlValue As Object
         Dim queryParams As String = String.Empty
+        Dim whereID As String = String.Empty
 
         ' Add query parameters for each column value in DataTable
         For i As Integer = 0 To dataTable.Columns.Count - 1
@@ -265,17 +266,19 @@
 
         Next
 
-        ' Add on id paramater if not already done so from a form control
-        If InStr(queryParams, idName) = 0 Then
-            updateController.AddParams("@" & idName, dataTableRow)
-            queryParams += idName & "=@" & idName & ","
-        End If
+        '' Add on id paramater if not already done so from a form control
+        'If InStr(queryParams, idName) = 0 Then
+        '    updateController.AddParams("@" & idName, id)
+        'End If
+        updateController.AddParams("@id", id)
+        whereID = " WHERE " & idName & "=@id"
 
         ' If query params isn't empty, then run update query
         If Not String.IsNullOrEmpty(queryParams) Then
             ' The substring at the end ensures that there isn't an extra comma at the end
             queryParams = queryParams.Substring(0, queryParams.Length - 1)
-            updateController.ExecQuery("UPDATE CompanyMaster SET " & queryParams)
+            Console.WriteLine("UPDATE " & tableName & " SET " & queryParams & whereID)
+            updateController.ExecQuery("UPDATE " & tableName & " SET " & queryParams & whereID)
         End If
 
     End Sub
@@ -611,8 +614,6 @@
 
     ' Function that checks to se if a value does exist to prevent a duplicate. Accepts sorted list of values
     Public Function isDuplicate(ByVal label As String, ByVal newValue As String, ByRef errorMessage As String, ByVal existingValues As List(Of Object)) As Boolean
-
-        Console.WriteLine("Called isDuplicate!")
 
         If existingValues.BinarySearch(newValue) >= 0 Then
             errorMessage += "ERROR: " & newValue & " already exists" & vbNewLine

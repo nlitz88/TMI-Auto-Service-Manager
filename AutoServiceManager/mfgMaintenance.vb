@@ -4,6 +4,8 @@ Public Class mfgMaintenance
 
     ' New Database control instances for manufacturer datatable
     Private AutoManufacturersDbController As New DbControl()
+    ' New Database control instance for updating various tables
+    Private updateController As New DbControl()
 
     ' Initialize new lists to store certain row values of datatables (easily sorted and BINARY SEARCHED FOR SPEED)
     Private AutoManufacturersList As List(Of Object)
@@ -26,7 +28,7 @@ Public Class mfgMaintenance
     ' Sub that will contain calls to all of the instances of the database controller class that loads data from the database into DataTables
     Private Function loadDataTablesFromDatabase() As Boolean
 
-        AutoManufacturersDbController.ExecQuery("SELECT am.AutoMake FROM AutoManufacturers as am")
+        AutoManufacturersDbController.ExecQuery("SELECT am.AutoMake FROM AutoManufacturers am")
         If AutoManufacturersDbController.HasException() Then Return False
 
         ' Also, populate respective lists with data
@@ -63,6 +65,27 @@ Public Class mfgMaintenance
         setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
 
     End Sub
+
+
+    ' Function that makes updateTable calls for all relevant DataTables that need updated based on changes
+    Private Function updateAll() As Boolean
+
+        ' First, remove any formatting that was added (specific to the controls on this form)
+        'stripFormatting()
+
+        ' Then, update all relevant tables that COUDLD have experienced changes
+        Dim initialValueAsKey As String = AutoManufacturersDbController.DbDataTable.Rows(amRow)("AutoMake")
+        updateTable(updateController, AutoManufacturersDbController.DbDataTable, "AutoManufacturers", initialValueAsKey, "AutoMake", "_", "dataEditingControl", Me)
+        ' I could use a simple, standalone sql query here, as it would allow me to freely change the updateTable overloads in globals.vb.
+        ' For now, though, I will try to implement these wherever I can for uniformity/consistency
+
+        ' Then, return exception status of updateController. Return false andfrom this function and reformat if there is an exception thrown (do this after each call).
+        If updateController.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
 
 
     ' **************** VALIDATION SUBS ****************
@@ -108,26 +131,13 @@ Public Class mfgMaintenance
         End If
 
 
-        ' ONE-TIME CONTROL SETUP HERE
+        ' SETUP CONTROLS HERE
         'AutoMakeComboBox.DropDownStyle = ComboBoxStyle.DropDownList
         AutoMakeComboBox.Items.Add("Select One")
         For Each row In AutoManufacturersDbController.DbDataTable.Rows
             AutoMakeComboBox.Items.Add(row("AutoMake"))
         Next
         AutoMakeComboBox.SelectedIndex = 0
-
-
-        ' THIS STUFF DOESN'T HAPPEN UNTIL USER SELECTS AN ENTRY FROM THE COMBOBOX
-        '' INITIALIZE + FORMAT CONTROL VALUES
-        'valuesInitialized = False
-
-        '' Initialize All Control Values (in this case, just one function)
-
-
-        '' store initial control values
-        'InitialValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
-
-        'valuesInitialized = True
 
     End Sub
 
@@ -242,8 +252,14 @@ Public Class mfgMaintenance
                 If Not controlsValid() Then Exit Sub
 
                 ' 2.) UPDATE DATATABLE(S), THEN UPDATE DATABASE
+                If Not updateAll() Then
+                    MessageBox.Show("Update unsuccessful; Changes not saved")
+                Else
+                    MessageBox.Show("Successfully updated Company Information")
+                End If
 
                 ' 3.) RELOAD DATATABLES FROM DATABASE
+
 
                 ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
                 valuesInitialized = False

@@ -5,8 +5,8 @@ Public Class companyInfo
     ' Initialize new database control instances
     Private CompanyMasterDbController As New DbControl()
     Private ZipCodesDbController As New DbControl()
-    ' For updating?
-    Dim updateController As New DbControl()
+    ' New Database control instance for updating various tables
+    Private updateController As New DbControl()
 
     ' Initialize new lists to store certain row values of datatables
     Private zipCodesList As List(Of Object)
@@ -139,7 +139,7 @@ Public Class companyInfo
         ' First, remove any formatting that was added (specific to the controls on this form)
         stripFormatting()
         ' Then, update all relevant tables that COUDLD have experienced changes
-        updateTable(updateController, CompanyMasterDbController.DbDataTable, "_", "dataEditingControl", Me)
+        updateTable(updateController, CompanyMasterDbController.DbDataTable, "CompanyMaster", "_", "dataEditingControl", Me)
         ' Then, return exception status of updateController. Return false andfrom this function and reformat if there is an exception thrown (do this after each call).
         If updateController.HasException() Then Return False
 
