@@ -182,6 +182,7 @@ Public Class mfgMaintenance
             ' Show labels and corresponding values
             showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
             showHide(getAllControlsWithTag("dataLabel", Me), 1)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
             ' Enable editing button
             editButton.Enabled = True
             deleteButton.Enabled = True
@@ -247,8 +248,7 @@ Public Class mfgMaintenance
                 nav.EnableAll()
                 AutoMakeComboBox.Enabled = True
                 ' Show/Hide the dataViewingControls and dataEditingControls, respectively
-                showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
-                showHide(getAllControlsWithTag("dataEditingControl", Me), 0) ' consider moving this to the comboBox .text/selected idx changed if = 0
+                ' This will be done by changing the selectedIndex to 0. May have to fire event here manually.
 
                 AutoMakeComboBox.SelectedIndex = 0
 
@@ -307,13 +307,13 @@ Public Class mfgMaintenance
                         AutoMakeComboBox.Enabled = True
                         ' Show/Hide the dataViewingControls and dataEditingControls, respectively
                         showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
-                        showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+                        'showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
 
                     ElseIf mode = "adding" Then
 
                         ' 1.) CLEAR DATA EDITING CONTROLS
                         clearControls(getAllControlsWithTag("dataEditingControl", Me))
-                        showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+                        'showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
 
                         ' 2.) SET AUTOMAKECOMBOBOX BACK TO LAST SELECTED ITEM/INDEX
                         AutoMakeComboBox.SelectedIndex = AutoMakeComboBox.Items.IndexOf(lastSelected)
@@ -356,7 +356,7 @@ Public Class mfgMaintenance
 
                 ' 1.) CLEAR DATA EDITING CONTROLS
                 clearControls(getAllControlsWithTag("dataEditingControl", Me))
-                showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+                'showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
 
                 ' 2.) SET AUTOMAKECOMBOBOX BACK TO LAST SELECTED ITEM/INDEX
                 AutoMakeComboBox.SelectedIndex = AutoMakeComboBox.Items.IndexOf(lastSelected)
