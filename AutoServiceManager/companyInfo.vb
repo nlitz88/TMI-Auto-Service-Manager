@@ -205,9 +205,15 @@ Public Class companyInfo
 
     Private Sub companyInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ' TEST DATABASE CONNECTION FIRST
+        If Not checkDbConn() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
         ' Load datatables from database
         If Not loadDataTablesFromDatabase() Then
-            MessageBox.Show("Loading unsuccessful; Please restart and try again")
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 

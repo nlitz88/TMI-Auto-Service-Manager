@@ -387,6 +387,17 @@
     End Function
 
 
+    ' Function that checks database connection
+    Public Function checkDbConn() As Boolean
+
+        Dim testConn As New DbControl()
+
+        testConn.ExecQuery("SELECT 1")
+        If testConn.HasException() Then Return False
+
+        Return True
+
+    End Function
 
 
     ' **************** KEYPRESS/INPUT VALIDATION ****************

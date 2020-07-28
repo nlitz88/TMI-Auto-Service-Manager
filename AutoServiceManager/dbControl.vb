@@ -65,7 +65,7 @@ Public Class DbControl
         Catch ex As Exception
 
             ' Capture error
-            Exception = "ExecQuery Error" & vbNewLine & ex.Message
+            Exception = "Database Query Error" & vbNewLine & ex.Message
             MessageBox.Show(Exception, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
         Finally
