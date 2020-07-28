@@ -4,8 +4,8 @@ Public Class mfgMaintenance
 
     ' New Database control instances for manufacturer datatable
     Private AutoManufacturersDbController As New DbControl()
-    ' New Database control instance for updating various tables
-    Private updateController As New DbControl()
+    ' New Database control instance for updating, inserting, and deleting
+    Private CRUD As New DbControl()
 
     ' Initialize new lists to store certain row values of datatables (easily sorted and BINARY SEARCHED FOR SPEED)
     Private AutoManufacturersList As List(Of Object)
@@ -96,17 +96,52 @@ Public Class mfgMaintenance
 
         ' Then, update all relevant tables that COUDLD have experienced changes
         Dim initialValueAsKey As String = AutoManufacturersDbController.DbDataTable.Rows(amRow)("AutoMake")
-        updateTable(updateController, AutoManufacturersDbController.DbDataTable, "AutoManufacturers", initialValueAsKey, "AutoMake", "_", "dataEditingControl", Me)
+        updateTable(CRUD, AutoManufacturersDbController.DbDataTable, "AutoManufacturers", initialValueAsKey, "AutoMake", "_", "dataEditingControl", Me)
         ' I could use a simple, standalone sql query here, as it would allow me to freely change the updateTable overloads in globals.vb.
         ' For now, though, I will try to implement these wherever I can for uniformity/consistency
 
-        ' Then, return exception status of updateController. Return false andfrom this function and reformat if there is an exception thrown (do this after each call).
-        If updateController.HasException() Then Return False
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
 
         ' Otherwise, return true
         Return True
 
     End Function
+
+
+    ' Function that makes insertRow calls for all relevant DataTables
+    Private Function insertAll() As Boolean
+
+        ' First, remove any formatting that was added (specific to the controls on this form)
+        'stripFormatting()
+
+        ' Then, make calls to insertRow to all relevant tables
+
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
+
+    ' Function that makes deleteRow calls for all relevant DataTables
+    Private Function deleteAll() As Boolean
+
+
+
+        ' Then, make calls to insertRow to all relevant tables
+
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
+
 
 
     ' **************** VALIDATION SUBS ****************
