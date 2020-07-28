@@ -18,6 +18,7 @@ Public Class mfgMaintenance
 
     ' Row index variables used for DataTable lookups
     Private amRow As Integer
+    Private lastSelected As String
 
     ' Keeps track of whether or not user in "editing" or "adding" mode
     Private mode As String
@@ -229,6 +230,29 @@ Public Class mfgMaintenance
     Private Sub deleteButton_Click(sender As Object, e As EventArgs) Handles deleteButton.Click
 
         Dim decision As DialogResult = MessageBox.Show("Are you sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                ' Delete value from database
+
+
+                ' RESTORE USER CONTROLS TO NON-EDITING/SELECTING STATE
+                editButton.Enabled = True
+                addButton.Enabled = True
+                cancelButton.Enabled = False
+                saveButton.Enabled = False
+                nav.EnableAll()
+                AutoMakeComboBox.Enabled = True
+                ' Show/Hide the dataViewingControls and dataEditingControls, respectively
+                showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+                showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+                AutoMakeComboBox.SelectedIndex = 0
+
+            Case DialogResult.No
+
+        End Select
 
     End Sub
 
