@@ -42,7 +42,7 @@ Partial Class mfgMaintenance
         Me.cancelButton.Enabled = False
         Me.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cancelButton.ForeColor = System.Drawing.Color.White
-        Me.cancelButton.Location = New System.Drawing.Point(448, 120)
+        Me.cancelButton.Location = New System.Drawing.Point(564, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
         Me.cancelButton.TabIndex = 48
@@ -55,7 +55,7 @@ Partial Class mfgMaintenance
         Me.saveButton.Enabled = False
         Me.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.saveButton.ForeColor = System.Drawing.Color.White
-        Me.saveButton.Location = New System.Drawing.Point(564, 120)
+        Me.saveButton.Location = New System.Drawing.Point(448, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
         Me.saveButton.TabIndex = 47
