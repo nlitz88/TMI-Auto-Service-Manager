@@ -14,7 +14,7 @@ Public Class mfgMaintenance
     Private InitialAutoManufacturersValues As New InitialValues()
 
     'Variable to keep track of whether form fully loaded or not
-    Private valuesInitialized As Boolean = False
+    Private valuesInitialized As Boolean = True
 
     ' Row index variables used for DataTable lookups
     Private amRow As Integer
@@ -191,9 +191,11 @@ Public Class mfgMaintenance
             ' Have all labels and corresponding values hidden
             showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
             showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
             ' Disable editing button
             editButton.Enabled = False
             deleteButton.Enabled = False
+
 
         End If
 
@@ -215,14 +217,14 @@ Public Class mfgMaintenance
         cancelButton.Enabled = True
         nav.DisableAll()
         AutoMakeComboBox.Enabled = False
+
+        lastSelected = AutoMakeComboBox.Text
         AutoMakeComboBox.SelectedIndex = 0
 
         ' Hide/Show the dataViewingControls and dataEditingControls, respectively
         showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
         showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
         showHide(getAllControlsWithTag("dataLabel", Me), 1)
-
-        ' Call insertAll function here
 
     End Sub
 
@@ -246,7 +248,7 @@ Public Class mfgMaintenance
                 AutoMakeComboBox.Enabled = True
                 ' Show/Hide the dataViewingControls and dataEditingControls, respectively
                 showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
-                showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+                showHide(getAllControlsWithTag("dataEditingControl", Me), 0) ' consider moving this to the comboBox .text/selected idx changed if = 0
 
                 AutoMakeComboBox.SelectedIndex = 0
 
@@ -289,37 +291,93 @@ Public Class mfgMaintenance
             Select Case decision
                 Case DialogResult.Yes
 
-                    ' REINITIALIZE ALL CONTROL VALUES (as unwanted changes have been made)
-                    valuesInitialized = False
-                    InitializeAllDataEditingControls()
-                    valuesInitialized = True
+                    If mode = "editing" Then
 
-                    ' RESTORE USER CONTROLS TO NON-EDITING STATE
-                    editButton.Enabled = True
-                    addButton.Enabled = True
-                    cancelButton.Enabled = False
-                    saveButton.Enabled = False
-                    nav.EnableAll()
-                    AutoMakeComboBox.Enabled = True
-                    ' Show/Hide the dataViewingControls and dataEditingControls, respectively
-                    showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
-                    showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+                        ' REINITIALIZE ALL CONTROL VALUES (as unwanted changes have been made)
+                        valuesInitialized = False
+                        InitializeAllDataEditingControls()
+                        valuesInitialized = True
+
+                        ' RESTORE USER CONTROLS TO NON-EDITING STATE
+                        editButton.Enabled = True
+                        addButton.Enabled = True
+                        cancelButton.Enabled = False
+                        saveButton.Enabled = False
+                        nav.EnableAll()
+                        AutoMakeComboBox.Enabled = True
+                        ' Show/Hide the dataViewingControls and dataEditingControls, respectively
+                        showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+                        showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+                    ElseIf mode = "adding" Then
+
+                        ' 1.) CLEAR DATA EDITING CONTROLS
+                        clearControls(getAllControlsWithTag("dataEditingControl", Me))
+                        showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+                        ' 2.) SET AUTOMAKECOMBOBOX BACK TO LAST SELECTED ITEM/INDEX
+                        AutoMakeComboBox.SelectedIndex = AutoMakeComboBox.Items.IndexOf(lastSelected)
+                        ' If this is not select one, because it changed from the orig to select one, and now back to orig,
+                        ' the .textChanged event for the combo box will take care of reinitializing and showing the dataViewingControls
+
+                        ' 3.) IF LAST SELECTED WAS "SELECT ONE", Then simulate functionality from combobox text/selectedIndex changed
+                        If lastSelected = "Select One" Then
+                            AutoMake_ComboBox_SelectedIndexChanged(AutoMakeComboBox, New EventArgs())
+                        End If
+
+                        ' 4.) RESTORE USER CONTROLS TO NON-ADDING STATE (only those that are controlled by "adding")
+                        AutoMakeComboBox.Enabled = True
+                        addButton.Enabled = True
+                        cancelButton.Enabled = False
+                        saveButton.Enabled = False
+                        nav.EnableAll()
+
+                    End If
 
                 Case DialogResult.No
             End Select
 
         Else
 
-            ' RESTORE USER CONTROLS TO NON-EDITING STATE
-            editButton.Enabled = True
-            addButton.Enabled = True
-            cancelButton.Enabled = False
-            saveButton.Enabled = False
-            nav.EnableAll()
-            AutoMakeComboBox.Enabled = True
-            ' Show/Hide the dataViewingControls and dataEditingControls, respectively
-            showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
-            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            If mode = "editing" Then
+
+                ' RESTORE USER CONTROLS TO NON-EDITING STATE
+                editButton.Enabled = True
+                addButton.Enabled = True
+                cancelButton.Enabled = False
+                saveButton.Enabled = False
+                nav.EnableAll()
+                AutoMakeComboBox.Enabled = True
+                ' Show/Hide the dataViewingControls and dataEditingControls, respectively
+                showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+                showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+            ElseIf mode = "adding" Then
+
+                ' 1.) CLEAR DATA EDITING CONTROLS
+                clearControls(getAllControlsWithTag("dataEditingControl", Me))
+                showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+                ' 2.) SET AUTOMAKECOMBOBOX BACK TO LAST SELECTED ITEM/INDEX
+                AutoMakeComboBox.SelectedIndex = AutoMakeComboBox.Items.IndexOf(lastSelected)
+                ' If this is not select one, because it changed from the orig to select one, and now back to orig,
+                ' the .textChanged event for the combo box will take care of reinitializing and showing the dataViewingControls
+
+                ' 3.) IF LAST SELECTED WAS "SELECT ONE", Then simulate functionality from combobox text/selectedIndex changed
+                If lastSelected = "Select One" Then
+                    AutoMake_ComboBox_SelectedIndexChanged(AutoMakeComboBox, New EventArgs())
+                End If
+
+                ' 4.) RESTORE USER CONTROLS TO NON-ADDING STATE (only those that are controlled by "adding")
+                AutoMakeComboBox.Enabled = True
+                addButton.Enabled = True
+                cancelButton.Enabled = False
+                saveButton.Enabled = False
+                nav.EnableAll()
+
+            End If
+
+
 
         End If
 
@@ -332,44 +390,54 @@ Public Class mfgMaintenance
         Select Case decision
             Case DialogResult.Yes
 
-                ' 1.) VALIDATE DATAEDITING CONTROLS
-                If Not controlsValid() Then Exit Sub
+                If mode = "editing" Then
 
-                ' 2.) UPDATE DATATABLE(S), THEN UPDATE DATABASE
-                If Not updateAll() Then
-                    MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Else
-                    MessageBox.Show("Successfully updated Auto Manufacturers")
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    If Not controlsValid() Then Exit Sub
+
+                    ' 2.) UPDATE DATATABLE(S), THEN UPDATE DATABASE
+                    If Not updateAll() Then
+                        MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Else
+                        MessageBox.Show("Successfully updated Auto Manufacturers")
+                    End If
+
+                    ' 3.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadDataTablesFromDatabase() Then
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+
+                    ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                    AutoMakeComboBox.Items.Clear()
+                    AutoMakeComboBox.Items.Add("Select One")
+                    For Each row In AutoManufacturersDbController.DbDataTable.Rows
+                        AutoMakeComboBox.Items.Add(row("AutoMake"))
+                    Next
+                    AutoMakeComboBox.SelectedIndex = AutoMakeComboBox.Items.IndexOf(AutoMake_Textbox.Text)
+                    'AutoMakeComboBox.SelectedIndex = amRow + 1
+
+                    valuesInitialized = False
+                    InitializeAutoManufacturersDataViewingControls()
+                    valuesInitialized = True
+
+                    ' 5.) MOVE UI OUT OF EDITING MODE
+                    editButton.Enabled = True
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+                    nav.EnableAll()
+                    AutoMakeComboBox.Enabled = True
+                    ' Show/Hide the dataViewingControls and dataEditingControls, respectively
+                    showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+                    showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+                ElseIf mode = "adding" Then
+
+
+
                 End If
 
-                ' 3.) RELOAD DATATABLES FROM DATABASE
-                If Not loadDataTablesFromDatabase() Then
-                    MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
 
-                ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
-                AutoMakeComboBox.Items.Clear()
-                AutoMakeComboBox.Items.Add("Select One")
-                For Each row In AutoManufacturersDbController.DbDataTable.Rows
-                    AutoMakeComboBox.Items.Add(row("AutoMake"))
-                Next
-                AutoMakeComboBox.SelectedIndex = AutoMakeComboBox.Items.IndexOf(AutoMake_Textbox.Text)
-                'AutoMakeComboBox.SelectedIndex = amRow + 1
-
-                valuesInitialized = False
-                InitializeAutoManufacturersDataViewingControls()
-                valuesInitialized = True
-
-                ' 5.) MOVE UI OUT OF EDITING MODE
-                editButton.Enabled = True
-                addButton.Enabled = True
-                cancelButton.Enabled = False
-                saveButton.Enabled = False
-                nav.EnableAll()
-                AutoMakeComboBox.Enabled = True
-                ' Show/Hide the dataViewingControls and dataEditingControls, respectively
-                showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
-                showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
 
             Case DialogResult.No
                 ' Continue making changes or cancel editing
