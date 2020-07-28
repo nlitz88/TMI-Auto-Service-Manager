@@ -237,20 +237,30 @@ Public Class mfgMaintenance
         Select Case decision
             Case DialogResult.Yes
 
-                ' Delete value from database
+                ' 1.) Delete value from database
 
 
-                ' RESTORE USER CONTROLS TO NON-EDITING/SELECTING STATE
-                editButton.Enabled = True
+                ' 2.) RELOAD DATATABLES FROM DATABASE
+                If Not loadDataTablesFromDatabase() Then
+                    MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
+                ' 3.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                AutoMakeComboBox.Items.Clear()
+                AutoMakeComboBox.Items.Add("Select One")
+                For Each row In AutoManufacturersDbController.DbDataTable.Rows
+                    AutoMakeComboBox.Items.Add(row("AutoMake"))
+                Next
+                AutoMakeComboBox.SelectedIndex = 0
+
+                ' 4.) RESTORE USER CONTROLS TO NON-EDITING/SELECTING STATE
+                AutoMakeComboBox.Enabled = True
                 addButton.Enabled = True
                 cancelButton.Enabled = False
                 saveButton.Enabled = False
                 nav.EnableAll()
-                AutoMakeComboBox.Enabled = True
                 ' Show/Hide the dataViewingControls and dataEditingControls, respectively
                 ' This will be done by changing the selectedIndex to 0. May have to fire event here manually.
-
-                AutoMakeComboBox.SelectedIndex = 0
 
             Case DialogResult.No
 
@@ -307,7 +317,7 @@ Public Class mfgMaintenance
                         AutoMakeComboBox.Enabled = True
                         ' Show/Hide the dataViewingControls and dataEditingControls, respectively
                         showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
-                        'showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+                        showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
 
                     ElseIf mode = "adding" Then
 
