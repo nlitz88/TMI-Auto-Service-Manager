@@ -416,7 +416,7 @@ Public Class mfgMaintenance
                     AutoMakeComboBox.SelectedIndex = AutoMakeComboBox.Items.IndexOf(AutoMake_Textbox.Text)
                     'AutoMakeComboBox.SelectedIndex = amRow + 1
 
-                    ' dataViewingControl values reinitialized in combobox text/selectedindex change event
+                    ' dataViewingControl values reinitialized, as well as dataControls hide/show in combobox text/selectedindex change event
 
                     ' 5.) MOVE UI OUT OF EDITING MODE
                     addButton.Enabled = True
@@ -424,13 +424,36 @@ Public Class mfgMaintenance
                     saveButton.Enabled = False
                     nav.EnableAll()
                     AutoMakeComboBox.Enabled = True
-                    ' Show/Hide the dataViewingControls and dataEditingControls, respectively
-                    showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
-                    showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
 
                 ElseIf mode = "adding" Then
 
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    If Not controlsValid() Then Exit Sub
 
+                    ' 2.) INSERT NEW ROW INTO DATABASE
+
+
+                    ' 3.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadDataTablesFromDatabase() Then
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+
+                    ' 4.) REINITIALIZE CONTROLS (based on index of newly inserted value)
+                    AutoMakeComboBox.Items.Clear()
+                    AutoMakeComboBox.Items.Add("Select One")
+                    For Each row In AutoManufacturersDbController.DbDataTable.Rows
+                        AutoMakeComboBox.Items.Add(row("AutoMake"))
+                    Next
+
+                    ' Changing index of main combobox will also initialize respective dataViewing control values
+                    AutoMakeComboBox.SelectedIndex = AutoMakeComboBox.Items.IndexOf(AutoMake_Textbox.Text)
+
+                    ' 5.) MOVE UI OUT OF Adding MODE
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+                    nav.EnableAll()
+                    AutoMakeComboBox.Enabled = True
 
                 End If
 
