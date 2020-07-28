@@ -416,12 +416,9 @@ Public Class mfgMaintenance
                     AutoMakeComboBox.SelectedIndex = AutoMakeComboBox.Items.IndexOf(AutoMake_Textbox.Text)
                     'AutoMakeComboBox.SelectedIndex = amRow + 1
 
-                    valuesInitialized = False
-                    InitializeAutoManufacturersDataViewingControls()
-                    valuesInitialized = True
+                    ' dataViewingControl values reinitialized in combobox text/selectedindex change event
 
                     ' 5.) MOVE UI OUT OF EDITING MODE
-                    editButton.Enabled = True
                     addButton.Enabled = True
                     cancelButton.Enabled = False
                     saveButton.Enabled = False
