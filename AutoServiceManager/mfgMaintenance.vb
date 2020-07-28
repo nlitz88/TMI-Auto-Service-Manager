@@ -42,27 +42,46 @@ Public Class mfgMaintenance
     End Function
 
 
-    ' Sub that initializes all controls corresponding with values from the automanufacturer datatable
-    Private Sub InitializeAutoManufacturersControls()
+    ' Sub that initializes all dataEditingcontrols corresponding with values from the automanufacturer datatable
+    Private Sub InitializeAutoManufacturersDataEditingControls()
 
         ' Lookup and set current amRow index based on selectedIndex of AutoMake ComboBox
         Dim amDataRow As DataRow = AutoManufacturersDbController.DbDataTable.Select("AutoMake = '" & AutoMakeComboBox.Text & "'")(0)
         amRow = AutoManufacturersDbController.DbDataTable.Rows.IndexOf(amDataRow)
 
-        initializeControlsFromRow(AutoManufacturersDbController.DbDataTable, amRow, "_", Me)
+        initializeControlsFromRow(AutoManufacturersDbController.DbDataTable, amRow, "dataEditingControl", "_", Me)
+
+    End Sub
+
+    ' Sub that initializes all dataViewingControls corresponding with values from the automanufacturer datatable
+    Private Sub InitializeAutoManufacturersDataViewingControls()
+
+        ' Lookup and set current amRow index based on selectedIndex of AutoMake ComboBox
+        Dim amDataRow As DataRow = AutoManufacturersDbController.DbDataTable.Select("AutoMake = '" & AutoMakeComboBox.Text & "'")(0)
+        amRow = AutoManufacturersDbController.DbDataTable.Rows.IndexOf(amDataRow)
+
+        initializeControlsFromRow(AutoManufacturersDbController.DbDataTable, amRow, "dataViewingControl", "_", Me)
 
     End Sub
 
 
-    ' Sub that calls all individual initialization subs in one (These can be used individually if desired
-    Private Sub InitializeAll()
+    ' Sub that calls all individual dataEditingControl initialization subs in one (These can be used individually if desired)
+    Private Sub InitializeAllDataEditingControls()
 
         ' Automated initializations
-        InitializeAutoManufacturersControls()
+        InitializeAutoManufacturersDataEditingControls()
         ' Then, add formatting
         ' addFormatting()
         ' Set forecolor if not already initially default
         setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
+
+    End Sub
+
+    ' Sub that calls all individual dataEditingControl initialization subs in one (These can be used individually if desired)
+    Private Sub InitializeAllDataViewingControls()
+
+        ' Automated initializations
+        InitializeAutoManufacturersDataViewingControls()
 
     End Sub
 
@@ -155,7 +174,7 @@ Public Class mfgMaintenance
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
-            InitializeAll()
+            InitializeAutoManufacturersDataViewingControls()
             valuesInitialized = True
 
             ' Show labels and corresponding values
@@ -197,6 +216,8 @@ Public Class mfgMaintenance
         showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
         showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
 
+        ' Initialize values for dataEditingControls
+        InitializeAutoManufacturersDataEditingControls()
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialAutoManufacturersValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
@@ -214,7 +235,7 @@ Public Class mfgMaintenance
 
                     ' REINITIALIZE ALL CONTROL VALUES (as unwanted changes have been made)
                     valuesInitialized = False
-                    InitializeAll()
+                    InitializeAllDataEditingControls()
                     valuesInitialized = True
 
                     ' RESTORE USER CONTROLS TO NON-EDITING STATE
@@ -279,7 +300,7 @@ Public Class mfgMaintenance
                 AutoMakeComboBox.SelectedIndex = amRow + 1
 
                 valuesInitialized = False
-                InitializeAll()
+                InitializeAutoManufacturersDataViewingControls()
                 valuesInitialized = True
 
                 ' 5.) MOVE UI OUT OF EDITING MODE
