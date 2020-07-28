@@ -33,6 +33,7 @@ Partial Class mfgMaintenance
         Me.AutoMake_Value = New System.Windows.Forms.Label()
         Me.nav = New AutoServiceManager.navigation()
         Me.AutoMake_Textbox = New System.Windows.Forms.TextBox()
+        Me.deleteButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cancelButton
@@ -41,7 +42,7 @@ Partial Class mfgMaintenance
         Me.cancelButton.Enabled = False
         Me.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cancelButton.ForeColor = System.Drawing.Color.White
-        Me.cancelButton.Location = New System.Drawing.Point(332, 120)
+        Me.cancelButton.Location = New System.Drawing.Point(448, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
         Me.cancelButton.TabIndex = 48
@@ -54,7 +55,7 @@ Partial Class mfgMaintenance
         Me.saveButton.Enabled = False
         Me.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.saveButton.ForeColor = System.Drawing.Color.White
-        Me.saveButton.Location = New System.Drawing.Point(448, 120)
+        Me.saveButton.Location = New System.Drawing.Point(564, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
         Me.saveButton.TabIndex = 47
@@ -79,7 +80,7 @@ Partial Class mfgMaintenance
         Me.editButton.Enabled = False
         Me.editButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.editButton.ForeColor = System.Drawing.Color.White
-        Me.editButton.Location = New System.Drawing.Point(216, 120)
+        Me.editButton.Location = New System.Drawing.Point(332, 120)
         Me.editButton.Name = "editButton"
         Me.editButton.Size = New System.Drawing.Size(110, 30)
         Me.editButton.TabIndex = 49
@@ -159,12 +160,26 @@ Partial Class mfgMaintenance
         Me.AutoMake_Textbox.Tag = "dataEditingControl"
         Me.AutoMake_Textbox.Visible = False
         '
+        'deleteButton
+        '
+        Me.deleteButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.deleteButton.Enabled = False
+        Me.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.deleteButton.ForeColor = System.Drawing.Color.White
+        Me.deleteButton.Location = New System.Drawing.Point(216, 120)
+        Me.deleteButton.Name = "deleteButton"
+        Me.deleteButton.Size = New System.Drawing.Size(110, 30)
+        Me.deleteButton.TabIndex = 56
+        Me.deleteButton.Text = "Delete"
+        Me.deleteButton.UseVisualStyleBackColor = False
+        '
         'mfgMaintenance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.deleteButton)
         Me.Controls.Add(Me.AutoMake_Textbox)
         Me.Controls.Add(Me.AutoMake_Value)
         Me.Controls.Add(Me.mfgNameLabel)
@@ -197,4 +212,5 @@ Partial Class mfgMaintenance
     Friend WithEvents mfgNameLabel As Label
     Friend WithEvents AutoMake_Value As Label
     Friend WithEvents AutoMake_Textbox As TextBox
+    Friend WithEvents deleteButton As Button
 End Class

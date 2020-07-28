@@ -183,6 +183,7 @@ Public Class mfgMaintenance
             showHide(getAllControlsWithTag("dataLabel", Me), 1)
             ' Enable editing button
             editButton.Enabled = True
+            deleteButton.Enabled = True
 
         Else
 
@@ -191,6 +192,7 @@ Public Class mfgMaintenance
             showHide(getAllControlsWithTag("dataLabel", Me), 0)
             ' Disable editing button
             editButton.Enabled = False
+            deleteButton.Enabled = False
 
         End If
 
@@ -224,6 +226,13 @@ Public Class mfgMaintenance
     End Sub
 
 
+    Private Sub deleteButton_Click(sender As Object, e As EventArgs) Handles deleteButton.Click
+
+        Dim decision As DialogResult = MessageBox.Show("Are you sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+    End Sub
+
+
     Private Sub editButton_Click(sender As Object, e As EventArgs) Handles editButton.Click
 
         mode = "editing"
@@ -251,7 +260,7 @@ Public Class mfgMaintenance
         ' Check for changes before cancelling. Don't need function here that calls all, as only working with one datatable
         If InitialAutoManufacturersValues.CtrlValuesChanged() Then
 
-            Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo)
+            Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
             Select Case decision
                 Case DialogResult.Yes
@@ -304,14 +313,14 @@ Public Class mfgMaintenance
 
                 ' 2.) UPDATE DATATABLE(S), THEN UPDATE DATABASE
                 If Not updateAll() Then
-                    MessageBox.Show("Update unsuccessful; Changes not saved")
+                    MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
                     MessageBox.Show("Successfully updated Auto Manufacturers")
                 End If
 
                 ' 3.) RELOAD DATATABLES FROM DATABASE
                 If Not loadDataTablesFromDatabase() Then
-                    MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again")
+                    MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
 
                 ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
@@ -364,6 +373,5 @@ Public Class mfgMaintenance
     Private Sub mfgMaintenance_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         End
     End Sub
-
 
 End Class
