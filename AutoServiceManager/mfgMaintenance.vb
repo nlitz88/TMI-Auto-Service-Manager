@@ -116,7 +116,7 @@ Public Class mfgMaintenance
         'stripFormatting()
 
         ' Then, make calls to insertRow to all relevant tables
-
+        insertRow(CRUD, AutoManufacturersDbController.DbDataTable, "AutoManufacturers", "_", "dataEditingControl", Me)
         ' Then, return exception status of CRUD controller. Do this after each call
         If CRUD.HasException() Then Return False
 
@@ -476,7 +476,11 @@ Public Class mfgMaintenance
                     If Not controlsValid() Then Exit Sub
 
                     ' 2.) INSERT NEW ROW INTO DATABASE
-
+                    If Not insertAll() Then
+                        MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Else
+                        MessageBox.Show("Successfully added " & AutoMake_Textbox.Text & " to Auto Manufacturers")
+                    End If
 
                     ' 3.) RELOAD DATATABLES FROM DATABASE
                     If Not loadDataTablesFromDatabase() Then

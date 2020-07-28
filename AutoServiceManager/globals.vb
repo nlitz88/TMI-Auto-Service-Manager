@@ -324,6 +324,49 @@
     End Sub
 
 
+    ' Sub that inserts new row into specified table
+    Public Sub insertRow(ByRef insertController As DbControl, ByVal dataTable As DataTable, ByVal tableName As String,
+                         ByVal nameDelimiter As String, ByVal controlTag As String, ByRef form As Form)
+
+        Dim query As String = "INSERT INTO tableName (AutoMake, ... ,) VALUES (@AutoMakeParam, ... ,)"
+
+
+        Dim ctrls As List(Of Object)
+        Dim ctrlValue As Object
+        Dim columnList As String = String.Empty
+        Dim valuesParamList As String = String.Empty
+
+
+        ' Add query parameters for each column value in DataTable
+        For i As Integer = 0 To dataTable.Columns.Count - 1
+
+            ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
+
+            ' Should only be one (dataEditingField) per column (MAY NEED TO UPDATE THIS TO ONLY BE ctrls(0) IN THE FUTURE
+            For Each ctrl In ctrls
+                ctrlValue = getControlValue(ctrl)
+                If ctrlValue = Nothing Then
+                    ' For compatability with existing columns. This is for fields that do not allow zero-length strings, even though user might want to make field blank.
+                    ctrlValue = DBNull.Value
+                End If
+                insertController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
+                columnList += dataTable.Columns(i).ColumnName & ","
+                valuesParamList += dataTable.Columns(i).ColumnName & ","
+            Next
+
+        Next
+
+        ' If lists aren't empty, then run query
+        If Not String.IsNullOrEmpty(columnList) And Not String.IsNullOrEmpty(valuesParamList) Then
+            ' The substring at the end ensures that there isn't an extra comma at the end
+            columnList = "(" & columnList.Substring(0, columnList.Length - 1) & ")"
+            valuesParamList = "(" & valuesParamList.Substring(0, valuesParamList.Length - 1) & ")"
+            insertController.ExecQuery("INSERT INTO " & tableName & " " & columnList & " VALUES " & valuesParamList)
+        End If
+
+    End Sub
+
+
     ' Function that generates sorted lists from datatable columns. Useful if binary search on values used.
     Public Function getListFromDataTable(ByVal datatable As DataTable, ByVal column As String, Optional ByVal sorted As Boolean = True) As List(Of Object)
 
