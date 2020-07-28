@@ -362,6 +362,15 @@
     End Sub
 
 
+    ' Sub that deletes row from specified table
+    Public Sub deleteRow(ByRef deleteController As DbControl, ByVal tableName As String, ByVal id As String, ByVal idName As String)
+
+        deleteController.AddParams("@id", id)
+        deleteController.ExecQuery("DELETE FROM " & tableName & " WHERE " & idName & "=@id")
+
+    End Sub
+
+
     ' Function that generates sorted lists from datatable columns. Useful if binary search on values used.
     Public Function getListFromDataTable(ByVal datatable As DataTable, ByVal column As String, Optional ByVal sorted As Boolean = True) As List(Of Object)
 

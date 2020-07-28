@@ -129,10 +129,9 @@ Public Class mfgMaintenance
     ' Function that makes deleteRow calls for all relevant DataTables
     Private Function deleteAll() As Boolean
 
-
-
         ' Then, make calls to insertRow to all relevant tables
-
+        Dim valueAsKey As String = AutoManufacturersDbController.DbDataTable.Rows(amRow)("AutoMake")
+        deleteRow(CRUD, "AutoManufacturers", valueAsKey, "AutoMake")
         ' Then, return exception status of CRUD controller. Do this after each call
         If CRUD.HasException() Then Return False
 
@@ -273,7 +272,11 @@ Public Class mfgMaintenance
             Case DialogResult.Yes
 
                 ' 1.) Delete value from database
-
+                If Not deleteAll() Then
+                    MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("Successfully deleted " & AutoMakeComboBox.Text & " from Auto Manufacturers")
+                End If
 
                 ' 2.) RELOAD DATATABLES FROM DATABASE
                 If Not loadDataTablesFromDatabase() Then
