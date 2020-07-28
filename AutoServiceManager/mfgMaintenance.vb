@@ -255,13 +255,22 @@ Public Class mfgMaintenance
                 If Not updateAll() Then
                     MessageBox.Show("Update unsuccessful; Changes not saved")
                 Else
-                    MessageBox.Show("Successfully updated Company Information")
+                    MessageBox.Show("Successfully updated Auto Manufacturers")
                 End If
 
                 ' 3.) RELOAD DATATABLES FROM DATABASE
-
+                If Not loadDataTablesFromDatabase() Then
+                    MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again")
+                End If
 
                 ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                AutoMakeComboBox.Items.Clear()
+                AutoMakeComboBox.Items.Add("Select One")
+                For Each row In AutoManufacturersDbController.DbDataTable.Rows
+                    AutoMakeComboBox.Items.Add(row("AutoMake"))
+                Next
+                AutoMakeComboBox.SelectedIndex = amRow + 1
+
                 valuesInitialized = False
                 InitializeAll()
                 valuesInitialized = True
