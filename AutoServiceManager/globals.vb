@@ -257,16 +257,14 @@
 
             ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
 
-            ' Should only be one (dataEditingField) per column
-            For Each ctrl In ctrls
-                ctrlValue = getControlValue(ctrl)
-                If ctrlValue = Nothing Then
-                    ' For compatability with existing columns. This is for fields that do not allow zero-length strings, even though user might want to make field blank.
-                    ctrlValue = DBNull.Value
-                End If
-                updateController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
-                queryParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & ","
-            Next
+            ' Get the value of only one control of the same name designation (assuming they control/correspond with the same table column value)
+            ctrlValue = getControlValue(ctrls(0))
+            If ctrlValue = Nothing Then
+                ' For compatability with existing columns. This is for fields that do not allow zero-length strings, even though user might want to make field blank.
+                ctrlValue = DBNull.Value
+            End If
+            updateController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
+            queryParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & ","
 
         Next
 
@@ -293,16 +291,14 @@
 
             ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
 
-            ' Should only be one (dataEditingField) per column
-            For Each ctrl In ctrls
-                ctrlValue = getControlValue(ctrl)
-                If ctrlValue = Nothing Then
-                    ' For compatability with existing columns. This is for fields that do not allow zero-length strings, even though user might want to make field blank.
-                    ctrlValue = DBNull.Value
-                End If
-                updateController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
-                queryParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & ","
-            Next
+            ' Get the value of only one control of the same name designation (assuming they control/correspond with the same table column value)
+            ctrlValue = getControlValue(ctrls(0))
+            If ctrlValue = Nothing Then
+                ' For compatability with existing columns. This is for fields that do not allow zero-length strings, even though user might want to make field blank.
+                ctrlValue = DBNull.Value
+            End If
+            updateController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
+            queryParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & ","
 
         Next
 
@@ -342,17 +338,16 @@
 
             ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
 
-            ' Should only be one (dataEditingField) per column (MAY NEED TO UPDATE THIS TO ONLY BE ctrls(0) IN THE FUTURE
-            For Each ctrl In ctrls
-                ctrlValue = getControlValue(ctrl)
-                If ctrlValue = Nothing Then
-                    ' For compatability with existing columns. This is for fields that do not allow zero-length strings, even though user might want to make field blank.
-                    ctrlValue = DBNull.Value
-                End If
-                insertController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
-                columnList += dataTable.Columns(i).ColumnName & ","
-                valuesParamList += dataTable.Columns(i).ColumnName & ","
-            Next
+            ' Get the value of only one control of the same name designation (assuming they control/correspond with the same table column value)
+            ctrlValue = getControlValue(ctrls(0))
+            If ctrlValue = Nothing Then
+                ' For compatability with existing columns. This is for fields that do not allow zero-length strings, even though user might want to make field blank.
+                ctrlValue = DBNull.Value
+            End If
+
+            insertController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
+            columnList += dataTable.Columns(i).ColumnName & ","
+            valuesParamList += dataTable.Columns(i).ColumnName & ","
 
         Next
 
