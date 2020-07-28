@@ -200,12 +200,13 @@ Public Class mfgMaintenance
                     InitializeAll()
                     valuesInitialized = True
 
+                    ' RESTORE USER CONTROLS TO NON-EDITING STATE
                     editButton.Enabled = True
                     addButton.Enabled = True
                     cancelButton.Enabled = False
+                    saveButton.Enabled = False
                     nav.EnableAll()
                     AutoMakeComboBox.Enabled = True
-
                     ' Show/Hide the dataViewingControls and dataEditingControls, respectively
                     showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
                     showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
@@ -215,12 +216,13 @@ Public Class mfgMaintenance
 
         Else
 
+            ' RESTORE USER CONTROLS TO NON-EDITING STATE
             editButton.Enabled = True
             addButton.Enabled = True
             cancelButton.Enabled = False
+            saveButton.Enabled = False
             nav.EnableAll()
             AutoMakeComboBox.Enabled = True
-
             ' Show/Hide the dataViewingControls and dataEditingControls, respectively
             showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
             showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
@@ -238,10 +240,26 @@ Public Class mfgMaintenance
 
                 ' 1.) VALIDATE DATAEDITING CONTROLS
                 If Not controlsValid() Then Exit Sub
+
                 ' 2.) UPDATE DATATABLE(S), THEN UPDATE DATABASE
+
                 ' 3.) RELOAD DATATABLES FROM DATABASE
+
                 ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                valuesInitialized = False
+                InitializeAll()
+                valuesInitialized = True
+
                 ' 5.) MOVE UI OUT OF EDITING MODE
+                editButton.Enabled = True
+                addButton.Enabled = True
+                cancelButton.Enabled = False
+                saveButton.Enabled = False
+                nav.EnableAll()
+                AutoMakeComboBox.Enabled = True
+                ' Show/Hide the dataViewingControls and dataEditingControls, respectively
+                showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+                showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
 
             Case DialogResult.No
                 ' Continue making changes or cancel editing
