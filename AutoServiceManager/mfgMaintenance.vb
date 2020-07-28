@@ -320,7 +320,8 @@ Public Class mfgMaintenance
                 For Each row In AutoManufacturersDbController.DbDataTable.Rows
                     AutoMakeComboBox.Items.Add(row("AutoMake"))
                 Next
-                AutoMakeComboBox.SelectedIndex = amRow + 1
+                AutoMakeComboBox.SelectedIndex = AutoMakeComboBox.Items.IndexOf(AutoMake_Textbox.Text)
+                'AutoMakeComboBox.SelectedIndex = amRow + 1
 
                 valuesInitialized = False
                 InitializeAutoManufacturersDataViewingControls()
