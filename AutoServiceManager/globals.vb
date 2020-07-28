@@ -160,6 +160,21 @@
     End Function
 
 
+    ' Sub that will clear controls values
+    Public Sub clearControls(ByRef ctrls As List(Of Object))
+
+        For Each ctrl In ctrls
+            Select Case ctrl.GetType()
+                Case GetType(System.Windows.Forms.CheckBox)
+                    ctrl.checked = False
+                Case Else
+                    ctrl.Text = String.Empty
+            End Select
+        Next
+
+    End Sub
+
+
     ' Sub that is primarily used to reset forecolor of invalid controls after re-initializing
     Public Sub setForeColor(ByVal ctrls As List(Of Object), ByVal color As Color)
 

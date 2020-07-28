@@ -19,7 +19,8 @@ Public Class mfgMaintenance
     ' Row index variables used for DataTable lookups
     Private amRow As Integer
 
-
+    ' Keeps track of whether or not user in "editing" or "adding" mode
+    Private mode As String
 
 
     ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
@@ -198,12 +199,39 @@ Public Class mfgMaintenance
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
 
+        mode = "adding"
+
+        ' Initialize values for dataEditingControls
+        clearControls(getAllControlsWithTag("dataEditingControl", Me))
+        ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
+        InitialAutoManufacturersValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
+
+        ' First, disable editButton, addButton, enable cancelButton, and disable nav
+        editButton.Enabled = False
+        addButton.Enabled = False
+        cancelButton.Enabled = True
+        nav.DisableAll()
+        AutoMakeComboBox.Enabled = False
+        AutoMakeComboBox.SelectedIndex = 0
+
+        ' Hide/Show the dataViewingControls and dataEditingControls, respectively
+        showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+        showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+        showHide(getAllControlsWithTag("dataLabel", Me), 1)
+
         ' Call insertAll function here
 
     End Sub
 
 
     Private Sub editButton_Click(sender As Object, e As EventArgs) Handles editButton.Click
+
+        mode = "editing"
+
+        ' Initialize values for dataEditingControls
+        InitializeAutoManufacturersDataEditingControls()
+        ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
+        InitialAutoManufacturersValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
         ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
         editButton.Enabled = False
@@ -215,11 +243,6 @@ Public Class mfgMaintenance
         ' Hide/Show the dataViewingControls and dataEditingControls, respectively
         showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
         showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
-
-        ' Initialize values for dataEditingControls
-        InitializeAutoManufacturersDataEditingControls()
-        ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
-        InitialAutoManufacturersValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
     End Sub
 
