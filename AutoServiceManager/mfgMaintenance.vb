@@ -177,6 +177,13 @@ Public Class mfgMaintenance
     End Sub
 
 
+    Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
+
+        ' Call insertAll function here
+
+    End Sub
+
+
     Private Sub editButton_Click(sender As Object, e As EventArgs) Handles editButton.Click
 
         ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox

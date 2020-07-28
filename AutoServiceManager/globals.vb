@@ -203,6 +203,31 @@
 
     End Sub
 
+    ' Overload that allows for specifying a control tag
+    Public Sub initializeControlsFromRow(ByVal dataTable As DataTable, ByVal dataTableRow As Integer, ByVal controlTag As String, ByVal nameDelimiter As String, ByRef form As Form)
+
+        Dim ctrls As List(Of Object)
+        Dim dataValue As Object
+
+        ' For each column in the dataTable
+        For i As Integer = 0 To dataTable.Columns.Count - 1
+
+            ' Get all of the controls on the form that are to be set/initialized by way of matching the first part of their name to the column name
+            ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
+
+            ' Initialize values of each control that holds the value of this column
+            For Each ctrl In ctrls
+
+                dataValue = dataTable.Rows(dataTableRow)(dataTable.Columns(i).ColumnName)
+                setControlValue(ctrl, dataValue)
+
+            Next
+
+
+        Next
+
+    End Sub
+
 
     ' Sub that updates database tables based on their respective values in form
     Public Sub updateTable(ByRef updateController As DbControl, ByVal dataTable As DataTable, ByVal tableName As String,
