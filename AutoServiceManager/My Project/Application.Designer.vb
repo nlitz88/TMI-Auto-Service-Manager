@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.AutoServiceManager.mfgMaintenance
+            Me.MainForm = Global.AutoServiceManager.home
         End Sub
     End Class
 End Namespace
