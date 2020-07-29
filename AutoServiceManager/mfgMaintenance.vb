@@ -30,7 +30,7 @@ Public Class mfgMaintenance
     ' Sub that will contain calls to all of the instances of the database controller class that loads data from the database into DataTables
     Private Function loadDataTablesFromDatabase() As Boolean
 
-        AutoManufacturersDbController.ExecQuery("SELECT am.AutoMake FROM AutoManufacturers am")
+        AutoManufacturersDbController.ExecQuery("SELECT am.AutoMake FROM AutoManufacturers am ORDER BY AutoMake ASC")
         If AutoManufacturersDbController.HasException() Then Return False
 
         ' Also, populate respective lists with data
