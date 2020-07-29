@@ -283,6 +283,8 @@
 
             ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
 
+            If ctrls.Count = 0 Then Continue For
+
             ' Get the value of only one control of the same name designation (assuming they control/correspond with the same table column value)
             ctrlValue = getControlValue(ctrls(0))
             If ctrlValue = Nothing Then
@@ -316,6 +318,8 @@
         For i As Integer = 0 To dataTable.Columns.Count - 1
 
             ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
+
+            If ctrls.Count = 0 Then Continue For
 
             ' Get the value of only one control of the same name designation (assuming they control/correspond with the same table column value)
             ctrlValue = getControlValue(ctrls(0))
@@ -363,6 +367,8 @@
         For i As Integer = 0 To dataTable.Columns.Count - 1
 
             ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
+
+            If ctrls.Count = 0 Then Continue For
 
             ' Get the value of only one control of the same name designation (assuming they control/correspond with the same table column value)
             ctrlValue = getControlValue(ctrls(0))

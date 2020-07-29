@@ -230,8 +230,6 @@ Public Class taskMaintenance
             TTRow = getDataTableRow(TTDbController.DbDataTable, "TTD", TTComboBox.Text)
             Dim TaskType As String = TTDbController.DbDataTable.Rows(TTRow)("TaskType").ToString()
 
-            Console.WriteLine(TaskType & " at " & TTRow.ToString())
-
             ' If the input in the combobox matches an entry in the table that it represents
             If TTList.BinarySearch(TaskType.ToLower()) >= 0 Then
                 ' Initialize corresponding controls from DataTable values
