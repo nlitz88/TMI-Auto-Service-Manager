@@ -185,6 +185,32 @@
     End Sub
 
 
+    ' Function that returns similar string but with proper escape characters applied (for use with DataTable select)
+    Public Function escapeLikeValues(ByVal original As String) As String
+
+        Dim sb As New System.Text.StringBuilder(original.Length)
+
+        For i As Integer = 0 To original.Length - 1
+
+            Dim c As Char = original(i)
+            Select Case c
+                Case "]", "[", "%", "*"
+                    sb.Append("[").Append(c).Append("]")
+                Case "'"
+                    sb.Append("''")
+                Case Else
+                    sb.Append(c)
+            End Select
+
+        Next
+
+        Return sb.ToString()
+
+    End Function
+
+
+
+
     ' ************************ DATABASE DATA INTERACTION/MANIPULATION ************************
 
 
