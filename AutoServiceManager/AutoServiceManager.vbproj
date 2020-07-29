@@ -141,6 +141,12 @@
     <Compile Include="navigation.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="paymentMaintenance.Designer.vb">
+      <DependentUpon>paymentMaintenance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="paymentMaintenance.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="colorMaintenance.resx">
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="navigation.resx">
       <DependentUpon>navigation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="paymentMaintenance.resx">
+      <DependentUpon>paymentMaintenance.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

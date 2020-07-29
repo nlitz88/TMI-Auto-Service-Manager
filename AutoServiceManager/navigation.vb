@@ -52,4 +52,10 @@
         changeScreen(colorMaintenance, Me.ParentForm)
     End Sub
 
+    Private Sub PaymentTypesAcceptedToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PaymentTypesAcceptedToolStripMenuItem.Click
+        If Me.ParentForm Is paymentMaintenance Then Exit Sub
+        changeScreen(paymentMaintenance, Me.ParentForm)
+    End Sub
+
+
 End Class
