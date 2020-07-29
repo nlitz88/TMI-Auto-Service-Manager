@@ -491,7 +491,7 @@ Public Class taskMaintenance
                     Next
 
                     ' Lookup and set new selectedIndex based on updated value
-                    Dim updatedItem As String = getRowValueWithKey(TTDbController.DbDataTable, "TTD", "TaskType", TaskType_Textbox.Text)
+                    Dim updatedItem As String = getRowValueWithKey(TTDbController.DbDataTable, "TTD", "TaskType", TaskType_Textbox.Text).ToString()
                     TTComboBox.SelectedIndex = TTComboBox.Items.IndexOf(updatedItem)
 
                     ' dataViewingControl values reinitialized, as well as dataControls hide/show in combobox text/selectedindex change event
@@ -529,7 +529,7 @@ Public Class taskMaintenance
 
                     ' Changing index of main combobox will also initialize respective dataViewing control values
                     ' Lookup and set new selectedIndex based on new value
-                    Dim newItem As String = getRowValueWithKey(TTDbController.DbDataTable, "TTD", "TaskType", TaskType_Textbox.Text)
+                    Dim newItem As String = getRowValueWithKey(TTDbController.DbDataTable, "TTD", "TaskType", TaskType_Textbox.Text).ToString()
                     TTComboBox.SelectedIndex = TTComboBox.Items.IndexOf(newItem)
 
                     ' 5.) MOVE UI OUT OF Adding MODE

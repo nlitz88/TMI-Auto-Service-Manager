@@ -434,7 +434,20 @@
     End Function
 
 
-    ' Function that returns value from same row but different column provided a value as they key
+    ' Function that returns value from specified row and column
+    Public Function getRowValue(ByVal dataTable As DataTable, ByVal row As Integer, ByVal valueColumn As String) As Object
+
+        Try
+            Dim value As Object = dataTable.Rows(row)(valueColumn)
+            Return value
+        Catch ex As Exception
+            Return Nothing
+        End Try
+
+    End Function
+
+
+    ' Function that returns value from same row but different column provided another column value from that row as the key
     Public Function getRowValueWithKey(ByVal dataTable As DataTable, ByVal desiredColumn As String, ByVal keyColumn As String, ByVal key As String) As Object
 
         Dim rowIndex As Integer = getDataTableRow(dataTable, keyColumn, key)
