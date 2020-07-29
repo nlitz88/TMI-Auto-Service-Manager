@@ -22,28 +22,28 @@ Partial Class insuranceMaintenance
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Navigation1 = New AutoServiceManager.navigation()
+        Me.nav = New AutoServiceManager.navigation()
         Me.insuranceMaintenanceLabel = New System.Windows.Forms.Label()
         Me.deleteButton = New System.Windows.Forms.Button()
         Me.editButton = New System.Windows.Forms.Button()
         Me.cancelButton = New System.Windows.Forms.Button()
         Me.saveButton = New System.Windows.Forms.Button()
         Me.addButton = New System.Windows.Forms.Button()
-        Me.icLabel = New System.Windows.Forms.Label()
-        Me.icCombobox = New System.Windows.Forms.ComboBox()
-        Me.COmpanyName_Textbox = New System.Windows.Forms.TextBox()
-        Me.AutoMake_Value = New System.Windows.Forms.Label()
-        Me.icNameLabel = New System.Windows.Forms.Label()
+        Me.ICLabel = New System.Windows.Forms.Label()
+        Me.ICComboBox = New System.Windows.Forms.ComboBox()
+        Me.CompanyName_Textbox = New System.Windows.Forms.TextBox()
+        Me.ICNameLabel = New System.Windows.Forms.Label()
+        Me.CompanyName_Value = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'Navigation1
+        'nav
         '
-        Me.Navigation1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Navigation1.Location = New System.Drawing.Point(0, 0)
-        Me.Navigation1.Name = "Navigation1"
-        Me.Navigation1.Size = New System.Drawing.Size(982, 28)
-        Me.Navigation1.TabIndex = 57
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(982, 28)
+        Me.nav.TabIndex = 57
         '
         'insuranceMaintenanceLabel
         '
@@ -120,58 +120,58 @@ Partial Class insuranceMaintenance
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = False
         '
-        'icLabel
+        'ICLabel
         '
-        Me.icLabel.AutoSize = True
-        Me.icLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.icLabel.Location = New System.Drawing.Point(97, 200)
-        Me.icLabel.Name = "icLabel"
-        Me.icLabel.Size = New System.Drawing.Size(141, 17)
-        Me.icLabel.TabIndex = 65
-        Me.icLabel.Text = "Insurance Company :"
+        Me.ICLabel.AutoSize = True
+        Me.ICLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.ICLabel.Location = New System.Drawing.Point(97, 200)
+        Me.ICLabel.Name = "ICLabel"
+        Me.ICLabel.Size = New System.Drawing.Size(141, 17)
+        Me.ICLabel.TabIndex = 65
+        Me.ICLabel.Text = "Insurance Company :"
         '
-        'icCombobox
+        'ICComboBox
         '
-        Me.icCombobox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.icCombobox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.icCombobox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
-        Me.icCombobox.FormattingEnabled = True
-        Me.icCombobox.Location = New System.Drawing.Point(244, 194)
-        Me.icCombobox.Name = "icCombobox"
-        Me.icCombobox.Size = New System.Drawing.Size(430, 28)
-        Me.icCombobox.TabIndex = 64
+        Me.ICComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.ICComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.ICComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
+        Me.ICComboBox.FormattingEnabled = True
+        Me.ICComboBox.Location = New System.Drawing.Point(244, 194)
+        Me.ICComboBox.Name = "ICComboBox"
+        Me.ICComboBox.Size = New System.Drawing.Size(430, 28)
+        Me.ICComboBox.TabIndex = 64
         '
-        'COmpanyName_Textbox
+        'CompanyName_Textbox
         '
-        Me.COmpanyName_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.COmpanyName_Textbox.Location = New System.Drawing.Point(285, 258)
-        Me.COmpanyName_Textbox.Name = "COmpanyName_Textbox"
-        Me.COmpanyName_Textbox.Size = New System.Drawing.Size(430, 27)
-        Me.COmpanyName_Textbox.TabIndex = 68
-        Me.COmpanyName_Textbox.Tag = "dataEditingControl"
-        Me.COmpanyName_Textbox.Visible = False
+        Me.CompanyName_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CompanyName_Textbox.Location = New System.Drawing.Point(285, 258)
+        Me.CompanyName_Textbox.Name = "CompanyName_Textbox"
+        Me.CompanyName_Textbox.Size = New System.Drawing.Size(430, 27)
+        Me.CompanyName_Textbox.TabIndex = 68
+        Me.CompanyName_Textbox.Tag = "dataEditingControl"
+        Me.CompanyName_Textbox.Visible = False
         '
-        'AutoMake_Value
+        'ICNameLabel
         '
-        Me.AutoMake_Value.AutoSize = True
-        Me.AutoMake_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AutoMake_Value.ForeColor = System.Drawing.Color.Black
-        Me.AutoMake_Value.Location = New System.Drawing.Point(244, 257)
-        Me.AutoMake_Value.Name = "AutoMake_Value"
-        Me.AutoMake_Value.Size = New System.Drawing.Size(0, 20)
-        Me.AutoMake_Value.TabIndex = 67
-        Me.AutoMake_Value.Tag = "dataViewingControl"
+        Me.ICNameLabel.AutoSize = True
+        Me.ICNameLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.ICNameLabel.Location = New System.Drawing.Point(97, 264)
+        Me.ICNameLabel.Name = "ICNameLabel"
+        Me.ICNameLabel.Size = New System.Drawing.Size(182, 17)
+        Me.ICNameLabel.TabIndex = 66
+        Me.ICNameLabel.Tag = "dataLabel"
+        Me.ICNameLabel.Text = "Insurance Company Name :"
         '
-        'icNameLabel
+        'CompanyName_Value
         '
-        Me.icNameLabel.AutoSize = True
-        Me.icNameLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.icNameLabel.Location = New System.Drawing.Point(97, 264)
-        Me.icNameLabel.Name = "icNameLabel"
-        Me.icNameLabel.Size = New System.Drawing.Size(182, 17)
-        Me.icNameLabel.TabIndex = 66
-        Me.icNameLabel.Tag = "dataLabel"
-        Me.icNameLabel.Text = "Insurance Company Name :"
+        Me.CompanyName_Value.AutoSize = True
+        Me.CompanyName_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CompanyName_Value.ForeColor = System.Drawing.Color.Black
+        Me.CompanyName_Value.Location = New System.Drawing.Point(285, 261)
+        Me.CompanyName_Value.Name = "CompanyName_Value"
+        Me.CompanyName_Value.Size = New System.Drawing.Size(0, 20)
+        Me.CompanyName_Value.TabIndex = 69
+        Me.CompanyName_Value.Tag = "dataViewingControl"
         '
         'insuranceMaintenance
         '
@@ -179,18 +179,18 @@ Partial Class insuranceMaintenance
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
-        Me.Controls.Add(Me.COmpanyName_Textbox)
-        Me.Controls.Add(Me.AutoMake_Value)
-        Me.Controls.Add(Me.icNameLabel)
-        Me.Controls.Add(Me.icLabel)
-        Me.Controls.Add(Me.icCombobox)
+        Me.Controls.Add(Me.CompanyName_Value)
+        Me.Controls.Add(Me.CompanyName_Textbox)
+        Me.Controls.Add(Me.ICNameLabel)
+        Me.Controls.Add(Me.ICLabel)
+        Me.Controls.Add(Me.ICComboBox)
         Me.Controls.Add(Me.deleteButton)
         Me.Controls.Add(Me.editButton)
         Me.Controls.Add(Me.cancelButton)
         Me.Controls.Add(Me.saveButton)
         Me.Controls.Add(Me.addButton)
         Me.Controls.Add(Me.insuranceMaintenanceLabel)
-        Me.Controls.Add(Me.Navigation1)
+        Me.Controls.Add(Me.nav)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "insuranceMaintenance"
@@ -201,16 +201,16 @@ Partial Class insuranceMaintenance
 
     End Sub
 
-    Friend WithEvents Navigation1 As navigation
+    Friend WithEvents nav As navigation
     Friend WithEvents insuranceMaintenanceLabel As Label
     Friend WithEvents deleteButton As Button
     Friend WithEvents editButton As Button
     Friend WithEvents cancelButton As Button
     Friend WithEvents saveButton As Button
     Friend WithEvents addButton As Button
-    Friend WithEvents icLabel As Label
-    Friend WithEvents icCombobox As ComboBox
-    Friend WithEvents COmpanyName_Textbox As TextBox
-    Friend WithEvents AutoMake_Value As Label
-    Friend WithEvents icNameLabel As Label
+    Friend WithEvents ICLabel As Label
+    Friend WithEvents ICComboBox As ComboBox
+    Friend WithEvents CompanyName_Textbox As TextBox
+    Friend WithEvents ICNameLabel As Label
+    Friend WithEvents CompanyName_Value As Label
 End Class
