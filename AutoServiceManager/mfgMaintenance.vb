@@ -48,7 +48,8 @@ Public Class mfgMaintenance
     Private Sub InitializeAutoManufacturersDataEditingControls()
 
         ' Lookup and set current amRow index based on selectedIndex of AutoMake ComboBox
-        Dim amDataRow As DataRow = AutoManufacturersDbController.DbDataTable.Select("AutoMake = '" & AutoMakeComboBox.Text & "'")(0)
+        Dim escapedText As String = escapeLikeValues(AutoMakeComboBox.Text)   ' removes/handles escape characters that cause errors
+        Dim amDataRow As DataRow = AutoManufacturersDbController.DbDataTable.Select("AutoMake LIKE '" & escapedText & "'")(0)
         amRow = AutoManufacturersDbController.DbDataTable.Rows.IndexOf(amDataRow)
 
         initializeControlsFromRow(AutoManufacturersDbController.DbDataTable, amRow, "dataEditingControl", "_", Me)
@@ -59,7 +60,8 @@ Public Class mfgMaintenance
     Private Sub InitializeAutoManufacturersDataViewingControls()
 
         ' Lookup and set current amRow index based on selectedIndex of AutoMake ComboBox
-        Dim amDataRow As DataRow = AutoManufacturersDbController.DbDataTable.Select("AutoMake = '" & AutoMakeComboBox.Text & "'")(0)
+        Dim escapedText As String = escapeLikeValues(AutoMakeComboBox.Text)   ' removes/handles escape characters that cause errors
+        Dim amDataRow As DataRow = AutoManufacturersDbController.DbDataTable.Select("AutoMake LIKE '" & escapedText & "'")(0)
         amRow = AutoManufacturersDbController.DbDataTable.Rows.IndexOf(amDataRow)
 
         initializeControlsFromRow(AutoManufacturersDbController.DbDataTable, amRow, "dataViewingControl", "_", Me)

@@ -59,9 +59,8 @@ Public Class insuranceMaintenance
     ' Sub that initializes all dataViewingControls corresponding with values from the InsuranceCompanies datatable
     Private Sub InitializeICDataViewingControls()
 
-        Dim escapedText As String = escapeLikeValues(ICComboBox.Text)
-        Console.WriteLine(escapedText)
         ' Lookup and set current ICRow index based on selectedIndex of CompanyName ComboBox
+        Dim escapedText As String = escapeLikeValues(ICComboBox.Text)   ' removes/handles escape characters that cause errors
         Dim ICDataRow As DataRow = ICDbController.DbDataTable.Select("CompanyName LIKE '" & escapedText & "'")(0)
         ICRow = ICDbController.DbDataTable.Rows.IndexOf(ICDataRow)
 
