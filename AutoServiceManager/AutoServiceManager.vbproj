@@ -73,6 +73,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="creditCardMaintenance.Designer.vb">
+      <DependentUpon>creditCardMaintenance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="creditCardMaintenance.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="home.Designer.vb">
       <DependentUpon>home.vb</DependentUpon>
     </Compile>
@@ -133,6 +139,9 @@
   <ItemGroup>
     <EmbeddedResource Include="companyInfo.resx">
       <DependentUpon>companyInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="creditCardMaintenance.resx">
+      <DependentUpon>creditCardMaintenance.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="home.resx">
       <DependentUpon>home.vb</DependentUpon>

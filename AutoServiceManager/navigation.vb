@@ -42,4 +42,8 @@
         changeScreen(insuranceMaintenance, Me.ParentForm)
     End Sub
 
+    Private Sub CreditCardsAcceptedToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreditCardsAcceptedToolStripMenuItem.Click
+        If Me.ParentForm Is creditCardMaintenance Then Exit Sub
+        changeScreen(creditCardMaintenance, Me.ParentForm)
+    End Sub
 End Class
