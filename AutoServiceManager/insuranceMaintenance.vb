@@ -159,7 +159,7 @@ Public Class insuranceMaintenance
         ' Insurance Company Name (REQUIRED)(MUST BE UNIQUE)
         If isEmpty("Insurance Company Name", True, CompanyName_Textbox.Text, errorMessage) Then
             CompanyName_Textbox.ForeColor = Color.Red
-        ElseIf isDuplicate("Manufacturer Name", CompanyName_Textbox.Text.ToLower(), errorMessage, ICList) Then
+        ElseIf isDuplicate("Insurance Company Name", CompanyName_Textbox.Text.ToLower(), errorMessage, ICList) Then
             CompanyName_Textbox.ForeColor = Color.Red
         End If
 
