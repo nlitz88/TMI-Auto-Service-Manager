@@ -423,9 +423,9 @@
     Public Function getDataTableRow(ByVal dataTable As DataTable, ByVal column As String, ByVal keyorvalue As String) As Integer
 
         Dim escapedText As String = escapeLikeValues(keyorvalue)
-        Dim dataRow As DataRow = dataTable.Select(column & " LIKE '" & escapedText & "'")(0)
         Try
-            Dim rowIndex As Integer = dataTable.Rows.IndexOf(dataRow)
+            Dim dataRow As DataRow = dataTable.Select(column & " LIKE '" & escapedText & "'")(0)
+            Dim rowIndex As Integer = dataTable.Rows.IndexOf(DataRow)
             Return rowIndex
         Catch ex As Exception
             Return -1
@@ -443,6 +443,7 @@
         Catch ex As Exception
             Return Nothing
         End Try
+
 
     End Function
 

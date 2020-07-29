@@ -227,11 +227,13 @@ Public Class taskMaintenance
 
         Else
 
+            ' Lookup TTROW to define it for the entire class and to change selected index of ComboBox
             TTRow = getDataTableRow(TTDbController.DbDataTable, "TTD", TTComboBox.Text)
-            Dim TaskType As String = TTDbController.DbDataTable.Rows(TTRow)("TaskType").ToString()
+            'Dim TaskType As String = TTDbController.DbDataTable.Rows(TTRow)("TaskType").ToString()
+            Dim TaskType As Object = getRowValue(TTDbController.DbDataTable, TTRow, "TaskType")
 
             ' If the input in the combobox matches an entry in the table that it represents
-            If TTList.BinarySearch(TaskType.ToLower()) >= 0 Then
+            If TaskType <> Nothing And TTList.BinarySearch(TaskType.ToLower()) >= 0 Then
                 ' Initialize corresponding controls from DataTable values
                 valuesInitialized = False
                 InitializeTTDataViewingControls()
@@ -245,7 +247,7 @@ Public Class taskMaintenance
                 editButton.Enabled = True
                 deleteButton.Enabled = True
 
-            Else ' THIS SHOULD NEVER EXECUTE
+            Else ' THIS SHOULD ONLY EVER EXECUTE IF AN ENTRY IN COMBOBOX IS NOT SELECT ONE AND NOT IN THE DATATABLE
 
                 ' Have all labels and corresponding values hidden
                 showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
@@ -490,9 +492,10 @@ Public Class taskMaintenance
                         TTComboBox.Items.Add(row("TTD"))
                     Next
 
-                    ' Lookup and set new selectedIndex based on updated value
-                    Dim updatedItem As String = getRowValueWithKey(TTDbController.DbDataTable, "TTD", "TaskType", TaskType_Textbox.Text).ToString()
+                    ' Lookup and set new selectedIndex based on updated value (updated value will still be at same datatable index, though)
+                    Dim updatedItem As String = TTDbController.DbDataTable.Rows(TTRow)("TTD")
                     TTComboBox.SelectedIndex = TTComboBox.Items.IndexOf(updatedItem)
+
 
                     ' dataViewingControl values reinitialized, as well as dataControls hide/show in combobox text/selectedindex change event
 
@@ -528,9 +531,14 @@ Public Class taskMaintenance
                     Next
 
                     ' Changing index of main combobox will also initialize respective dataViewing control values
-                    ' Lookup and set new selectedIndex based on new value
-                    Dim newItem As String = getRowValueWithKey(TTDbController.DbDataTable, "TTD", "TaskType", TaskType_Textbox.Text).ToString()
-                    TTComboBox.SelectedIndex = TTComboBox.Items.IndexOf(newItem)
+                    ' Lookup and set new selectedIndex based on new value. If insertion failed, then go back to last
+                    Dim newItem As Object = getRowValueWithKey(TTDbController.DbDataTable, "TTD", "TaskType", TaskType_Textbox.Text)
+                    If Not newItem = Nothing Then
+                        TTComboBox.SelectedIndex = TTComboBox.Items.IndexOf(newItem)
+                    Else
+                        TTComboBox.SelectedIndex = TTComboBox.Items.IndexOf(lastSelected)
+                    End If
+
 
                     ' 5.) MOVE UI OUT OF Adding MODE
                     addButton.Enabled = True
