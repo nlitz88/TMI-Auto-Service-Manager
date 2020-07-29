@@ -37,4 +37,9 @@
         changeScreen(mfgMaintenance, Me.ParentForm)
     End Sub
 
+    Private Sub InsuranceCompaniesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InsuranceCompaniesToolStripMenuItem.Click
+        If Me.ParentForm Is insuranceMaintenance Then Exit Sub
+        changeScreen(insuranceMaintenance, Me.ParentForm)
+    End Sub
+
 End Class

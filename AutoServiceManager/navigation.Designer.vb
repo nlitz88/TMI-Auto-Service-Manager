@@ -28,8 +28,9 @@ Partial Class navigation
         Me.InvoiceMaintenanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FileMaintenanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CompanySetupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AutomobileManufacturersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InsuranceCompaniesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mainMs.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -64,7 +65,7 @@ Partial Class navigation
         '
         'FileMaintenanceToolStripMenuItem
         '
-        Me.FileMaintenanceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompanySetupToolStripMenuItem, Me.AutomobileManufacturersToolStripMenuItem})
+        Me.FileMaintenanceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompanySetupToolStripMenuItem, Me.AutomobileManufacturersToolStripMenuItem, Me.InsuranceCompaniesToolStripMenuItem})
         Me.FileMaintenanceToolStripMenuItem.Name = "FileMaintenanceToolStripMenuItem"
         Me.FileMaintenanceToolStripMenuItem.Size = New System.Drawing.Size(135, 24)
         Me.FileMaintenanceToolStripMenuItem.Text = "File Maintenance"
@@ -75,17 +76,23 @@ Partial Class navigation
         Me.CompanySetupToolStripMenuItem.Size = New System.Drawing.Size(269, 26)
         Me.CompanySetupToolStripMenuItem.Text = "Company Setup"
         '
+        'AutomobileManufacturersToolStripMenuItem
+        '
+        Me.AutomobileManufacturersToolStripMenuItem.Name = "AutomobileManufacturersToolStripMenuItem"
+        Me.AutomobileManufacturersToolStripMenuItem.Size = New System.Drawing.Size(269, 26)
+        Me.AutomobileManufacturersToolStripMenuItem.Text = "Automobile Manufacturers"
+        '
         'ReportsToolStripMenuItem
         '
         Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
         Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(74, 24)
         Me.ReportsToolStripMenuItem.Text = "Reports"
         '
-        'AutomobileManufacturersToolStripMenuItem
+        'InsuranceCompaniesToolStripMenuItem
         '
-        Me.AutomobileManufacturersToolStripMenuItem.Name = "AutomobileManufacturersToolStripMenuItem"
-        Me.AutomobileManufacturersToolStripMenuItem.Size = New System.Drawing.Size(269, 26)
-        Me.AutomobileManufacturersToolStripMenuItem.Text = "Automobile Manufacturers"
+        Me.InsuranceCompaniesToolStripMenuItem.Name = "InsuranceCompaniesToolStripMenuItem"
+        Me.InsuranceCompaniesToolStripMenuItem.Size = New System.Drawing.Size(269, 26)
+        Me.InsuranceCompaniesToolStripMenuItem.Text = "Insurance Companies"
         '
         'navigation
         '
@@ -109,4 +116,5 @@ Partial Class navigation
     Friend WithEvents CompanySetupToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReportsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AutomobileManufacturersToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents InsuranceCompaniesToolStripMenuItem As ToolStripMenuItem
 End Class

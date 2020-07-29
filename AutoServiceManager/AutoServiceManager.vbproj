@@ -87,6 +87,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dbControl.vb" />
+    <Compile Include="insuranceMaintenance.Designer.vb">
+      <DependentUpon>insuranceMaintenance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="insuranceMaintenance.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="loginForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="home.resx">
       <DependentUpon>home.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="insuranceMaintenance.resx">
+      <DependentUpon>insuranceMaintenance.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="loginForm.resx">
       <DependentUpon>loginForm.vb</DependentUpon>
