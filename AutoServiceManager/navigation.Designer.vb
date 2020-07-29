@@ -30,8 +30,8 @@ Partial Class navigation
         Me.CompanySetupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AutomobileManufacturersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InsuranceCompaniesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CreditCardsAcceptedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mainMs.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -74,32 +74,32 @@ Partial Class navigation
         'CompanySetupToolStripMenuItem
         '
         Me.CompanySetupToolStripMenuItem.Name = "CompanySetupToolStripMenuItem"
-        Me.CompanySetupToolStripMenuItem.Size = New System.Drawing.Size(269, 26)
+        Me.CompanySetupToolStripMenuItem.Size = New System.Drawing.Size(240, 26)
         Me.CompanySetupToolStripMenuItem.Text = "Company Setup"
         '
         'AutomobileManufacturersToolStripMenuItem
         '
         Me.AutomobileManufacturersToolStripMenuItem.Name = "AutomobileManufacturersToolStripMenuItem"
-        Me.AutomobileManufacturersToolStripMenuItem.Size = New System.Drawing.Size(269, 26)
-        Me.AutomobileManufacturersToolStripMenuItem.Text = "Automobile Manufacturers"
+        Me.AutomobileManufacturersToolStripMenuItem.Size = New System.Drawing.Size(240, 26)
+        Me.AutomobileManufacturersToolStripMenuItem.Text = "Auto Manufacturers"
         '
         'InsuranceCompaniesToolStripMenuItem
         '
         Me.InsuranceCompaniesToolStripMenuItem.Name = "InsuranceCompaniesToolStripMenuItem"
-        Me.InsuranceCompaniesToolStripMenuItem.Size = New System.Drawing.Size(269, 26)
+        Me.InsuranceCompaniesToolStripMenuItem.Size = New System.Drawing.Size(240, 26)
         Me.InsuranceCompaniesToolStripMenuItem.Text = "Insurance Companies"
+        '
+        'CreditCardsAcceptedToolStripMenuItem
+        '
+        Me.CreditCardsAcceptedToolStripMenuItem.Name = "CreditCardsAcceptedToolStripMenuItem"
+        Me.CreditCardsAcceptedToolStripMenuItem.Size = New System.Drawing.Size(240, 26)
+        Me.CreditCardsAcceptedToolStripMenuItem.Text = "Credit Cards Accepted"
         '
         'ReportsToolStripMenuItem
         '
         Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
         Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(74, 24)
         Me.ReportsToolStripMenuItem.Text = "Reports"
-        '
-        'CreditCardsAcceptedToolStripMenuItem
-        '
-        Me.CreditCardsAcceptedToolStripMenuItem.Name = "CreditCardsAcceptedToolStripMenuItem"
-        Me.CreditCardsAcceptedToolStripMenuItem.Size = New System.Drawing.Size(269, 26)
-        Me.CreditCardsAcceptedToolStripMenuItem.Text = "Credit Cards Accepted"
         '
         'navigation
         '
