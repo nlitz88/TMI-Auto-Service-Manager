@@ -32,8 +32,9 @@ Partial Class navigation
         Me.AutoColorsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InsuranceCompaniesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CreditCardsAcceptedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PaymentTypesAcceptedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TaskTypesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mainMs.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -68,7 +69,7 @@ Partial Class navigation
         '
         'FileMaintenanceToolStripMenuItem
         '
-        Me.FileMaintenanceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompanySetupToolStripMenuItem, Me.AutomobileManufacturersToolStripMenuItem, Me.AutoColorsToolStripMenuItem, Me.InsuranceCompaniesToolStripMenuItem, Me.CreditCardsAcceptedToolStripMenuItem, Me.PaymentTypesAcceptedToolStripMenuItem})
+        Me.FileMaintenanceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompanySetupToolStripMenuItem, Me.AutomobileManufacturersToolStripMenuItem, Me.AutoColorsToolStripMenuItem, Me.InsuranceCompaniesToolStripMenuItem, Me.CreditCardsAcceptedToolStripMenuItem, Me.PaymentTypesAcceptedToolStripMenuItem, Me.TaskTypesToolStripMenuItem})
         Me.FileMaintenanceToolStripMenuItem.Name = "FileMaintenanceToolStripMenuItem"
         Me.FileMaintenanceToolStripMenuItem.Size = New System.Drawing.Size(135, 24)
         Me.FileMaintenanceToolStripMenuItem.Text = "File Maintenance"
@@ -103,17 +104,23 @@ Partial Class navigation
         Me.CreditCardsAcceptedToolStripMenuItem.Size = New System.Drawing.Size(256, 26)
         Me.CreditCardsAcceptedToolStripMenuItem.Text = "Credit Cards Accepted"
         '
+        'PaymentTypesAcceptedToolStripMenuItem
+        '
+        Me.PaymentTypesAcceptedToolStripMenuItem.Name = "PaymentTypesAcceptedToolStripMenuItem"
+        Me.PaymentTypesAcceptedToolStripMenuItem.Size = New System.Drawing.Size(256, 26)
+        Me.PaymentTypesAcceptedToolStripMenuItem.Text = "Payment Types Accepted"
+        '
         'ReportsToolStripMenuItem
         '
         Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
         Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(74, 24)
         Me.ReportsToolStripMenuItem.Text = "Reports"
         '
-        'PaymentTypesAcceptedToolStripMenuItem
+        'TaskTypesToolStripMenuItem
         '
-        Me.PaymentTypesAcceptedToolStripMenuItem.Name = "PaymentTypesAcceptedToolStripMenuItem"
-        Me.PaymentTypesAcceptedToolStripMenuItem.Size = New System.Drawing.Size(256, 26)
-        Me.PaymentTypesAcceptedToolStripMenuItem.Text = "Payment Types Accepted"
+        Me.TaskTypesToolStripMenuItem.Name = "TaskTypesToolStripMenuItem"
+        Me.TaskTypesToolStripMenuItem.Size = New System.Drawing.Size(256, 26)
+        Me.TaskTypesToolStripMenuItem.Text = "Task Types"
         '
         'navigation
         '
@@ -141,4 +148,5 @@ Partial Class navigation
     Friend WithEvents CreditCardsAcceptedToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AutoColorsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PaymentTypesAcceptedToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TaskTypesToolStripMenuItem As ToolStripMenuItem
 End Class

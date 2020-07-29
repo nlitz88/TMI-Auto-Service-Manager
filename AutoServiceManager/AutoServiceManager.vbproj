@@ -147,6 +147,12 @@
     <Compile Include="paymentMaintenance.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="taskMaintenance.Designer.vb">
+      <DependentUpon>taskMaintenance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="taskMaintenance.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="colorMaintenance.resx">
@@ -181,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="paymentMaintenance.resx">
       <DependentUpon>paymentMaintenance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="taskMaintenance.resx">
+      <DependentUpon>taskMaintenance.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -57,5 +57,9 @@
         changeScreen(paymentMaintenance, Me.ParentForm)
     End Sub
 
+    Private Sub TaskTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TaskTypesToolStripMenuItem.Click
+        If Me.ParentForm Is taskMaintenance Then Exit Sub
+        changeScreen(taskMaintenance, Me.ParentForm)
+    End Sub
 
 End Class
