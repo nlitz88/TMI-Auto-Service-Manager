@@ -435,7 +435,7 @@
 
 
     ' Function that returns value from same row but different column provided a value as they key
-    Public Function getRowValue(ByVal dataTable As DataTable, ByVal desiredColumn As String, ByVal keyColumn As String, ByVal key As String) As Object
+    Public Function getRowValueWithKey(ByVal dataTable As DataTable, ByVal desiredColumn As String, ByVal keyColumn As String, ByVal key As String) As Object
 
         Dim rowIndex As Integer = getDataTableRow(dataTable, keyColumn, key)
         If rowIndex >= 0 Then
