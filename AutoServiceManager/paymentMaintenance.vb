@@ -158,7 +158,7 @@ Public Class paymentMaintenance
         ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
 
 
-        ' Insurance Company Name (REQUIRED)(MUST BE UNIQUE)
+        ' Payment Type Name (REQUIRED)(MUST BE UNIQUE)
         If isEmpty("Payment Type Name", True, PaymentType_Textbox.Text, errorMessage) Then
             PaymentType_Textbox.ForeColor = Color.Red
         ElseIf isDuplicate("Payment Type Name", PaymentType_Textbox.Text.ToLower(), errorMessage, PTList) Then

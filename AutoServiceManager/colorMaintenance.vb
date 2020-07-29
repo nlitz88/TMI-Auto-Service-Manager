@@ -158,7 +158,7 @@ Public Class colorMaintenance
         ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
 
 
-        ' Insurance Company Name (REQUIRED)(MUST BE UNIQUE)
+        ' Color Name (REQUIRED)(MUST BE UNIQUE)
         If isEmpty("Color Name", True, Color_Textbox.Text, errorMessage) Then
             Color_Textbox.ForeColor = Color.Red
         ElseIf isDuplicate("Color Name", Color_Textbox.Text.ToLower(), errorMessage, ACList) Then

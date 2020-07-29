@@ -158,7 +158,7 @@ Public Class creditCardMaintenance
         ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
 
 
-        ' Insurance Company Name (REQUIRED)(MUST BE UNIQUE)
+        ' Credit Card Name (REQUIRED)(MUST BE UNIQUE)
         If isEmpty("Credit Card Name", True, CreditCard_Textbox.Text, errorMessage) Then
             CreditCard_Textbox.ForeColor = Color.Red
         ElseIf isDuplicate("Credit Card Name", CreditCard_Textbox.Text.ToLower(), errorMessage, CCList) Then
