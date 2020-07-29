@@ -158,7 +158,6 @@ Partial Class mfgMaintenance
         Me.AutoMake_Textbox.Size = New System.Drawing.Size(210, 27)
         Me.AutoMake_Textbox.TabIndex = 55
         Me.AutoMake_Textbox.Tag = "dataEditingControl"
-        Me.AutoMake_Textbox.Visible = False
         '
         'deleteButton
         '

@@ -22,7 +22,6 @@ Partial Class insuranceMaintenance
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.nav = New AutoServiceManager.navigation()
         Me.insuranceMaintenanceLabel = New System.Windows.Forms.Label()
         Me.deleteButton = New System.Windows.Forms.Button()
         Me.editButton = New System.Windows.Forms.Button()
@@ -34,16 +33,8 @@ Partial Class insuranceMaintenance
         Me.CompanyName_Textbox = New System.Windows.Forms.TextBox()
         Me.ICNameLabel = New System.Windows.Forms.Label()
         Me.CompanyName_Value = New System.Windows.Forms.Label()
+        Me.nav = New AutoServiceManager.navigation()
         Me.SuspendLayout()
-        '
-        'nav
-        '
-        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.nav.Location = New System.Drawing.Point(0, 0)
-        Me.nav.Name = "nav"
-        Me.nav.Size = New System.Drawing.Size(982, 28)
-        Me.nav.TabIndex = 57
         '
         'insuranceMaintenanceLabel
         '
@@ -149,7 +140,6 @@ Partial Class insuranceMaintenance
         Me.CompanyName_Textbox.Size = New System.Drawing.Size(430, 27)
         Me.CompanyName_Textbox.TabIndex = 68
         Me.CompanyName_Textbox.Tag = "dataEditingControl"
-        Me.CompanyName_Textbox.Visible = False
         '
         'ICNameLabel
         '
@@ -172,6 +162,15 @@ Partial Class insuranceMaintenance
         Me.CompanyName_Value.Size = New System.Drawing.Size(0, 20)
         Me.CompanyName_Value.TabIndex = 69
         Me.CompanyName_Value.Tag = "dataViewingControl"
+        '
+        'nav
+        '
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(982, 28)
+        Me.nav.TabIndex = 57
         '
         'insuranceMaintenance
         '
