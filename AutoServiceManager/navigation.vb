@@ -46,4 +46,10 @@
         If Me.ParentForm Is creditCardMaintenance Then Exit Sub
         changeScreen(creditCardMaintenance, Me.ParentForm)
     End Sub
+
+    Private Sub AutoColorsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AutoColorsToolStripMenuItem.Click
+        If Me.ParentForm Is colorMaintenance Then Exit Sub
+        changeScreen(colorMaintenance, Me.ParentForm)
+    End Sub
+
 End Class

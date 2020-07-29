@@ -32,6 +32,7 @@ Partial Class navigation
         Me.InsuranceCompaniesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CreditCardsAcceptedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AutoColorsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mainMs.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -42,33 +43,33 @@ Partial Class navigation
         Me.mainMs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HomeToolStripMenuItem, Me.NewInvoiceToolStripMenuItem, Me.InvoiceMaintenanceToolStripMenuItem, Me.FileMaintenanceToolStripMenuItem, Me.ReportsToolStripMenuItem})
         Me.mainMs.Location = New System.Drawing.Point(0, 0)
         Me.mainMs.Name = "mainMs"
-        Me.mainMs.Size = New System.Drawing.Size(1000, 28)
+        Me.mainMs.Size = New System.Drawing.Size(1000, 30)
         Me.mainMs.TabIndex = 46
         Me.mainMs.Text = "MenuStrip1"
         '
         'HomeToolStripMenuItem
         '
         Me.HomeToolStripMenuItem.Name = "HomeToolStripMenuItem"
-        Me.HomeToolStripMenuItem.Size = New System.Drawing.Size(64, 24)
+        Me.HomeToolStripMenuItem.Size = New System.Drawing.Size(64, 26)
         Me.HomeToolStripMenuItem.Text = "Home"
         '
         'NewInvoiceToolStripMenuItem
         '
         Me.NewInvoiceToolStripMenuItem.Name = "NewInvoiceToolStripMenuItem"
-        Me.NewInvoiceToolStripMenuItem.Size = New System.Drawing.Size(104, 24)
+        Me.NewInvoiceToolStripMenuItem.Size = New System.Drawing.Size(104, 26)
         Me.NewInvoiceToolStripMenuItem.Text = "New Invoice"
         '
         'InvoiceMaintenanceToolStripMenuItem
         '
         Me.InvoiceMaintenanceToolStripMenuItem.Name = "InvoiceMaintenanceToolStripMenuItem"
-        Me.InvoiceMaintenanceToolStripMenuItem.Size = New System.Drawing.Size(159, 24)
+        Me.InvoiceMaintenanceToolStripMenuItem.Size = New System.Drawing.Size(159, 26)
         Me.InvoiceMaintenanceToolStripMenuItem.Text = "Invoice Maintenance"
         '
         'FileMaintenanceToolStripMenuItem
         '
-        Me.FileMaintenanceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompanySetupToolStripMenuItem, Me.AutomobileManufacturersToolStripMenuItem, Me.InsuranceCompaniesToolStripMenuItem, Me.CreditCardsAcceptedToolStripMenuItem})
+        Me.FileMaintenanceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompanySetupToolStripMenuItem, Me.AutomobileManufacturersToolStripMenuItem, Me.AutoColorsToolStripMenuItem, Me.InsuranceCompaniesToolStripMenuItem, Me.CreditCardsAcceptedToolStripMenuItem})
         Me.FileMaintenanceToolStripMenuItem.Name = "FileMaintenanceToolStripMenuItem"
-        Me.FileMaintenanceToolStripMenuItem.Size = New System.Drawing.Size(135, 24)
+        Me.FileMaintenanceToolStripMenuItem.Size = New System.Drawing.Size(135, 26)
         Me.FileMaintenanceToolStripMenuItem.Text = "File Maintenance"
         '
         'CompanySetupToolStripMenuItem
@@ -98,8 +99,14 @@ Partial Class navigation
         'ReportsToolStripMenuItem
         '
         Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
-        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(74, 24)
+        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(74, 26)
         Me.ReportsToolStripMenuItem.Text = "Reports"
+        '
+        'AutoColorsToolStripMenuItem
+        '
+        Me.AutoColorsToolStripMenuItem.Name = "AutoColorsToolStripMenuItem"
+        Me.AutoColorsToolStripMenuItem.Size = New System.Drawing.Size(240, 26)
+        Me.AutoColorsToolStripMenuItem.Text = "Auto Colors"
         '
         'navigation
         '
@@ -125,4 +132,5 @@ Partial Class navigation
     Friend WithEvents AutomobileManufacturersToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents InsuranceCompaniesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CreditCardsAcceptedToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AutoColorsToolStripMenuItem As ToolStripMenuItem
 End Class
