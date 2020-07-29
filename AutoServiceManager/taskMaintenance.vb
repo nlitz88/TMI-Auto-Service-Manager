@@ -32,7 +32,8 @@ Public Class taskMaintenance
     ' Sub that will contain calls to all of the instances of the database controller class that loads data from the database into DataTables
     Private Function loadDataTablesFromDatabase() As Boolean
 
-        TTDbController.ExecQuery("SELECT tt.TaskType, tt.TaskDescription FROM TaskTypes tt ORDER BY tt.TaskType ASC")
+        'TTDbController.ExecQuery("SELECT tt.TaskType, tt.TaskDescription FROM TaskTypes tt ORDER BY tt.TaskType ASC")
+        TTDbController.ExecQuery("SELECT tt.TaskType + ' - ' + tt.TaskDescrption as TD, tt.TaskType, tt.TaskDescription FROM TaskTypes tt ORDER BY tt.TaskType ASC")
         If TTDbController.HasException() Then Return False
 
         ' Also, populate respective lists with data
@@ -160,7 +161,6 @@ Public Class taskMaintenance
 
         ' Task Type Symbol (REQUIRED)(MUST BE UNIQUE)
         Dim initialTTS As String = TTDbController.DbDataTable.Rows(TTRow)("TaskType").ToString().ToLower()
-        Console.WriteLine(initialTTS)
         If isEmpty("Task Type Symbol", True, TaskType_Textbox.Text, errorMessage) Then
             TaskType_Textbox.ForeColor = Color.Red
             ' Before checking if it is a duplicate value, first ensure that it is not itself (the initial value)
@@ -207,7 +207,7 @@ Public Class taskMaintenance
         ' SETUP CONTROLS HERE
         TTComboBox.Items.Add("Select One")
         For Each row In TTDbController.DbDataTable.Rows
-            TTComboBox.Items.Add(row("TaskType"))
+            TTComboBox.Items.Add(row("TD"))
             'TTComboBox.Items.Add(row("TaskType") & " " & row("TaskDescription")), then split combobox.text on lookup by " "
             ' Or, use custom sql query, and use the "Task Type + Task Description" as a separate column in the datatable, this way
             ' we can lookup the values we want from the column values that we generated custom
@@ -307,7 +307,7 @@ Public Class taskMaintenance
                 TTComboBox.Items.Clear()
                 TTComboBox.Items.Add("Select One")
                 For Each row In TTDbController.DbDataTable.Rows
-                    TTComboBox.Items.Add(row("TaskType"))
+                    TTComboBox.Items.Add(row("TD"))
                 Next
                 TTComboBox.SelectedIndex = 0
 
