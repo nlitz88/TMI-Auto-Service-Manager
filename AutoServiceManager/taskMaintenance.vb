@@ -33,7 +33,7 @@ Public Class taskMaintenance
     Private Function loadDataTablesFromDatabase() As Boolean
 
         'TTDbController.ExecQuery("SELECT tt.TaskType, tt.TaskDescription FROM TaskTypes tt ORDER BY tt.TaskType ASC")
-        TTDbController.ExecQuery("SELECT tt.TaskType + ' - ' + tt.TaskDescrption as TD, tt.TaskType, tt.TaskDescription FROM TaskTypes tt ORDER BY tt.TaskType ASC")
+        TTDbController.ExecQuery("SELECT tt.TaskType + ' - ' + tt.TaskDescription as TTD, tt.TaskType, tt.TaskDescription FROM TaskTypes tt ORDER BY tt.TaskType ASC")
         If TTDbController.HasException() Then Return False
 
         ' Also, populate respective lists with data
@@ -50,11 +50,6 @@ Public Class taskMaintenance
     ' Sub that initializes all dataEditingcontrols corresponding with values from the TaskTypes datatable
     Private Sub InitializeTTDataEditingControls()
 
-        ' Lookup and set current TTRow index based on selectedIndex of TaskType ComboBox
-        Dim escapedText As String = escapeLikeValues(TTComboBox.Text)
-        Dim TTDataRow As DataRow = TTDbController.DbDataTable.Select("TaskType LIKE '" & escapedText & "'")(0)
-        TTRow = TTDbController.DbDataTable.Rows.IndexOf(TTDataRow)
-
         initializeControlsFromRow(TTDbController.DbDataTable, TTRow, "dataEditingControl", "_", Me)
 
     End Sub
@@ -62,10 +57,7 @@ Public Class taskMaintenance
     ' Sub that initializes all dataViewingControls corresponding with values from the TaskTypes datatable
     Private Sub InitializeTTDataViewingControls()
 
-        ' Lookup and set current TTRow index based on selectedIndex of TaskType ComboBox
-        Dim escapedText As String = escapeLikeValues(TTComboBox.Text)   ' removes/handles escape characters that cause errors
-        Dim TTDataRow As DataRow = TTDbController.DbDataTable.Select("TaskType LIKE '" & escapedText & "'")(0)
-        TTRow = TTDbController.DbDataTable.Rows.IndexOf(TTDataRow)
+        'TTRow = getDataTableRow(TTDbController.DbDataTable, "TTD", TTComboBox.Text)
 
         initializeControlsFromRow(TTDbController.DbDataTable, TTRow, "dataViewingControl", "_", Me)
 
@@ -207,10 +199,7 @@ Public Class taskMaintenance
         ' SETUP CONTROLS HERE
         TTComboBox.Items.Add("Select One")
         For Each row In TTDbController.DbDataTable.Rows
-            TTComboBox.Items.Add(row("TD"))
-            'TTComboBox.Items.Add(row("TaskType") & " " & row("TaskDescription")), then split combobox.text on lookup by " "
-            ' Or, use custom sql query, and use the "Task Type + Task Description" as a separate column in the datatable, this way
-            ' we can lookup the values we want from the column values that we generated custom
+            TTComboBox.Items.Add(row("TTD"))
         Next
         TTComboBox.SelectedIndex = 0
 
@@ -225,23 +214,8 @@ Public Class taskMaintenance
     ' Main eventhandler that handles most of the initialization for all subsequent elements/controls.
     Private Sub TTCombobox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TTComboBox.SelectedIndexChanged, TTComboBox.TextChanged
 
-        ' If the input in the combobox matches an entry in the table that it represents
-        If TTList.BinarySearch(TTComboBox.Text.ToLower()) >= 0 Then
-
-            ' Initialize corresponding controls from DataTable values
-            valuesInitialized = False
-            InitializeTTDataViewingControls()
-            valuesInitialized = True
-
-            ' Show labels and corresponding values
-            showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
-            showHide(getAllControlsWithTag("dataLabel", Me), 1)
-            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
-            ' Enable editing button
-            editButton.Enabled = True
-            deleteButton.Enabled = True
-
-        Else
+        ' Rewrite this if structure so that these don't go first (we still need to take action if select one is selected)
+        If TTComboBox.Text = "Select One" Or TTComboBox.SelectedIndex = 0 Then
 
             ' Have all labels and corresponding values hidden
             showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
@@ -251,7 +225,42 @@ Public Class taskMaintenance
             editButton.Enabled = False
             deleteButton.Enabled = False
 
+        Else
+
+            TTRow = getDataTableRow(TTDbController.DbDataTable, "TTD", TTComboBox.Text)
+            Dim TaskType As String = TTDbController.DbDataTable.Rows(TTRow)("TaskType").ToString()
+
+            Console.WriteLine(TaskType & " at " & TTRow.ToString())
+
+            ' If the input in the combobox matches an entry in the table that it represents
+            If TTList.BinarySearch(TaskType.ToLower()) >= 0 Then
+                ' Initialize corresponding controls from DataTable values
+                valuesInitialized = False
+                InitializeTTDataViewingControls()
+                valuesInitialized = True
+
+                ' Show labels and corresponding values
+                showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+                showHide(getAllControlsWithTag("dataLabel", Me), 1)
+                showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+                ' Enable editing button
+                editButton.Enabled = True
+                deleteButton.Enabled = True
+
+            Else ' THIS SHOULD NEVER EXECUTE
+
+                ' Have all labels and corresponding values hidden
+                showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+                showHide(getAllControlsWithTag("dataLabel", Me), 0)
+                showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+                ' Disable editing button
+                editButton.Enabled = False
+                deleteButton.Enabled = False
+
+            End If
+
         End If
+
 
     End Sub
 
@@ -307,7 +316,7 @@ Public Class taskMaintenance
                 TTComboBox.Items.Clear()
                 TTComboBox.Items.Add("Select One")
                 For Each row In TTDbController.DbDataTable.Rows
-                    TTComboBox.Items.Add(row("TD"))
+                    TTComboBox.Items.Add(row("TTD"))
                 Next
                 TTComboBox.SelectedIndex = 0
 
@@ -480,10 +489,12 @@ Public Class taskMaintenance
                     TTComboBox.Items.Clear()
                     TTComboBox.Items.Add("Select One")
                     For Each row In TTDbController.DbDataTable.Rows
-                        TTComboBox.Items.Add(row("TaskType"))
+                        TTComboBox.Items.Add(row("TTD"))
                     Next
-                    TTComboBox.SelectedIndex = TTComboBox.Items.IndexOf(TaskType_Textbox.Text)
-                    'TTComboBox.SelectedIndex = amRow + 1
+
+                    ' Lookup and set new selectedIndex based on updated value
+                    Dim updatedItem As String = getRowValue(TTDbController.DbDataTable, "TTD", "TaskType", TaskType_Textbox.Text)
+                    TTComboBox.SelectedIndex = TTComboBox.Items.IndexOf(updatedItem)
 
                     ' dataViewingControl values reinitialized, as well as dataControls hide/show in combobox text/selectedindex change event
 
@@ -515,11 +526,13 @@ Public Class taskMaintenance
                     TTComboBox.Items.Clear()
                     TTComboBox.Items.Add("Select One")
                     For Each row In TTDbController.DbDataTable.Rows
-                        TTComboBox.Items.Add(row("TaskType"))
+                        TTComboBox.Items.Add(row("TTD"))
                     Next
 
                     ' Changing index of main combobox will also initialize respective dataViewing control values
-                    TTComboBox.SelectedIndex = TTComboBox.Items.IndexOf(TaskType_Textbox.Text)
+                    ' Lookup and set new selectedIndex based on new value
+                    Dim newItem As String = getRowValue(TTDbController.DbDataTable, "TTD", "TaskType", TaskType_Textbox.Text)
+                    TTComboBox.SelectedIndex = TTComboBox.Items.IndexOf(newItem)
 
                     ' 5.) MOVE UI OUT OF Adding MODE
                     addButton.Enabled = True

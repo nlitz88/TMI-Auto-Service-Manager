@@ -413,6 +413,34 @@
     End Function
 
 
+    ' Function that returns the index of a certain DataTable row based on a certain column value/entry provided
+    Public Function getDataTableRow(ByVal dataTable As DataTable, ByVal column As String, ByVal keyorvalue As String) As Integer
+
+        Dim escapedText As String = escapeLikeValues(keyorvalue)
+        Dim dataRow As DataRow = dataTable.Select(column & " LIKE '" & escapedText & "'")(0)
+        Try
+            Dim rowIndex As Integer = dataTable.Rows.IndexOf(dataRow)
+            Return rowIndex
+        Catch ex As Exception
+            Return -1
+        End Try
+
+    End Function
+
+
+    ' Function that returns value from same row but different column provided a value as they key
+    Public Function getRowValue(ByVal dataTable As DataTable, ByVal desiredColumn As String, ByVal keyColumn As String, ByVal key As String) As Object
+
+        Dim rowIndex As Integer = getDataTableRow(dataTable, keyColumn, key)
+        If rowIndex >= 0 Then
+            Dim value As Object = dataTable.Rows(rowIndex)(desiredColumn)
+            Return value
+        End If
+        Return Nothing
+
+    End Function
+
+
     ' Function that checks database connection
     Public Function checkDbConn() As Boolean
 
