@@ -67,8 +67,8 @@ Public Class inventoryMaintenance
 
         ' Automated initializations
         InitializeIPDataEditingControls()
-        ' Then, add formatting
-        ' addFormatting()
+        ' Then, format dataEditingControls
+        formatDataEditingControls()
         ' Set forecolor if not already initially default
         setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
 
@@ -79,6 +79,30 @@ Public Class inventoryMaintenance
 
         ' Automated initializations
         InitializeIPDataViewingControls()
+        ' Format dataviewingcontrols
+        formatDataViewingControls()
+
+    End Sub
+
+
+    ' Sub that will call formatting functions to add respective formats to already INITIALIZED DATAVIEWINGCONTROLS (i.e. phone numbers, currency, etc.).
+    Private Sub formatDataViewingControls()
+
+        PartPrice_Value.Text = FormatCurrency(IPDbController.DbDataTable.Rows(IPRow)("PartPrice"))
+        ListPrice_Value.Text = FormatCurrency(IPDbController.DbDataTable.Rows(IPRow)("ListPrice"))
+
+    End Sub
+
+    ' Sub that will call formatting functions to add respective formats to already INITIALIZED DATAEDITINGCONTROLS (i.e. phone numbers, currency, etc.).
+    Private Sub formatDataEditingControls()
+
+        PartPrice_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(IPDbController.DbDataTable.Rows(IPRow)("PartPrice")))
+        ListPrice_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(IPDbController.DbDataTable.Rows(IPRow)("ListPrice")))
+
+    End Sub
+
+    ' Sub that will remove all necessary formatting taht was added (used before updating values)
+    Private Sub stripDataEditingControlsFormatting()
 
     End Sub
 
@@ -87,7 +111,7 @@ Public Class inventoryMaintenance
     Private Function updateAll() As Boolean
 
         ' First, remove any formatting that was added (specific to the controls on this form)
-        'stripFormatting()
+        ' stripDataEditingControlsFormatting()
 
         ' Then, update all relevant tables that COUDLD have experienced changes
         Dim initialValueAsKey As String = IPDbController.DbDataTable.Rows(IPRow)("PartNbr")
@@ -108,7 +132,7 @@ Public Class inventoryMaintenance
     Private Function insertAll() As Boolean
 
         ' First, remove any formatting that was added (specific to the controls on this form)
-        'stripFormatting()
+        ' stripDataEditingControlsFormatting()
 
         ' Then, make calls to insertRow to all relevant tables
         insertRow(CRUD, IPDbController.DbDataTable, "Parts", "_", "dataEditingControl", Me)
