@@ -152,7 +152,7 @@ Public Class taskMaintenance
 
 
         ' Task Type Symbol (KEY)(REQUIRED)(MUST BE UNIQUE)
-        If isEmpty("Task Type Symbol", True, TaskType_Textbox.Text, errorMessage) Then
+        If Not isValidLength("Task Type Symbol", True, TaskType_Textbox.Text, 1, errorMessage) Then
             TaskType_Textbox.ForeColor = Color.Red
         Else
             If mode = "editing" Then
@@ -170,8 +170,8 @@ Public Class taskMaintenance
         End If
 
         ' Task Type Description (REQUIRED)
-        If isEmpty("Task Type Description", True, TaskType_Textbox.Text, errorMessage) Then
-            TaskType_Textbox.ForeColor = Color.Red
+        If Not isValidLength("Task Type Description", True, TaskDescription_Textbox.Text, 50, errorMessage) Then
+            TaskDescription_Textbox.ForeColor = Color.Red
         End If
 
 
@@ -582,7 +582,7 @@ Public Class taskMaintenance
 
         If Not valuesInitialized Then Exit Sub
 
-        TaskType_Textbox.ForeColor = DefaultForeColor
+        TaskDescription_Textbox.ForeColor = DefaultForeColor
 
         If InitialTTValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
