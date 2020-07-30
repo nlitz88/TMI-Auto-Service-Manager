@@ -154,6 +154,7 @@ Partial Class mfgMaintenance
         '
         Me.AutoMake_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AutoMake_Textbox.Location = New System.Drawing.Point(244, 258)
+        Me.AutoMake_Textbox.MaxLength = 50
         Me.AutoMake_Textbox.Name = "AutoMake_Textbox"
         Me.AutoMake_Textbox.Size = New System.Drawing.Size(210, 27)
         Me.AutoMake_Textbox.TabIndex = 55

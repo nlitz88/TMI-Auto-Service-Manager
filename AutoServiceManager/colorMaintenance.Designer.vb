@@ -62,6 +62,7 @@ Partial Class colorMaintenance
         '
         Me.Color_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Color_Textbox.Location = New System.Drawing.Point(193, 258)
+        Me.Color_Textbox.MaxLength = 20
         Me.Color_Textbox.Name = "Color_Textbox"
         Me.Color_Textbox.Size = New System.Drawing.Size(179, 27)
         Me.Color_Textbox.TabIndex = 77

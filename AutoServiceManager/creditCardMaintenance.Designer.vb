@@ -62,6 +62,7 @@ Partial Class creditCardMaintenance
         '
         Me.CreditCard_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CreditCard_Textbox.Location = New System.Drawing.Point(229, 258)
+        Me.CreditCard_Textbox.MaxLength = 50
         Me.CreditCard_Textbox.Name = "CreditCard_Textbox"
         Me.CreditCard_Textbox.Size = New System.Drawing.Size(210, 27)
         Me.CreditCard_Textbox.TabIndex = 66

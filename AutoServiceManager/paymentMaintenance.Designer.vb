@@ -62,6 +62,7 @@ Partial Class paymentMaintenance
         '
         Me.PaymentType_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PaymentType_Textbox.Location = New System.Drawing.Point(251, 258)
+        Me.PaymentType_Textbox.MaxLength = 50
         Me.PaymentType_Textbox.Name = "PaymentType_Textbox"
         Me.PaymentType_Textbox.Size = New System.Drawing.Size(210, 27)
         Me.PaymentType_Textbox.TabIndex = 77

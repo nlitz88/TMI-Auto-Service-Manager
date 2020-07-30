@@ -150,6 +150,7 @@ Partial Class companyInfo
         '
         Me.CompanyName1_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CompanyName1_Textbox.Location = New System.Drawing.Point(275, 194)
+        Me.CompanyName1_Textbox.MaxLength = 50
         Me.CompanyName1_Textbox.Name = "CompanyName1_Textbox"
         Me.CompanyName1_Textbox.Size = New System.Drawing.Size(560, 27)
         Me.CompanyName1_Textbox.TabIndex = 8
@@ -161,6 +162,7 @@ Partial Class companyInfo
         '
         Me.CompanyName2_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CompanyName2_Textbox.Location = New System.Drawing.Point(275, 231)
+        Me.CompanyName2_Textbox.MaxLength = 50
         Me.CompanyName2_Textbox.Name = "CompanyName2_Textbox"
         Me.CompanyName2_Textbox.Size = New System.Drawing.Size(560, 27)
         Me.CompanyName2_Textbox.TabIndex = 9
@@ -171,6 +173,7 @@ Partial Class companyInfo
         '
         Me.Address1_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Address1_Textbox.Location = New System.Drawing.Point(223, 286)
+        Me.Address1_Textbox.MaxLength = 50
         Me.Address1_Textbox.Name = "Address1_Textbox"
         Me.Address1_Textbox.Size = New System.Drawing.Size(289, 27)
         Me.Address1_Textbox.TabIndex = 10
@@ -181,6 +184,7 @@ Partial Class companyInfo
         '
         Me.Address2_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Address2_Textbox.Location = New System.Drawing.Point(223, 330)
+        Me.Address2_Textbox.MaxLength = 50
         Me.Address2_Textbox.Name = "Address2_Textbox"
         Me.Address2_Textbox.Size = New System.Drawing.Size(289, 27)
         Me.Address2_Textbox.TabIndex = 11

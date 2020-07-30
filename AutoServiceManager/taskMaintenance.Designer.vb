@@ -56,6 +56,7 @@ Partial Class taskMaintenance
         '
         Me.TaskType_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TaskType_Textbox.Location = New System.Drawing.Point(236, 258)
+        Me.TaskType_Textbox.MaxLength = 1
         Me.TaskType_Textbox.Name = "TaskType_Textbox"
         Me.TaskType_Textbox.Size = New System.Drawing.Size(63, 27)
         Me.TaskType_Textbox.TabIndex = 88
@@ -192,6 +193,7 @@ Partial Class taskMaintenance
         '
         Me.TaskDescription_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TaskDescription_Textbox.Location = New System.Drawing.Point(473, 258)
+        Me.TaskDescription_Textbox.MaxLength = 50
         Me.TaskDescription_Textbox.Name = "TaskDescription_Textbox"
         Me.TaskDescription_Textbox.Size = New System.Drawing.Size(167, 27)
         Me.TaskDescription_Textbox.TabIndex = 92
