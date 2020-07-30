@@ -766,6 +766,26 @@
     ' **************** CORE VALIDATION ****************
 
 
+    ' Function that determines if a given input value is within a given length
+    ' Implements isEmpty, so this can be called for every text based input
+    Public Function isValidLength(ByVal label As String, ByVal required As Boolean, ByVal value As String, ByVal maxLength As Integer, ByRef errorMessage As String) As Boolean
+
+        If required Then
+            If isEmpty(label, required, value, errorMessage) Then Return False
+        Else
+            If isEmpty(label, required, value, errorMessage) Then Return True
+        End If
+
+        If value.Length > maxLength Then
+            errorMessage += "ERROR: " & label & " cannot be longer than " & maxLength & " characters" & vbNewLine
+            Return False
+        End If
+
+        Return True
+
+    End Function
+
+
     ' Function that determines if a value/input is empty.
     Public Function isEmpty(ByVal Label As String, ByVal required As Boolean, ByVal value As String, ByRef errorMessage As String) As Boolean
 
@@ -780,19 +800,6 @@
         End If
 
         Return False
-
-    End Function
-
-
-    ' Function that determines if a given input value is within a given length
-    Public Function isValidLength(ByVal label As String, ByVal value As String, ByVal maxLength As Integer, ByRef errorMessage As String) As Boolean
-
-        If value.Length > maxLength Then
-            errorMessage += "ERROR: " & label & " cannot be longer than " & maxLength & " characters" & vbNewLine
-            Return False
-        End If
-
-        Return True
 
     End Function
 
