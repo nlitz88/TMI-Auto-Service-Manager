@@ -33,7 +33,7 @@ Partial Class laborCodeMaintenance
         Me.RateLabel = New System.Windows.Forms.Label()
         Me.Rate_Value = New System.Windows.Forms.Label()
         Me.deleteButton = New System.Windows.Forms.Button()
-        Me.PartNbr_Textbox = New System.Windows.Forms.TextBox()
+        Me.LaborCode_Textbox = New System.Windows.Forms.TextBox()
         Me.LaborCode_Value = New System.Windows.Forms.Label()
         Me.LaborCodeLabel = New System.Windows.Forms.Label()
         Me.LaborCodeComboLabel = New System.Windows.Forms.Label()
@@ -165,15 +165,15 @@ Partial Class laborCodeMaintenance
         Me.deleteButton.Text = "Delete"
         Me.deleteButton.UseVisualStyleBackColor = False
         '
-        'PartNbr_Textbox
+        'LaborCode_Textbox
         '
-        Me.PartNbr_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PartNbr_Textbox.Location = New System.Drawing.Point(193, 258)
-        Me.PartNbr_Textbox.MaxLength = 15
-        Me.PartNbr_Textbox.Name = "PartNbr_Textbox"
-        Me.PartNbr_Textbox.Size = New System.Drawing.Size(270, 27)
-        Me.PartNbr_Textbox.TabIndex = 114
-        Me.PartNbr_Textbox.Tag = "dataEditingControl"
+        Me.LaborCode_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LaborCode_Textbox.Location = New System.Drawing.Point(193, 258)
+        Me.LaborCode_Textbox.MaxLength = 15
+        Me.LaborCode_Textbox.Name = "LaborCode_Textbox"
+        Me.LaborCode_Textbox.Size = New System.Drawing.Size(270, 27)
+        Me.LaborCode_Textbox.TabIndex = 114
+        Me.LaborCode_Textbox.Tag = "dataEditingControl"
         '
         'LaborCode_Value
         '
@@ -331,7 +331,7 @@ Partial Class laborCodeMaintenance
         Me.Controls.Add(Me.RateLabel)
         Me.Controls.Add(Me.Rate_Value)
         Me.Controls.Add(Me.deleteButton)
-        Me.Controls.Add(Me.PartNbr_Textbox)
+        Me.Controls.Add(Me.LaborCode_Textbox)
         Me.Controls.Add(Me.LaborCode_Value)
         Me.Controls.Add(Me.LaborCodeLabel)
         Me.Controls.Add(Me.LaborCodeComboLabel)
@@ -363,7 +363,7 @@ Partial Class laborCodeMaintenance
     Friend WithEvents RateLabel As Label
     Friend WithEvents Rate_Value As Label
     Friend WithEvents deleteButton As Button
-    Friend WithEvents PartNbr_Textbox As TextBox
+    Friend WithEvents LaborCode_Textbox As TextBox
     Friend WithEvents LaborCode_Value As Label
     Friend WithEvents LaborCodeLabel As Label
     Friend WithEvents LaborCodeComboLabel As Label
