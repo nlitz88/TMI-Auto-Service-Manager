@@ -161,8 +161,19 @@ Public Class paymentMaintenance
         ' Payment Type Name (REQUIRED)(MUST BE UNIQUE)
         If Not isValidLength("Payment Type Name", True, PaymentType_Textbox.Text, 50, errorMessage) Then
             PaymentType_Textbox.ForeColor = Color.Red
-        ElseIf isDuplicate("Payment Type Name", PaymentType_Textbox.Text.ToLower(), errorMessage, PTList) Then
-            PaymentType_Textbox.ForeColor = Color.Red
+        Else
+            If mode = "editing" Then
+                Dim initial As String = PTDbController.DbDataTable.Rows(PTRow)("PaymentType").ToString()
+                If PaymentType_Textbox.Text.ToLower() <> initial.ToLower() Then
+                    If isDuplicate("Payment Type Name", PaymentType_Textbox.Text.ToLower(), errorMessage, PTList) Then
+                        PaymentType_Textbox.ForeColor = Color.Red
+                    End If
+                End If
+            ElseIf mode = "adding" Then
+                If isDuplicate("Payment Type Name", PaymentType_Textbox.Text.ToLower(), errorMessage, PTList) Then
+                    PaymentType_Textbox.ForeColor = Color.Red
+                End If
+            End If
         End If
 
 

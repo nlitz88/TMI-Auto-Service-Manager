@@ -156,8 +156,8 @@ Public Class taskMaintenance
             TaskType_Textbox.ForeColor = Color.Red
         Else
             If mode = "editing" Then
-                Dim initialTTS As String = TTDbController.DbDataTable.Rows(TTRow)("TaskType").ToString().ToLower()
-                If TaskType_Textbox.Text.ToLower() <> initialTTS Then
+                Dim initial As String = TTDbController.DbDataTable.Rows(TTRow)("TaskType").ToString().ToLower()
+                If TaskType_Textbox.Text.ToLower() <> initial Then
                     If isDuplicate("Task Type Symbol", TaskType_Textbox.Text.ToLower(), errorMessage, TTList) Then
                         TaskType_Textbox.ForeColor = Color.Red
                     End If
