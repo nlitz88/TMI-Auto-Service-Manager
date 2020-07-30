@@ -27,6 +27,8 @@ Public Class inventoryMaintenance
     Private allowedKeystroke As Boolean = False
 
 
+
+
     ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
 
 

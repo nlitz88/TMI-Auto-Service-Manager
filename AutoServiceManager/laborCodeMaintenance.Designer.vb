@@ -83,7 +83,7 @@ Partial Class laborCodeMaintenance
         '
         Me.Description_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Description_Textbox.Location = New System.Drawing.Point(190, 308)
-        Me.Description_Textbox.MaxLength = 50
+        Me.Description_Textbox.MaxLength = 100
         Me.Description_Textbox.Name = "Description_Textbox"
         Me.Description_Textbox.Size = New System.Drawing.Size(662, 27)
         Me.Description_Textbox.TabIndex = 115
@@ -93,6 +93,7 @@ Partial Class laborCodeMaintenance
         '
         Me.Hours_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Hours_Textbox.Location = New System.Drawing.Point(333, 358)
+        Me.Hours_Textbox.MaxLength = 19
         Me.Hours_Textbox.Name = "Hours_Textbox"
         Me.Hours_Textbox.Size = New System.Drawing.Size(105, 27)
         Me.Hours_Textbox.TabIndex = 117
@@ -168,7 +169,7 @@ Partial Class laborCodeMaintenance
         '
         Me.PartNbr_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PartNbr_Textbox.Location = New System.Drawing.Point(193, 258)
-        Me.PartNbr_Textbox.MaxLength = 30
+        Me.PartNbr_Textbox.MaxLength = 15
         Me.PartNbr_Textbox.Name = "PartNbr_Textbox"
         Me.PartNbr_Textbox.Size = New System.Drawing.Size(270, 27)
         Me.PartNbr_Textbox.TabIndex = 114
@@ -281,6 +282,7 @@ Partial Class laborCodeMaintenance
         '
         'Amount_Textbox
         '
+        Me.Amount_Textbox.Enabled = False
         Me.Amount_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Amount_Textbox.Location = New System.Drawing.Point(534, 358)
         Me.Amount_Textbox.Name = "Amount_Textbox"
