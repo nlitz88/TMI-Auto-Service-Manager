@@ -23,20 +23,26 @@ Partial Class inventoryMaintenance
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.nav = New AutoServiceManager.navigation()
-        Me.TaskDescription_Textbox = New System.Windows.Forms.TextBox()
-        Me.TTDLabel = New System.Windows.Forms.Label()
-        Me.TaskDescription_Value = New System.Windows.Forms.Label()
+        Me.PartPrice_Textbox = New System.Windows.Forms.TextBox()
+        Me.PriceLabel = New System.Windows.Forms.Label()
+        Me.PartPrice_Value = New System.Windows.Forms.Label()
         Me.deleteButton = New System.Windows.Forms.Button()
-        Me.TaskType_Textbox = New System.Windows.Forms.TextBox()
-        Me.TaskType_Value = New System.Windows.Forms.Label()
-        Me.TTSLabel = New System.Windows.Forms.Label()
-        Me.TTLabel = New System.Windows.Forms.Label()
-        Me.TTComboBox = New System.Windows.Forms.ComboBox()
+        Me.PartNbr_Textbox = New System.Windows.Forms.TextBox()
+        Me.PartNbr_Value = New System.Windows.Forms.Label()
+        Me.PartNumberLabel = New System.Windows.Forms.Label()
+        Me.PartLabel = New System.Windows.Forms.Label()
+        Me.PartComboBox = New System.Windows.Forms.ComboBox()
         Me.inventoryMaintenanceLabel = New System.Windows.Forms.Label()
         Me.editButton = New System.Windows.Forms.Button()
         Me.cancelButton = New System.Windows.Forms.Button()
         Me.saveButton = New System.Windows.Forms.Button()
         Me.addButton = New System.Windows.Forms.Button()
+        Me.ListPrice_Textbox = New System.Windows.Forms.TextBox()
+        Me.ListPriceLabel = New System.Windows.Forms.Label()
+        Me.ListPrice_Value = New System.Windows.Forms.Label()
+        Me.PartDescription_Textbox = New System.Windows.Forms.TextBox()
+        Me.PartDescriptionLabel = New System.Windows.Forms.Label()
+        Me.PartDescription_Value = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'nav
@@ -48,36 +54,36 @@ Partial Class inventoryMaintenance
         Me.nav.Size = New System.Drawing.Size(982, 28)
         Me.nav.TabIndex = 49
         '
-        'TaskDescription_Textbox
+        'PartPrice_Textbox
         '
-        Me.TaskDescription_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TaskDescription_Textbox.Location = New System.Drawing.Point(448, 258)
-        Me.TaskDescription_Textbox.Name = "TaskDescription_Textbox"
-        Me.TaskDescription_Textbox.Size = New System.Drawing.Size(167, 27)
-        Me.TaskDescription_Textbox.TabIndex = 106
-        Me.TaskDescription_Textbox.Tag = "dataEditingControl"
+        Me.PartPrice_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PartPrice_Textbox.Location = New System.Drawing.Point(151, 358)
+        Me.PartPrice_Textbox.Name = "PartPrice_Textbox"
+        Me.PartPrice_Textbox.Size = New System.Drawing.Size(105, 27)
+        Me.PartPrice_Textbox.TabIndex = 106
+        Me.PartPrice_Textbox.Tag = "dataEditingControl"
         '
-        'TTDLabel
+        'PriceLabel
         '
-        Me.TTDLabel.AutoSize = True
-        Me.TTDLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.TTDLabel.Location = New System.Drawing.Point(309, 264)
-        Me.TTDLabel.Name = "TTDLabel"
-        Me.TTDLabel.Size = New System.Drawing.Size(133, 17)
-        Me.TTDLabel.TabIndex = 105
-        Me.TTDLabel.Tag = "dataLabel"
-        Me.TTDLabel.Text = "Task Type Symbol :"
+        Me.PriceLabel.AutoSize = True
+        Me.PriceLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.PriceLabel.Location = New System.Drawing.Point(97, 364)
+        Me.PriceLabel.Name = "PriceLabel"
+        Me.PriceLabel.Size = New System.Drawing.Size(48, 17)
+        Me.PriceLabel.TabIndex = 105
+        Me.PriceLabel.Tag = "dataLabel"
+        Me.PriceLabel.Text = "Price :"
         '
-        'TaskDescription_Value
+        'PartPrice_Value
         '
-        Me.TaskDescription_Value.AutoSize = True
-        Me.TaskDescription_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TaskDescription_Value.ForeColor = System.Drawing.Color.Black
-        Me.TaskDescription_Value.Location = New System.Drawing.Point(448, 261)
-        Me.TaskDescription_Value.Name = "TaskDescription_Value"
-        Me.TaskDescription_Value.Size = New System.Drawing.Size(0, 20)
-        Me.TaskDescription_Value.TabIndex = 104
-        Me.TaskDescription_Value.Tag = "dataViewingControl"
+        Me.PartPrice_Value.AutoSize = True
+        Me.PartPrice_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PartPrice_Value.ForeColor = System.Drawing.Color.Black
+        Me.PartPrice_Value.Location = New System.Drawing.Point(151, 361)
+        Me.PartPrice_Value.Name = "PartPrice_Value"
+        Me.PartPrice_Value.Size = New System.Drawing.Size(0, 20)
+        Me.PartPrice_Value.TabIndex = 104
+        Me.PartPrice_Value.Tag = "dataViewingControl"
         '
         'deleteButton
         '
@@ -92,57 +98,58 @@ Partial Class inventoryMaintenance
         Me.deleteButton.Text = "Delete"
         Me.deleteButton.UseVisualStyleBackColor = False
         '
-        'TaskType_Textbox
+        'PartNbr_Textbox
         '
-        Me.TaskType_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TaskType_Textbox.Location = New System.Drawing.Point(236, 258)
-        Me.TaskType_Textbox.Name = "TaskType_Textbox"
-        Me.TaskType_Textbox.Size = New System.Drawing.Size(63, 27)
-        Me.TaskType_Textbox.TabIndex = 102
-        Me.TaskType_Textbox.Tag = "dataEditingControl"
+        Me.PartNbr_Textbox.Enabled = False
+        Me.PartNbr_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PartNbr_Textbox.Location = New System.Drawing.Point(199, 258)
+        Me.PartNbr_Textbox.Name = "PartNbr_Textbox"
+        Me.PartNbr_Textbox.Size = New System.Drawing.Size(270, 27)
+        Me.PartNbr_Textbox.TabIndex = 102
+        Me.PartNbr_Textbox.Tag = "dataEditingControl"
         '
-        'TaskType_Value
+        'PartNbr_Value
         '
-        Me.TaskType_Value.AutoSize = True
-        Me.TaskType_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TaskType_Value.ForeColor = System.Drawing.Color.Black
-        Me.TaskType_Value.Location = New System.Drawing.Point(236, 261)
-        Me.TaskType_Value.Name = "TaskType_Value"
-        Me.TaskType_Value.Size = New System.Drawing.Size(0, 20)
-        Me.TaskType_Value.TabIndex = 101
-        Me.TaskType_Value.Tag = "dataViewingControl"
+        Me.PartNbr_Value.AutoSize = True
+        Me.PartNbr_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PartNbr_Value.ForeColor = System.Drawing.Color.Black
+        Me.PartNbr_Value.Location = New System.Drawing.Point(199, 261)
+        Me.PartNbr_Value.Name = "PartNbr_Value"
+        Me.PartNbr_Value.Size = New System.Drawing.Size(0, 20)
+        Me.PartNbr_Value.TabIndex = 101
+        Me.PartNbr_Value.Tag = "dataViewingControl"
         '
-        'TTSLabel
+        'PartNumberLabel
         '
-        Me.TTSLabel.AutoSize = True
-        Me.TTSLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.TTSLabel.Location = New System.Drawing.Point(97, 264)
-        Me.TTSLabel.Name = "TTSLabel"
-        Me.TTSLabel.Size = New System.Drawing.Size(133, 17)
-        Me.TTSLabel.TabIndex = 100
-        Me.TTSLabel.Tag = "dataLabel"
-        Me.TTSLabel.Text = "Task Type Symbol :"
+        Me.PartNumberLabel.AutoSize = True
+        Me.PartNumberLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.PartNumberLabel.Location = New System.Drawing.Point(97, 264)
+        Me.PartNumberLabel.Name = "PartNumberLabel"
+        Me.PartNumberLabel.Size = New System.Drawing.Size(96, 17)
+        Me.PartNumberLabel.TabIndex = 100
+        Me.PartNumberLabel.Tag = "dataLabel"
+        Me.PartNumberLabel.Text = "Part Number :"
         '
-        'TTLabel
+        'PartLabel
         '
-        Me.TTLabel.AutoSize = True
-        Me.TTLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.TTLabel.Location = New System.Drawing.Point(97, 200)
-        Me.TTLabel.Name = "TTLabel"
-        Me.TTLabel.Size = New System.Drawing.Size(83, 17)
-        Me.TTLabel.TabIndex = 99
-        Me.TTLabel.Text = "Task Type :"
+        Me.PartLabel.AutoSize = True
+        Me.PartLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.PartLabel.Location = New System.Drawing.Point(97, 200)
+        Me.PartLabel.Name = "PartLabel"
+        Me.PartLabel.Size = New System.Drawing.Size(42, 17)
+        Me.PartLabel.TabIndex = 99
+        Me.PartLabel.Text = "Part :"
         '
-        'TTComboBox
+        'PartComboBox
         '
-        Me.TTComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.TTComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.TTComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
-        Me.TTComboBox.FormattingEnabled = True
-        Me.TTComboBox.Location = New System.Drawing.Point(186, 194)
-        Me.TTComboBox.Name = "TTComboBox"
-        Me.TTComboBox.Size = New System.Drawing.Size(335, 28)
-        Me.TTComboBox.TabIndex = 98
+        Me.PartComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.PartComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.PartComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
+        Me.PartComboBox.FormattingEnabled = True
+        Me.PartComboBox.Location = New System.Drawing.Point(145, 194)
+        Me.PartComboBox.Name = "PartComboBox"
+        Me.PartComboBox.Size = New System.Drawing.Size(297, 28)
+        Me.PartComboBox.TabIndex = 98
         '
         'inventoryMaintenanceLabel
         '
@@ -206,21 +213,89 @@ Partial Class inventoryMaintenance
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = False
         '
+        'ListPrice_Textbox
+        '
+        Me.ListPrice_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListPrice_Textbox.Location = New System.Drawing.Point(358, 358)
+        Me.ListPrice_Textbox.Name = "ListPrice_Textbox"
+        Me.ListPrice_Textbox.Size = New System.Drawing.Size(105, 27)
+        Me.ListPrice_Textbox.TabIndex = 109
+        Me.ListPrice_Textbox.Tag = "dataEditingControl"
+        '
+        'ListPriceLabel
+        '
+        Me.ListPriceLabel.AutoSize = True
+        Me.ListPriceLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.ListPriceLabel.Location = New System.Drawing.Point(278, 364)
+        Me.ListPriceLabel.Name = "ListPriceLabel"
+        Me.ListPriceLabel.Size = New System.Drawing.Size(74, 17)
+        Me.ListPriceLabel.TabIndex = 108
+        Me.ListPriceLabel.Tag = "dataLabel"
+        Me.ListPriceLabel.Text = "List Price :"
+        '
+        'ListPrice_Value
+        '
+        Me.ListPrice_Value.AutoSize = True
+        Me.ListPrice_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListPrice_Value.ForeColor = System.Drawing.Color.Black
+        Me.ListPrice_Value.Location = New System.Drawing.Point(358, 361)
+        Me.ListPrice_Value.Name = "ListPrice_Value"
+        Me.ListPrice_Value.Size = New System.Drawing.Size(0, 20)
+        Me.ListPrice_Value.TabIndex = 107
+        Me.ListPrice_Value.Tag = "dataViewingControl"
+        '
+        'PartDescription_Textbox
+        '
+        Me.PartDescription_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PartDescription_Textbox.Location = New System.Drawing.Point(220, 308)
+        Me.PartDescription_Textbox.Name = "PartDescription_Textbox"
+        Me.PartDescription_Textbox.Size = New System.Drawing.Size(297, 27)
+        Me.PartDescription_Textbox.TabIndex = 110
+        Me.PartDescription_Textbox.Tag = "dataEditingControl"
+        '
+        'PartDescriptionLabel
+        '
+        Me.PartDescriptionLabel.AutoSize = True
+        Me.PartDescriptionLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.PartDescriptionLabel.Location = New System.Drawing.Point(97, 314)
+        Me.PartDescriptionLabel.Name = "PartDescriptionLabel"
+        Me.PartDescriptionLabel.Size = New System.Drawing.Size(117, 17)
+        Me.PartDescriptionLabel.TabIndex = 111
+        Me.PartDescriptionLabel.Tag = "dataLabel"
+        Me.PartDescriptionLabel.Text = "Part Description :"
+        '
+        'PartDescription_Value
+        '
+        Me.PartDescription_Value.AutoSize = True
+        Me.PartDescription_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PartDescription_Value.ForeColor = System.Drawing.Color.Black
+        Me.PartDescription_Value.Location = New System.Drawing.Point(220, 311)
+        Me.PartDescription_Value.Name = "PartDescription_Value"
+        Me.PartDescription_Value.Size = New System.Drawing.Size(0, 20)
+        Me.PartDescription_Value.TabIndex = 112
+        Me.PartDescription_Value.Tag = "dataViewingControl"
+        '
         'inventoryMaintenance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
-        Me.Controls.Add(Me.TaskDescription_Textbox)
-        Me.Controls.Add(Me.TTDLabel)
-        Me.Controls.Add(Me.TaskDescription_Value)
+        Me.Controls.Add(Me.PartDescription_Value)
+        Me.Controls.Add(Me.PartDescriptionLabel)
+        Me.Controls.Add(Me.PartDescription_Textbox)
+        Me.Controls.Add(Me.ListPrice_Textbox)
+        Me.Controls.Add(Me.ListPriceLabel)
+        Me.Controls.Add(Me.ListPrice_Value)
+        Me.Controls.Add(Me.PartPrice_Textbox)
+        Me.Controls.Add(Me.PriceLabel)
+        Me.Controls.Add(Me.PartPrice_Value)
         Me.Controls.Add(Me.deleteButton)
-        Me.Controls.Add(Me.TaskType_Textbox)
-        Me.Controls.Add(Me.TaskType_Value)
-        Me.Controls.Add(Me.TTSLabel)
-        Me.Controls.Add(Me.TTLabel)
-        Me.Controls.Add(Me.TTComboBox)
+        Me.Controls.Add(Me.PartNbr_Textbox)
+        Me.Controls.Add(Me.PartNbr_Value)
+        Me.Controls.Add(Me.PartNumberLabel)
+        Me.Controls.Add(Me.PartLabel)
+        Me.Controls.Add(Me.PartComboBox)
         Me.Controls.Add(Me.inventoryMaintenanceLabel)
         Me.Controls.Add(Me.editButton)
         Me.Controls.Add(Me.cancelButton)
@@ -236,18 +311,24 @@ Partial Class inventoryMaintenance
     End Sub
 
     Friend WithEvents nav As navigation
-    Friend WithEvents TaskDescription_Textbox As TextBox
-    Friend WithEvents TTDLabel As Label
-    Friend WithEvents TaskDescription_Value As Label
+    Friend WithEvents PartPrice_Textbox As TextBox
+    Friend WithEvents PriceLabel As Label
+    Friend WithEvents PartPrice_Value As Label
     Friend WithEvents deleteButton As Button
-    Friend WithEvents TaskType_Textbox As TextBox
-    Friend WithEvents TaskType_Value As Label
-    Friend WithEvents TTSLabel As Label
-    Friend WithEvents TTLabel As Label
-    Friend WithEvents TTComboBox As ComboBox
+    Friend WithEvents PartNbr_Textbox As TextBox
+    Friend WithEvents PartNbr_Value As Label
+    Friend WithEvents PartNumberLabel As Label
+    Friend WithEvents PartLabel As Label
+    Friend WithEvents PartComboBox As ComboBox
     Friend WithEvents inventoryMaintenanceLabel As Label
     Friend WithEvents editButton As Button
     Friend WithEvents cancelButton As Button
     Friend WithEvents saveButton As Button
     Friend WithEvents addButton As Button
+    Friend WithEvents ListPrice_Textbox As TextBox
+    Friend WithEvents ListPriceLabel As Label
+    Friend WithEvents ListPrice_Value As Label
+    Friend WithEvents PartDescription_Textbox As TextBox
+    Friend WithEvents PartDescriptionLabel As Label
+    Friend WithEvents PartDescription_Value As Label
 End Class
