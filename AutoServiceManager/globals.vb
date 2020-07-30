@@ -784,6 +784,19 @@
     End Function
 
 
+    ' Function that determines if a given input value is within a given length
+    Public Function isValidLength(ByVal label As String, ByVal value As String, ByVal maxLength As Integer, ByRef errorMessage As String) As Boolean
+
+        If value.Length > maxLength Then
+            errorMessage += "ERROR: " & label & " cannot be longer than " & maxLength & " characters" & vbNewLine
+            Return False
+        End If
+
+        Return True
+
+    End Function
+
+
     ' Function that checks to se if a value does exist to prevent a duplicate. Accepts sorted list of values
     Public Function isDuplicate(ByVal label As String, ByVal newValue As String, ByRef errorMessage As String, ByVal existingValues As List(Of Object)) As Boolean
 

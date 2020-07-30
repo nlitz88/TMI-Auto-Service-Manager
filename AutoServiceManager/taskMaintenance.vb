@@ -151,18 +151,6 @@ Public Class taskMaintenance
         ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
 
 
-        ' Task Type Symbol (REQUIRED)(MUST BE UNIQUE)
-        'Dim initialTTS As String = TTDbController.DbDataTable.Rows(TTRow)("TaskType").ToString().ToLower()
-        'Console.WriteLine(initialTTS)
-        'If isEmpty("Task Type Symbol", True, TaskType_Textbox.Text, errorMessage) Then
-        '    TaskType_Textbox.ForeColor = Color.Red
-        '    ' Before checking if it is a duplicate value, first ensure that it is not itself (the initial value)
-        'ElseIf TaskType_Textbox.Text.ToLower() <> initialTTS Then
-        '    If isDuplicate("Task Type Symbol", TaskType_Textbox.Text.ToLower(), errorMessage, TTList) Then
-        '        TaskType_Textbox.ForeColor = Color.Red
-        '    End If
-        'End If
-
         ' Task Type Symbol (KEY)(REQUIRED)(MUST BE UNIQUE)
         If isEmpty("Task Type Symbol", True, TaskType_Textbox.Text, errorMessage) Then
             TaskType_Textbox.ForeColor = Color.Red
