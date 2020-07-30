@@ -2,4 +2,4 @@
 !/.gitignore
 /AutoServiceManager/bin
 /AutoServiceManager/obj/Debug
-/AutoServiceManager/Database/TMI-ServiceMgr.mdb
+/AutoServiceManager/Database/
