@@ -157,7 +157,7 @@ Public Class mfgMaintenance
 
 
         ' Manufacturer Name (REQUIRED)(MUST BE UNIQUE)
-        If isEmpty("Manufacturer Name", True, AutoMake_Textbox.Text, errorMessage) Then
+        If Not isValidLength("Manufacturer Name", True, AutoMake_Textbox.Text, 50, errorMessage) Then
             AutoMake_Textbox.ForeColor = Color.Red
         ElseIf isDuplicate("Manufacturer Name", AutoMake_Textbox.Text.ToLower(), errorMessage, AutoManufacturersList) Then
             AutoMake_Textbox.ForeColor = Color.Red

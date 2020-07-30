@@ -159,7 +159,7 @@ Public Class colorMaintenance
 
 
         ' Color Name (REQUIRED)(MUST BE UNIQUE)
-        If isEmpty("Color Name", True, Color_Textbox.Text, errorMessage) Then
+        If Not isValidLength("Color Name", True, Color_Textbox.Text, 20, errorMessage) Then
             Color_Textbox.ForeColor = Color.Red
         ElseIf isDuplicate("Color Name", Color_Textbox.Text.ToLower(), errorMessage, ACList) Then
             Color_Textbox.ForeColor = Color.Red

@@ -159,7 +159,7 @@ Public Class creditCardMaintenance
 
 
         ' Credit Card Name (REQUIRED)(MUST BE UNIQUE)
-        If isEmpty("Credit Card Name", True, CreditCard_Textbox.Text, errorMessage) Then
+        If Not isValidLength("Credit Card Name", True, CreditCard_Textbox.Text, 50, errorMessage) Then
             CreditCard_Textbox.ForeColor = Color.Red
         ElseIf isDuplicate("Credit Card Name", CreditCard_Textbox.Text.ToLower(), errorMessage, CCList) Then
             CreditCard_Textbox.ForeColor = Color.Red
