@@ -162,9 +162,13 @@ Public Class companyInfo
         ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
 
         ' Company Name 1 (REQUIRED)
-        If isEmpty("Company Name 1", True, CompanyName1_Textbox.Text, errorMessage) Then CompanyName1_Textbox.ForeColor = Color.Red
+        If Not isValidLength("Company Name 1", True, CompanyName1_Textbox.Text, 50, errorMessage) Then CompanyName1_Textbox.ForeColor = Color.Red
+        ' Company Name 2
+        If Not isValidLength("Company Name 2", False, CompanyName2_Textbox.Text, 50, errorMessage) Then CompanyName2_Textbox.ForeColor = Color.Red
         ' Address 1 (REQUIRED)
-        If isEmpty("Address 1", True, Address1_Textbox.Text, errorMessage) Then Address1_Textbox.ForeColor = Color.Red
+        If Not isValidLength("Address 1", True, Address1_Textbox.Text, 50, errorMessage) Then Address1_Textbox.ForeColor = Color.Red
+        ' Address 2
+        If Not isValidLength("Address 2", False, Address2_Textbox.Text, 50, errorMessage) Then Address2_Textbox.ForeColor = Color.Red
 
         ' Phone 1 (REQUIRED)
         If Not validPhone("Phone 1", True, Phone1_Textbox.Text, errorMessage) Then Phone1_Textbox.ForeColor = Color.Red
