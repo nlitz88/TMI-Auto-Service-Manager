@@ -193,7 +193,7 @@ Partial Class mfgMaintenance
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "mfgMaintenance"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "List of Auto Manufacturers"
         Me.ResumeLayout(False)
         Me.PerformLayout()

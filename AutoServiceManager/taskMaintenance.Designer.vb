@@ -230,7 +230,7 @@ Partial Class taskMaintenance
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "taskMaintenance"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Task Types"
         Me.ResumeLayout(False)
         Me.PerformLayout()

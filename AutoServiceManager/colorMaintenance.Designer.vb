@@ -193,7 +193,7 @@ Partial Class colorMaintenance
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "colorMaintenance"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Auto Colors"
         Me.ResumeLayout(False)
         Me.PerformLayout()

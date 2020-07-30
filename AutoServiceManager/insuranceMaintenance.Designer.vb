@@ -193,7 +193,7 @@ Partial Class insuranceMaintenance
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "insuranceMaintenance"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Insurance Companies"
         Me.ResumeLayout(False)
         Me.PerformLayout()
