@@ -466,6 +466,7 @@ Partial Class companyInfo
         Me.ZipCode_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ZipCode_ComboBox.FormattingEnabled = True
         Me.ZipCode_ComboBox.Location = New System.Drawing.Point(176, 383)
+        Me.ZipCode_ComboBox.MaxLength = 5
         Me.ZipCode_ComboBox.Name = "ZipCode_ComboBox"
         Me.ZipCode_ComboBox.Size = New System.Drawing.Size(150, 28)
         Me.ZipCode_ComboBox.TabIndex = 41

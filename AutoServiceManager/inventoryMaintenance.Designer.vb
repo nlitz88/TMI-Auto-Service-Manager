@@ -102,6 +102,7 @@ Partial Class inventoryMaintenance
         '
         Me.PartNbr_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PartNbr_Textbox.Location = New System.Drawing.Point(199, 258)
+        Me.PartNbr_Textbox.MaxLength = 30
         Me.PartNbr_Textbox.Name = "PartNbr_Textbox"
         Me.PartNbr_Textbox.Size = New System.Drawing.Size(270, 27)
         Me.PartNbr_Textbox.TabIndex = 102
@@ -247,6 +248,7 @@ Partial Class inventoryMaintenance
         '
         Me.PartDescription_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PartDescription_Textbox.Location = New System.Drawing.Point(220, 308)
+        Me.PartDescription_Textbox.MaxLength = 50
         Me.PartDescription_Textbox.Name = "PartDescription_Textbox"
         Me.PartDescription_Textbox.Size = New System.Drawing.Size(297, 27)
         Me.PartDescription_Textbox.TabIndex = 110
