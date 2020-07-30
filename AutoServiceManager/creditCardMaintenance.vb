@@ -550,9 +550,5 @@ Public Class creditCardMaintenance
 
     End Sub
 
-    Private Sub creditCardMaintenance_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        End
-    End Sub
-
 
 End Class

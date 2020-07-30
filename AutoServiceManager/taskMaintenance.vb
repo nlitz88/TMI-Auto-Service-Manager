@@ -593,9 +593,4 @@ Public Class taskMaintenance
     End Sub
 
 
-    Private Sub taskMaintenance_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        End
-    End Sub
-
-
 End Class

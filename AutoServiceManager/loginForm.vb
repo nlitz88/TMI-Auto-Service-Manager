@@ -15,4 +15,5 @@
         changeScreen(home, Me)
 
     End Sub
+
 End Class

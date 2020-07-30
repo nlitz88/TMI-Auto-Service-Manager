@@ -639,8 +639,4 @@ Public Class companyInfo
     End Sub
 
 
-    Private Sub companyInfo_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        End
-    End Sub
-
 End Class

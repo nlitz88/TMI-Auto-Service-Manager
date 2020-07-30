@@ -551,9 +551,4 @@ Public Class mfgMaintenance
     End Sub
 
 
-
-    Private Sub mfgMaintenance_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        End
-    End Sub
-
 End Class

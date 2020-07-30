@@ -714,9 +714,4 @@ Public Class inventoryMaintenance
     End Sub
 
 
-    'Private Sub inventoryMaintenance_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-    '    End
-    'End Sub
-
-
 End Class
