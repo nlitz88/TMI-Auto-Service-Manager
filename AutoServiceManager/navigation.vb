@@ -67,4 +67,9 @@
         changeScreen(inventoryMaintenance, Me.ParentForm)
     End Sub
 
+    Private Sub LaborCodesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LaborCodesToolStripMenuItem.Click
+        If Me.ParentForm Is laborCodeMaintenance Then Exit Sub
+        changeScreen(laborCodeMaintenance, Me.ParentForm)
+    End Sub
+
 End Class

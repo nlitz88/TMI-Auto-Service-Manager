@@ -30,7 +30,7 @@ Partial Class inventoryMaintenance
         Me.PartNbr_Textbox = New System.Windows.Forms.TextBox()
         Me.PartNbr_Value = New System.Windows.Forms.Label()
         Me.PartNumberLabel = New System.Windows.Forms.Label()
-        Me.PartLabel = New System.Windows.Forms.Label()
+        Me.PartNumberComboLabel = New System.Windows.Forms.Label()
         Me.PartComboBox = New System.Windows.Forms.ComboBox()
         Me.inventoryMaintenanceLabel = New System.Windows.Forms.Label()
         Me.editButton = New System.Windows.Forms.Button()
@@ -130,15 +130,15 @@ Partial Class inventoryMaintenance
         Me.PartNumberLabel.Tag = "dataLabel"
         Me.PartNumberLabel.Text = "Part Number :"
         '
-        'PartLabel
+        'PartNumberComboLabel
         '
-        Me.PartLabel.AutoSize = True
-        Me.PartLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.PartLabel.Location = New System.Drawing.Point(97, 200)
-        Me.PartLabel.Name = "PartLabel"
-        Me.PartLabel.Size = New System.Drawing.Size(42, 17)
-        Me.PartLabel.TabIndex = 99
-        Me.PartLabel.Text = "Part :"
+        Me.PartNumberComboLabel.AutoSize = True
+        Me.PartNumberComboLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.PartNumberComboLabel.Location = New System.Drawing.Point(97, 200)
+        Me.PartNumberComboLabel.Name = "PartNumberComboLabel"
+        Me.PartNumberComboLabel.Size = New System.Drawing.Size(42, 17)
+        Me.PartNumberComboLabel.TabIndex = 99
+        Me.PartNumberComboLabel.Text = "Part :"
         '
         'PartComboBox
         '
@@ -295,7 +295,7 @@ Partial Class inventoryMaintenance
         Me.Controls.Add(Me.PartNbr_Textbox)
         Me.Controls.Add(Me.PartNbr_Value)
         Me.Controls.Add(Me.PartNumberLabel)
-        Me.Controls.Add(Me.PartLabel)
+        Me.Controls.Add(Me.PartNumberComboLabel)
         Me.Controls.Add(Me.PartComboBox)
         Me.Controls.Add(Me.inventoryMaintenanceLabel)
         Me.Controls.Add(Me.editButton)
@@ -319,7 +319,7 @@ Partial Class inventoryMaintenance
     Friend WithEvents PartNbr_Textbox As TextBox
     Friend WithEvents PartNbr_Value As Label
     Friend WithEvents PartNumberLabel As Label
-    Friend WithEvents PartLabel As Label
+    Friend WithEvents PartNumberComboLabel As Label
     Friend WithEvents PartComboBox As ComboBox
     Friend WithEvents inventoryMaintenanceLabel As Label
     Friend WithEvents editButton As Button
