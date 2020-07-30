@@ -100,7 +100,6 @@ Partial Class inventoryMaintenance
         '
         'PartNbr_Textbox
         '
-        Me.PartNbr_Textbox.Enabled = False
         Me.PartNbr_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PartNbr_Textbox.Location = New System.Drawing.Point(199, 258)
         Me.PartNbr_Textbox.Name = "PartNbr_Textbox"
