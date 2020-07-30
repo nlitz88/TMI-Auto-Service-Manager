@@ -91,16 +91,16 @@ Public Class laborCodeMaintenance
     ' Sub that will call formatting functions to add respective formats to already INITIALIZED DATAVIEWINGCONTROLS (i.e. phone numbers, currency, etc.).
     Private Sub formatDataViewingControls()
 
-        'PartPrice_Value.Text = FormatCurrency(LCDbController.DbDataTable.Rows(LCRow)("PartPrice"))
-        'ListPrice_Value.Text = FormatCurrency(LCDbController.DbDataTable.Rows(LCRow)("ListPrice"))
+        Rate_Value.Text = FormatCurrency(LCDbController.DbDataTable.Rows(LCRow)("Rate"))
+        Amount_Value.Text = FormatCurrency(LCDbController.DbDataTable.Rows(LCRow)("Amount"))
 
     End Sub
 
     ' Sub that will call formatting functions to add respective formats to already INITIALIZED DATAEDITINGCONTROLS (i.e. phone numbers, currency, etc.).
     Private Sub formatDataEditingControls()
 
-        'PartPrice_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(LCDbController.DbDataTable.Rows(LCRow)("PartPrice")))
-        'ListPrice_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(LCDbController.DbDataTable.Rows(LCRow)("ListPrice")))
+        Rate_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(LCDbController.DbDataTable.Rows(LCRow)("Rate")))
+        Amount_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(LCDbController.DbDataTable.Rows(LCRow)("Amount")))
 
     End Sub
 
@@ -300,6 +300,303 @@ Public Class laborCodeMaintenance
 
 
     End Sub
+
+
+    Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
+
+        mode = "adding"
+
+        ' Initialize values for dataEditingControls
+        clearControls(getAllControlsWithTag("dataEditingControl", Me))
+        ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
+        InitialLCValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
+
+        ' First, disable editButton, addButton, enable cancelButton, and disable nav
+        editButton.Enabled = False
+        addButton.Enabled = False
+        cancelButton.Enabled = True
+        nav.DisableAll()
+        LCComboBox.Enabled = False
+
+
+        lastSelected = LCComboBox.Text
+        LCComboBox.SelectedIndex = 0
+
+        ' Hide/Show the dataViewingControls and dataEditingControls, respectively
+        showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+        showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+        showHide(getAllControlsWithTag("dataLabel", Me), 1)
+
+    End Sub
+
+
+    Private Sub deleteButton_Click(sender As Object, e As EventArgs) Handles deleteButton.Click
+
+        Dim decision As DialogResult = MessageBox.Show("Are you sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                ' 1.) Delete value from database
+                If Not deleteAll() Then
+                    MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("Successfully deleted " & LCComboBox.Text & " from Labor Codes")
+                End If
+
+                ' 2.) RELOAD DATATABLES FROM DATABASE
+                If Not loadDataTablesFromDatabase() Then
+                    MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
+                ' 3.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                LCComboBox.Items.Clear()
+                LCComboBox.Items.Add("Select One")
+                For Each row In LCDbController.DbDataTable.Rows
+                    LCComboBox.Items.Add(row("LDLC"))
+                Next
+                LCComboBox.SelectedIndex = 0
+
+                ' 4.) RESTORE USER CONTROLS TO NON-EDITING/SELECTING STATE
+                LCComboBox.Enabled = True
+                addButton.Enabled = True
+                cancelButton.Enabled = False
+                saveButton.Enabled = False
+                nav.EnableAll()
+                ' Show/Hide the dataViewingControls and dataEditingControls, respectively
+                ' This will be done by changing the selectedIndex to 0. May have to fire event here manually.
+
+            Case DialogResult.No
+
+        End Select
+
+    End Sub
+
+
+    Private Sub editButton_Click(sender As Object, e As EventArgs) Handles editButton.Click
+
+        mode = "editing"
+
+        ' Initialize values for dataEditingControls
+        InitializeAllDataEditingControls()
+        ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
+        InitialLCValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
+
+        ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
+        editButton.Enabled = False
+        addButton.Enabled = False
+        cancelButton.Enabled = True
+        nav.DisableAll()
+        LCComboBox.Enabled = False
+
+        ' Hide/Show the dataViewingControls and dataEditingControls, respectively
+        showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+        showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+
+    End Sub
+
+
+    Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
+
+        ' Check for changes before cancelling. Don't need function here that calls all, as only working with one datatable
+        If InitialLCValues.CtrlValuesChanged() Then
+
+            Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+            Select Case decision
+                Case DialogResult.Yes
+
+                    If mode = "editing" Then
+
+                        ' REINITIALIZE ALL CONTROL VALUES (as unwanted changes have been made)
+                        valuesInitialized = False
+                        InitializeAllDataEditingControls()
+                        valuesInitialized = True
+
+                        ' RESTORE USER CONTROLS TO NON-EDITING STATE
+                        editButton.Enabled = True
+                        addButton.Enabled = True
+                        cancelButton.Enabled = False
+                        saveButton.Enabled = False
+                        nav.EnableAll()
+                        LCComboBox.Enabled = True
+                        ' Show/Hide the dataViewingControls and dataEditingControls, respectively
+                        showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+                        showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+                    ElseIf mode = "adding" Then
+
+                        ' 1.) CLEAR DATA EDITING CONTROLS
+                        clearControls(getAllControlsWithTag("dataEditingControl", Me))
+                        'showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+                        ' 2.) SET LCComboBox BACKK TO LAST SELECTED ITEM/INDEX
+                        LCComboBox.SelectedIndex = LCComboBox.Items.IndexOf(lastSelected)
+                        ' If this is not select one, because it changed from the orig to select one, and now back to orig,
+                        ' the .textChanged event for the combo box will take care of reinitializing and showing the dataViewingControls
+
+                        ' 3.) IF LAST SELECTED WAS "SELECT ONE", Then simulate functionality from combobox text/selectedIndex changed
+                        If lastSelected = "Select One" Then
+                            LCCombobox_SelectedIndexChanged(LCComboBox, New EventArgs())
+                        End If
+
+                        ' 4.) RESTORE USER CONTROLS TO NON-ADDING STATE (only those that are controlled by "adding")
+                        LCComboBox.Enabled = True
+                        addButton.Enabled = True
+                        cancelButton.Enabled = False
+                        saveButton.Enabled = False
+                        nav.EnableAll()
+
+                    End If
+
+                Case DialogResult.No
+            End Select
+
+        Else
+
+            If mode = "editing" Then
+
+                ' RESTORE USER CONTROLS TO NON-EDITING STATE
+                editButton.Enabled = True
+                addButton.Enabled = True
+                cancelButton.Enabled = False
+                saveButton.Enabled = False
+                nav.EnableAll()
+                LCComboBox.Enabled = True
+                ' Show/Hide the dataViewingControls and dataEditingControls, respectively
+                showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+                showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+            ElseIf mode = "adding" Then
+
+                ' 1.) CLEAR DATA EDITING CONTROLS
+                clearControls(getAllControlsWithTag("dataEditingControl", Me))
+                'showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+                ' 2.) SET LCComboBox BACK TO LAST SELECTED ITEM/INDEX
+                LCComboBox.SelectedIndex = LCComboBox.Items.IndexOf(lastSelected)
+                ' If this is not select one, because it changed from the orig to select one, and now back to orig,
+                ' the .textChanged event for the combo box will take care of reinitializing and showing the dataViewingControls
+
+                ' 3.) IF LAST SELECTED WAS "SELECT ONE", Then simulate functionality from combobox text/selectedIndex changed
+                If lastSelected = "Select One" Then
+                    LCCombobox_SelectedIndexChanged(LCComboBox, New EventArgs())
+                End If
+
+                ' 4.) RESTORE USER CONTROLS TO NON-ADDING STATE (only those that are controlled by "adding")
+                LCComboBox.Enabled = True
+                addButton.Enabled = True
+                cancelButton.Enabled = False
+                saveButton.Enabled = False
+                nav.EnableAll()
+
+            End If
+
+        End If
+
+    End Sub
+
+
+    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+
+        Dim decision As DialogResult = MessageBox.Show("Save Changes?", "Confirm Changes", MessageBoxButtons.YesNo)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                If mode = "editing" Then
+
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    If Not controlsValid() Then Exit Sub
+
+                    ' 2.) UPDATE DATATABLE(S), THEN UPDATE DATABASE
+                    If Not updateAll() Then
+                        MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Else
+                        MessageBox.Show("Successfully updated Labor Codes")
+                    End If
+
+                    ' 3.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadDataTablesFromDatabase() Then
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+
+                    ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                    LCComboBox.Items.Clear()
+                    LCComboBox.Items.Add("Select One")
+                    For Each row In LCDbController.DbDataTable.Rows
+                        LCComboBox.Items.Add(row("LDLC"))
+                    Next
+
+                    ' Lookup and set new selectedIndex based on updated value (updated value will still be at same datatable index, though)
+                    Dim updatedItem As String = LCDbController.DbDataTable.Rows(LCRow)("LDLC")
+                    LCComboBox.SelectedIndex = LCComboBox.Items.IndexOf(updatedItem)
+
+
+                    ' dataViewingControl values reinitialized, as well as dataControls hide/show in combobox text/selectedindex change event
+
+                    ' 5.) MOVE UI OUT OF EDITING MODE
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+                    nav.EnableAll()
+                    LCComboBox.Enabled = True
+
+                ElseIf mode = "adding" Then
+
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    If Not controlsValid() Then Exit Sub
+
+                    ' 2.) INSERT NEW ROW INTO DATABASE
+                    If Not insertAll() Then
+                        MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Else
+                        MessageBox.Show("Successfully added " & LaborCode_Textbox.Text & " to Labor Codes")
+                    End If
+
+                    ' 3.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadDataTablesFromDatabase() Then
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+
+                    ' 4.) REINITIALIZE CONTROLS (based on index of newly inserted value)
+                    LCComboBox.Items.Clear()
+                    LCComboBox.Items.Add("Select One")
+                    For Each row In LCDbController.DbDataTable.Rows
+                        LCComboBox.Items.Add(row("LDLC"))
+                    Next
+
+                    ' Changing index of main combobox will also initialize respective dataViewing control values
+                    ' Lookup and set new selectedIndex based on new value. If insertion failed, then go back to last
+                    Dim newItem As Object = getRowValueWithKey(LCDbController.DbDataTable, "LDLC", "LaborCode", LaborCode_Textbox.Text)
+                    If Not newItem = Nothing Then
+                        LCComboBox.SelectedIndex = LCComboBox.Items.IndexOf(newItem)
+                    Else
+                        LCComboBox.SelectedIndex = LCComboBox.Items.IndexOf(lastSelected)
+                    End If
+
+
+                    ' 5.) MOVE UI OUT OF Adding MODE
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+                    nav.EnableAll()
+                    LCComboBox.Enabled = True
+
+                End If
+
+            Case DialogResult.No
+                ' Continue making changes or cancel editing
+        End Select
+
+
+    End Sub
+
+
+    ' Later, add textchanged subs for various textboxes.
+    ' For Rate and Hours changed events, if it's a valid Rate and valid hour amount, then calculate amount and initialize it's value
+    ' And remember to do this calculation on initialization as well (maybe make own function for this, as that's kind of how it works
+    ' for the zipcode combobox on companymaster.
 
 
 End Class
