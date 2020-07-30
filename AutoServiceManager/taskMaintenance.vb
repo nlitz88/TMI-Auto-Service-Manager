@@ -243,7 +243,7 @@ Public Class taskMaintenance
             If TaskType <> Nothing And TTList.BinarySearch(TaskType.ToLower()) >= 0 Then
                 ' Initialize corresponding controls from DataTable values
                 valuesInitialized = False
-                InitializeTTDataViewingControls()
+                InitializeAllDataViewingControls()
                 valuesInitialized = True
 
                 ' Show labels and corresponding values
@@ -348,7 +348,7 @@ Public Class taskMaintenance
         mode = "editing"
 
         ' Initialize values for dataEditingControls
-        InitializeTTDataEditingControls()
+        InitializeAllDataEditingControls()
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialTTValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
@@ -377,7 +377,7 @@ Public Class taskMaintenance
 
                     If mode = "editing" Then
 
-                        ' REINITIALIZE ALL CONTROL VALUES (as unwanted changes have been made)
+                        ' REINITIALIZE ALL CONTROL VALUES (as unwanted changes have been made) (redundant)
                         valuesInitialized = False
                         InitializeAllDataEditingControls()
                         valuesInitialized = True

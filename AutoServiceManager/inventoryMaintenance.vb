@@ -270,7 +270,7 @@ Public Class inventoryMaintenance
             If PartNumber <> Nothing And IPList.BinarySearch(PartNumber.ToLower()) >= 0 Then
                 ' Initialize corresponding controls from DataTable values
                 valuesInitialized = False
-                InitializeIPDataViewingControls()
+                InitializeAllDataViewingControls()
                 valuesInitialized = True
 
                 ' Show labels and corresponding values
@@ -375,7 +375,7 @@ Public Class inventoryMaintenance
         mode = "editing"
 
         ' Initialize values for dataEditingControls
-        InitializeIPDataEditingControls()
+        InitializeAllDataEditingControls()
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialIPValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
@@ -591,6 +591,14 @@ Public Class inventoryMaintenance
     End Sub
 
 
+    Private Sub PartNbr_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles PartNbr_Textbox.KeyDown
+
+    End Sub
+
+    Private Sub PartNbr_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles PartNbr_Textbox.KeyPress
+
+    End Sub
+
     Private Sub PartNbr_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PartNbr_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
@@ -605,6 +613,7 @@ Public Class inventoryMaintenance
 
     End Sub
 
+
     Private Sub PartDescription_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PartDescription_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
@@ -618,6 +627,8 @@ Public Class inventoryMaintenance
         End If
 
     End Sub
+
+
     Private Sub PartPrice_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PartPrice_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
@@ -631,6 +642,7 @@ Public Class inventoryMaintenance
         End If
 
     End Sub
+
 
     Private Sub ListPrice_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ListPrice_Textbox.TextChanged
 
