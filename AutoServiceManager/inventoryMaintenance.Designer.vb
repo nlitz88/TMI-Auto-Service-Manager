@@ -60,7 +60,7 @@ Partial Class inventoryMaintenance
         Me.PartPrice_Textbox.Location = New System.Drawing.Point(151, 358)
         Me.PartPrice_Textbox.Name = "PartPrice_Textbox"
         Me.PartPrice_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.PartPrice_Textbox.TabIndex = 106
+        Me.PartPrice_Textbox.TabIndex = 3
         Me.PartPrice_Textbox.Tag = "dataEditingControl"
         '
         'PriceLabel
@@ -94,7 +94,7 @@ Partial Class inventoryMaintenance
         Me.deleteButton.Location = New System.Drawing.Point(216, 120)
         Me.deleteButton.Name = "deleteButton"
         Me.deleteButton.Size = New System.Drawing.Size(110, 30)
-        Me.deleteButton.TabIndex = 103
+        Me.deleteButton.TabIndex = 6
         Me.deleteButton.Text = "Delete"
         Me.deleteButton.UseVisualStyleBackColor = False
         '
@@ -105,7 +105,7 @@ Partial Class inventoryMaintenance
         Me.PartNbr_Textbox.MaxLength = 30
         Me.PartNbr_Textbox.Name = "PartNbr_Textbox"
         Me.PartNbr_Textbox.Size = New System.Drawing.Size(270, 27)
-        Me.PartNbr_Textbox.TabIndex = 102
+        Me.PartNbr_Textbox.TabIndex = 1
         Me.PartNbr_Textbox.Tag = "dataEditingControl"
         '
         'PartNbr_Value
@@ -149,7 +149,7 @@ Partial Class inventoryMaintenance
         Me.PartComboBox.Location = New System.Drawing.Point(145, 194)
         Me.PartComboBox.Name = "PartComboBox"
         Me.PartComboBox.Size = New System.Drawing.Size(297, 28)
-        Me.PartComboBox.TabIndex = 98
+        Me.PartComboBox.TabIndex = 0
         '
         'inventoryMaintenanceLabel
         '
@@ -171,7 +171,7 @@ Partial Class inventoryMaintenance
         Me.editButton.Location = New System.Drawing.Point(332, 120)
         Me.editButton.Name = "editButton"
         Me.editButton.Size = New System.Drawing.Size(110, 30)
-        Me.editButton.TabIndex = 96
+        Me.editButton.TabIndex = 7
         Me.editButton.Text = "Edit"
         Me.editButton.UseVisualStyleBackColor = False
         '
@@ -184,7 +184,7 @@ Partial Class inventoryMaintenance
         Me.cancelButton.Location = New System.Drawing.Point(564, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
-        Me.cancelButton.TabIndex = 95
+        Me.cancelButton.TabIndex = 9
         Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
         '
@@ -197,7 +197,7 @@ Partial Class inventoryMaintenance
         Me.saveButton.Location = New System.Drawing.Point(448, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
-        Me.saveButton.TabIndex = 94
+        Me.saveButton.TabIndex = 8
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
         '
@@ -209,7 +209,7 @@ Partial Class inventoryMaintenance
         Me.addButton.Location = New System.Drawing.Point(100, 120)
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(110, 30)
-        Me.addButton.TabIndex = 93
+        Me.addButton.TabIndex = 5
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = False
         '
@@ -219,7 +219,7 @@ Partial Class inventoryMaintenance
         Me.ListPrice_Textbox.Location = New System.Drawing.Point(358, 358)
         Me.ListPrice_Textbox.Name = "ListPrice_Textbox"
         Me.ListPrice_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.ListPrice_Textbox.TabIndex = 109
+        Me.ListPrice_Textbox.TabIndex = 4
         Me.ListPrice_Textbox.Tag = "dataEditingControl"
         '
         'ListPriceLabel
@@ -251,7 +251,7 @@ Partial Class inventoryMaintenance
         Me.PartDescription_Textbox.MaxLength = 50
         Me.PartDescription_Textbox.Name = "PartDescription_Textbox"
         Me.PartDescription_Textbox.Size = New System.Drawing.Size(297, 27)
-        Me.PartDescription_Textbox.TabIndex = 110
+        Me.PartDescription_Textbox.TabIndex = 2
         Me.PartDescription_Textbox.Tag = "dataEditingControl"
         '
         'PartDescriptionLabel

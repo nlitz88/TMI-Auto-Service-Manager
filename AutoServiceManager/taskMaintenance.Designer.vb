@@ -48,7 +48,7 @@ Partial Class taskMaintenance
         Me.deleteButton.Location = New System.Drawing.Point(216, 120)
         Me.deleteButton.Name = "deleteButton"
         Me.deleteButton.Size = New System.Drawing.Size(110, 30)
-        Me.deleteButton.TabIndex = 89
+        Me.deleteButton.TabIndex = 4
         Me.deleteButton.Text = "Delete"
         Me.deleteButton.UseVisualStyleBackColor = False
         '
@@ -59,7 +59,7 @@ Partial Class taskMaintenance
         Me.TaskType_Textbox.MaxLength = 1
         Me.TaskType_Textbox.Name = "TaskType_Textbox"
         Me.TaskType_Textbox.Size = New System.Drawing.Size(63, 27)
-        Me.TaskType_Textbox.TabIndex = 88
+        Me.TaskType_Textbox.TabIndex = 1
         Me.TaskType_Textbox.Tag = "dataEditingControl"
         '
         'TaskType_Value
@@ -103,7 +103,7 @@ Partial Class taskMaintenance
         Me.TTComboBox.Location = New System.Drawing.Point(186, 194)
         Me.TTComboBox.Name = "TTComboBox"
         Me.TTComboBox.Size = New System.Drawing.Size(229, 28)
-        Me.TTComboBox.TabIndex = 84
+        Me.TTComboBox.TabIndex = 0
         '
         'taskMaintenanceLabel
         '
@@ -125,7 +125,7 @@ Partial Class taskMaintenance
         Me.editButton.Location = New System.Drawing.Point(332, 120)
         Me.editButton.Name = "editButton"
         Me.editButton.Size = New System.Drawing.Size(110, 30)
-        Me.editButton.TabIndex = 82
+        Me.editButton.TabIndex = 5
         Me.editButton.Text = "Edit"
         Me.editButton.UseVisualStyleBackColor = False
         '
@@ -138,7 +138,7 @@ Partial Class taskMaintenance
         Me.cancelButton.Location = New System.Drawing.Point(564, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
-        Me.cancelButton.TabIndex = 81
+        Me.cancelButton.TabIndex = 7
         Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
         '
@@ -151,7 +151,7 @@ Partial Class taskMaintenance
         Me.saveButton.Location = New System.Drawing.Point(448, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
-        Me.saveButton.TabIndex = 80
+        Me.saveButton.TabIndex = 6
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
         '
@@ -163,7 +163,7 @@ Partial Class taskMaintenance
         Me.addButton.Location = New System.Drawing.Point(100, 120)
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(110, 30)
-        Me.addButton.TabIndex = 79
+        Me.addButton.TabIndex = 3
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = False
         '
@@ -196,7 +196,7 @@ Partial Class taskMaintenance
         Me.TaskDescription_Textbox.MaxLength = 50
         Me.TaskDescription_Textbox.Name = "TaskDescription_Textbox"
         Me.TaskDescription_Textbox.Size = New System.Drawing.Size(167, 27)
-        Me.TaskDescription_Textbox.TabIndex = 92
+        Me.TaskDescription_Textbox.TabIndex = 2
         Me.TaskDescription_Textbox.Tag = "dataEditingControl"
         '
         'nav

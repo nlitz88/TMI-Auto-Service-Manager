@@ -56,7 +56,7 @@ Partial Class insuranceMaintenance
         Me.deleteButton.Location = New System.Drawing.Point(216, 120)
         Me.deleteButton.Name = "deleteButton"
         Me.deleteButton.Size = New System.Drawing.Size(110, 30)
-        Me.deleteButton.TabIndex = 63
+        Me.deleteButton.TabIndex = 3
         Me.deleteButton.Text = "Delete"
         Me.deleteButton.UseVisualStyleBackColor = False
         '
@@ -69,7 +69,7 @@ Partial Class insuranceMaintenance
         Me.editButton.Location = New System.Drawing.Point(332, 120)
         Me.editButton.Name = "editButton"
         Me.editButton.Size = New System.Drawing.Size(110, 30)
-        Me.editButton.TabIndex = 62
+        Me.editButton.TabIndex = 4
         Me.editButton.Text = "Edit"
         Me.editButton.UseVisualStyleBackColor = False
         '
@@ -82,7 +82,7 @@ Partial Class insuranceMaintenance
         Me.cancelButton.Location = New System.Drawing.Point(564, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
-        Me.cancelButton.TabIndex = 61
+        Me.cancelButton.TabIndex = 6
         Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
         '
@@ -95,7 +95,7 @@ Partial Class insuranceMaintenance
         Me.saveButton.Location = New System.Drawing.Point(448, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
-        Me.saveButton.TabIndex = 60
+        Me.saveButton.TabIndex = 5
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
         '
@@ -107,7 +107,7 @@ Partial Class insuranceMaintenance
         Me.addButton.Location = New System.Drawing.Point(100, 120)
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(110, 30)
-        Me.addButton.TabIndex = 59
+        Me.addButton.TabIndex = 2
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = False
         '
@@ -130,7 +130,7 @@ Partial Class insuranceMaintenance
         Me.ICComboBox.Location = New System.Drawing.Point(244, 194)
         Me.ICComboBox.Name = "ICComboBox"
         Me.ICComboBox.Size = New System.Drawing.Size(430, 28)
-        Me.ICComboBox.TabIndex = 64
+        Me.ICComboBox.TabIndex = 0
         '
         'CompanyName_Textbox
         '
@@ -139,7 +139,7 @@ Partial Class insuranceMaintenance
         Me.CompanyName_Textbox.MaxLength = 75
         Me.CompanyName_Textbox.Name = "CompanyName_Textbox"
         Me.CompanyName_Textbox.Size = New System.Drawing.Size(430, 27)
-        Me.CompanyName_Textbox.TabIndex = 68
+        Me.CompanyName_Textbox.TabIndex = 1
         Me.CompanyName_Textbox.Tag = "dataEditingControl"
         '
         'ICNameLabel

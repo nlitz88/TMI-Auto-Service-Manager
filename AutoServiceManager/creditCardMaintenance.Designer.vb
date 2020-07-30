@@ -54,7 +54,7 @@ Partial Class creditCardMaintenance
         Me.deleteButton.Location = New System.Drawing.Point(216, 120)
         Me.deleteButton.Name = "deleteButton"
         Me.deleteButton.Size = New System.Drawing.Size(110, 30)
-        Me.deleteButton.TabIndex = 67
+        Me.deleteButton.TabIndex = 3
         Me.deleteButton.Text = "Delete"
         Me.deleteButton.UseVisualStyleBackColor = False
         '
@@ -65,7 +65,7 @@ Partial Class creditCardMaintenance
         Me.CreditCard_Textbox.MaxLength = 50
         Me.CreditCard_Textbox.Name = "CreditCard_Textbox"
         Me.CreditCard_Textbox.Size = New System.Drawing.Size(210, 27)
-        Me.CreditCard_Textbox.TabIndex = 66
+        Me.CreditCard_Textbox.TabIndex = 1
         Me.CreditCard_Textbox.Tag = "dataEditingControl"
         '
         'CreditCard_Value
@@ -109,7 +109,7 @@ Partial Class creditCardMaintenance
         Me.CCComboBox.Location = New System.Drawing.Point(190, 194)
         Me.CCComboBox.Name = "CCComboBox"
         Me.CCComboBox.Size = New System.Drawing.Size(210, 28)
-        Me.CCComboBox.TabIndex = 62
+        Me.CCComboBox.TabIndex = 0
         '
         'creditCardMaintenanceLabel
         '
@@ -131,7 +131,7 @@ Partial Class creditCardMaintenance
         Me.editButton.Location = New System.Drawing.Point(332, 120)
         Me.editButton.Name = "editButton"
         Me.editButton.Size = New System.Drawing.Size(110, 30)
-        Me.editButton.TabIndex = 60
+        Me.editButton.TabIndex = 4
         Me.editButton.Text = "Edit"
         Me.editButton.UseVisualStyleBackColor = False
         '
@@ -144,7 +144,7 @@ Partial Class creditCardMaintenance
         Me.cancelButton.Location = New System.Drawing.Point(564, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
-        Me.cancelButton.TabIndex = 59
+        Me.cancelButton.TabIndex = 6
         Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
         '
@@ -157,7 +157,7 @@ Partial Class creditCardMaintenance
         Me.saveButton.Location = New System.Drawing.Point(448, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
-        Me.saveButton.TabIndex = 58
+        Me.saveButton.TabIndex = 5
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
         '
@@ -169,7 +169,7 @@ Partial Class creditCardMaintenance
         Me.addButton.Location = New System.Drawing.Point(100, 120)
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(110, 30)
-        Me.addButton.TabIndex = 57
+        Me.addButton.TabIndex = 2
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = False
         '

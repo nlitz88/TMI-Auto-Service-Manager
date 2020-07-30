@@ -153,7 +153,7 @@ Partial Class companyInfo
         Me.CompanyName1_Textbox.MaxLength = 50
         Me.CompanyName1_Textbox.Name = "CompanyName1_Textbox"
         Me.CompanyName1_Textbox.Size = New System.Drawing.Size(560, 27)
-        Me.CompanyName1_Textbox.TabIndex = 8
+        Me.CompanyName1_Textbox.TabIndex = 0
         Me.CompanyName1_Textbox.Tag = "dataEditingControl"
         Me.CompanyName1_Textbox.Visible = False
         Me.CompanyName1_Textbox.WordWrap = False
@@ -165,7 +165,7 @@ Partial Class companyInfo
         Me.CompanyName2_Textbox.MaxLength = 50
         Me.CompanyName2_Textbox.Name = "CompanyName2_Textbox"
         Me.CompanyName2_Textbox.Size = New System.Drawing.Size(560, 27)
-        Me.CompanyName2_Textbox.TabIndex = 9
+        Me.CompanyName2_Textbox.TabIndex = 1
         Me.CompanyName2_Textbox.Tag = "dataEditingControl"
         Me.CompanyName2_Textbox.Visible = False
         '
@@ -176,7 +176,7 @@ Partial Class companyInfo
         Me.Address1_Textbox.MaxLength = 50
         Me.Address1_Textbox.Name = "Address1_Textbox"
         Me.Address1_Textbox.Size = New System.Drawing.Size(289, 27)
-        Me.Address1_Textbox.TabIndex = 10
+        Me.Address1_Textbox.TabIndex = 2
         Me.Address1_Textbox.Tag = "dataEditingControl"
         Me.Address1_Textbox.Visible = False
         '
@@ -187,7 +187,7 @@ Partial Class companyInfo
         Me.Address2_Textbox.MaxLength = 50
         Me.Address2_Textbox.Name = "Address2_Textbox"
         Me.Address2_Textbox.Size = New System.Drawing.Size(289, 27)
-        Me.Address2_Textbox.TabIndex = 11
+        Me.Address2_Textbox.TabIndex = 3
         Me.Address2_Textbox.Tag = "dataEditingControl"
         Me.Address2_Textbox.Visible = False
         '
@@ -208,7 +208,7 @@ Partial Class companyInfo
         Me.ShopSupplyCharge_Textbox.Location = New System.Drawing.Point(249, 525)
         Me.ShopSupplyCharge_Textbox.Name = "ShopSupplyCharge_Textbox"
         Me.ShopSupplyCharge_Textbox.Size = New System.Drawing.Size(82, 27)
-        Me.ShopSupplyCharge_Textbox.TabIndex = 14
+        Me.ShopSupplyCharge_Textbox.TabIndex = 8
         Me.ShopSupplyCharge_Textbox.Tag = "dataEditingControl"
         Me.ShopSupplyCharge_Textbox.Visible = False
         '
@@ -218,7 +218,7 @@ Partial Class companyInfo
         Me.LaborRate_Textbox.Location = New System.Drawing.Point(443, 525)
         Me.LaborRate_Textbox.Name = "LaborRate_Textbox"
         Me.LaborRate_Textbox.Size = New System.Drawing.Size(69, 27)
-        Me.LaborRate_Textbox.TabIndex = 15
+        Me.LaborRate_Textbox.TabIndex = 9
         Me.LaborRate_Textbox.Tag = "dataEditingControl"
         Me.LaborRate_Textbox.Visible = False
         '
@@ -228,7 +228,7 @@ Partial Class companyInfo
         Me.TaxRate_Textbox.Location = New System.Drawing.Point(649, 427)
         Me.TaxRate_Textbox.Name = "TaxRate_Textbox"
         Me.TaxRate_Textbox.Size = New System.Drawing.Size(81, 27)
-        Me.TaxRate_Textbox.TabIndex = 16
+        Me.TaxRate_Textbox.TabIndex = 7
         Me.TaxRate_Textbox.Tag = "dataEditingControl"
         Me.TaxRate_Textbox.Visible = False
         '
@@ -280,7 +280,7 @@ Partial Class companyInfo
         Me.editButton.Location = New System.Drawing.Point(100, 120)
         Me.editButton.Name = "editButton"
         Me.editButton.Size = New System.Drawing.Size(110, 30)
-        Me.editButton.TabIndex = 24
+        Me.editButton.TabIndex = 10
         Me.editButton.Text = "Edit"
         Me.editButton.UseVisualStyleBackColor = False
         '
@@ -293,7 +293,7 @@ Partial Class companyInfo
         Me.saveButton.Location = New System.Drawing.Point(216, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
-        Me.saveButton.TabIndex = 25
+        Me.saveButton.TabIndex = 11
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
         '
@@ -306,7 +306,7 @@ Partial Class companyInfo
         Me.cancelButton.Location = New System.Drawing.Point(333, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
-        Me.cancelButton.TabIndex = 26
+        Me.cancelButton.TabIndex = 12
         Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
         '
@@ -473,7 +473,7 @@ Partial Class companyInfo
         Me.ZipCode_ComboBox.MaxLength = 5
         Me.ZipCode_ComboBox.Name = "ZipCode_ComboBox"
         Me.ZipCode_ComboBox.Size = New System.Drawing.Size(150, 28)
-        Me.ZipCode_ComboBox.TabIndex = 41
+        Me.ZipCode_ComboBox.TabIndex = 4
         Me.ZipCode_ComboBox.Tag = "dataEditingControl"
         Me.ZipCode_ComboBox.Visible = False
         '
@@ -488,7 +488,7 @@ Partial Class companyInfo
         Me.Phone1_Textbox.Name = "Phone1_Textbox"
         Me.Phone1_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.Phone1_Textbox.Size = New System.Drawing.Size(181, 27)
-        Me.Phone1_Textbox.TabIndex = 42
+        Me.Phone1_Textbox.TabIndex = 5
         Me.Phone1_Textbox.Tag = "dataEditingControl"
         Me.Phone1_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.Phone1_Textbox.Visible = False
@@ -504,7 +504,7 @@ Partial Class companyInfo
         Me.Phone2_Textbox.Name = "Phone2_Textbox"
         Me.Phone2_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.Phone2_Textbox.Size = New System.Drawing.Size(181, 27)
-        Me.Phone2_Textbox.TabIndex = 43
+        Me.Phone2_Textbox.TabIndex = 6
         Me.Phone2_Textbox.Tag = "dataEditingControl"
         Me.Phone2_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.Phone2_Textbox.Visible = False

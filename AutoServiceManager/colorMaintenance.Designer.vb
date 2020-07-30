@@ -54,7 +54,7 @@ Partial Class colorMaintenance
         Me.deleteButton.Location = New System.Drawing.Point(216, 120)
         Me.deleteButton.Name = "deleteButton"
         Me.deleteButton.Size = New System.Drawing.Size(110, 30)
-        Me.deleteButton.TabIndex = 78
+        Me.deleteButton.TabIndex = 3
         Me.deleteButton.Text = "Delete"
         Me.deleteButton.UseVisualStyleBackColor = False
         '
@@ -65,7 +65,7 @@ Partial Class colorMaintenance
         Me.Color_Textbox.MaxLength = 20
         Me.Color_Textbox.Name = "Color_Textbox"
         Me.Color_Textbox.Size = New System.Drawing.Size(179, 27)
-        Me.Color_Textbox.TabIndex = 77
+        Me.Color_Textbox.TabIndex = 1
         Me.Color_Textbox.Tag = "dataEditingControl"
         '
         'Color_Value
@@ -109,7 +109,7 @@ Partial Class colorMaintenance
         Me.ACComboBox.Location = New System.Drawing.Point(152, 194)
         Me.ACComboBox.Name = "ACComboBox"
         Me.ACComboBox.Size = New System.Drawing.Size(179, 28)
-        Me.ACComboBox.TabIndex = 73
+        Me.ACComboBox.TabIndex = 0
         '
         'colorMaintenanceLabel
         '
@@ -131,7 +131,7 @@ Partial Class colorMaintenance
         Me.editButton.Location = New System.Drawing.Point(332, 120)
         Me.editButton.Name = "editButton"
         Me.editButton.Size = New System.Drawing.Size(110, 30)
-        Me.editButton.TabIndex = 71
+        Me.editButton.TabIndex = 4
         Me.editButton.Text = "Edit"
         Me.editButton.UseVisualStyleBackColor = False
         '
@@ -144,7 +144,7 @@ Partial Class colorMaintenance
         Me.cancelButton.Location = New System.Drawing.Point(564, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
-        Me.cancelButton.TabIndex = 70
+        Me.cancelButton.TabIndex = 6
         Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
         '
@@ -157,7 +157,7 @@ Partial Class colorMaintenance
         Me.saveButton.Location = New System.Drawing.Point(448, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
-        Me.saveButton.TabIndex = 69
+        Me.saveButton.TabIndex = 5
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
         '
@@ -169,7 +169,7 @@ Partial Class colorMaintenance
         Me.addButton.Location = New System.Drawing.Point(100, 120)
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(110, 30)
-        Me.addButton.TabIndex = 68
+        Me.addButton.TabIndex = 2
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = False
         '

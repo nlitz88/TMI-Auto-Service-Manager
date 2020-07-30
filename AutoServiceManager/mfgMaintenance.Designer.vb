@@ -45,7 +45,7 @@ Partial Class mfgMaintenance
         Me.cancelButton.Location = New System.Drawing.Point(564, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
-        Me.cancelButton.TabIndex = 48
+        Me.cancelButton.TabIndex = 6
         Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
         '
@@ -58,7 +58,7 @@ Partial Class mfgMaintenance
         Me.saveButton.Location = New System.Drawing.Point(448, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
-        Me.saveButton.TabIndex = 47
+        Me.saveButton.TabIndex = 5
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
         '
@@ -70,7 +70,7 @@ Partial Class mfgMaintenance
         Me.addButton.Location = New System.Drawing.Point(100, 120)
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(110, 30)
-        Me.addButton.TabIndex = 46
+        Me.addButton.TabIndex = 2
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = False
         '
@@ -83,7 +83,7 @@ Partial Class mfgMaintenance
         Me.editButton.Location = New System.Drawing.Point(332, 120)
         Me.editButton.Name = "editButton"
         Me.editButton.Size = New System.Drawing.Size(110, 30)
-        Me.editButton.TabIndex = 49
+        Me.editButton.TabIndex = 4
         Me.editButton.Text = "Edit"
         Me.editButton.UseVisualStyleBackColor = False
         '
@@ -107,7 +107,7 @@ Partial Class mfgMaintenance
         Me.AutoMakeComboBox.Location = New System.Drawing.Point(203, 194)
         Me.AutoMakeComboBox.Name = "AutoMakeComboBox"
         Me.AutoMakeComboBox.Size = New System.Drawing.Size(210, 28)
-        Me.AutoMakeComboBox.TabIndex = 51
+        Me.AutoMakeComboBox.TabIndex = 0
         '
         'mfgLabel
         '
@@ -157,7 +157,7 @@ Partial Class mfgMaintenance
         Me.AutoMake_Textbox.MaxLength = 50
         Me.AutoMake_Textbox.Name = "AutoMake_Textbox"
         Me.AutoMake_Textbox.Size = New System.Drawing.Size(210, 27)
-        Me.AutoMake_Textbox.TabIndex = 55
+        Me.AutoMake_Textbox.TabIndex = 1
         Me.AutoMake_Textbox.Tag = "dataEditingControl"
         '
         'deleteButton
@@ -169,7 +169,7 @@ Partial Class mfgMaintenance
         Me.deleteButton.Location = New System.Drawing.Point(216, 120)
         Me.deleteButton.Name = "deleteButton"
         Me.deleteButton.Size = New System.Drawing.Size(110, 30)
-        Me.deleteButton.TabIndex = 56
+        Me.deleteButton.TabIndex = 3
         Me.deleteButton.Text = "Delete"
         Me.deleteButton.UseVisualStyleBackColor = False
         '
