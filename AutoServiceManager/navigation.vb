@@ -62,4 +62,9 @@
         changeScreen(taskMaintenance, Me.ParentForm)
     End Sub
 
+    Private Sub InventoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InventoryToolStripMenuItem.Click
+        If Me.ParentForm Is inventoryMaintenance Then Exit Sub
+        changeScreen(inventoryMaintenance, Me.ParentForm)
+    End Sub
+
 End Class

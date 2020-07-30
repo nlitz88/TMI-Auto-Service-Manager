@@ -105,6 +105,12 @@
     <Compile Include="insuranceMaintenance.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="inventoryMaintenance.Designer.vb">
+      <DependentUpon>inventoryMaintenance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inventoryMaintenance.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="loginForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="insuranceMaintenance.resx">
       <DependentUpon>insuranceMaintenance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inventoryMaintenance.resx">
+      <DependentUpon>inventoryMaintenance.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="loginForm.resx">
       <DependentUpon>loginForm.vb</DependentUpon>
