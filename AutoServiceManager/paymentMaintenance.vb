@@ -158,7 +158,7 @@ Public Class paymentMaintenance
         ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
 
 
-        ' Payment Type Name (REQUIRED)(MUST BE UNIQUE)
+        ' Payment Type Name (KEY)(REQUIRED)(MUST BE UNIQUE)
         If Not isValidLength("Payment Type Name", True, PaymentType_Textbox.Text, 50, errorMessage) Then
             PaymentType_Textbox.ForeColor = Color.Red
         Else

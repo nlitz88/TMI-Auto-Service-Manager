@@ -156,11 +156,22 @@ Public Class insuranceMaintenance
         ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
 
 
-        ' Insurance Company Name (REQUIRED)(MUST BE UNIQUE)
+        ' Insurance Company Name (KEY)(REQUIRED)(MUST BE UNIQUE)
         If Not isValidLength("Insurance Company Name", True, CompanyName_Textbox.Text, 75, errorMessage) Then
             CompanyName_Textbox.ForeColor = Color.Red
-        ElseIf isDuplicate("Insurance Company Name", CompanyName_Textbox.Text.ToLower(), errorMessage, ICList) Then
-            CompanyName_Textbox.ForeColor = Color.Red
+        Else
+            If mode = "editing" Then
+                Dim initial As String = ICDbController.DbDataTable.Rows(ICRow)("CompanyName").ToString()
+                If CompanyName_Textbox.Text.ToLower() <> initial.ToLower() Then
+                    If isDuplicate("Insurance Company Name", CompanyName_Textbox.Text.ToLower(), errorMessage, ICList) Then
+                        CompanyName_Textbox.ForeColor = Color.Red
+                    End If
+                End If
+            ElseIf mode = "adding" Then
+                If isDuplicate("Insurance Company Name", CompanyName_Textbox.Text.ToLower(), errorMessage, ICList) Then
+                    CompanyName_Textbox.ForeColor = Color.Red
+                End If
+            End If
         End If
 
 

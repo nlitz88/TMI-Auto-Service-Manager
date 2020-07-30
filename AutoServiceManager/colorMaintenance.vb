@@ -158,12 +158,24 @@ Public Class colorMaintenance
         ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
 
 
-        ' Color Name (REQUIRED)(MUST BE UNIQUE)
+        ' Color Name (KEY)(REQUIRED)(MUST BE UNIQUE)
         If Not isValidLength("Color Name", True, Color_Textbox.Text, 20, errorMessage) Then
             Color_Textbox.ForeColor = Color.Red
-        ElseIf isDuplicate("Color Name", Color_Textbox.Text.ToLower(), errorMessage, ACList) Then
-            Color_Textbox.ForeColor = Color.Red
+        Else
+            If mode = "editing" Then
+                Dim initial As String = ACDbController.DbDataTable.Rows(ACRow)("Color").ToString()
+                If Color_Textbox.Text.ToLower() <> initial.ToLower() Then
+                    If isDuplicate("Color Name", Color_Textbox.Text.ToLower(), errorMessage, ACList) Then
+                        Color_Textbox.ForeColor = Color.Red
+                    End If
+                End If
+            ElseIf mode = "adding" Then
+                If isDuplicate("Color Name", Color_Textbox.Text.ToLower(), errorMessage, ACList) Then
+                    Color_Textbox.ForeColor = Color.Red
+                End If
+            End If
         End If
+
 
 
         ' Check if any invalid input has been found

@@ -158,13 +158,23 @@ Public Class creditCardMaintenance
         ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
 
 
-        ' Credit Card Name (REQUIRED)(MUST BE UNIQUE)
+        ' Credit Card Name (KEY)(REQUIRED)(MUST BE UNIQUE)
         If Not isValidLength("Credit Card Name", True, CreditCard_Textbox.Text, 50, errorMessage) Then
             CreditCard_Textbox.ForeColor = Color.Red
-        ElseIf isDuplicate("Credit Card Name", CreditCard_Textbox.Text.ToLower(), errorMessage, CCList) Then
-            CreditCard_Textbox.ForeColor = Color.Red
+        Else
+            If mode = "editing" Then
+                Dim initial As String = CCDbController.DbDataTable.Rows(CCRow)("CreditCard").ToString()
+                If CreditCard_Textbox.Text.ToLower() <> initial.ToLower() Then
+                    If isDuplicate("Credit Card Name", CreditCard_Textbox.Text.ToLower(), errorMessage, CCList) Then
+                        CreditCard_Textbox.ForeColor = Color.Red
+                    End If
+                End If
+            ElseIf mode = "adding" Then
+                If isDuplicate("Credit Card Name", CreditCard_Textbox.Text.ToLower(), errorMessage, CCList) Then
+                    CreditCard_Textbox.ForeColor = Color.Red
+                End If
+            End If
         End If
-
 
         ' Check if any invalid input has been found
         If Not String.IsNullOrEmpty(errorMessage) Then

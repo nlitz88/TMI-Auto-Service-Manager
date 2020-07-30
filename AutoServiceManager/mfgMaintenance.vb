@@ -156,13 +156,23 @@ Public Class mfgMaintenance
         ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
 
 
-        ' Manufacturer Name (REQUIRED)(MUST BE UNIQUE)
+        ' Manufacturer Name (KEY)(REQUIRED)(MUST BE UNIQUE)
         If Not isValidLength("Manufacturer Name", True, AutoMake_Textbox.Text, 50, errorMessage) Then
             AutoMake_Textbox.ForeColor = Color.Red
-        ElseIf isDuplicate("Manufacturer Name", AutoMake_Textbox.Text.ToLower(), errorMessage, AutoManufacturersList) Then
-            AutoMake_Textbox.ForeColor = Color.Red
+        Else
+            If mode = "editing" Then
+                Dim initial As String = AutoManufacturersDbController.DbDataTable.Rows(amRow)("AutoMake").ToString()
+                If AutoMake_Textbox.Text.ToLower() <> initial.ToLower() Then
+                    If isDuplicate("Manufacturer Name", AutoMake_Textbox.Text.ToLower(), errorMessage, AutoManufacturersList) Then
+                        AutoMake_Textbox.ForeColor = Color.Red
+                    End If
+                End If
+            ElseIf mode = "adding" Then
+                If isDuplicate("Manufacturer Name", AutoMake_Textbox.Text.ToLower(), errorMessage, AutoManufacturersList) Then
+                    AutoMake_Textbox.ForeColor = Color.Red
+                End If
+            End If
         End If
-
 
         ' Check if any invalid input has been found
         If Not String.IsNullOrEmpty(errorMessage) Then
