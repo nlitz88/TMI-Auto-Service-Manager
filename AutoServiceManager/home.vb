@@ -2,20 +2,8 @@
 
 Public Class home
 
+    Private Sub home_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
-
-    ' ************************ MENU STRIP ************************
-
-
-    Private Sub CompanySetupToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        changeScreen(companyInfo, Me)
-        ' alternative:
-        '   
-    End Sub
-
-    Private Sub home_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        End
     End Sub
 
 End Class

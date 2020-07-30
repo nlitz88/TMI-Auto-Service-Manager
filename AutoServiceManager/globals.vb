@@ -937,7 +937,7 @@
 
 
     ' Function that handles switching screens
-    Public Sub changeScreen(ByRef newScreen As Form, ByVal currentScreen As Form)
+    Public Sub changeScreen(ByRef newScreen As Form, ByRef currentScreen As Form)
 
         Try
 
@@ -951,7 +951,7 @@
 
         If currentScreen IsNot Nothing Then
 
-            currentScreen.Hide()
+            currentScreen.Close()
 
         End If
 
