@@ -87,19 +87,71 @@
     End Sub
 
 
-    ' Sub that initializes all dataEditingcontrols corresponding with values from the Parts datatable
+    ' Sub that initializes all dataEditingcontrols corresponding with values from CarModels datatable
     Private Sub InitializeCarModelDataEditingControls()
 
         initializeControlsFromRow(CarModelDbController.DbDataTable, CarModelRow, "dataEditingControl", "_", Me)
+        ' Set forecolor if not already initially default
+        setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
 
     End Sub
 
-    ' Sub that initializes all dataEditingcontrols corresponding with values from the Parts datatable
+    ' Sub that initializes all dataEditingcontrols corresponding with values from the CarModels datatable
     Private Sub InitializeCarModelDataViewingControls()
 
         initializeControlsFromRow(CarModelDbController.DbDataTable, CarModelRow, "dataViewingControl", "_", Me)
 
     End Sub
+
+
+    ' Function that makes custom updates to database tables
+    Private Function updateAll() As Boolean
+
+        ' First, remove any formatting that was added (specific to the controls on this form)
+        ' stripDataEditingControlsFormatting()
+
+        CRUD.AddParams("@newAutoModel", AutoModel_Textbox.Text)
+        ' The initial AutoModel value (in combination with the AutoMake) acts as our key for the query in this case
+        CRUD.AddParams("@autoMake", AutoMakeComboBox.Text)
+        CRUD.AddParams("@initialAutoModel", CarModelDbController.DbDataTable.Rows(CarModelRow)("AutoModel"))
+        CRUD.ExecQuery("UPDATE CarModels SET AutoModel=@newAutoModel WHERE AutoMake=@autoMake AND AutoModel=@initialAutoModel")
+
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
+
+    ' Function that makes insertRow calls for all relevant DataTables
+    Private Function insertAll() As Boolean
+
+        ' First, remove any formatting that was added (specific to the controls on this form)
+        ' stripDataEditingControlsFormatting()
+
+
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
+
+    ' Function that makes deleteRow calls for all relevant DataTables
+    Private Function deleteAll() As Boolean
+
+
+
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
 
 
     Private Sub carModelMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -134,7 +186,7 @@
         ' First, lookup newly changed value in respective dataTable to see if the selected value exists and is valid
         AutoMakeRow = getDataTableRow(AutoMakeDbController.DbDataTable, "AutoMake", AutoMakeComboBox.Text)
 
-        ' If the lookup DOES find the value in the datable
+        ' If the lookup DOES find the value in the DataTable
         If AutoMakeRow <> -1 Then
 
             ' Load corresponding car models for that automake into DataTable
@@ -173,12 +225,12 @@
         ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid
         CarModelRow = getDataTableRow(CarModelDbController.DbDataTable, "AutoModel", CarModelComboBox.Text)
 
-        ' If the lookup DOES find the value in the datable
+        ' If the lookup DOES find the value in the DataTable
         If CarModelRow <> -1 Then
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
-            InitializeCarModelDataViewingControls()
+            InitializeCarModelDataViewingControls()     ' in customer vehicles, this will need to be a call to initializeAll (maybe?)
             valuesInitialized = True
 
             ' Show labels and corresponding values
@@ -201,6 +253,53 @@
             editButton.Enabled = False
             deleteButton.Enabled = False
 
+        End If
+
+    End Sub
+
+
+    Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
+
+        mode = "adding"
+
+        ' Initialize values for dataEditingControls
+        clearControls(getAllControlsWithTag("dataEditingControl", Me))
+        ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
+        InitialCarModelValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
+
+        ' First, disable editButton, addButton, enable cancelButton, and disable nav
+        editButton.Enabled = False
+        addButton.Enabled = False
+        cancelButton.Enabled = True
+        nav.DisableAll()
+        AutoMakeComboBox.Enabled = False
+        CarModelComboBox.Enabled = False
+
+        ' Store the last selected item in the ComboBox, then set its selected index to "Select One" (0)
+        lastSelectedCarModel = CarModelComboBox.Text
+        CarModelComboBox.SelectedIndex = 0
+
+        ' Hide/Show the dataViewingControls and dataEditingControls, respectively
+        showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+        showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+        showHide(getAllControlsWithTag("dataLabel", Me), 1)
+
+    End Sub
+
+
+
+
+
+    Private Sub AutoModel_Textbox_TextChanged(sender As Object, e As EventArgs) Handles AutoModel_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        AutoModel_Textbox.ForeColor = DefaultForeColor
+
+        If InitialCarModelValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
         End If
 
     End Sub
