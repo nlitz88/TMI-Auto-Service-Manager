@@ -201,7 +201,7 @@ Public Class laborCodeMaintenance
         If Not validCurrency("Rate", True, Rate_Textbox.Text, errorMessage) Then Rate_Textbox.ForeColor = Color.Red
 
         ' Hours (REQUIRED)
-        If Not isValidLength("Hours", True, Hours_Textbox.Text, 19, errorMessage) Then Hours_Textbox.ForeColor = Color.Red
+        If Not validNumber("Hours", True, Hours_Textbox.Text, errorMessage) Then Hours_Textbox.ForeColor = Color.Red
 
         ' Amount (REQUIRED) (DOESN'T NEED VALIDATION)
 
@@ -669,11 +669,42 @@ Public Class laborCodeMaintenance
     End Sub
 
 
+    Private Sub Hours_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles Hours_Textbox.KeyDown
+
+        ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
+            allowedKeystroke = True
+        End If
+
+    End Sub
+
+    Private Sub Hours_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Hours_Textbox.KeyPress
+
+        ' If certain keystroke exceptions allowed throuhg, then skip input validation here
+        If allowedKeystroke Then
+            allowedKeystroke = False
+            Exit Sub
+        End If
+
+        If Not numericInputValid(Hours_Textbox, e.KeyChar) Then
+            e.KeyChar = Chr(0)
+            e.Handled = True
+        End If
+
+    End Sub
+
     Private Sub Hours_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Hours_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
 
         Hours_Textbox.ForeColor = DefaultForeColor
+
+        ' Handles pasting in invalid values/strings
+        Dim lastValidIndex As Integer = allValidChars(Hours_Textbox.Text, "1234567890.")
+        If lastValidIndex <> -1 Then
+            Hours_Textbox.Text = Hours_Textbox.Text.Substring(0, lastValidIndex)
+            Hours_Textbox.SelectionStart = lastValidIndex
+        End If
 
         If InitialLCValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -682,9 +713,6 @@ Public Class laborCodeMaintenance
         End If
 
     End Sub
-
-
-
 
     ' Later, add textchanged subs for various textboxes.
     ' For Rate and Hours changed events, if it's a valid Rate and valid hour amount, then calculate amount and initialize it's value

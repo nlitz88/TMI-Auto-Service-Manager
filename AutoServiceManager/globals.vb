@@ -550,6 +550,44 @@
     End Function
 
 
+    ' Just a copy of currencyInputValid; both use same logic, but this is just to differentiate when they're used
+    Public Function numericInputValid(ByVal ctrl As Object, ByRef keyChar As String) As Boolean
+
+        Dim valid As Boolean = True
+
+        ' First, ignore any input that isn't an number, period, or backspace
+        If (InStr("1234567890Oo.", keyChar) = 0 And Asc(keyChar) <> 8) Or (keyChar = "." And InStr(ctrl.Text, ".") > 0) Then
+            valid = False
+            ' If it's a valid number or period, then check for length on right side of decimal, IF there is a decimal
+        ElseIf InStr(ctrl.Text, ".") > 0 Then
+
+            ' If the # of decimal places is already 2, and the cursor is on the right of said decimal place, and the keystroke is not a backspace
+            If ctrl.Text.Split(".")(1).Length = 2 And ctrl.SelectionStart >= InStr(ctrl.Text, ".") And Asc(keyChar) <> 8 And Not ctrl.SelectionLength > 0 Then
+                valid = False
+                ' If the # of digits before decimal is already 3, the cursor is behind the decimal, and it's not a backspace
+            ElseIf ctrl.Text.Split(".")(0).Length = 14 And ctrl.SelectionStart < InStr(ctrl.Text, ".") And Asc(keyChar) <> 8 And Not ctrl.SelectionLength > 0 Then
+                valid = False
+            End If
+
+            ' If there is no decimal place
+        ElseIf InStr(ctrl.Text, ".") = 0 Then
+
+            ' If the length is 3 and it's not a backspace or a decimal place
+            If ctrl.Text.Length = 14 And Asc(keyChar) <> 8 And Not keyChar = "." And Not ctrl.SelectionLength > 0 Then
+                valid = False
+            End If
+
+        End If
+
+        If keyChar.ToLower() = "o" Then
+            keyChar = Chr(48)
+        End If
+
+        Return valid
+
+    End Function
+
+
     Public Function zipCodeInputValid(ByVal ctrl As Object, ByRef keyChar As String) As Boolean
 
         Dim valid As Boolean = True
@@ -664,6 +702,60 @@
 
     ' Function used to validate decimal based values. Very simlar to validPercent. IsEmpty() should be used outside of this function for optional controls
     Public Function validCurrency(ByVal label As String, ByVal required As Boolean, ByVal currencyValue As String, ByRef errorMessage As String) As Boolean
+
+        If required Then
+            ' If it is empty, return false, as this is not valid
+            If isEmpty(label, required, currencyValue, errorMessage) Then Return False
+        Else
+            ' If it's not required, and it's empty, then don't append anything to the error message, and report that the value is valid (as it's blank and doesn't matter).
+            If isEmpty(label, required, currencyValue, errorMessage) Then Return True
+        End If
+
+        ' Ensure all chars in currencyValue are numbers or a decimal place
+        If Not allValidChars(label, currencyValue, "1234567890.", errorMessage) Then Return False
+
+        ' Check to see if there are duplicate decimal places in currencyValue
+        Dim dcount As Integer = 0
+        For Each c In currencyValue.ToCharArray()
+            If c = "." Then dcount += 1
+            If dcount > 1 Then
+                errorMessage += "ERROR: More than one decimal point in " & label & vbNewLine
+                Return False
+            End If
+        Next
+
+        ' If it contains (at most) one decimal place
+        If dcount = 1 Then
+
+            ' If left side is greater than three in length, then it is too large
+            If currencyValue.Split(".")(0).Length > 14 Then
+                errorMessage += "ERROR: Amount too large in " & label & vbNewLine
+                Return False
+            End If
+
+            ' If number is not too large, then ensure that there are no more than 4 points of precision
+            If currencyValue.Split(".")(1).Length > 2 Then
+                errorMessage += "ERROR: More than 2 digits after decimal place in " & label & vbNewLine
+                Return False
+            End If
+
+        Else
+
+            ' If number is greater than three in length, then it is too large
+            If currencyValue.Split(".")(0).Length > 14 Then
+                errorMessage += "ERROR: Amount too large in " & label & vbNewLine
+                Return False
+            End If
+
+        End If
+
+        Return True
+
+    End Function
+
+
+    ' Just a copy of validCurrency; both use same logic, but this is just to differentiate when they're used
+    Public Function validNumber(ByVal label As String, ByVal required As Boolean, ByVal currencyValue As String, ByRef errorMessage As String) As Boolean
 
         If required Then
             ' If it is empty, return false, as this is not valid

@@ -93,7 +93,7 @@ Partial Class laborCodeMaintenance
         '
         Me.Hours_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Hours_Textbox.Location = New System.Drawing.Point(333, 358)
-        Me.Hours_Textbox.MaxLength = 19
+        Me.Hours_Textbox.MaxLength = 14
         Me.Hours_Textbox.Name = "Hours_Textbox"
         Me.Hours_Textbox.Size = New System.Drawing.Size(105, 27)
         Me.Hours_Textbox.TabIndex = 117
