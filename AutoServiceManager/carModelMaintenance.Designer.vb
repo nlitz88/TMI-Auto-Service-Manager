@@ -48,6 +48,7 @@ Partial Class carModelMaintenance
         Me.AutoModel_Value.Size = New System.Drawing.Size(0, 20)
         Me.AutoModel_Value.TabIndex = 132
         Me.AutoModel_Value.Tag = "dataViewingControl"
+        Me.AutoModel_Value.Visible = False
         '
         'ModelNameLabel
         '
@@ -59,6 +60,7 @@ Partial Class carModelMaintenance
         Me.ModelNameLabel.TabIndex = 131
         Me.ModelNameLabel.Tag = "dataLabel"
         Me.ModelNameLabel.Text = "Model Name :"
+        Me.ModelNameLabel.Visible = False
         '
         'AutoModel_Textbox
         '
@@ -69,6 +71,7 @@ Partial Class carModelMaintenance
         Me.AutoModel_Textbox.Size = New System.Drawing.Size(221, 27)
         Me.AutoModel_Textbox.TabIndex = 115
         Me.AutoModel_Textbox.Tag = "dataEditingControl"
+        Me.AutoModel_Textbox.Visible = False
         '
         'deleteButton
         '

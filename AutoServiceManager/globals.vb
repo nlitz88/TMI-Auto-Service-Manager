@@ -423,11 +423,11 @@
     Public Function getDataTableRow(ByVal dataTable As DataTable, ByVal column As String, ByVal keyorvalue As String) As Integer
 
         Dim escapedText As String = escapeLikeValues(keyorvalue)
+
         Try
             Dim dataRows() As DataRow = dataTable.Select(column & " LIKE '" & escapedText & "'")
             If dataRows.Count <> 0 Then
                 Dim rowIndex As Integer = dataTable.Rows.IndexOf(dataRows(0))
-                Console.WriteLine("Found value")
                 Return rowIndex
             Else Return -1
             End If

@@ -122,16 +122,20 @@
 
     End Sub
 
+
+
+
+    ' **************** CONTROL SUBS ****************
+
+
+    ' Handles changes made to AutoMakeComboBox
     Private Sub AutoMakeComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AutoMakeComboBox.SelectedIndexChanged, AutoMakeComboBox.TextChanged
 
         ' First, lookup newly changed value in respective dataTable to see if the selected value exists and is valid
         AutoMakeRow = getDataTableRow(AutoMakeDbController.DbDataTable, "AutoMake", AutoMakeComboBox.Text)
 
-        ' If the lookup DOES return a valid automake
+        ' If the lookup DOES find the value in the datable
         If AutoMakeRow <> -1 Then
-
-            ' Looking up actual value unecessarry in this case
-            ' Dim AutoMake As Object = getRowValue(AutoMakeDbController.DbDataTable, AutoMakeRow, "AutoMake")
 
             ' Load corresponding car models for that automake into DataTable
             loadCarModelDataTable()
@@ -139,10 +143,12 @@
             InitializeCarModelComboBox()
             CarModelComboBox.SelectedIndex = 0
 
+            'CarModelComboBox.Enabled = True
+
             ' Enable user to Add new model under valid manufacturer
             addButton.Enabled = True
 
-            'If it does = nothing, that means that value is either "Select one" or some other anomoly
+            'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
 
             ' If not already, clear and empty the CarModelComboBox
@@ -150,6 +156,7 @@
                 CarModelComboBox.Items.Clear()
                 CarModelComboBox.Text = String.Empty
             End If
+            'CarModelComboBox.Enabled = False
             addButton.Enabled = False
 
         End If
@@ -157,22 +164,46 @@
     End Sub
 
 
-    'Private Sub CarModelComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CarModelComboBox.SelectedIndexChanged
+    ' Handles changes made to CarModelComboBox
+    Private Sub CarModelComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CarModelComboBox.SelectedIndexChanged, CarModelComboBox.TextChanged
 
-    '    ' First, lookup newly changed value in respective dataTable to see if the selected value exists and is valid
-    '    CarModelRow = getDataTableRow(CarModelDbController.DbDataTable, "AutoModel", CarModelComboBox.Text)
-    '    Dim CarModel As Object = getRowValue(CarModelDbController.DbDataTable, CarModelRow, "AutoModel")
+        ' Before anything, ensure that AutoMakeComboBox has a valid entry. Otherwise, we can't be entering values into CarModelComboBox
+        If AutoMakeRow = -1 Then Exit Sub
 
-    '    ' If the lookup DOES return a valid CarModel
-    '    If CarModel <> Nothing Then
+        ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid
+        CarModelRow = getDataTableRow(CarModelDbController.DbDataTable, "AutoModel", CarModelComboBox.Text)
 
+        ' If the lookup DOES find the value in the datable
+        If CarModelRow <> -1 Then
 
-    '        'If it does = nothing, that means that value is either "Select one" or some other anomoly
-    '    Else
+            ' Initialize corresponding controls from DataTable values
+            valuesInitialized = False
+            InitializeCarModelDataViewingControls()
+            valuesInitialized = True
 
-    '    End If
+            ' Show labels and corresponding values
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+            showHide(getAllControlsWithTag("dataLabel", Me), 1)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
 
-    'End Sub
+            ' Enable editing and deleting button
+            editButton.Enabled = True
+            deleteButton.Enabled = True
+
+            'If it does = -1, that means that value Is either "Select one" Or some other anomoly
+        Else
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            ' Disable editing button
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+
+        End If
+
+    End Sub
 
 
 End Class
