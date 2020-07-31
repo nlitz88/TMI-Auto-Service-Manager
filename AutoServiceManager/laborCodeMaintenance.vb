@@ -70,6 +70,8 @@ Public Class laborCodeMaintenance
 
         ' Automated initializations
         InitializeLCDataEditingControls()
+        ' Then, manually initialize AmountTextbox
+        InitializeAmountTextbox()
         ' Then, format dataEditingControls
         formatDataEditingControls()
         ' Set forecolor if not already initially default
@@ -82,8 +84,36 @@ Public Class laborCodeMaintenance
 
         ' Automated initializations
         InitializeLCDataViewingControls()
+        ' Then, manually initialize AmountValue
+        InitializeAmountValue()
         ' Format dataviewingcontrols
         formatDataViewingControls()
+
+    End Sub
+
+
+    ' Subs that initializes Amount_Textbox/Amount_Value based on the values of
+    Private Sub InitializeAmountTextbox()
+
+        If validCurrency("Rate", True, Rate_Textbox.Text, String.Empty) And validNumber("Hours", True, Hours_Textbox.Text, String.Empty) Then
+            ' Calculate amount based on valid rate and hours
+            Dim rate As Decimal = Convert.ToDecimal(Rate_Textbox.Text)
+            Dim hours As Decimal = Convert.ToDecimal(Hours_Textbox.Text)
+            Amount_Textbox.Text = rate * hours
+            ' THen, manually format newly calculated quantity
+            Amount_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(Amount_Textbox.Text))
+        Else
+            Amount_Textbox.Text = String.Empty
+        End If
+
+
+    End Sub
+    Private Sub InitializeAmountValue()
+
+        Dim rate, hours As Decimal
+        rate = Convert.ToDecimal(LCDbController.DbDataTable.Rows(LCRow)("Rate"))
+        hours = Convert.ToDecimal(LCDbController.DbDataTable.Rows(LCRow)("Hours"))
+        Amount_Value.Text = (rate * hours).ToString()
 
     End Sub
 
@@ -92,7 +122,7 @@ Public Class laborCodeMaintenance
     Private Sub formatDataViewingControls()
 
         Rate_Value.Text = FormatCurrency(LCDbController.DbDataTable.Rows(LCRow)("Rate"))
-        Amount_Value.Text = FormatCurrency(LCDbController.DbDataTable.Rows(LCRow)("Amount"))
+        Amount_Value.Text = FormatCurrency(Amount_Value.Text)   ' Need to use valueLabel value so that new calculated value doesn't get overwritten by old value
 
     End Sub
 
@@ -100,7 +130,7 @@ Public Class laborCodeMaintenance
     Private Sub formatDataEditingControls()
 
         Rate_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(LCDbController.DbDataTable.Rows(LCRow)("Rate")))
-        Amount_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(LCDbController.DbDataTable.Rows(LCRow)("Amount")))
+        'Amount_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(Amount_Textbox.Text))   ' This formatting will be done manually per each change
 
     End Sub
 
@@ -660,6 +690,8 @@ Public Class laborCodeMaintenance
             Rate_Textbox.SelectionStart = lastValidIndex
         End If
 
+        InitializeAmountTextbox()
+
         If InitialLCValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
         Else
@@ -705,6 +737,8 @@ Public Class laborCodeMaintenance
             Hours_Textbox.Text = Hours_Textbox.Text.Substring(0, lastValidIndex)
             Hours_Textbox.SelectionStart = lastValidIndex
         End If
+
+        InitializeAmountTextbox()
 
         If InitialLCValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
