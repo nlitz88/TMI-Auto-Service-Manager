@@ -270,7 +270,7 @@ Public Class inventoryMaintenance
             Dim PartNumber As Object = getRowValue(IPDbController.DbDataTable, IPRow, "PartNbr")
 
             ' If the input in the combobox matches an entry in the table that it represents
-            If PartNumber <> Nothing And IPList.BinarySearch(PartNumber.ToLower()) >= 0 Then
+            If PartNumber <> Nothing Then
                 ' Initialize corresponding controls from DataTable values
                 valuesInitialized = False
                 InitializeAllDataViewingControls()

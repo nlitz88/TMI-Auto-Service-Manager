@@ -270,7 +270,7 @@ Public Class laborCodeMaintenance
             Dim LaborCode As Object = getRowValue(LCDbController.DbDataTable, LCRow, "LaborCode")
 
             ' If the input in the combobox matches an entry in the table that it represents
-            If LaborCode <> Nothing And LCList.BinarySearch(LaborCode.ToLower()) >= 0 Then
+            If LaborCode <> Nothing Then
                 ' Initialize corresponding controls from DataTable values
                 valuesInitialized = False
                 InitializeAllDataViewingControls()
@@ -591,6 +591,99 @@ Public Class laborCodeMaintenance
 
 
     End Sub
+
+
+    Private Sub LaborCode_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LaborCode_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        LaborCode_Textbox.ForeColor = DefaultForeColor
+
+        If InitialLCValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+
+    Private Sub Description_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Description_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        Description_Textbox.ForeColor = DefaultForeColor
+
+        If InitialLCValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+
+    Private Sub Rate_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles Rate_Textbox.KeyDown
+
+        ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
+            allowedKeystroke = True
+        End If
+
+    End Sub
+
+    Private Sub Rate_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Rate_Textbox.KeyPress
+
+        ' If certain keystroke exceptions allowed throuhg, then skip input validation here
+        If allowedKeystroke Then
+            allowedKeystroke = False
+            Exit Sub
+        End If
+
+        If Not currencyInputValid(Rate_Textbox, e.KeyChar) Then
+            e.KeyChar = Chr(0)
+            e.Handled = True
+        End If
+
+    End Sub
+
+    Private Sub Rate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Rate_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        Rate_Textbox.ForeColor = DefaultForeColor
+
+        ' Handles pasting in invalid values/strings
+        Dim lastValidIndex As Integer = allValidChars(Rate_Textbox.Text, "1234567890.")
+        If lastValidIndex <> -1 Then
+            Rate_Textbox.Text = Rate_Textbox.Text.Substring(0, lastValidIndex)
+            Rate_Textbox.SelectionStart = lastValidIndex
+        End If
+
+        If InitialLCValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+
+    Private Sub Hours_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Hours_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        Hours_Textbox.ForeColor = DefaultForeColor
+
+        If InitialLCValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+
 
 
     ' Later, add textchanged subs for various textboxes.
