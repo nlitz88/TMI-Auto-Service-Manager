@@ -152,14 +152,10 @@
 
         End If
 
-        ' First, 
-        If AutoMakeComboBox.Text = "Select One" Or AutoMakeComboBox.SelectedIndex = 0 Then
-
-
-
-        End If
-
     End Sub
+
+
+
 
 
 End Class
