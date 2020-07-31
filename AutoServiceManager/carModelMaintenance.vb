@@ -60,7 +60,7 @@
     Private Function loadCarModelDataTable() As Boolean
 
         CarModelDbController.AddParams("@automake", "%" & AutoMakeComboBox.Text & "%")
-        CarModelDbController.ExecQuery("SELECT cm.AutoMake, cm.AutoModel FROM CarModels cm ORDER BY am.AutoMake ASC WHERE cm.AutoMake LIKE @automake")
+        CarModelDbController.ExecQuery("SELECT cm.AutoMake, cm.AutoModel FROM CarModels cm WHERE cm.AutoMake LIKE @automake ORDER BY cm.AutoModel ASC")
         If CarModelDbController.HasException() Then Return False
 
         ' Also, populate respective list with data
@@ -80,8 +80,8 @@
         ' SETUP/INITIALIZE CARMODEL COMBOBOX
         CarModelComboBox.Items.Clear()
         CarModelComboBox.Items.Add("Select One")
-        For Each Row In CarModelDbController.DbDataTable.Rows
-            CarModelComboBox.Items.Add(Row("AutoModel"))
+        For Each row In CarModelDbController.DbDataTable.Rows
+            CarModelComboBox.Items.Add(row("AutoModel"))
         Next
 
     End Sub
@@ -118,7 +118,46 @@
 
         ' INITIALIZE AUTOMAKECOMBOBOX FOR FIRST TIME
         InitializeAutoMakeComboBox()
+        AutoMakeComboBox.SelectedIndex = 0
 
+    End Sub
+
+    Private Sub AutoMakeComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AutoMakeComboBox.SelectedIndexChanged, AutoMakeComboBox.TextChanged
+
+        ' First, lookup newly changed value in respective dataTable to see if the selected value exists and is valid
+        AutoMakeRow = getDataTableRow(AutoMakeDbController.DbDataTable, "AutoMake", AutoMakeComboBox.Text)
+        Dim AutoMake As Object = getRowValue(AutoMakeDbController.DbDataTable, AutoMakeRow, "AutoMake")    ' For automake, this is unecessarry, but good form
+
+        ' If the lookup DOES return a valid automake
+        If AutoMake <> Nothing Then
+
+            ' Load corresponding car models for that automake into DataTable
+            loadCarModelDataTable()
+            ' Then initialize CarModelComboBox
+            InitializeCarModelComboBox()
+            CarModelComboBox.SelectedIndex = 0
+
+            ' Enable user to Add new model under valid manufacturer
+            addButton.Enabled = True
+
+            'If it does = nothing, that means that value is either "Select one" or some other anomoly
+        Else
+
+            ' If not already, clear and empty the CarModelComboBox
+            If CarModelComboBox.Text <> String.Empty And CarModelComboBox.Items.Count <> 0 Then
+                CarModelComboBox.Items.Clear()
+                CarModelComboBox.Text = String.Empty
+            End If
+            addButton.Enabled = False
+
+        End If
+
+        ' First, 
+        If AutoMakeComboBox.Text = "Select One" Or AutoMakeComboBox.SelectedIndex = 0 Then
+
+
+
+        End If
 
     End Sub
 
