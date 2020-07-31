@@ -457,11 +457,15 @@
     Public Function getRowValueWithKey(ByVal dataTable As DataTable, ByVal desiredColumn As String, ByVal keyColumn As String, ByVal key As String) As Object
 
         Dim rowIndex As Integer = getDataTableRow(dataTable, keyColumn, key)
-        If rowIndex >= 0 Then
-            Dim value As Object = dataTable.Rows(rowIndex)(desiredColumn)
-            Return value
-        End If
-        Return Nothing
+        Try
+            If rowIndex >= 0 Then
+                Dim value As Object = dataTable.Rows(rowIndex)(desiredColumn)
+                Return value
+            Else Return Nothing
+            End If
+        Catch ex As Exception
+            Return Nothing
+        End Try
 
     End Function
 
