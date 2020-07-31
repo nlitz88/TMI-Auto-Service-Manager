@@ -727,6 +727,12 @@
         ' If it contains (at most) one decimal place
         If dcount = 1 Then
 
+            ' Check first that it's not only a decimal place
+            If String.IsNullOrWhiteSpace(currencyValue.Split(".")(0)) And String.IsNullOrWhiteSpace(currencyValue.Split(".")(1)) Then
+                errorMessage += "ERROR:  " & label & " cannot contain only a decimal place" & vbNewLine
+                Return False
+            End If
+
             ' If left side is greater than three in length, then it is too large
             If currencyValue.Split(".")(0).Length > 14 Then
                 errorMessage += "ERROR: Amount too large in " & label & vbNewLine
@@ -780,6 +786,12 @@
 
         ' If it contains (at most) one decimal place
         If dcount = 1 Then
+
+            ' Check first that it's not only a decimal place
+            If String.IsNullOrWhiteSpace(currencyValue.Split(".")(0)) And String.IsNullOrWhiteSpace(currencyValue.Split(".")(1)) Then
+                errorMessage += "ERROR:  " & label & " cannot contain only a decimal place" & vbNewLine
+                Return False
+            End If
 
             ' If left side is greater than three in length, then it is too large
             If currencyValue.Split(".")(0).Length > 14 Then
