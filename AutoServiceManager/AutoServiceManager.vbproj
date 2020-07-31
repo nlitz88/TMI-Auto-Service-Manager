@@ -73,6 +73,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="carModelMaintenance.Designer.vb">
+      <DependentUpon>carModelMaintenance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="carModelMaintenance.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="colorMaintenance.Designer.vb">
       <DependentUpon>colorMaintenance.vb</DependentUpon>
     </Compile>
@@ -167,6 +173,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="carModelMaintenance.resx">
+      <DependentUpon>carModelMaintenance.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="colorMaintenance.resx">
       <DependentUpon>colorMaintenance.vb</DependentUpon>
     </EmbeddedResource>

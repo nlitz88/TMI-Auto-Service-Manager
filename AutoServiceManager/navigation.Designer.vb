@@ -35,8 +35,9 @@ Partial Class navigation
         Me.PaymentTypesAcceptedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TaskTypesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InventoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LaborCodesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CarModelsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mainMs.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -71,7 +72,7 @@ Partial Class navigation
         '
         'FileMaintenanceToolStripMenuItem
         '
-        Me.FileMaintenanceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompanySetupToolStripMenuItem, Me.AutomobileManufacturersToolStripMenuItem, Me.AutoColorsToolStripMenuItem, Me.InsuranceCompaniesToolStripMenuItem, Me.CreditCardsAcceptedToolStripMenuItem, Me.PaymentTypesAcceptedToolStripMenuItem, Me.TaskTypesToolStripMenuItem, Me.InventoryToolStripMenuItem, Me.LaborCodesToolStripMenuItem})
+        Me.FileMaintenanceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompanySetupToolStripMenuItem, Me.AutomobileManufacturersToolStripMenuItem, Me.AutoColorsToolStripMenuItem, Me.InsuranceCompaniesToolStripMenuItem, Me.CreditCardsAcceptedToolStripMenuItem, Me.PaymentTypesAcceptedToolStripMenuItem, Me.TaskTypesToolStripMenuItem, Me.InventoryToolStripMenuItem, Me.LaborCodesToolStripMenuItem, Me.CarModelsToolStripMenuItem})
         Me.FileMaintenanceToolStripMenuItem.Name = "FileMaintenanceToolStripMenuItem"
         Me.FileMaintenanceToolStripMenuItem.Size = New System.Drawing.Size(135, 24)
         Me.FileMaintenanceToolStripMenuItem.Text = "File Maintenance"
@@ -124,17 +125,23 @@ Partial Class navigation
         Me.InventoryToolStripMenuItem.Size = New System.Drawing.Size(256, 26)
         Me.InventoryToolStripMenuItem.Text = "Inventory"
         '
+        'LaborCodesToolStripMenuItem
+        '
+        Me.LaborCodesToolStripMenuItem.Name = "LaborCodesToolStripMenuItem"
+        Me.LaborCodesToolStripMenuItem.Size = New System.Drawing.Size(256, 26)
+        Me.LaborCodesToolStripMenuItem.Text = "Labor Codes"
+        '
         'ReportsToolStripMenuItem
         '
         Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
         Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(74, 24)
         Me.ReportsToolStripMenuItem.Text = "Reports"
         '
-        'LaborCodesToolStripMenuItem
+        'CarModelsToolStripMenuItem
         '
-        Me.LaborCodesToolStripMenuItem.Name = "LaborCodesToolStripMenuItem"
-        Me.LaborCodesToolStripMenuItem.Size = New System.Drawing.Size(256, 26)
-        Me.LaborCodesToolStripMenuItem.Text = "Labor Codes"
+        Me.CarModelsToolStripMenuItem.Name = "CarModelsToolStripMenuItem"
+        Me.CarModelsToolStripMenuItem.Size = New System.Drawing.Size(256, 26)
+        Me.CarModelsToolStripMenuItem.Text = "Car Models"
         '
         'navigation
         '
@@ -165,4 +172,5 @@ Partial Class navigation
     Friend WithEvents TaskTypesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents InventoryToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LaborCodesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CarModelsToolStripMenuItem As ToolStripMenuItem
 End Class
