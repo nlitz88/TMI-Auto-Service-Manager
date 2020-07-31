@@ -126,10 +126,12 @@
 
         ' First, lookup newly changed value in respective dataTable to see if the selected value exists and is valid
         AutoMakeRow = getDataTableRow(AutoMakeDbController.DbDataTable, "AutoMake", AutoMakeComboBox.Text)
-        Dim AutoMake As Object = getRowValue(AutoMakeDbController.DbDataTable, AutoMakeRow, "AutoMake")    ' For automake, this is unecessarry, but good form
 
         ' If the lookup DOES return a valid automake
-        If AutoMake <> Nothing Then
+        If AutoMakeRow <> -1 Then
+
+            ' Looking up actual value unecessarry in this case
+            ' Dim AutoMake As Object = getRowValue(AutoMakeDbController.DbDataTable, AutoMakeRow, "AutoMake")
 
             ' Load corresponding car models for that automake into DataTable
             loadCarModelDataTable()
@@ -155,7 +157,22 @@
     End Sub
 
 
+    'Private Sub CarModelComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CarModelComboBox.SelectedIndexChanged
 
+    '    ' First, lookup newly changed value in respective dataTable to see if the selected value exists and is valid
+    '    CarModelRow = getDataTableRow(CarModelDbController.DbDataTable, "AutoModel", CarModelComboBox.Text)
+    '    Dim CarModel As Object = getRowValue(CarModelDbController.DbDataTable, CarModelRow, "AutoModel")
+
+    '    ' If the lookup DOES return a valid CarModel
+    '    If CarModel <> Nothing Then
+
+
+    '        'If it does = nothing, that means that value is either "Select one" or some other anomoly
+    '    Else
+
+    '    End If
+
+    'End Sub
 
 
 End Class

@@ -424,9 +424,13 @@
 
         Dim escapedText As String = escapeLikeValues(keyorvalue)
         Try
-            Dim dataRow As DataRow = dataTable.Select(column & " LIKE '" & escapedText & "'")(0)
-            Dim rowIndex As Integer = dataTable.Rows.IndexOf(DataRow)
-            Return rowIndex
+            Dim dataRows() As DataRow = dataTable.Select(column & " LIKE '" & escapedText & "'")
+            If dataRows.Count <> 0 Then
+                Dim rowIndex As Integer = dataTable.Rows.IndexOf(dataRows(0))
+                Console.WriteLine("Found value")
+                Return rowIndex
+            Else Return -1
+            End If
         Catch ex As Exception
             Return -1
         End Try
@@ -437,6 +441,7 @@
     ' Function that returns value from specified row and column
     Public Function getRowValue(ByVal dataTable As DataTable, ByVal row As Integer, ByVal valueColumn As String) As Object
 
+        ' This function shuold never throw an exception if used in conjunction with getDataTableRow, but try/catch just in case
         Try
             Dim value As Object = dataTable.Rows(row)(valueColumn)
             Return value
