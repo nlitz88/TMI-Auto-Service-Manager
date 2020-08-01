@@ -193,7 +193,7 @@ Partial Class taskMaintenance
         '
         Me.TaskDescription_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TaskDescription_Textbox.Location = New System.Drawing.Point(473, 258)
-        Me.TaskDescription_Textbox.MaxLength = 50
+        Me.TaskDescription_Textbox.MaxLength = 15
         Me.TaskDescription_Textbox.Name = "TaskDescription_Textbox"
         Me.TaskDescription_Textbox.Size = New System.Drawing.Size(167, 27)
         Me.TaskDescription_Textbox.TabIndex = 2

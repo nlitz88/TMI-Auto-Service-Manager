@@ -170,7 +170,7 @@ Public Class taskMaintenance
         End If
 
         ' Task Type Description (REQUIRED)
-        If Not isValidLength("Task Type Description", True, TaskDescription_Textbox.Text, 50, errorMessage) Then
+        If Not isValidLength("Task Type Description", True, TaskDescription_Textbox.Text, 15, errorMessage) Then
             TaskDescription_Textbox.ForeColor = Color.Red
         End If
 
