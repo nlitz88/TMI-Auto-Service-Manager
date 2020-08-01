@@ -318,7 +318,7 @@
                 ' 4.) RESTORE USER CONTROLS TO NON-EDITING/SELECTING STATE
                 AutoMakeComboBox.Enabled = True
                 CarModelComboBox.Enabled = True
-                addButton.Enabled = False
+                addButton.Enabled = True
                 cancelButton.Enabled = False
                 saveButton.Enabled = False
                 nav.EnableAll()
