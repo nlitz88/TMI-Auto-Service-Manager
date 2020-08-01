@@ -46,7 +46,7 @@ Partial Class carModelMaintenance
         Me.AutoModel_Value.Location = New System.Drawing.Point(198, 317)
         Me.AutoModel_Value.Name = "AutoModel_Value"
         Me.AutoModel_Value.Size = New System.Drawing.Size(0, 20)
-        Me.AutoModel_Value.TabIndex = 132
+        Me.AutoModel_Value.TabIndex = 11
         Me.AutoModel_Value.Tag = "dataViewingControl"
         Me.AutoModel_Value.Visible = False
         '
@@ -66,10 +66,10 @@ Partial Class carModelMaintenance
         '
         Me.AutoModel_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AutoModel_Textbox.Location = New System.Drawing.Point(198, 314)
-        Me.AutoModel_Textbox.MaxLength = 0
+        Me.AutoModel_Textbox.MaxLength = 50
         Me.AutoModel_Textbox.Name = "AutoModel_Textbox"
         Me.AutoModel_Textbox.Size = New System.Drawing.Size(221, 27)
-        Me.AutoModel_Textbox.TabIndex = 115
+        Me.AutoModel_Textbox.TabIndex = 2
         Me.AutoModel_Textbox.Tag = "dataEditingControl"
         Me.AutoModel_Textbox.Visible = False
         '
@@ -82,7 +82,7 @@ Partial Class carModelMaintenance
         Me.deleteButton.Location = New System.Drawing.Point(217, 120)
         Me.deleteButton.Name = "deleteButton"
         Me.deleteButton.Size = New System.Drawing.Size(110, 30)
-        Me.deleteButton.TabIndex = 119
+        Me.deleteButton.TabIndex = 4
         Me.deleteButton.Text = "Delete"
         Me.deleteButton.UseVisualStyleBackColor = False
         '
@@ -105,7 +105,7 @@ Partial Class carModelMaintenance
         Me.AutoMakeComboBox.Location = New System.Drawing.Point(203, 194)
         Me.AutoMakeComboBox.Name = "AutoMakeComboBox"
         Me.AutoMakeComboBox.Size = New System.Drawing.Size(240, 28)
-        Me.AutoMakeComboBox.TabIndex = 113
+        Me.AutoMakeComboBox.TabIndex = 0
         '
         'carModelMaintenanceLabel
         '
@@ -127,7 +127,7 @@ Partial Class carModelMaintenance
         Me.editButton.Location = New System.Drawing.Point(333, 120)
         Me.editButton.Name = "editButton"
         Me.editButton.Size = New System.Drawing.Size(110, 30)
-        Me.editButton.TabIndex = 120
+        Me.editButton.TabIndex = 5
         Me.editButton.Text = "Edit"
         Me.editButton.UseVisualStyleBackColor = False
         '
@@ -140,7 +140,7 @@ Partial Class carModelMaintenance
         Me.cancelButton.Location = New System.Drawing.Point(565, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
-        Me.cancelButton.TabIndex = 122
+        Me.cancelButton.TabIndex = 7
         Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
         '
@@ -153,7 +153,7 @@ Partial Class carModelMaintenance
         Me.saveButton.Location = New System.Drawing.Point(449, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
-        Me.saveButton.TabIndex = 121
+        Me.saveButton.TabIndex = 6
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
         '
@@ -165,7 +165,7 @@ Partial Class carModelMaintenance
         Me.addButton.Location = New System.Drawing.Point(100, 120)
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(110, 30)
-        Me.addButton.TabIndex = 118
+        Me.addButton.TabIndex = 3
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = False
         '
@@ -188,7 +188,7 @@ Partial Class carModelMaintenance
         Me.CarModelComboBox.Location = New System.Drawing.Point(157, 250)
         Me.CarModelComboBox.Name = "CarModelComboBox"
         Me.CarModelComboBox.Size = New System.Drawing.Size(240, 28)
-        Me.CarModelComboBox.TabIndex = 134
+        Me.CarModelComboBox.TabIndex = 1
         '
         'nav
         '

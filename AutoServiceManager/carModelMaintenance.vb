@@ -162,6 +162,50 @@
 
 
 
+
+    ' **************** VALIDATION SUBS ****************
+
+
+    ' Sub that runs validation for all form controls. Also handles error reporting
+    Private Function controlsValid() As Boolean
+
+        Dim errorMessage As String = String.Empty
+
+        ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
+
+
+        ' Auto Model (KEY)(REQUIRED)(MUST BE UNIQUE)
+        If Not isValidLength("Car Model", True, AutoModel_Textbox.Text, 50, errorMessage) Then
+            AutoModel_Textbox.ForeColor = Color.Red
+        Else
+            If mode = "editing" Then
+                Dim initial As String = CarModelDbController.DbDataTable.Rows(CarModelRow)("AutoModel").ToString().ToLower()
+                If AutoModel_Textbox.Text.ToLower() <> initial Then
+                    If isDuplicate("Car Model", AutoModel_Textbox.Text.ToLower(), errorMessage, CarModelList) Then
+                        AutoModel_Textbox.ForeColor = Color.Red
+                    End If
+                End If
+            ElseIf mode = "adding" Then
+                If isDuplicate("Car Model", AutoModel_Textbox.Text.ToLower(), errorMessage, CarModelList) Then
+                    AutoModel_Textbox.ForeColor = Color.Red
+                End If
+            End If
+        End If
+
+
+        ' Check if any invalid input has been found
+        If Not String.IsNullOrEmpty(errorMessage) Then
+
+            MessageBox.Show(errorMessage, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+
+        End If
+
+        Return True
+
+    End Function
+
+
     Private Sub carModelMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ' TEST DATABASE CONNECTION FIRST
@@ -457,7 +501,7 @@
                 If mode = "editing" Then
 
                     ' 1.) VALIDATE DATAEDITING CONTROLS
-                    'If Not controlsValid() Then Exit Sub
+                    If Not controlsValid() Then Exit Sub
 
                     ' 2.) UPDATE DATATABLE(S), THEN UPDATE DATABASE
                     If Not updateAll() Then
@@ -495,7 +539,7 @@
                 ElseIf mode = "adding" Then
 
                     ' 1.) VALIDATE DATAEDITING CONTROLS
-                    'If Not controlsValid() Then Exit Sub
+                    If Not controlsValid() Then Exit Sub
 
                     ' 2.) INSERT NEW ROW INTO DATABASE
                     If Not insertAll() Then
