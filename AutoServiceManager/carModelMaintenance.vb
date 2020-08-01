@@ -195,8 +195,6 @@
             InitializeCarModelComboBox()
             CarModelComboBox.SelectedIndex = 0
 
-            'CarModelComboBox.Enabled = True
-
             ' Enable user to Add new model under valid manufacturer
             addButton.Enabled = True
 
@@ -208,7 +206,6 @@
                 CarModelComboBox.Items.Clear()
                 CarModelComboBox.Text = String.Empty
             End If
-            'CarModelComboBox.Enabled = False
             addButton.Enabled = False
 
         End If
@@ -287,7 +284,249 @@
     End Sub
 
 
+    Private Sub deleteButton_Click(sender As Object, e As EventArgs) Handles deleteButton.Click
 
+        Dim decision As DialogResult = MessageBox.Show("Are you sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                ' 1.) Delete value from database
+                If Not deleteAll() Then
+                    MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("Successfully deleted " & CarModelComboBox.Text & " from CarModels")
+                End If
+
+                ' 2.) RELOAD DATATABLES FROM DATABASE
+                If Not loadCarModelDataTable() Then
+                    MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
+                ' 3.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                InitializeCarModelComboBox()
+                CarModelComboBox.SelectedIndex = 0
+
+                ' 4.) RESTORE USER CONTROLS TO NON-EDITING/SELECTING STATE
+                AutoMakeComboBox.Enabled = True
+                CarModelComboBox.Enabled = True
+                addButton.Enabled = False
+                cancelButton.Enabled = False
+                saveButton.Enabled = False
+                nav.EnableAll()
+
+            Case DialogResult.No
+
+        End Select
+
+    End Sub
+
+
+    Private Sub editButton_Click(sender As Object, e As EventArgs) Handles editButton.Click
+
+        mode = "editing"
+
+        ' Initialize values for dataEditingControls
+        InitializeCarModelDataEditingControls()
+        ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
+        InitialCarModelValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
+
+        ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
+        editButton.Enabled = False
+        addButton.Enabled = False
+        cancelButton.Enabled = True
+        nav.DisableAll()
+        AutoMakeComboBox.Enabled = False
+        CarModelComboBox.Enabled = False
+
+        ' Hide/Show the dataViewingControls and dataEditingControls, respectively
+        showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+        showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+
+    End Sub
+
+
+    Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
+
+        ' Check for changes before cancelling. Don't need function here that calls all, as only working with one datatable's values
+        If InitialCarModelValues.CtrlValuesChanged() Then
+
+            Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+            Select Case decision
+                Case DialogResult.Yes
+
+                    If mode = "editing" Then
+
+                        ' RESTORE USER CONTROLS TO NON-EDITING STATE
+                        editButton.Enabled = True
+                        addButton.Enabled = True
+                        cancelButton.Enabled = False
+                        saveButton.Enabled = False
+                        nav.EnableAll()
+                        AutoMakeComboBox.Enabled = True
+                        CarModelComboBox.Enabled = True
+
+                        ' Show/Hide the dataViewingControls and dataEditingControls, respectively
+                        showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+                        showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+                    ElseIf mode = "adding" Then
+
+                        ' 1.) SET CarModelComboBox BACKK TO LAST SELECTED ITEM/INDEX
+                        CarModelComboBox.SelectedIndex = CarModelComboBox.Items.IndexOf(lastSelectedCarModel)
+
+                        ' 2.) IF LAST SELECTED WAS "SELECT ONE", Then simulate functionality from combobox text/selectedIndex changed
+                        If lastSelectedCarModel = "Select One" Then
+                            CarModelComboBox_SelectedIndexChanged(CarModelComboBox, New EventArgs())
+                        End If
+
+                        ' 3.) RESTORE USER CONTROLS TO NON-ADDING STATE (only those that are controlled by "adding")
+                        AutoMakeComboBox.Enabled = True
+                        CarModelComboBox.Enabled = True
+                        addButton.Enabled = True
+                        cancelButton.Enabled = False
+                        saveButton.Enabled = False
+                        nav.EnableAll()
+
+                    End If
+
+                Case DialogResult.No
+            End Select
+
+        Else
+
+            If mode = "editing" Then
+
+                ' RESTORE USER CONTROLS TO NON-EDITING STATE
+                editButton.Enabled = True
+                addButton.Enabled = True
+                cancelButton.Enabled = False
+                saveButton.Enabled = False
+                nav.EnableAll()
+                AutoMakeComboBox.Enabled = True
+                CarModelComboBox.Enabled = True
+
+                ' Show/Hide the dataViewingControls and dataEditingControls, respectively
+                showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+                showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+            ElseIf mode = "adding" Then
+
+                ' 1.) SET PartComboBox BACK TO LAST SELECTED ITEM/INDEX
+                CarModelComboBox.SelectedIndex = CarModelComboBox.Items.IndexOf(lastSelectedCarModel)
+
+                ' 2.) IF LAST SELECTED WAS "SELECT ONE", Then simulate functionality from combobox text/selectedIndex changed
+                If lastSelectedCarModel = "Select One" Then
+                    CarModelComboBox_SelectedIndexChanged(CarModelComboBox, New EventArgs())
+                End If
+
+                ' 3.) RESTORE USER CONTROLS TO NON-ADDING STATE (only those that are controlled by "adding")
+                AutoMakeComboBox.Enabled = True
+                CarModelComboBox.Enabled = True
+                addButton.Enabled = True
+                cancelButton.Enabled = False
+                saveButton.Enabled = False
+                nav.EnableAll()
+
+            End If
+
+        End If
+
+    End Sub
+
+
+    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+
+        Dim decision As DialogResult = MessageBox.Show("Save Changes?", "Confirm Changes", MessageBoxButtons.YesNo)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                If mode = "editing" Then
+
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    'If Not controlsValid() Then Exit Sub
+
+                    ' 2.) UPDATE DATATABLE(S), THEN UPDATE DATABASE
+                    If Not updateAll() Then
+                        MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Else
+                        MessageBox.Show("Successfully updated Car Models")
+                    End If
+
+                    ' 3.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadCarModelDataTable() Then
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+
+                    ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                    InitializeCarModelComboBox()
+
+                    ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
+                    ' If insertion failed, then revert selected back to lastSelected
+                    Dim updatedItem As String = getRowValueWithKey(CarModelDbController.DbDataTable, "AutoModel", "AutoModel", AutoModel_Textbox.Text)
+                    If updatedItem <> Nothing Then
+                        CarModelComboBox.SelectedIndex = CarModelComboBox.Items.IndexOf(updatedItem)
+                    Else
+                        CarModelComboBox.SelectedIndex = CarModelComboBox.Items.IndexOf(lastSelectedCarModel)
+                    End If
+
+
+                    ' 5.) MOVE UI OUT OF EDITING MODE
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+                    nav.EnableAll()
+                    AutoMakeComboBox.Enabled = True
+                    CarModelComboBox.Enabled = True
+
+                ElseIf mode = "adding" Then
+
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    'If Not controlsValid() Then Exit Sub
+
+                    ' 2.) INSERT NEW ROW INTO DATABASE
+                    If Not insertAll() Then
+                        MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Else
+                        MessageBox.Show("Successfully added " & AutoModel_Textbox.Text & " to Car Models")
+                    End If
+
+                    ' 3.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadCarModelDataTable() Then
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+
+                    ' 4.) REINITIALIZE CONTROLS (based on index of newly inserted value)
+                    InitializeCarModelComboBox()
+
+                    ' Changing index of CarModelComboBox  will also initialize respective dataViewing control values
+                    ' Lookup and set new selectedIndex based on new value. If insertion failed, then go back to last
+                    Dim newItem As Object = getRowValueWithKey(CarModelDbController.DbDataTable, "AutoModel", "AutoModel", AutoModel_Textbox.Text)
+                    If newItem <> Nothing Then
+                        CarModelComboBox.SelectedIndex = CarModelComboBox.Items.IndexOf(newItem)
+                    Else
+                        CarModelComboBox.SelectedIndex = CarModelComboBox.Items.IndexOf(lastSelectedCarModel)
+                    End If
+
+
+                    ' 5.) MOVE UI OUT OF Adding MODE
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+                    nav.EnableAll()
+                    AutoMakeComboBox.Enabled = True
+                    CarModelComboBox.Enabled = True
+
+                End If
+
+            Case DialogResult.No
+                ' Continue making changes or cancel editing
+        End Select
+
+
+    End Sub
 
 
     Private Sub AutoModel_Textbox_TextChanged(sender As Object, e As EventArgs) Handles AutoModel_Textbox.TextChanged
