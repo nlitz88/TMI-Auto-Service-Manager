@@ -343,7 +343,6 @@
         If Not String.IsNullOrEmpty(queryParams) Then
             ' The substring at the end ensures that there isn't an extra comma at the end
             queryParams = queryParams.Substring(0, queryParams.Length - 1)
-            Console.WriteLine("UPDATE " & tableName & " SET " & queryParams & whereID)
             updateController.ExecQuery("UPDATE " & tableName & " SET " & queryParams & whereID)
         End If
 
