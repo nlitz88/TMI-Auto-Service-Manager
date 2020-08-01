@@ -91,6 +91,12 @@
     <Compile Include="creditCardMaintenance.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="customerMaintenance.Designer.vb">
+      <DependentUpon>customerMaintenance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="customerMaintenance.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="home.Designer.vb">
       <DependentUpon>home.vb</DependentUpon>
     </Compile>
@@ -184,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="creditCardMaintenance.resx">
       <DependentUpon>creditCardMaintenance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="customerMaintenance.resx">
+      <DependentUpon>customerMaintenance.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="home.resx">
       <DependentUpon>home.vb</DependentUpon>
