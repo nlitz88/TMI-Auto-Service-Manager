@@ -337,6 +337,9 @@ Public Class taskMaintenance
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialTTValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
+        ' Store the last selected item in the ComboBox (in case update fails and it must revert)
+        lastSelected = TTComboBox.Text
+
         ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
         editButton.Enabled = False
         addButton.Enabled = False

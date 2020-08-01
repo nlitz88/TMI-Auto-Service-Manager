@@ -66,7 +66,7 @@ Partial Class carModelMaintenance
         '
         Me.AutoModel_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AutoModel_Textbox.Location = New System.Drawing.Point(198, 314)
-        Me.AutoModel_Textbox.MaxLength = 50
+        Me.AutoModel_Textbox.MaxLength = 0
         Me.AutoModel_Textbox.Name = "AutoModel_Textbox"
         Me.AutoModel_Textbox.Size = New System.Drawing.Size(221, 27)
         Me.AutoModel_Textbox.TabIndex = 115

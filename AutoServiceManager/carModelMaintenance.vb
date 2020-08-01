@@ -131,7 +131,11 @@
         ' First, remove any formatting that was added (specific to the controls on this form)
         ' stripDataEditingControlsFormatting()
 
+        CRUD.AddParams("@autoMake", AutoMakeComboBox.Text)
+        CRUD.AddParams("@autoModel", AutoModel_Textbox.Text)
+        CRUD.ExecQuery("INSERT INTO CarModels (AutoMake, AutoModel) VALUES (@autoMake, @autoModel)")
 
+        ' Then, return exception status of CRUD controller. Do this after each call
         If CRUD.HasException() Then Return False
 
         ' Otherwise, return true
@@ -143,8 +147,12 @@
     ' Function that makes deleteRow calls for all relevant DataTables
     Private Function deleteAll() As Boolean
 
+        ' The initial AutoModel value (in combination with the AutoMake) acts as our key for the query in this case
+        CRUD.AddParams("@autoMake", AutoMakeComboBox.Text)
+        CRUD.AddParams("@initialAutoModel", CarModelDbController.DbDataTable.Rows(CarModelRow)("AutoModel"))
+        CRUD.ExecQuery("DELETE FROM CarModels WHERE AutoMake=@autoMake AND AutoModel=@initialAutoModel")
 
-
+        ' Then, return exception status of CRUD controller. Do this after each call
         If CRUD.HasException() Then Return False
 
         ' Otherwise, return true
@@ -330,6 +338,9 @@
         InitializeCarModelDataEditingControls()
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialCarModelValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
+
+        ' Store the last selected item in the ComboBox (in case update fails and it must revert)
+        lastSelectedCarModel = CarModelComboBox.Text
 
         ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
         editButton.Enabled = False

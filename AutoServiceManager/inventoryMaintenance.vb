@@ -369,6 +369,9 @@ Public Class inventoryMaintenance
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialIPValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
+        ' Store the last selected item in the ComboBox (in case update fails and it must revert)
+        lastSelected = PartComboBox.Text
+
         ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
         editButton.Enabled = False
         addButton.Enabled = False
