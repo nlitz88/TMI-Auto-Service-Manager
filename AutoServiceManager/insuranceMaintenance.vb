@@ -348,101 +348,46 @@ Public Class insuranceMaintenance
 
     Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
 
-        ' Check for changes before cancelling. Don't need function here that calls all, as only working with one datatable
+        ' Check for changes before cancelling. Don't need function here that calls all, as only working with one datatable's values
         If InitialICValues.CtrlValuesChanged() Then
 
             Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            ' If changes have been made, and the user selected that they don't want to cancel, then exit here.
+            If decision = DialogResult.No Then Exit Sub
 
-            Select Case decision
-                Case DialogResult.Yes
+        End If
 
-                    If mode = "editing" Then
+        ' Otherwise, continue cancelling
+        If mode = "editing" Then
 
-                        ' REINITIALIZE ALL CONTROL VALUES (as unwanted changes have been made)
-                        valuesInitialized = False
-                        InitializeAllDataEditingControls()
-                        valuesInitialized = True
+            ' RESTORE USER CONTROLS TO NON-EDITING STATE
+            editButton.Enabled = True
+            addButton.Enabled = True
+            cancelButton.Enabled = False
+            saveButton.Enabled = False
+            nav.EnableAll()
+            ICComboBox.Enabled = True
 
-                        ' RESTORE USER CONTROLS TO NON-EDITING STATE
-                        editButton.Enabled = True
-                        addButton.Enabled = True
-                        cancelButton.Enabled = False
-                        saveButton.Enabled = False
-                        nav.EnableAll()
-                        ICComboBox.Enabled = True
-                        ' Show/Hide the dataViewingControls and dataEditingControls, respectively
-                        showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
-                        showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            ' Show/Hide the dataViewingControls and dataEditingControls, respectively
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
 
-                    ElseIf mode = "adding" Then
+        ElseIf mode = "adding" Then
 
-                        ' 1.) CLEAR DATA EDITING CONTROLS
-                        clearControls(getAllControlsWithTag("dataEditingControl", Me))
-                        'showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            ' 1.) SET PartComboBox BACKK TO LAST SELECTED ITEM/INDEX
+            ICComboBox.SelectedIndex = ICComboBox.Items.IndexOf(lastSelected)
 
-                        ' 2.) SET ICComboBox BACK TO LAST SELECTED ITEM/INDEX
-                        ICComboBox.SelectedIndex = ICComboBox.Items.IndexOf(lastSelected)
-                        ' If this is not select one, because it changed from the orig to select one, and now back to orig,
-                        ' the .textChanged event for the combo box will take care of reinitializing and showing the dataViewingControls
-
-                        ' 3.) IF LAST SELECTED WAS "SELECT ONE", Then simulate functionality from combobox text/selectedIndex changed
-                        If lastSelected = "Select One" Then
-                            ICCombobox_SelectedIndexChanged(ICComboBox, New EventArgs())
-                        End If
-
-                        ' 4.) RESTORE USER CONTROLS TO NON-ADDING STATE (only those that are controlled by "adding")
-                        ICComboBox.Enabled = True
-                        addButton.Enabled = True
-                        cancelButton.Enabled = False
-                        saveButton.Enabled = False
-                        nav.EnableAll()
-
-                    End If
-
-                Case DialogResult.No
-            End Select
-
-        Else
-
-            If mode = "editing" Then
-
-                ' RESTORE USER CONTROLS TO NON-EDITING STATE
-                editButton.Enabled = True
-                addButton.Enabled = True
-                cancelButton.Enabled = False
-                saveButton.Enabled = False
-                nav.EnableAll()
-                ICComboBox.Enabled = True
-                ' Show/Hide the dataViewingControls and dataEditingControls, respectively
-                showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
-                showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
-
-            ElseIf mode = "adding" Then
-
-                ' 1.) CLEAR DATA EDITING CONTROLS
-                clearControls(getAllControlsWithTag("dataEditingControl", Me))
-                'showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
-
-                ' 2.) SET ICComboBox BACK TO LAST SELECTED ITEM/INDEX
-                ICComboBox.SelectedIndex = ICComboBox.Items.IndexOf(lastSelected)
-                ' If this is not select one, because it changed from the orig to select one, and now back to orig,
-                ' the .textChanged event for the combo box will take care of reinitializing and showing the dataViewingControls
-
-                ' 3.) IF LAST SELECTED WAS "SELECT ONE", Then simulate functionality from combobox text/selectedIndex changed
-                If lastSelected = "Select One" Then
-                    ICCombobox_SelectedIndexChanged(ICComboBox, New EventArgs())
-                End If
-
-                ' 4.) RESTORE USER CONTROLS TO NON-ADDING STATE (only those that are controlled by "adding")
-                ICComboBox.Enabled = True
-                addButton.Enabled = True
-                cancelButton.Enabled = False
-                saveButton.Enabled = False
-                nav.EnableAll()
-
+            ' 2.) IF LAST SELECTED WAS "SELECT ONE", Then simulate functionality from combobox text/selectedIndex changed
+            If lastSelected = "Select One" Then
+                ICCombobox_SelectedIndexChanged(ICComboBox, New EventArgs())
             End If
 
-
+            ' 3.) RESTORE USER CONTROLS TO NON-ADDING STATE (only those that are controlled by "adding")
+            ICComboBox.Enabled = True
+            addButton.Enabled = True
+            cancelButton.Enabled = False
+            saveButton.Enabled = False
+            nav.EnableAll()
 
         End If
 

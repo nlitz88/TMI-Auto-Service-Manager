@@ -403,17 +403,14 @@
 
     Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
 
-        Dim decision As DialogResult = Nothing
-
         ' Check for changes before cancelling. Don't need function here that calls all, as only working with one datatable's values
         If InitialCarModelValues.CtrlValuesChanged() Then
 
-            decision = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            ' If changes have been made, and the user selected that they don't want to cancel, then exit here.
+            If decision = DialogResult.No Then Exit Sub
 
         End If
-
-        ' If changes have been made, and the user selected that they don't want to cancel, then exit here.
-        If decision = DialogResult.No Then Exit Sub
 
         ' Otherwise, continue cancelling
         If mode = "editing" Then
@@ -450,8 +447,6 @@
             nav.EnableAll()
 
         End If
-
-
 
     End Sub
 
