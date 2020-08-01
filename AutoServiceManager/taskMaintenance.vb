@@ -499,10 +499,14 @@ Public Class taskMaintenance
                         TTComboBox.Items.Add(row("TTD"))
                     Next
 
-                    ' Lookup and set new selectedIndex based on updated value (updated value will still be at same datatable index, though)
-                    Dim updatedItem As String = TTDbController.DbDataTable.Rows(TTRow)("TTD")
-                    TTComboBox.SelectedIndex = TTComboBox.Items.IndexOf(updatedItem)
-
+                    ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
+                    ' If insertion failed, then revert selected back to lastSelected
+                    Dim updatedItem As String = getRowValueWithKey(TTDbController.DbDataTable, "TTD", "TaskType", TaskType_Textbox.Text)
+                    If updatedItem <> Nothing Then
+                        TTComboBox.SelectedIndex = TTComboBox.Items.IndexOf(updatedItem)
+                    Else
+                        TTComboBox.SelectedIndex = TTComboBox.Items.IndexOf(lastSelected)
+                    End If
 
                     ' dataViewingControl values reinitialized, as well as dataControls hide/show in combobox text/selectedindex change event
 
@@ -540,7 +544,7 @@ Public Class taskMaintenance
                     ' Changing index of main combobox will also initialize respective dataViewing control values
                     ' Lookup and set new selectedIndex based on new value. If insertion failed, then go back to last
                     Dim newItem As Object = getRowValueWithKey(TTDbController.DbDataTable, "TTD", "TaskType", TaskType_Textbox.Text)
-                    If Not newItem = Nothing Then
+                    If newItem <> Nothing Then
                         TTComboBox.SelectedIndex = TTComboBox.Items.IndexOf(newItem)
                     Else
                         TTComboBox.SelectedIndex = TTComboBox.Items.IndexOf(lastSelected)

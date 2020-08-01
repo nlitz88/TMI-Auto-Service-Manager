@@ -529,10 +529,14 @@ Public Class inventoryMaintenance
                         PartComboBox.Items.Add(row("PDPN"))
                     Next
 
-                    ' Lookup and set new selectedIndex based on updated value (updated value will still be at same datatable index, though)
-                    Dim updatedItem As String = IPDbController.DbDataTable.Rows(IPRow)("PDPN")
-                    PartComboBox.SelectedIndex = PartComboBox.Items.IndexOf(updatedItem)
-
+                    ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
+                    ' If insertion failed, then revert selected back to lastSelected
+                    Dim updatedItem As String = getRowValueWithKey(IPDbController.DbDataTable, "PDPN", "PartNbr", PartNbr_Textbox.Text)
+                    If updatedItem <> Nothing Then
+                        PartComboBox.SelectedIndex = PartComboBox.Items.IndexOf(updatedItem)
+                    Else
+                        PartComboBox.SelectedIndex = PartComboBox.Items.IndexOf(lastSelected)
+                    End If
 
                     ' dataViewingControl values reinitialized, as well as dataControls hide/show in combobox text/selectedindex change event
 
@@ -570,7 +574,7 @@ Public Class inventoryMaintenance
                     ' Changing index of main combobox will also initialize respective dataViewing control values
                     ' Lookup and set new selectedIndex based on new value. If insertion failed, then go back to last
                     Dim newItem As Object = getRowValueWithKey(IPDbController.DbDataTable, "PDPN", "PartNbr", PartNbr_Textbox.Text)
-                    If Not newItem = Nothing Then
+                    If newItem <> Nothing Then
                         PartComboBox.SelectedIndex = PartComboBox.Items.IndexOf(newItem)
                     Else
                         PartComboBox.SelectedIndex = PartComboBox.Items.IndexOf(lastSelected)
