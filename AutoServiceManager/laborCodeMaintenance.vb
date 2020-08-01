@@ -282,8 +282,28 @@ Public Class laborCodeMaintenance
     ' Main eventhandler that handles most of the initialization for all subsequent elements/controls.
     Private Sub LCCombobox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LCComboBox.SelectedIndexChanged, LCComboBox.TextChanged
 
-        ' Rewrite this if structure so that these don't go first (we still need to take action if select one is selected)
-        If LCComboBox.Text = "Select One" Or LCComboBox.SelectedIndex = 0 Then
+        ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid
+        LCRow = getDataTableRow(LCDbController.DbDataTable, "LDLC", LCComboBox.Text)
+
+        ' If the lookup DOES find the value in the DataTable
+        If LCRow <> -1 Then
+
+            ' Initialize corresponding controls from DataTable values
+            valuesInitialized = False
+            InitializeAllDataViewingControls()
+            valuesInitialized = True
+
+            ' Show labels and corresponding values
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+            showHide(getAllControlsWithTag("dataLabel", Me), 1)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+            ' Enable editing and deleting button
+            editButton.Enabled = True
+            deleteButton.Enabled = True
+
+            'If it does = -1, that means that value Is either "Select one" Or some other anomoly
+        Else
 
             ' Have all labels and corresponding values hidden
             showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
@@ -293,41 +313,7 @@ Public Class laborCodeMaintenance
             editButton.Enabled = False
             deleteButton.Enabled = False
 
-        Else
-
-            ' Lookup LCROW to define it for the entire class and to change selected index of ComboBox
-            LCRow = getDataTableRow(LCDbController.DbDataTable, "LDLC", LCComboBox.Text)
-            Dim LaborCode As Object = getRowValue(LCDbController.DbDataTable, LCRow, "LaborCode")
-
-            ' If the input in the combobox matches an entry in the table that it represents
-            If LaborCode <> Nothing Then
-                ' Initialize corresponding controls from DataTable values
-                valuesInitialized = False
-                InitializeAllDataViewingControls()
-                valuesInitialized = True
-
-                ' Show labels and corresponding values
-                showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
-                showHide(getAllControlsWithTag("dataLabel", Me), 1)
-                showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
-                ' Enable editing button
-                editButton.Enabled = True
-                deleteButton.Enabled = True
-
-            Else ' THIS SHOULD ONLY EVER EXECUTE IF AN ENTRY IN COMBOBOX IS NOT SELECT ONE AND NOT IN THE DATATABLE
-
-                ' Have all labels and corresponding values hidden
-                showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
-                showHide(getAllControlsWithTag("dataLabel", Me), 0)
-                showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
-                ' Disable editing button
-                editButton.Enabled = False
-                deleteButton.Enabled = False
-
-            End If
-
         End If
-
 
     End Sub
 
