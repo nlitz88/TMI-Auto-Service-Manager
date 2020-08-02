@@ -66,6 +66,8 @@ Partial Class customerMaintenance
         Me.WorkPhone_Value = New System.Windows.Forms.Label()
         Me.CellPhone2Label = New System.Windows.Forms.Label()
         Me.WorkPhoneLabel = New System.Windows.Forms.Label()
+        Me.TaxExemptLabel = New System.Windows.Forms.Label()
+        Me.TaxExempt_CheckBox = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'nav
@@ -73,9 +75,9 @@ Partial Class customerMaintenance
         Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.nav.Location = New System.Drawing.Point(0, 0)
-        Me.nav.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.nav.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.nav.Name = "nav"
-        Me.nav.Size = New System.Drawing.Size(1105, 28)
+        Me.nav.Size = New System.Drawing.Size(982, 22)
         Me.nav.TabIndex = 50
         '
         'LastName_Value
@@ -83,9 +85,9 @@ Partial Class customerMaintenance
         Me.LastName_Value.AutoSize = True
         Me.LastName_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LastName_Value.ForeColor = System.Drawing.Color.Black
-        Me.LastName_Value.Location = New System.Drawing.Point(206, 390)
+        Me.LastName_Value.Location = New System.Drawing.Point(183, 312)
         Me.LastName_Value.Name = "LastName_Value"
-        Me.LastName_Value.Size = New System.Drawing.Size(0, 25)
+        Me.LastName_Value.Size = New System.Drawing.Size(0, 20)
         Me.LastName_Value.TabIndex = 132
         Me.LastName_Value.Tag = "dataViewingControl"
         '
@@ -93,9 +95,9 @@ Partial Class customerMaintenance
         '
         Me.LastNameLabel.AutoSize = True
         Me.LastNameLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.LastNameLabel.Location = New System.Drawing.Point(106, 393)
+        Me.LastNameLabel.Location = New System.Drawing.Point(94, 314)
         Me.LastNameLabel.Name = "LastNameLabel"
-        Me.LastNameLabel.Size = New System.Drawing.Size(94, 20)
+        Me.LastNameLabel.Size = New System.Drawing.Size(84, 17)
         Me.LastNameLabel.TabIndex = 131
         Me.LastNameLabel.Tag = "dataLabel"
         Me.LastNameLabel.Text = "Last Name :"
@@ -103,31 +105,31 @@ Partial Class customerMaintenance
         'LastName_Textbox
         '
         Me.LastName_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LastName_Textbox.Location = New System.Drawing.Point(206, 386)
-        Me.LastName_Textbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.LastName_Textbox.Location = New System.Drawing.Point(183, 309)
         Me.LastName_Textbox.MaxLength = 50
         Me.LastName_Textbox.Name = "LastName_Textbox"
-        Me.LastName_Textbox.Size = New System.Drawing.Size(334, 31)
+        Me.LastName_Textbox.Size = New System.Drawing.Size(297, 27)
         Me.LastName_Textbox.TabIndex = 115
         Me.LastName_Textbox.Tag = "dataEditingControl"
+        Me.LastName_Textbox.Visible = False
         '
         'EmailAddress_Textbox
         '
         Me.EmailAddress_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.EmailAddress_Textbox.Location = New System.Drawing.Point(170, 709)
-        Me.EmailAddress_Textbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.EmailAddress_Textbox.Location = New System.Drawing.Point(148, 567)
         Me.EmailAddress_Textbox.Name = "EmailAddress_Textbox"
-        Me.EmailAddress_Textbox.Size = New System.Drawing.Size(346, 31)
+        Me.EmailAddress_Textbox.Size = New System.Drawing.Size(308, 27)
         Me.EmailAddress_Textbox.TabIndex = 116
         Me.EmailAddress_Textbox.Tag = "dataEditingControl"
+        Me.EmailAddress_Textbox.Visible = False
         '
         'PriceLabel
         '
         Me.PriceLabel.AutoSize = True
         Me.PriceLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.PriceLabel.Location = New System.Drawing.Point(109, 716)
+        Me.PriceLabel.Location = New System.Drawing.Point(94, 573)
         Me.PriceLabel.Name = "PriceLabel"
-        Me.PriceLabel.Size = New System.Drawing.Size(56, 20)
+        Me.PriceLabel.Size = New System.Drawing.Size(50, 17)
         Me.PriceLabel.TabIndex = 128
         Me.PriceLabel.Tag = "dataLabel"
         Me.PriceLabel.Text = "Email :"
@@ -137,9 +139,9 @@ Partial Class customerMaintenance
         Me.EmailAddress_Value.AutoSize = True
         Me.EmailAddress_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.EmailAddress_Value.ForeColor = System.Drawing.Color.Black
-        Me.EmailAddress_Value.Location = New System.Drawing.Point(170, 712)
+        Me.EmailAddress_Value.Location = New System.Drawing.Point(148, 570)
         Me.EmailAddress_Value.Name = "EmailAddress_Value"
-        Me.EmailAddress_Value.Size = New System.Drawing.Size(0, 25)
+        Me.EmailAddress_Value.Size = New System.Drawing.Size(0, 20)
         Me.EmailAddress_Value.TabIndex = 127
         Me.EmailAddress_Value.Tag = "dataViewingControl"
         '
@@ -149,10 +151,9 @@ Partial Class customerMaintenance
         Me.deleteButton.Enabled = False
         Me.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.deleteButton.ForeColor = System.Drawing.Color.White
-        Me.deleteButton.Location = New System.Drawing.Point(244, 150)
-        Me.deleteButton.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.deleteButton.Location = New System.Drawing.Point(217, 120)
         Me.deleteButton.Name = "deleteButton"
-        Me.deleteButton.Size = New System.Drawing.Size(124, 38)
+        Me.deleteButton.Size = New System.Drawing.Size(110, 30)
         Me.deleteButton.TabIndex = 119
         Me.deleteButton.Text = "Delete"
         Me.deleteButton.UseVisualStyleBackColor = False
@@ -162,9 +163,9 @@ Partial Class customerMaintenance
         Me.CustomerId_Value.AutoSize = True
         Me.CustomerId_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CustomerId_Value.ForeColor = System.Drawing.Color.Black
-        Me.CustomerId_Value.Location = New System.Drawing.Point(221, 327)
+        Me.CustomerId_Value.Location = New System.Drawing.Point(196, 262)
         Me.CustomerId_Value.Name = "CustomerId_Value"
-        Me.CustomerId_Value.Size = New System.Drawing.Size(0, 25)
+        Me.CustomerId_Value.Size = New System.Drawing.Size(0, 20)
         Me.CustomerId_Value.TabIndex = 126
         Me.CustomerId_Value.Tag = "dataViewingControl"
         '
@@ -172,9 +173,9 @@ Partial Class customerMaintenance
         '
         Me.PartNumberLabel.AutoSize = True
         Me.PartNumberLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.PartNumberLabel.Location = New System.Drawing.Point(109, 330)
+        Me.PartNumberLabel.Location = New System.Drawing.Point(97, 264)
         Me.PartNumberLabel.Name = "PartNumberLabel"
-        Me.PartNumberLabel.Size = New System.Drawing.Size(107, 20)
+        Me.PartNumberLabel.Size = New System.Drawing.Size(93, 17)
         Me.PartNumberLabel.TabIndex = 125
         Me.PartNumberLabel.Tag = "dataLabel"
         Me.PartNumberLabel.Text = "Customer ID :"
@@ -183,9 +184,9 @@ Partial Class customerMaintenance
         '
         Me.CustomerComboLabel.AutoSize = True
         Me.CustomerComboLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.CustomerComboLabel.Location = New System.Drawing.Point(109, 250)
+        Me.CustomerComboLabel.Location = New System.Drawing.Point(97, 200)
         Me.CustomerComboLabel.Name = "CustomerComboLabel"
-        Me.CustomerComboLabel.Size = New System.Drawing.Size(86, 20)
+        Me.CustomerComboLabel.Size = New System.Drawing.Size(76, 17)
         Me.CustomerComboLabel.TabIndex = 124
         Me.CustomerComboLabel.Text = "Customer :"
         '
@@ -195,10 +196,9 @@ Partial Class customerMaintenance
         Me.CustomerComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CustomerComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.CustomerComboBox.FormattingEnabled = True
-        Me.CustomerComboBox.Location = New System.Drawing.Point(201, 243)
-        Me.CustomerComboBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CustomerComboBox.Location = New System.Drawing.Point(179, 194)
         Me.CustomerComboBox.Name = "CustomerComboBox"
-        Me.CustomerComboBox.Size = New System.Drawing.Size(334, 33)
+        Me.CustomerComboBox.Size = New System.Drawing.Size(297, 28)
         Me.CustomerComboBox.TabIndex = 113
         '
         'customerMaintenanceLabel
@@ -206,9 +206,9 @@ Partial Class customerMaintenance
         Me.customerMaintenanceLabel.AutoSize = True
         Me.customerMaintenanceLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.customerMaintenanceLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.customerMaintenanceLabel.Location = New System.Drawing.Point(106, 91)
+        Me.customerMaintenanceLabel.Location = New System.Drawing.Point(94, 73)
         Me.customerMaintenanceLabel.Name = "customerMaintenanceLabel"
-        Me.customerMaintenanceLabel.Size = New System.Drawing.Size(185, 38)
+        Me.customerMaintenanceLabel.Size = New System.Drawing.Size(160, 32)
         Me.customerMaintenanceLabel.TabIndex = 123
         Me.customerMaintenanceLabel.Text = "Customers"
         '
@@ -218,10 +218,9 @@ Partial Class customerMaintenance
         Me.editButton.Enabled = False
         Me.editButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.editButton.ForeColor = System.Drawing.Color.White
-        Me.editButton.Location = New System.Drawing.Point(375, 150)
-        Me.editButton.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.editButton.Location = New System.Drawing.Point(333, 120)
         Me.editButton.Name = "editButton"
-        Me.editButton.Size = New System.Drawing.Size(124, 38)
+        Me.editButton.Size = New System.Drawing.Size(110, 30)
         Me.editButton.TabIndex = 120
         Me.editButton.Text = "Edit"
         Me.editButton.UseVisualStyleBackColor = False
@@ -232,10 +231,9 @@ Partial Class customerMaintenance
         Me.cancelButton.Enabled = False
         Me.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cancelButton.ForeColor = System.Drawing.Color.White
-        Me.cancelButton.Location = New System.Drawing.Point(635, 150)
-        Me.cancelButton.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.cancelButton.Location = New System.Drawing.Point(564, 120)
         Me.cancelButton.Name = "cancelButton"
-        Me.cancelButton.Size = New System.Drawing.Size(124, 38)
+        Me.cancelButton.Size = New System.Drawing.Size(110, 30)
         Me.cancelButton.TabIndex = 122
         Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
@@ -246,10 +244,9 @@ Partial Class customerMaintenance
         Me.saveButton.Enabled = False
         Me.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.saveButton.ForeColor = System.Drawing.Color.White
-        Me.saveButton.Location = New System.Drawing.Point(505, 150)
-        Me.saveButton.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.saveButton.Location = New System.Drawing.Point(449, 120)
         Me.saveButton.Name = "saveButton"
-        Me.saveButton.Size = New System.Drawing.Size(124, 38)
+        Me.saveButton.Size = New System.Drawing.Size(110, 30)
         Me.saveButton.TabIndex = 121
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
@@ -259,10 +256,9 @@ Partial Class customerMaintenance
         Me.addButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.addButton.ForeColor = System.Drawing.Color.White
-        Me.addButton.Location = New System.Drawing.Point(112, 150)
-        Me.addButton.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.addButton.Location = New System.Drawing.Point(100, 120)
         Me.addButton.Name = "addButton"
-        Me.addButton.Size = New System.Drawing.Size(124, 38)
+        Me.addButton.Size = New System.Drawing.Size(110, 30)
         Me.addButton.TabIndex = 118
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = False
@@ -272,9 +268,9 @@ Partial Class customerMaintenance
         Me.FirstName_Value.AutoSize = True
         Me.FirstName_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FirstName_Value.ForeColor = System.Drawing.Color.Black
-        Me.FirstName_Value.Location = New System.Drawing.Point(664, 391)
+        Me.FirstName_Value.Location = New System.Drawing.Point(590, 313)
         Me.FirstName_Value.Name = "FirstName_Value"
-        Me.FirstName_Value.Size = New System.Drawing.Size(0, 25)
+        Me.FirstName_Value.Size = New System.Drawing.Size(0, 20)
         Me.FirstName_Value.TabIndex = 135
         Me.FirstName_Value.Tag = "dataViewingControl"
         '
@@ -282,9 +278,9 @@ Partial Class customerMaintenance
         '
         Me.FirstNameLabel.AutoSize = True
         Me.FirstNameLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.FirstNameLabel.Location = New System.Drawing.Point(564, 394)
+        Me.FirstNameLabel.Location = New System.Drawing.Point(501, 315)
         Me.FirstNameLabel.Name = "FirstNameLabel"
-        Me.FirstNameLabel.Size = New System.Drawing.Size(94, 20)
+        Me.FirstNameLabel.Size = New System.Drawing.Size(84, 17)
         Me.FirstNameLabel.TabIndex = 134
         Me.FirstNameLabel.Tag = "dataLabel"
         Me.FirstNameLabel.Text = "First Name :"
@@ -292,22 +288,22 @@ Partial Class customerMaintenance
         'FirstName_Textbox
         '
         Me.FirstName_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FirstName_Textbox.Location = New System.Drawing.Point(664, 387)
-        Me.FirstName_Textbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.FirstName_Textbox.Location = New System.Drawing.Point(590, 310)
         Me.FirstName_Textbox.MaxLength = 50
         Me.FirstName_Textbox.Name = "FirstName_Textbox"
-        Me.FirstName_Textbox.Size = New System.Drawing.Size(334, 31)
+        Me.FirstName_Textbox.Size = New System.Drawing.Size(297, 27)
         Me.FirstName_Textbox.TabIndex = 133
         Me.FirstName_Textbox.Tag = "dataEditingControl"
+        Me.FirstName_Textbox.Visible = False
         '
         'Address_Value
         '
         Me.Address_Value.AutoSize = True
         Me.Address_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Address_Value.ForeColor = System.Drawing.Color.Black
-        Me.Address_Value.Location = New System.Drawing.Point(238, 441)
+        Me.Address_Value.Location = New System.Drawing.Point(212, 353)
         Me.Address_Value.Name = "Address_Value"
-        Me.Address_Value.Size = New System.Drawing.Size(0, 25)
+        Me.Address_Value.Size = New System.Drawing.Size(0, 20)
         Me.Address_Value.TabIndex = 138
         Me.Address_Value.Tag = "dataViewingControl"
         '
@@ -315,9 +311,9 @@ Partial Class customerMaintenance
         '
         Me.AddressLabel.AutoSize = True
         Me.AddressLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.AddressLabel.Location = New System.Drawing.Point(108, 445)
+        Me.AddressLabel.Location = New System.Drawing.Point(96, 356)
         Me.AddressLabel.Name = "AddressLabel"
-        Me.AddressLabel.Size = New System.Drawing.Size(124, 20)
+        Me.AddressLabel.Size = New System.Drawing.Size(110, 17)
         Me.AddressLabel.TabIndex = 137
         Me.AddressLabel.Tag = "dataLabel"
         Me.AddressLabel.Text = "Street Address :"
@@ -325,13 +321,13 @@ Partial Class customerMaintenance
         'Address_Textbox
         '
         Me.Address_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Address_Textbox.Location = New System.Drawing.Point(238, 437)
-        Me.Address_Textbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.Address_Textbox.Location = New System.Drawing.Point(212, 350)
         Me.Address_Textbox.MaxLength = 50
         Me.Address_Textbox.Name = "Address_Textbox"
-        Me.Address_Textbox.Size = New System.Drawing.Size(473, 31)
+        Me.Address_Textbox.Size = New System.Drawing.Size(421, 27)
         Me.Address_Textbox.TabIndex = 136
         Me.Address_Textbox.Tag = "dataEditingControl"
+        Me.Address_Textbox.Visible = False
         '
         'ZipCode_ComboBox
         '
@@ -339,11 +335,10 @@ Partial Class customerMaintenance
         Me.ZipCode_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.ZipCode_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ZipCode_ComboBox.FormattingEnabled = True
-        Me.ZipCode_ComboBox.Location = New System.Drawing.Point(193, 490)
-        Me.ZipCode_ComboBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ZipCode_ComboBox.Location = New System.Drawing.Point(172, 392)
         Me.ZipCode_ComboBox.MaxLength = 5
         Me.ZipCode_ComboBox.Name = "ZipCode_ComboBox"
-        Me.ZipCode_ComboBox.Size = New System.Drawing.Size(168, 33)
+        Me.ZipCode_ComboBox.Size = New System.Drawing.Size(150, 28)
         Me.ZipCode_ComboBox.TabIndex = 139
         Me.ZipCode_ComboBox.Tag = "dataEditingControl"
         Me.ZipCode_ComboBox.Visible = False
@@ -353,9 +348,9 @@ Partial Class customerMaintenance
         Me.State_Value.AutoSize = True
         Me.State_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.State_Value.ForeColor = System.Drawing.Color.Black
-        Me.State_Value.Location = New System.Drawing.Point(449, 546)
+        Me.State_Value.Location = New System.Drawing.Point(399, 437)
         Me.State_Value.Name = "State_Value"
-        Me.State_Value.Size = New System.Drawing.Size(0, 25)
+        Me.State_Value.Size = New System.Drawing.Size(0, 20)
         Me.State_Value.TabIndex = 147
         Me.State_Value.Tag = "dataViewingControl"
         '
@@ -364,9 +359,9 @@ Partial Class customerMaintenance
         Me.city_Value.AutoSize = True
         Me.city_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.city_Value.ForeColor = System.Drawing.Color.Black
-        Me.city_Value.Location = New System.Drawing.Point(157, 546)
+        Me.city_Value.Location = New System.Drawing.Point(140, 437)
         Me.city_Value.Name = "city_Value"
-        Me.city_Value.Size = New System.Drawing.Size(0, 25)
+        Me.city_Value.Size = New System.Drawing.Size(0, 20)
         Me.city_Value.TabIndex = 146
         Me.city_Value.Tag = "dataViewingControl"
         '
@@ -375,9 +370,9 @@ Partial Class customerMaintenance
         Me.ZipCode_Value.AutoSize = True
         Me.ZipCode_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ZipCode_Value.ForeColor = System.Drawing.Color.Black
-        Me.ZipCode_Value.Location = New System.Drawing.Point(195, 490)
+        Me.ZipCode_Value.Location = New System.Drawing.Point(173, 392)
         Me.ZipCode_Value.Name = "ZipCode_Value"
-        Me.ZipCode_Value.Size = New System.Drawing.Size(0, 25)
+        Me.ZipCode_Value.Size = New System.Drawing.Size(0, 20)
         Me.ZipCode_Value.TabIndex = 145
         Me.ZipCode_Value.Tag = "dataViewingControl"
         '
@@ -385,9 +380,9 @@ Partial Class customerMaintenance
         '
         Me.stateLabel.AutoSize = True
         Me.stateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.stateLabel.Location = New System.Drawing.Point(387, 549)
+        Me.stateLabel.Location = New System.Drawing.Point(344, 439)
         Me.stateLabel.Name = "stateLabel"
-        Me.stateLabel.Size = New System.Drawing.Size(56, 20)
+        Me.stateLabel.Size = New System.Drawing.Size(49, 17)
         Me.stateLabel.TabIndex = 143
         Me.stateLabel.Text = "State :"
         '
@@ -395,9 +390,9 @@ Partial Class customerMaintenance
         '
         Me.cityLabel.AutoSize = True
         Me.cityLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.cityLabel.Location = New System.Drawing.Point(106, 549)
+        Me.cityLabel.Location = New System.Drawing.Point(94, 439)
         Me.cityLabel.Name = "cityLabel"
-        Me.cityLabel.Size = New System.Drawing.Size(43, 20)
+        Me.cityLabel.Size = New System.Drawing.Size(39, 17)
         Me.cityLabel.TabIndex = 141
         Me.cityLabel.Text = "City :"
         '
@@ -405,9 +400,9 @@ Partial Class customerMaintenance
         '
         Me.zipCodeLabel.AutoSize = True
         Me.zipCodeLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.zipCodeLabel.Location = New System.Drawing.Point(106, 497)
+        Me.zipCodeLabel.Location = New System.Drawing.Point(94, 398)
         Me.zipCodeLabel.Name = "zipCodeLabel"
-        Me.zipCodeLabel.Size = New System.Drawing.Size(81, 20)
+        Me.zipCodeLabel.Size = New System.Drawing.Size(73, 17)
         Me.zipCodeLabel.TabIndex = 140
         Me.zipCodeLabel.Text = "Zip Code :"
         '
@@ -415,10 +410,9 @@ Partial Class customerMaintenance
         '
         Me.State_Textbox.Enabled = False
         Me.State_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.State_Textbox.Location = New System.Drawing.Point(449, 542)
-        Me.State_Textbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.State_Textbox.Location = New System.Drawing.Point(399, 434)
         Me.State_Textbox.Name = "State_Textbox"
-        Me.State_Textbox.Size = New System.Drawing.Size(123, 31)
+        Me.State_Textbox.Size = New System.Drawing.Size(110, 27)
         Me.State_Textbox.TabIndex = 144
         Me.State_Textbox.Tag = "dataEditingControl"
         Me.State_Textbox.Visible = False
@@ -427,10 +421,9 @@ Partial Class customerMaintenance
         '
         Me.city_Textbox.Enabled = False
         Me.city_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.city_Textbox.Location = New System.Drawing.Point(157, 542)
-        Me.city_Textbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.city_Textbox.Location = New System.Drawing.Point(140, 434)
         Me.city_Textbox.Name = "city_Textbox"
-        Me.city_Textbox.Size = New System.Drawing.Size(206, 31)
+        Me.city_Textbox.Size = New System.Drawing.Size(184, 27)
         Me.city_Textbox.TabIndex = 142
         Me.city_Textbox.Tag = "dataEditingControl"
         Me.city_Textbox.Visible = False
@@ -441,12 +434,11 @@ Partial Class customerMaintenance
         Me.CellPhone1_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.CellPhone1_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.CellPhone1_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
-        Me.CellPhone1_Textbox.Location = New System.Drawing.Point(218, 652)
-        Me.CellPhone1_Textbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CellPhone1_Textbox.Location = New System.Drawing.Point(194, 522)
         Me.CellPhone1_Textbox.Mask = "(999) 000-0000"
         Me.CellPhone1_Textbox.Name = "CellPhone1_Textbox"
         Me.CellPhone1_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.CellPhone1_Textbox.Size = New System.Drawing.Size(203, 31)
+        Me.CellPhone1_Textbox.Size = New System.Drawing.Size(181, 27)
         Me.CellPhone1_Textbox.TabIndex = 155
         Me.CellPhone1_Textbox.Tag = "dataEditingControl"
         Me.CellPhone1_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
@@ -458,12 +450,11 @@ Partial Class customerMaintenance
         Me.HomePhone_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.HomePhone_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.HomePhone_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
-        Me.HomePhone_Textbox.Location = New System.Drawing.Point(222, 597)
-        Me.HomePhone_Textbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.HomePhone_Textbox.Location = New System.Drawing.Point(197, 478)
         Me.HomePhone_Textbox.Mask = "(999) 000-0000"
         Me.HomePhone_Textbox.Name = "HomePhone_Textbox"
         Me.HomePhone_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.HomePhone_Textbox.Size = New System.Drawing.Size(203, 31)
+        Me.HomePhone_Textbox.Size = New System.Drawing.Size(181, 27)
         Me.HomePhone_Textbox.TabIndex = 154
         Me.HomePhone_Textbox.Tag = "dataEditingControl"
         Me.HomePhone_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
@@ -474,9 +465,9 @@ Partial Class customerMaintenance
         Me.CellPhone1_Value.AutoSize = True
         Me.CellPhone1_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CellPhone1_Value.ForeColor = System.Drawing.Color.Black
-        Me.CellPhone1_Value.Location = New System.Drawing.Point(218, 656)
+        Me.CellPhone1_Value.Location = New System.Drawing.Point(194, 525)
         Me.CellPhone1_Value.Name = "CellPhone1_Value"
-        Me.CellPhone1_Value.Size = New System.Drawing.Size(0, 25)
+        Me.CellPhone1_Value.Size = New System.Drawing.Size(0, 20)
         Me.CellPhone1_Value.TabIndex = 159
         Me.CellPhone1_Value.Tag = "dataViewingControl"
         '
@@ -485,9 +476,9 @@ Partial Class customerMaintenance
         Me.HomePhone_Value.AutoSize = True
         Me.HomePhone_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.HomePhone_Value.ForeColor = System.Drawing.Color.Black
-        Me.HomePhone_Value.Location = New System.Drawing.Point(222, 600)
+        Me.HomePhone_Value.Location = New System.Drawing.Point(197, 480)
         Me.HomePhone_Value.Name = "HomePhone_Value"
-        Me.HomePhone_Value.Size = New System.Drawing.Size(0, 25)
+        Me.HomePhone_Value.Size = New System.Drawing.Size(0, 20)
         Me.HomePhone_Value.TabIndex = 158
         Me.HomePhone_Value.Tag = "dataViewingControl"
         '
@@ -495,9 +486,9 @@ Partial Class customerMaintenance
         '
         Me.CellPhone1Label.AutoSize = True
         Me.CellPhone1Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.CellPhone1Label.Location = New System.Drawing.Point(106, 659)
+        Me.CellPhone1Label.Location = New System.Drawing.Point(94, 527)
         Me.CellPhone1Label.Name = "CellPhone1Label"
-        Me.CellPhone1Label.Size = New System.Drawing.Size(106, 20)
+        Me.CellPhone1Label.Size = New System.Drawing.Size(96, 17)
         Me.CellPhone1Label.TabIndex = 157
         Me.CellPhone1Label.Text = "Cell Phone 1 :"
         '
@@ -505,9 +496,9 @@ Partial Class customerMaintenance
         '
         Me.HomePhoneLabel.AutoSize = True
         Me.HomePhoneLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.HomePhoneLabel.Location = New System.Drawing.Point(106, 604)
+        Me.HomePhoneLabel.Location = New System.Drawing.Point(94, 483)
         Me.HomePhoneLabel.Name = "HomePhoneLabel"
-        Me.HomePhoneLabel.Size = New System.Drawing.Size(110, 20)
+        Me.HomePhoneLabel.Size = New System.Drawing.Size(98, 17)
         Me.HomePhoneLabel.TabIndex = 156
         Me.HomePhoneLabel.Text = "Home Phone :"
         '
@@ -517,12 +508,11 @@ Partial Class customerMaintenance
         Me.CellPhone2_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.CellPhone2_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.CellPhone2_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
-        Me.CellPhone2_Textbox.Location = New System.Drawing.Point(562, 653)
-        Me.CellPhone2_Textbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CellPhone2_Textbox.Location = New System.Drawing.Point(500, 522)
         Me.CellPhone2_Textbox.Mask = "(999) 000-0000"
         Me.CellPhone2_Textbox.Name = "CellPhone2_Textbox"
         Me.CellPhone2_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.CellPhone2_Textbox.Size = New System.Drawing.Size(203, 31)
+        Me.CellPhone2_Textbox.Size = New System.Drawing.Size(181, 27)
         Me.CellPhone2_Textbox.TabIndex = 161
         Me.CellPhone2_Textbox.Tag = "dataEditingControl"
         Me.CellPhone2_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
@@ -534,12 +524,11 @@ Partial Class customerMaintenance
         Me.WorkPhone_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.WorkPhone_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.WorkPhone_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
-        Me.WorkPhone_Textbox.Location = New System.Drawing.Point(560, 597)
-        Me.WorkPhone_Textbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.WorkPhone_Textbox.Location = New System.Drawing.Point(498, 478)
         Me.WorkPhone_Textbox.Mask = "(999) 000-0000"
         Me.WorkPhone_Textbox.Name = "WorkPhone_Textbox"
         Me.WorkPhone_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.WorkPhone_Textbox.Size = New System.Drawing.Size(203, 31)
+        Me.WorkPhone_Textbox.Size = New System.Drawing.Size(181, 27)
         Me.WorkPhone_Textbox.TabIndex = 160
         Me.WorkPhone_Textbox.Tag = "dataEditingControl"
         Me.WorkPhone_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
@@ -550,9 +539,9 @@ Partial Class customerMaintenance
         Me.CellPhone2_Value.AutoSize = True
         Me.CellPhone2_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CellPhone2_Value.ForeColor = System.Drawing.Color.Black
-        Me.CellPhone2_Value.Location = New System.Drawing.Point(562, 657)
+        Me.CellPhone2_Value.Location = New System.Drawing.Point(500, 526)
         Me.CellPhone2_Value.Name = "CellPhone2_Value"
-        Me.CellPhone2_Value.Size = New System.Drawing.Size(0, 25)
+        Me.CellPhone2_Value.Size = New System.Drawing.Size(0, 20)
         Me.CellPhone2_Value.TabIndex = 165
         Me.CellPhone2_Value.Tag = "dataViewingControl"
         '
@@ -561,9 +550,9 @@ Partial Class customerMaintenance
         Me.WorkPhone_Value.AutoSize = True
         Me.WorkPhone_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.WorkPhone_Value.ForeColor = System.Drawing.Color.Black
-        Me.WorkPhone_Value.Location = New System.Drawing.Point(560, 600)
+        Me.WorkPhone_Value.Location = New System.Drawing.Point(498, 480)
         Me.WorkPhone_Value.Name = "WorkPhone_Value"
-        Me.WorkPhone_Value.Size = New System.Drawing.Size(0, 25)
+        Me.WorkPhone_Value.Size = New System.Drawing.Size(0, 20)
         Me.WorkPhone_Value.TabIndex = 164
         Me.WorkPhone_Value.Tag = "dataViewingControl"
         '
@@ -571,9 +560,9 @@ Partial Class customerMaintenance
         '
         Me.CellPhone2Label.AutoSize = True
         Me.CellPhone2Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.CellPhone2Label.Location = New System.Drawing.Point(450, 659)
+        Me.CellPhone2Label.Location = New System.Drawing.Point(400, 527)
         Me.CellPhone2Label.Name = "CellPhone2Label"
-        Me.CellPhone2Label.Size = New System.Drawing.Size(106, 20)
+        Me.CellPhone2Label.Size = New System.Drawing.Size(96, 17)
         Me.CellPhone2Label.TabIndex = 163
         Me.CellPhone2Label.Text = "Cell Phone 2 :"
         '
@@ -581,18 +570,39 @@ Partial Class customerMaintenance
         '
         Me.WorkPhoneLabel.AutoSize = True
         Me.WorkPhoneLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.WorkPhoneLabel.Location = New System.Drawing.Point(450, 604)
+        Me.WorkPhoneLabel.Location = New System.Drawing.Point(400, 483)
         Me.WorkPhoneLabel.Name = "WorkPhoneLabel"
-        Me.WorkPhoneLabel.Size = New System.Drawing.Size(104, 20)
+        Me.WorkPhoneLabel.Size = New System.Drawing.Size(94, 17)
         Me.WorkPhoneLabel.TabIndex = 162
         Me.WorkPhoneLabel.Text = "Work Phone :"
         '
+        'TaxExemptLabel
+        '
+        Me.TaxExemptLabel.AutoSize = True
+        Me.TaxExemptLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.TaxExemptLabel.Location = New System.Drawing.Point(487, 573)
+        Me.TaxExemptLabel.Name = "TaxExemptLabel"
+        Me.TaxExemptLabel.Size = New System.Drawing.Size(89, 17)
+        Me.TaxExemptLabel.TabIndex = 166
+        Me.TaxExemptLabel.Text = "Tax Exempt :"
+        '
+        'TaxExempt_CheckBox
+        '
+        Me.TaxExempt_CheckBox.AutoSize = True
+        Me.TaxExempt_CheckBox.Location = New System.Drawing.Point(582, 574)
+        Me.TaxExempt_CheckBox.Name = "TaxExempt_CheckBox"
+        Me.TaxExempt_CheckBox.Size = New System.Drawing.Size(18, 17)
+        Me.TaxExempt_CheckBox.TabIndex = 167
+        Me.TaxExempt_CheckBox.UseVisualStyleBackColor = True
+        '
         'customerMaintenance
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1105, 941)
+        Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.TaxExempt_CheckBox)
+        Me.Controls.Add(Me.TaxExemptLabel)
         Me.Controls.Add(Me.CellPhone2_Textbox)
         Me.Controls.Add(Me.WorkPhone_Textbox)
         Me.Controls.Add(Me.CellPhone2_Value)
@@ -638,6 +648,7 @@ Partial Class customerMaintenance
         Me.Controls.Add(Me.addButton)
         Me.Controls.Add(Me.nav)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.MaximizeBox = False
         Me.Name = "customerMaintenance"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
@@ -691,4 +702,6 @@ Partial Class customerMaintenance
     Friend WithEvents WorkPhone_Value As Label
     Friend WithEvents CellPhone2Label As Label
     Friend WithEvents WorkPhoneLabel As Label
+    Friend WithEvents TaxExemptLabel As Label
+    Friend WithEvents TaxExempt_CheckBox As CheckBox
 End Class
