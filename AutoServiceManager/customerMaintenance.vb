@@ -603,11 +603,12 @@
                     ' Changing index of main combobox will also initialize respective dataViewing control values
 
                     ' First, lookup most recent CustomerId added to the table
-                    CRUD.ExecQuery("")
+                    CRUD.ExecQuery("SELECT CustomerId FROM Customer WHERE CustomerId=(SELECT max(CustomerId) FROM Customer)")
+                    Dim newCustomerId As Integer = CRUD.DbDataTable.Rows(0)("CustomerId")
 
                     ' Lookup and set new selectedIndex based on new value. If insertion failed, then go back to last
                     ' Must use '=' comparison here, as our key is an integer, not a string
-                    Dim newItem As Object = getRowValueWithKeyEquals(CustomerDbController.DbDataTable, "CLF", "CustomerId", Convert.ToInt32(CustomerId_Textbox.Text))
+                    Dim newItem As Object = getRowValueWithKeyEquals(CustomerDbController.DbDataTable, "CLF", "CustomerId", newCustomerId)
                     If newItem <> Nothing Then
                         Console.WriteLine("Successfully located new customer")
                         CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(newItem)    ' Might have to figure out a more accurate way of getting ID, as this MIGHT not work. Fix SQL query
