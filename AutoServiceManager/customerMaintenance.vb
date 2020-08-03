@@ -303,9 +303,9 @@
         End If
 
         ' Email
-        If Not validEmail("Email", False, EmailAddress_Textbox.Text, errorMessage) Then
-            EmailAddress_Textbox.ForeColor = Color.Red
-        End If
+        'If Not validEmail("Email", False, EmailAddress_Textbox.Text, errorMessage) Then
+        '    EmailAddress_Textbox.ForeColor = Color.Red
+        'End If
 
 
         ' Check if any invalid input has been found
@@ -766,19 +766,19 @@
 
     End Sub
 
-    Private Sub EmailAddress_Textbox_TextChanged(sender As Object, e As EventArgs) Handles EmailAddress_Textbox.TextChanged
+    'Private Sub EmailAddress_Textbox_TextChanged(sender As Object, e As EventArgs) Handles EmailAddress_Textbox.TextChanged
 
-        If Not valuesInitialized Then Exit Sub
+    '    If Not valuesInitialized Then Exit Sub
 
-        EmailAddress_Textbox.ForeColor = DefaultForeColor
+    '    EmailAddress_Textbox.ForeColor = DefaultForeColor
 
-        If InitialCustomerValues.CtrlValuesChanged() Then
-            saveButton.Enabled = True
-        Else
-            saveButton.Enabled = False
-        End If
+    '    If InitialCustomerValues.CtrlValuesChanged() Then
+    '        saveButton.Enabled = True
+    '    Else
+    '        saveButton.Enabled = False
+    '    End If
 
-    End Sub
+    'End Sub
 
     Private Sub TaxExempt_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles TaxExempt_CheckBox.CheckedChanged
 
