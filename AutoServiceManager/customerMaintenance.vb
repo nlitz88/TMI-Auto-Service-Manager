@@ -402,7 +402,12 @@
         CustomerComboBox.Enabled = False
 
         ' Set ComboBox to "Select One"
-        lastSelected = CustomerComboBox.Text
+        If getDataTableRow(CustomerDbController.DbDataTable, "CLF", CustomerComboBox.Text) <> -1 Then
+            lastSelected = CustomerComboBox.Text
+        Else
+            lastSelected = "Select One"
+        End If
+
         CustomerComboBox.SelectedIndex = 0
 
         ' Set CustomerId to ID of new entry (this value will not actually be used, but it's based on the number of rows currently in the table)
@@ -601,8 +606,10 @@
                     ' Must use '=' comparison here, as our key is an integer, not a string
                     Dim newItem As Object = getRowValueWithKeyEquals(CustomerDbController.DbDataTable, "CLF", "CustomerId", Convert.ToInt32(CustomerId_Textbox.Text))
                     If newItem <> Nothing Then
+                        Console.WriteLine("Successfully located new customer")
                         CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(newItem)    ' Might have to figure out a more accurate way of getting ID, as this MIGHT not work. Fix SQL query
                     Else
+                        Console.WriteLine("Was not able to locate new customer")
                         CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(lastSelected)
                     End If
 
