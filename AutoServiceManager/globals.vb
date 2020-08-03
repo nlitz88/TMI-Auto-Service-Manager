@@ -993,6 +993,26 @@
     End Function
 
 
+    ' Email validation function
+    Public Function validEmail(ByVal label As String, ByVal required As Boolean, ByVal email As String, ByRef errorMessage As String) As Boolean
+
+        If required Then
+            If isEmpty(label, required, email, errorMessage) Then Return False
+        Else
+            If isEmpty(label, required, email, errorMessage) Then Return True
+        End If
+
+        If Not isValidLength(label, required, email, 50, errorMessage) Then Return False
+
+        If InStr(email, "@") = 0 Then
+            errorMessage += "ERROR: " & label & " must contain an @" & vbNewLine
+        End If
+
+        ' This is all of the validation for now. Might have to use a regular expression
+
+    End Function
+
+
     ' **************** CORE VALIDATION ****************
 
 

@@ -98,7 +98,7 @@ Partial Class customerMaintenance
         '
         Me.LastName_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LastName_Textbox.Location = New System.Drawing.Point(183, 309)
-        Me.LastName_Textbox.MaxLength = 50
+        Me.LastName_Textbox.MaxLength = 20
         Me.LastName_Textbox.Name = "LastName_Textbox"
         Me.LastName_Textbox.Size = New System.Drawing.Size(297, 27)
         Me.LastName_Textbox.TabIndex = 1
@@ -109,6 +109,7 @@ Partial Class customerMaintenance
         '
         Me.EmailAddress_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.EmailAddress_Textbox.Location = New System.Drawing.Point(148, 567)
+        Me.EmailAddress_Textbox.MaxLength = 50
         Me.EmailAddress_Textbox.Name = "EmailAddress_Textbox"
         Me.EmailAddress_Textbox.Size = New System.Drawing.Size(308, 27)
         Me.EmailAddress_Textbox.TabIndex = 9
@@ -281,7 +282,7 @@ Partial Class customerMaintenance
         '
         Me.FirstName_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FirstName_Textbox.Location = New System.Drawing.Point(590, 310)
-        Me.FirstName_Textbox.MaxLength = 50
+        Me.FirstName_Textbox.MaxLength = 20
         Me.FirstName_Textbox.Name = "FirstName_Textbox"
         Me.FirstName_Textbox.Size = New System.Drawing.Size(297, 27)
         Me.FirstName_Textbox.TabIndex = 2
@@ -406,6 +407,7 @@ Partial Class customerMaintenance
         Me.State_Textbox.Enabled = False
         Me.State_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.State_Textbox.Location = New System.Drawing.Point(399, 434)
+        Me.State_Textbox.MaxLength = 2
         Me.State_Textbox.Name = "State_Textbox"
         Me.State_Textbox.Size = New System.Drawing.Size(110, 27)
         Me.State_Textbox.TabIndex = 144
@@ -417,6 +419,7 @@ Partial Class customerMaintenance
         Me.City_Textbox.Enabled = False
         Me.City_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.City_Textbox.Location = New System.Drawing.Point(140, 434)
+        Me.City_Textbox.MaxLength = 15
         Me.City_Textbox.Name = "City_Textbox"
         Me.City_Textbox.Size = New System.Drawing.Size(184, 27)
         Me.City_Textbox.TabIndex = 142

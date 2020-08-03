@@ -237,34 +237,53 @@
         ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
 
 
-        '' Part Number (KEY)(REQUIRED)(MUST BE UNIQUE)
-        'If Not isValidLength("Part Number", True, PartNbr_Textbox.Text, 30, errorMessage) Then
-        '    PartNbr_Textbox.ForeColor = Color.Red
-        'Else
-        '    If mode = "editing" Then
-        '        Dim initial As String = IPDbController.DbDataTable.Rows(IPRow)("PartNbr").ToString().ToLower()
-        '        If PartNbr_Textbox.Text.ToLower() <> initial Then
-        '            If isDuplicate("Part Number", PartNbr_Textbox.Text.ToLower(), errorMessage, IPList) Then
-        '                PartNbr_Textbox.ForeColor = Color.Red
-        '            End If
-        '        End If
-        '    ElseIf mode = "adding" Then
-        '        If isDuplicate("Part Number", PartNbr_Textbox.Text.ToLower(), errorMessage, IPList) Then
-        '            PartNbr_Textbox.ForeColor = Color.Red
-        '        End If
-        '    End If
-        'End If
+        ' Last Name (REQUIRED)
+        If Not isValidLength("Last Name", True, LastName_Textbox.Text, 20, errorMessage) Then
+            LastName_Textbox.ForeColor = Color.Red
+        End If
 
-        '' Part Description (REQUIRED)
-        'If Not isValidLength("Part Description", True, PartDescription_Textbox.Text, 50, errorMessage) Then
-        '    PartDescription_Textbox.ForeColor = Color.Red
-        'End If
+        ' First Name
+        If Not isValidLength("First Name", False, FirstName_Textbox.Text, 20, errorMessage) Then
+            FirstName_Textbox.ForeColor = Color.Red
+        End If
 
-        '' Part Price (REQUIRED)
-        'If Not validCurrency("Part Price", True, PartPrice_Textbox.Text, errorMessage) Then PartPrice_Textbox.ForeColor = Color.Red
+        ' Street Address (REQUIRED)
+        If Not isValidLength("Street Address", True, Address_Textbox.Text, 50, errorMessage) Then
+            Address_Textbox.ForeColor = Color.Red
+        End If
 
-        '' Part List Price (REQUIRED)
-        'If Not validCurrency("List Price", True, ListPrice_Textbox.Text, errorMessage) Then ListPrice_Textbox.ForeColor = Color.Red
+        ' ZipCode (REQUIRED)
+        If Not validZipCode(ZipCode_ComboBox.Text, errorMessage) Then
+            ZipCode_ComboBox.ForeColor = Color.Red
+        ElseIf zipCodesList.BinarySearch(ZipCode_ComboBox.Text) < 0 Then
+            errorMessage += "ERROR: ZIP Code does not exist" & vbNewLine
+            ZipCode_ComboBox.ForeColor = Color.Red
+        End If
+
+        ' Home Phone
+        If Not isValidLength("Home Phone", False, HomePhone_Textbox.Text, 20, errorMessage) Then
+            HomePhone_Textbox.ForeColor = Color.Red
+        End If
+
+        ' Work Phone
+        If Not isValidLength("Work Phone", False, WorkPhone_Textbox.Text, 20, errorMessage) Then
+            WorkPhone_Textbox.ForeColor = Color.Red
+        End If
+
+        ' Cell Phone 1
+        If Not isValidLength("Cell Phone 1", False, CellPhone1_Textbox.Text, 20, errorMessage) Then
+            CellPhone1_Textbox.ForeColor = Color.Red
+        End If
+
+        ' Cell Phone 2
+        If Not isValidLength("Cell Phone 2", False, CellPhone2_Textbox.Text, 20, errorMessage) Then
+            CellPhone2_Textbox.ForeColor = Color.Red
+        End If
+
+        ' Email
+        If Not validEmail("Email", False, EmailAddress_Textbox.Text, errorMessage) Then
+            EmailAddress_Textbox.ForeColor = Color.Red
+        End If
 
 
         ' Check if any invalid input has been found
