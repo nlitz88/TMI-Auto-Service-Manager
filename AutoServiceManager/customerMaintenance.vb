@@ -610,10 +610,8 @@
                     ' Must use '=' comparison here, as our key is an integer, not a string
                     Dim newItem As Object = getRowValueWithKeyEquals(CustomerDbController.DbDataTable, "CLF", "CustomerId", newCustomerId)
                     If newItem <> Nothing Then
-                        Console.WriteLine("Successfully located new customer")
                         CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(newItem)    ' Might have to figure out a more accurate way of getting ID, as this MIGHT not work. Fix SQL query
                     Else
-                        Console.WriteLine("Was not able to locate new customer")
                         CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(lastSelected)
                     End If
 
