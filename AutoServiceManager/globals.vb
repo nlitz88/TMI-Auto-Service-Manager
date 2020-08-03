@@ -1006,8 +1006,10 @@
 
         If InStr(email, "@") = 0 Then
             errorMessage += "ERROR: " & label & " must contain an @" & vbNewLine
+            Return False
         End If
 
+        Return True
         ' This is all of the validation for now. Might have to use a regular expression
 
     End Function
