@@ -209,6 +209,24 @@
     End Function
 
 
+    ' Function that returns string but only the characters of that string that are valid, per a provided list
+    Public Function removeInvalidChars(ByVal original As String, ByVal validChars As String) As String
+
+        Dim sb As New System.Text.StringBuilder(original.Length)
+        For i As Integer = 0 To original.Length - 1
+
+            Dim c As Char = original(i)
+
+            If InStr(validChars, c.ToString()) <> 0 Then
+                sb.Append(c)
+            End If
+
+        Next
+
+        Return sb.ToString()
+
+    End Function
+
 
 
     ' ************************ DATABASE DATA INTERACTION/MANIPULATION ************************

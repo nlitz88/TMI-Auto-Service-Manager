@@ -160,13 +160,35 @@
 
         ' Automated initializations
         InitializeCustomerDataViewingControls()
+        ' Then, format dataViewingControls
+        formatDataViewingControls()
         ' Initialization of viewing controls dependent on zip code
         InitializeZipCodeDataViewingControls()
 
     End Sub
 
 
-    '' ADD FORMATTING FUNCTIONS HERE, THEN IMPLEMENT THEM INTO THE INITIALIZATION FUNCTIONS
+    ' Sub that will call formatting functions to add respective formats to already INITIALIZED DATAVIEWINGCONTROLS (i.e. phone numbers, currency, etc.).
+    Private Sub formatDataViewingControls()
+
+        ' For these phone numbers, first strip them of any invalidCharacters, then format their respective labels
+
+        ' Formatting for labels that contain values from DataTable
+        If Not String.IsNullOrEmpty(HomePhone_Value.Text) Then
+            HomePhone_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(removeInvalidChars(HomePhone_Value.Text, "1234567890")))
+        End If
+        If Not String.IsNullOrEmpty(WorkPhone_Value.Text) Then
+            WorkPhone_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(removeInvalidChars(WorkPhone_Value.Text, "1234567890")))
+        End If
+        If Not String.IsNullOrEmpty(CellPhone1_Value.Text) Then
+            CellPhone1_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(removeInvalidChars(CellPhone1_Value.Text, "1234567890")))
+        End If
+        If Not String.IsNullOrEmpty(CellPhone2_Value.Text) Then
+            CellPhone2_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(removeInvalidChars(CellPhone2_Value.Text, "1234567890")))
+        End If
+
+    End Sub
+
     '' ADD FORMAT STRIPPING FUNCTIONS HERE IF NECESSARRY (Don't think so)
 
 
@@ -261,22 +283,22 @@
         End If
 
         ' Home Phone
-        If Not isValidLength("Home Phone", False, HomePhone_Textbox.Text, 20, errorMessage) Then
+        If Not validPhone("Home Phone", False, HomePhone_Textbox.Text, errorMessage) Then
             HomePhone_Textbox.ForeColor = Color.Red
         End If
 
         ' Work Phone
-        If Not isValidLength("Work Phone", False, WorkPhone_Textbox.Text, 20, errorMessage) Then
+        If Not validPhone("Work Phone", False, WorkPhone_Textbox.Text, errorMessage) Then
             WorkPhone_Textbox.ForeColor = Color.Red
         End If
 
         ' Cell Phone 1
-        If Not isValidLength("Cell Phone 1", False, CellPhone1_Textbox.Text, 20, errorMessage) Then
+        If Not validPhone("Cell Phone 1", False, CellPhone1_Textbox.Text, errorMessage) Then
             CellPhone1_Textbox.ForeColor = Color.Red
         End If
 
         ' Cell Phone 2
-        If Not isValidLength("Cell Phone 2", False, CellPhone2_Textbox.Text, 20, errorMessage) Then
+        If Not validPhone("Cell Phone 2", False, CellPhone2_Textbox.Text, errorMessage) Then
             CellPhone2_Textbox.ForeColor = Color.Red
         End If
 
