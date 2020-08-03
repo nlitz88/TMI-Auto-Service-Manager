@@ -436,6 +436,24 @@
 
     End Function
 
+    ' GetDataTableRow but that uses '=' comparison instead of LIKE
+    Public Function getDataTableRowEquals(ByVal dataTable As DataTable, ByVal column As String, ByVal keyorvalue As Object) As Integer
+
+        Dim escapedText As String = escapeLikeValues(keyorvalue)
+
+        Try
+            Dim dataRows() As DataRow = dataTable.Select(column & " = '" & escapedText & "'")
+            If dataRows.Count <> 0 Then
+                Dim rowIndex As Integer = dataTable.Rows.IndexOf(dataRows(0))
+                Return rowIndex
+            Else Return -1
+            End If
+        Catch ex As Exception
+            Return -1
+        End Try
+
+    End Function
+
 
     ' Function that returns value from specified row and column
     Public Function getRowValue(ByVal dataTable As DataTable, ByVal row As Integer, ByVal valueColumn As String) As Object
@@ -456,6 +474,22 @@
     Public Function getRowValueWithKey(ByVal dataTable As DataTable, ByVal desiredColumn As String, ByVal keyColumn As String, ByVal key As String) As Object
 
         Dim rowIndex As Integer = getDataTableRow(dataTable, keyColumn, key)
+        Try
+            If rowIndex >= 0 Then
+                Dim value As Object = dataTable.Rows(rowIndex)(desiredColumn)
+                Return value
+            Else Return Nothing
+            End If
+        Catch ex As Exception
+            Return Nothing
+        End Try
+
+    End Function
+
+    ' getRowValueWithKey but that uses getDataTableRowEquals instead of LIKE variant
+    Public Function getRowValueWithKeyEquals(ByVal dataTable As DataTable, ByVal desiredColumn As String, ByVal keyColumn As String, ByVal key As Object) As Object
+
+        Dim rowIndex As Integer = getDataTableRowEquals(dataTable, keyColumn, key)
         Try
             If rowIndex >= 0 Then
                 Dim value As Object = dataTable.Rows(rowIndex)(desiredColumn)

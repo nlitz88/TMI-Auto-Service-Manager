@@ -339,6 +339,8 @@
 
         ' Initialize values for dataEditingControls
         clearControls(getAllControlsWithTag("dataEditingControl", Me))
+        ' Initialize ZipCode ComboBox (must be done separately from InitializeAllDataEditingControls, as we don't want all that to occur here)
+        InitializeZipCodeComboBox()
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialCustomerValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
@@ -546,7 +548,9 @@
 
                     ' Changing index of main combobox will also initialize respective dataViewing control values
                     ' Lookup and set new selectedIndex based on new value. If insertion failed, then go back to last
-                    Dim newItem As Object = getRowValueWithKey(CustomerDbController.DbDataTable, "CLF", "CustomerId", CustomerId_Textbox.Text)
+                    ' Must use '=' comparison here, as our key is an integer, not a string
+                    Dim newItem As Object = getRowValueWithKeyEquals(CustomerDbController.DbDataTable, "CLF", "CustomerId", Convert.ToInt32(CustomerId_Textbox.Text))
+
                     If newItem <> Nothing Then
                         CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(newItem)    ' Might have to figure out a more accurate way of getting ID, as this MIGHT not work. Fix SQL query
                     Else
@@ -612,11 +616,41 @@
 
     End Sub
 
+
+    Private Sub ZipCode_ComboBox_KeyDown(sender As Object, e As KeyEventArgs) Handles ZipCode_ComboBox.KeyDown
+
+        ' Allow certain keystrokes through here. Oftentimes, these will be common shortcuts
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
+            allowedKeystroke = True
+        End If
+
+    End Sub
+
+    Private Sub ZipCode_ComboBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ZipCode_ComboBox.KeyPress
+
+        ' If certain keystroke exceptions allowed throuhg, then skip input validation here
+        If allowedKeystroke Then
+            allowedKeystroke = False
+            Exit Sub
+        End If
+
+        If Not zipCodeInputValid(ZipCode_ComboBox, e.KeyChar) Then
+            e.KeyChar = Chr(0)
+            e.Handled = True
+        End If
+
+    End Sub
+
     Private Sub ZipCode_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ZipCode_ComboBox.SelectedIndexChanged, ZipCode_ComboBox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
 
         ZipCode_ComboBox.ForeColor = DefaultForeColor
+
+        ' If valid ZIP entered, then initialize controls that correspond to ZipCode value
+        If validZipCode(ZipCode_ComboBox.Text, String.Empty) And zipCodesList.BinarySearch(ZipCode_ComboBox.Text) <> -1 Then
+            InitializeZipCodeDataEditingControls()
+        End If
 
         If InitialCustomerValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -709,5 +743,6 @@
         End If
 
     End Sub
+
 
 End Class
