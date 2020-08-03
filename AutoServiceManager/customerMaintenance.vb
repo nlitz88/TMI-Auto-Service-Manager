@@ -248,7 +248,7 @@
         End If
 
         ' Street Address (REQUIRED)
-        If Not isValidLength("Street Address", True, Address_Textbox.Text, 50, errorMessage) Then
+        If Not isValidLength("Street Address", False, Address_Textbox.Text, 50, errorMessage) Then
             Address_Textbox.ForeColor = Color.Red
         End If
 
