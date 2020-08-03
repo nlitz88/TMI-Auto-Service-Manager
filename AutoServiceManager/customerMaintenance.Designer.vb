@@ -68,6 +68,7 @@ Partial Class customerMaintenance
         Me.WorkPhoneLabel = New System.Windows.Forms.Label()
         Me.TaxExemptLabel = New System.Windows.Forms.Label()
         Me.TaxExempt_CheckBox = New System.Windows.Forms.CheckBox()
+        Me.CustomerId_Textbox = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'nav
@@ -198,7 +199,7 @@ Partial Class customerMaintenance
         Me.CustomerComboBox.FormattingEnabled = True
         Me.CustomerComboBox.Location = New System.Drawing.Point(179, 194)
         Me.CustomerComboBox.Name = "CustomerComboBox"
-        Me.CustomerComboBox.Size = New System.Drawing.Size(297, 28)
+        Me.CustomerComboBox.Size = New System.Drawing.Size(362, 28)
         Me.CustomerComboBox.TabIndex = 113
         '
         'customerMaintenanceLabel
@@ -595,12 +596,24 @@ Partial Class customerMaintenance
         Me.TaxExempt_CheckBox.TabIndex = 167
         Me.TaxExempt_CheckBox.UseVisualStyleBackColor = True
         '
+        'CustomerId_Textbox
+        '
+        Me.CustomerId_Textbox.Enabled = False
+        Me.CustomerId_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CustomerId_Textbox.Location = New System.Drawing.Point(196, 258)
+        Me.CustomerId_Textbox.Name = "CustomerId_Textbox"
+        Me.CustomerId_Textbox.Size = New System.Drawing.Size(126, 27)
+        Me.CustomerId_Textbox.TabIndex = 168
+        Me.CustomerId_Textbox.Tag = "dataEditingControl"
+        Me.CustomerId_Textbox.Visible = False
+        '
         'customerMaintenance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.CustomerId_Textbox)
         Me.Controls.Add(Me.TaxExempt_CheckBox)
         Me.Controls.Add(Me.TaxExemptLabel)
         Me.Controls.Add(Me.CellPhone2_Textbox)
@@ -704,4 +717,5 @@ Partial Class customerMaintenance
     Friend WithEvents WorkPhoneLabel As Label
     Friend WithEvents TaxExemptLabel As Label
     Friend WithEvents TaxExempt_CheckBox As CheckBox
+    Friend WithEvents CustomerId_Textbox As TextBox
 End Class
