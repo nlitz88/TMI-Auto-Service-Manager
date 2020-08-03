@@ -410,10 +410,9 @@
 
         CustomerComboBox.SelectedIndex = 0
 
-        ' Set CustomerId to ID of new entry (this value will not actually be used, but it's based on the number of rows currently in the table)
-        ' Lookup ID of last user in table in database. Can't use datatable here, as it's already sorted
-        CRUD.ExecQuery("SELECT CustomerId FROM Customer WHERE CustomerId=(SELECT max(CustomerId) FROM Customer)")
-        CustomerId_Textbox.Text = (CRUD.DbDataTable.Rows(0)("CustomerId") + 1).ToString()
+
+        ' Don't set new CustomerId when adding new user, as there is no gaurantee as to what that newly autoIncrement value might be.
+        ' Instead, just look it up after the insert has occurred
 
         ' Hide/Show the dataViewingControls and dataEditingControls, respectively
         showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
@@ -602,6 +601,10 @@
                     InitializeCustomerComboBox()
 
                     ' Changing index of main combobox will also initialize respective dataViewing control values
+
+                    ' First, lookup most recent CustomerId added to the table
+                    CRUD.ExecQuery("")
+
                     ' Lookup and set new selectedIndex based on new value. If insertion failed, then go back to last
                     ' Must use '=' comparison here, as our key is an integer, not a string
                     Dim newItem As Object = getRowValueWithKeyEquals(CustomerDbController.DbDataTable, "CLF", "CustomerId", Convert.ToInt32(CustomerId_Textbox.Text))
