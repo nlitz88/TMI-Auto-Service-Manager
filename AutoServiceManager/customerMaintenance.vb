@@ -479,4 +479,235 @@
     End Sub
 
 
+    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+
+        Dim decision As DialogResult = MessageBox.Show("Save Changes?", "Confirm Changes", MessageBoxButtons.YesNo)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                If mode = "editing" Then
+
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    If Not controlsValid() Then Exit Sub
+
+                    ' 2.) UPDATE DATATABLE(S), THEN UPDATE DATABASE
+                    If Not updateAll() Then
+                        MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Else
+                        MessageBox.Show("Successfully updated Customers")
+                    End If
+
+                    ' 3.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadDataTablesFromDatabase() Then
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+
+                    ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                    InitializeCustomerComboBox()
+
+                    ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
+                    ' If insertion failed, then revert selected back to lastSelected
+                    Dim updatedItem As String = getRowValueWithKey(CustomerDbController.DbDataTable, "CLF", "CustomerId", CustomerId_Textbox.Text)
+                    If updatedItem <> Nothing Then
+                        CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(updatedItem)
+                    Else
+                        CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(lastSelected)
+                    End If
+
+                    ' dataViewingControl values reinitialized, as well as dataControls hide/show in combobox text/selectedindex change event
+
+                    ' 5.) MOVE UI OUT OF EDITING MODE
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+                    nav.EnableAll()
+                    CustomerComboBox.Enabled = True
+
+                ElseIf mode = "adding" Then
+
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    If Not controlsValid() Then Exit Sub
+
+                    ' 2.) INSERT NEW ROW INTO DATABASE
+                    If Not insertAll() Then
+                        MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Else
+                        MessageBox.Show("Successfully added " & LastName_Textbox.Text & ", " & FirstName_Textbox.Text & " to Customers")
+                    End If
+
+                    ' 3.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadDataTablesFromDatabase() Then
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+
+                    ' 4.) REINITIALIZE CONTROLS (based on index of newly inserted value)
+                    InitializeCustomerComboBox()
+
+                    ' Changing index of main combobox will also initialize respective dataViewing control values
+                    ' Lookup and set new selectedIndex based on new value. If insertion failed, then go back to last
+                    Dim newItem As Object = getRowValueWithKey(CustomerDbController.DbDataTable, "CLF", "CustomerId", CustomerId_Textbox.Text)
+                    If newItem <> Nothing Then
+                        CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(newItem)    ' Might have to figure out a more accurate way of getting ID, as this MIGHT not work. Fix SQL query
+                    Else
+                        CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(lastSelected)
+                    End If
+
+
+                    ' 5.) MOVE UI OUT OF Adding MODE
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+                    nav.EnableAll()
+                    CustomerComboBox.Enabled = True
+
+                End If
+
+            Case DialogResult.No
+                ' Continue making changes or cancel editing
+        End Select
+
+
+    End Sub
+
+    Private Sub LastName_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LastName_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        LastName_Textbox.ForeColor = DefaultForeColor
+
+        If InitialCustomerValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub FirstName_Textbox_TextChanged(sender As Object, e As EventArgs) Handles FirstName_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        FirstName_Textbox.ForeColor = DefaultForeColor
+
+        If InitialCustomerValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub Address_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Address_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        Address_Textbox.ForeColor = DefaultForeColor
+
+        If InitialCustomerValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub ZipCode_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ZipCode_ComboBox.SelectedIndexChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        ZipCode_ComboBox.ForeColor = DefaultForeColor
+
+        If InitialCustomerValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub HomePhone_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles HomePhone_Textbox.MaskInputRejected
+
+        If Not valuesInitialized Then Exit Sub
+
+        HomePhone_Textbox.ForeColor = DefaultForeColor
+
+        If InitialCustomerValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub CellPhone1_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles CellPhone1_Textbox.MaskInputRejected
+
+        If Not valuesInitialized Then Exit Sub
+
+        CellPhone1_Textbox.ForeColor = DefaultForeColor
+
+        If InitialCustomerValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub WorkPhone_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles WorkPhone_Textbox.MaskInputRejected
+
+        If Not valuesInitialized Then Exit Sub
+
+        WorkPhone_Textbox.ForeColor = DefaultForeColor
+
+        If InitialCustomerValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub CellPhone2_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles CellPhone2_Textbox.MaskInputRejected
+
+        If Not valuesInitialized Then Exit Sub
+
+        CellPhone2_Textbox.ForeColor = DefaultForeColor
+
+        If InitialCustomerValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub EmailAddress_Textbox_TextChanged(sender As Object, e As EventArgs) Handles EmailAddress_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        EmailAddress_Textbox.ForeColor = DefaultForeColor
+
+        If InitialCustomerValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub TaxExempt_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles TaxExempt_CheckBox.CheckedChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        TaxExempt_CheckBox.ForeColor = DefaultForeColor
+
+        If InitialCustomerValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
 End Class
