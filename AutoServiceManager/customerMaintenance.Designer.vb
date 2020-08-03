@@ -22,7 +22,6 @@ Partial Class customerMaintenance
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.nav = New AutoServiceManager.navigation()
         Me.LastName_Value = New System.Windows.Forms.Label()
         Me.LastNameLabel = New System.Windows.Forms.Label()
         Me.LastName_Textbox = New System.Windows.Forms.TextBox()
@@ -47,13 +46,13 @@ Partial Class customerMaintenance
         Me.Address_Textbox = New System.Windows.Forms.TextBox()
         Me.ZipCode_ComboBox = New System.Windows.Forms.ComboBox()
         Me.State_Value = New System.Windows.Forms.Label()
-        Me.city_Value = New System.Windows.Forms.Label()
+        Me.City_Value = New System.Windows.Forms.Label()
         Me.ZipCode_Value = New System.Windows.Forms.Label()
         Me.stateLabel = New System.Windows.Forms.Label()
         Me.cityLabel = New System.Windows.Forms.Label()
         Me.zipCodeLabel = New System.Windows.Forms.Label()
         Me.State_Textbox = New System.Windows.Forms.TextBox()
-        Me.city_Textbox = New System.Windows.Forms.TextBox()
+        Me.City_Textbox = New System.Windows.Forms.TextBox()
         Me.CellPhone1_Textbox = New System.Windows.Forms.MaskedTextBox()
         Me.HomePhone_Textbox = New System.Windows.Forms.MaskedTextBox()
         Me.CellPhone1_Value = New System.Windows.Forms.Label()
@@ -69,17 +68,9 @@ Partial Class customerMaintenance
         Me.TaxExemptLabel = New System.Windows.Forms.Label()
         Me.TaxExempt_CheckBox = New System.Windows.Forms.CheckBox()
         Me.CustomerId_Textbox = New System.Windows.Forms.TextBox()
+        Me.TaxExempt_Value = New System.Windows.Forms.Label()
+        Me.nav = New AutoServiceManager.navigation()
         Me.SuspendLayout()
-        '
-        'nav
-        '
-        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.nav.Location = New System.Drawing.Point(0, 0)
-        Me.nav.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.nav.Name = "nav"
-        Me.nav.Size = New System.Drawing.Size(982, 22)
-        Me.nav.TabIndex = 50
         '
         'LastName_Value
         '
@@ -355,16 +346,16 @@ Partial Class customerMaintenance
         Me.State_Value.TabIndex = 147
         Me.State_Value.Tag = "dataViewingControl"
         '
-        'city_Value
+        'City_Value
         '
-        Me.city_Value.AutoSize = True
-        Me.city_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.city_Value.ForeColor = System.Drawing.Color.Black
-        Me.city_Value.Location = New System.Drawing.Point(140, 437)
-        Me.city_Value.Name = "city_Value"
-        Me.city_Value.Size = New System.Drawing.Size(0, 20)
-        Me.city_Value.TabIndex = 146
-        Me.city_Value.Tag = "dataViewingControl"
+        Me.City_Value.AutoSize = True
+        Me.City_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.City_Value.ForeColor = System.Drawing.Color.Black
+        Me.City_Value.Location = New System.Drawing.Point(140, 437)
+        Me.City_Value.Name = "City_Value"
+        Me.City_Value.Size = New System.Drawing.Size(0, 20)
+        Me.City_Value.TabIndex = 146
+        Me.City_Value.Tag = "dataViewingControl"
         '
         'ZipCode_Value
         '
@@ -385,6 +376,7 @@ Partial Class customerMaintenance
         Me.stateLabel.Name = "stateLabel"
         Me.stateLabel.Size = New System.Drawing.Size(49, 17)
         Me.stateLabel.TabIndex = 143
+        Me.stateLabel.Tag = "dataLabel"
         Me.stateLabel.Text = "State :"
         '
         'cityLabel
@@ -395,6 +387,7 @@ Partial Class customerMaintenance
         Me.cityLabel.Name = "cityLabel"
         Me.cityLabel.Size = New System.Drawing.Size(39, 17)
         Me.cityLabel.TabIndex = 141
+        Me.cityLabel.Tag = "dataLabel"
         Me.cityLabel.Text = "City :"
         '
         'zipCodeLabel
@@ -405,6 +398,7 @@ Partial Class customerMaintenance
         Me.zipCodeLabel.Name = "zipCodeLabel"
         Me.zipCodeLabel.Size = New System.Drawing.Size(73, 17)
         Me.zipCodeLabel.TabIndex = 140
+        Me.zipCodeLabel.Tag = "dataLabel"
         Me.zipCodeLabel.Text = "Zip Code :"
         '
         'State_Textbox
@@ -418,16 +412,16 @@ Partial Class customerMaintenance
         Me.State_Textbox.Tag = "dataEditingControl"
         Me.State_Textbox.Visible = False
         '
-        'city_Textbox
+        'City_Textbox
         '
-        Me.city_Textbox.Enabled = False
-        Me.city_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.city_Textbox.Location = New System.Drawing.Point(140, 434)
-        Me.city_Textbox.Name = "city_Textbox"
-        Me.city_Textbox.Size = New System.Drawing.Size(184, 27)
-        Me.city_Textbox.TabIndex = 142
-        Me.city_Textbox.Tag = "dataEditingControl"
-        Me.city_Textbox.Visible = False
+        Me.City_Textbox.Enabled = False
+        Me.City_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.City_Textbox.Location = New System.Drawing.Point(140, 434)
+        Me.City_Textbox.Name = "City_Textbox"
+        Me.City_Textbox.Size = New System.Drawing.Size(184, 27)
+        Me.City_Textbox.TabIndex = 142
+        Me.City_Textbox.Tag = "dataEditingControl"
+        Me.City_Textbox.Visible = False
         '
         'CellPhone1_Textbox
         '
@@ -491,6 +485,7 @@ Partial Class customerMaintenance
         Me.CellPhone1Label.Name = "CellPhone1Label"
         Me.CellPhone1Label.Size = New System.Drawing.Size(96, 17)
         Me.CellPhone1Label.TabIndex = 157
+        Me.CellPhone1Label.Tag = "dataLabel"
         Me.CellPhone1Label.Text = "Cell Phone 1 :"
         '
         'HomePhoneLabel
@@ -501,6 +496,7 @@ Partial Class customerMaintenance
         Me.HomePhoneLabel.Name = "HomePhoneLabel"
         Me.HomePhoneLabel.Size = New System.Drawing.Size(98, 17)
         Me.HomePhoneLabel.TabIndex = 156
+        Me.HomePhoneLabel.Tag = "dataLabel"
         Me.HomePhoneLabel.Text = "Home Phone :"
         '
         'CellPhone2_Textbox
@@ -565,6 +561,7 @@ Partial Class customerMaintenance
         Me.CellPhone2Label.Name = "CellPhone2Label"
         Me.CellPhone2Label.Size = New System.Drawing.Size(96, 17)
         Me.CellPhone2Label.TabIndex = 163
+        Me.CellPhone2Label.Tag = "dataLabel"
         Me.CellPhone2Label.Text = "Cell Phone 2 :"
         '
         'WorkPhoneLabel
@@ -575,6 +572,7 @@ Partial Class customerMaintenance
         Me.WorkPhoneLabel.Name = "WorkPhoneLabel"
         Me.WorkPhoneLabel.Size = New System.Drawing.Size(94, 17)
         Me.WorkPhoneLabel.TabIndex = 162
+        Me.WorkPhoneLabel.Tag = "dataLabel"
         Me.WorkPhoneLabel.Text = "Work Phone :"
         '
         'TaxExemptLabel
@@ -585,6 +583,7 @@ Partial Class customerMaintenance
         Me.TaxExemptLabel.Name = "TaxExemptLabel"
         Me.TaxExemptLabel.Size = New System.Drawing.Size(89, 17)
         Me.TaxExemptLabel.TabIndex = 166
+        Me.TaxExemptLabel.Tag = "dataLabel"
         Me.TaxExemptLabel.Text = "Tax Exempt :"
         '
         'TaxExempt_CheckBox
@@ -594,6 +593,7 @@ Partial Class customerMaintenance
         Me.TaxExempt_CheckBox.Name = "TaxExempt_CheckBox"
         Me.TaxExempt_CheckBox.Size = New System.Drawing.Size(18, 17)
         Me.TaxExempt_CheckBox.TabIndex = 167
+        Me.TaxExempt_CheckBox.Tag = "dataEditingControl"
         Me.TaxExempt_CheckBox.UseVisualStyleBackColor = True
         '
         'CustomerId_Textbox
@@ -607,12 +607,34 @@ Partial Class customerMaintenance
         Me.CustomerId_Textbox.Tag = "dataEditingControl"
         Me.CustomerId_Textbox.Visible = False
         '
+        'TaxExempt_Value
+        '
+        Me.TaxExempt_Value.AutoSize = True
+        Me.TaxExempt_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TaxExempt_Value.ForeColor = System.Drawing.Color.Black
+        Me.TaxExempt_Value.Location = New System.Drawing.Point(582, 570)
+        Me.TaxExempt_Value.Name = "TaxExempt_Value"
+        Me.TaxExempt_Value.Size = New System.Drawing.Size(0, 20)
+        Me.TaxExempt_Value.TabIndex = 169
+        Me.TaxExempt_Value.Tag = "dataViewingControl"
+        '
+        'nav
+        '
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(982, 28)
+        Me.nav.TabIndex = 50
+        '
         'customerMaintenance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.TaxExempt_Value)
         Me.Controls.Add(Me.CustomerId_Textbox)
         Me.Controls.Add(Me.TaxExempt_CheckBox)
         Me.Controls.Add(Me.TaxExemptLabel)
@@ -630,13 +652,13 @@ Partial Class customerMaintenance
         Me.Controls.Add(Me.HomePhoneLabel)
         Me.Controls.Add(Me.ZipCode_ComboBox)
         Me.Controls.Add(Me.State_Value)
-        Me.Controls.Add(Me.city_Value)
+        Me.Controls.Add(Me.City_Value)
         Me.Controls.Add(Me.ZipCode_Value)
         Me.Controls.Add(Me.stateLabel)
         Me.Controls.Add(Me.cityLabel)
         Me.Controls.Add(Me.zipCodeLabel)
         Me.Controls.Add(Me.State_Textbox)
-        Me.Controls.Add(Me.city_Textbox)
+        Me.Controls.Add(Me.City_Textbox)
         Me.Controls.Add(Me.Address_Value)
         Me.Controls.Add(Me.AddressLabel)
         Me.Controls.Add(Me.Address_Textbox)
@@ -696,13 +718,13 @@ Partial Class customerMaintenance
     Friend WithEvents Address_Textbox As TextBox
     Friend WithEvents ZipCode_ComboBox As ComboBox
     Friend WithEvents State_Value As Label
-    Friend WithEvents city_Value As Label
+    Friend WithEvents City_Value As Label
     Friend WithEvents ZipCode_Value As Label
     Friend WithEvents stateLabel As Label
     Friend WithEvents cityLabel As Label
     Friend WithEvents zipCodeLabel As Label
     Friend WithEvents State_Textbox As TextBox
-    Friend WithEvents city_Textbox As TextBox
+    Friend WithEvents City_Textbox As TextBox
     Friend WithEvents CellPhone1_Textbox As MaskedTextBox
     Friend WithEvents HomePhone_Textbox As MaskedTextBox
     Friend WithEvents CellPhone1_Value As Label
@@ -718,4 +740,5 @@ Partial Class customerMaintenance
     Friend WithEvents TaxExemptLabel As Label
     Friend WithEvents TaxExempt_CheckBox As CheckBox
     Friend WithEvents CustomerId_Textbox As TextBox
+    Friend WithEvents TaxExempt_Value As Label
 End Class
