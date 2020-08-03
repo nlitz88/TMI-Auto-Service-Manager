@@ -175,8 +175,12 @@
 
         ' Lookup CustomerId (primary key) based on selected CLF in ComboBox
         Dim customerId As Integer = CustomerDbController.DbDataTable.Rows(CustomerRow)("CustomerId")
-        ' Using CustomerID as key, update customer row
+
+        ' Because CustomerId is our primary key, we don't want to try and update its value too (not possible in this case)
+        ' So, add CustomerId_Textbox to the excluded list. We can still use it as our key, but updateRow won't try and update its value
         Dim excludedList As New List(Of Control) From {CustomerId_Textbox}
+
+        ' Using CustomerID as key, update customer row
         updateTable(CRUD, CustomerDbController.DbDataTable, "Customer", customerId, "CustomerId", "_", "dataEditingControl", Me, excludedList)
         ' Then, return exception status of CRUD controller. Do this after each call
         If CRUD.HasException() Then Return False
@@ -190,11 +194,12 @@
     ' Function that makes insertRow calls for all relevant DataTables
     Private Function insertAll() As Boolean
 
-        ' TECHNICALLY, IT'S NOT PROPER TO TRY TO INSERT THE AUTOINCREMENTING PRIMARY KEY
-        ' CONSIDER MAKING A MANUAL INSERT
+        ' Because CustomerId is an autoincremented value in the database, we don't want to attempt to insert a value for it here
+        ' So, exclude the new value in CustomerId_Textbox from being inserted
+        Dim excludedList As New List(Of Control) From {CustomerId_Textbox}
 
         ' Then, make calls to insertRow to all relevant tables
-        insertRow(CRUD, CustomerDbController.DbDataTable, "Customer", "_", "dataEditingControl", Me)
+        insertRow(CRUD, CustomerDbController.DbDataTable, "Customer", "_", "dataEditingControl", Me, excludedList)
         ' Then, return exception status of CRUD controller. Do this after each call
         If CRUD.HasException() Then Return False
 
