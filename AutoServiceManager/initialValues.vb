@@ -71,7 +71,8 @@
                     result = True
                 End If
             Case GetType(System.Windows.Forms.ComboBox)
-                If (control.SelectedValue <> value) Or (control.Text <> value) Then
+                If control.Text <> value Then
+                    'Console.WriteLine("SelectedValue = value? : " & (control.SelectedValue = value).ToString() & " | Text = value? : " & (control.Text = value).ToString())
                     result = True
                 End If
         End Select

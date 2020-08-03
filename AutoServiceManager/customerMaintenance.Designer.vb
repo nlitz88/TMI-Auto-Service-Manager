@@ -101,7 +101,7 @@ Partial Class customerMaintenance
         Me.LastName_Textbox.MaxLength = 50
         Me.LastName_Textbox.Name = "LastName_Textbox"
         Me.LastName_Textbox.Size = New System.Drawing.Size(297, 27)
-        Me.LastName_Textbox.TabIndex = 115
+        Me.LastName_Textbox.TabIndex = 1
         Me.LastName_Textbox.Tag = "dataEditingControl"
         Me.LastName_Textbox.Visible = False
         '
@@ -111,7 +111,7 @@ Partial Class customerMaintenance
         Me.EmailAddress_Textbox.Location = New System.Drawing.Point(148, 567)
         Me.EmailAddress_Textbox.Name = "EmailAddress_Textbox"
         Me.EmailAddress_Textbox.Size = New System.Drawing.Size(308, 27)
-        Me.EmailAddress_Textbox.TabIndex = 116
+        Me.EmailAddress_Textbox.TabIndex = 9
         Me.EmailAddress_Textbox.Tag = "dataEditingControl"
         Me.EmailAddress_Textbox.Visible = False
         '
@@ -146,7 +146,7 @@ Partial Class customerMaintenance
         Me.deleteButton.Location = New System.Drawing.Point(217, 120)
         Me.deleteButton.Name = "deleteButton"
         Me.deleteButton.Size = New System.Drawing.Size(110, 30)
-        Me.deleteButton.TabIndex = 119
+        Me.deleteButton.TabIndex = 12
         Me.deleteButton.Text = "Delete"
         Me.deleteButton.UseVisualStyleBackColor = False
         '
@@ -191,7 +191,7 @@ Partial Class customerMaintenance
         Me.CustomerComboBox.Location = New System.Drawing.Point(179, 194)
         Me.CustomerComboBox.Name = "CustomerComboBox"
         Me.CustomerComboBox.Size = New System.Drawing.Size(362, 28)
-        Me.CustomerComboBox.TabIndex = 113
+        Me.CustomerComboBox.TabIndex = 0
         '
         'customerMaintenanceLabel
         '
@@ -213,7 +213,7 @@ Partial Class customerMaintenance
         Me.editButton.Location = New System.Drawing.Point(333, 120)
         Me.editButton.Name = "editButton"
         Me.editButton.Size = New System.Drawing.Size(110, 30)
-        Me.editButton.TabIndex = 120
+        Me.editButton.TabIndex = 13
         Me.editButton.Text = "Edit"
         Me.editButton.UseVisualStyleBackColor = False
         '
@@ -226,7 +226,7 @@ Partial Class customerMaintenance
         Me.cancelButton.Location = New System.Drawing.Point(564, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
-        Me.cancelButton.TabIndex = 122
+        Me.cancelButton.TabIndex = 15
         Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
         '
@@ -239,7 +239,7 @@ Partial Class customerMaintenance
         Me.saveButton.Location = New System.Drawing.Point(449, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
-        Me.saveButton.TabIndex = 121
+        Me.saveButton.TabIndex = 14
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
         '
@@ -251,7 +251,7 @@ Partial Class customerMaintenance
         Me.addButton.Location = New System.Drawing.Point(100, 120)
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(110, 30)
-        Me.addButton.TabIndex = 118
+        Me.addButton.TabIndex = 11
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = False
         '
@@ -284,7 +284,7 @@ Partial Class customerMaintenance
         Me.FirstName_Textbox.MaxLength = 50
         Me.FirstName_Textbox.Name = "FirstName_Textbox"
         Me.FirstName_Textbox.Size = New System.Drawing.Size(297, 27)
-        Me.FirstName_Textbox.TabIndex = 133
+        Me.FirstName_Textbox.TabIndex = 2
         Me.FirstName_Textbox.Tag = "dataEditingControl"
         Me.FirstName_Textbox.Visible = False
         '
@@ -317,7 +317,7 @@ Partial Class customerMaintenance
         Me.Address_Textbox.MaxLength = 50
         Me.Address_Textbox.Name = "Address_Textbox"
         Me.Address_Textbox.Size = New System.Drawing.Size(421, 27)
-        Me.Address_Textbox.TabIndex = 136
+        Me.Address_Textbox.TabIndex = 3
         Me.Address_Textbox.Tag = "dataEditingControl"
         Me.Address_Textbox.Visible = False
         '
@@ -331,7 +331,7 @@ Partial Class customerMaintenance
         Me.ZipCode_ComboBox.MaxLength = 5
         Me.ZipCode_ComboBox.Name = "ZipCode_ComboBox"
         Me.ZipCode_ComboBox.Size = New System.Drawing.Size(150, 28)
-        Me.ZipCode_ComboBox.TabIndex = 139
+        Me.ZipCode_ComboBox.TabIndex = 4
         Me.ZipCode_ComboBox.Tag = "dataEditingControl"
         Me.ZipCode_ComboBox.Visible = False
         '
@@ -434,7 +434,7 @@ Partial Class customerMaintenance
         Me.CellPhone1_Textbox.Name = "CellPhone1_Textbox"
         Me.CellPhone1_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.CellPhone1_Textbox.Size = New System.Drawing.Size(181, 27)
-        Me.CellPhone1_Textbox.TabIndex = 155
+        Me.CellPhone1_Textbox.TabIndex = 6
         Me.CellPhone1_Textbox.Tag = "dataEditingControl"
         Me.CellPhone1_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.CellPhone1_Textbox.Visible = False
@@ -450,7 +450,7 @@ Partial Class customerMaintenance
         Me.HomePhone_Textbox.Name = "HomePhone_Textbox"
         Me.HomePhone_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.HomePhone_Textbox.Size = New System.Drawing.Size(181, 27)
-        Me.HomePhone_Textbox.TabIndex = 154
+        Me.HomePhone_Textbox.TabIndex = 5
         Me.HomePhone_Textbox.Tag = "dataEditingControl"
         Me.HomePhone_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.HomePhone_Textbox.Visible = False
@@ -510,7 +510,7 @@ Partial Class customerMaintenance
         Me.CellPhone2_Textbox.Name = "CellPhone2_Textbox"
         Me.CellPhone2_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.CellPhone2_Textbox.Size = New System.Drawing.Size(181, 27)
-        Me.CellPhone2_Textbox.TabIndex = 161
+        Me.CellPhone2_Textbox.TabIndex = 8
         Me.CellPhone2_Textbox.Tag = "dataEditingControl"
         Me.CellPhone2_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.CellPhone2_Textbox.Visible = False
@@ -526,7 +526,7 @@ Partial Class customerMaintenance
         Me.WorkPhone_Textbox.Name = "WorkPhone_Textbox"
         Me.WorkPhone_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.WorkPhone_Textbox.Size = New System.Drawing.Size(181, 27)
-        Me.WorkPhone_Textbox.TabIndex = 160
+        Me.WorkPhone_Textbox.TabIndex = 7
         Me.WorkPhone_Textbox.Tag = "dataEditingControl"
         Me.WorkPhone_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.WorkPhone_Textbox.Visible = False
@@ -615,7 +615,7 @@ Partial Class customerMaintenance
         Me.TaxExempt_Value.Location = New System.Drawing.Point(582, 570)
         Me.TaxExempt_Value.Name = "TaxExempt_Value"
         Me.TaxExempt_Value.Size = New System.Drawing.Size(0, 20)
-        Me.TaxExempt_Value.TabIndex = 169
+        Me.TaxExempt_Value.TabIndex = 10
         Me.TaxExempt_Value.Tag = "dataViewingControl"
         '
         'nav
