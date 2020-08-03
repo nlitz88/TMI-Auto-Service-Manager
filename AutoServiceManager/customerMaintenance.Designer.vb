@@ -113,7 +113,7 @@ Partial Class customerMaintenance
         Me.EmailAddress_Textbox.Name = "EmailAddress_Textbox"
         Me.EmailAddress_Textbox.Size = New System.Drawing.Size(308, 27)
         Me.EmailAddress_Textbox.TabIndex = 9
-        Me.EmailAddress_Textbox.Tag = "dataEditingControl"
+        Me.EmailAddress_Textbox.Tag = ""
         Me.EmailAddress_Textbox.Visible = False
         '
         'PriceLabel
@@ -124,8 +124,9 @@ Partial Class customerMaintenance
         Me.PriceLabel.Name = "PriceLabel"
         Me.PriceLabel.Size = New System.Drawing.Size(50, 17)
         Me.PriceLabel.TabIndex = 128
-        Me.PriceLabel.Tag = "dataLabel"
+        Me.PriceLabel.Tag = ""
         Me.PriceLabel.Text = "Email :"
+        Me.PriceLabel.Visible = False
         '
         'EmailAddress_Value
         '
@@ -136,7 +137,8 @@ Partial Class customerMaintenance
         Me.EmailAddress_Value.Name = "EmailAddress_Value"
         Me.EmailAddress_Value.Size = New System.Drawing.Size(0, 20)
         Me.EmailAddress_Value.TabIndex = 127
-        Me.EmailAddress_Value.Tag = "dataViewingControl"
+        Me.EmailAddress_Value.Tag = ""
+        Me.EmailAddress_Value.Visible = False
         '
         'deleteButton
         '
@@ -582,7 +584,7 @@ Partial Class customerMaintenance
         '
         Me.TaxExemptLabel.AutoSize = True
         Me.TaxExemptLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.TaxExemptLabel.Location = New System.Drawing.Point(487, 573)
+        Me.TaxExemptLabel.Location = New System.Drawing.Point(501, 265)
         Me.TaxExemptLabel.Name = "TaxExemptLabel"
         Me.TaxExemptLabel.Size = New System.Drawing.Size(89, 17)
         Me.TaxExemptLabel.TabIndex = 166
@@ -592,7 +594,7 @@ Partial Class customerMaintenance
         'TaxExempt_CheckBox
         '
         Me.TaxExempt_CheckBox.AutoSize = True
-        Me.TaxExempt_CheckBox.Location = New System.Drawing.Point(582, 574)
+        Me.TaxExempt_CheckBox.Location = New System.Drawing.Point(596, 266)
         Me.TaxExempt_CheckBox.Name = "TaxExempt_CheckBox"
         Me.TaxExempt_CheckBox.Size = New System.Drawing.Size(18, 17)
         Me.TaxExempt_CheckBox.TabIndex = 167
@@ -615,7 +617,7 @@ Partial Class customerMaintenance
         Me.TaxExempt_Value.AutoSize = True
         Me.TaxExempt_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TaxExempt_Value.ForeColor = System.Drawing.Color.Black
-        Me.TaxExempt_Value.Location = New System.Drawing.Point(582, 570)
+        Me.TaxExempt_Value.Location = New System.Drawing.Point(596, 262)
         Me.TaxExempt_Value.Name = "TaxExempt_Value"
         Me.TaxExempt_Value.Size = New System.Drawing.Size(0, 20)
         Me.TaxExempt_Value.TabIndex = 10
