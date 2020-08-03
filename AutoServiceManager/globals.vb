@@ -348,6 +348,51 @@
 
     End Sub
 
+    ' Overload that allows specifying a list of controls to exclude from updating their values in a given row
+    Public Sub updateTable(ByRef updateController As DbControl, ByVal dataTable As DataTable, ByVal tableName As String, ByVal id As Object,
+                           ByVal idName As String, ByVal nameDelimiter As String, ByVal controlTag As String, ByRef form As Form,
+                           ByVal excludedControls As List(Of Control))
+
+        Dim ctrls As List(Of Object)
+        Dim ctrlValue As Object
+        Dim queryParams As String = String.Empty
+        Dim whereID As String = String.Empty
+
+        ' Add query parameters for each column value in DataTable
+        For i As Integer = 0 To dataTable.Columns.Count - 1
+
+            ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
+
+            If ctrls.Count = 0 Then Continue For
+            If excludedControls.Contains(ctrls(0)) Then Continue For
+
+            ' Get the value of only one control of the same name designation (assuming they control/correspond with the same table column value)
+            ctrlValue = getControlValue(ctrls(0))
+            If ctrlValue = Nothing Then
+                ' For compatability with existing columns. This is for fields that do not allow zero-length strings, even though user might want to make field blank.
+                ctrlValue = DBNull.Value
+            End If
+            updateController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
+            queryParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & ","
+
+        Next
+
+        '' Add on id paramater if not already done so from a form control
+        'If InStr(queryParams, idName) = 0 Then
+        '    updateController.AddParams("@" & idName, id)
+        'End If
+        updateController.AddParams("@id", id)
+        whereID = " WHERE " & idName & "=@id"
+
+        ' If query params isn't empty, then run update query
+        If Not String.IsNullOrEmpty(queryParams) Then
+            ' The substring at the end ensures that there isn't an extra comma at the end
+            queryParams = queryParams.Substring(0, queryParams.Length - 1)
+            updateController.ExecQuery("UPDATE " & tableName & " SET " & queryParams & whereID)
+        End If
+
+    End Sub
+
 
     ' Sub that inserts new row into specified table
     Public Sub insertRow(ByRef insertController As DbControl, ByVal dataTable As DataTable, ByVal tableName As String,

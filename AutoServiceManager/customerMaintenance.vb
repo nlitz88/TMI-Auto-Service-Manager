@@ -176,7 +176,8 @@
         ' Lookup CustomerId (primary key) based on selected CLF in ComboBox
         Dim customerId As Integer = CustomerDbController.DbDataTable.Rows(CustomerRow)("CustomerId")
         ' Using CustomerID as key, update customer row
-        updateTable(CRUD, CustomerDbController.DbDataTable, "Customer", customerId, "CustomerId", "_", "dataEditingControl", Me)
+        Dim excludedList As New List(Of Control) From {CustomerId_Textbox}
+        updateTable(CRUD, CustomerDbController.DbDataTable, "Customer", customerId, "CustomerId", "_", "dataEditingControl", Me, excludedList)
         ' Then, return exception status of CRUD controller. Do this after each call
         If CRUD.HasException() Then Return False
 
@@ -188,6 +189,9 @@
 
     ' Function that makes insertRow calls for all relevant DataTables
     Private Function insertAll() As Boolean
+
+        ' TECHNICALLY, IT'S NOT PROPER TO TRY TO INSERT THE AUTOINCREMENTING PRIMARY KEY
+        ' CONSIDER MAKING A MANUAL INSERT
 
         ' Then, make calls to insertRow to all relevant tables
         insertRow(CRUD, CustomerDbController.DbDataTable, "Customer", "_", "dataEditingControl", Me)
@@ -510,7 +514,7 @@
 
                     ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
                     ' If insertion failed, then revert selected back to lastSelected
-                    Dim updatedItem As String = getRowValueWithKey(CustomerDbController.DbDataTable, "CLF", "CustomerId", CustomerId_Textbox.Text)
+                    Dim updatedItem As String = getRowValueWithKeyEquals(CustomerDbController.DbDataTable, "CLF", "CustomerId", Convert.ToInt32(CustomerId_Textbox.Text))
                     If updatedItem <> Nothing Then
                         CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(updatedItem)
                     Else
@@ -550,7 +554,6 @@
                     ' Lookup and set new selectedIndex based on new value. If insertion failed, then go back to last
                     ' Must use '=' comparison here, as our key is an integer, not a string
                     Dim newItem As Object = getRowValueWithKeyEquals(CustomerDbController.DbDataTable, "CLF", "CustomerId", Convert.ToInt32(CustomerId_Textbox.Text))
-
                     If newItem <> Nothing Then
                         CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(newItem)    ' Might have to figure out a more accurate way of getting ID, as this MIGHT not work. Fix SQL query
                     Else
