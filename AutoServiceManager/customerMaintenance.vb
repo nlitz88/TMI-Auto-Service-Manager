@@ -709,7 +709,8 @@
 
     End Sub
 
-    Private Sub HomePhone_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles HomePhone_Textbox.TextChanged
+
+    Private Sub HomePhone_Value_TextChanged(sender As Object, e As EventArgs) Handles HomePhone_Value.TextChanged
 
         If Not valuesInitialized Then Exit Sub
 
@@ -723,21 +724,7 @@
 
     End Sub
 
-    Private Sub CellPhone1_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles CellPhone1_Textbox.TextChanged
-
-        If Not valuesInitialized Then Exit Sub
-
-        CellPhone1_Textbox.ForeColor = DefaultForeColor
-
-        If InitialCustomerValues.CtrlValuesChanged() Then
-            saveButton.Enabled = True
-        Else
-            saveButton.Enabled = False
-        End If
-
-    End Sub
-
-    Private Sub WorkPhone_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles WorkPhone_Textbox.TextChanged
+    Private Sub WorkPhone_Textbox_TextChanged(sender As Object, e As EventArgs) Handles WorkPhone_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
 
@@ -751,7 +738,21 @@
 
     End Sub
 
-    Private Sub CellPhone2_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles CellPhone2_Textbox.TextChanged
+    Private Sub CellPhone1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles CellPhone1_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        CellPhone1_Textbox.ForeColor = DefaultForeColor
+
+        If InitialCustomerValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub CellPhone2_Textbox_TextChanged(sender As Object, e As EventArgs) Handles CellPhone2_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
 
