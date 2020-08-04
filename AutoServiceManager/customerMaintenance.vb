@@ -395,6 +395,8 @@
 
         CustomerRow = -1    ' guilty until proven innocent
 
+        ' MAKE THIS A FUNCTION ************************************************ (essentially just a lookup with two where conditions?
+
         ' Then, update Customer row such that it reflects the PROPER entry (according to the selectedValue (CustomerId))
         Dim escapedText As String = escapeLikeValues(CustomerComboBox.Text)
         Dim rows() As DataRow = CustomerDbController.DbDataTable.Select("CLF LIKE '" & escapedText & "'")
