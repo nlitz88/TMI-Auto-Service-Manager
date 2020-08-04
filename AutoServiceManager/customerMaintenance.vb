@@ -39,7 +39,7 @@
         CustomerDbController.ExecQuery("SELECT c.LastName + ', ' + IIF(ISNULL(c.FirstName), '', c.FirstName) as CLF, " &
             "c.CustomerId, c.FirstName, c.LastName, c.Address, c.City, c.State, c.ZipCode, c.HomePhone, c.WorkPhone, c.CellPhone1, c.CellPhone2, c.TaxExempt, c.EmailAddress " &
             "FROM Customer c " &
-            "WHERE Trim(LastName) <> NULL " &
+            "WHERE Trim(LastName) <> '' " &
             "ORDER BY c.LastName ASC")
 
         If CustomerDbController.HasException() Then Return False
@@ -755,6 +755,9 @@
         If Not zipCodeInputValid(ZipCode_ComboBox, e.KeyChar) Then
             e.KeyChar = Chr(0)
             e.Handled = True
+        Else
+            City_Textbox.Text = String.Empty
+            State_Textbox.Text = String.Empty
         End If
 
     End Sub
