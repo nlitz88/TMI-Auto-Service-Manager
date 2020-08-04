@@ -401,16 +401,22 @@
         ' MAKE THIS A FUNCTION ************************************************ (essentially just a lookup with two where conditions?
 
         ' Then, update Customer row such that it reflects the PROPER entry (according to the selectedValue (CustomerId))
+        'Dim escapedText As String = escapeLikeValues(CustomerComboBox.Text)
+        'Dim rows() As DataRow = CustomerDbController.DbDataTable.Select("CLF LIKE '" & escapedText & "'")
+        'If rows.Count <> 0 Then
+        '    ' We want to see if the rows that match with the CLF 
+        '    For Each row In rows
+        '        If row("CustomerId") = CustomerComboBox.SelectedValue Then
+        '            CustomerRow = CustomerDbController.DbDataTable.Rows.IndexOf(row)
+        '            Exit For
+        '        End If
+        '    Next
+        'End If
+
         Dim escapedText As String = escapeLikeValues(CustomerComboBox.Text)
-        Dim rows() As DataRow = CustomerDbController.DbDataTable.Select("CLF LIKE '" & escapedText & "'")
+        Dim rows() As DataRow = CustomerDbController.DbDataTable.Select("CLF LIKE '" & escapedText & "' AND CustomerId = '" & CustomerComboBox.SelectedValue & "'")
         If rows.Count <> 0 Then
-            ' We want to see if the rows that match with the CLF 
-            For Each row In rows
-                If row("CustomerId") = CustomerComboBox.SelectedValue Then
-                    CustomerRow = CustomerDbController.DbDataTable.Rows.IndexOf(row)
-                    Exit For
-                End If
-            Next
+            CustomerRow = CustomerDbController.DbDataTable.Rows.IndexOf(rows(0))
         End If
 
         If CustomerRow <> -1 Then
