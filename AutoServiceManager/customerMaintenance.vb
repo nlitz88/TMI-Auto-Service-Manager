@@ -365,7 +365,6 @@
         Console.WriteLine("Done loading in from datatable")
 
         InitializeCustomerComboBox()
-        Console.WriteLine(CustomerComboBox.SelectedIndex)
         CustomerComboBox.SelectedIndex = -1
 
     End Sub
@@ -377,6 +376,8 @@
 
 
     Private Sub CustomerComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CustomerComboBox.SelectedIndexChanged, CustomerComboBox.TextChanged, CustomerComboBox.SelectedValueChanged
+
+        If Not checkDbConn() Then Exit Sub
 
         Console.WriteLine(CustomerComboBox.SelectedIndex)
 
@@ -468,6 +469,7 @@
         End If
 
         CustomerComboBox.SelectedIndex = -1
+        CustomerComboBox.Text = String.Empty
 
 
         ' Don't set new CustomerId when adding new user, as there is no gaurantee as to what that newly autoIncrement value might be.
@@ -528,9 +530,6 @@
         InitializeAllDataEditingControls()
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialCustomerValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
-
-        ' Store the last selected item in the ComboBox (in case update fails and it must revert)
-        lastSelected = CustomerComboBox.SelectedIndex
 
         ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
         editButton.Enabled = False
@@ -621,16 +620,9 @@
                     ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
                     InitializeCustomerComboBox()
 
-                    ' Look up new ComboBox index based on row number in DataTable
-                    ' If update failed, then revert selected back to lastSelected
-                    Dim updatedItemRowNumber As String = getDataTableRowEquals(CustomerDbController.DbDataTable, "CustomerId", Convert.ToInt32(CustomerId_Textbox.Text))
-                    If updatedItemRowNumber <> -1 Then
-                        ' When this occurs, the Changed sub will initialize the data controls with the data respective to the PROPER CustomerId. This just points it to a CLF to work from
-                        CustomerComboBox.SelectedIndex = updatedItemRowNumber
-                    Else
-                        CustomerComboBox.SelectedIndex = lastSelected
-                    End If
-
+                    ' Then, as CustomerId doesn't change, set the selectedValue of the combobox equal to the valid CustomerId value
+                    ' As long as this CustomerId is valid (which it should always be here), the item/index will change accordingly
+                    CustomerComboBox.SelectedValue = Convert.ToInt32(CustomerId_Textbox.Text)
                     ' dataViewingControl values reinitialized, as well as dataControls hide/show in combobox text/selectedindex change event
 
                     ' 5.) MOVE UI OUT OF EDITING MODE
@@ -665,14 +657,18 @@
 
                     ' First, lookup most recent CustomerId added to the table
                     CRUD.ExecQuery("SELECT CustomerId FROM Customer WHERE CustomerId=(SELECT max(CustomerId) FROM Customer)")
-                    Dim newCustomerId As Integer = CRUD.DbDataTable.Rows(0)("CustomerId")
+                    Dim newCustomerId As Integer = -1
+                    If CRUD.DbDataTable.Rows.Count <> 0 And Not CRUD.HasException(True) Then
+                        newCustomerId = CRUD.DbDataTable.Rows(0)("CustomerId")
+                    Else
+                        Console.WriteLine("Select not successful?")
+                    End If
 
-                    ' Look up new ComboBox index based on row number in DataTable
-                    ' If insertion failed, then revert selected back to lastSelected
-                    Dim newItemRowNumber As String = getDataTableRowEquals(CustomerDbController.DbDataTable, "CustomerId", newCustomerId)
-                    If newItemRowNumber <> -1 Then
+
+                    If newCustomerId <> -1 Then
                         ' When this occurs, the Changed sub will initialize the data controls with the data respective to the PROPER CustomerId. This just points it to a CLF to work from
-                        CustomerComboBox.SelectedIndex = newItemRowNumber
+                        'CustomerComboBox.SelectedIndex = newItemRowNumber
+                        CustomerComboBox.SelectedValue = newCustomerId
                     Else
                         CustomerComboBox.SelectedIndex = lastSelected
                     End If
