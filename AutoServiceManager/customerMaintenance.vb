@@ -777,7 +777,7 @@
     End Sub
 
 
-    Private Sub HomePhone_Value_TextChanged(sender As Object, e As EventArgs) Handles HomePhone_Value.TextChanged
+    Private Sub HomePhone_Value_TextChanged(sender As Object, e As EventArgs) Handles HomePhone_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
 
