@@ -456,7 +456,9 @@
         mode = "adding"
 
         ' Initialize values for dataEditingControls
+        valuesInitialized = False
         clearControls(getAllControlsWithTag("dataEditingControl", Me))
+        valuesInitialized = True
         ' Initialize ZipCode ComboBox (must be done separately from InitializeAllDataEditingControls, as we don't want all that to occur here)
         InitializeZipCodeComboBox()
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
@@ -531,7 +533,9 @@
         mode = "editing"
 
         ' Initialize values for dataEditingControls
+        valuesInitialized = False
         InitializeAllDataEditingControls()
+        valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialCustomerValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
