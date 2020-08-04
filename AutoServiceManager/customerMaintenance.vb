@@ -76,9 +76,9 @@
 
         'CustomerComboBox.FormattingEnabled = True
         CustomerComboBox.BeginUpdate()
-        CustomerComboBox.DataSource = CustomerDbController.DbDataTable
         CustomerComboBox.DisplayMember = "CLF"
         CustomerComboBox.ValueMember = "CustomerId"
+        CustomerComboBox.DataSource = CustomerDbController.DbDataTable
         CustomerComboBox.EndUpdate()
 
         valuesInitialized = True
@@ -656,9 +656,9 @@
                     nav.EnableAll()
                     CustomerComboBox.Enabled = True
 
-                    End If
+                End If
 
-                    Case DialogResult.No
+            Case DialogResult.No
                 ' Continue making changes or cancel editing
         End Select
 
