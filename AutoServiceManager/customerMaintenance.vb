@@ -36,11 +36,12 @@
     ' Sub that will contain calls to all of the instances of the database controller class that loads data from the database into DataTables
     Private Function loadDataTablesFromDatabase() As Boolean
 
-        CustomerDbController.ExecQuery("SELECT c.LastName + ', ' + c.FirstName as CLF, " &
+        CustomerDbController.ExecQuery("SELECT c.LastName + ', ' + IIF(ISNULL(c.FirstName), '', c.FirstName) as CLF, " &
             "c.CustomerId, c.FirstName, c.LastName, c.Address, c.City, c.State, c.ZipCode, c.HomePhone, c.WorkPhone, c.CellPhone1, c.CellPhone2, c.TaxExempt, c.EmailAddress " &
             "FROM Customer c " &
-            "WHERE Trim(c.LastName) IS NOT NULL " &
+            "WHERE Trim(LastName) <> NULL " &
             "ORDER BY c.LastName ASC")
+
         If CustomerDbController.HasException() Then Return False
 
         ZipCodesDbController.ExecQuery("Select zc.Zipcode, zc.city as City, zc.State from ZipCodes zc")
@@ -395,7 +396,8 @@
         CustomerRow = -1    ' guilty until proven innocent
 
         ' Then, update Customer row such that it reflects the PROPER entry (according to the selectedValue (CustomerId))
-        Dim rows() As DataRow = CustomerDbController.DbDataTable.Select("CLF LIKE '" & CustomerComboBox.Text & "'")
+        Dim escapedText As String = escapeLikeValues(CustomerComboBox.Text)
+        Dim rows() As DataRow = CustomerDbController.DbDataTable.Select("CLF LIKE '" & escapedText & "'")
         If rows.Count <> 0 Then
             ' We want to see if the rows that match with the CLF 
             For Each row In rows
