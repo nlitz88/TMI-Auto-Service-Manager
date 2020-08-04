@@ -709,7 +709,7 @@
 
     End Sub
 
-    Private Sub HomePhone_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles HomePhone_Textbox.MaskInputRejected
+    Private Sub HomePhone_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles HomePhone_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
 
@@ -723,7 +723,7 @@
 
     End Sub
 
-    Private Sub CellPhone1_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles CellPhone1_Textbox.MaskInputRejected
+    Private Sub CellPhone1_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles CellPhone1_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
 
@@ -737,7 +737,7 @@
 
     End Sub
 
-    Private Sub WorkPhone_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles WorkPhone_Textbox.MaskInputRejected
+    Private Sub WorkPhone_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles WorkPhone_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
 
@@ -751,7 +751,7 @@
 
     End Sub
 
-    Private Sub CellPhone2_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles CellPhone2_Textbox.MaskInputRejected
+    Private Sub CellPhone2_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles CellPhone2_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
 
