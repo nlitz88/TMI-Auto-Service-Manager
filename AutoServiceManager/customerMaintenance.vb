@@ -326,6 +326,30 @@
 
     Private Sub customerMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        '' TEST DATABASE CONNECTION FIRST
+        'If Not checkDbConn() Then
+        '    MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    Exit Sub
+        'End If
+
+        '' LOAD DATATABLES FROM DATABASE INITIALLY
+        'If Not loadDataTablesFromDatabase() Then
+        '    MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    Exit Sub
+        'End If
+
+        'InitializeCustomerComboBox()
+        'Console.WriteLine(CustomerComboBox.SelectedIndex)
+        'CustomerComboBox.SelectedIndex = -1
+
+    End Sub
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
         ' TEST DATABASE CONNECTION FIRST
         If Not checkDbConn() Then
             MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -337,6 +361,7 @@
             MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
+        Console.WriteLine("Done loading in from datatable")
 
         InitializeCustomerComboBox()
         Console.WriteLine(CustomerComboBox.SelectedIndex)
