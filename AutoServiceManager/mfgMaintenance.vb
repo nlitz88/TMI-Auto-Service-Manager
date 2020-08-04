@@ -260,7 +260,9 @@ Public Class mfgMaintenance
         mode = "adding"
 
         ' Initialize values for dataEditingControls
+        valuesInitialized = False
         clearControls(getAllControlsWithTag("dataEditingControl", Me))
+        valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialAutoManufacturersValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
@@ -330,7 +332,9 @@ Public Class mfgMaintenance
         mode = "editing"
 
         ' Initialize values for dataEditingControls
+        valuesInitialized = False
         InitializeAutoManufacturersDataEditingControls()
+        valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialAutoManufacturersValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 

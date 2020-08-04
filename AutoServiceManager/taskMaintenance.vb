@@ -262,7 +262,9 @@ Public Class taskMaintenance
         mode = "adding"
 
         ' Initialize values for dataEditingControls
+        valuesInitialized = False
         clearControls(getAllControlsWithTag("dataEditingControl", Me))
+        valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialTTValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
@@ -333,7 +335,9 @@ Public Class taskMaintenance
         mode = "editing"
 
         ' Initialize values for dataEditingControls
+        valuesInitialized = False
         InitializeAllDataEditingControls()
+        valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialTTValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 

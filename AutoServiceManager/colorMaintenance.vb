@@ -260,7 +260,9 @@ Public Class colorMaintenance
         mode = "adding"
 
         ' Initialize values for dataEditingControls
+        valuesInitialized = False
         clearControls(getAllControlsWithTag("dataEditingControl", Me))
+        valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialACValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
@@ -331,7 +333,9 @@ Public Class colorMaintenance
         mode = "editing"
 
         ' Initialize values for dataEditingControls
+        valuesInitialized = False
         InitializeACDataEditingControls()
+        valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialACValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 

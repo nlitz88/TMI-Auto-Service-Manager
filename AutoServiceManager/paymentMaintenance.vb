@@ -259,7 +259,9 @@ Public Class paymentMaintenance
         mode = "adding"
 
         ' Initialize values for dataEditingControls
+        valuesInitialized = False
         clearControls(getAllControlsWithTag("dataEditingControl", Me))
+        valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialPTValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
@@ -330,7 +332,9 @@ Public Class paymentMaintenance
         mode = "editing"
 
         ' Initialize values for dataEditingControls
+        valuesInitialized = False
         InitializePTDataEditingControls()
+        valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialPTValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 

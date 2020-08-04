@@ -258,7 +258,9 @@ Public Class insuranceMaintenance
         mode = "adding"
 
         ' Initialize values for dataEditingControls
+        valuesInitialized = False
         clearControls(getAllControlsWithTag("dataEditingControl", Me))
+        valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialICValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
@@ -329,7 +331,9 @@ Public Class insuranceMaintenance
         mode = "editing"
 
         ' Initialize values for dataEditingControls
+        valuesInitialized = False
         InitializeICDataEditingControls()
+        valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialICValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
