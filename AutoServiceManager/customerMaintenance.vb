@@ -39,7 +39,7 @@
         CustomerDbController.ExecQuery("SELECT c.LastName + ', ' + c.FirstName as CLF, " &
             "c.CustomerId, c.FirstName, c.LastName, c.Address, c.City, c.State, c.ZipCode, c.HomePhone, c.WorkPhone, c.CellPhone1, c.CellPhone2, c.TaxExempt, c.EmailAddress " &
             "FROM Customer c " &
-            "WHERE c.LastName IS NOT NULL AND c.FirstName IS NOT NULL " &
+            "WHERE Trim(c.LastName) IS NOT NULL " &
             "ORDER BY c.LastName ASC")
         If CustomerDbController.HasException() Then Return False
 
