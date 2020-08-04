@@ -342,8 +342,6 @@
         Console.WriteLine(CustomerComboBox.SelectedIndex)
         CustomerComboBox.SelectedIndex = -1
 
-        ' figure out a way to initialize this to -1 or something or check if it's not initialized. or used values initialized
-
     End Sub
 
 
@@ -357,12 +355,19 @@
         Console.WriteLine(CustomerComboBox.SelectedIndex)
 
         ' Ensure that CustomerCombobox is not being initialized and not on invalid selectedIndex
-        If Not valuesInitialized Or CustomerComboBox.SelectedIndex = -1 Then Exit Sub
+        If Not valuesInitialized Or CustomerComboBox.SelectedIndex = -1 Then
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            ' Disable editing button
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+            Exit Sub
+        End If
 
-        ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid
-        'CustomerRow = getDataTableRow(CustomerDbController.DbDataTable, "CLF", CustomerComboBox.Text)
 
-        CustomerRow = -1 ' guilty until proven innocent
+        CustomerRow = -1    ' guilty until proven innocent
 
         ' Then, update Customer row such that it reflects the PROPER entry (according to the selectedValue (CustomerId))
         Dim rows() As DataRow = CustomerDbController.DbDataTable.Select("CLF LIKE '" & CustomerComboBox.Text & "'")
@@ -426,11 +431,11 @@
         nav.DisableAll()
         CustomerComboBox.Enabled = False
 
-        ' Set ComboBox to "Select One"
+        ' Store last selectedIndex and then set ComboBox selectedIndex to -1
         If getDataTableRow(CustomerDbController.DbDataTable, "CLF", CustomerComboBox.Text) <> -1 Then
-            lastSelected = CustomerComboBox.Text
+            lastSelected = CustomerComboBox.SelectedIndex
         Else
-            lastSelected = "Select One"
+            lastSelected = -1
         End If
 
         CustomerComboBox.SelectedIndex = -1
@@ -468,7 +473,7 @@
 
                 ' 3.) REINITIALIZE CONTROLS (Based on the selected index)
                 InitializeCustomerComboBox()
-                CustomerComboBox.SelectedIndex = 0
+                CustomerComboBox.SelectedIndex = -1
 
                 ' 4.) RESTORE USER CONTROLS TO NON-EDITING/SELECTING STATE
                 CustomerComboBox.Enabled = True
@@ -496,7 +501,7 @@
         InitialCustomerValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
         ' Store the last selected item in the ComboBox (in case update fails and it must revert)
-        lastSelected = CustomerComboBox.Text
+        lastSelected = CustomerComboBox.SelectedIndex
 
         ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
         editButton.Enabled = False
@@ -541,10 +546,10 @@
         ElseIf mode = "adding" Then
 
             ' 1.) SET PartComboBox BACKK TO LAST SELECTED ITEM/INDEX
-            CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(lastSelected)
+            CustomerComboBox.SelectedIndex = lastSelected
 
             ' 2.) IF LAST SELECTED WAS "SELECT ONE", Then simulate functionality from combobox text/selectedIndex changed
-            If lastSelected = "Select One" Then
+            If lastSelected = -1 Then
                 CustomerComboBox_SelectedIndexChanged(CustomerComboBox, New EventArgs())
             End If
 
@@ -587,13 +592,14 @@
                     ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
                     InitializeCustomerComboBox()
 
-                    ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
-                    ' If insertion failed, then revert selected back to lastSelected
-                    Dim updatedItem As String = getRowValueWithKeyEquals(CustomerDbController.DbDataTable, "CLF", "CustomerId", Convert.ToInt32(CustomerId_Textbox.Text))
-                    If updatedItem <> Nothing Then
-                        CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(updatedItem)
+                    ' Look up new ComboBox index based on row number in DataTable
+                    ' If update failed, then revert selected back to lastSelected
+                    Dim updatedItemRowNumber As String = getDataTableRowEquals(CustomerDbController.DbDataTable, "CustomerId", Convert.ToInt32(CustomerId_Textbox.Text))
+                    If updatedItemRowNumber <> -1 Then
+                        ' When this occurs, the Changed sub will initialize the data controls with the data respective to the PROPER CustomerId. This just points it to a CLF to work from
+                        CustomerComboBox.SelectedIndex = updatedItemRowNumber
                     Else
-                        CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(lastSelected)
+                        CustomerComboBox.SelectedIndex = lastSelected
                     End If
 
                     ' dataViewingControl values reinitialized, as well as dataControls hide/show in combobox text/selectedindex change event
@@ -627,17 +633,19 @@
 
                     ' Changing index of main combobox will also initialize respective dataViewing control values
 
+
                     ' First, lookup most recent CustomerId added to the table
                     CRUD.ExecQuery("SELECT CustomerId FROM Customer WHERE CustomerId=(SELECT max(CustomerId) FROM Customer)")
                     Dim newCustomerId As Integer = CRUD.DbDataTable.Rows(0)("CustomerId")
 
-                    ' Lookup and set new selectedIndex based on new value. If insertion failed, then go back to last
-                    ' Must use '=' comparison here, as our key is an integer, not a string
-                    Dim newItem As Object = getRowValueWithKeyEquals(CustomerDbController.DbDataTable, "CLF", "CustomerId", newCustomerId)
-                    If newItem <> Nothing Then
-                        CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(newItem)    ' Might have to figure out a more accurate way of getting ID, as this MIGHT not work. Fix SQL query
+                    ' Look up new ComboBox index based on row number in DataTable
+                    ' If insertion failed, then revert selected back to lastSelected
+                    Dim newItemRowNumber As String = getDataTableRowEquals(CustomerDbController.DbDataTable, "CustomerId", newCustomerId)
+                    If newItemRowNumber <> -1 Then
+                        ' When this occurs, the Changed sub will initialize the data controls with the data respective to the PROPER CustomerId. This just points it to a CLF to work from
+                        CustomerComboBox.SelectedIndex = newItemRowNumber
                     Else
-                        CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(lastSelected)
+                        CustomerComboBox.SelectedIndex = lastSelected
                     End If
 
 
@@ -648,9 +656,9 @@
                     nav.EnableAll()
                     CustomerComboBox.Enabled = True
 
-                End If
+                    End If
 
-            Case DialogResult.No
+                    Case DialogResult.No
                 ' Continue making changes or cancel editing
         End Select
 
