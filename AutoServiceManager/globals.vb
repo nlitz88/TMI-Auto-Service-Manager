@@ -606,12 +606,15 @@
 
 
     ' Function that checks database connection
-    Public Function checkDbConn() As Boolean
+    Public Function checkDbConn(Optional Report As Boolean = True) As Boolean
 
         Dim testConn As New DbControl()
 
         testConn.ExecQuery("SELECT 1")
-        If testConn.HasException() Then Return False
+        If testConn.HasException() Then
+            If Report Then MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
 
         Return True
 

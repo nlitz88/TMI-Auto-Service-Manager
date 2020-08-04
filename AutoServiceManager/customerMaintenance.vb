@@ -352,17 +352,13 @@
 
         ' Add any initialization after the InitializeComponent() call.
         ' TEST DATABASE CONNECTION FIRST
-        If Not checkDbConn() Then
-            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
+        If Not checkDbConn() Then Exit Sub
 
         ' LOAD DATATABLES FROM DATABASE INITIALLY
         If Not loadDataTablesFromDatabase() Then
             MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
-        Console.WriteLine("Done loading in from datatable")
 
         InitializeCustomerComboBox()
         CustomerComboBox.SelectedIndex = -1
@@ -445,6 +441,8 @@
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
 
+        If Not checkDbConn() Then Exit Sub
+
         mode = "adding"
 
         ' Initialize values for dataEditingControls
@@ -471,10 +469,6 @@
         CustomerComboBox.SelectedIndex = -1
         CustomerComboBox.Text = String.Empty
 
-
-        ' Don't set new CustomerId when adding new user, as there is no gaurantee as to what that newly autoIncrement value might be.
-        ' Instead, just look it up after the insert has occurred
-
         ' Hide/Show the dataViewingControls and dataEditingControls, respectively
         showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
         showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
@@ -484,6 +478,8 @@
 
 
     Private Sub deleteButton_Click(sender As Object, e As EventArgs) Handles deleteButton.Click
+
+        If Not checkDbConn() Then Exit Sub
 
         Dim decision As DialogResult = MessageBox.Show("Are you sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
@@ -524,6 +520,8 @@
 
     Private Sub editButton_Click(sender As Object, e As EventArgs) Handles editButton.Click
 
+        If Not checkDbConn() Then Exit Sub
+
         mode = "editing"
 
         ' Initialize values for dataEditingControls
@@ -546,6 +544,8 @@
 
 
     Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
+
+        If Not checkDbConn() Then Exit Sub
 
         ' Check for changes before cancelling. Don't need function here that calls all, as only working with one datatable's values
         If InitialCustomerValues.CtrlValuesChanged() Then
@@ -594,6 +594,8 @@
 
 
     Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+
+        If Not checkDbConn() Then Exit Sub
 
         Dim decision As DialogResult = MessageBox.Show("Save Changes?", "Confirm Changes", MessageBoxButtons.YesNo)
 
