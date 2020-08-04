@@ -245,6 +245,8 @@
             loadCarModelDataTable()
             ' Then initialize CarModelComboBox
             InitializeCarModelComboBox()
+            CarModelComboBox.Visible = True
+            ModelLabel.Visible = True
             CarModelComboBox.SelectedIndex = 0
 
             ' Enable user to Add new model under valid manufacturer
@@ -258,6 +260,11 @@
                 CarModelComboBox.Items.Clear()
                 CarModelComboBox.Text = String.Empty
             End If
+            CarModelComboBox.Visible = False
+            ModelLabel.Visible = False
+            CarModelComboBox.SelectedIndex = -1
+
+            ' Disable user from adding new model, as no valid manufacturer has been selected
             addButton.Enabled = False
 
         End If
@@ -269,7 +276,9 @@
     Private Sub CarModelComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CarModelComboBox.SelectedIndexChanged, CarModelComboBox.TextChanged
 
         ' Before anything, ensure that AutoMakeComboBox has a valid entry. Otherwise, we can't be entering values into CarModelComboBox
-        If AutoMakeRow = -1 Then Exit Sub
+        ' I think I can get rid of the If Automake = -1 in the next selectedIndexChanged, as if it's hidden it doesn't matter
+        'If AutoMakeRow = -1 Then Exit Sub
+
 
         ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid
         CarModelRow = getDataTableRow(CarModelDbController.DbDataTable, "AutoModel", CarModelComboBox.Text)
