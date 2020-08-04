@@ -72,13 +72,16 @@
     ' Sub that initializes Customer ComboBox
     Private Sub InitializeCustomerComboBox()
 
-        CustomerComboBox.Items.Clear()
+        valuesInitialized = False
+
+        'CustomerComboBox.FormattingEnabled = True
         CustomerComboBox.BeginUpdate()
-        CustomerComboBox.Items.Add("Select One")
-        For Each row In CustomerDbController.DbDataTable.Rows
-            If row("LastName") <> "" Then CustomerComboBox.Items.Add(row("CLF"))
-        Next
+        CustomerComboBox.DataSource = CustomerDbController.DbDataTable
+        CustomerComboBox.DisplayMember = "CLF"
+        CustomerComboBox.ValueMember = "CustomerId"
         CustomerComboBox.EndUpdate()
+
+        valuesInitialized = True
 
     End Sub
 
@@ -336,7 +339,10 @@
         End If
 
         InitializeCustomerComboBox()
-        CustomerComboBox.SelectedIndex = 0
+        Console.WriteLine(CustomerComboBox.SelectedIndex)
+        CustomerComboBox.SelectedIndex = -1
+
+        ' figure out a way to initialize this to -1 or something or check if it's not initialized. or used values initialized
 
     End Sub
 
@@ -346,10 +352,29 @@
     ' **************** CONTROL SUBS ****************
 
 
-    Private Sub CustomerComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CustomerComboBox.SelectedIndexChanged, CustomerComboBox.TextChanged
+    Private Sub CustomerComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CustomerComboBox.SelectedIndexChanged, CustomerComboBox.TextChanged, CustomerComboBox.SelectedValueChanged
+
+        Console.WriteLine(CustomerComboBox.SelectedIndex)
+
+        ' Ensure that CustomerCombobox is not being initialized and not on invalid selectedIndex
+        If Not valuesInitialized Or CustomerComboBox.SelectedIndex = -1 Then Exit Sub
 
         ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid
-        CustomerRow = getDataTableRow(CustomerDbController.DbDataTable, "CLF", CustomerComboBox.Text)
+        'CustomerRow = getDataTableRow(CustomerDbController.DbDataTable, "CLF", CustomerComboBox.Text)
+
+        CustomerRow = -1 ' guilty until proven innocent
+
+        ' Then, update Customer row such that it reflects the PROPER entry (according to the selectedValue (CustomerId))
+        Dim rows() As DataRow = CustomerDbController.DbDataTable.Select("CLF LIKE '" & CustomerComboBox.Text & "'")
+        If rows.Count <> 0 Then
+            ' We want to see if the rows that match with the CLF 
+            For Each row In rows
+                If row("CustomerId") = CustomerComboBox.SelectedValue Then
+                    CustomerRow = CustomerDbController.DbDataTable.Rows.IndexOf(row)
+                    Exit For
+                End If
+            Next
+        End If
 
         If CustomerRow <> -1 Then
 
@@ -408,7 +433,7 @@
             lastSelected = "Select One"
         End If
 
-        CustomerComboBox.SelectedIndex = 0
+        CustomerComboBox.SelectedIndex = -1
 
 
         ' Don't set new CustomerId when adding new user, as there is no gaurantee as to what that newly autoIncrement value might be.
