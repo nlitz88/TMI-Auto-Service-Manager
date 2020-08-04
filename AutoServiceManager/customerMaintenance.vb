@@ -89,7 +89,6 @@
 
     ' Sub that initializes the DataEditingControls corresponding with the values from the ZipCodes datatable
     Private Sub InitializeZipCodeDataEditingControls()
-        ' Because city and state (dependent on zip) are stored in customer table, we don't need to initialize any dataViewingControls based on Zip.
 
         Try
 
@@ -111,7 +110,6 @@
 
     ' Sub that initializes the DataEditingControls corresponding with the values from the ZipCodes datatable
     Private Sub InitializeZipCodeDataViewingControls()
-        ' Because city and state (dependent on zip) are stored in customer table, we don't need to initialize any dataViewingControls based on Zip.
 
         Try
 
@@ -175,20 +173,33 @@
     ' Sub that will call formatting functions to add respective formats to already INITIALIZED DATAVIEWINGCONTROLS (i.e. phone numbers, currency, etc.).
     Private Sub formatDataViewingControls()
 
-        ' For these phone numbers, first strip them of any invalidCharacters, then format their respective labels
-
         ' Formatting for labels that contain values from DataTable
+
+        ' For these phone numbers, first strip them of any invalidCharacters, then format their respective labels (if stripped not null)
+        Dim strippedTexted As String
         If Not String.IsNullOrEmpty(HomePhone_Value.Text) Then
-            HomePhone_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(removeInvalidChars(HomePhone_Value.Text, "1234567890")))
+            strippedTexted = removeInvalidChars(HomePhone_Value.Text, "1234567890")
+            If Not String.IsNullOrEmpty(strippedTexted) Then
+                HomePhone_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(removeInvalidChars(HomePhone_Value.Text, "1234567890")))
+            End If
         End If
         If Not String.IsNullOrEmpty(WorkPhone_Value.Text) Then
-            WorkPhone_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(removeInvalidChars(WorkPhone_Value.Text, "1234567890")))
+            strippedTexted = removeInvalidChars(WorkPhone_Value.Text, "1234567890")
+            If Not String.IsNullOrEmpty(strippedTexted) Then
+                WorkPhone_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(removeInvalidChars(WorkPhone_Value.Text, "1234567890")))
+            End If
         End If
         If Not String.IsNullOrEmpty(CellPhone1_Value.Text) Then
-            CellPhone1_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(removeInvalidChars(CellPhone1_Value.Text, "1234567890")))
+            strippedTexted = removeInvalidChars(CellPhone1_Value.Text, "1234567890")
+            If Not String.IsNullOrEmpty(strippedTexted) Then
+                CellPhone1_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(removeInvalidChars(CellPhone1_Value.Text, "1234567890")))
+            End If
         End If
         If Not String.IsNullOrEmpty(CellPhone2_Value.Text) Then
-            CellPhone2_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(removeInvalidChars(CellPhone2_Value.Text, "1234567890")))
+            strippedTexted = removeInvalidChars(CellPhone2_Value.Text, "1234567890")
+            If Not String.IsNullOrEmpty(strippedTexted) Then
+                CellPhone2_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(removeInvalidChars(CellPhone2_Value.Text, "1234567890")))
+            End If
         End If
 
     End Sub
@@ -373,10 +384,6 @@
 
     Private Sub CustomerComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CustomerComboBox.SelectedIndexChanged, CustomerComboBox.TextChanged, CustomerComboBox.SelectedValueChanged
 
-        If Not checkDbConn() Then Exit Sub
-
-        Console.WriteLine(CustomerComboBox.SelectedIndex)
-
         ' Ensure that CustomerCombobox is not being initialized and not on invalid selectedIndex
         If Not valuesInitialized Or CustomerComboBox.SelectedIndex = -1 Then
             ' Have all labels and corresponding values hidden
@@ -388,7 +395,6 @@
             deleteButton.Enabled = False
             Exit Sub
         End If
-
 
         CustomerRow = -1    ' guilty until proven innocent
 
@@ -441,8 +447,6 @@
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
 
-        If Not checkDbConn() Then Exit Sub
-
         mode = "adding"
 
         ' Initialize values for dataEditingControls
@@ -478,8 +482,6 @@
 
 
     Private Sub deleteButton_Click(sender As Object, e As EventArgs) Handles deleteButton.Click
-
-        If Not checkDbConn() Then Exit Sub
 
         Dim decision As DialogResult = MessageBox.Show("Are you sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
@@ -520,8 +522,6 @@
 
     Private Sub editButton_Click(sender As Object, e As EventArgs) Handles editButton.Click
 
-        If Not checkDbConn() Then Exit Sub
-
         mode = "editing"
 
         ' Initialize values for dataEditingControls
@@ -544,8 +544,6 @@
 
 
     Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
-
-        If Not checkDbConn() Then Exit Sub
 
         ' Check for changes before cancelling. Don't need function here that calls all, as only working with one datatable's values
         If InitialCustomerValues.CtrlValuesChanged() Then
@@ -594,8 +592,6 @@
 
 
     Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
-
-        If Not checkDbConn() Then Exit Sub
 
         Dim decision As DialogResult = MessageBox.Show("Save Changes?", "Confirm Changes", MessageBoxButtons.YesNo)
 
