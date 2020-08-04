@@ -661,18 +661,13 @@
 
                     ' First, lookup most recent CustomerId added to the table
                     CRUD.ExecQuery("SELECT CustomerId FROM Customer WHERE CustomerId=(SELECT max(CustomerId) FROM Customer)")
-                    Dim newCustomerId As Integer = -1
+                    Dim newCustomerId As Integer
+
                     If CRUD.DbDataTable.Rows.Count <> 0 And Not CRUD.HasException(True) Then
+
                         newCustomerId = CRUD.DbDataTable.Rows(0)("CustomerId")
-                    Else
-                        Console.WriteLine("Select not successful?")
-                    End If
-
-
-                    If newCustomerId <> -1 Then
-                        ' When this occurs, the Changed sub will initialize the data controls with the data respective to the PROPER CustomerId. This just points it to a CLF to work from
-                        'CustomerComboBox.SelectedIndex = newItemRowNumber
                         CustomerComboBox.SelectedValue = newCustomerId
+                        ' When this occurs, the Changed sub will initialize the data controls with the data respective to the PROPER CustomerId. This just points it to a CLF to work from
                     Else
                         CustomerComboBox.SelectedIndex = lastSelected
                     End If
