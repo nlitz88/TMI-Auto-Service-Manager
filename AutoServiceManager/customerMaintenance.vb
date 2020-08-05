@@ -19,7 +19,7 @@
     ' Row index variables used for DataTable lookups
     Private CustomerRow As Integer
     Private zcRow As Integer
-    Private lastSelected As String
+    Private lastSelected As Integer
 
     ' Keeps track of whether or not user in "editing" or "adding" mode
     Private mode As String
@@ -382,7 +382,26 @@
     ' **************** CONTROL SUBS ****************
 
 
+    ' Used to prevent combobox from changing index on leave/lose focus. Still needs restricted, however, when Enter used
+    Dim CustomerComboBoxleave As Boolean = False
+    Dim selectedIndex As Integer = -1
+
+    Private Sub CustomerComboBox_Leave(sender As Object, e As EventArgs) Handles CustomerComboBox.Leave
+        CustomerComboBoxleave = True
+        selectedIndex = CustomerComboBox.SelectedIndex
+    End Sub
+
+    Private Sub CustomerComboBox_Enter(sender As Object, e As EventArgs) Handles CustomerComboBox.Enter
+        CustomerComboBoxleave = False
+    End Sub
+
+
     Private Sub CustomerComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CustomerComboBox.SelectedIndexChanged, CustomerComboBox.TextChanged, CustomerComboBox.SelectedValueChanged
+
+        If CustomerComboBoxleave Then
+            CustomerComboBox.SelectedIndex = selectedIndex
+            CustomerComboBoxleave = False
+        End If
 
         ' Ensure that CustomerCombobox is not being initialized and not on invalid selectedIndex
         If Not valuesInitialized Or CustomerComboBox.SelectedIndex = -1 Then
@@ -397,21 +416,6 @@
         End If
 
         CustomerRow = -1    ' guilty until proven innocent
-
-        ' MAKE THIS A FUNCTION ************************************************ (essentially just a lookup with two where conditions?
-
-        ' Then, update Customer row such that it reflects the PROPER entry (according to the selectedValue (CustomerId))
-        'Dim escapedText As String = escapeLikeValues(CustomerComboBox.Text)
-        'Dim rows() As DataRow = CustomerDbController.DbDataTable.Select("CLF LIKE '" & escapedText & "'")
-        'If rows.Count <> 0 Then
-        '    ' We want to see if the rows that match with the CLF 
-        '    For Each row In rows
-        '        If row("CustomerId") = CustomerComboBox.SelectedValue Then
-        '            CustomerRow = CustomerDbController.DbDataTable.Rows.IndexOf(row)
-        '            Exit For
-        '        End If
-        '    Next
-        'End If
 
         Dim escapedText As String = escapeLikeValues(CustomerComboBox.Text)
         Dim rows() As DataRow = CustomerDbController.DbDataTable.Select("CLF LIKE '" & escapedText & "' AND CustomerId = '" & CustomerComboBox.SelectedValue & "'")
