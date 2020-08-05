@@ -227,6 +227,7 @@ Partial Class vehicleMaintenance
         Me.Alarm_CheckBox.TabIndex = 206
         Me.Alarm_CheckBox.Tag = "dataEditingControl"
         Me.Alarm_CheckBox.UseVisualStyleBackColor = True
+        Me.Alarm_CheckBox.Visible = False
         '
         'AlarmLabel
         '
@@ -665,6 +666,7 @@ Partial Class vehicleMaintenance
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(200, 22)
         Me.DateTimePicker1.TabIndex = 241
+        Me.DateTimePicker1.Visible = False
         '
         'ABS_Value
         '
@@ -686,6 +688,7 @@ Partial Class vehicleMaintenance
         Me.ABS_CheckBox.TabIndex = 244
         Me.ABS_CheckBox.Tag = "dataEditingControl"
         Me.ABS_CheckBox.UseVisualStyleBackColor = True
+        Me.ABS_CheckBox.Visible = False
         '
         'ABSLabel
         '
@@ -718,6 +721,7 @@ Partial Class vehicleMaintenance
         Me.AirBags_CheckBox.TabIndex = 247
         Me.AirBags_CheckBox.Tag = "dataEditingControl"
         Me.AirBags_CheckBox.UseVisualStyleBackColor = True
+        Me.AirBags_CheckBox.Visible = False
         '
         'AirbagsLabel
         '
@@ -750,6 +754,7 @@ Partial Class vehicleMaintenance
         Me.AC_CheckBox.TabIndex = 250
         Me.AC_CheckBox.Tag = "dataEditingControl"
         Me.AC_CheckBox.UseVisualStyleBackColor = True
+        Me.AC_CheckBox.Visible = False
         '
         'ACLabel
         '
@@ -912,6 +917,7 @@ Partial Class vehicleMaintenance
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "vehicleMaintenance"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Vehicles"
         Me.ResumeLayout(False)
         Me.PerformLayout()
