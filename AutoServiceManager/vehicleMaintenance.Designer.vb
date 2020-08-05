@@ -673,7 +673,7 @@ Partial Class vehicleMaintenance
         Me.ABS_Value.AutoSize = True
         Me.ABS_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ABS_Value.ForeColor = System.Drawing.Color.Black
-        Me.ABS_Value.Location = New System.Drawing.Point(360, 581)
+        Me.ABS_Value.Location = New System.Drawing.Point(389, 581)
         Me.ABS_Value.Name = "ABS_Value"
         Me.ABS_Value.Size = New System.Drawing.Size(0, 20)
         Me.ABS_Value.TabIndex = 242
@@ -682,7 +682,7 @@ Partial Class vehicleMaintenance
         'ABS_CheckBox
         '
         Me.ABS_CheckBox.AutoSize = True
-        Me.ABS_CheckBox.Location = New System.Drawing.Point(360, 585)
+        Me.ABS_CheckBox.Location = New System.Drawing.Point(389, 585)
         Me.ABS_CheckBox.Name = "ABS_CheckBox"
         Me.ABS_CheckBox.Size = New System.Drawing.Size(18, 17)
         Me.ABS_CheckBox.TabIndex = 244
@@ -694,7 +694,7 @@ Partial Class vehicleMaintenance
         '
         Me.ABSLabel.AutoSize = True
         Me.ABSLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.ABSLabel.Location = New System.Drawing.Point(263, 584)
+        Me.ABSLabel.Location = New System.Drawing.Point(297, 584)
         Me.ABSLabel.Name = "ABSLabel"
         Me.ABSLabel.Size = New System.Drawing.Size(91, 17)
         Me.ABSLabel.TabIndex = 243
@@ -706,7 +706,7 @@ Partial Class vehicleMaintenance
         Me.AirBags_Value.AutoSize = True
         Me.AirBags_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AirBags_Value.ForeColor = System.Drawing.Color.Black
-        Me.AirBags_Value.Location = New System.Drawing.Point(488, 581)
+        Me.AirBags_Value.Location = New System.Drawing.Point(556, 581)
         Me.AirBags_Value.Name = "AirBags_Value"
         Me.AirBags_Value.Size = New System.Drawing.Size(0, 20)
         Me.AirBags_Value.TabIndex = 245
@@ -715,7 +715,7 @@ Partial Class vehicleMaintenance
         'AirBags_CheckBox
         '
         Me.AirBags_CheckBox.AutoSize = True
-        Me.AirBags_CheckBox.Location = New System.Drawing.Point(488, 585)
+        Me.AirBags_CheckBox.Location = New System.Drawing.Point(556, 585)
         Me.AirBags_CheckBox.Name = "AirBags_CheckBox"
         Me.AirBags_CheckBox.Size = New System.Drawing.Size(18, 17)
         Me.AirBags_CheckBox.TabIndex = 247
@@ -727,7 +727,7 @@ Partial Class vehicleMaintenance
         '
         Me.AirbagsLabel.AutoSize = True
         Me.AirbagsLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.AirbagsLabel.Location = New System.Drawing.Point(417, 584)
+        Me.AirbagsLabel.Location = New System.Drawing.Point(485, 584)
         Me.AirbagsLabel.Name = "AirbagsLabel"
         Me.AirbagsLabel.Size = New System.Drawing.Size(65, 17)
         Me.AirbagsLabel.TabIndex = 246
@@ -739,7 +739,7 @@ Partial Class vehicleMaintenance
         Me.AC_Value.AutoSize = True
         Me.AC_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AC_Value.ForeColor = System.Drawing.Color.Black
-        Me.AC_Value.Location = New System.Drawing.Point(589, 581)
+        Me.AC_Value.Location = New System.Drawing.Point(691, 582)
         Me.AC_Value.Name = "AC_Value"
         Me.AC_Value.Size = New System.Drawing.Size(0, 20)
         Me.AC_Value.TabIndex = 248
@@ -748,7 +748,7 @@ Partial Class vehicleMaintenance
         'AC_CheckBox
         '
         Me.AC_CheckBox.AutoSize = True
-        Me.AC_CheckBox.Location = New System.Drawing.Point(589, 585)
+        Me.AC_CheckBox.Location = New System.Drawing.Point(691, 586)
         Me.AC_CheckBox.Name = "AC_CheckBox"
         Me.AC_CheckBox.Size = New System.Drawing.Size(18, 17)
         Me.AC_CheckBox.TabIndex = 250
@@ -760,7 +760,7 @@ Partial Class vehicleMaintenance
         '
         Me.ACLabel.AutoSize = True
         Me.ACLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.ACLabel.Location = New System.Drawing.Point(545, 584)
+        Me.ACLabel.Location = New System.Drawing.Point(647, 585)
         Me.ACLabel.Name = "ACLabel"
         Me.ACLabel.Size = New System.Drawing.Size(38, 17)
         Me.ACLabel.TabIndex = 249

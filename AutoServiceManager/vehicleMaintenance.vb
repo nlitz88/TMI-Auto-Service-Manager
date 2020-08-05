@@ -183,13 +183,14 @@
     Private Function loadVehicleDataTable() As Boolean
 
         VehicleDbController.AddParams("@customerId", CustomerId)
-        VehicleDbController.ExecQuery("SELECT v.makeYear + ' ' + v.Make + ' ' + v.Model as YMM, " &
+        VehicleDbController.ExecQuery("SELECT STR(IIF(ISNULL(v.makeYear), 0, v.makeYear)) + ' ' + v.Make + ' ' + v.Model as YMM, " &
                                       "v.CustomerId, v.VehicleId, IIF(ISNULL(v.makeYear), 0, v.makeYear), v.Make, v.Model, v.Color, v.LicenseState, v.LicensePlate, v.VIN, " &
                                       "v.InspectionStickerNbr, v.InspectionMonth, v.InsuranceCompany, v.PolicyNumber, v.ExpirationDate, v.Notes, " &
                                       "v.Engine, v.ABS, v.AC, v.AirBags, v.Alarm " &
                                       "FROM Vehicle v " &
                                       "WHERE v.CustomerId=@customerId " &
                                       "ORDER BY v.makeYear ASC")
+
         If VehicleDbController.HasException() Then Return False
 
         Return True
@@ -300,7 +301,7 @@
 
             ' If not already, clear and empty the VehicleComboBox
             If VehicleComboBox.Text <> String.Empty And VehicleComboBox.Items.Count <> 0 Then
-                VehicleComboBox.Items.Clear()
+                'VehicleComboBox.Items.Clear()
                 VehicleComboBox.Text = String.Empty
             End If
             VehicleComboBox.Visible = False
@@ -324,10 +325,10 @@
 
             ' CustomerRow doesn't mean anything to vehicleComboBox. VehicleComboBox query only concerned about the selectedValue (Customer Id)
             'CustomerId = CustomerComboBox.SelectedValue
-            CustomerId = 1126
+            CustomerId = CustomerComboBox.SelectedValue
             loadVehicleDataTable()
             InitializeVehicleComboBox()
-            'initializeControlsFromRow(VehicleDbController.DbDataTable, 0, "dataViewingControl", "_", Me)
+            initializeControlsFromRow(VehicleDbController.DbDataTable, 0, "dataViewingControl", "_", Me)
 
         Else
 
