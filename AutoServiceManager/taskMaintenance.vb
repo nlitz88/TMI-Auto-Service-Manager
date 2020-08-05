@@ -276,7 +276,12 @@ Public Class taskMaintenance
         TTComboBox.Enabled = False
 
 
-        lastSelected = TTComboBox.Text
+        If getDataTableRow(TTDbController.DbDataTable, "TTD", TTComboBox.Text) <> -1 Then
+            lastSelected = TTComboBox.Text
+        Else
+            lastSelected = "Select One"
+        End If
+
         TTComboBox.SelectedIndex = 0
 
         ' Hide/Show the dataViewingControls and dataEditingControls, respectively
