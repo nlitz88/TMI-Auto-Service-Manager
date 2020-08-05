@@ -177,6 +177,12 @@
     <Compile Include="taskMaintenance.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="vehicleMaintenance.Designer.vb">
+      <DependentUpon>vehicleMaintenance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="vehicleMaintenance.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="carModelMaintenance.resx">
@@ -226,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="taskMaintenance.resx">
       <DependentUpon>taskMaintenance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="vehicleMaintenance.resx">
+      <DependentUpon>vehicleMaintenance.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
