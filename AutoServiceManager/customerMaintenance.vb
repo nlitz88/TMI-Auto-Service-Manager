@@ -306,25 +306,39 @@
                 ' Only if the current values (that make up the CLFA) are not equal to their initial values
                 If LastName_Textbox.Text.ToLower() <> initialLName Or FirstName_Textbox.Text.ToLower() <> initialFName Or Address_Textbox.Text.ToLower() <> initialAddress Then
 
-                    ' Use query to check if row exists with all of these (DATATABLE? OR DATABASE QUERY?)
+                    ' Use query to check if row exists with all of these
                     Dim duplicateRows() As DataRow = CustomerDbController.DbDataTable.Select("LastName LIKE '" & LastName_Textbox.Text &
                                                                                             "' AND FirstName LIKE '" & FirstName_Textbox.Text &
                                                                                             "' AND Address LIKE '" & Address_Textbox.Text & "'")
 
                     If duplicateRows.Count <> 0 Then
-                        errorMessage += "ERROR: Duplicate !!!!" & vbNewLine
+                        errorMessage += "ERROR: " & LastName_Textbox.Text & ", " & FirstName_Textbox.Text & " @ " & Address_Textbox.Text & " already exists;" & vbNewLine &
+                            "Please modify Last Name, First Name, or Address" & vbNewLine
+                        LastName_Textbox.ForeColor = Color.Red
+                        FirstName_Textbox.ForeColor = Color.Red
+                        Address_Textbox.ForeColor = Color.Red
                     End If
 
 
                 ElseIf mode = "adding" Then
 
-                    LastName_Textbox.ForeColor = Color.Red
-                    FirstName_Textbox.ForeColor = Color.Red
-                    Address_Textbox.ForeColor = Color.Red
+                    ' Use query to check if row exists with all of these
+                    Dim duplicateRows() As DataRow = CustomerDbController.DbDataTable.Select("LastName LIKE '" & LastName_Textbox.Text &
+                                                                                            "' AND FirstName LIKE '" & FirstName_Textbox.Text &
+                                                                                            "' AND Address LIKE '" & Address_Textbox.Text & "'")
 
+                    If duplicateRows.Count <> 0 Then
+                        errorMessage += "ERROR: " & LastName_Textbox.Text & ", " & FirstName_Textbox.Text & " @ " & Address_Textbox.Text & " already exists;" & vbNewLine &
+                            "Please modify Last Name, First Name, or Address" & vbNewLine
+                        LastName_Textbox.ForeColor = Color.Red
+                        FirstName_Textbox.ForeColor = Color.Red
+                        Address_Textbox.ForeColor = Color.Red
+                    End If
 
                 End If
+
             End If
+
         End If
 
 
@@ -735,6 +749,8 @@
         If Not valuesInitialized Then Exit Sub
 
         LastName_Textbox.ForeColor = DefaultForeColor
+        FirstName_Textbox.ForeColor = DefaultForeColor
+        Address_Textbox.ForeColor = DefaultForeColor
 
         If InitialCustomerValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -748,7 +764,9 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        LastName_Textbox.ForeColor = DefaultForeColor
         FirstName_Textbox.ForeColor = DefaultForeColor
+        Address_Textbox.ForeColor = DefaultForeColor
 
         If InitialCustomerValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -762,6 +780,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        LastName_Textbox.ForeColor = DefaultForeColor
+        FirstName_Textbox.ForeColor = DefaultForeColor
         Address_Textbox.ForeColor = DefaultForeColor
 
         If InitialCustomerValues.CtrlValuesChanged() Then
