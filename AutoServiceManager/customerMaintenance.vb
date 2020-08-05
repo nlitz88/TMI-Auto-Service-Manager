@@ -7,7 +7,6 @@
     Private CRUD As New DbControl()
 
     ' Initialize new lists to store certain row values of datatables (easily sorted and BINARY SEARCHED FOR SPEED)
-    Private CLFAList As List(Of Object)
     Private zipCodesList As List(Of Object)
 
     ' Initialize instance(s) of initialValues class
@@ -43,12 +42,6 @@
             "ORDER BY c.LastName ASC")
 
         If CustomerDbController.HasException() Then Return False
-        ' Also, populate respective lists with data
-        CLFAList = getListFromDataTable(CustomerDbController.DbDataTable, "CLFA")
-        ' Make all list items lowercase for later comparisons
-        For i As Integer = 0 To CLFAList.Count - 1
-            CLFAList(i) = CLFAList(i).ToString().ToLower().Replace(" ", "")
-        Next
 
         ZipCodesDbController.ExecQuery("Select zc.Zipcode, zc.city as City, zc.State from ZipCodes zc")
         If ZipCodesDbController.HasException() Then Return False
@@ -79,12 +72,13 @@
     Private Sub InitializeCustomerComboBox()
 
         'valuesInitialized = False
-
+        CustomerComboBox.BeginUpdate()
         CustomerComboBox.Items.Clear()
         CustomerComboBox.Items.Add("Select One")
         For Each row In CustomerDbController.DbDataTable.Rows
             CustomerComboBox.Items.Add(row("CLFA"))
         Next
+        CustomerComboBox.EndUpdate()
         CustomerComboBox.SelectedIndex = 0
 
         'valuesInitialized = True
@@ -304,27 +298,48 @@
             Console.WriteLine("Last Name is a valid length. Now validating CLFA")
             ' If we're going to compare it, we first must form the CLFA from the textboxes
             ' THIS CORRESPONDS DIRECTLY WITH THE FORMATTING OUTLINED IN THE SQL QUERY.
-            Dim newCLFA As String = LastName_Textbox.Text & "," & FirstName_Textbox.Text & "@" & Address_Textbox.Text 'Might have to account for empty strings here with a " ". OR, could strip all whitespace out of CLFAList items
-            Console.WriteLine("New CLFA : " & newCLFA)
+            'Dim newCLFA As String = LastName_Textbox.Text & "," & FirstName_Textbox.Text & "@" & Address_Textbox.Text 'Might have to account for empty strings here with a " ". OR, could strip all whitespace out of CLFAList items
+            'Console.WriteLine("New CLFA : " & newCLFA)
 
             If mode = "editing" Then
-                Dim initial As String = CustomerDbController.DbDataTable.Rows(CustomerRow)("CLFA").ToString().ToLower()
-                ' ONLY If the current value is NOT equal to the initial, then check to see if it's a duplicate. If it is, then we don't care
-                If newCLFA <> initial Then
-                    Console.WriteLine("Begin checking for duplicate")
-                    If isDuplicate("Customer", newCLFA, errorMessage, CLFAList) Then
-                        Console.WriteLine("End checking for duplicate")
-                        LastName_Textbox.ForeColor = Color.Red
-                        FirstName_Textbox.ForeColor = Color.Red
-                        Address_Textbox.ForeColor = Color.Red
+
+                Console.WriteLine("Editing mode validation")
+
+                ' Get initial values (that make up CLFA) to see if there changes are the same as initial
+                Dim initialLName As String = CustomerDbController.DbDataTable.Rows(CustomerRow)("LastName").ToString().ToLower()
+                Dim initialFName As String = CustomerDbController.DbDataTable.Rows(CustomerRow)("FirstName").ToString().ToLower()
+                Dim initialAddress As String = CustomerDbController.DbDataTable.Rows(CustomerRow)("Address").ToString().ToLower()
+
+                Console.WriteLine("Initial LName : " & initialLName & " Initial FName : " & initialFName & " InitialAddr : " & initialAddress)
+
+                ' Only if the current values (that make up the CLFA) are not equal to their initial values
+                If LastName_Textbox.Text.ToLower() <> initialLName Or FirstName_Textbox.Text.ToLower() <> initialFName Or Address_Textbox.Text.ToLower() <> initialAddress Then
+
+                    Console.WriteLine("Begin checking for duplicate row")
+
+                    ' Use query to check if row exists with all of these (DATATABLE? OR DATABASE QUERY?)
+                    Dim duplicateRows() As DataRow = CustomerDbController.DbDataTable.Select("LastName LIKE '" & LastName_Textbox.Text &
+                                                                                            "' AND FirstName LIKE '" & FirstName_Textbox.Text &
+                                                                                            "' AND Address LIKE '" & Address_Textbox.Text & "'")
+                    Console.WriteLine("End checking for duplicate")
+
+                    If duplicateRows.Count <> 0 Then
+                        Console.WriteLine("Duplicate Found!")
+                        errorMessage += "ERROR: Duplicate !!!!" & vbNewLine
+                    Else
+                        Console.WriteLine("No Duplicate Rows Found")
                     End If
+
+                Else
+                    Console.WriteLine("Values do = Their initials. No duplicate checking")
                 End If
+
             ElseIf mode = "adding" Then
-                If isDuplicate("Customer", newCLFA, errorMessage, CLFAList) Then
-                    LastName_Textbox.ForeColor = Color.Red
+
+                LastName_Textbox.ForeColor = Color.Red
                     FirstName_Textbox.ForeColor = Color.Red
                     Address_Textbox.ForeColor = Color.Red
-                End If
+
             End If
 
         End If
@@ -402,8 +417,8 @@
             Exit Sub
         End If
 
-        InitializeZipCodeComboBox()     ' Preliminary
-
+        ' Initialize Preloaded ComboBoxes
+        InitializeZipCodeComboBox()
         InitializeCustomerComboBox()
         CustomerComboBox.SelectedIndex = 0
 
@@ -645,7 +660,9 @@
                     End If
 
                     ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                    Console.WriteLine("Start init CustomerComboBox")
                     InitializeCustomerComboBox()
+                    Console.WriteLine("End init CustomerComboBox")
 
                     ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
                     ' If insertion failed, then revert selected back to lastSelected
@@ -691,6 +708,7 @@
 
 
                     ' First, lookup most recent CustomerId added to the table
+                    ' CHANGE THIS TO JUST GET THE CUSTOMER ID FROM THE LAST ROW (.COUNT) FROM THE DATATABLE TO AVOID EXTERNAL QUERY
                     CRUD.ExecQuery("SELECT CustomerId FROM Customer WHERE CustomerId=(SELECT max(CustomerId) FROM Customer)")
                     Dim newCustomerId As Integer
 
