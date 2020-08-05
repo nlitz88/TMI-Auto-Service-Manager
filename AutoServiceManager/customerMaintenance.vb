@@ -705,7 +705,6 @@
 
 
                     ' First, lookup most recent CustomerId added to the table
-                    ' CHANGE THIS TO JUST GET THE CUSTOMER ID FROM THE LAST ROW (.COUNT) FROM THE DATATABLE TO AVOID EXTERNAL QUERY
                     CRUD.ExecQuery("SELECT CustomerId FROM Customer WHERE CustomerId=(SELECT max(CustomerId) FROM Customer)")
                     Dim newCustomerId As Integer
 
