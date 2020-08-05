@@ -301,15 +301,19 @@
             LastName_Textbox.ForeColor = Color.Red
             ' If Last Name isn't blank, then check to see if CLFA is a duplicate
         Else
+            Console.WriteLine("Last Name is a valid length. Now validating CLFA")
             ' If we're going to compare it, we first must form the CLFA from the textboxes
             ' THIS CORRESPONDS DIRECTLY WITH THE FORMATTING OUTLINED IN THE SQL QUERY.
             Dim newCLFA As String = LastName_Textbox.Text & "," & FirstName_Textbox.Text & "@" & Address_Textbox.Text 'Might have to account for empty strings here with a " ". OR, could strip all whitespace out of CLFAList items
+            Console.WriteLine("New CLFA : " & newCLFA)
 
             If mode = "editing" Then
                 Dim initial As String = CustomerDbController.DbDataTable.Rows(CustomerRow)("CLFA").ToString().ToLower()
                 ' ONLY If the current value is NOT equal to the initial, then check to see if it's a duplicate. If it is, then we don't care
                 If newCLFA <> initial Then
+                    Console.WriteLine("Begin checking for duplicate")
                     If isDuplicate("Customer", newCLFA, errorMessage, CLFAList) Then
+                        Console.WriteLine("End checking for duplicate")
                         LastName_Textbox.ForeColor = Color.Red
                         FirstName_Textbox.ForeColor = Color.Red
                         Address_Textbox.ForeColor = Color.Red
@@ -375,21 +379,11 @@
 
     Private Sub customerMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        '' TEST DATABASE CONNECTION FIRST
-        'If Not checkDbConn() Then
-        '    MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '    Exit Sub
-        'End If
-
-        '' LOAD DATATABLES FROM DATABASE INITIALLY
-        'If Not loadDataTablesFromDatabase() Then
-        '    MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '    Exit Sub
-        'End If
-
-        'InitializeCustomerComboBox()
-        'Console.WriteLine(CustomerComboBox.SelectedIndex)
-        'CustomerComboBox.SelectedIndex = -1
+        ' PRE-DRAW PRE-LOADED COMBOBOXES. 
+        ' This ensures that ZipCode Combobox is predrawn. onLoad, that way, we don't have to wait for it on first edit.
+        ' Implement this in companyMaster, Vehicles, and MTL as well
+        ZipCode_ComboBox.Visible = True
+        ZipCode_ComboBox.Visible = False
 
     End Sub
 
@@ -409,6 +403,7 @@
         End If
 
         InitializeZipCodeComboBox()     ' Preliminary
+
         InitializeCustomerComboBox()
         CustomerComboBox.SelectedIndex = 0
 
@@ -444,6 +439,7 @@
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
             InitializeAllDataViewingControls()
+            ' Set ZipCode (or pre-initilized ComboBoxes) selectedIndex = -1 ?
             valuesInitialized = True
 
             ' Show labels and corresponding values

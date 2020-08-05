@@ -193,7 +193,7 @@ Partial Class customerMaintenance
         Me.CustomerComboBox.FormattingEnabled = True
         Me.CustomerComboBox.Location = New System.Drawing.Point(179, 194)
         Me.CustomerComboBox.Name = "CustomerComboBox"
-        Me.CustomerComboBox.Size = New System.Drawing.Size(362, 28)
+        Me.CustomerComboBox.Size = New System.Drawing.Size(508, 28)
         Me.CustomerComboBox.TabIndex = 0
         '
         'customerMaintenanceLabel
