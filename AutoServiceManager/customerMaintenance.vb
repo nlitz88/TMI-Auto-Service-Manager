@@ -315,16 +315,16 @@
                         errorMessage += "ERROR: Duplicate !!!!" & vbNewLine
                     End If
 
-                End If
 
-            ElseIf mode = "adding" Then
+                ElseIf mode = "adding" Then
 
-                LastName_Textbox.ForeColor = Color.Red
+                    LastName_Textbox.ForeColor = Color.Red
                     FirstName_Textbox.ForeColor = Color.Red
                     Address_Textbox.ForeColor = Color.Red
 
-            End If
 
+                End If
+            End If
         End If
 
 

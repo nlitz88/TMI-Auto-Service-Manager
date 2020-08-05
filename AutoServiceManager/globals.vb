@@ -1104,26 +1104,26 @@
     End Function
 
 
-    ' Overload that checks for duplicate rows on the basis of multiple columns/values
-    Public Function isDuplicate(ByVal label As String, ByRef errorMessage As String, ByVal columnsAndValues As Dictionary(Of String, Object), ByVal dataTable As DataTable) As Boolean
+    '' Overload that checks for duplicate rows on the basis of multiple columns/values
+    'Public Function isDuplicate(ByVal label As String, ByRef errorMessage As String, ByVal columnsAndValues As Dictionary(Of String, Object), ByVal dataTable As DataTable) As Boolean
 
-        Dim query As String = String.Empty
-        For i As Integer = 0 To columnsAndValues.Count - 1
-            If i <> 0 Then query += " AND "
-            query += columnsAndValues(i)(0) & " LIKE '" & columnsAndValues(i)(1) & "'"
-        Next
-        If String.IsNullOrEmpty(query) Then Return False
+    '    Dim query As String = String.Empty
+    '    For i As Integer = 0 To columnsAndValues.Count - 1
+    '        If i <> 0 Then query += " AND "
+    '        query += columnsAndValues(i).Key & " LIKE '" & columnsAndValues(i).Value & "'"
+    '    Next
+    '    If String.IsNullOrEmpty(query) Then Return False
 
-        Dim duplicateRows() As DataRow = dataTable.Select(query)
+    '    Dim duplicateRows() As DataRow = dataTable.Select(query)
 
-        If duplicateRows.Count <> 0 Then
-            errorMessage += "ERROR: " & label & " already exists" & vbNewLine
-            Return True
-        End If
+    '    If duplicateRows.Count <> 0 Then
+    '        errorMessage += "ERROR: " & label & " already exists" & vbNewLine
+    '        Return True
+    '    End If
 
-        Return False
+    '    Return False
 
-    End Function
+    'End Function
 
 
     ' Function that checks to see if a value DOES exist. Accepts sorted list of values
