@@ -82,4 +82,9 @@
         changeScreen(customerMaintenance, Me.ParentForm)
     End Sub
 
+    Private Sub CustomerVehiclesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CustomerVehiclesToolStripMenuItem.Click
+        If Me.ParentForm Is vehicleMaintenance Then Exit Sub
+        changeScreen(vehicleMaintenance, Me.ParentForm)
+    End Sub
+
 End Class

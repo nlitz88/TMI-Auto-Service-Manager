@@ -87,6 +87,7 @@ Partial Class vehicleMaintenance
         Me.Notes_Value = New System.Windows.Forms.Label()
         Me.NotesLabel = New System.Windows.Forms.Label()
         Me.Notes_Textbox = New System.Windows.Forms.TextBox()
+        Me.nav = New AutoServiceManager.navigation()
         Me.SuspendLayout()
         '
         'deleteButton
@@ -827,12 +828,22 @@ Partial Class vehicleMaintenance
         Me.Notes_Textbox.Tag = "dataEditingControl"
         Me.Notes_Textbox.Visible = False
         '
+        'nav
+        '
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(982, 28)
+        Me.nav.TabIndex = 257
+        '
         'vehicleMaintenance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.nav)
         Me.Controls.Add(Me.Notes_Value)
         Me.Controls.Add(Me.NotesLabel)
         Me.Controls.Add(Me.Notes_Textbox)
@@ -972,4 +983,5 @@ Partial Class vehicleMaintenance
     Friend WithEvents Notes_Value As Label
     Friend WithEvents NotesLabel As Label
     Friend WithEvents Notes_Textbox As TextBox
+    Friend WithEvents nav As navigation
 End Class
