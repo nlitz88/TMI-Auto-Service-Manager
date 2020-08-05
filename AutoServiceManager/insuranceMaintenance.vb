@@ -192,10 +192,7 @@ Public Class insuranceMaintenance
     Private Sub insuranceMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ' TEST DATABASE CONNECTION FIRST
-        If Not checkDbConn() Then
-            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
+        If Not checkDbConn() Then Exit Sub
 
         ' LOAD DATATABLES FROM DATABASE INITIALLY
         If Not loadDataTablesFromDatabase() Then
@@ -271,8 +268,13 @@ Public Class insuranceMaintenance
         nav.DisableAll()
         ICComboBox.Enabled = False
 
+        ' Get lastSelected
+        If getDataTableRow(ICDbController.DbDataTable, "CompanyName", ICComboBox.Text) <> -1 Then
+            lastSelected = ICComboBox.Text
+        Else
+            lastSelected = "Select One"
+        End If
 
-        lastSelected = ICComboBox.Text
         ICComboBox.SelectedIndex = 0
 
         ' Hide/Show the dataViewingControls and dataEditingControls, respectively

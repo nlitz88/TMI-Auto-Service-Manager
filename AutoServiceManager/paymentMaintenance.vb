@@ -193,10 +193,7 @@ Public Class paymentMaintenance
     Private Sub paymentMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ' TEST DATABASE CONNECTION FIRST
-        If Not checkDbConn() Then
-            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
+        If Not checkDbConn() Then Exit Sub
 
         ' LOAD DATATABLES FROM DATABASE INITIALLY
         If Not loadDataTablesFromDatabase() Then
@@ -273,7 +270,13 @@ Public Class paymentMaintenance
         PTComboBox.Enabled = False
 
 
-        lastSelected = PTComboBox.Text
+        ' Get lastSelected
+        If getDataTableRow(PTDbController.DbDataTable, "PaymentType", PTComboBox.Text) <> -1 Then
+            lastSelected = PTComboBox.Text
+        Else
+            lastSelected = "Select One"
+        End If
+
         PTComboBox.SelectedIndex = 0
 
         ' Hide/Show the dataViewingControls and dataEditingControls, respectively

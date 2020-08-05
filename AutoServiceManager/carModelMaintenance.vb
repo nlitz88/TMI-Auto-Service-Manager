@@ -209,10 +209,7 @@
     Private Sub carModelMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ' TEST DATABASE CONNECTION FIRST
-        If Not checkDbConn() Then
-            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
+        If Not checkDbConn() Then Exit Sub
 
         ' LOAD AUTOMAKE DATATABLE
         If Not loadAutoMakeDatatable() Then
@@ -335,8 +332,13 @@
         AutoMakeComboBox.Enabled = False
         CarModelComboBox.Enabled = False
 
-        ' Store the last selected item in the ComboBox, then set its selected index to "Select One" (0)
-        lastSelectedCarModel = CarModelComboBox.Text
+        ' Get lastSelected
+        If getDataTableRow(CarModelDbController.DbDataTable, "AutoModel", CarModelComboBox.Text) <> -1 Then
+            lastSelectedCarModel = CarModelComboBox.Text
+        Else
+            lastSelectedCarModel = "Select One"
+        End If
+
         CarModelComboBox.SelectedIndex = 0
 
         ' Hide/Show the dataViewingControls and dataEditingControls, respectively

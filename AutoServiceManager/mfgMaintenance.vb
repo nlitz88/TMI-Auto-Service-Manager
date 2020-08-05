@@ -192,10 +192,7 @@ Public Class mfgMaintenance
     Private Sub mfgMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ' TEST DATABASE CONNECTION FIRST
-        If Not checkDbConn() Then
-            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
+        If Not checkDbConn() Then Exit Sub
 
         ' LOAD DATATABLES FROM DATABASE INITIALLY
         If Not loadDataTablesFromDatabase() Then
@@ -273,7 +270,13 @@ Public Class mfgMaintenance
         nav.DisableAll()
         AutoMakeComboBox.Enabled = False
 
-        lastSelected = AutoMakeComboBox.Text
+        ' Get lastSelected
+        If getDataTableRow(AutoManufacturersDbController.DbDataTable, "AutoMake", AutoMakeComboBox.Text) <> -1 Then
+            lastSelected = AutoMakeComboBox.Text
+        Else
+            lastSelected = "Select One"
+        End If
+
         AutoMakeComboBox.SelectedIndex = 0
 
         ' Hide/Show the dataViewingControls and dataEditingControls, respectively

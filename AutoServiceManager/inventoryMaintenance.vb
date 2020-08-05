@@ -222,10 +222,7 @@ Public Class inventoryMaintenance
     Private Sub inventoryMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ' TEST DATABASE CONNECTION FIRST
-        If Not checkDbConn() Then
-            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
+        If Not checkDbConn() Then Exit Sub
 
         ' LOAD DATATABLES FROM DATABASE INITIALLY
         If Not loadDataTablesFromDatabase() Then
@@ -307,8 +304,13 @@ Public Class inventoryMaintenance
         nav.DisableAll()
         PartComboBox.Enabled = False
 
+        ' Get lastSelected
+        If getDataTableRow(IPDbController.DbDataTable, "PDPN", PartComboBox.Text) <> -1 Then
+            lastSelected = PartComboBox.Text
+        Else
+            lastSelected = "Select One"
+        End If
 
-        lastSelected = PartComboBox.Text
         PartComboBox.SelectedIndex = 0
 
         ' Hide/Show the dataViewingControls and dataEditingControls, respectively
