@@ -439,7 +439,7 @@ Partial Class customerMaintenance
         Me.CellPhone1_Textbox.Name = "CellPhone1_Textbox"
         Me.CellPhone1_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.CellPhone1_Textbox.Size = New System.Drawing.Size(181, 27)
-        Me.CellPhone1_Textbox.TabIndex = 6
+        Me.CellPhone1_Textbox.TabIndex = 7
         Me.CellPhone1_Textbox.Tag = "dataEditingControl"
         Me.CellPhone1_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.CellPhone1_Textbox.Visible = False
@@ -531,7 +531,7 @@ Partial Class customerMaintenance
         Me.WorkPhone_Textbox.Name = "WorkPhone_Textbox"
         Me.WorkPhone_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.WorkPhone_Textbox.Size = New System.Drawing.Size(181, 27)
-        Me.WorkPhone_Textbox.TabIndex = 7
+        Me.WorkPhone_Textbox.TabIndex = 6
         Me.WorkPhone_Textbox.Tag = "dataEditingControl"
         Me.WorkPhone_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.WorkPhone_Textbox.Visible = False
