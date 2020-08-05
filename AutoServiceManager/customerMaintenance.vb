@@ -295,43 +295,26 @@
             LastName_Textbox.ForeColor = Color.Red
             ' If Last Name isn't blank, then check to see if CLFA is a duplicate
         Else
-            Console.WriteLine("Last Name is a valid length. Now validating CLFA")
-            ' If we're going to compare it, we first must form the CLFA from the textboxes
-            ' THIS CORRESPONDS DIRECTLY WITH THE FORMATTING OUTLINED IN THE SQL QUERY.
-            'Dim newCLFA As String = LastName_Textbox.Text & "," & FirstName_Textbox.Text & "@" & Address_Textbox.Text 'Might have to account for empty strings here with a " ". OR, could strip all whitespace out of CLFAList items
-            'Console.WriteLine("New CLFA : " & newCLFA)
 
             If mode = "editing" Then
-
-                Console.WriteLine("Editing mode validation")
 
                 ' Get initial values (that make up CLFA) to see if there changes are the same as initial
                 Dim initialLName As String = CustomerDbController.DbDataTable.Rows(CustomerRow)("LastName").ToString().ToLower()
                 Dim initialFName As String = CustomerDbController.DbDataTable.Rows(CustomerRow)("FirstName").ToString().ToLower()
                 Dim initialAddress As String = CustomerDbController.DbDataTable.Rows(CustomerRow)("Address").ToString().ToLower()
 
-                Console.WriteLine("Initial LName : " & initialLName & " Initial FName : " & initialFName & " InitialAddr : " & initialAddress)
-
                 ' Only if the current values (that make up the CLFA) are not equal to their initial values
                 If LastName_Textbox.Text.ToLower() <> initialLName Or FirstName_Textbox.Text.ToLower() <> initialFName Or Address_Textbox.Text.ToLower() <> initialAddress Then
-
-                    Console.WriteLine("Begin checking for duplicate row")
 
                     ' Use query to check if row exists with all of these (DATATABLE? OR DATABASE QUERY?)
                     Dim duplicateRows() As DataRow = CustomerDbController.DbDataTable.Select("LastName LIKE '" & LastName_Textbox.Text &
                                                                                             "' AND FirstName LIKE '" & FirstName_Textbox.Text &
                                                                                             "' AND Address LIKE '" & Address_Textbox.Text & "'")
-                    Console.WriteLine("End checking for duplicate")
 
                     If duplicateRows.Count <> 0 Then
-                        Console.WriteLine("Duplicate Found!")
                         errorMessage += "ERROR: Duplicate !!!!" & vbNewLine
-                    Else
-                        Console.WriteLine("No Duplicate Rows Found")
                     End If
 
-                Else
-                    Console.WriteLine("Values do = Their initials. No duplicate checking")
                 End If
 
             ElseIf mode = "adding" Then
