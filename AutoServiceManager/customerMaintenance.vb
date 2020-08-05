@@ -36,7 +36,7 @@
     ' Sub that will contain calls to all of the instances of the database controller class that loads data from the database into DataTables
     Private Function loadDataTablesFromDatabase() As Boolean
 
-        CustomerDbController.ExecQuery("SELECT c.LastName + ', ' + IIF(ISNULL(c.FirstName), '', c.FirstName) + ' @ ' + c.Address as CLFA, " &
+        CustomerDbController.ExecQuery("SELECT c.LastName + ', ' + IIF(ISNULL(c.FirstName), '', c.FirstName) + ' @ ' + IIF(ISNULL(c.Address), '', c.Address) as CLFA, " &
             "c.CustomerId, c.FirstName, c.LastName, c.Address, c.City, c.State, c.ZipCode, c.HomePhone, c.WorkPhone, c.CellPhone1, c.CellPhone2, c.TaxExempt, c.EmailAddress " &
             "FROM Customer c " &
             "WHERE Trim(LastName) <> '' " &
@@ -47,7 +47,7 @@
         CLFAList = getListFromDataTable(CustomerDbController.DbDataTable, "CLFA")
         ' Make all list items lowercase for later comparisons
         For i As Integer = 0 To CLFAList.Count - 1
-            CLFAList(i) = CLFAList(i).ToString().ToLower()
+            CLFAList(i) = CLFAList(i).ToString().ToLower().Replace(" ", "")
         Next
 
         ZipCodesDbController.ExecQuery("Select zc.Zipcode, zc.city as City, zc.State from ZipCodes zc")
@@ -303,7 +303,7 @@
         Else
             ' If we're going to compare it, we first must form the CLFA from the textboxes
             ' THIS CORRESPONDS DIRECTLY WITH THE FORMATTING OUTLINED IN THE SQL QUERY.
-            Dim newCLFA As String = LastName_Textbox.Text & ", " & FirstName_Textbox.Text & " @ " & Address_Textbox.Text 'Might have to account for empty strings here with a " "
+            Dim newCLFA As String = LastName_Textbox.Text & "," & FirstName_Textbox.Text & "@" & Address_Textbox.Text 'Might have to account for empty strings here with a " ". OR, could strip all whitespace out of CLFAList items
 
             If mode = "editing" Then
                 Dim initial As String = CustomerDbController.DbDataTable.Rows(CustomerRow)("CLFA").ToString().ToLower()
