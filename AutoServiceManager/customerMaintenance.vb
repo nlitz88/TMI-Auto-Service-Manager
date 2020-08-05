@@ -319,22 +319,22 @@
                         Address_Textbox.ForeColor = Color.Red
                     End If
 
+                End If
 
-                ElseIf mode = "adding" Then
 
-                    ' Use query to check if row exists with all of these
-                    Dim duplicateRows() As DataRow = CustomerDbController.DbDataTable.Select("LastName LIKE '" & LastName_Textbox.Text &
+            ElseIf mode = "adding" Then
+
+                ' Use query to check if row exists with all of these
+                Dim duplicateRows() As DataRow = CustomerDbController.DbDataTable.Select("LastName LIKE '" & LastName_Textbox.Text &
                                                                                             "' AND FirstName LIKE '" & FirstName_Textbox.Text &
                                                                                             "' AND Address LIKE '" & Address_Textbox.Text & "'")
 
-                    If duplicateRows.Count <> 0 Then
-                        errorMessage += "ERROR: " & LastName_Textbox.Text & ", " & FirstName_Textbox.Text & " @ " & Address_Textbox.Text & " already exists;" & vbNewLine &
+                If duplicateRows.Count <> 0 Then
+                    errorMessage += "ERROR: " & LastName_Textbox.Text & ", " & FirstName_Textbox.Text & " @ " & Address_Textbox.Text & " already exists;" & vbNewLine &
                             "Please modify Last Name, First Name, or Address" & vbNewLine
-                        LastName_Textbox.ForeColor = Color.Red
-                        FirstName_Textbox.ForeColor = Color.Red
-                        Address_Textbox.ForeColor = Color.Red
-                    End If
-
+                    LastName_Textbox.ForeColor = Color.Red
+                    FirstName_Textbox.ForeColor = Color.Red
+                    Address_Textbox.ForeColor = Color.Red
                 End If
 
             End If
@@ -690,7 +690,7 @@
                         MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Exit Sub
                     Else
-                        MessageBox.Show("Successfully added " & LastName_Textbox.Text & ", " & FirstName_Textbox.Text & " to Customers")
+                        MessageBox.Show("Successfully added " & LastName_Textbox.Text & ", " & FirstName_Textbox.Text & " @ " & Address_Textbox.Text & " to Customers")
                     End If
 
                     ' 3.) RELOAD DATATABLES FROM DATABASE
