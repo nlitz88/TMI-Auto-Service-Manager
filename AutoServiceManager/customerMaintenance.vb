@@ -7,7 +7,7 @@
     Private CRUD As New DbControl()
 
     ' Initialize new lists to store certain row values of datatables (easily sorted and BINARY SEARCHED FOR SPEED)
-    Private CustomerList As List(Of Object)
+    Private CLFAList As List(Of Object)
     Private zipCodesList As List(Of Object)
 
     ' Initialize instance(s) of initialValues class
@@ -19,7 +19,7 @@
     ' Row index variables used for DataTable lookups
     Private CustomerRow As Integer
     Private zcRow As Integer
-    Private lastSelected As Integer
+    Private lastSelected As String
 
     ' Keeps track of whether or not user in "editing" or "adding" mode
     Private mode As String
@@ -36,17 +36,22 @@
     ' Sub that will contain calls to all of the instances of the database controller class that loads data from the database into DataTables
     Private Function loadDataTablesFromDatabase() As Boolean
 
-        CustomerDbController.ExecQuery("SELECT c.LastName + ', ' + IIF(ISNULL(c.FirstName), '', c.FirstName) as CLF, " &
+        CustomerDbController.ExecQuery("SELECT c.LastName + ', ' + IIF(ISNULL(c.FirstName), '', c.FirstName) + ' @ ' + c.Address as CLFA, " &
             "c.CustomerId, c.FirstName, c.LastName, c.Address, c.City, c.State, c.ZipCode, c.HomePhone, c.WorkPhone, c.CellPhone1, c.CellPhone2, c.TaxExempt, c.EmailAddress " &
             "FROM Customer c " &
             "WHERE Trim(LastName) <> '' " &
             "ORDER BY c.LastName ASC")
 
         If CustomerDbController.HasException() Then Return False
+        ' Also, populate respective lists with data
+        CLFAList = getListFromDataTable(CustomerDbController.DbDataTable, "CLFA")
+        ' Make all list items lowercase for later comparisons
+        For i As Integer = 0 To CLFAList.Count - 1
+            CLFAList(i) = CLFAList(i).ToString().ToLower()
+        Next
 
         ZipCodesDbController.ExecQuery("Select zc.Zipcode, zc.city as City, zc.State from ZipCodes zc")
         If ZipCodesDbController.HasException() Then Return False
-
         ' Also, populate respective lists with data
         zipCodesList = getListFromDataTable(ZipCodesDbController.DbDataTable, "Zipcode")
 
@@ -73,16 +78,16 @@
     ' Sub that initializes Customer ComboBox
     Private Sub InitializeCustomerComboBox()
 
-        valuesInitialized = False
+        'valuesInitialized = False
 
-        'CustomerComboBox.FormattingEnabled = True
-        CustomerComboBox.BeginUpdate()
-        CustomerComboBox.DisplayMember = "CLF"
-        CustomerComboBox.ValueMember = "CustomerId"
-        CustomerComboBox.DataSource = CustomerDbController.DbDataTable
-        CustomerComboBox.EndUpdate()
+        CustomerComboBox.Items.Clear()
+        CustomerComboBox.Items.Add("Select One")
+        For Each row In CustomerDbController.DbDataTable.Rows
+            CustomerComboBox.Items.Add(row("CLFA"))
+        Next
+        CustomerComboBox.SelectedIndex = 0
 
-        valuesInitialized = True
+        'valuesInitialized = True
 
     End Sub
 
@@ -275,9 +280,9 @@
 
 
         ' Last Name (REQUIRED)
-        If Not isValidLength("Last Name", True, LastName_Textbox.Text, 20, errorMessage) Then
-            LastName_Textbox.ForeColor = Color.Red
-        End If
+        'If Not isValidLength("Last Name", True, LastName_Textbox.Text, 20, errorMessage) Then
+        '    LastName_Textbox.ForeColor = Color.Red
+        'End If
 
         ' First Name
         If Not isValidLength("First Name", False, FirstName_Textbox.Text, 20, errorMessage) Then
@@ -288,6 +293,38 @@
         If Not isValidLength("Street Address", False, Address_Textbox.Text, 50, errorMessage) Then
             Address_Textbox.ForeColor = Color.Red
         End If
+
+
+        ' CHECK IF CLFA (Last, First, Address Combination) NOT A DUPLICATE (but only check if Last Name is filled out)
+        ' First, ensure that Last Name (REQUIRED)
+        If Not isValidLength("Last Name", True, LastName_Textbox.Text, 20, errorMessage) Then
+            LastName_Textbox.ForeColor = Color.Red
+            ' If Last Name isn't blank, then check to see if CLFA is a duplicate
+        Else
+            ' If we're going to compare it, we first must form the CLFA from the textboxes
+            ' THIS CORRESPONDS DIRECTLY WITH THE FORMATTING OUTLINED IN THE SQL QUERY.
+            Dim newCLFA As String = LastName_Textbox.Text & ", " & FirstName_Textbox.Text & " @ " & Address_Textbox.Text 'Might have to account for empty strings here with a " "
+
+            If mode = "editing" Then
+                Dim initial As String = CustomerDbController.DbDataTable.Rows(CustomerRow)("CLFA").ToString().ToLower()
+                ' ONLY If the current value is NOT equal to the initial, then check to see if it's a duplicate. If it is, then we don't care
+                If newCLFA <> initial Then
+                    If isDuplicate("Customer", newCLFA, errorMessage, CLFAList) Then
+                        LastName_Textbox.ForeColor = Color.Red
+                        FirstName_Textbox.ForeColor = Color.Red
+                        Address_Textbox.ForeColor = Color.Red
+                    End If
+                End If
+            ElseIf mode = "adding" Then
+                If isDuplicate("Customer", newCLFA, errorMessage, CLFAList) Then
+                    LastName_Textbox.ForeColor = Color.Red
+                    FirstName_Textbox.ForeColor = Color.Red
+                    Address_Textbox.ForeColor = Color.Red
+                End If
+            End If
+
+        End If
+
 
         ' ZipCode (REQUIRED)
         If Not validZipCode(ZipCode_ComboBox.Text, errorMessage) Then
@@ -418,7 +455,7 @@
         CustomerRow = -1    ' guilty until proven innocent
 
         Dim escapedText As String = escapeLikeValues(CustomerComboBox.Text)
-        Dim rows() As DataRow = CustomerDbController.DbDataTable.Select("CLF LIKE '" & escapedText & "' AND CustomerId = '" & CustomerComboBox.SelectedValue & "'")
+        Dim rows() As DataRow = CustomerDbController.DbDataTable.Select("CLFA LIKE '" & escapedText & "' AND CustomerId = '" & CustomerComboBox.SelectedValue & "'")
         If rows.Count <> 0 Then
             CustomerRow = CustomerDbController.DbDataTable.Rows.IndexOf(rows(0))
         End If
