@@ -454,6 +454,7 @@ Public Class inventoryMaintenance
                     ' 2.) UPDATE DATATABLE(S), THEN UPDATE DATABASE
                     If Not updateAll() Then
                         MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
                     Else
                         MessageBox.Show("Successfully updated Parts")
                     End If
@@ -496,6 +497,7 @@ Public Class inventoryMaintenance
                     ' 2.) INSERT NEW ROW INTO DATABASE
                     If Not insertAll() Then
                         MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
                     Else
                         MessageBox.Show("Successfully added " & PartNbr_Textbox.Text & " to Parts")
                     End If

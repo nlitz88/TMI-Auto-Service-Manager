@@ -414,6 +414,7 @@ Public Class insuranceMaintenance
                     ' 2.) UPDATE DATATABLE(S), THEN UPDATE DATABASE
                     If Not updateAll() Then
                         MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
                     Else
                         MessageBox.Show("Successfully updated Insurance Companies")
                     End If
@@ -449,6 +450,7 @@ Public Class insuranceMaintenance
                     ' 2.) INSERT NEW ROW INTO DATABASE
                     If Not insertAll() Then
                         MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
                     Else
                         MessageBox.Show("Successfully added " & CompanyName_Textbox.Text & " to Insurance Companies")
                     End If

@@ -422,6 +422,7 @@ Public Class taskMaintenance
                     ' 2.) UPDATE DATATABLE(S), THEN UPDATE DATABASE
                     If Not updateAll() Then
                         MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
                     Else
                         MessageBox.Show("Successfully updated Task Types")
                     End If
@@ -464,6 +465,7 @@ Public Class taskMaintenance
                     ' 2.) INSERT NEW ROW INTO DATABASE
                     If Not insertAll() Then
                         MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
                     Else
                         MessageBox.Show("Successfully added " & TaskType_Textbox.Text & " to Task Types")
                     End If

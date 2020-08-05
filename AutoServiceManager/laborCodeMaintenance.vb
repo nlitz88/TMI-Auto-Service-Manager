@@ -484,6 +484,7 @@ Public Class laborCodeMaintenance
                     ' 2.) UPDATE DATATABLE(S), THEN UPDATE DATABASE
                     If Not updateAll() Then
                         MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
                     Else
                         MessageBox.Show("Successfully updated Labor Codes")
                     End If
@@ -526,6 +527,7 @@ Public Class laborCodeMaintenance
                     ' 2.) INSERT NEW ROW INTO DATABASE
                     If Not insertAll() Then
                         MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
                     Else
                         MessageBox.Show("Successfully added " & LaborCode_Textbox.Text & " to Labor Codes")
                     End If
