@@ -52,10 +52,6 @@
         MakeDbController.ExecQuery("SELECT am.AutoMake FROM AutoManufacturers am ORDER BY am.AutoMake ASC")
         If MakeDbController.HasException() Then Return False
 
-        ' Loads datatable from CarModels
-        ModelDbController.ExecQuery("SELECT cm.AutoModel FROM CarModels cm ORDER BY cm.AutoModel ASC")
-        If ModelDbController.HasException() Then Return False
-
         ' Loads datatable from Colors
         ColorDbController.ExecQuery("SELECT c.Color FROM Colors c ORDER BY c.Color ASC")
         If ColorDbController.HasException() Then Return False
@@ -99,18 +95,6 @@
             Make_ComboBox.Items.Add(row("AutoMake"))
         Next
         Make_ComboBox.EndUpdate()
-
-    End Sub
-
-    ' Sub that initializes ModelComboBox
-    Private Sub InitializeModelComboBox()
-
-        Model_ComboBox.Items.Clear()
-        Model_ComboBox.BeginUpdate()
-        For Each row In ModelDbController.DbDataTable.Rows
-            Model_ComboBox.Items.Add(row("AutoModel"))
-        Next
-        Model_ComboBox.EndUpdate()
 
     End Sub
 
@@ -167,7 +151,6 @@
 
         'InitializeCustomerComboBox() While preloaded, should not be grouped with these, as it serves a different purpose. All of these are vehicle-editing related
         InitializeMakeComboBox()
-        InitializeModelComboBox()
         InitializeColorComboBox()
         InitializeStateComboBox()
         InitializeMonthComboBox()
@@ -179,7 +162,7 @@
     Private Sub SetIndexAllPreliminaryComboBoxes()
 
         Make_ComboBox.SelectedIndex = -1
-        Model_ComboBox.SelectedIndex = -1
+        'Model_ComboBox.SelectedIndex = -1
         Color_ComboBox.SelectedIndex = -1
         LicenseState_ComboBox.SelectedIndex = -1
         InspectionMonth_ComboBox.SelectedIndex = -1
@@ -189,7 +172,44 @@
 
 
 
-    ' Loads datatable from CarModels database table
+    ' Loads datatable from CarModels database table based on AutoMake
+    Private Function loadCarModelsDataTable() As Boolean
+
+        ' Loads datatable from CarModels
+        ModelDbController.AddParams("@automake", "%" & Make_ComboBox.Text & "%")
+        ModelDbController.ExecQuery("SELECT cm.AutoModel, cm.AutoMake FROM CarModels cm " &
+                                    "WHERE cm.AutoMake LIKE @automake " &
+                                    "ORDER BY cm.AutoModel ASC")
+        If ModelDbController.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+    ' Sub that initializes ModelComboBox
+    Private Sub InitializeModelComboBox()
+
+        Model_ComboBox.Items.Clear()
+        Model_ComboBox.BeginUpdate()
+        For Each row In ModelDbController.DbDataTable.Rows
+            Model_ComboBox.Items.Add(row("AutoModel"))
+        Next
+        Model_ComboBox.EndUpdate()
+
+    End Sub
+
+    ' Sub that initializes the DataEditingControls (Model_ComboBox) based on value in Make_ComboBox
+    Private Sub InitializeCarModelDataEditingControls()
+
+        loadCarModelsDataTable()
+        InitializeModelComboBox()
+        Model_ComboBox.SelectedIndex = -1
+
+    End Sub
+
+
+
+    ' Loads datatable from Vehicle database table based on CustomerId
     Private Function loadVehicleDataTable() As Boolean
 
         VehicleDbController.AddParams("@customerId", CustomerId)
@@ -749,6 +769,9 @@
         End Select
 
     End Sub
+
+
+
 
 
 End Class
