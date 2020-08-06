@@ -6,9 +6,6 @@
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
-    ' Initialize new lists to store certain row values of datatables (easily sorted and BINARY SEARCHED FOR SPEED)
-    Private zipCodesList As List(Of Object)
-
     ' Initialize instance(s) of initialValues class
     Private InitialCustomerValues As New InitialValues()
 
@@ -37,8 +34,6 @@
 
         ZipCodesDbController.ExecQuery("Select zc.Zipcode, zc.city as City, zc.State from ZipCodes zc")
         If ZipCodesDbController.HasException() Then Return False
-        ' Also, populate respective lists with data
-        zipCodesList = getListFromDataTable(ZipCodesDbController.DbDataTable, "Zipcode")
 
         Return True
 
@@ -353,8 +348,7 @@
         ' ZipCode (REQUIRED)
         If Not validZipCode(ZipCode_ComboBox.Text, errorMessage) Then
             ZipCode_ComboBox.ForeColor = Color.Red
-        ElseIf zipCodesList.BinarySearch(ZipCode_ComboBox.Text) < 0 Then
-            errorMessage += "ERROR: ZIP Code does not exist" & vbNewLine
+        ElseIf Not valueExists("ZIP Code", errorMessage, "Zipcode", ZipCode_ComboBox.Text, ZipCodesDbController.DbDataTable) Then
             ZipCode_ComboBox.ForeColor = Color.Red
         End If
 
@@ -670,9 +664,7 @@
                     End If
 
                     ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
-                    Console.WriteLine("Start init CustomerComboBox")
                     InitializeCustomerComboBox()
-                    Console.WriteLine("End init CustomerComboBox")
 
                     ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
                     ' If insertion failed, then revert selected back to lastSelected
@@ -839,7 +831,7 @@
         ZipCode_ComboBox.ForeColor = DefaultForeColor
 
         ' If valid ZIP entered, then initialize controls that correspond to ZipCode value
-        If validZipCode(ZipCode_ComboBox.Text, String.Empty) And zipCodesList.BinarySearch(ZipCode_ComboBox.Text) <> -1 Then
+        If validZipCode(ZipCode_ComboBox.Text, String.Empty) And valueExists("Zipcode", ZipCode_ComboBox.Text, ZipCodesDbController.DbDataTable) Then
             InitializeZipCodeDataEditingControls()
         End If
 

@@ -1090,9 +1090,9 @@
     End Function
 
     ' Overload that checks for duplicate items/rows using DataTable instead of sorted listed
-    Public Function isDuplicate(ByVal label As String, ByRef errorMessage As String, ByVal valueColumn As String, ByVal value As String, ByVal dataTable As DataTable) As Boolean
+    Public Function isDuplicate(ByVal label As String, ByRef errorMessage As String, ByVal valueColumn As String, ByVal value As Object, ByVal dataTable As DataTable) As Boolean
 
-        Dim duplicateRows() As DataRow = dataTable.Select(valueColumn & " LIKE '" & value)
+        Dim duplicateRows() As DataRow = dataTable.Select(valueColumn & " LIKE '" & value & "'")
 
         If duplicateRows.Count <> 0 Then
             errorMessage += "ERROR: " & value & " already exists" & vbNewLine
@@ -1139,16 +1139,29 @@
     End Function
 
     ' OVERLOAD: uses datatable instead of sorted list
-    Public Function valueExists(ByVal label As String, ByVal value As String, ByRef errorMessage As String, ByVal dataTable As DataTable, ByVal dataColumn As String) As Boolean
+    Public Function valueExists(ByVal label As String, ByRef errorMessage As String, ByVal valueColumn As String, ByVal value As Object, ByVal dataTable As DataTable) As Boolean
 
-        Dim rows As DataRowCollection = dataTable.Rows
+        Dim dataRows() As DataRow = dataTable.Select(valueColumn & " LIKE '" & value & "'")
 
-        For Each row In rows
-            If row(dataColumn) = value Then Return True
-        Next
+        If dataRows.Count = 0 Then
+            errorMessage += "ERROR: " & label & value & " does not exist" & vbNewLine
+            Return False
+        End If
 
-        errorMessage += "ERROR: " & value & " does not exist" & vbNewLine
-        Return False
+        Return True
+
+    End Function
+
+    ' OVERLOAD: does not receive errorMessage
+    Public Function valueExists(ByVal valueColumn As String, ByVal value As Object, ByVal dataTable As DataTable) As Boolean
+
+        Dim dataRows() As DataRow = dataTable.Select(valueColumn & " LIKE '" & value & "'")
+
+        If dataRows.Count = 0 Then
+            Return False
+        End If
+
+        Return True
 
     End Function
 
