@@ -305,7 +305,7 @@
         Dim valuesParamList As String = String.Empty
 
         Dim Columns As New List(Of String) From {"CustomerId", "makeYear", "Make", "Model", "Color", "LicenseState", "LicensePlate", "VIN", "InspectionStickerNbr", "InspectionMonth", "InsuranceCompany", "PolicyNumber", "ExpirationDate", "Notes", "Engine", "ABS", "AC", "AirBags", "Alarm"}
-        Dim Values As New List(Of Object) From {CustomerId, Make_ComboBox.Text, Model_ComboBox.Text, Color_ComboBox.Text, LicenseState_ComboBox.Text, LicensePlate_Textbox.Text, VIN_Textbox.Text, InspectionStickerNbr_Textbox.Text, InspectionMonth_ComboBox.Text, InsuranceCompany_ComboBox.Text, PolicyNumber_Textbox.Text, ExpirationDate_Textbox.Text, Notes_Textbox.Text, Engine_Textbox.Text, ABS_CheckBox.Checked, AC_CheckBox.Checked, AirBags_CheckBox.Checked, Alarm_CheckBox.Checked}
+        Dim Values As New List(Of Object) From {CustomerId, makeYear_Textbox.Text, Make_ComboBox.Text, Model_ComboBox.Text, Color_ComboBox.Text, LicenseState_ComboBox.Text, LicensePlate_Textbox.Text, VIN_Textbox.Text, InspectionStickerNbr_Textbox.Text, InspectionMonth_ComboBox.Text, InsuranceCompany_ComboBox.Text, PolicyNumber_Textbox.Text, ExpirationDate_Textbox.Text, Notes_Textbox.Text, Engine_Textbox.Text, ABS_CheckBox.Checked, AC_CheckBox.Checked, AirBags_CheckBox.Checked, Alarm_CheckBox.Checked}
 
         For i As Integer = 0 To Columns.Count - 1
             If Not String.IsNullOrWhiteSpace(Columns(i)) Then
@@ -495,8 +495,6 @@
         ElseIf ExpirationDate_Textbox.Text.Length < 9 And Not String.IsNullOrWhiteSpace(ExpirationDate_Textbox.Text) Then
             errorMessage += "ERROR: " & ExpirationDate_Textbox.Text & " is not a valid Date" & vbNewLine
             ExpirationDate_Textbox.ForeColor = Color.Red
-        Else
-            Console.WriteLine(ExpirationDate_Textbox.Text.Length)
         End If
 
         ' Engine
