@@ -246,6 +246,25 @@
 
         ' PRE-DRAW PRE-LOADED (Preliminary) COMBOBOXES. 
         ' This way, we don't have to wait for them to draw on first edit/add
+
+        Make_ComboBox.Visible = True
+        Make_ComboBox.Visible = False
+
+        Model_ComboBox.Visible = True
+        Model_ComboBox.Visible = False
+
+        Color_ComboBox.Visible = True
+        Color_ComboBox.Visible = False
+
+        LicenseState_ComboBox.Visible = True
+        LicenseState_ComboBox.Visible = False
+
+        InspectionMonth_ComboBox.Visible = True
+        InspectionMonth_ComboBox.Visible = False
+
+        InsuranceCompany_ComboBox.Visible = True
+        InsuranceCompany_ComboBox.Visible = False
+
         Make_ComboBox.Visible = True
         Make_ComboBox.Visible = False
 
@@ -266,42 +285,26 @@
         End If
 
         ' INITIALIZE CUSTOMERCOMBOBOX (And All other preliminaries) FOR FIRST TIME
-        InitializeCustomerComboBox()
-        CustomerComboBox.SelectedIndex = -1
         InitializeAllPreliminaryComboBoxes()
+        InitializeCustomerComboBox()
+        CustomerComboBox.SelectedIndex = 0
 
     End Sub
+
+
 
 
     ' **************** CONTROL SUBS ****************
 
 
-    ' Used to prevent combobox from changing index on leave/lose focus. Still needs restricted, however, when Enter used
-    Dim CustomerComboBoxleave As Boolean = False
-    Dim selectedIndex As Integer = -1
+    Private Sub CustomerComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CustomerComboBox.SelectedIndexChanged, CustomerComboBox.TextChanged
 
-    Private Sub CustomerComboBox_Leave(sender As Object, e As EventArgs) Handles CustomerComboBox.Leave
-        CustomerComboBoxleave = True
-        selectedIndex = CustomerComboBox.SelectedIndex
-    End Sub
-
-    Private Sub CustomerComboBox_Enter(sender As Object, e As EventArgs) Handles CustomerComboBox.Enter
-        CustomerComboBoxleave = False
-    End Sub
-
-    Private Sub CustomerComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CustomerComboBox.SelectedIndexChanged
-
-        If CustomerComboBoxleave Then
-            CustomerComboBox.SelectedIndex = selectedIndex
-            CustomerComboBoxleave = False
-        End If
-
-        ' Ensure that CustomerCombobox is not being initialized and not on invalid selectedIndex
-        If Not valuesInitialized Or CustomerComboBox.SelectedIndex = -1 Then
+        ' Ensure that CustomerCombobox is only enabling user to select vehicle if valid index selected
+        If CustomerComboBox.SelectedIndex = -1 Then
 
             ' If not already, clear and empty the VehicleComboBox
             If VehicleComboBox.Text <> String.Empty And VehicleComboBox.Items.Count <> 0 Then
-                'VehicleComboBox.Items.Clear()
+                VehicleComboBox.Items.Clear()
                 VehicleComboBox.Text = String.Empty
             End If
             VehicleComboBox.Visible = False
@@ -313,23 +316,25 @@
 
         End If
 
-        CustomerRow = -1    ' guilty until proven innocent
-
-        Dim escapedText As String = escapeLikeValues(CustomerComboBox.Text)
-        Dim rows() As DataRow = CustomerDbController.DbDataTable.Select("CLF LIKE '" & escapedText & "' AND CustomerId = '" & CustomerComboBox.SelectedValue & "'")
-        If rows.Count <> 0 Then
-            CustomerRow = CustomerDbController.DbDataTable.Rows.IndexOf(rows(0))
-        End If
+        CustomerRow = getDataTableRow(CustomerDbController.DbDataTable, "CLFA", CustomerComboBox.Text)
 
         If CustomerRow <> -1 Then
 
-            ' CustomerRow doesn't mean anything to vehicleComboBox. VehicleComboBox query only concerned about the selectedValue (Customer Id)
-            'CustomerId = CustomerComboBox.SelectedValue
-            CustomerId = CustomerComboBox.SelectedValue
+            ' CustomerRow doesn't mean anything to vehicleComboBox. VehicleComboBox query only concerned about the CustomerId
+            ' So, if the customer entered in CustomerComboBox exists (valid CLFA), then lookup the corresponding ID
+            CustomerId = CustomerDbController.DbDataTable(CustomerRow)("CustomerId")
+
+            ' Then, load the vehicleDataTable and initialize vehicleComboBox based on this newfound CustomerId
             loadVehicleDataTable()
             InitializeVehicleComboBox()
-            initializeControlsFromRow(VehicleDbController.DbDataTable, 0, "dataViewingControl", "_", Me)
+            VehicleComboBox.Visible = True
+            VehicleLabel.Visible = True
+            VehicleComboBox.SelectedIndex = 0
 
+            ' Enable user to Add new model under valid manufacturer
+            addButton.Enabled = True
+
+            'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
 
             ' If not already, clear and empty the VehicleComboBox
