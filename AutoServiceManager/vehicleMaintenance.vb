@@ -789,69 +789,205 @@
 
     Private Sub Model_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Model_ComboBox.SelectedIndexChanged, Model_ComboBox.TextChanged
 
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
 
     Private Sub makeYear_Textbox_TextChanged(sender As Object, e As EventArgs) Handles makeYear_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
     Private Sub Color_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Color_ComboBox.SelectedIndexChanged, Color_ComboBox.TextChanged
 
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
 
     Private Sub LicenseState_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LicenseState_ComboBox.SelectedIndexChanged, LicenseState_ComboBox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
     Private Sub LicensePlate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LicensePlate_Textbox.TextChanged
 
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
 
     Private Sub VIN_Textbox_TextChanged(sender As Object, e As EventArgs) Handles VIN_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
     Private Sub InspectionMonth_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InspectionMonth_ComboBox.SelectedIndexChanged, InspectionMonth_ComboBox.TextChanged
 
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
 
     Private Sub InspectionStickerNbr_Textbox_TextChanged(sender As Object, e As EventArgs) Handles InspectionStickerNbr_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
     Private Sub InsuranceCompany_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InsuranceCompany_ComboBox.SelectedIndexChanged, InsuranceCompany_ComboBox.TextChanged
 
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
 
     Private Sub PolicyNumber_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PolicyNumber_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
     Private Sub ExpirationDate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ExpirationDate_Textbox.TextChanged
 
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
 
     Private Sub Alarm_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles Alarm_CheckBox.CheckedChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
     Private Sub ABS_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles ABS_CheckBox.CheckedChanged
 
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
 
     Private Sub AirBags_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles AirBags_CheckBox.CheckedChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
     Private Sub AC_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles AC_CheckBox.CheckedChanged
 
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
 
     Private Sub Engine_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Engine_Textbox.TextChanged
 
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
 
     Private Sub Notes_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Notes_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
