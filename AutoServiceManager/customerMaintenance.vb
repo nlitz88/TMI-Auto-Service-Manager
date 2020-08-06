@@ -438,6 +438,7 @@
 
         ' Ensure that CustomerCombobox is only attempting to initialize values when on proper selected Index
         If CustomerComboBox.SelectedIndex = -1 Then
+
             ' Have all labels and corresponding values hidden
             showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
             showHide(getAllControlsWithTag("dataLabel", Me), 0)
@@ -446,6 +447,7 @@
             editButton.Enabled = False
             deleteButton.Enabled = False
             Exit Sub
+
         End If
 
         ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid
@@ -457,7 +459,6 @@
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
             InitializeAllDataViewingControls()
-            ' Set ZipCode (or pre-initilized ComboBoxes) selectedIndex = -1 ?
             valuesInitialized = True
 
             ' Show labels and corresponding values

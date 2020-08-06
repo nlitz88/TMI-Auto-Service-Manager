@@ -339,6 +339,7 @@
 
         End If
 
+        ' Lookup newly selected row and see if it is valid (valid if it corresponds with a datatable row)
         CustomerRow = getDataTableRow(CustomerDbController.DbDataTable, "CLFA", CustomerComboBox.Text)
 
         If CustomerRow <> -1 Then
@@ -374,6 +375,56 @@
 
         End If
 
+    End Sub
+
+    Private Sub VehicleComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles VehicleComboBox.SelectedIndexChanged, VehicleComboBox.TextChanged
+
+        ' Ensure that CustomerCombobox is only attempting to initialize values when on proper selected Index
+        If VehicleComboBox.SelectedIndex = -1 Then
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            ' Disable editing button
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+            Exit Sub
+
+        End If
+
+        ' Lookup newly selected row and see if it is valid (valid if it corresponds with a datatable row)
+        VehicleRow = getDataTableRow(CustomerDbController.DbDataTable, "YMML", VehicleComboBox.Text)
+
+        ' If this query DOES return a valid row index, then initialize respective controls
+        If VehicleRow <> -1 Then
+
+            ' Initialize corresponding controls from DataTable values
+            valuesInitialized = False
+            InitializeAllDataViewingControls()
+            valuesInitialized = True
+
+            ' Show labels and corresponding values
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+            showHide(getAllControlsWithTag("dataLabel", Me), 1)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+            ' Enable editing and deleting button
+            editButton.Enabled = True
+            deleteButton.Enabled = True
+
+            'If it does = -1, that means that value Is either "Select one" Or some other anomoly
+        Else
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            ' Disable editing button
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+
+        End If
 
     End Sub
 
