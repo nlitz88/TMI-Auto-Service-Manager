@@ -399,7 +399,7 @@
         If Not isValidLength("Model", False, Model_ComboBox.Text, 20, errorMessage) Then
             Model_ComboBox.ForeColor = Color.Red
         ElseIf Model_ComboBox.SelectedIndex = -1 Then
-            errorMessage += "ERROR: " & Model_ComboBox.Text & " is not a valid model" & vbNewLine
+            errorMessage += "ERROR: " & Model_ComboBox.Text & " is not a valid model of " & Make_ComboBox.Text & vbNewLine
             Model_ComboBox.ForeColor = Color.Red
         End If
 
@@ -636,9 +636,6 @@
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
             InitializeAllDataViewingControls()
-            ' load car models based on auto make, then initialize
-            loadCarModelsDataTable()
-            InitializeModelComboBox()
             valuesInitialized = True
 
             ' Show labels and corresponding values
@@ -748,6 +745,9 @@
         ' Initialize values for dataEditingControls
         valuesInitialized = False
         InitializeVehicleDataEditingControls()
+        ' load car models based on auto make, then initialize
+        loadCarModelsDataTable()
+        InitializeModelComboBox()
         valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialVehicleValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
