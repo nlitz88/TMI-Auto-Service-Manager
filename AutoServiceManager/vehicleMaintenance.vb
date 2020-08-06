@@ -198,16 +198,6 @@
 
     End Sub
 
-    ' Sub that initializes the DataEditingControls (Model_ComboBox) based on value in Make_ComboBox
-    Private Sub InitializeCarModelDataEditingControls()
-
-        loadCarModelsDataTable()
-        InitializeModelComboBox()
-        Model_ComboBox.SelectedIndex = -1
-
-    End Sub
-
-
 
     ' Loads datatable from Vehicle database table based on CustomerId
     Private Function loadVehicleDataTable() As Boolean
@@ -477,6 +467,9 @@
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
             InitializeAllDataViewingControls()
+            ' load car models based on auto make, then initialize
+            loadCarModelsDataTable()
+            InitializeModelComboBox()
             valuesInitialized = True
 
             ' Show labels and corresponding values
@@ -772,6 +765,25 @@
 
 
     Private Sub Make_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Make_ComboBox.SelectedIndexChanged, Make_ComboBox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        ' If value selected/typed in exists in the combobox (and inherently, in the manufacturers datatable), then the selectedIndex <> -1.
+        ' If does automake does exist, then initialize ModelComboBox respectively
+        If Make_ComboBox.SelectedIndex <> -1 Then
+
+            loadCarModelsDataTable()
+            InitializeModelComboBox()
+            Model_ComboBox.SelectedIndex = -1
+            Model_ComboBox.Text = String.Empty
+
+        End If
+
+        If InitialVehicleValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
