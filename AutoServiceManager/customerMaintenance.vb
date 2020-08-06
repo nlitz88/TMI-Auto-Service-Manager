@@ -618,7 +618,7 @@
 
         ElseIf mode = "adding" Then
 
-            ' 1.) SET PartComboBox BACKK TO LAST SELECTED ITEM/INDEX
+            ' 1.) SET CustomerComboBox BACKK TO LAST SELECTED ITEM/INDEX
             CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(lastSelected)
 
             ' 2.) IF LAST SELECTED WAS "SELECT ONE", Then simulate functionality from combobox text/selectedIndex changed
