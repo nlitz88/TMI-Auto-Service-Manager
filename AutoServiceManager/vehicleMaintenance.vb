@@ -134,7 +134,7 @@
     Private Sub InitializeInsuranceComboBox()
 
         InsuranceCompany_ComboBox.Items.Clear()
-        Make_ComboBox.BeginUpdate()
+        InsuranceCompany_ComboBox.BeginUpdate()
         For Each row In InsuranceCompanyDbController.DbDataTable.Rows
             InsuranceCompany_ComboBox.Items.Add(row("CompanyName"))
         Next
@@ -179,16 +179,13 @@
     ' Sub that initializes CarModelComboBox after valid AutoMakeComboBox selection has been made
     Private Sub InitializeVehicleComboBox()
 
-        valuesInitialized = False
-
-        'CustomerComboBox.FormattingEnabled = True
         VehicleComboBox.BeginUpdate()
-        VehicleComboBox.DisplayMember = "YMM"
-        VehicleComboBox.ValueMember = "VehicleId"
-        VehicleComboBox.DataSource = VehicleDbController.DbDataTable
+        VehicleComboBox.Items.Clear()
+        VehicleComboBox.Items.Add("Select One")
+        For Each row In VehicleDbController.DbDataTable.Rows
+            VehicleComboBox.Items.Add(row("YMM"))
+        Next
         VehicleComboBox.EndUpdate()
-
-        valuesInitialized = True
 
     End Sub
 
