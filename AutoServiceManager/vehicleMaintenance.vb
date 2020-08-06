@@ -771,11 +771,11 @@
     End Sub
 
 
-    Private Sub Make_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Make_ComboBox.SelectedIndexChanged
+    Private Sub Make_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Make_ComboBox.SelectedIndexChanged, Make_ComboBox.TextChanged
 
     End Sub
 
-    Private Sub Model_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Model_ComboBox.SelectedIndexChanged
+    Private Sub Model_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Model_ComboBox.SelectedIndexChanged, Model_ComboBox.TextChanged
 
     End Sub
 
@@ -783,11 +783,11 @@
 
     End Sub
 
-    Private Sub Color_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Color_ComboBox.SelectedIndexChanged
+    Private Sub Color_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Color_ComboBox.SelectedIndexChanged, Color_ComboBox.TextChanged
 
     End Sub
 
-    Private Sub LicenseState_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LicenseState_ComboBox.SelectedIndexChanged
+    Private Sub LicenseState_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LicenseState_ComboBox.SelectedIndexChanged, LicenseState_ComboBox.TextChanged
 
     End Sub
 
@@ -799,7 +799,7 @@
 
     End Sub
 
-    Private Sub InspectionMonth_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InspectionMonth_ComboBox.SelectedIndexChanged
+    Private Sub InspectionMonth_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InspectionMonth_ComboBox.SelectedIndexChanged, InspectionMonth_ComboBox.TextChanged
 
     End Sub
 
@@ -807,7 +807,7 @@
 
     End Sub
 
-    Private Sub InsuranceCompany_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InsuranceCompany_ComboBox.SelectedIndexChanged
+    Private Sub InsuranceCompany_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InsuranceCompany_ComboBox.SelectedIndexChanged, InsuranceCompany_ComboBox.TextChanged
 
     End Sub
 
@@ -815,7 +815,7 @@
 
     End Sub
 
-    Private Sub ExpirationDate_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles ExpirationDate_Textbox.MaskInputRejected
+    Private Sub ExpirationDate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ExpirationDate_Textbox.TextChanged
 
     End Sub
 
@@ -842,5 +842,6 @@
     Private Sub Notes_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Notes_Textbox.TextChanged
 
     End Sub
+
 
 End Class
