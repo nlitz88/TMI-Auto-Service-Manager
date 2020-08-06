@@ -327,6 +327,167 @@
 
 
 
+    ' **************** VALIDATION SUBS ****************
+
+
+    ' Sub that runs validation for all form controls. Also handles error reporting
+    Private Function controlsValid() As Boolean
+
+        Dim errorMessage As String = String.Empty
+
+        ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
+
+
+        ' CHECK IF YMML (Year, Make, Model, and LicensePlateNbr) NOT A DUPLICATE
+        If mode = "editing" Then
+
+            ' Get initial values (that make up YMML) to see if there changes are the same as initial
+            Dim makeYear As String = CustomerDbController.DbDataTable.Rows(CustomerRow)("makeYear").ToString().ToLower()
+            Dim Make As String = CustomerDbController.DbDataTable.Rows(CustomerRow)("Make").ToString().ToLower()
+            Dim Model As String = CustomerDbController.DbDataTable.Rows(CustomerRow)("Model").ToString().ToLower()
+            Dim LicensePlate As String = CustomerDbController.DbDataTable.Rows(CustomerRow)("LicensePlate").ToString().ToLower()
+
+            ' Only if the current values (that make up the YMML) are not equal to their initial values
+            If makeYear_Textbox.Text.ToLower() <> makeYear Or Make_ComboBox.Text.ToLower() <> Make Or Model_ComboBox.Text.ToLower() <> Model Or LicensePlate_Textbox.Text.ToLower() <> LicensePlate Then
+
+                ' Use query to check if row exists with all of these
+                Dim duplicateRows() As DataRow = CustomerDbController.DbDataTable.Select("makeYear LIKE '" & makeYear_Textbox.Text &
+                                                                                            "' AND Make LIKE '" & Make_ComboBox.Text &
+                                                                                            "' AND Model LIKE '" & Model_ComboBox.Text &
+                                                                                            "' AND LicensePlate LIKE '" & LicensePlate_Textbox.Text & "'")
+
+                If duplicateRows.Count <> 0 Then
+                    errorMessage += "ERROR: " & makeYear_Textbox.Text & " " & Make_ComboBox.Text & " " & Model_ComboBox.Text & "  -  " & LicensePlate_Textbox.Text & " already exists;" & vbNewLine &
+                                "Please modify Year, Make, Model, or License Plate" & vbNewLine
+                    makeYear_Textbox.ForeColor = Color.Red
+                    Make_ComboBox.ForeColor = Color.Red
+                    Model_ComboBox.ForeColor = Color.Red
+                    LicensePlate_Textbox.ForeColor = Color.Red
+                End If
+
+            End If
+
+
+        ElseIf mode = "adding" Then
+
+            ' Use query to check if row exists with all of these
+            Dim duplicateRows() As DataRow = CustomerDbController.DbDataTable.Select("makeYear LIKE '" & makeYear_Textbox.Text &
+                                                                                            "' AND Make LIKE '" & Make_ComboBox.Text &
+                                                                                            "' AND Model LIKE '" & Model_ComboBox.Text &
+                                                                                            "' AND LicensePlate LIKE '" & LicensePlate_Textbox.Text & "'")
+
+            If duplicateRows.Count <> 0 Then
+                errorMessage += "ERROR: " & makeYear_Textbox.Text & " " & Make_ComboBox.Text & " " & Model_ComboBox.Text & "  -  " & LicensePlate_Textbox.Text & " already exists;" & vbNewLine &
+                                "Please modify Year, Make, Model, or License Plate" & vbNewLine
+                makeYear_Textbox.ForeColor = Color.Red
+                Make_ComboBox.ForeColor = Color.Red
+                Model_ComboBox.ForeColor = Color.Red
+                LicensePlate_Textbox.ForeColor = Color.Red
+            End If
+
+        End If
+
+        ' Manufacturer
+        If Not isValidLength("Manufacturer", False, Make_ComboBox.Text, 20, errorMessage) Then
+            Make_ComboBox.ForeColor = Color.Red
+        ElseIf Make_ComboBox.SelectedIndex = -1 Then
+            errorMessage += "ERROR: " & Make_ComboBox.Text & " is not a valid manufacturer" & vbNewLine
+        End If
+
+        ' Model
+        If Not isValidLength("Model", False, Model_ComboBox.Text, 20, errorMessage) Then
+            Model_ComboBox.ForeColor = Color.Red
+        ElseIf Model_ComboBox.SelectedIndex = -1 Then
+            errorMessage += "ERROR: " & Model_ComboBox.Text & " is not a valid model" & vbNewLine
+        End If
+
+        ' Year
+        If Not isValidLength("Year", False, makeYear_Textbox.Text, 14, errorMessage) Then
+            makeYear_Textbox.ForeColor = Color.Red
+        End If
+
+        ' Color
+        If Not isValidLength("Color", False, Color_ComboBox.Text, 20, errorMessage) Then
+            Color_ComboBox.ForeColor = Color.Red
+        ElseIf Color_ComboBox.SelectedIndex = -1 Then
+            errorMessage += "ERROR: " & Color_ComboBox.Text & " is not a valid color" & vbNewLine
+        End If
+
+        ' License State
+        If Not isValidLength("License State", False, LicenseState_ComboBox.Text, 2, errorMessage) Then
+            LicenseState_ComboBox.ForeColor = Color.Red
+        ElseIf LicenseState_ComboBox.SelectedIndex = -1 Then
+            errorMessage += "ERROR: " & LicenseState_ComboBox.Text & " is not a valid State" & vbNewLine
+        End If
+
+        ' License Plate
+        If Not isValidLength("License Plate", False, LicensePlate_Textbox.Text, 10, errorMessage) Then
+            LicensePlate_Textbox.ForeColor = Color.Red
+        End If
+
+        ' VIN
+        If Not isValidLength("VIN", False, VIN_Textbox.Text, 20, errorMessage) Then
+            VIN_Textbox.ForeColor = Color.Red
+        End If
+
+        ' Inspection Month
+        If Not isValidLength("Inspection Month", False, InspectionMonth_ComboBox.Text, 3, errorMessage) Then
+            InspectionMonth_ComboBox.ForeColor = Color.Red
+        ElseIf InspectionMonth_ComboBox.SelectedIndex = -1 Then
+            errorMessage += "ERROR: " & InspectionMonth_ComboBox.Text & " is not a valid Month" & vbNewLine
+        End If
+
+        ' Inspection Sticker Number
+        If Not isValidLength("Inspection Sticker Number", False, InspectionStickerNbr_Textbox.Text, 15, errorMessage) Then
+            InspectionStickerNbr_Textbox.ForeColor = Color.Red
+        End If
+
+        ' Insurance Company
+        If Not isValidLength("Insurance Company", False, InsuranceCompany_ComboBox.Text, 100, errorMessage) Then
+            InsuranceCompany_ComboBox.ForeColor = Color.Red
+        ElseIf InsuranceCompany_ComboBox.SelectedIndex = -1 Then
+            errorMessage += "ERROR: " & InsuranceCompany_ComboBox.Text & " is not a valid Insurance Company" & vbNewLine
+        End If
+
+        ' Policy Number
+        If Not isValidLength("Policy Number", False, PolicyNumber_Textbox.Text, 20, errorMessage) Then
+            PolicyNumber_Textbox.ForeColor = Color.Red
+        End If
+
+        ' Expiration Date
+        ' MAKE VALIDDATETIME FUNCTION
+        If Not isEmpty("Expiration Date", False, ExpirationDate_Textbox.Text, errorMessage) Then
+            If ExpirationDate_Textbox.Text.Length < 9 Then
+                errorMessage += "ERROR: " & ExpirationDate_Textbox.Text & " is not a valid Date" & vbNewLine
+            End If
+        End If
+
+        ' Engine
+        If Not isValidLength("Engine", False, Engine_Textbox.Text, 20, errorMessage) Then
+            Engine_Textbox.ForeColor = Color.Red
+        End If
+
+        ' Notes
+        If Not isValidLength("Notes", False, Notes_Textbox.Text, 255, errorMessage) Then
+            Notes_Textbox.ForeColor = Color.Red
+        End If
+
+
+        ' Check if any invalid input has been found
+        If Not String.IsNullOrEmpty(errorMessage) Then
+
+            MessageBox.Show(errorMessage, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+
+        End If
+
+        Return True
+
+    End Function
+
+
+
+
 
     Private Sub vehicleMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -776,6 +937,16 @@
             InitializeModelComboBox()
             Model_ComboBox.SelectedIndex = -1
             Model_ComboBox.Text = String.Empty
+
+            ' If the selected index is -1, then clear out the model combobox
+        Else
+
+            ' If not already, clear and empty the VehicleComboBox
+            If Model_ComboBox.Text <> String.Empty And Model_ComboBox.Items.Count <> 0 Then
+                Model_ComboBox.Items.Clear()
+                Model_ComboBox.Text = String.Empty
+            End If
+            Model_ComboBox.SelectedIndex = -1
 
         End If
 
