@@ -217,6 +217,7 @@ Partial Class vehicleMaintenance
         Me.Alarm_Value.Size = New System.Drawing.Size(0, 20)
         Me.Alarm_Value.TabIndex = 178
         Me.Alarm_Value.Tag = "dataViewingControl"
+        Me.Alarm_Value.Visible = False
         '
         'Alarm_CheckBox
         '
@@ -239,6 +240,7 @@ Partial Class vehicleMaintenance
         Me.AlarmLabel.TabIndex = 205
         Me.AlarmLabel.Tag = "dataLabel"
         Me.AlarmLabel.Text = "Alarm System :"
+        Me.AlarmLabel.Visible = False
         '
         'VIN_Value
         '
@@ -250,6 +252,7 @@ Partial Class vehicleMaintenance
         Me.VIN_Value.Size = New System.Drawing.Size(0, 20)
         Me.VIN_Value.TabIndex = 188
         Me.VIN_Value.Tag = "dataViewingControl"
+        Me.VIN_Value.Visible = False
         '
         'VINLabel
         '
@@ -261,6 +264,7 @@ Partial Class vehicleMaintenance
         Me.VINLabel.TabIndex = 187
         Me.VINLabel.Tag = "dataLabel"
         Me.VINLabel.Text = "VIN :"
+        Me.VINLabel.Visible = False
         '
         'VIN_Textbox
         '
@@ -283,6 +287,7 @@ Partial Class vehicleMaintenance
         Me.Make_Value.Size = New System.Drawing.Size(0, 20)
         Me.Make_Value.TabIndex = 180
         Me.Make_Value.Tag = "dataViewingControl"
+        Me.Make_Value.Visible = False
         '
         'ManufacturerLabel
         '
@@ -294,6 +299,7 @@ Partial Class vehicleMaintenance
         Me.ManufacturerLabel.TabIndex = 179
         Me.ManufacturerLabel.Tag = "dataLabel"
         Me.ManufacturerLabel.Text = "Manufacturer :"
+        Me.ManufacturerLabel.Visible = False
         '
         'Model_Value
         '
@@ -305,6 +311,7 @@ Partial Class vehicleMaintenance
         Me.Model_Value.Size = New System.Drawing.Size(0, 20)
         Me.Model_Value.TabIndex = 209
         Me.Model_Value.Tag = "dataViewingControl"
+        Me.Model_Value.Visible = False
         '
         'ModelLabel
         '
@@ -316,6 +323,7 @@ Partial Class vehicleMaintenance
         Me.ModelLabel.TabIndex = 208
         Me.ModelLabel.Tag = "dataLabel"
         Me.ModelLabel.Text = "Model :"
+        Me.ModelLabel.Visible = False
         '
         'Make_ComboBox
         '
@@ -355,6 +363,7 @@ Partial Class vehicleMaintenance
         Me.makeYear_Value.Size = New System.Drawing.Size(0, 20)
         Me.makeYear_Value.TabIndex = 215
         Me.makeYear_Value.Tag = "dataViewingControl"
+        Me.makeYear_Value.Visible = False
         '
         'YearLabel
         '
@@ -366,6 +375,7 @@ Partial Class vehicleMaintenance
         Me.YearLabel.TabIndex = 214
         Me.YearLabel.Tag = "dataLabel"
         Me.YearLabel.Text = "Year :"
+        Me.YearLabel.Visible = False
         '
         'makeYear_Textbox
         '
@@ -402,6 +412,7 @@ Partial Class vehicleMaintenance
         Me.Color_Value.Size = New System.Drawing.Size(0, 20)
         Me.Color_Value.TabIndex = 217
         Me.Color_Value.Tag = "dataViewingControl"
+        Me.Color_Value.Visible = False
         '
         'ColorLabel
         '
@@ -413,6 +424,7 @@ Partial Class vehicleMaintenance
         Me.ColorLabel.TabIndex = 216
         Me.ColorLabel.Tag = "dataLabel"
         Me.ColorLabel.Text = "Color :"
+        Me.ColorLabel.Visible = False
         '
         'LicenseState_ComboBox
         '
@@ -438,6 +450,7 @@ Partial Class vehicleMaintenance
         Me.LicenseState_Value.Size = New System.Drawing.Size(0, 20)
         Me.LicenseState_Value.TabIndex = 220
         Me.LicenseState_Value.Tag = "dataViewingControl"
+        Me.LicenseState_Value.Visible = False
         '
         'LicenseStateLabel
         '
@@ -449,6 +462,7 @@ Partial Class vehicleMaintenance
         Me.LicenseStateLabel.TabIndex = 219
         Me.LicenseStateLabel.Tag = "dataLabel"
         Me.LicenseStateLabel.Text = "License State :"
+        Me.LicenseStateLabel.Visible = False
         '
         'LicensePlate_Value
         '
@@ -460,6 +474,7 @@ Partial Class vehicleMaintenance
         Me.LicensePlate_Value.Size = New System.Drawing.Size(0, 20)
         Me.LicensePlate_Value.TabIndex = 224
         Me.LicensePlate_Value.Tag = "dataViewingControl"
+        Me.LicensePlate_Value.Visible = False
         '
         'LicensePlateLabel
         '
@@ -471,6 +486,7 @@ Partial Class vehicleMaintenance
         Me.LicensePlateLabel.TabIndex = 223
         Me.LicensePlateLabel.Tag = "dataLabel"
         Me.LicensePlateLabel.Text = "License Plate :"
+        Me.LicensePlateLabel.Visible = False
         '
         'LicensePlate_Textbox
         '
@@ -507,6 +523,7 @@ Partial Class vehicleMaintenance
         Me.InspectionMonth_Value.Size = New System.Drawing.Size(0, 20)
         Me.InspectionMonth_Value.TabIndex = 226
         Me.InspectionMonth_Value.Tag = "dataViewingControl"
+        Me.InspectionMonth_Value.Visible = False
         '
         'InspectionMonthLabel
         '
@@ -518,6 +535,7 @@ Partial Class vehicleMaintenance
         Me.InspectionMonthLabel.TabIndex = 225
         Me.InspectionMonthLabel.Tag = "dataLabel"
         Me.InspectionMonthLabel.Text = "Inspection Month :"
+        Me.InspectionMonthLabel.Visible = False
         '
         'InsuranceCompany_ComboBox
         '
@@ -543,6 +561,7 @@ Partial Class vehicleMaintenance
         Me.InsuranceCompany_Value.Size = New System.Drawing.Size(0, 20)
         Me.InsuranceCompany_Value.TabIndex = 229
         Me.InsuranceCompany_Value.Tag = "dataViewingControl"
+        Me.InsuranceCompany_Value.Visible = False
         '
         'InsuranceCompanyLabel
         '
@@ -554,6 +573,7 @@ Partial Class vehicleMaintenance
         Me.InsuranceCompanyLabel.TabIndex = 228
         Me.InsuranceCompanyLabel.Tag = "dataLabel"
         Me.InsuranceCompanyLabel.Text = "Insurance Company :"
+        Me.InsuranceCompanyLabel.Visible = False
         '
         'InspectionStickerNbr_Value
         '
@@ -565,6 +585,7 @@ Partial Class vehicleMaintenance
         Me.InspectionStickerNbr_Value.Size = New System.Drawing.Size(0, 20)
         Me.InspectionStickerNbr_Value.TabIndex = 233
         Me.InspectionStickerNbr_Value.Tag = "dataViewingControl"
+        Me.InspectionStickerNbr_Value.Visible = False
         '
         'InspectionStickerNbrLabel
         '
@@ -576,6 +597,7 @@ Partial Class vehicleMaintenance
         Me.InspectionStickerNbrLabel.TabIndex = 232
         Me.InspectionStickerNbrLabel.Tag = "dataLabel"
         Me.InspectionStickerNbrLabel.Text = "Inspection Sticker Number :"
+        Me.InspectionStickerNbrLabel.Visible = False
         '
         'InspectionStickerNbr_Textbox
         '
@@ -598,6 +620,7 @@ Partial Class vehicleMaintenance
         Me.PolicyNumber_Value.Size = New System.Drawing.Size(0, 20)
         Me.PolicyNumber_Value.TabIndex = 236
         Me.PolicyNumber_Value.Tag = "dataViewingControl"
+        Me.PolicyNumber_Value.Visible = False
         '
         'PolicyNumberLabel
         '
@@ -609,6 +632,7 @@ Partial Class vehicleMaintenance
         Me.PolicyNumberLabel.TabIndex = 235
         Me.PolicyNumberLabel.Tag = "dataLabel"
         Me.PolicyNumberLabel.Text = "Policy Number :"
+        Me.PolicyNumberLabel.Visible = False
         '
         'PolicyNumber_Textbox
         '
@@ -631,6 +655,7 @@ Partial Class vehicleMaintenance
         Me.ExpirationDate_Value.Size = New System.Drawing.Size(0, 20)
         Me.ExpirationDate_Value.TabIndex = 239
         Me.ExpirationDate_Value.Tag = "dataViewingControl"
+        Me.ExpirationDate_Value.Visible = False
         '
         'ExpirationDateLabel
         '
@@ -642,6 +667,7 @@ Partial Class vehicleMaintenance
         Me.ExpirationDateLabel.TabIndex = 238
         Me.ExpirationDateLabel.Tag = "dataLabel"
         Me.ExpirationDateLabel.Text = "Expiration Date :"
+        Me.ExpirationDateLabel.Visible = False
         '
         'ExpirationDate_Textbox
         '
@@ -678,6 +704,7 @@ Partial Class vehicleMaintenance
         Me.ABS_Value.Size = New System.Drawing.Size(0, 20)
         Me.ABS_Value.TabIndex = 242
         Me.ABS_Value.Tag = "dataViewingControl"
+        Me.ABS_Value.Visible = False
         '
         'ABS_CheckBox
         '
@@ -700,6 +727,7 @@ Partial Class vehicleMaintenance
         Me.ABSLabel.TabIndex = 243
         Me.ABSLabel.Tag = "dataLabel"
         Me.ABSLabel.Text = "ABS Brakes :"
+        Me.ABSLabel.Visible = False
         '
         'AirBags_Value
         '
@@ -711,6 +739,7 @@ Partial Class vehicleMaintenance
         Me.AirBags_Value.Size = New System.Drawing.Size(0, 20)
         Me.AirBags_Value.TabIndex = 245
         Me.AirBags_Value.Tag = "dataViewingControl"
+        Me.AirBags_Value.Visible = False
         '
         'AirBags_CheckBox
         '
@@ -733,6 +762,7 @@ Partial Class vehicleMaintenance
         Me.AirbagsLabel.TabIndex = 246
         Me.AirbagsLabel.Tag = "dataLabel"
         Me.AirbagsLabel.Text = "AirBags :"
+        Me.AirbagsLabel.Visible = False
         '
         'AC_Value
         '
@@ -744,6 +774,7 @@ Partial Class vehicleMaintenance
         Me.AC_Value.Size = New System.Drawing.Size(0, 20)
         Me.AC_Value.TabIndex = 248
         Me.AC_Value.Tag = "dataViewingControl"
+        Me.AC_Value.Visible = False
         '
         'AC_CheckBox
         '
@@ -766,6 +797,7 @@ Partial Class vehicleMaintenance
         Me.ACLabel.TabIndex = 249
         Me.ACLabel.Tag = "dataLabel"
         Me.ACLabel.Text = "A/C :"
+        Me.ACLabel.Visible = False
         '
         'Engine_Value
         '
@@ -777,6 +809,7 @@ Partial Class vehicleMaintenance
         Me.Engine_Value.Size = New System.Drawing.Size(0, 20)
         Me.Engine_Value.TabIndex = 253
         Me.Engine_Value.Tag = "dataViewingControl"
+        Me.Engine_Value.Visible = False
         '
         'EngineLabel
         '
@@ -788,6 +821,7 @@ Partial Class vehicleMaintenance
         Me.EngineLabel.TabIndex = 252
         Me.EngineLabel.Tag = "dataLabel"
         Me.EngineLabel.Text = "Engine :"
+        Me.EngineLabel.Visible = False
         '
         'Engine_Textbox
         '
@@ -810,6 +844,7 @@ Partial Class vehicleMaintenance
         Me.Notes_Value.Size = New System.Drawing.Size(0, 20)
         Me.Notes_Value.TabIndex = 256
         Me.Notes_Value.Tag = "dataViewingControl"
+        Me.Notes_Value.Visible = False
         '
         'NotesLabel
         '
@@ -821,6 +856,7 @@ Partial Class vehicleMaintenance
         Me.NotesLabel.TabIndex = 255
         Me.NotesLabel.Tag = "dataLabel"
         Me.NotesLabel.Text = "Notes :"
+        Me.NotesLabel.Visible = False
         '
         'Notes_Textbox
         '
