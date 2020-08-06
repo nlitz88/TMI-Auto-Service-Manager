@@ -638,4 +638,117 @@
     End Sub
 
 
+    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+
+        Dim decision As DialogResult = MessageBox.Show("Save Changes?", "Confirm Changes", MessageBoxButtons.YesNo)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                If mode = "editing" Then
+
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    'If Not controlsValid() Then Exit Sub
+
+                    ' 2.) UPDATE DATATABLE(S), THEN UPDATE DATABASE
+                    If Not updateAll() Then
+                        MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    Else
+                        MessageBox.Show("Successfully updated Vehicles")
+                    End If
+
+                    ' 3.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadVehicleDataTable() Then
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+
+                    ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                    InitializeVehicleComboBox()
+
+                    ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
+                    ' If insertion failed, then revert selected back to lastSelected
+                    Dim currentVehicleId As Integer = VehicleDbController.DbDataTable.Rows(VehicleRow)("VehicleId")
+                    Dim updatedItem As String = getRowValueWithKeyEquals(VehicleDbController.DbDataTable, "YMML", "VehicleId", currentVehicleId)
+                    If updatedItem <> Nothing Then
+                        VehicleComboBox.SelectedIndex = VehicleComboBox.Items.IndexOf(updatedItem)
+                    Else
+                        VehicleComboBox.SelectedIndex = VehicleComboBox.Items.IndexOf(lastSelectedVehicle)
+                    End If
+
+
+                    ' dataViewingControl values reinitialized, as well as dataControls hide/show in combobox text/selectedindex change event
+
+                    ' 5.) MOVE UI OUT OF EDITING MODE
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+                    nav.EnableAll()
+                    CustomerComboBox.Enabled = True
+                    VehicleComboBox.Enabled = True
+
+                ElseIf mode = "adding" Then
+
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    'If Not controlsValid() Then Exit Sub
+
+                    ' 2.) INSERT NEW ROW INTO DATABASE
+                    If Not insertAll() Then
+                        MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    Else
+                        MessageBox.Show("Successfully added " & makeYear_Textbox.Text & " " & Make_ComboBox.Text & " " & Model_ComboBox.Text & " to Vehicles")
+                    End If
+
+                    ' 3.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadVehicleDataTable() Then
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+
+                    ' 4.) REINITIALIZE CONTROLS (based on index of newly inserted value)
+                    InitializeVehicleComboBox()
+
+                    ' Changing index of main combobox will also initialize respective dataViewing control values
+
+
+                    ' First, lookup most recent VehicleId added to the table
+                    CRUD.ExecQuery("SELECT VehicleId FROM Vehicle WHERE VehicleId=(SELECT max(VehicleId) FROM Vehicle)")
+                    Dim newVehicleId As Integer
+
+                    If CRUD.DbDataTable.Rows.Count <> 0 And Not CRUD.HasException(True) Then
+
+                        ' Get new VehicleId if query successful
+                        newVehicleId = CRUD.DbDataTable.Rows(0)("VehicleId")
+                        ' Get new ComboBox item from datatable using newly retrieved ID
+                        Dim newItem As String = getRowValueWithKeyEquals(CustomerDbController.DbDataTable, "YMML", "VehicleId", newVehicleId)
+
+                        ' Set ComboBox accordingly after one final check
+                        If newItem <> Nothing Then
+                            VehicleComboBox.SelectedIndex = VehicleComboBox.Items.IndexOf(newItem)
+                        Else
+                            VehicleComboBox.SelectedIndex = VehicleComboBox.Items.IndexOf(lastSelectedVehicle)
+                        End If
+
+                    Else
+                        VehicleComboBox.SelectedIndex = lastSelectedVehicle
+                    End If
+
+
+                    ' 5.) MOVE UI OUT OF Adding MODE
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+                    nav.EnableAll()
+                    CustomerComboBox.Enabled = True
+                    VehicleComboBox.Enabled = True
+
+                End If
+
+            Case DialogResult.No
+                ' Continue making changes or cancel editing
+        End Select
+
+    End Sub
+
+
 End Class

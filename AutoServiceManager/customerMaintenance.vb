@@ -745,7 +745,6 @@
                 ' Continue making changes or cancel editing
         End Select
 
-
     End Sub
 
     Private Sub LastName_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LastName_Textbox.TextChanged
