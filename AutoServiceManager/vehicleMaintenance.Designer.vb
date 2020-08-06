@@ -270,7 +270,7 @@ Partial Class vehicleMaintenance
         '
         Me.VIN_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.VIN_Textbox.Location = New System.Drawing.Point(141, 401)
-        Me.VIN_Textbox.MaxLength = 50
+        Me.VIN_Textbox.MaxLength = 20
         Me.VIN_Textbox.Name = "VIN_Textbox"
         Me.VIN_Textbox.Size = New System.Drawing.Size(315, 27)
         Me.VIN_Textbox.TabIndex = 171
@@ -332,7 +332,7 @@ Partial Class vehicleMaintenance
         Me.Make_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Make_ComboBox.FormattingEnabled = True
         Me.Make_ComboBox.Location = New System.Drawing.Point(203, 309)
-        Me.Make_ComboBox.MaxLength = 5
+        Me.Make_ComboBox.MaxLength = 20
         Me.Make_ComboBox.Name = "Make_ComboBox"
         Me.Make_ComboBox.Size = New System.Drawing.Size(204, 28)
         Me.Make_ComboBox.TabIndex = 211
@@ -346,7 +346,7 @@ Partial Class vehicleMaintenance
         Me.Model_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Model_ComboBox.FormattingEnabled = True
         Me.Model_ComboBox.Location = New System.Drawing.Point(473, 309)
-        Me.Model_ComboBox.MaxLength = 5
+        Me.Model_ComboBox.MaxLength = 20
         Me.Model_ComboBox.Name = "Model_ComboBox"
         Me.Model_ComboBox.Size = New System.Drawing.Size(204, 28)
         Me.Model_ComboBox.TabIndex = 212
@@ -381,7 +381,7 @@ Partial Class vehicleMaintenance
         '
         Me.makeYear_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.makeYear_Textbox.Location = New System.Drawing.Point(735, 309)
-        Me.makeYear_Textbox.MaxLength = 20
+        Me.makeYear_Textbox.MaxLength = 14
         Me.makeYear_Textbox.Name = "makeYear_Textbox"
         Me.makeYear_Textbox.Size = New System.Drawing.Size(92, 27)
         Me.makeYear_Textbox.TabIndex = 213
@@ -395,7 +395,7 @@ Partial Class vehicleMaintenance
         Me.Color_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Color_ComboBox.FormattingEnabled = True
         Me.Color_ComboBox.Location = New System.Drawing.Point(152, 355)
-        Me.Color_ComboBox.MaxLength = 5
+        Me.Color_ComboBox.MaxLength = 20
         Me.Color_ComboBox.Name = "Color_ComboBox"
         Me.Color_ComboBox.Size = New System.Drawing.Size(147, 28)
         Me.Color_ComboBox.TabIndex = 218
@@ -433,7 +433,7 @@ Partial Class vehicleMaintenance
         Me.LicenseState_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LicenseState_ComboBox.FormattingEnabled = True
         Me.LicenseState_ComboBox.Location = New System.Drawing.Point(413, 355)
-        Me.LicenseState_ComboBox.MaxLength = 5
+        Me.LicenseState_ComboBox.MaxLength = 2
         Me.LicenseState_ComboBox.Name = "LicenseState_ComboBox"
         Me.LicenseState_ComboBox.Size = New System.Drawing.Size(205, 28)
         Me.LicenseState_ComboBox.TabIndex = 221
@@ -492,7 +492,7 @@ Partial Class vehicleMaintenance
         '
         Me.LicensePlate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LicensePlate_Textbox.Location = New System.Drawing.Point(731, 355)
-        Me.LicensePlate_Textbox.MaxLength = 20
+        Me.LicensePlate_Textbox.MaxLength = 10
         Me.LicensePlate_Textbox.Name = "LicensePlate_Textbox"
         Me.LicensePlate_Textbox.Size = New System.Drawing.Size(126, 27)
         Me.LicensePlate_Textbox.TabIndex = 222
@@ -506,7 +506,7 @@ Partial Class vehicleMaintenance
         Me.InspectionMonth_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.InspectionMonth_ComboBox.FormattingEnabled = True
         Me.InspectionMonth_ComboBox.Location = New System.Drawing.Point(226, 445)
-        Me.InspectionMonth_ComboBox.MaxLength = 5
+        Me.InspectionMonth_ComboBox.MaxLength = 3
         Me.InspectionMonth_ComboBox.Name = "InspectionMonth_ComboBox"
         Me.InspectionMonth_ComboBox.Size = New System.Drawing.Size(73, 28)
         Me.InspectionMonth_ComboBox.TabIndex = 227
@@ -544,7 +544,7 @@ Partial Class vehicleMaintenance
         Me.InsuranceCompany_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.InsuranceCompany_ComboBox.FormattingEnabled = True
         Me.InsuranceCompany_ComboBox.Location = New System.Drawing.Point(244, 489)
-        Me.InsuranceCompany_ComboBox.MaxLength = 5
+        Me.InsuranceCompany_ComboBox.MaxLength = 100
         Me.InsuranceCompany_ComboBox.Name = "InsuranceCompany_ComboBox"
         Me.InsuranceCompany_ComboBox.Size = New System.Drawing.Size(305, 28)
         Me.InsuranceCompany_ComboBox.TabIndex = 230
@@ -603,7 +603,7 @@ Partial Class vehicleMaintenance
         '
         Me.InspectionStickerNbr_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.InspectionStickerNbr_Textbox.Location = New System.Drawing.Point(507, 445)
-        Me.InspectionStickerNbr_Textbox.MaxLength = 20
+        Me.InspectionStickerNbr_Textbox.MaxLength = 15
         Me.InspectionStickerNbr_Textbox.Name = "InspectionStickerNbr_Textbox"
         Me.InspectionStickerNbr_Textbox.Size = New System.Drawing.Size(229, 27)
         Me.InspectionStickerNbr_Textbox.TabIndex = 231
@@ -862,7 +862,7 @@ Partial Class vehicleMaintenance
         '
         Me.Notes_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Notes_Textbox.Location = New System.Drawing.Point(156, 664)
-        Me.Notes_Textbox.MaxLength = 20
+        Me.Notes_Textbox.MaxLength = 255
         Me.Notes_Textbox.Name = "Notes_Textbox"
         Me.Notes_Textbox.Size = New System.Drawing.Size(622, 27)
         Me.Notes_Textbox.TabIndex = 254
