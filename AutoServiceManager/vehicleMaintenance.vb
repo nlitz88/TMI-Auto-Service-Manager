@@ -335,6 +335,8 @@
             ' Disable user from adding new vehicle, as no valid Customer has been selected
             addButton.Enabled = False
 
+            Exit Sub
+
         End If
 
         CustomerRow = getDataTableRow(CustomerDbController.DbDataTable, "CLFA", CustomerComboBox.Text)
