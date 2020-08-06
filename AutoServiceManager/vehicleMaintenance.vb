@@ -771,7 +771,76 @@
     End Sub
 
 
+    Private Sub Make_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Make_ComboBox.SelectedIndexChanged
 
+    End Sub
 
+    Private Sub Model_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Model_ComboBox.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub makeYear_Textbox_TextChanged(sender As Object, e As EventArgs) Handles makeYear_Textbox.TextChanged
+
+    End Sub
+
+    Private Sub Color_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Color_ComboBox.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub LicenseState_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LicenseState_ComboBox.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub LicensePlate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LicensePlate_Textbox.TextChanged
+
+    End Sub
+
+    Private Sub VIN_Textbox_TextChanged(sender As Object, e As EventArgs) Handles VIN_Textbox.TextChanged
+
+    End Sub
+
+    Private Sub InspectionMonth_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InspectionMonth_ComboBox.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub InspectionStickerNbr_Textbox_TextChanged(sender As Object, e As EventArgs) Handles InspectionStickerNbr_Textbox.TextChanged
+
+    End Sub
+
+    Private Sub InsuranceCompany_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InsuranceCompany_ComboBox.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub PolicyNumber_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PolicyNumber_Textbox.TextChanged
+
+    End Sub
+
+    Private Sub ExpirationDate_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles ExpirationDate_Textbox.MaskInputRejected
+
+    End Sub
+
+    Private Sub Alarm_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles Alarm_CheckBox.CheckedChanged
+
+    End Sub
+
+    Private Sub ABS_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles ABS_CheckBox.CheckedChanged
+
+    End Sub
+
+    Private Sub AirBags_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles AirBags_CheckBox.CheckedChanged
+
+    End Sub
+
+    Private Sub AC_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles AC_CheckBox.CheckedChanged
+
+    End Sub
+
+    Private Sub Engine_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Engine_Textbox.TextChanged
+
+    End Sub
+
+    Private Sub Notes_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Notes_Textbox.TextChanged
+
+    End Sub
 
 End Class
