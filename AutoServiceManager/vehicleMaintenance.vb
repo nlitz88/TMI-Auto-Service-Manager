@@ -351,7 +351,7 @@
             If makeYear_Textbox.Text.ToLower() <> makeYear Or Make_ComboBox.Text.ToLower() <> Make Or Model_ComboBox.Text.ToLower() <> Model Or LicensePlate_Textbox.Text.ToLower() <> LicensePlate Then
 
                 ' Use query to check if row exists with all of these
-                Dim duplicateRows() As DataRow = VehicleDbController.DbDataTable.Select("makeYear LIKE '" & makeYear_Textbox.Text &
+                Dim duplicateRows() As DataRow = VehicleDbController.DbDataTable.Select("makeYear='" & Long.Parse(makeYear_Textbox.Text) &
                                                                                             "' AND Make LIKE '" & Make_ComboBox.Text &
                                                                                             "' AND Model LIKE '" & Model_ComboBox.Text &
                                                                                             "' AND LicensePlate LIKE '" & LicensePlate_Textbox.Text & "'")
@@ -371,7 +371,7 @@
         ElseIf mode = "adding" Then
 
             ' Use query to check if row exists with all of these
-            Dim duplicateRows() As DataRow = VehicleDbController.DbDataTable.Select("makeYear LIKE '" & makeYear_Textbox.Text &
+            Dim duplicateRows() As DataRow = VehicleDbController.DbDataTable.Select("makeYear='" & Long.Parse(makeYear_Textbox.Text) &
                                                                                             "' AND Make LIKE '" & Make_ComboBox.Text &
                                                                                             "' AND Model LIKE '" & Model_ComboBox.Text &
                                                                                             "' AND LicensePlate LIKE '" & LicensePlate_Textbox.Text & "'")
@@ -411,7 +411,7 @@
         ' Color
         If Not isValidLength("Color", False, Color_ComboBox.Text, 20, errorMessage) Then
             Color_ComboBox.ForeColor = Color.Red
-        ElseIf Color_ComboBox.SelectedIndex = -1 Then
+        ElseIf Color_ComboBox.SelectedIndex = -1 And Not String.IsNullOrWhiteSpace(Color_ComboBox.Text) Then
             errorMessage += "ERROR: " & Color_ComboBox.Text & " is not a valid color" & vbNewLine
             Color_ComboBox.ForeColor = Color.Red
         End If
