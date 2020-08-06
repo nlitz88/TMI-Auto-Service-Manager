@@ -82,7 +82,6 @@
             CustomerComboBox.Items.Add(row("CLFA"))
         Next
         CustomerComboBox.EndUpdate()
-        CustomerComboBox.SelectedIndex = 0
 
         'valuesInitialized = True
 

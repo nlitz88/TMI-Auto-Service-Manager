@@ -13,8 +13,6 @@
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
-    ' Initialize new lists to store certain row values of datatables (easily sorted and BINARY SEARCHED FOR SPEED)
-
     ' Initialize instance(s) of initialValues class
     Private InitialVehicleValues As New InitialValues()
 
@@ -22,9 +20,9 @@
     Private valuesInitialized As Boolean = True
 
     ' Row index variables used for DataTable lookups
-    Private CustomerRow As Integer
-    Private CustomerId As Integer
-    Private lastSelectedCustomer As String  ' Unecessary
+    Private CustomerRow As Integer              ' Used to keep track of which Customer CLFA selected
+    Private CustomerId As Integer               ' Maintains corresponding CustomerId to CLFA
+
     Private VehicleRow As Integer
     Private lastSelectedVehicle As String
 
@@ -44,7 +42,7 @@
     Private Function loadAllPreliminaryDataTables() As Boolean
 
         ' Loads datatable from Customer
-        CustomerDbController.ExecQuery("SELECT c.LastName + ', ' + IIF(ISNULL(c.FirstName), '', c.FirstName) as CLF, c.CustomerId, c.LastName " &
+        CustomerDbController.ExecQuery("SELECT c.LastName + ', ' + IIF(ISNULL(c.FirstName), '', c.FirstName) + ' @ ' + IIF(ISNULL(c.Address), '', c.Address) as CLFA, c.CustomerId, c.LastName " &
                                        "FROM Customer c " &
                                        "WHERE Trim(LastName) <> '' " &
                                        "ORDER BY c.LastName ASC")
@@ -62,105 +60,85 @@
     ' Sub that initializes Customer ComboBox
     Private Sub InitializeCustomerComboBox()
 
-        valuesInitialized = False
-
         CustomerComboBox.BeginUpdate()
-        CustomerComboBox.DisplayMember = "CLF"
-        CustomerComboBox.ValueMember = "CustomerId"
-        CustomerComboBox.DataSource = CustomerDbController.DbDataTable
+        CustomerComboBox.Items.Clear()
+        CustomerComboBox.Items.Add("Select One")
+        For Each row In CustomerDbController.DbDataTable.Rows
+            CustomerComboBox.Items.Add(row("CLFA"))
+        Next
         CustomerComboBox.EndUpdate()
-
-        valuesInitialized = True
 
     End Sub
 
     ' Sub that initializes MakeComboBox
     Private Sub InitializeMakeComboBox()
 
-        valuesInitialized = False
-
+        Make_ComboBox.Items.Clear()
         Make_ComboBox.BeginUpdate()
-        Make_ComboBox.DisplayMember = "Make"
-        Make_ComboBox.ValueMember = "Make"
-        Make_ComboBox.DataSource = MakeDbController.DbDataTable
+        For Each row In MakeDbController.DbDataTable.Rows
+            Make_ComboBox.Items.Add(row("AutoMake"))
+        Next
         Make_ComboBox.EndUpdate()
-
-        valuesInitialized = True
 
     End Sub
 
     ' Sub that initializes ModelComboBox
     Private Sub InitializeModelComboBox()
 
-        valuesInitialized = False
-
+        Model_ComboBox.Items.Clear()
         Model_ComboBox.BeginUpdate()
-        Model_ComboBox.DisplayMember = "Model"
-        Model_ComboBox.ValueMember = "Model"
-        Model_ComboBox.DataSource = ModelDbController.DbDataTable
+        For Each row In ModelDbController.DbDataTable.Rows
+            Model_ComboBox.Items.Add(row("AutoModel"))
+        Next
         Model_ComboBox.EndUpdate()
-
-        valuesInitialized = True
 
     End Sub
 
     ' Sub that initializes ColorComboBox
     Private Sub InitializeColorComboBox()
 
-        valuesInitialized = False
-
+        Color_ComboBox.Items.Clear()
         Color_ComboBox.BeginUpdate()
-        Color_ComboBox.DisplayMember = "Color"
-        Color_ComboBox.ValueMember = "Color"
-        Color_ComboBox.DataSource = ColorDbController.DbDataTable
+        For Each row In ColorDbController.DbDataTable.Rows
+            Color_ComboBox.Items.Add(row("Color"))
+        Next
         Color_ComboBox.EndUpdate()
-
-        valuesInitialized = True
 
     End Sub
 
     ' Sub that initializes StateComboBox
     Private Sub InitializeStateComboBox()
 
-        valuesInitialized = False
-
+        LicenseState_ComboBox.Items.Clear()
         LicenseState_ComboBox.BeginUpdate()
-        LicenseState_ComboBox.DisplayMember = "LicenseState"
-        LicenseState_ComboBox.ValueMember = "LicenseState"
-        LicenseState_ComboBox.DataSource = StateDbController.DbDataTable
+        For Each row In StateDbController.DbDataTable.Rows
+            LicenseState_ComboBox.Items.Add(row("State"))
+        Next
         LicenseState_ComboBox.EndUpdate()
-
-        valuesInitialized = True
 
     End Sub
 
     ' Sub that initializes MonthComboBox
     Private Sub InitializeMonthComboBox()
 
-        valuesInitialized = False
-
+        InspectionMonth_ComboBox.Items.Clear()
         InspectionMonth_ComboBox.BeginUpdate()
-        InspectionMonth_ComboBox.DisplayMember = "InspectionMonth"
-        InspectionMonth_ComboBox.ValueMember = "InspectionMonth"
-        InspectionMonth_ComboBox.DataSource = MonthDbController.DbDataTable
+        For Each row In MonthDbController.DbDataTable.Rows
+            InspectionMonth_ComboBox.Items.Add(row("Month"))
+        Next
         InspectionMonth_ComboBox.EndUpdate()
-
-        valuesInitialized = True
 
     End Sub
 
     ' Sub that initializes InsuranceComboBox
     Private Sub InitializeInsuranceComboBox()
 
-        valuesInitialized = False
-
-        InsuranceCompany_ComboBox.BeginUpdate()
-        InsuranceCompany_ComboBox.DisplayMember = "InsuranceCompany"
-        InsuranceCompany_ComboBox.ValueMember = "InsuranceCompany"
-        InsuranceCompany_ComboBox.DataSource = InsuranceCompanyDbController.DbDataTable
+        InsuranceCompany_ComboBox.Items.Clear()
+        Make_ComboBox.BeginUpdate()
+        For Each row In InsuranceCompanyDbController.DbDataTable.Rows
+            InsuranceCompany_ComboBox.Items.Add(row("CompanyName"))
+        Next
         InsuranceCompany_ComboBox.EndUpdate()
-
-        valuesInitialized = True
 
     End Sub
 
