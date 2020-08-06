@@ -32,8 +32,14 @@
     ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
 
 
+    ' Function that makes calls to all DbControllers for one-time "preliminary" datatable loading
+    Private Function loadAllPreliminaryDataTables() As Boolean
+
+    End Function
+
+
     ' Sub that will contain calls to all of the instances of the database controller class that loads data from the database into DataTables
-    Private Function loadDataTablesFromDatabase() As Boolean
+    Private Function loadCustomerDataTable() As Boolean
 
         CustomerDbController.ExecQuery("SELECT c.LastName + ', ' + IIF(ISNULL(c.FirstName), '', c.FirstName) + ' @ ' + IIF(ISNULL(c.Address), '', c.Address) as CLFA, " &
             "c.CustomerId, c.FirstName, c.LastName, c.Address, c.City, c.State, c.ZipCode, c.HomePhone, c.WorkPhone, c.CellPhone1, c.CellPhone2, c.TaxExempt, c.EmailAddress " &
@@ -409,7 +415,12 @@
         If Not checkDbConn() Then Exit Sub
 
         ' LOAD DATATABLES FROM DATABASE INITIALLY
-        If Not loadDataTablesFromDatabase() Then
+        If Not loadAllPreliminaryDataTables() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If Not loadCustomerDataTable() Then
             MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
@@ -531,7 +542,7 @@
                 End If
 
                 ' 2.) RELOAD DATATABLES FROM DATABASE
-                If Not loadDataTablesFromDatabase() Then
+                If Not loadCustomerDataTable() Then
                     MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
 
@@ -652,7 +663,7 @@
                     End If
 
                     ' 3.) RELOAD DATATABLES FROM DATABASE
-                    If Not loadDataTablesFromDatabase() Then
+                    If Not loadCustomerDataTable() Then
                         MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
 
@@ -694,7 +705,7 @@
                     End If
 
                     ' 3.) RELOAD DATATABLES FROM DATABASE
-                    If Not loadDataTablesFromDatabase() Then
+                    If Not loadCustomerDataTable() Then
                         MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
 
