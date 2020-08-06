@@ -249,7 +249,7 @@
 
     End Sub
 
-    ' Sub that calls all individual dataEditingControl initialization subs in one (These can be used individually if desired)
+    ' Sub that calls all individual dataViewingControl initialization subs in one (These can be used individually if desired)
     Private Sub InitializeAllDataViewingControls()
 
         ' Automated initializations
@@ -394,7 +394,7 @@
         End If
 
         ' Lookup newly selected row and see if it is valid (valid if it corresponds with a datatable row)
-        VehicleRow = getDataTableRow(CustomerDbController.DbDataTable, "YMML", VehicleComboBox.Text)
+        VehicleRow = getDataTableRow(VehicleDbController.DbDataTable, "YMML", VehicleComboBox.Text)
 
         ' If this query DOES return a valid row index, then initialize respective controls
         If VehicleRow <> -1 Then
