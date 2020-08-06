@@ -299,8 +299,37 @@
 
         ' No need for an exclusion list, as VehicleId (Autogen primary key) is not used in any controls
 
-        ' Then, make calls to insertRow to all relevant tables
-        insertRow(CRUD, VehicleDbController.DbDataTable, "Vehicle", "_", "dataEditingControl", Me)
+        ' FOR CONTROLS WITH NULL OR WHITESPACE, INSERT A DBNULL VALUE
+        Dim query As String = String.Empty
+        Dim columnList As String = String.Empty
+        Dim valuesParamList As String = String.Empty
+
+        Dim Columns As New List(Of String) From {"CustomerId", "makeYear", "Make", "Model", "Color", "LicenseState", "LicensePlate", "VIN", "InspectionStickerNbr", "InspectionMonth", "InsuranceCompany", "PolicyNumber", "ExpirationDate", "Notes", "Engine", "ABS", "AC", "AirBags", "Alarm"}
+        Dim Values As New List(Of Object) From {CustomerId, Make_ComboBox.Text, Model_ComboBox.Text, Color_ComboBox.Text, LicenseState_ComboBox.Text, LicensePlate_Textbox.Text, VIN_Textbox.Text, InspectionStickerNbr_Textbox.Text, InspectionMonth_ComboBox.Text, InsuranceCompany_ComboBox.Text, PolicyNumber_Textbox.Text, ExpirationDate_Textbox.Text, Notes_Textbox.Text, Engine_Textbox.Text, ABS_CheckBox.Checked, AC_CheckBox.Checked, AirBags_CheckBox.Checked, Alarm_CheckBox.Checked}
+
+        For i As Integer = 0 To Columns.Count - 1
+            If Not String.IsNullOrWhiteSpace(Columns(i)) Then
+                CRUD.AddParams("@" & Columns(i), Values(i))
+            Else
+                CRUD.AddParams("@" & Columns(i), DBNull.Value)
+            End If
+            columnList += Columns(i) & ","
+            valuesParamList += "@" & Columns(i) & ","
+        Next
+
+        ' Remove trailing commas from each list
+        columnList = columnList.Substring(0, columnList.Length - 1)
+        valuesParamList = valuesParamList.Substring(0, valuesParamList.Length - 1)
+
+        query = "INSERT INTO Vehicle (" & columnList & ") VALUES (" & valuesParamList & ")"
+
+        CRUD.ExecQuery(query)
+
+        'CRUD.ExecQuery("INSERT INTO Vehicle " &
+        '               "(CustomerId, makeYear, Make, Model, Color, LicenseState, LicensePlate, VIN, InspectionStickerNbr, InspectionMonth, InsuranceCompany, PolicyNumber, ExpirationDate, Notes, Engine, ABS, AC, AirBags, Alarm) " & "
+        '               VALUES (@CustomerId, @makeYear, @Make, @Model, @Color, @LicenseState, @LicensePlate, @VIN, @InspectionStickerNbr, @InspectionMonth, @InsuranceCompany, @PolicyNumber, @ExpirationDate, @Notes, @Engine, @ABS, @AC, AirBags, @Alarm)")
+
+
         ' Then, return exception status of CRUD controller. Do this after each call
         If CRUD.HasException() Then Return False
 
@@ -390,7 +419,7 @@
         ' Manufacturer
         If Not isValidLength("Manufacturer", False, Make_ComboBox.Text, 20, errorMessage) Then
             Make_ComboBox.ForeColor = Color.Red
-        ElseIf Make_ComboBox.SelectedIndex = -1 Then
+        ElseIf Make_ComboBox.SelectedIndex = -1 And Not String.IsNullOrWhiteSpace(Make_ComboBox.Text) Then
             errorMessage += "ERROR: " & Make_ComboBox.Text & " is not a valid manufacturer" & vbNewLine
             Make_ComboBox.ForeColor = Color.Red
         End If
@@ -398,7 +427,7 @@
         ' Model
         If Not isValidLength("Model", False, Model_ComboBox.Text, 20, errorMessage) Then
             Model_ComboBox.ForeColor = Color.Red
-        ElseIf Model_ComboBox.SelectedIndex = -1 Then
+        ElseIf Model_ComboBox.SelectedIndex = -1 And Not String.IsNullOrWhiteSpace(Model_ComboBox.Text) Then
             errorMessage += "ERROR: " & Model_ComboBox.Text & " is not a valid model of " & Make_ComboBox.Text & vbNewLine
             Model_ComboBox.ForeColor = Color.Red
         End If
@@ -419,7 +448,7 @@
         ' License State
         If Not isValidLength("License State", False, LicenseState_ComboBox.Text, 2, errorMessage) Then
             LicenseState_ComboBox.ForeColor = Color.Red
-        ElseIf LicenseState_ComboBox.SelectedIndex = -1 Then
+        ElseIf LicenseState_ComboBox.SelectedIndex = -1 And Not String.IsNullOrWhiteSpace(LicenseState_ComboBox.Text) Then
             errorMessage += "ERROR: " & LicenseState_ComboBox.Text & " is not a valid State" & vbNewLine
             LicenseState_ComboBox.ForeColor = Color.Red
         End If
@@ -437,7 +466,7 @@
         ' Inspection Month
         If Not isValidLength("Inspection Month", False, InspectionMonth_ComboBox.Text, 3, errorMessage) Then
             InspectionMonth_ComboBox.ForeColor = Color.Red
-        ElseIf InspectionMonth_ComboBox.SelectedIndex = -1 Then
+        ElseIf InspectionMonth_ComboBox.SelectedIndex = -1 And Not String.IsNullOrWhiteSpace(InspectionMonth_ComboBox.Text) Then
             errorMessage += "ERROR: " & InspectionMonth_ComboBox.Text & " is not a valid Month" & vbNewLine
             InspectionMonth_ComboBox.ForeColor = Color.Red
         End If
@@ -450,7 +479,7 @@
         ' Insurance Company
         If Not isValidLength("Insurance Company", False, InsuranceCompany_ComboBox.Text, 100, errorMessage) Then
             InsuranceCompany_ComboBox.ForeColor = Color.Red
-        ElseIf InsuranceCompany_ComboBox.SelectedIndex = -1 Then
+        ElseIf InsuranceCompany_ComboBox.SelectedIndex = -1 And Not String.IsNullOrWhiteSpace(InsuranceCompany_ComboBox.Text) Then
             errorMessage += "ERROR: " & InsuranceCompany_ComboBox.Text & " is not a valid Insurance Company" & vbNewLine
             InsuranceCompany_ComboBox.ForeColor = Color.Red
         End If
@@ -463,7 +492,7 @@
         ' Expiration Date
         If isEmpty("Expiration Date", False, ExpirationDate_Textbox.Text, errorMessage) Then
             ExpirationDate_Textbox.ForeColor = Color.Red
-        ElseIf ExpirationDate_Textbox.Text.Length < 9 Then
+        ElseIf ExpirationDate_Textbox.Text.Length < 9 And Not String.IsNullOrWhiteSpace(ExpirationDate_Textbox.Text) Then
             errorMessage += "ERROR: " & ExpirationDate_Textbox.Text & " is not a valid Date" & vbNewLine
             ExpirationDate_Textbox.ForeColor = Color.Red
         Else
@@ -902,7 +931,7 @@
                         ' Get new VehicleId if query successful
                         newVehicleId = CRUD.DbDataTable.Rows(0)("VehicleId")
                         ' Get new ComboBox item from datatable using newly retrieved ID
-                        Dim newItem As String = getRowValueWithKeyEquals(CustomerDbController.DbDataTable, "YMML", "VehicleId", newVehicleId)
+                        Dim newItem As String = getRowValueWithKeyEquals(VehicleDbController.DbDataTable, "YMML", "VehicleId", newVehicleId)
 
                         ' Set ComboBox accordingly after one final check
                         If newItem <> Nothing Then
