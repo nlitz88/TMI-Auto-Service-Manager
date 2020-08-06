@@ -261,6 +261,10 @@
 
 
 
+
+    ' ***************** CRUD SUBS *****************
+
+
     ' Function that makes updateTable calls for all relevant DataTables that need updated based on changes
     Private Function updateAll() As Boolean
 
