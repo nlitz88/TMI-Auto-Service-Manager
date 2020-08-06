@@ -261,6 +261,57 @@
 
 
 
+    ' Function that makes updateTable calls for all relevant DataTables that need updated based on changes
+    Private Function updateAll() As Boolean
+
+        ' Lookup VehicleId (primary key) based on selected YMML in ComboBox
+        Dim vehicleId As Integer = VehicleDbController.DbDataTable.Rows(VehicleRow)("VehicleId")
+
+        ' No need for an exclusion list, as VehicleId (Autogen primary key) is not used in any controls
+
+        ' Using vehicleId as key, update customer row
+        updateTable(CRUD, VehicleDbController.DbDataTable, "Vehicle", vehicleId, "VehicleId", "_", "dataEditingControl", Me)
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
+
+    ' Function that makes insertRow calls for all relevant DataTables
+    Private Function insertAll() As Boolean
+
+        ' No need for an exclusion list, as VehicleId (Autogen primary key) is not used in any controls
+
+        ' Then, make calls to insertRow to all relevant tables
+        insertRow(CRUD, VehicleDbController.DbDataTable, "Vehicle", "_", "dataEditingControl", Me)
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
+
+    ' Function that makes deleteRow calls for all relevant DataTables
+    Private Function deleteAll() As Boolean
+
+        ' Lookup VehicleId (primary key) based on selected YMML in ComboBox
+        Dim vehicleId As Integer = VehicleDbController.DbDataTable.Rows(VehicleRow)("VehicleId")
+        deleteRow(CRUD, "Vehicle", vehicleId, "VehicleId")
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
+
+
 
 
     Private Sub vehicleMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -464,6 +515,9 @@
         showHide(getAllControlsWithTag("dataLabel", Me), 1)
 
     End Sub
+
+
+
 
 
 End Class
