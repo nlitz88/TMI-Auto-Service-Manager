@@ -145,8 +145,7 @@
     ' Sub that calls all Initialization Subs for preloaded comboboxes
     Private Sub InitializeAllPreliminaryComboBoxes()
 
-        InitializeCustomerComboBox()
-
+        'InitializeCustomerComboBox() While preloaded, should not be grouped with these, as it serves a different purpose. All of these are vehicle-editing related
         InitializeMakeComboBox()
         InitializeModelComboBox()
         InitializeColorComboBox()
@@ -156,13 +155,25 @@
 
     End Sub
 
+    ' Sub that sets index of all preliminary/vehicle-editing/adding related comboboxes to -1 on add
+    Private Sub SetIndexAllPreliminaryComboBoxes()
+
+        Make_ComboBox.SelectedIndex = -1
+        Model_ComboBox.SelectedIndex = -1
+        Color_ComboBox.SelectedIndex = -1
+        LicenseState_ComboBox.SelectedIndex = -1
+        InspectionMonth_ComboBox.SelectedIndex = -1
+        InsuranceCompany_ComboBox.SelectedIndex = -1
+
+    End Sub
+
 
     ' Loads datatable from CarModels database table
     Private Function loadVehicleDataTable() As Boolean
 
         VehicleDbController.AddParams("@customerId", CustomerId)
-        VehicleDbController.ExecQuery("SELECT STR(IIF(ISNULL(v.makeYear), 0, v.makeYear)) + ' ' + v.Make + ' ' + v.Model as YMM, " &
-                                      "v.CustomerId, v.VehicleId, IIF(ISNULL(v.makeYear), 0, v.makeYear), v.Make, v.Model, v.Color, v.LicenseState, v.LicensePlate, v.VIN, " &
+        VehicleDbController.ExecQuery("SELECT STR(IIF(ISNULL(v.makeYear), 0, v.makeYear)) + ' ' + v.Make + ' ' + v.Model + '  -  ' + v.LicensePlate as YMML, " &
+                                      "v.CustomerId, v.VehicleId, v.makeYear, v.Make, v.Model, v.Color, v.LicenseState, v.LicensePlate, v.VIN, " &
                                       "v.InspectionStickerNbr, v.InspectionMonth, v.InsuranceCompany, v.PolicyNumber, v.ExpirationDate, v.Notes, " &
                                       "v.Engine, v.ABS, v.AC, v.AirBags, v.Alarm " &
                                       "FROM Vehicle v " &
@@ -183,7 +194,7 @@
         VehicleComboBox.Items.Clear()
         VehicleComboBox.Items.Add("Select One")
         For Each row In VehicleDbController.DbDataTable.Rows
-            VehicleComboBox.Items.Add(row("YMM"))
+            VehicleComboBox.Items.Add(row("YMML"))
         Next
         VehicleComboBox.EndUpdate()
 
@@ -229,8 +240,23 @@
 
 
 
+
+
     Private Sub vehicleMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ' PRE-DRAW PRE-LOADED (Preliminary) COMBOBOXES. 
+        ' This way, we don't have to wait for them to draw on first edit/add
+        Make_ComboBox.Visible = True
+        Make_ComboBox.Visible = False
+
+    End Sub
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
         If Not checkDbConn() Then Exit Sub
 
         ' LOAD CUSTOMER DATATABLE
@@ -240,12 +266,11 @@
         End If
 
         ' INITIALIZE CUSTOMERCOMBOBOX (And All other preliminaries) FOR FIRST TIME
-        InitializeAllPreliminaryComboBoxes()
+        InitializeCustomerComboBox()
         CustomerComboBox.SelectedIndex = -1
+        InitializeAllPreliminaryComboBoxes()
 
     End Sub
-
-
 
 
     ' **************** CONTROL SUBS ****************

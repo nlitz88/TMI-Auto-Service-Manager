@@ -183,7 +183,7 @@ Partial Class vehicleMaintenance
         Me.VehicleComboBox.FormattingEnabled = True
         Me.VehicleComboBox.Location = New System.Drawing.Point(165, 250)
         Me.VehicleComboBox.Name = "VehicleComboBox"
-        Me.VehicleComboBox.Size = New System.Drawing.Size(339, 28)
+        Me.VehicleComboBox.Size = New System.Drawing.Size(509, 28)
         Me.VehicleComboBox.TabIndex = 137
         '
         'CustomerComboLabel
@@ -204,7 +204,7 @@ Partial Class vehicleMaintenance
         Me.CustomerComboBox.FormattingEnabled = True
         Me.CustomerComboBox.Location = New System.Drawing.Point(179, 194)
         Me.CustomerComboBox.Name = "CustomerComboBox"
-        Me.CustomerComboBox.Size = New System.Drawing.Size(362, 28)
+        Me.CustomerComboBox.Size = New System.Drawing.Size(508, 28)
         Me.CustomerComboBox.TabIndex = 0
         '
         'Alarm_Value
