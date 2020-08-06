@@ -429,4 +429,41 @@
     End Sub
 
 
+    Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
+
+        mode = "adding"
+
+        ' Initialize values for dataEditingControls
+        valuesInitialized = False
+        clearControls(getAllControlsWithTag("dataEditingControl", Me))
+        ' Set all preliminary/vehicle editing/adding comboboxes index to -1 (no value)
+        SetIndexAllPreliminaryComboBoxes()
+        valuesInitialized = True
+        ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
+        InitialVehicleValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
+
+        ' First, disable editButton, addButton, enable cancelButton, and disable nav
+        editButton.Enabled = False
+        addButton.Enabled = False
+        cancelButton.Enabled = True
+        nav.DisableAll()
+        CustomerComboBox.Enabled = False
+
+        ' Get lastSelectedVehicle
+        If getDataTableRow(VehicleDbController.DbDataTable, "YMML", VehicleComboBox.Text) <> -1 Then
+            lastSelectedVehicle = VehicleComboBox.Text
+        Else
+            lastSelectedVehicle = "Select One"
+        End If
+
+        VehicleComboBox.SelectedIndex = 0
+
+        ' Hide/Show the dataViewingControls and dataEditingControls, respectively
+        showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+        showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+        showHide(getAllControlsWithTag("dataLabel", Me), 1)
+
+    End Sub
+
+
 End Class
