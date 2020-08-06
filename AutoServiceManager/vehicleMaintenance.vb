@@ -52,6 +52,26 @@
         MakeDbController.ExecQuery("SELECT am.AutoMake FROM AutoManufacturers am ORDER BY am.AutoMake ASC")
         If MakeDbController.HasException() Then Return False
 
+        ' Loads datatable from CarModels
+        ModelDbController.ExecQuery("SELECT cm.AutoModel FROM CarModels cm ORDER BY cm.AutoModel ASC")
+        If ModelDbController.HasException() Then Return False
+
+        ' Loads datatable from Colors
+        ColorDbController.ExecQuery("SELECT c.Color FROM Colors c ORDER BY c.Color ASC")
+        If ColorDbController.HasException() Then Return False
+
+        ' Loads datatable from States
+        StateDbController.ExecQuery("SELECT s.State FROM States s ORDER BY s.State ASC")
+        If StateDbController.HasException() Then Return False
+
+        ' Loads datatable from Months
+        MonthDbController.ExecQuery("SELECT m.Month FROM Months m ORDER BY m.Month ASC")
+        If MonthDbController.HasException() Then Return False
+
+        ' Loads datatable from Insurance
+        InsuranceCompanyDbController.ExecQuery("SELECT ic.CompanyName FROM InsuranceCompanies ic ORDER BY ic.CompanyName ASC")
+        If InsuranceCompanyDbController.HasException() Then Return False
+
         Return True
 
     End Function
@@ -166,6 +186,7 @@
         InsuranceCompany_ComboBox.SelectedIndex = -1
 
     End Sub
+
 
 
     ' Loads datatable from CarModels database table
