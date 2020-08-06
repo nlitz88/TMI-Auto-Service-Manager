@@ -521,7 +521,42 @@
     End Sub
 
 
+    Private Sub deleteButton_Click(sender As Object, e As EventArgs) Handles deleteButton.Click
 
+        Dim decision As DialogResult = MessageBox.Show("Are you sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                ' 1.) Delete value from database
+                If Not deleteAll() Then
+                    MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("Successfully deleted " & VehicleComboBox.Text & " from Vehicles")
+                End If
+
+                ' 2.) RELOAD DATATABLES FROM DATABASE
+                If Not loadVehicleDataTable() Then
+                    MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
+                ' 3.) REINITIALIZE CONTROLS (Based on the selected index)
+                InitializeVehicleComboBox()
+                VehicleComboBox.SelectedIndex = 0
+
+                ' 4.) RESTORE USER CONTROLS TO NON-EDITING/SELECTING STATE
+                CustomerComboBox.Enabled = True
+                VehicleComboBox.Enabled = True
+                addButton.Enabled = True
+                cancelButton.Enabled = False
+                saveButton.Enabled = False
+                nav.EnableAll()
+
+            Case DialogResult.No
+
+        End Select
+
+    End Sub
 
 
 End Class
