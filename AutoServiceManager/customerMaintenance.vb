@@ -35,6 +35,13 @@
     ' Function that makes calls to all DbControllers for one-time "preliminary" datatable loading
     Private Function loadAllPreliminaryDataTables() As Boolean
 
+        ZipCodesDbController.ExecQuery("Select zc.Zipcode, zc.city as City, zc.State from ZipCodes zc")
+        If ZipCodesDbController.HasException() Then Return False
+        ' Also, populate respective lists with data
+        zipCodesList = getListFromDataTable(ZipCodesDbController.DbDataTable, "Zipcode")
+
+        Return True
+
     End Function
 
 
@@ -48,11 +55,6 @@
             "ORDER BY c.LastName ASC")
 
         If CustomerDbController.HasException() Then Return False
-
-        ZipCodesDbController.ExecQuery("Select zc.Zipcode, zc.city as City, zc.State from ZipCodes zc")
-        If ZipCodesDbController.HasException() Then Return False
-        ' Also, populate respective lists with data
-        zipCodesList = getListFromDataTable(ZipCodesDbController.DbDataTable, "Zipcode")
 
         Return True
 
@@ -497,9 +499,9 @@
         ' Initialize values for dataEditingControls
         valuesInitialized = False
         clearControls(getAllControlsWithTag("dataEditingControl", Me))
+        ' Set ZipCode ComboBox selected index = -1
+        ZipCode_ComboBox.SelectedIndex = -1
         valuesInitialized = True
-        ' Initialize ZipCode ComboBox (must be done separately from InitializeAllDataEditingControls, as we don't want all that to occur here)
-        InitializeZipCodeComboBox()
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialCustomerValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
