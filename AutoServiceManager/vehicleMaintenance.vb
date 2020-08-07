@@ -379,11 +379,17 @@
             ' Only if the current values (that make up the YMML) are not equal to their initial values
             If makeYear_Textbox.Text.ToLower() <> makeYear Or Make_ComboBox.Text.ToLower() <> Make Or Model_ComboBox.Text.ToLower() <> Model Or LicensePlate_Textbox.Text.ToLower() <> LicensePlate Then
 
+                ' Before looking up anything, must ESCAPE special escape characters from the values to be looked up
+                ' eMakeYear doesn't need this, as it's a number only input
+                Dim eMake As String = escapeLikeValues(Make_ComboBox.Text)
+                Dim eModel As String = escapeLikeValues(Model_ComboBox.Text)
+                Dim eLicensePlate As String = escapeLikeValues(LicensePlate_Textbox.Text)
+
                 ' Use query to check if row exists with all of these
                 Dim duplicateRows() As DataRow = VehicleDbController.DbDataTable.Select("makeYear='" & Long.Parse(makeYear_Textbox.Text) &
-                                                                                            "' AND Make LIKE '" & Make_ComboBox.Text &
-                                                                                            "' AND Model LIKE '" & Model_ComboBox.Text &
-                                                                                            "' AND LicensePlate LIKE '" & LicensePlate_Textbox.Text & "'")
+                                                                                            "' AND Make LIKE '" & eMake &
+                                                                                            "' AND Model LIKE '" & eModel &
+                                                                                            "' AND LicensePlate LIKE '" & eLicensePlate & "'")
 
                 If duplicateRows.Count <> 0 Then
                     errorMessage += "ERROR: " & makeYear_Textbox.Text & " " & Make_ComboBox.Text & " " & Model_ComboBox.Text & "  -  " & LicensePlate_Textbox.Text & " already exists;" & vbNewLine &
@@ -399,11 +405,17 @@
 
         ElseIf mode = "adding" Then
 
+            ' Before looking up anything, must ESCAPE special escape characters from the values to be looked up
+            ' eMakeYear doesn't need this, as it's a number only input
+            Dim eMake As String = escapeLikeValues(Make_ComboBox.Text)
+            Dim eModel As String = escapeLikeValues(Model_ComboBox.Text)
+            Dim eLicensePlate As String = escapeLikeValues(LicensePlate_Textbox.Text)
+
             ' Use query to check if row exists with all of these
             Dim duplicateRows() As DataRow = VehicleDbController.DbDataTable.Select("makeYear='" & Long.Parse(makeYear_Textbox.Text) &
-                                                                                            "' AND Make LIKE '" & Make_ComboBox.Text &
-                                                                                            "' AND Model LIKE '" & Model_ComboBox.Text &
-                                                                                            "' AND LicensePlate LIKE '" & LicensePlate_Textbox.Text & "'")
+                                                                                            "' AND Make LIKE '" & eMake &
+                                                                                            "' AND Model LIKE '" & eModel &
+                                                                                            "' AND LicensePlate LIKE '" & eLicensePlate & "'")
 
             If duplicateRows.Count <> 0 Then
                 errorMessage += "ERROR: " & makeYear_Textbox.Text & " " & Make_ComboBox.Text & " " & Model_ComboBox.Text & "  -  " & LicensePlate_Textbox.Text & " already exists;" & vbNewLine &

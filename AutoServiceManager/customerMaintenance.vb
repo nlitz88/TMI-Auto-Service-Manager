@@ -308,10 +308,15 @@
                 ' Only if the current values (that make up the CLFA) are not equal to their initial values
                 If LastName_Textbox.Text.ToLower() <> initialLName Or FirstName_Textbox.Text.ToLower() <> initialFName Or Address_Textbox.Text.ToLower() <> initialAddress Then
 
+                    ' Before looking up anything, must ESCAPE special escape characters from the values to be looked up
+                    Dim eLName As String = escapeLikeValues(LastName_Textbox.Text)
+                    Dim eFName As String = escapeLikeValues(FirstName_Textbox.Text)
+                    Dim eAddress As String = escapeLikeValues(Address_Textbox.Text)
+
                     ' Use query to check if row exists with all of these
-                    Dim duplicateRows() As DataRow = CustomerDbController.DbDataTable.Select("LastName LIKE '" & LastName_Textbox.Text &
-                                                                                            "' AND FirstName LIKE '" & FirstName_Textbox.Text &
-                                                                                            "' AND Address LIKE '" & Address_Textbox.Text & "'")
+                    Dim duplicateRows() As DataRow = CustomerDbController.DbDataTable.Select("LastName LIKE '" & eLName &
+                                                                                            "' AND FirstName LIKE '" & eFName &
+                                                                                            "' AND Address LIKE '" & eAddress & "'")
 
                     If duplicateRows.Count <> 0 Then
                         errorMessage += "ERROR: " & LastName_Textbox.Text & ", " & FirstName_Textbox.Text & " @ " & Address_Textbox.Text & " already exists;" & vbNewLine &
@@ -326,10 +331,15 @@
 
             ElseIf mode = "adding" Then
 
+                ' Before looking up anything, must ESCAPE special escape characters from the values to be looked up
+                Dim eLName As String = escapeLikeValues(LastName_Textbox.Text)
+                Dim eFName As String = escapeLikeValues(FirstName_Textbox.Text)
+                Dim eAddress As String = escapeLikeValues(Address_Textbox.Text)
+
                 ' Use query to check if row exists with all of these
-                Dim duplicateRows() As DataRow = CustomerDbController.DbDataTable.Select("LastName LIKE '" & LastName_Textbox.Text &
-                                                                                            "' AND FirstName LIKE '" & FirstName_Textbox.Text &
-                                                                                            "' AND Address LIKE '" & Address_Textbox.Text & "'")
+                Dim duplicateRows() As DataRow = CustomerDbController.DbDataTable.Select("LastName LIKE '" & eLName &
+                                                                                            "' AND FirstName LIKE '" & eFName &
+                                                                                            "' AND Address LIKE '" & eAddress & "'")
 
                 If duplicateRows.Count <> 0 Then
                     errorMessage += "ERROR: " & LastName_Textbox.Text & ", " & FirstName_Textbox.Text & " @ " & Address_Textbox.Text & " already exists;" & vbNewLine &
