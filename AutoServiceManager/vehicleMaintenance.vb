@@ -61,7 +61,7 @@
         If StateDbController.HasException() Then Return False
 
         ' Loads datatable from Months
-        MonthDbController.ExecQuery("SELECT m.Month FROM Months m ORDER BY m.Month ASC")
+        MonthDbController.ExecQuery("SELECT m.Month, m.IntMonth FROM Months m ORDER BY m.IntMonth ASC")
         If MonthDbController.HasException() Then Return False
 
         ' Loads datatable from Insurance
