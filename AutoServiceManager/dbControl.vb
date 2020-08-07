@@ -137,7 +137,7 @@ Public Class DbControl
 
                     Dim dataType = column.DataType
 
-                    Console.WriteLine("Captured DBNull for row: " & DbDataTable.Rows.IndexOf(row) & " column: " & column.ColumnName & " | Supposed to be " & dataType.ToString())
+                    'Console.WriteLine("Captured DBNull for row: " & DbDataTable.Rows.IndexOf(row) & " column: " & column.ColumnName & " | Supposed to be " & dataType.ToString())
 
                     Select Case dataType
                         Case GetType(System.DateTime)
