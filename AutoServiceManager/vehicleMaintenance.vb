@@ -265,10 +265,33 @@
         ' Automated initializations
         InitializeVehicleDataViewingControls()
         ' Then, format dataViewingControls
-        'formatDataViewingControls()
+        formatDataViewingControls()
 
     End Sub
 
+
+
+    ' Sub that will add formatting to already initialized dataViewingControls (DateTime in this case)
+    Private Sub formatDataViewingControls()
+
+        ' EXPIRATION DATE FORMATTING
+        ' First, check to see if ExpirationDate is equal to a new date time (this implies that there is a DBNull in this field in the database)
+        Dim ExpirationDate As DateTime = VehicleDbController.DbDataTable.Rows(VehicleRow)("ExpirationDate")
+        ' If Expiration is a new date time, then we assume DBNull in database, and therefore don't want to display anything for the ExpirationDate
+        If DateTime.Compare(ExpirationDate, New DateTime) = 0 Then
+            ExpirationDate_Value.Text = String.Empty
+            ' If not, then we assume it's a legitimate Date, and would like to format it accordingly
+        Else
+            ' Don't need to do any invalid character stripping, so just go straight to formatting
+            ExpirationDate_Value.Text = String.Format("{0:MM/dd/yyyy}", ExpirationDate)
+        End If
+
+    End Sub
+
+    ' Sub that will add formatting to already initialized dataEditingControls (DateTime in this case)
+    Private Sub formatDataEditingControls()
+
+    End Sub
 
 
 
