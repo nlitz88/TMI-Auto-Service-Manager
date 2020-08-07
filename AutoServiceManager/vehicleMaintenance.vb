@@ -239,16 +239,33 @@
         ' First, check if empty. If empty, we don't need to do anything
         If String.IsNullOrWhiteSpace(InspectionMonth_ComboBox.Text) Then Exit Sub
 
-        ' Check to see value is an int or an abreviation. 
-        ' If it Then 's an abreviation, then exit the sub.
-        ' If not, then use row to assign Month abreviation
+        ' Then, check to see if it is an intMonth using allValidChars. If it's not, then exit sub. No change necessary
+        If allValidChars(InspectionMonth_ComboBox.Text.ToLower(), "abcdefghijklmnopqrstuvwxyz") = -1 Then Exit Sub
+
+        ' If not an abreviation, then use the intMonth to find the Month abreviation
         Dim month As String = getRowValueWithKeyEquals(MonthDbController.DbDataTable, "Month", "IntMonth", Convert.ToInt32(InspectionMonth_ComboBox.Text))
         ' If the query comes back with an abreviation, we can assign it.
         If month <> Nothing Then
             InspectionMonth_ComboBox.Text = month
         End If
 
-        ' Otherwise, if no value was returned, then no change necesssary
+    End Sub
+
+    ' Variant for use with correspondingvalue
+    Private Sub correctInpectionMonthValue()
+
+        ' First, check if empty. If empty, we don't need to do anything
+        If String.IsNullOrWhiteSpace(InspectionMonth_Value.Text) Then Exit Sub
+
+        ' Then, check to see if it is an intMonth using allValidChars. If it's not, then exit sub. No change necessary
+        If allValidChars(InspectionMonth_Value.Text.ToLower(), "abcdefghijklmnopqrstuvwxyz") = -1 Then Exit Sub
+
+        ' If not an abreviation, then use the intMonth to find the Month abreviation
+        Dim month As String = getRowValueWithKeyEquals(MonthDbController.DbDataTable, "Month", "IntMonth", Convert.ToInt32(InspectionMonth_Value.Text))
+        ' If the query comes back with an abreviation, we can assign it.
+        If month <> Nothing Then
+            InspectionMonth_Value.Text = month
+        End If
 
     End Sub
 
@@ -287,7 +304,7 @@
 
         ' Automated initializations
         InitializeVehicleDataViewingControls()
-        ' put correct inspectionMonthValue here
+        correctInpectionMonthValue()
         ' Then, format dataViewingControls
         formatDataViewingControls()
 
