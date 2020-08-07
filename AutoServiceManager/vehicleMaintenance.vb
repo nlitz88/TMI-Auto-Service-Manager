@@ -419,16 +419,14 @@
         ' Manufacturer
         If Not isValidLength("Manufacturer", False, Make_ComboBox.Text, 20, errorMessage) Then
             Make_ComboBox.ForeColor = Color.Red
-        ElseIf Make_ComboBox.SelectedIndex = -1 And Not String.IsNullOrWhiteSpace(Make_ComboBox.Text) Then
-            errorMessage += "ERROR: " & Make_ComboBox.Text & " is not a valid manufacturer" & vbNewLine
+        ElseIf Not String.IsNullOrWhiteSpace(Make_ComboBox.Text) And Not valueExists("Manufacturer", errorMessage, "AutoMake", Make_ComboBox.Text, MakeDbController.DbDataTable) Then
             Make_ComboBox.ForeColor = Color.Red
         End If
 
         ' Model
         If Not isValidLength("Model", False, Model_ComboBox.Text, 20, errorMessage) Then
             Model_ComboBox.ForeColor = Color.Red
-        ElseIf Model_ComboBox.SelectedIndex = -1 And Not String.IsNullOrWhiteSpace(Model_ComboBox.Text) Then
-            errorMessage += "ERROR: " & Model_ComboBox.Text & " is not a valid model of " & Make_ComboBox.Text & vbNewLine
+        ElseIf Not String.IsNullOrWhiteSpace(Model_ComboBox.Text) And Not valueExists("Model", errorMessage, "AutoModel", Model_ComboBox.Text, ModelDbController.DbDataTable) Then
             Model_ComboBox.ForeColor = Color.Red
         End If
 

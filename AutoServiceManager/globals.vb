@@ -1144,7 +1144,7 @@
         Dim dataRows() As DataRow = dataTable.Select(valueColumn & " LIKE '" & value & "'")
 
         If dataRows.Count = 0 Then
-            errorMessage += "ERROR: " & label & value & " does not exist" & vbNewLine
+            errorMessage += "ERROR: " & label & " " & value & " does not exist" & vbNewLine
             Return False
         End If
 
