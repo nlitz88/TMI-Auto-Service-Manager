@@ -299,58 +299,10 @@
 
         ' No need for an exclusion list, as VehicleId (Autogen primary key) is not used in any controls
 
-        ' FOR CONTROLS WITH NULL OR WHITESPACE, INSERT A DBNULL VALUE
-        Dim query As String = String.Empty
-        Dim columnList As String = String.Empty
-        Dim valuesParamList As String = String.Empty
+        ' Define additional values to add. In this case, just CustomerId
+        Dim additionalValues As New Dictionary(Of String, Object) From {{"CustomerId", CustomerId}}
 
-        Dim Columns As New List(Of String) From {"CustomerId", "makeYear", "Make", "Model", "Color", "LicenseState", "LicensePlate", "VIN", "InspectionStickerNbr", "InspectionMonth", "InsuranceCompany", "PolicyNumber", "ExpirationDate", "Notes", "Engine", "ABS", "AC", "AirBags", "Alarm"}
-        Dim Values As New List(Of Object) From {CustomerId, makeYear_Textbox.Text, Make_ComboBox.Text, Model_ComboBox.Text, Color_ComboBox.Text, LicenseState_ComboBox.Text, LicensePlate_Textbox.Text, VIN_Textbox.Text, InspectionStickerNbr_Textbox.Text, InspectionMonth_ComboBox.Text, InsuranceCompany_ComboBox.Text, PolicyNumber_Textbox.Text, ExpirationDate_Textbox.Text, Notes_Textbox.Text, Engine_Textbox.Text, ABS_CheckBox.Checked, AC_CheckBox.Checked, AirBags_CheckBox.Checked, Alarm_CheckBox.Checked}
-
-        For i As Integer = 0 To Columns.Count - 1
-
-            ' Check for empty dateTime
-            If Columns(i) = "ExpirationDate" Then
-
-                Console.WriteLine("Adding paramater for Expiration Date")
-                Console.WriteLine("Current expiration date value : " & ExpirationDate_Textbox.Text)
-                Console.WriteLine("Modified expiration date value : " & ExpirationDate_Textbox.Text.Replace(" ", "0"))
-                Console.WriteLine("Expiration Date Mask : " & ExpirationDate_Textbox.Mask)
-
-                If Values(i).ToString().Replace(" ", "0") = ExpirationDate_Textbox.Mask Then
-                    Console.WriteLine("Expiration Date currently equals its mask")
-                    CRUD.AddParams("@" & Columns(i), DBNull.Value)
-                Else
-                    Console.WriteLine("Expiration Date was not equal to its mask")
-                    CRUD.AddParams("@" & Columns(i), Values(i))
-                End If
-                columnList += Columns(i) & ","
-                valuesParamList += "@" & Columns(i) & ","
-                Continue For
-            End If
-
-            ' Otherwise, treat as normal empty control
-            If Not String.IsNullOrWhiteSpace(Columns(i)) Then
-                CRUD.AddParams("@" & Columns(i), Values(i))
-            Else
-                CRUD.AddParams("@" & Columns(i), DBNull.Value)
-            End If
-            columnList += Columns(i) & ","
-            valuesParamList += "@" & Columns(i) & ","
-        Next
-
-        ' Remove trailing commas from each list
-        columnList = columnList.Substring(0, columnList.Length - 1)
-        valuesParamList = valuesParamList.Substring(0, valuesParamList.Length - 1)
-
-        query = "INSERT INTO Vehicle (" & columnList & ") VALUES (" & valuesParamList & ")"
-
-        CRUD.ExecQuery(query)
-
-        'CRUD.ExecQuery("INSERT INTO Vehicle " &
-        '               "(CustomerId, makeYear, Make, Model, Color, LicenseState, LicensePlate, VIN, InspectionStickerNbr, InspectionMonth, InsuranceCompany, PolicyNumber, ExpirationDate, Notes, Engine, ABS, AC, AirBags, Alarm) " & "
-        '               VALUES (@CustomerId, @makeYear, @Make, @Model, @Color, @LicenseState, @LicensePlate, @VIN, @InspectionStickerNbr, @InspectionMonth, @InsuranceCompany, @PolicyNumber, @ExpirationDate, @Notes, @Engine, @ABS, @AC, AirBags, @Alarm)")
-
+        insertRow(CRUD, VehicleDbController.DbDataTable, "Vehicle", "_", "dataEditingControl", Me, additionalValues)
 
         ' Then, return exception status of CRUD controller. Do this after each call
         If CRUD.HasException() Then Return False

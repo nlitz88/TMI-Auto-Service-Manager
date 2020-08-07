@@ -305,10 +305,16 @@
 
             ' Get the value of only one control of the same name designation (assuming they control/correspond with the same table column value)
             ctrlValue = getControlValue(ctrls(0))
-            If ctrlValue = Nothing Then
-                ' For compatability with existing columns. This is for fields that do not allow zero-length strings, even though user might want to make field blank.
-                ctrlValue = DBNull.Value
+
+            ' To determine if we're going to insert a null instead of the value, we must consider all different types of values that warrant a DBNull insert
+            ' First, check if it's a DateTime field
+            If dataTable.Columns(i).DataType = GetType(DateTime) Then
+                If ctrlValue.ToString().Replace(" ", "0") = "00/00/0000" Then ctrlValue = DBNull.Value
+                ' For all other types of fields
+            Else
+                If ctrlValue = Nothing Then ctrlValue = DBNull.Value
             End If
+
             updateController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
             queryParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & ","
 
@@ -341,10 +347,16 @@
 
             ' Get the value of only one control of the same name designation (assuming they control/correspond with the same table column value)
             ctrlValue = getControlValue(ctrls(0))
-            If ctrlValue = Nothing Then
-                ' For compatability with existing columns. This is for fields that do not allow zero-length strings, even though user might want to make field blank.
-                ctrlValue = DBNull.Value
+
+            ' To determine if we're going to insert a null instead of the value, we must consider all different types of values that warrant a DBNull insert
+            ' First, check if it's a DateTime field
+            If dataTable.Columns(i).DataType = GetType(DateTime) Then
+                If ctrlValue.ToString().Replace(" ", "0") = "00/00/0000" Then ctrlValue = DBNull.Value
+                ' For all other types of fields
+            Else
+                If ctrlValue = Nothing Then ctrlValue = DBNull.Value
             End If
+
             updateController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
             queryParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & ","
 
@@ -386,10 +398,16 @@
 
             ' Get the value of only one control of the same name designation (assuming they control/correspond with the same table column value)
             ctrlValue = getControlValue(ctrls(0))
-            If ctrlValue = Nothing Then
-                ' For compatability with existing columns. This is for fields that do not allow zero-length strings, even though user might want to make field blank.
-                ctrlValue = DBNull.Value
+
+            ' To determine if we're going to insert a null instead of the value, we must consider all different types of values that warrant a DBNull insert
+            ' First, check if it's a DateTime field
+            If dataTable.Columns(i).DataType = GetType(DateTime) Then
+                If ctrlValue.ToString().Replace(" ", "0") = "00/00/0000" Then ctrlValue = DBNull.Value
+                ' For all other types of fields
+            Else
+                If ctrlValue = Nothing Then ctrlValue = DBNull.Value
             End If
+
             updateController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
             queryParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & ","
 
@@ -431,9 +449,14 @@
 
             ' Get the value of only one control of the same name designation (assuming they control/correspond with the same table column value)
             ctrlValue = getControlValue(ctrls(0))
-            If ctrlValue = Nothing Then
-                ' For compatability with existing columns. This is for fields that do not allow zero-length strings, even though user might want to make field blank.
-                ctrlValue = DBNull.Value
+
+            ' To determine if we're going to insert a null instead of the value, we must consider all different types of values that warrant a DBNull insert
+            ' First, check if it's a DateTime field
+            If dataTable.Columns(i).DataType = GetType(DateTime) Then
+                If ctrlValue.ToString().Replace(" ", "0") = "00/00/0000" Then ctrlValue = DBNull.Value
+                ' For all other types of fields
+            Else
+                If ctrlValue = Nothing Then ctrlValue = DBNull.Value
             End If
 
             insertController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
@@ -473,14 +496,74 @@
 
             ' Get the value of only one control of the same name designation (assuming they control/correspond with the same table column value)
             ctrlValue = getControlValue(ctrls(0))
-            If ctrlValue = Nothing Then
-                ' For compatability with existing columns. This is for fields that do not allow zero-length strings, even though user might want to make field blank.
-                ctrlValue = DBNull.Value
+
+            ' To determine if we're going to insert a null instead of the value, we must consider all different types of values that warrant a DBNull insert
+            ' First, check if it's a DateTime field
+            If dataTable.Columns(i).DataType = GetType(DateTime) Then
+                If ctrlValue.ToString().Replace(" ", "0") = "00/00/0000" Then ctrlValue = DBNull.Value
+                ' For all other types of fields
+            Else
+                If ctrlValue = Nothing Then ctrlValue = DBNull.Value
             End If
 
             insertController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
             columnList += dataTable.Columns(i).ColumnName & ","
             valuesParamList += dataTable.Columns(i).ColumnName & ","
+
+        Next
+
+        ' If lists aren't empty, then run query
+        If Not String.IsNullOrEmpty(columnList) And Not String.IsNullOrEmpty(valuesParamList) Then
+            ' The substring at the end ensures that there isn't an extra comma at the end
+            columnList = "(" & columnList.Substring(0, columnList.Length - 1) & ")"
+            valuesParamList = "(" & valuesParamList.Substring(0, valuesParamList.Length - 1) & ")"
+            insertController.ExecQuery("INSERT INTO " & tableName & " " & columnList & " VALUES " & valuesParamList)
+        End If
+
+    End Sub
+
+    ' Overload that accepts dictionary of additional columns and respective values to be inserted with the rest of the data
+    Public Sub insertRow(ByRef insertController As DbControl, ByVal dataTable As DataTable, ByVal tableName As String,
+                     ByVal nameDelimiter As String, ByVal controlTag As String, ByRef form As Form,
+                     ByVal additionalValues As Dictionary(Of String, Object))
+
+        Dim ctrls As List(Of Object)
+        Dim ctrlValue As Object
+        Dim columnList As String = String.Empty
+        Dim valuesParamList As String = String.Empty
+
+
+        ' Add query parameters for each column value in DataTable
+        For i As Integer = 0 To dataTable.Columns.Count - 1
+
+            ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
+
+            If ctrls.Count = 0 Then Continue For
+
+            ' Get the value of only one control of the same name designation (assuming they control/correspond with the same table column value)
+            ctrlValue = getControlValue(ctrls(0))
+
+            ' To determine if we're going to insert a null instead of the value, we must consider all different types of values that warrant a DBNull insert
+            ' First, check if it's a DateTime field
+            If dataTable.Columns(i).DataType = GetType(DateTime) Then
+                If ctrlValue.ToString().Replace(" ", "0") = "00/00/0000" Then ctrlValue = DBNull.Value
+                ' For all other types of fields
+            Else
+                If ctrlValue = Nothing Then ctrlValue = DBNull.Value
+            End If
+
+            insertController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
+            columnList += dataTable.Columns(i).ColumnName & ","
+            valuesParamList += dataTable.Columns(i).ColumnName & ","
+
+        Next
+
+        ' Add additional query parameters for additionalValues as provided
+        For Each key In additionalValues.Keys
+
+            insertController.AddParams("@" & key, additionalValues(key))
+            columnList += key & ","
+            valuesParamList += key & ","
 
         Next
 
