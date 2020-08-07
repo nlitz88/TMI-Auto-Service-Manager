@@ -137,6 +137,8 @@ Public Class DbControl
 
                     Dim dataType = column.DataType
 
+                    Console.WriteLine("Captured DBNull for row: " & DbDataTable.Rows.IndexOf(row) & " column: " & column.ColumnName & " | Supposed to be " & dataType.ToString())
+
                     Select Case dataType
                         Case GetType(System.DateTime)
                             dataValue = New DateTime
@@ -148,6 +150,8 @@ Public Class DbControl
                         Case Else
                             dataValue = 0
                     End Select
+
+                    row(column) = dataValue
 
                 End If
 
