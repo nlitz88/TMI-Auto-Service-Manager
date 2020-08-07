@@ -232,6 +232,26 @@
     End Sub
 
 
+    ' Sub that Accomodates rows that have month Ints instead of abreviations.
+    ' Sets inspection months value to the month abreviation that corresponds to the initialized month int (that is no longer being used)
+    Private Sub correctInpectionMonthComboBox()
+
+        ' First, check if empty. If empty, we don't need to do anything
+        If String.IsNullOrWhiteSpace(InspectionMonth_ComboBox.Text) Then Exit Sub
+
+        ' Check to see value is an int or an abreviation. 
+        ' If it Then 's an abreviation, then exit the sub.
+        ' If not, then use row to assign Month abreviation
+        Dim month As String = getRowValueWithKeyEquals(MonthDbController.DbDataTable, "Month", "IntMonth", Convert.ToInt32(InspectionMonth_ComboBox.Text))
+        ' If the query comes back with an abreviation, we can assign it.
+        If month <> Nothing Then
+            InspectionMonth_ComboBox.Text = month
+        End If
+
+        ' Otherwise, if no value was returned, then no change necesssary
+
+    End Sub
+
 
     ' Sub that initializes all dataEditingcontrols corresponding with values from the Vehicle datatable
     Private Sub InitializeVehicleDataEditingControls()
@@ -254,6 +274,7 @@
 
         ' Automated initializations
         InitializeVehicleDataEditingControls()
+        correctInpectionMonthComboBox()
         ' Then, format dataEditingControls
         formatDataEditingControls()
         ' Set forecolor if not already initially default
@@ -266,6 +287,7 @@
 
         ' Automated initializations
         InitializeVehicleDataViewingControls()
+        ' put correct inspectionMonthValue here
         ' Then, format dataViewingControls
         formatDataViewingControls()
 
