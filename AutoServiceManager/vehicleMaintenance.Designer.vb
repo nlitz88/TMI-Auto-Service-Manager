@@ -71,7 +71,6 @@ Partial Class vehicleMaintenance
         Me.ExpirationDate_Value = New System.Windows.Forms.Label()
         Me.ExpirationDateLabel = New System.Windows.Forms.Label()
         Me.ExpirationDate_Textbox = New System.Windows.Forms.MaskedTextBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.ABS_Value = New System.Windows.Forms.Label()
         Me.ABS_CheckBox = New System.Windows.Forms.CheckBox()
         Me.ABSLabel = New System.Windows.Forms.Label()
@@ -672,7 +671,7 @@ Partial Class vehicleMaintenance
         'ExpirationDate_Textbox
         '
         Me.ExpirationDate_Textbox.AllowPromptAsInput = False
-        Me.ExpirationDate_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
+        Me.ExpirationDate_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.ExpirationDate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.ExpirationDate_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
         Me.ExpirationDate_Textbox.Location = New System.Drawing.Point(530, 533)
@@ -685,14 +684,6 @@ Partial Class vehicleMaintenance
         Me.ExpirationDate_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
         Me.ExpirationDate_Textbox.ValidatingType = GetType(Date)
         Me.ExpirationDate_Textbox.Visible = False
-        '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(770, 536)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(200, 22)
-        Me.DateTimePicker1.TabIndex = 241
-        Me.DateTimePicker1.Visible = False
         '
         'ABS_Value
         '
@@ -900,7 +891,6 @@ Partial Class vehicleMaintenance
         Me.Controls.Add(Me.ABS_Value)
         Me.Controls.Add(Me.ABS_CheckBox)
         Me.Controls.Add(Me.ABSLabel)
-        Me.Controls.Add(Me.DateTimePicker1)
         Me.Controls.Add(Me.ExpirationDate_Textbox)
         Me.Controls.Add(Me.ExpirationDate_Value)
         Me.Controls.Add(Me.ExpirationDateLabel)
@@ -1009,7 +999,6 @@ Partial Class vehicleMaintenance
     Friend WithEvents ExpirationDate_Value As Label
     Friend WithEvents ExpirationDateLabel As Label
     Friend WithEvents ExpirationDate_Textbox As MaskedTextBox
-    Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents ABS_Value As Label
     Friend WithEvents ABS_CheckBox As CheckBox
     Friend WithEvents ABSLabel As Label

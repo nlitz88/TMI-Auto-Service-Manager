@@ -308,6 +308,27 @@
         Dim Values As New List(Of Object) From {CustomerId, makeYear_Textbox.Text, Make_ComboBox.Text, Model_ComboBox.Text, Color_ComboBox.Text, LicenseState_ComboBox.Text, LicensePlate_Textbox.Text, VIN_Textbox.Text, InspectionStickerNbr_Textbox.Text, InspectionMonth_ComboBox.Text, InsuranceCompany_ComboBox.Text, PolicyNumber_Textbox.Text, ExpirationDate_Textbox.Text, Notes_Textbox.Text, Engine_Textbox.Text, ABS_CheckBox.Checked, AC_CheckBox.Checked, AirBags_CheckBox.Checked, Alarm_CheckBox.Checked}
 
         For i As Integer = 0 To Columns.Count - 1
+
+            ' Check for empty dateTime
+            If Columns(i) = "ExpirationDate" Then
+
+                Console.WriteLine("Adding paramater for Expiration Date")
+                Console.WriteLine("Current expiration date value : " & ExpirationDate_Textbox.Text)
+                Console.WriteLine("Expiration Date Mask : " & ExpirationDate_Textbox.Mask)
+
+                If Values(i) = ExpirationDate_Textbox.Mask Then
+                    Console.WriteLine("Expiration Date currently equals its mask")
+                    CRUD.AddParams("@" & Columns(i), New DateTime)
+                Else
+                    Console.WriteLine("Expiration Date was not equal to its mask")
+                    CRUD.AddParams("@" & Columns(i), Values(i))
+                End If
+                columnList += Columns(i) & ","
+                valuesParamList += "@" & Columns(i) & ","
+                Continue For
+            End If
+
+            ' Otherwise, treat as normal empty control
             If Not String.IsNullOrWhiteSpace(Columns(i)) Then
                 CRUD.AddParams("@" & Columns(i), Values(i))
             Else
@@ -502,12 +523,12 @@
         End If
 
         ' Expiration Date
-        If isEmpty("Expiration Date", False, ExpirationDate_Textbox.Text, errorMessage) Then
-            ExpirationDate_Textbox.ForeColor = Color.Red
-        ElseIf ExpirationDate_Textbox.Text.Length < 9 And Not String.IsNullOrWhiteSpace(ExpirationDate_Textbox.Text) Then
-            errorMessage += "ERROR: " & ExpirationDate_Textbox.Text & " is not a valid Date" & vbNewLine
-            ExpirationDate_Textbox.ForeColor = Color.Red
-        End If
+        'If isEmpty("Expiration Date", False, ExpirationDate_Textbox.Text, errorMessage) Then
+        '    ExpirationDate_Textbox.ForeColor = Color.Red
+        'ElseIf ExpirationDate_Textbox.Text.Length < 9 And Not String.IsNullOrWhiteSpace(ExpirationDate_Textbox.Text) Then
+        '    errorMessage += "ERROR: " & ExpirationDate_Textbox.Text & " is not a valid Date" & vbNewLine
+        '    ExpirationDate_Textbox.ForeColor = Color.Red
+        'End If
 
         ' Engine
         If Not isValidLength("Engine", False, Engine_Textbox.Text, 20, errorMessage) Then
@@ -721,6 +742,7 @@
         cancelButton.Enabled = True
         nav.DisableAll()
         CustomerComboBox.Enabled = False
+        VehicleComboBox.Enabled = False
 
         ' Get lastSelectedVehicle
         If getDataTableRow(VehicleDbController.DbDataTable, "YMML", VehicleComboBox.Text) <> -1 Then
