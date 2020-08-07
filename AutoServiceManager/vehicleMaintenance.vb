@@ -495,9 +495,7 @@
         End If
 
         ' Year
-        If Not isValidLength("Year", False, makeYear_Textbox.Text, 14, errorMessage) Then
-            makeYear_Textbox.ForeColor = Color.Red
-        End If
+        If Not validNumber("Year", False, makeYear_Textbox.Text, errorMessage) Then makeYear_Textbox.ForeColor = Color.Red
 
         ' Color
         If Not isValidLength("Color", False, Color_ComboBox.Text, 20, errorMessage) Then
@@ -1070,6 +1068,31 @@
 
     End Sub
 
+
+    Private Sub makeYear_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles makeYear_Textbox.KeyDown
+
+        ' Allow certain keystrokes through here. Oftentimes, these will be common shortcuts
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
+            allowedKeystroke = True
+        End If
+
+    End Sub
+
+    Private Sub makeYear_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles makeYear_Textbox.KeyPress
+
+        ' If certain keystroke exceptions allowed throuhg, then skip input validation here
+        If allowedKeystroke Then
+            allowedKeystroke = False
+            Exit Sub
+        End If
+
+        If Not numericInputValid(makeYear_Textbox, e.KeyChar) Then
+            e.KeyChar = Chr(0)
+            e.Handled = True
+        End If
+
+    End Sub
+
     Private Sub makeYear_Textbox_TextChanged(sender As Object, e As EventArgs) Handles makeYear_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
@@ -1083,6 +1106,7 @@
         End If
 
     End Sub
+
 
     Private Sub Color_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Color_ComboBox.SelectedIndexChanged, Color_ComboBox.TextChanged
 
