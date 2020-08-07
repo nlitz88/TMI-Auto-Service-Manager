@@ -1025,6 +1025,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        Make_ComboBox.ForeColor = DefaultForeColor
+
         ' If value selected/typed in exists in the combobox (and inherently, in the manufacturers datatable), then the selectedIndex <> -1.
         ' If does automake does exist, then initialize ModelComboBox respectively
         If Make_ComboBox.SelectedIndex <> -1 Then
@@ -1058,6 +1060,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        Model_ComboBox.ForeColor = DefaultForeColor
+
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
         Else
@@ -1069,6 +1073,8 @@
     Private Sub makeYear_Textbox_TextChanged(sender As Object, e As EventArgs) Handles makeYear_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        makeYear_Textbox.ForeColor = DefaultForeColor
 
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -1082,6 +1088,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        Color_ComboBox.ForeColor = DefaultForeColor
+
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
         Else
@@ -1093,6 +1101,8 @@
     Private Sub LicenseState_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LicenseState_ComboBox.SelectedIndexChanged, LicenseState_ComboBox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        LicenseState_ComboBox.ForeColor = DefaultForeColor
 
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -1106,6 +1116,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        LicensePlate_Textbox.ForeColor = DefaultForeColor
+
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
         Else
@@ -1117,6 +1129,8 @@
     Private Sub VIN_Textbox_TextChanged(sender As Object, e As EventArgs) Handles VIN_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        VIN_Textbox.ForeColor = DefaultForeColor
 
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -1130,6 +1144,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        InspectionMonth_ComboBox.ForeColor = DefaultForeColor
+
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
         Else
@@ -1141,6 +1157,8 @@
     Private Sub InspectionStickerNbr_Textbox_TextChanged(sender As Object, e As EventArgs) Handles InspectionStickerNbr_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        InspectionStickerNbr_Textbox.ForeColor = DefaultForeColor
 
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -1154,6 +1172,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        InsuranceCompany_ComboBox.ForeColor = DefaultForeColor
+
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
         Else
@@ -1165,6 +1185,8 @@
     Private Sub PolicyNumber_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PolicyNumber_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        PolicyNumber_Textbox.ForeColor = DefaultForeColor
 
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -1178,6 +1200,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        ExpirationDate_Textbox.ForeColor = DefaultForeColor
+
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
         Else
@@ -1189,6 +1213,8 @@
     Private Sub Alarm_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles Alarm_CheckBox.CheckedChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        Alarm_CheckBox.ForeColor = DefaultForeColor
 
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -1202,6 +1228,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        ABS_CheckBox.ForeColor = DefaultForeColor
+
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
         Else
@@ -1213,6 +1241,8 @@
     Private Sub AirBags_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles AirBags_CheckBox.CheckedChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        AirBags_CheckBox.ForeColor = DefaultForeColor
 
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -1226,6 +1256,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        AC_CheckBox.ForeColor = DefaultForeColor
+
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
         Else
@@ -1238,6 +1270,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        Engine_Textbox.ForeColor = DefaultForeColor
+
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
         Else
@@ -1249,6 +1283,8 @@
     Private Sub Notes_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Notes_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        Notes_Textbox.ForeColor = DefaultForeColor
 
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
