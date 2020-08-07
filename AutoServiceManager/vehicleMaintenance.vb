@@ -419,14 +419,16 @@
         ' Manufacturer
         If Not isValidLength("Manufacturer", False, Make_ComboBox.Text, 20, errorMessage) Then
             Make_ComboBox.ForeColor = Color.Red
-        ElseIf Not String.IsNullOrWhiteSpace(Make_ComboBox.Text) And Not valueExists("Manufacturer", errorMessage, "AutoMake", Make_ComboBox.Text, MakeDbController.DbDataTable) Then
+        ElseIf Not String.IsNullOrWhiteSpace(Make_ComboBox.Text) And Not valueExists("AutoMake", Make_ComboBox.Text, MakeDbController.DbDataTable) Then
+            errorMessage += "ERROR: " & Make_ComboBox.Text & " is not a valid manufacturer" & vbNewLine
             Make_ComboBox.ForeColor = Color.Red
         End If
 
         ' Model
         If Not isValidLength("Model", False, Model_ComboBox.Text, 20, errorMessage) Then
             Model_ComboBox.ForeColor = Color.Red
-        ElseIf Not String.IsNullOrWhiteSpace(Model_ComboBox.Text) And Not valueExists("Model", errorMessage, "AutoModel", Model_ComboBox.Text, ModelDbController.DbDataTable) Then
+        ElseIf Not String.IsNullOrWhiteSpace(Model_ComboBox.Text) And Not valueExists("AutoModel", Model_ComboBox.Text, ModelDbController.DbDataTable) Then
+            errorMessage += "ERROR: " & Model_ComboBox.Text & " is not an existing model of " & Make_ComboBox.Text & vbNewLine
             Model_ComboBox.ForeColor = Color.Red
         End If
 
@@ -438,7 +440,7 @@
         ' Color
         If Not isValidLength("Color", False, Color_ComboBox.Text, 20, errorMessage) Then
             Color_ComboBox.ForeColor = Color.Red
-        ElseIf Color_ComboBox.SelectedIndex = -1 And Not String.IsNullOrWhiteSpace(Color_ComboBox.Text) Then
+        ElseIf Not String.IsNullOrWhiteSpace(Color_ComboBox.Text) And Not valueExists("Color", Color_ComboBox.Text, ColorDbController.DbDataTable) Then
             errorMessage += "ERROR: " & Color_ComboBox.Text & " is not a valid color" & vbNewLine
             Color_ComboBox.ForeColor = Color.Red
         End If
@@ -446,7 +448,7 @@
         ' License State
         If Not isValidLength("License State", False, LicenseState_ComboBox.Text, 2, errorMessage) Then
             LicenseState_ComboBox.ForeColor = Color.Red
-        ElseIf LicenseState_ComboBox.SelectedIndex = -1 And Not String.IsNullOrWhiteSpace(LicenseState_ComboBox.Text) Then
+        ElseIf Not String.IsNullOrWhiteSpace(LicenseState_ComboBox.Text) And Not valueExists("State", LicenseState_ComboBox.Text, StateDbController.DbDataTable) Then
             errorMessage += "ERROR: " & LicenseState_ComboBox.Text & " is not a valid State" & vbNewLine
             LicenseState_ComboBox.ForeColor = Color.Red
         End If
@@ -464,7 +466,7 @@
         ' Inspection Month
         If Not isValidLength("Inspection Month", False, InspectionMonth_ComboBox.Text, 3, errorMessage) Then
             InspectionMonth_ComboBox.ForeColor = Color.Red
-        ElseIf InspectionMonth_ComboBox.SelectedIndex = -1 And Not String.IsNullOrWhiteSpace(InspectionMonth_ComboBox.Text) Then
+        ElseIf Not String.IsNullOrWhiteSpace(InspectionMonth_ComboBox.Text) And Not valueExists("Month", InspectionMonth_ComboBox.Text, MonthDbController.DbDataTable) Then
             errorMessage += "ERROR: " & InspectionMonth_ComboBox.Text & " is not a valid Month" & vbNewLine
             InspectionMonth_ComboBox.ForeColor = Color.Red
         End If
@@ -477,7 +479,7 @@
         ' Insurance Company
         If Not isValidLength("Insurance Company", False, InsuranceCompany_ComboBox.Text, 100, errorMessage) Then
             InsuranceCompany_ComboBox.ForeColor = Color.Red
-        ElseIf InsuranceCompany_ComboBox.SelectedIndex = -1 And Not String.IsNullOrWhiteSpace(InsuranceCompany_ComboBox.Text) Then
+        ElseIf Not String.IsNullOrWhiteSpace(InsuranceCompany_ComboBox.Text) And Not valueExists("CompanyName", InsuranceCompany_ComboBox.Text, InsuranceCompanyDbController.DbDataTable) Then
             errorMessage += "ERROR: " & InsuranceCompany_ComboBox.Text & " is not a valid Insurance Company" & vbNewLine
             InsuranceCompany_ComboBox.ForeColor = Color.Red
         End If
