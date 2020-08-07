@@ -314,11 +314,12 @@
 
                 Console.WriteLine("Adding paramater for Expiration Date")
                 Console.WriteLine("Current expiration date value : " & ExpirationDate_Textbox.Text)
+                Console.WriteLine("Modified expiration date value : " & ExpirationDate_Textbox.Text.Replace(" ", "0"))
                 Console.WriteLine("Expiration Date Mask : " & ExpirationDate_Textbox.Mask)
 
-                If Values(i) = ExpirationDate_Textbox.Mask Then
+                If Values(i).ToString().Replace(" ", "0") = ExpirationDate_Textbox.Mask Then
                     Console.WriteLine("Expiration Date currently equals its mask")
-                    CRUD.AddParams("@" & Columns(i), New DateTime)
+                    CRUD.AddParams("@" & Columns(i), DBNull.Value)
                 Else
                     Console.WriteLine("Expiration Date was not equal to its mask")
                     CRUD.AddParams("@" & Columns(i), Values(i))

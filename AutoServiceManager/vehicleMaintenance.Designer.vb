@@ -671,7 +671,7 @@ Partial Class vehicleMaintenance
         'ExpirationDate_Textbox
         '
         Me.ExpirationDate_Textbox.AllowPromptAsInput = False
-        Me.ExpirationDate_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
+        Me.ExpirationDate_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
         Me.ExpirationDate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.ExpirationDate_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
         Me.ExpirationDate_Textbox.Location = New System.Drawing.Point(530, 533)
