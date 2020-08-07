@@ -513,12 +513,9 @@
         End If
 
         ' Expiration Date
-        'If isEmpty("Expiration Date", False, ExpirationDate_Textbox.Text, errorMessage) Then
-        '    ExpirationDate_Textbox.ForeColor = Color.Red
-        'ElseIf ExpirationDate_Textbox.Text.Length < 9 And Not String.IsNullOrWhiteSpace(ExpirationDate_Textbox.Text) Then
-        '    errorMessage += "ERROR: " & ExpirationDate_Textbox.Text & " is not a valid Date" & vbNewLine
-        '    ExpirationDate_Textbox.ForeColor = Color.Red
-        'End If
+        If Not validDateTime("Expiration Date", False, ExpirationDate_Textbox.Text, errorMessage) Then
+            ExpirationDate_Textbox.ForeColor = Color.Red
+        End If
 
         ' Engine
         If Not isValidLength("Engine", False, Engine_Textbox.Text, 20, errorMessage) Then

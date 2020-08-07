@@ -1119,6 +1119,32 @@
     End Function
 
 
+    ' DateTime validation function
+    Public Function validDateTime(ByVal label As String, ByVal required As Boolean, ByVal dateTime As String, ByRef errorMessage As String) As Boolean
+
+        ' First check if "Empty." Empty for datetime means that its value will be equivalent to its mask
+        If required Then
+            If dateTime.Replace(" ", "0") = "00/00/0000" Then
+                errorMessage += "ERROR: Must enter a valid " & label & vbNewLine
+                Return False
+            End If
+        Else
+            If dateTime.Replace(" ", "0") = "00/00/0000" Then Return True
+        End If
+
+        ' Then, if not empty, then check if it's a valid date
+        If Not IsDate(dateTime) Then
+            errorMessage += "ERROR: " & dateTime & " is not a valid date" & vbNewLine
+            Return False
+        End If
+
+        ' Otherwise, it must be valid
+        Return True
+
+    End Function
+
+
+
     ' **************** CORE VALIDATION ****************
 
 
