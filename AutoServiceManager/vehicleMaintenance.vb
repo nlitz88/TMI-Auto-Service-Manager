@@ -42,7 +42,7 @@
     Private Function loadAllPreliminaryDataTables() As Boolean
 
         ' Loads datatable from Customer
-        CustomerDbController.ExecQuery("SELECT c.LastName + ', ' + IIF(ISNULL(c.FirstName), '', c.FirstName) + ' @ ' + IIF(ISNULL(c.Address), '', c.Address) as CLFA, c.CustomerId, c.LastName " &
+        CustomerDbController.ExecQuery("SELECT IIF(ISNULL(c.LastName), '', c.LastName) + ', ' + IIF(ISNULL(c.FirstName), '', c.FirstName) + ' @ ' + IIF(ISNULL(c.Address), '', c.Address) as CLFA, c.CustomerId, c.LastName " &
                                        "FROM Customer c " &
                                        "WHERE Trim(LastName) <> '' " &
                                        "ORDER BY c.LastName ASC")
