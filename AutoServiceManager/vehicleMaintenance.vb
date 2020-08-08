@@ -697,7 +697,7 @@
 
     Private Sub VehicleComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles VehicleComboBox.SelectedIndexChanged, VehicleComboBox.TextChanged
 
-        ' Ensure that CustomerCombobox is only attempting to initialize values when on proper selected Index
+        ' Ensure that VehicleCombobox is only attempting to initialize values when on proper selected Index
         If VehicleComboBox.SelectedIndex = -1 Then
 
             ' Have all labels and corresponding values hidden
