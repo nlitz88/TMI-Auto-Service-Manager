@@ -49,6 +49,18 @@ Partial Class masterTaskMaintenance
         Me.TotalTask_Textbox = New System.Windows.Forms.TextBox()
         Me.TotalCostLabel = New System.Windows.Forms.Label()
         Me.TotalTask_Value = New System.Windows.Forms.Label()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.TaskLaborLabel = New System.Windows.Forms.Label()
+        Me.TaskPartsLabel = New System.Windows.Forms.Label()
+        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'nav
@@ -195,7 +207,7 @@ Partial Class masterTaskMaintenance
         Me.Instructions_Value.AutoSize = True
         Me.Instructions_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Instructions_Value.ForeColor = System.Drawing.Color.Black
-        Me.Instructions_Value.Location = New System.Drawing.Point(191, 307)
+        Me.Instructions_Value.Location = New System.Drawing.Point(191, 302)
         Me.Instructions_Value.Name = "Instructions_Value"
         Me.Instructions_Value.Size = New System.Drawing.Size(0, 20)
         Me.Instructions_Value.TabIndex = 138
@@ -205,7 +217,7 @@ Partial Class masterTaskMaintenance
         '
         Me.InstructionsLabel.AutoSize = True
         Me.InstructionsLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.InstructionsLabel.Location = New System.Drawing.Point(97, 310)
+        Me.InstructionsLabel.Location = New System.Drawing.Point(97, 305)
         Me.InstructionsLabel.Name = "InstructionsLabel"
         Me.InstructionsLabel.Size = New System.Drawing.Size(88, 17)
         Me.InstructionsLabel.TabIndex = 137
@@ -215,7 +227,7 @@ Partial Class masterTaskMaintenance
         'Instructions_Textbox
         '
         Me.Instructions_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Instructions_Textbox.Location = New System.Drawing.Point(191, 304)
+        Me.Instructions_Textbox.Location = New System.Drawing.Point(191, 299)
         Me.Instructions_Textbox.MaxLength = 20
         Me.Instructions_Textbox.Name = "Instructions_Textbox"
         Me.Instructions_Textbox.Size = New System.Drawing.Size(641, 27)
@@ -229,7 +241,7 @@ Partial Class masterTaskMaintenance
         Me.TaskType_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.TaskType_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TaskType_ComboBox.FormattingEnabled = True
-        Me.TaskType_ComboBox.Location = New System.Drawing.Point(186, 350)
+        Me.TaskType_ComboBox.Location = New System.Drawing.Point(186, 340)
         Me.TaskType_ComboBox.MaxLength = 20
         Me.TaskType_ComboBox.Name = "TaskType_ComboBox"
         Me.TaskType_ComboBox.Size = New System.Drawing.Size(195, 28)
@@ -242,7 +254,7 @@ Partial Class masterTaskMaintenance
         Me.TaskType_Value.AutoSize = True
         Me.TaskType_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TaskType_Value.ForeColor = System.Drawing.Color.Black
-        Me.TaskType_Value.Location = New System.Drawing.Point(186, 353)
+        Me.TaskType_Value.Location = New System.Drawing.Point(186, 343)
         Me.TaskType_Value.Name = "TaskType_Value"
         Me.TaskType_Value.Size = New System.Drawing.Size(0, 20)
         Me.TaskType_Value.TabIndex = 220
@@ -253,7 +265,7 @@ Partial Class masterTaskMaintenance
         '
         Me.TaskTypeLabel.AutoSize = True
         Me.TaskTypeLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.TaskTypeLabel.Location = New System.Drawing.Point(97, 356)
+        Me.TaskTypeLabel.Location = New System.Drawing.Point(97, 346)
         Me.TaskTypeLabel.Name = "TaskTypeLabel"
         Me.TaskTypeLabel.Size = New System.Drawing.Size(83, 17)
         Me.TaskTypeLabel.TabIndex = 219
@@ -263,8 +275,9 @@ Partial Class masterTaskMaintenance
         '
         'TaskLabor_Textbox
         '
+        Me.TaskLabor_Textbox.Enabled = False
         Me.TaskLabor_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TaskLabor_Textbox.Location = New System.Drawing.Point(224, 398)
+        Me.TaskLabor_Textbox.Location = New System.Drawing.Point(221, 381)
         Me.TaskLabor_Textbox.Name = "TaskLabor_Textbox"
         Me.TaskLabor_Textbox.Size = New System.Drawing.Size(105, 27)
         Me.TaskLabor_Textbox.TabIndex = 221
@@ -274,7 +287,7 @@ Partial Class masterTaskMaintenance
         '
         Me.TotalLaborCostLabel.AutoSize = True
         Me.TotalLaborCostLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.TotalLaborCostLabel.Location = New System.Drawing.Point(97, 404)
+        Me.TotalLaborCostLabel.Location = New System.Drawing.Point(97, 387)
         Me.TotalLaborCostLabel.Name = "TotalLaborCostLabel"
         Me.TotalLaborCostLabel.Size = New System.Drawing.Size(121, 17)
         Me.TotalLaborCostLabel.TabIndex = 223
@@ -286,7 +299,7 @@ Partial Class masterTaskMaintenance
         Me.TaskLabor_Value.AutoSize = True
         Me.TaskLabor_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TaskLabor_Value.ForeColor = System.Drawing.Color.Black
-        Me.TaskLabor_Value.Location = New System.Drawing.Point(224, 401)
+        Me.TaskLabor_Value.Location = New System.Drawing.Point(221, 384)
         Me.TaskLabor_Value.Name = "TaskLabor_Value"
         Me.TaskLabor_Value.Size = New System.Drawing.Size(0, 20)
         Me.TaskLabor_Value.TabIndex = 222
@@ -294,8 +307,9 @@ Partial Class masterTaskMaintenance
         '
         'TaskParts_Textbox
         '
+        Me.TaskParts_Textbox.Enabled = False
         Me.TaskParts_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TaskParts_Textbox.Location = New System.Drawing.Point(472, 398)
+        Me.TaskParts_Textbox.Location = New System.Drawing.Point(469, 381)
         Me.TaskParts_Textbox.Name = "TaskParts_Textbox"
         Me.TaskParts_Textbox.Size = New System.Drawing.Size(105, 27)
         Me.TaskParts_Textbox.TabIndex = 224
@@ -305,7 +319,7 @@ Partial Class masterTaskMaintenance
         '
         Me.TotalPartsCostLabel.AutoSize = True
         Me.TotalPartsCostLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.TotalPartsCostLabel.Location = New System.Drawing.Point(349, 404)
+        Me.TotalPartsCostLabel.Location = New System.Drawing.Point(346, 387)
         Me.TotalPartsCostLabel.Name = "TotalPartsCostLabel"
         Me.TotalPartsCostLabel.Size = New System.Drawing.Size(117, 17)
         Me.TotalPartsCostLabel.TabIndex = 226
@@ -317,7 +331,7 @@ Partial Class masterTaskMaintenance
         Me.TaskParts_Value.AutoSize = True
         Me.TaskParts_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TaskParts_Value.ForeColor = System.Drawing.Color.Black
-        Me.TaskParts_Value.Location = New System.Drawing.Point(472, 401)
+        Me.TaskParts_Value.Location = New System.Drawing.Point(469, 384)
         Me.TaskParts_Value.Name = "TaskParts_Value"
         Me.TaskParts_Value.Size = New System.Drawing.Size(0, 20)
         Me.TaskParts_Value.TabIndex = 225
@@ -325,8 +339,9 @@ Partial Class masterTaskMaintenance
         '
         'TotalTask_Textbox
         '
+        Me.TotalTask_Textbox.Enabled = False
         Me.TotalTask_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TotalTask_Textbox.Location = New System.Drawing.Point(684, 398)
+        Me.TotalTask_Textbox.Location = New System.Drawing.Point(681, 381)
         Me.TotalTask_Textbox.Name = "TotalTask_Textbox"
         Me.TotalTask_Textbox.Size = New System.Drawing.Size(105, 27)
         Me.TotalTask_Textbox.TabIndex = 227
@@ -336,7 +351,7 @@ Partial Class masterTaskMaintenance
         '
         Me.TotalCostLabel.AutoSize = True
         Me.TotalCostLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.TotalCostLabel.Location = New System.Drawing.Point(598, 404)
+        Me.TotalCostLabel.Location = New System.Drawing.Point(595, 387)
         Me.TotalCostLabel.Name = "TotalCostLabel"
         Me.TotalCostLabel.Size = New System.Drawing.Size(80, 17)
         Me.TotalCostLabel.TabIndex = 229
@@ -348,11 +363,129 @@ Partial Class masterTaskMaintenance
         Me.TotalTask_Value.AutoSize = True
         Me.TotalTask_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TotalTask_Value.ForeColor = System.Drawing.Color.Black
-        Me.TotalTask_Value.Location = New System.Drawing.Point(684, 401)
+        Me.TotalTask_Value.Location = New System.Drawing.Point(681, 384)
         Me.TotalTask_Value.Name = "TotalTask_Value"
         Me.TotalTask_Value.Size = New System.Drawing.Size(0, 20)
         Me.TotalTask_Value.TabIndex = 228
         Me.TotalTask_Value.Tag = "dataViewingControl"
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(100, 505)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowHeadersWidth = 51
+        Me.DataGridView1.RowTemplate.Height = 24
+        Me.DataGridView1.Size = New System.Drawing.Size(369, 200)
+        Me.DataGridView1.TabIndex = 232
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.Button1.Enabled = False
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.ForeColor = System.Drawing.Color.White
+        Me.Button1.Location = New System.Drawing.Point(216, 469)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(110, 30)
+        Me.Button1.TabIndex = 234
+        Me.Button1.Text = "Delete"
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.Button2.Enabled = False
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.ForeColor = System.Drawing.Color.White
+        Me.Button2.Location = New System.Drawing.Point(332, 469)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(110, 30)
+        Me.Button2.TabIndex = 235
+        Me.Button2.Text = "Edit"
+        Me.Button2.UseVisualStyleBackColor = False
+        '
+        'Button5
+        '
+        Me.Button5.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button5.ForeColor = System.Drawing.Color.White
+        Me.Button5.Location = New System.Drawing.Point(100, 469)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(110, 30)
+        Me.Button5.TabIndex = 233
+        Me.Button5.Text = "Add"
+        Me.Button5.UseVisualStyleBackColor = False
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.Button3.Enabled = False
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.ForeColor = System.Drawing.Color.White
+        Me.Button3.Location = New System.Drawing.Point(625, 469)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(110, 30)
+        Me.Button3.TabIndex = 238
+        Me.Button3.Text = "Delete"
+        Me.Button3.UseVisualStyleBackColor = False
+        '
+        'Button4
+        '
+        Me.Button4.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.Button4.Enabled = False
+        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button4.ForeColor = System.Drawing.Color.White
+        Me.Button4.Location = New System.Drawing.Point(741, 469)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(110, 30)
+        Me.Button4.TabIndex = 239
+        Me.Button4.Text = "Edit"
+        Me.Button4.UseVisualStyleBackColor = False
+        '
+        'Button6
+        '
+        Me.Button6.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button6.ForeColor = System.Drawing.Color.White
+        Me.Button6.Location = New System.Drawing.Point(509, 469)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(110, 30)
+        Me.Button6.TabIndex = 237
+        Me.Button6.Text = "Add"
+        Me.Button6.UseVisualStyleBackColor = False
+        '
+        'TaskLaborLabel
+        '
+        Me.TaskLaborLabel.AutoSize = True
+        Me.TaskLaborLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TaskLaborLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.TaskLaborLabel.Location = New System.Drawing.Point(95, 437)
+        Me.TaskLaborLabel.Name = "TaskLaborLabel"
+        Me.TaskLaborLabel.Size = New System.Drawing.Size(144, 29)
+        Me.TaskLaborLabel.TabIndex = 240
+        Me.TaskLaborLabel.Text = "Task Labor"
+        '
+        'TaskPartsLabel
+        '
+        Me.TaskPartsLabel.AutoSize = True
+        Me.TaskPartsLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TaskPartsLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.TaskPartsLabel.Location = New System.Drawing.Point(504, 437)
+        Me.TaskPartsLabel.Name = "TaskPartsLabel"
+        Me.TaskPartsLabel.Size = New System.Drawing.Size(137, 29)
+        Me.TaskPartsLabel.TabIndex = 241
+        Me.TaskPartsLabel.Text = "Task Parts"
+        '
+        'DataGridView2
+        '
+        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView2.Location = New System.Drawing.Point(509, 505)
+        Me.DataGridView2.Name = "DataGridView2"
+        Me.DataGridView2.RowHeadersWidth = 51
+        Me.DataGridView2.RowTemplate.Height = 24
+        Me.DataGridView2.Size = New System.Drawing.Size(369, 200)
+        Me.DataGridView2.TabIndex = 242
         '
         'masterTaskMaintenance
         '
@@ -360,6 +493,16 @@ Partial Class masterTaskMaintenance
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.DataGridView2)
+        Me.Controls.Add(Me.TaskPartsLabel)
+        Me.Controls.Add(Me.TaskLaborLabel)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.Button6)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button5)
+        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.TotalTask_Textbox)
         Me.Controls.Add(Me.TotalCostLabel)
         Me.Controls.Add(Me.TotalTask_Value)
@@ -391,7 +534,9 @@ Partial Class masterTaskMaintenance
         Me.MaximizeBox = False
         Me.Name = "masterTaskMaintenance"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
-        Me.Text = "Master Task List"
+        Me.Text = "                                      "
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -424,4 +569,14 @@ Partial Class masterTaskMaintenance
     Friend WithEvents TotalTask_Textbox As TextBox
     Friend WithEvents TotalCostLabel As Label
     Friend WithEvents TotalTask_Value As Label
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button5 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button6 As Button
+    Friend WithEvents TaskLaborLabel As Label
+    Friend WithEvents TaskPartsLabel As Label
+    Friend WithEvents DataGridView2 As DataGridView
 End Class
