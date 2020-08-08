@@ -362,7 +362,7 @@ Partial Class masterTaskMaintenance
         'TaskLaborGridView
         '
         Me.TaskLaborGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.TaskLaborGridView.Location = New System.Drawing.Point(100, 469)
+        Me.TaskLaborGridView.Location = New System.Drawing.Point(100, 479)
         Me.TaskLaborGridView.Name = "TaskLaborGridView"
         Me.TaskLaborGridView.RowHeadersWidth = 51
         Me.TaskLaborGridView.RowTemplate.Height = 24
@@ -376,9 +376,9 @@ Partial Class masterTaskMaintenance
         Me.tlDeleteButton.Enabled = False
         Me.tlDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.tlDeleteButton.ForeColor = System.Drawing.Color.White
-        Me.tlDeleteButton.Location = New System.Drawing.Point(216, 675)
+        Me.tlDeleteButton.Location = New System.Drawing.Point(331, 437)
         Me.tlDeleteButton.Name = "tlDeleteButton"
-        Me.tlDeleteButton.Size = New System.Drawing.Size(110, 30)
+        Me.tlDeleteButton.Size = New System.Drawing.Size(66, 30)
         Me.tlDeleteButton.TabIndex = 234
         Me.tlDeleteButton.Tag = "dataEditingControl"
         Me.tlDeleteButton.Text = "Delete"
@@ -390,9 +390,9 @@ Partial Class masterTaskMaintenance
         Me.tlEditButton.Enabled = False
         Me.tlEditButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.tlEditButton.ForeColor = System.Drawing.Color.White
-        Me.tlEditButton.Location = New System.Drawing.Point(332, 675)
+        Me.tlEditButton.Location = New System.Drawing.Point(403, 437)
         Me.tlEditButton.Name = "tlEditButton"
-        Me.tlEditButton.Size = New System.Drawing.Size(110, 30)
+        Me.tlEditButton.Size = New System.Drawing.Size(66, 30)
         Me.tlEditButton.TabIndex = 235
         Me.tlEditButton.Tag = "dataEditingControl"
         Me.tlEditButton.Text = "Edit"
@@ -403,9 +403,9 @@ Partial Class masterTaskMaintenance
         Me.tlAddButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.tlAddButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.tlAddButton.ForeColor = System.Drawing.Color.White
-        Me.tlAddButton.Location = New System.Drawing.Point(100, 675)
+        Me.tlAddButton.Location = New System.Drawing.Point(259, 437)
         Me.tlAddButton.Name = "tlAddButton"
-        Me.tlAddButton.Size = New System.Drawing.Size(110, 30)
+        Me.tlAddButton.Size = New System.Drawing.Size(66, 30)
         Me.tlAddButton.TabIndex = 233
         Me.tlAddButton.Tag = "dataEditingControl"
         Me.tlAddButton.Text = "Add"
@@ -417,9 +417,9 @@ Partial Class masterTaskMaintenance
         Me.tpDeleteButton.Enabled = False
         Me.tpDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.tpDeleteButton.ForeColor = System.Drawing.Color.White
-        Me.tpDeleteButton.Location = New System.Drawing.Point(625, 675)
+        Me.tpDeleteButton.Location = New System.Drawing.Point(742, 436)
         Me.tpDeleteButton.Name = "tpDeleteButton"
-        Me.tpDeleteButton.Size = New System.Drawing.Size(110, 30)
+        Me.tpDeleteButton.Size = New System.Drawing.Size(65, 30)
         Me.tpDeleteButton.TabIndex = 238
         Me.tpDeleteButton.Tag = "dataEditingControl"
         Me.tpDeleteButton.Text = "Delete"
@@ -431,9 +431,9 @@ Partial Class masterTaskMaintenance
         Me.tpEditButton.Enabled = False
         Me.tpEditButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.tpEditButton.ForeColor = System.Drawing.Color.White
-        Me.tpEditButton.Location = New System.Drawing.Point(741, 675)
+        Me.tpEditButton.Location = New System.Drawing.Point(813, 436)
         Me.tpEditButton.Name = "tpEditButton"
-        Me.tpEditButton.Size = New System.Drawing.Size(110, 30)
+        Me.tpEditButton.Size = New System.Drawing.Size(65, 30)
         Me.tpEditButton.TabIndex = 239
         Me.tpEditButton.Tag = "dataEditingControl"
         Me.tpEditButton.Text = "Edit"
@@ -444,9 +444,9 @@ Partial Class masterTaskMaintenance
         Me.tpAddButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.tpAddButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.tpAddButton.ForeColor = System.Drawing.Color.White
-        Me.tpAddButton.Location = New System.Drawing.Point(509, 675)
+        Me.tpAddButton.Location = New System.Drawing.Point(671, 436)
         Me.tpAddButton.Name = "tpAddButton"
-        Me.tpAddButton.Size = New System.Drawing.Size(110, 30)
+        Me.tpAddButton.Size = New System.Drawing.Size(65, 30)
         Me.tpAddButton.TabIndex = 237
         Me.tpAddButton.Tag = "dataEditingControl"
         Me.tpAddButton.Text = "Add"
@@ -479,7 +479,7 @@ Partial Class masterTaskMaintenance
         'TaskPartsGridView
         '
         Me.TaskPartsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.TaskPartsGridView.Location = New System.Drawing.Point(509, 469)
+        Me.TaskPartsGridView.Location = New System.Drawing.Point(509, 479)
         Me.TaskPartsGridView.Name = "TaskPartsGridView"
         Me.TaskPartsGridView.RowHeadersWidth = 51
         Me.TaskPartsGridView.RowTemplate.Height = 24
