@@ -87,4 +87,9 @@
         changeScreen(vehicleMaintenance, Me.ParentForm)
     End Sub
 
+    Private Sub MasterTaskListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MasterTaskListToolStripMenuItem.Click
+        If Me.ParentForm Is masterTaskMaintenance Then Exit Sub
+        changeScreen(masterTaskMaintenance, Me.ParentForm)
+    End Sub
+
 End Class

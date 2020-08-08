@@ -98,7 +98,7 @@ Partial Class vehicleMaintenance
         Me.deleteButton.Location = New System.Drawing.Point(216, 120)
         Me.deleteButton.Name = "deleteButton"
         Me.deleteButton.Size = New System.Drawing.Size(110, 30)
-        Me.deleteButton.TabIndex = 125
+        Me.deleteButton.TabIndex = 21
         Me.deleteButton.Text = "Delete"
         Me.deleteButton.UseVisualStyleBackColor = False
         '
@@ -122,7 +122,7 @@ Partial Class vehicleMaintenance
         Me.editButton.Location = New System.Drawing.Point(332, 120)
         Me.editButton.Name = "editButton"
         Me.editButton.Size = New System.Drawing.Size(110, 30)
-        Me.editButton.TabIndex = 126
+        Me.editButton.TabIndex = 22
         Me.editButton.Text = "Edit"
         Me.editButton.UseVisualStyleBackColor = False
         '
@@ -135,7 +135,7 @@ Partial Class vehicleMaintenance
         Me.cancelButton.Location = New System.Drawing.Point(564, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
-        Me.cancelButton.TabIndex = 128
+        Me.cancelButton.TabIndex = 24
         Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
         '
@@ -148,7 +148,7 @@ Partial Class vehicleMaintenance
         Me.saveButton.Location = New System.Drawing.Point(448, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
-        Me.saveButton.TabIndex = 127
+        Me.saveButton.TabIndex = 23
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
         '
@@ -160,7 +160,7 @@ Partial Class vehicleMaintenance
         Me.addButton.Location = New System.Drawing.Point(100, 120)
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(110, 30)
-        Me.addButton.TabIndex = 124
+        Me.addButton.TabIndex = 20
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = False
         '
@@ -183,7 +183,7 @@ Partial Class vehicleMaintenance
         Me.VehicleComboBox.Location = New System.Drawing.Point(165, 250)
         Me.VehicleComboBox.Name = "VehicleComboBox"
         Me.VehicleComboBox.Size = New System.Drawing.Size(509, 28)
-        Me.VehicleComboBox.TabIndex = 137
+        Me.VehicleComboBox.TabIndex = 1
         '
         'CustomerComboLabel
         '
@@ -214,7 +214,7 @@ Partial Class vehicleMaintenance
         Me.Alarm_Value.Location = New System.Drawing.Point(206, 581)
         Me.Alarm_Value.Name = "Alarm_Value"
         Me.Alarm_Value.Size = New System.Drawing.Size(0, 20)
-        Me.Alarm_Value.TabIndex = 178
+        Me.Alarm_Value.TabIndex = 14
         Me.Alarm_Value.Tag = "dataViewingControl"
         Me.Alarm_Value.Visible = False
         '
@@ -272,7 +272,7 @@ Partial Class vehicleMaintenance
         Me.VIN_Textbox.MaxLength = 20
         Me.VIN_Textbox.Name = "VIN_Textbox"
         Me.VIN_Textbox.Size = New System.Drawing.Size(315, 27)
-        Me.VIN_Textbox.TabIndex = 171
+        Me.VIN_Textbox.TabIndex = 8
         Me.VIN_Textbox.Tag = "dataEditingControl"
         Me.VIN_Textbox.Visible = False
         '
@@ -334,7 +334,7 @@ Partial Class vehicleMaintenance
         Me.Make_ComboBox.MaxLength = 20
         Me.Make_ComboBox.Name = "Make_ComboBox"
         Me.Make_ComboBox.Size = New System.Drawing.Size(204, 28)
-        Me.Make_ComboBox.TabIndex = 211
+        Me.Make_ComboBox.TabIndex = 2
         Me.Make_ComboBox.Tag = "dataEditingControl"
         Me.Make_ComboBox.Visible = False
         '
@@ -348,7 +348,7 @@ Partial Class vehicleMaintenance
         Me.Model_ComboBox.MaxLength = 20
         Me.Model_ComboBox.Name = "Model_ComboBox"
         Me.Model_ComboBox.Size = New System.Drawing.Size(204, 28)
-        Me.Model_ComboBox.TabIndex = 212
+        Me.Model_ComboBox.TabIndex = 3
         Me.Model_ComboBox.Tag = "dataEditingControl"
         Me.Model_ComboBox.Visible = False
         '
@@ -383,7 +383,7 @@ Partial Class vehicleMaintenance
         Me.makeYear_Textbox.MaxLength = 14
         Me.makeYear_Textbox.Name = "makeYear_Textbox"
         Me.makeYear_Textbox.Size = New System.Drawing.Size(92, 27)
-        Me.makeYear_Textbox.TabIndex = 213
+        Me.makeYear_Textbox.TabIndex = 4
         Me.makeYear_Textbox.Tag = "dataEditingControl"
         Me.makeYear_Textbox.Visible = False
         '
@@ -397,7 +397,7 @@ Partial Class vehicleMaintenance
         Me.Color_ComboBox.MaxLength = 20
         Me.Color_ComboBox.Name = "Color_ComboBox"
         Me.Color_ComboBox.Size = New System.Drawing.Size(147, 28)
-        Me.Color_ComboBox.TabIndex = 218
+        Me.Color_ComboBox.TabIndex = 5
         Me.Color_ComboBox.Tag = "dataEditingControl"
         Me.Color_ComboBox.Visible = False
         '
@@ -435,7 +435,7 @@ Partial Class vehicleMaintenance
         Me.LicenseState_ComboBox.MaxLength = 2
         Me.LicenseState_ComboBox.Name = "LicenseState_ComboBox"
         Me.LicenseState_ComboBox.Size = New System.Drawing.Size(205, 28)
-        Me.LicenseState_ComboBox.TabIndex = 221
+        Me.LicenseState_ComboBox.TabIndex = 6
         Me.LicenseState_ComboBox.Tag = "dataEditingControl"
         Me.LicenseState_ComboBox.Visible = False
         '
@@ -494,7 +494,7 @@ Partial Class vehicleMaintenance
         Me.LicensePlate_Textbox.MaxLength = 10
         Me.LicensePlate_Textbox.Name = "LicensePlate_Textbox"
         Me.LicensePlate_Textbox.Size = New System.Drawing.Size(126, 27)
-        Me.LicensePlate_Textbox.TabIndex = 222
+        Me.LicensePlate_Textbox.TabIndex = 7
         Me.LicensePlate_Textbox.Tag = "dataEditingControl"
         Me.LicensePlate_Textbox.Visible = False
         '
@@ -508,7 +508,7 @@ Partial Class vehicleMaintenance
         Me.InspectionMonth_ComboBox.MaxLength = 3
         Me.InspectionMonth_ComboBox.Name = "InspectionMonth_ComboBox"
         Me.InspectionMonth_ComboBox.Size = New System.Drawing.Size(73, 28)
-        Me.InspectionMonth_ComboBox.TabIndex = 227
+        Me.InspectionMonth_ComboBox.TabIndex = 9
         Me.InspectionMonth_ComboBox.Tag = "dataEditingControl"
         Me.InspectionMonth_ComboBox.Visible = False
         '
@@ -546,7 +546,7 @@ Partial Class vehicleMaintenance
         Me.InsuranceCompany_ComboBox.MaxLength = 100
         Me.InsuranceCompany_ComboBox.Name = "InsuranceCompany_ComboBox"
         Me.InsuranceCompany_ComboBox.Size = New System.Drawing.Size(305, 28)
-        Me.InsuranceCompany_ComboBox.TabIndex = 230
+        Me.InsuranceCompany_ComboBox.TabIndex = 11
         Me.InsuranceCompany_ComboBox.Tag = "dataEditingControl"
         Me.InsuranceCompany_ComboBox.Visible = False
         '
@@ -605,7 +605,7 @@ Partial Class vehicleMaintenance
         Me.InspectionStickerNbr_Textbox.MaxLength = 15
         Me.InspectionStickerNbr_Textbox.Name = "InspectionStickerNbr_Textbox"
         Me.InspectionStickerNbr_Textbox.Size = New System.Drawing.Size(229, 27)
-        Me.InspectionStickerNbr_Textbox.TabIndex = 231
+        Me.InspectionStickerNbr_Textbox.TabIndex = 10
         Me.InspectionStickerNbr_Textbox.Tag = "dataEditingControl"
         Me.InspectionStickerNbr_Textbox.Visible = False
         '
@@ -640,7 +640,7 @@ Partial Class vehicleMaintenance
         Me.PolicyNumber_Textbox.MaxLength = 20
         Me.PolicyNumber_Textbox.Name = "PolicyNumber_Textbox"
         Me.PolicyNumber_Textbox.Size = New System.Drawing.Size(186, 27)
-        Me.PolicyNumber_Textbox.TabIndex = 234
+        Me.PolicyNumber_Textbox.TabIndex = 12
         Me.PolicyNumber_Textbox.Tag = "dataEditingControl"
         Me.PolicyNumber_Textbox.Visible = False
         '
@@ -679,7 +679,7 @@ Partial Class vehicleMaintenance
         Me.ExpirationDate_Textbox.Name = "ExpirationDate_Textbox"
         Me.ExpirationDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.ExpirationDate_Textbox.Size = New System.Drawing.Size(181, 27)
-        Me.ExpirationDate_Textbox.TabIndex = 240
+        Me.ExpirationDate_Textbox.TabIndex = 13
         Me.ExpirationDate_Textbox.Tag = "dataEditingControl"
         Me.ExpirationDate_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
         Me.ExpirationDate_Textbox.ValidatingType = GetType(Date)
@@ -690,17 +690,17 @@ Partial Class vehicleMaintenance
         Me.ABS_Value.AutoSize = True
         Me.ABS_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ABS_Value.ForeColor = System.Drawing.Color.Black
-        Me.ABS_Value.Location = New System.Drawing.Point(389, 581)
+        Me.ABS_Value.Location = New System.Drawing.Point(394, 581)
         Me.ABS_Value.Name = "ABS_Value"
         Me.ABS_Value.Size = New System.Drawing.Size(0, 20)
-        Me.ABS_Value.TabIndex = 242
+        Me.ABS_Value.TabIndex = 15
         Me.ABS_Value.Tag = "dataViewingControl"
         Me.ABS_Value.Visible = False
         '
         'ABS_CheckBox
         '
         Me.ABS_CheckBox.AutoSize = True
-        Me.ABS_CheckBox.Location = New System.Drawing.Point(389, 585)
+        Me.ABS_CheckBox.Location = New System.Drawing.Point(394, 585)
         Me.ABS_CheckBox.Name = "ABS_CheckBox"
         Me.ABS_CheckBox.Size = New System.Drawing.Size(18, 17)
         Me.ABS_CheckBox.TabIndex = 244
@@ -728,7 +728,7 @@ Partial Class vehicleMaintenance
         Me.AirBags_Value.Location = New System.Drawing.Point(556, 581)
         Me.AirBags_Value.Name = "AirBags_Value"
         Me.AirBags_Value.Size = New System.Drawing.Size(0, 20)
-        Me.AirBags_Value.TabIndex = 245
+        Me.AirBags_Value.TabIndex = 16
         Me.AirBags_Value.Tag = "dataViewingControl"
         Me.AirBags_Value.Visible = False
         '
@@ -763,7 +763,7 @@ Partial Class vehicleMaintenance
         Me.AC_Value.Location = New System.Drawing.Point(691, 582)
         Me.AC_Value.Name = "AC_Value"
         Me.AC_Value.Size = New System.Drawing.Size(0, 20)
-        Me.AC_Value.TabIndex = 248
+        Me.AC_Value.TabIndex = 17
         Me.AC_Value.Tag = "dataViewingControl"
         Me.AC_Value.Visible = False
         '
@@ -821,7 +821,7 @@ Partial Class vehicleMaintenance
         Me.Engine_Textbox.MaxLength = 20
         Me.Engine_Textbox.Name = "Engine_Textbox"
         Me.Engine_Textbox.Size = New System.Drawing.Size(163, 27)
-        Me.Engine_Textbox.TabIndex = 251
+        Me.Engine_Textbox.TabIndex = 18
         Me.Engine_Textbox.Tag = "dataEditingControl"
         Me.Engine_Textbox.Visible = False
         '
@@ -856,7 +856,7 @@ Partial Class vehicleMaintenance
         Me.Notes_Textbox.MaxLength = 255
         Me.Notes_Textbox.Name = "Notes_Textbox"
         Me.Notes_Textbox.Size = New System.Drawing.Size(622, 27)
-        Me.Notes_Textbox.TabIndex = 254
+        Me.Notes_Textbox.TabIndex = 19
         Me.Notes_Textbox.Tag = "dataEditingControl"
         Me.Notes_Textbox.Visible = False
         '

@@ -38,8 +38,9 @@ Partial Class navigation
         Me.LaborCodesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CarModelsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CustomersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CustomerVehiclesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MasterTaskListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mainMs.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -50,7 +51,6 @@ Partial Class navigation
         Me.mainMs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HomeToolStripMenuItem, Me.NewInvoiceToolStripMenuItem, Me.InvoiceMaintenanceToolStripMenuItem, Me.FileMaintenanceToolStripMenuItem, Me.ReportsToolStripMenuItem})
         Me.mainMs.Location = New System.Drawing.Point(0, 0)
         Me.mainMs.Name = "mainMs"
-        Me.mainMs.Padding = New System.Windows.Forms.Padding(6, 2, 0, 2)
         Me.mainMs.Size = New System.Drawing.Size(1000, 28)
         Me.mainMs.TabIndex = 46
         Me.mainMs.Text = "MenuStrip1"
@@ -75,7 +75,7 @@ Partial Class navigation
         '
         'FileMaintenanceToolStripMenuItem
         '
-        Me.FileMaintenanceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompanySetupToolStripMenuItem, Me.AutomobileManufacturersToolStripMenuItem, Me.AutoColorsToolStripMenuItem, Me.InsuranceCompaniesToolStripMenuItem, Me.CreditCardsAcceptedToolStripMenuItem, Me.PaymentTypesAcceptedToolStripMenuItem, Me.TaskTypesToolStripMenuItem, Me.InventoryToolStripMenuItem, Me.LaborCodesToolStripMenuItem, Me.CarModelsToolStripMenuItem, Me.CustomersToolStripMenuItem, Me.CustomerVehiclesToolStripMenuItem})
+        Me.FileMaintenanceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompanySetupToolStripMenuItem, Me.AutomobileManufacturersToolStripMenuItem, Me.AutoColorsToolStripMenuItem, Me.InsuranceCompaniesToolStripMenuItem, Me.CreditCardsAcceptedToolStripMenuItem, Me.PaymentTypesAcceptedToolStripMenuItem, Me.TaskTypesToolStripMenuItem, Me.InventoryToolStripMenuItem, Me.LaborCodesToolStripMenuItem, Me.CarModelsToolStripMenuItem, Me.CustomersToolStripMenuItem, Me.CustomerVehiclesToolStripMenuItem, Me.MasterTaskListToolStripMenuItem})
         Me.FileMaintenanceToolStripMenuItem.Name = "FileMaintenanceToolStripMenuItem"
         Me.FileMaintenanceToolStripMenuItem.Size = New System.Drawing.Size(135, 24)
         Me.FileMaintenanceToolStripMenuItem.Text = "File Maintenance"
@@ -146,17 +146,23 @@ Partial Class navigation
         Me.CustomersToolStripMenuItem.Size = New System.Drawing.Size(256, 26)
         Me.CustomersToolStripMenuItem.Text = "Customers"
         '
+        'CustomerVehiclesToolStripMenuItem
+        '
+        Me.CustomerVehiclesToolStripMenuItem.Name = "CustomerVehiclesToolStripMenuItem"
+        Me.CustomerVehiclesToolStripMenuItem.Size = New System.Drawing.Size(256, 26)
+        Me.CustomerVehiclesToolStripMenuItem.Text = "Customer Vehicles"
+        '
         'ReportsToolStripMenuItem
         '
         Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
         Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(74, 24)
         Me.ReportsToolStripMenuItem.Text = "Reports"
         '
-        'CustomerVehiclesToolStripMenuItem
+        'MasterTaskListToolStripMenuItem
         '
-        Me.CustomerVehiclesToolStripMenuItem.Name = "CustomerVehiclesToolStripMenuItem"
-        Me.CustomerVehiclesToolStripMenuItem.Size = New System.Drawing.Size(256, 26)
-        Me.CustomerVehiclesToolStripMenuItem.Text = "Customer Vehicles"
+        Me.MasterTaskListToolStripMenuItem.Name = "MasterTaskListToolStripMenuItem"
+        Me.MasterTaskListToolStripMenuItem.Size = New System.Drawing.Size(256, 26)
+        Me.MasterTaskListToolStripMenuItem.Text = "Master Task List"
         '
         'navigation
         '
@@ -190,4 +196,5 @@ Partial Class navigation
     Friend WithEvents CarModelsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CustomersToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CustomerVehiclesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MasterTaskListToolStripMenuItem As ToolStripMenuItem
 End Class
