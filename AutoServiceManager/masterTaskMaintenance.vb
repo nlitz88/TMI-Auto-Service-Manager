@@ -135,14 +135,16 @@
 
         ' Loads rows from MasterTaskLabor based on selected TaskId from MasterTaskList
         TaskLaborDbController.AddParams("@taskId", TaskId)
-        TaskLaborDbController.ExecQuery("SELECT tl.LaborCode, tl.Description, tl.Rate, tl.Hours, tl.Amount " &
-                                        "WHERE TaskId=@taskId")
+        TaskLaborDbController.ExecQuery("SELECT tl.TaskId, tl.LaborCode, tl.Description, tl.Rate, tl.Hours, tl.Amount " &
+                                        "FROM MasterTaskLabor tl " &
+                                        "WHERE tl.TaskId=@taskId")
         If TaskLaborDbController.HasException() Then Return False
 
         ' Loads rows from MasterTaskParts based on selected TaskId from MasterTaskList
         TaskPartsDbController.AddParams("@taskId", TaskId)
-        TaskPartsDbController.ExecQuery("SELECT tp.PartNbr, tp.Qty, tp.PartDescription, tp.PartPrice, tp.PartAmount, tp.ListPrice" &
-                                        "WHERE taskId=@taskId")
+        TaskPartsDbController.ExecQuery("SELECT tp.TaskId, tp.PartNbr, tp.Qty, tp.PartDescription, tp.PartPrice, tp.PartAmount, tp.ListPrice " &
+                                        "FROM MasterTaskParts tp " &
+                                        "WHERE tp.TaskId=@taskId")
         If TaskPartsDbController.HasException() Then Return False
 
         Return True
@@ -282,9 +284,18 @@
         ' If this query DOES return a valid row index, then initialize respective controls
         If TaskRow <> -1 Then
 
+            ' Lookup TaskId based on selected TaskDescription
+            TaskId = MTL.DbDataTable(TaskRow)("TaskId")
+            Console.WriteLine(TaskId)
+
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
             InitializeAllDataViewingControls()
+            ' Load TaskParts and TaskLabor datatables based on selected TaskId, then Initialize corresponding GridViews
+            loadDependentDataTables()
+            InitializeTaskLaborGridView()
+            InitializeTaskPartsGridView()
+
             valuesInitialized = True
 
             ' Show labels and corresponding values
