@@ -49,7 +49,7 @@ Partial Class masterTaskMaintenance
         Me.TotalTask_Textbox = New System.Windows.Forms.TextBox()
         Me.TotalCostLabel = New System.Windows.Forms.Label()
         Me.TotalTask_Value = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.TaskLaborGridView = New System.Windows.Forms.DataGridView()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
@@ -58,9 +58,9 @@ Partial Class masterTaskMaintenance
         Me.Button6 = New System.Windows.Forms.Button()
         Me.TaskLaborLabel = New System.Windows.Forms.Label()
         Me.TaskPartsLabel = New System.Windows.Forms.Label()
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TaskPartsGridView = New System.Windows.Forms.DataGridView()
+        CType(Me.TaskLaborGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TaskPartsGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'nav
@@ -369,15 +369,15 @@ Partial Class masterTaskMaintenance
         Me.TotalTask_Value.TabIndex = 228
         Me.TotalTask_Value.Tag = "dataViewingControl"
         '
-        'DataGridView1
+        'TaskLaborGridView
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(100, 505)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.RowTemplate.Height = 24
-        Me.DataGridView1.Size = New System.Drawing.Size(369, 200)
-        Me.DataGridView1.TabIndex = 232
+        Me.TaskLaborGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.TaskLaborGridView.Location = New System.Drawing.Point(100, 505)
+        Me.TaskLaborGridView.Name = "TaskLaborGridView"
+        Me.TaskLaborGridView.RowHeadersWidth = 51
+        Me.TaskLaborGridView.RowTemplate.Height = 24
+        Me.TaskLaborGridView.Size = New System.Drawing.Size(369, 200)
+        Me.TaskLaborGridView.TabIndex = 232
         '
         'Button1
         '
@@ -477,15 +477,15 @@ Partial Class masterTaskMaintenance
         Me.TaskPartsLabel.TabIndex = 241
         Me.TaskPartsLabel.Text = "Task Parts"
         '
-        'DataGridView2
+        'TaskPartsGridView
         '
-        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Location = New System.Drawing.Point(509, 505)
-        Me.DataGridView2.Name = "DataGridView2"
-        Me.DataGridView2.RowHeadersWidth = 51
-        Me.DataGridView2.RowTemplate.Height = 24
-        Me.DataGridView2.Size = New System.Drawing.Size(369, 200)
-        Me.DataGridView2.TabIndex = 242
+        Me.TaskPartsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.TaskPartsGridView.Location = New System.Drawing.Point(509, 505)
+        Me.TaskPartsGridView.Name = "TaskPartsGridView"
+        Me.TaskPartsGridView.RowHeadersWidth = 51
+        Me.TaskPartsGridView.RowTemplate.Height = 24
+        Me.TaskPartsGridView.Size = New System.Drawing.Size(369, 200)
+        Me.TaskPartsGridView.TabIndex = 242
         '
         'masterTaskMaintenance
         '
@@ -493,7 +493,7 @@ Partial Class masterTaskMaintenance
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
-        Me.Controls.Add(Me.DataGridView2)
+        Me.Controls.Add(Me.TaskPartsGridView)
         Me.Controls.Add(Me.TaskPartsLabel)
         Me.Controls.Add(Me.TaskLaborLabel)
         Me.Controls.Add(Me.Button3)
@@ -502,7 +502,7 @@ Partial Class masterTaskMaintenance
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.TaskLaborGridView)
         Me.Controls.Add(Me.TotalTask_Textbox)
         Me.Controls.Add(Me.TotalCostLabel)
         Me.Controls.Add(Me.TotalTask_Value)
@@ -535,8 +535,8 @@ Partial Class masterTaskMaintenance
         Me.Name = "masterTaskMaintenance"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "                                      "
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TaskLaborGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TaskPartsGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -569,7 +569,7 @@ Partial Class masterTaskMaintenance
     Friend WithEvents TotalTask_Textbox As TextBox
     Friend WithEvents TotalCostLabel As Label
     Friend WithEvents TotalTask_Value As Label
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents TaskLaborGridView As DataGridView
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents Button5 As Button
@@ -578,5 +578,5 @@ Partial Class masterTaskMaintenance
     Friend WithEvents Button6 As Button
     Friend WithEvents TaskLaborLabel As Label
     Friend WithEvents TaskPartsLabel As Label
-    Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents TaskPartsGridView As DataGridView
 End Class
