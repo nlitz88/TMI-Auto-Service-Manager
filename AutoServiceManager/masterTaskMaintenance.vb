@@ -249,7 +249,7 @@
 
         ' Initialize TaskComboBox and all other preliminary ComboBoxes for the first time
         InitializeTaskComboBox()
-        TaskType_ComboBox.SelectedIndex = 0
+        TaskComboBox.SelectedIndex = 0
         InitializeTaskTypeComboBox()
 
     End Sub
