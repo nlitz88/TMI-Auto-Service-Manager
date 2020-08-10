@@ -178,8 +178,8 @@
             sum += row("Amount")
         Next
 
-        ' Then, set the text to the currency formatted value of the sum
-        TaskLabor_Value.Text = FormatCurrency(sum)
+        ' Then, assign the calculated sum
+        TaskLabor_Value.Text = sum
 
     End Sub
 
@@ -204,7 +204,8 @@
             sum += row("PartAmount")
         Next
 
-        TaskParts_Value.Text = FormatCurrency(sum)
+        ' Then, assign the calculated sum
+        TaskParts_Value.Text = sum
 
     End Sub
 
@@ -228,8 +229,8 @@
         Dim TaskPartsCost As Decimal = Convert.ToDecimal(TaskParts_Value.Text)
         Dim sum As Decimal = TaskLaborCost + TaskPartsCost
 
-        ' Then, assign and format calculated sum
-        TotalTask_Value.Text = FormatCurrency(sum)
+        ' Then, assign the calculated sum
+        TotalTask_Value.Text = sum
 
     End Sub
 
@@ -241,7 +242,7 @@
         Dim sum As Decimal = TaskLaborCost + TaskPartsCost
 
         ' Then, assign and format calculated sum
-        TotalTask_Textbox.Text = FormatCurrency(sum)
+        TotalTask_Textbox.Text = String.Format("{0:0.00}", sum)
 
     End Sub
 
@@ -253,6 +254,10 @@
         ' Automated initializations
         InitializeMTLDataEditingControls()
         ReplaceTaskTypeComboBox()
+        ' Then, re-initialize and format any calculation based values
+        InitializeTaskLaborTextbox()
+        InitializeTaskPartsTextbox()
+        InitializeTotalTaskTextbox()
         ' Then, format dataEditingControls
         formatDataEditingControls()
         ' Set forecolor if not already initially default
@@ -266,6 +271,10 @@
         ' Automated initializations
         InitializeMTLDataViewingControls()
         ReplaceTaskTypeValue()
+        ' Then, re-initialize and format any calculation based values
+        InitializeTaskLaborValue()
+        InitializeTaskPartsValue()
+        InitializeTotalTaskValue()
         ' Then, format dataViewingControls
         formatDataViewingControls()
 
@@ -274,13 +283,13 @@
 
 
     ' Sub that will add formatting to already initialized dataViewingControls
-    ' NOTE: these subs only format controls that don't have their formatting handled by a separate calculation/intitialization sub
+    ' NOTE: these subs only format controls that don't have their formatting handled by a separate sub
     Private Sub formatDataViewingControls()
 
-        ' Currency formatting
-        'TaskLabor_Value.Text = FormatCurrency(TaskLabor_Value.Text)
-        'TaskParts_Value.Text = FormatCurrency(TaskParts_Value.Text)
-        'TotalTask_Value.Text = FormatCurrency(TotalTask_Value.Text)
+        ' These three calculation based fields are formatted here after the fact, as otherwise, TotalTask can't parse the decimal values from TaskLabor and TaskParts
+        TaskLabor_Value.Text = FormatCurrency(TaskLabor_Value.Text)
+        TaskParts_Value.Text = FormatCurrency(TaskParts_Value.Text)
+        TotalTask_Value.Text = FormatCurrency(TotalTask_Value.Text)
 
     End Sub
 
@@ -371,9 +380,12 @@
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
-            InitializeAllDataViewingControls()
             ' Load TaskParts and TaskLabor datatables based on selected TaskId, then Initialize corresponding GridViews
             loadDependentDataTables()
+            ' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
+            ' This is because controls like TaskLaborCost (for instance) are calculated from those tables
+            InitializeAllDataViewingControls()
+            ' Initialize corresponding DataGridViews
             InitializeTaskLaborGridView()
             InitializeTaskPartsGridView()
 
