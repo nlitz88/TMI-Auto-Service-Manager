@@ -10,7 +10,7 @@
     Private CRUD As New DbControl()
 
     ' Initialize instance(s) of initialValues class
-    Private InitialTaskValues As New InitialValues()
+    Private InitialMTLValues As New InitialValues()
 
     'Variable to keep track of whether form fully loaded or not
     Private valuesInitialized As Boolean = True
@@ -361,6 +361,7 @@
             showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
             showHide(getAllControlsWithTag("dataLabel", Me), 0)
             showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            showHide(getAllControlsWithTag("taskEditingButton", Me), 0)
             ' Disable editing button
             editButton.Enabled = False
             deleteButton.Enabled = False
@@ -407,6 +408,7 @@
             showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
             showHide(getAllControlsWithTag("dataLabel", Me), 0)
             showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            showHide(getAllControlsWithTag("taskEditingButton", Me), 0)
             ' Disable editing button
             editButton.Enabled = False
             deleteButton.Enabled = False
@@ -416,7 +418,33 @@
     End Sub
 
 
+    Private Sub editButton_Click(sender As Object, e As EventArgs) Handles editButton.Click
 
+        mode = "editing"
+
+        ' Initialize values for dataEditingControls
+        valuesInitialized = False
+        InitializeAllDataEditingControls()
+        valuesInitialized = True
+        ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
+        InitialMTLValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
+
+        ' Store the last selected item in the ComboBox (in case update fails and it must revert)
+        lastSelectedTask = TaskComboBox.Text
+
+        ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
+        editButton.Enabled = False
+        addButton.Enabled = False
+        cancelButton.Enabled = True
+        nav.DisableAll()
+        TaskComboBox.Enabled = False
+
+        ' Show/Hide various control types accordingly
+        showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+        showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+        showHide(getAllControlsWithTag("taskEditingButton", Me), 1)
+
+    End Sub
 
 
 

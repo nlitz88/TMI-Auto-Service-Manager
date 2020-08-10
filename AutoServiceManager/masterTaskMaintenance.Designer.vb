@@ -135,6 +135,7 @@ Partial Class masterTaskMaintenance
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(110, 30)
         Me.addButton.TabIndex = 124
+        Me.addButton.Tag = ""
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = False
         '
@@ -381,7 +382,7 @@ Partial Class masterTaskMaintenance
         Me.tlDeleteButton.Name = "tlDeleteButton"
         Me.tlDeleteButton.Size = New System.Drawing.Size(66, 30)
         Me.tlDeleteButton.TabIndex = 234
-        Me.tlDeleteButton.Tag = "dataEditingControl"
+        Me.tlDeleteButton.Tag = "taskEditingButton"
         Me.tlDeleteButton.Text = "Delete"
         Me.tlDeleteButton.UseVisualStyleBackColor = False
         '
@@ -395,7 +396,7 @@ Partial Class masterTaskMaintenance
         Me.tlEditButton.Name = "tlEditButton"
         Me.tlEditButton.Size = New System.Drawing.Size(66, 30)
         Me.tlEditButton.TabIndex = 235
-        Me.tlEditButton.Tag = "dataEditingControl"
+        Me.tlEditButton.Tag = "taskEditingButton"
         Me.tlEditButton.Text = "Edit"
         Me.tlEditButton.UseVisualStyleBackColor = False
         '
@@ -408,7 +409,7 @@ Partial Class masterTaskMaintenance
         Me.tlAddButton.Name = "tlAddButton"
         Me.tlAddButton.Size = New System.Drawing.Size(66, 30)
         Me.tlAddButton.TabIndex = 233
-        Me.tlAddButton.Tag = "dataEditingControl"
+        Me.tlAddButton.Tag = "taskEditingButton"
         Me.tlAddButton.Text = "Add"
         Me.tlAddButton.UseVisualStyleBackColor = False
         '
@@ -422,7 +423,7 @@ Partial Class masterTaskMaintenance
         Me.tpDeleteButton.Name = "tpDeleteButton"
         Me.tpDeleteButton.Size = New System.Drawing.Size(65, 30)
         Me.tpDeleteButton.TabIndex = 238
-        Me.tpDeleteButton.Tag = "dataEditingControl"
+        Me.tpDeleteButton.Tag = "taskEditingButton"
         Me.tpDeleteButton.Text = "Delete"
         Me.tpDeleteButton.UseVisualStyleBackColor = False
         '
@@ -436,7 +437,7 @@ Partial Class masterTaskMaintenance
         Me.tpEditButton.Name = "tpEditButton"
         Me.tpEditButton.Size = New System.Drawing.Size(65, 30)
         Me.tpEditButton.TabIndex = 239
-        Me.tpEditButton.Tag = "dataEditingControl"
+        Me.tpEditButton.Tag = "taskEditingButton"
         Me.tpEditButton.Text = "Edit"
         Me.tpEditButton.UseVisualStyleBackColor = False
         '
@@ -449,7 +450,7 @@ Partial Class masterTaskMaintenance
         Me.tpAddButton.Name = "tpAddButton"
         Me.tpAddButton.Size = New System.Drawing.Size(65, 30)
         Me.tpAddButton.TabIndex = 237
-        Me.tpAddButton.Tag = "dataEditingControl"
+        Me.tpAddButton.Tag = "taskEditingButton"
         Me.tpAddButton.Text = "Add"
         Me.tpAddButton.UseVisualStyleBackColor = False
         '
