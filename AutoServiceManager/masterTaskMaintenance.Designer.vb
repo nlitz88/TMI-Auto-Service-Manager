@@ -547,7 +547,7 @@ Partial Class masterTaskMaintenance
         Me.MaximizeBox = False
         Me.Name = "masterTaskMaintenance"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
-        Me.Text = "                                      "
+        Me.Text = "Master Task List"
         CType(Me.TaskLaborGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TaskPartsGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
