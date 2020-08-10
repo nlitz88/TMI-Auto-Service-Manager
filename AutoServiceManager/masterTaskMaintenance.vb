@@ -83,6 +83,7 @@
 
     End Sub
 
+
     ' Sub that will display TaskType TaskDescription instead of the corresponding symbol stored in the database in TaskTypeComboBox
     Private Sub ReplaceTaskTypeComboBox()
 
@@ -166,6 +167,60 @@
     End Sub
 
 
+    ' Sub that will initialize/Calculate Task Labor Cost based on the total cost of all the labor codes in MasterTaskLabor with current TaskId
+    Private Sub InitializeTaskLaborValue()
+
+        ' All rows in MasterTaskLabor that are associated with the currently selectedTaskId will already be loaded into the datatable.
+        ' So, to calculate the total, all we have to do is get the sum of the Amount Field in the Dependently loaded MasterTaskLabor DataTable
+        Dim sum As Integer = 0
+        ' Even if zero rows, shouldn't run into any issues
+        For Each row In TaskLaborDbController.DbDataTable.Rows
+            sum += row("Amount")
+        Next
+
+        ' Then, set the text to the currency formatted value of the sum
+        TaskLabor_Value.Text = FormatCurrency(sum)
+
+    End Sub
+
+    Private Sub InitializeTaskLaborTextbox()
+
+        ' Calculate TaskLabor sum
+        Dim sum As Integer = 0
+        For Each row In TaskLaborDbController.DbDataTable.Rows
+            sum += row("Amount")
+        Next
+
+        TaskLabor_Textbox.Text = String.Format("{0:0.00}", sum)
+
+    End Sub
+
+    ' Sub that will initialize/Calculate Task Part Cost based on the total cost of all the parts in MasterTaskParts with current TaskId
+    Private Sub InitializeTaskPartsValue()
+
+        ' Calculate TaskParts sum
+        Dim sum As Integer = 0
+        For Each row In TaskPartsDbController.DbDataTable.Rows
+            sum += row("PartAmount")
+        Next
+
+        TaskParts_Value.Text = FormatCurrency(sum)
+
+    End Sub
+
+    Private Sub InitializeTaskPartsTextbox()
+
+        ' Calculate TaskParts sum
+        Dim sum As Integer = 0
+        For Each row In TaskPartsDbController.DbDataTable.Rows
+            sum += row("PartAmount")
+        Next
+
+        TaskParts_Textbox.Text = String.Format("{0:0.00}", sum)
+
+    End Sub
+
+
 
     ' Sub that handles all initialization for dataEditingControls
     Private Sub InitializeAllDataEditingControls()
@@ -194,21 +249,22 @@
 
 
     ' Sub that will add formatting to already initialized dataViewingControls
+    ' NOTE: these subs only format controls that don't have their formatting handled by a separate calculation/intitialization sub
     Private Sub formatDataViewingControls()
 
         ' Currency formatting
-        TaskLabor_Value.Text = FormatCurrency(TaskLabor_Value.Text)
-        TaskParts_Value.Text = FormatCurrency(TaskParts_Value.Text)
-        TotalTask_Value.Text = FormatCurrency(TotalTask_Value.Text)
+        'TaskLabor_Value.Text = FormatCurrency(TaskLabor_Value.Text)
+        'TaskParts_Value.Text = FormatCurrency(TaskParts_Value.Text)
+        'TotalTask_Value.Text = FormatCurrency(TotalTask_Value.Text)
 
     End Sub
 
     ' Sub that will add formatting to already initialized dataEditingControls
     Private Sub formatDataEditingControls()
 
-        TaskLabor_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TaskLabor_Textbox.Text))
-        TaskParts_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TaskParts_Textbox.Text))
-        TotalTask_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TotalTask_Textbox.Text))
+        'TaskLabor_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TaskLabor_Textbox.Text))
+        'TaskParts_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TaskParts_Textbox.Text))
+        'TotalTask_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TotalTask_Textbox.Text))
 
     End Sub
 
