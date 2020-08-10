@@ -30,13 +30,36 @@
     Private lastSelectedTaskLabor As String
     Private lastSelectedTaskPart As String
 
-    ' Keeps track of whether or not user in "editing" or "adding" mode
-    Private mode As String
+    ' Keeps track of whether or not user in "editing" or "adding" mode for various control groups
+    Private mtMode As String
+    Private tlMode As String
+    Private tpMode As String
 
     ' Variable that allows certain keystrokes through restricted fields
     Private allowedKeystroke As Boolean = False
 
 
+
+
+    ' ***************** GET/SET SUBS FOR EXTERNAL FORMS *****************
+
+
+    Public Function GetMode(ByVal mode As String) As String
+        Select Case mode
+            Case "mtMode"
+                Return mtMode
+            Case "tlMode"
+                Return tlMode
+            Case "tpMode"
+                Return tpMode
+            Case Else
+                Return String.Empty
+        End Select
+    End Function
+
+    Public Function GetTask() As String
+        Return TaskComboBox.Text
+    End Function
 
 
     ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
@@ -502,7 +525,7 @@
 
     Private Sub editButton_Click(sender As Object, e As EventArgs) Handles editButton.Click
 
-        mode = "editing"
+        mtMode = "editing"
 
         ' Initialize values for dataEditingControls
         valuesInitialized = False
