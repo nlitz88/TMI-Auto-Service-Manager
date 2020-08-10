@@ -40,19 +40,16 @@
     ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
 
 
-    ' Function that will load all preliminary datatables
-    Private Function loadAllPreliminaryDataTables() As Boolean
+    ' Function that will load main TaskComboBox
+    Private Function loadMasterTaskListDataTable()
 
         ' Loads datatable from MasterTaskList table
         MTL.ExecQuery("SELECT mtl.TaskId, mtl.TaskDescription, mtl.Instructions, mtl.TaskType, mtl.TaskLabor, mtl.TaskParts, mtl.TotalTask " &
                                        "FROM MasterTaskList mtl " &
                                        "WHERE Trim(mtl.TaskDescription) <> '' " &
                                        "ORDER BY mtl.TaskDescription ASC")
-        If MTL.HasException() Then Return False
 
-        ' Loads datatable from TaskTypes
-        TaskTypesDbController.ExecQuery("SELECT mtl.TaskType, mtl.TaskDescription FROM TaskTypes mtl ORDER BY mtl.TaskType ASC")
-        If TaskTypesDbController.HasException() Then Return False
+        If MTL.HasException() Then Return False
 
         Return True
 
@@ -70,6 +67,18 @@
         TaskComboBox.EndUpdate()
 
     End Sub
+
+
+    ' Function that will load all preliminary datatables (in this case, only taskTypes)
+    Private Function loadAllPreliminaryDataTables() As Boolean
+
+        ' Loads datatable from TaskTypes
+        TaskTypesDbController.ExecQuery("SELECT tt.TaskType, tt.TaskDescription FROM TaskTypes tt ORDER BY tt.TaskType ASC")
+        If TaskTypesDbController.HasException() Then Return False
+
+        Return True
+
+    End Function
 
     ' Sub that initializes TaskTypeComboBox
     Private Sub InitializeTaskTypeComboBox()
@@ -339,6 +348,12 @@
             Exit Sub
         End If
 
+        ' Load MasterTaskList DataTable
+        If Not loadMasterTaskListDataTable() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
         ' Initialize TaskComboBox and all other preliminary ComboBoxes for the first time
         InitializeTaskComboBox()
         TaskComboBox.SelectedIndex = 0
@@ -414,6 +429,45 @@
             deleteButton.Enabled = False
 
         End If
+
+    End Sub
+
+
+    Private Sub deleteButton_Click(sender As Object, e As EventArgs) Handles deleteButton.Click
+
+        Dim decision As DialogResult = MessageBox.Show("Are you sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                ' 1.) Delete value from database
+                'If Not deleteAll() Then
+                '    MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                'Else
+                '    MessageBox.Show("Successfully deleted " & TaskComboBox.Text & " from Customers")
+                'End If
+
+                ' 2.) RELOAD MASTERTASKLIST DATATABLE FROM DATABASE
+                If Not loadMasterTaskListDataTable() Then
+                    MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
+                ' 3.) REINITIALIZE CONTROLS (Based on the selected index)
+                InitializeTaskComboBox()
+                TaskComboBox.SelectedIndex = 0
+
+                ' 4.) RESTORE USER CONTROLS TO NON-EDITING/SELECTING STATE
+                TaskComboBox.Enabled = True
+                addButton.Enabled = True
+                cancelButton.Enabled = False
+                saveButton.Enabled = False
+                nav.EnableAll()
+                ' Show/Hide the dataViewingControls and dataEditingControls, respectively
+                ' This will be done by changing the selectedIndex to 0. May have to fire event here manually.
+
+            Case DialogResult.No
+
+        End Select
 
     End Sub
 
