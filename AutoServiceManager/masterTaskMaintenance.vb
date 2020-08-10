@@ -172,7 +172,7 @@
 
         ' All rows in MasterTaskLabor that are associated with the currently selectedTaskId will already be loaded into the datatable.
         ' So, to calculate the total, all we have to do is get the sum of the Amount Field in the Dependently loaded MasterTaskLabor DataTable
-        Dim sum As Integer = 0
+        Dim sum As Decimal = 0
         ' Even if zero rows, shouldn't run into any issues
         For Each row In TaskLaborDbController.DbDataTable.Rows
             sum += row("Amount")
@@ -186,7 +186,7 @@
     Private Sub InitializeTaskLaborTextbox()
 
         ' Calculate TaskLabor sum
-        Dim sum As Integer = 0
+        Dim sum As Decimal = 0
         For Each row In TaskLaborDbController.DbDataTable.Rows
             sum += row("Amount")
         Next
@@ -199,7 +199,7 @@
     Private Sub InitializeTaskPartsValue()
 
         ' Calculate TaskParts sum
-        Dim sum As Integer = 0
+        Dim sum As Decimal = 0
         For Each row In TaskPartsDbController.DbDataTable.Rows
             sum += row("PartAmount")
         Next
@@ -211,12 +211,37 @@
     Private Sub InitializeTaskPartsTextbox()
 
         ' Calculate TaskParts sum
-        Dim sum As Integer = 0
+        Dim sum As Decimal = 0
         For Each row In TaskPartsDbController.DbDataTable.Rows
             sum += row("PartAmount")
         Next
 
         TaskParts_Textbox.Text = String.Format("{0:0.00}", sum)
+
+    End Sub
+
+    ' Sub that will initialize/Calculate Total Task Cost based on the Sums found in TotalLaborCost and TotalPartsCost
+    ' NOTE: must be called after InitializeTaskLaborValue and InitializeTaskPartsValue
+    Private Sub InitializeTotalTaskValue()
+
+        Dim TaskLaborCost As Decimal = Convert.ToDecimal(TaskLabor_Value.Text)
+        Dim TaskPartsCost As Decimal = Convert.ToDecimal(TaskParts_Value.Text)
+        Dim sum As Decimal = TaskLaborCost + TaskPartsCost
+
+        ' Then, assign and format calculated sum
+        TotalTask_Value.Text = FormatCurrency(sum)
+
+    End Sub
+
+    Private Sub InitializeTotalTaskTextbox()
+
+        ' In other scenarios, we would have to validate the values that we were finding these calculations from. However, becauase these values are calculated.
+        Dim TaskLaborCost As Decimal = Convert.ToDecimal(TaskLabor_Textbox.Text)
+        Dim TaskPartsCost As Decimal = Convert.ToDecimal(TaskParts_Textbox.Text)
+        Dim sum As Decimal = TaskLaborCost + TaskPartsCost
+
+        ' Then, assign and format calculated sum
+        TotalTask_Textbox.Text = FormatCurrency(sum)
 
     End Sub
 
