@@ -523,24 +523,16 @@
     End Sub
 
 
-    '' Sub that handles hiding of unneeded columns in datagridview
-    'Private Sub TaskLaborGridView_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles TaskLaborGridView.DataBindingComplete
 
-    '    With TaskLaborGridView
-    '        .Columns("TaskId").Visible = False
-    '        .Columns("LaborCode").Visible = False
-    '    End With
 
-    'End Sub
 
-    'Private Sub TaskPartsGridView_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles TaskPartsGridView.DataBindingComplete
+    ' Subs that handle disabling sorting on columns that are added to the DataGridViews
+    Private Sub TaskLaborGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles TaskLaborGridView.ColumnAdded
+        e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
+    End Sub
+    Private Sub TaskPartsGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles TaskPartsGridView.ColumnAdded
+        e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
+    End Sub
 
-    '    With TaskPartsGridView
-    '        .Columns("TaskId").Visible = False
-    '        .Columns("PartNbr").Visible = False
-    '        .Columns("ListPrice").Visible = False
-    '    End With
-
-    'End Sub
 
 End Class
