@@ -163,13 +163,22 @@ Public Class editMasterTaskPart
 
         If Not MeClosed Then
 
-            Dim decision As DialogResult = MessageBox.Show("Cancel without applying changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-            If decision = DialogResult.No Then
-                e.Cancel = True
-                Exit Sub
+            If InitialPartValues.CtrlValuesChanged() Then
+
+                Dim decision As DialogResult = MessageBox.Show("Go back without applying changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If decision = DialogResult.No Then
+                    Exit Sub
+                Else
+                    MeClosed = True
+                    changeScreen(previousScreen, Me)
+                End If
+
             Else
+
                 MeClosed = True
                 changeScreen(previousScreen, Me)
+
             End If
 
         End If
