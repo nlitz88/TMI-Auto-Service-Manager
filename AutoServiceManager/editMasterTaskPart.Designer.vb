@@ -264,6 +264,7 @@ Partial Class editMasterTaskPart
         '
         'PartAmount_Textbox
         '
+        Me.PartAmount_Textbox.Enabled = False
         Me.PartAmount_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PartAmount_Textbox.Location = New System.Drawing.Point(554, 358)
         Me.PartAmount_Textbox.Name = "PartAmount_Textbox"

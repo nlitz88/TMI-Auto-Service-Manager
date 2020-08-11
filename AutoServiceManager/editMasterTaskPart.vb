@@ -35,6 +35,21 @@ Public Class editMasterTaskPart
     End Sub
 
 
+    ' Sub that will initialize/Calculate Total Task Cost based on the product of the Quantity and Unit Price
+    Private Sub InitializeTotalTaskTextbox()
+
+        ' In other scenarios, we would have to validate the values that we were finding these calculations from. However, becauase these values are calculated.
+        Dim Quantity As Decimal = Convert.ToDecimal(Qty_Textbox.Text)
+        Dim Price As Decimal = Convert.ToDecimal(PartPrice_Textbox.Text)
+        Dim product As Decimal = Quantity * Price
+
+        ' Then, assign and format calculated sum
+        PartAmount_Textbox.Text = String.Format("{0:0.00}", product)
+
+    End Sub
+
+
+
     ' Sub that will call formatting functions to add respective formats to already INITIALIZED DATAEDITINGCONTROLS (i.e. phone numbers, currency, etc.).
     Private Sub formatDataEditingControls()
 
@@ -50,10 +65,8 @@ Public Class editMasterTaskPart
         ' Automated initializations
         InitializeTaskPartsDataEditingControls()
         'ReplaceTaskTypeComboBox()
-        '' Then, re-initialize and format any calculation based values
-        'InitializeTaskLaborTextbox()
-        'InitializeTaskPartsTextbox()
-        'InitializeTotalTaskTextbox()
+        ' Then, re-initialize and format any calculation based values
+        InitializeTotalTaskTextbox()
         ' Then, format dataEditingControls
         formatDataEditingControls()
         ' Set forecolor if not already initially default
@@ -92,6 +105,13 @@ Public Class editMasterTaskPart
 
 
 
+
+    ' **************** CONTROL SUBS ****************
+
+
+    Private Sub applyButton_Click(sender As Object, e As EventArgs) Handles applyButton.Click
+
+    End Sub
 
 
 
