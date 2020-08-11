@@ -20,6 +20,40 @@ Public Class editMasterTaskPart
 
 
 
+
+    ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
+
+
+    ' No need for DataTable loading functions here, as this form is entirely dependent on the DataTable from masterTaskMaintenance
+
+
+    ' Sub that initializes all dataEditingcontrols corresponding with values from the MasterTaskParts datatable
+    Private Sub InitializeTaskPartsDataEditingControls()
+
+        initializeControlsFromRow(TaskPartsDataTable, TaskPartsRow, "dataEditingControl", "_", Me)
+
+    End Sub
+
+
+    ' Sub that handles all initialization for dataEditingControls
+    Private Sub InitializeAllDataEditingControls()
+
+        ' Automated initializations
+        InitializeTaskPartsDataEditingControls()
+        'ReplaceTaskTypeComboBox()
+        '' Then, re-initialize and format any calculation based values
+        'InitializeTaskLaborTextbox()
+        'InitializeTaskPartsTextbox()
+        'InitializeTotalTaskTextbox()
+        '' Then, format dataEditingControls
+        'formatDataEditingControls()
+        ' Set forecolor if not already initially default
+        setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
+
+    End Sub
+
+
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -38,6 +72,10 @@ Public Class editMasterTaskPart
 
 
         TaskTextbox.Text = masterTaskMaintenance.GetTask()
+
+        ' For the editing forms, we won't be initializing our dataEditingControls from a selection. Instead, we will initialize them just once on load
+        ' Initialize all DataEditing Controls
+        InitializeAllDataEditingControls()
 
 
     End Sub
