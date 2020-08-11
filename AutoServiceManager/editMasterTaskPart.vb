@@ -35,6 +35,15 @@ Public Class editMasterTaskPart
     End Sub
 
 
+    ' Sub that will call formatting functions to add respective formats to already INITIALIZED DATAEDITINGCONTROLS (i.e. phone numbers, currency, etc.).
+    Private Sub formatDataEditingControls()
+
+        PartPrice_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(PartPrice_Textbox.Text))
+        ListPrice_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(ListPrice_Textbox.Text))
+
+    End Sub
+
+
     ' Sub that handles all initialization for dataEditingControls
     Private Sub InitializeAllDataEditingControls()
 
@@ -45,8 +54,8 @@ Public Class editMasterTaskPart
         'InitializeTaskLaborTextbox()
         'InitializeTaskPartsTextbox()
         'InitializeTotalTaskTextbox()
-        '' Then, format dataEditingControls
-        'formatDataEditingControls()
+        ' Then, format dataEditingControls
+        formatDataEditingControls()
         ' Set forecolor if not already initially default
         setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
 
