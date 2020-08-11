@@ -38,13 +38,21 @@ Public Class editMasterTaskPart
     ' Sub that will initialize/Calculate Total Task Cost based on the product of the Quantity and Unit Price
     Private Sub InitializeTotalTaskTextbox()
 
-        ' In other scenarios, we would have to validate the values that we were finding these calculations from. However, becauase these values are calculated.
-        Dim Quantity As Decimal = Convert.ToDecimal(Qty_Textbox.Text)
-        Dim Price As Decimal = Convert.ToDecimal(PartPrice_Textbox.Text)
-        Dim product As Decimal = Quantity * Price
+        ' First, Validate values that calculation is based on before attempting to parse and calculate
+        If validNumber("Quantity", True, Qty_Textbox.Text, String.Empty, True) And validCurrency("Unit Price", True, PartPrice_Textbox.Text, String.Empty) Then
 
-        ' Then, assign and format calculated sum
-        PartAmount_Textbox.Text = String.Format("{0:0.00}", product)
+            Dim Quantity As Decimal = Convert.ToDecimal(Qty_Textbox.Text)
+            Dim Price As Decimal = Convert.ToDecimal(PartPrice_Textbox.Text)
+            Dim product As Decimal = Quantity * Price
+
+            ' Then, assign and format calculated sum
+            PartAmount_Textbox.Text = String.Format("{0:0.00}", product)
+
+        Else
+            PartAmount_Textbox.Text = String.Empty
+        End If
+
+
 
     End Sub
 
@@ -311,6 +319,8 @@ Public Class editMasterTaskPart
             Qty_Textbox.SelectionStart = lastValidIndex
         End If
 
+        InitializeTotalTaskTextbox()
+
         If InitialPartValues.CtrlValuesChanged() Then
             applyButton.Enabled = True
         Else
@@ -356,6 +366,8 @@ Public Class editMasterTaskPart
             PartPrice_Textbox.Text = PartPrice_Textbox.Text.Substring(0, lastValidIndex)
             PartPrice_Textbox.SelectionStart = lastValidIndex
         End If
+
+        InitializeTotalTaskTextbox()
 
         If InitialPartValues.CtrlValuesChanged() Then
             applyButton.Enabled = True
