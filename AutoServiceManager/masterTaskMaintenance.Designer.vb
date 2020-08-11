@@ -364,10 +364,12 @@ Partial Class masterTaskMaintenance
         '
         Me.TaskLaborGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.TaskLaborGridView.Location = New System.Drawing.Point(100, 479)
+        Me.TaskLaborGridView.MultiSelect = False
         Me.TaskLaborGridView.Name = "TaskLaborGridView"
         Me.TaskLaborGridView.ReadOnly = True
         Me.TaskLaborGridView.RowHeadersWidth = 51
         Me.TaskLaborGridView.RowTemplate.Height = 24
+        Me.TaskLaborGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.TaskLaborGridView.Size = New System.Drawing.Size(369, 200)
         Me.TaskLaborGridView.TabIndex = 232
         Me.TaskLaborGridView.Tag = "dataLabel"
@@ -482,10 +484,12 @@ Partial Class masterTaskMaintenance
         '
         Me.TaskPartsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.TaskPartsGridView.Location = New System.Drawing.Point(509, 479)
+        Me.TaskPartsGridView.MultiSelect = False
         Me.TaskPartsGridView.Name = "TaskPartsGridView"
         Me.TaskPartsGridView.ReadOnly = True
         Me.TaskPartsGridView.RowHeadersWidth = 51
         Me.TaskPartsGridView.RowTemplate.Height = 24
+        Me.TaskPartsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.TaskPartsGridView.Size = New System.Drawing.Size(369, 200)
         Me.TaskPartsGridView.TabIndex = 242
         Me.TaskPartsGridView.Tag = "dataLabel"
