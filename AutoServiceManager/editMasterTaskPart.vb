@@ -76,6 +76,46 @@ Public Class editMasterTaskPart
 
 
 
+
+    ' **************** VALIDATION SUBS ****************
+
+
+    ' Sub that runs validation for all form controls. Also handles error reporting
+    Private Function controlsValid() As Boolean
+
+        Dim errorMessage As String = String.Empty
+
+        ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
+
+
+        ' CONSIDER ADDING VALIDATION HERE THAT PREVENTS USER FROM ENTERING EXACT DUPLICATE PART TO TASK
+        '    - however, might not need this really, as duplicate rows will just be treated as the same until one changes. Not a huge deal
+
+        ' Part Description
+        If Not isValidLength("Part Description", False, PartDescription_Textbox.Text, 50, errorMessage) Then PartDescription_Textbox.ForeColor = Color.Red
+
+        ' Quantity
+        If Not validNumber("Quantity", True, Qty_Textbox.Text, errorMessage) Then Qty_Textbox.ForeColor = Color.Red
+
+        ' Unit Price
+        If Not validCurrency("Unit Price", False, PartPrice_Textbox.Text, errorMessage) Then PartPrice_Textbox.ForeColor = Color.Red
+
+
+        ' Check if any invalid input has been found
+        If Not String.IsNullOrEmpty(errorMessage) Then
+
+            MessageBox.Show(errorMessage, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+
+        End If
+
+        Return True
+
+    End Function
+
+
+
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -110,6 +150,8 @@ Public Class editMasterTaskPart
 
 
     Private Sub applyButton_Click(sender As Object, e As EventArgs) Handles applyButton.Click
+
+
 
     End Sub
 
