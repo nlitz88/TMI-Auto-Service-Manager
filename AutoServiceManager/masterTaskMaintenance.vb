@@ -610,7 +610,7 @@
 
         ' Change to masterTaskPartsMaintenance Form, and Hide (but don't close) this one
         previousScreen = Me
-        changeScreenHide(masterTaskPartsMaintenance, Me)
+        changeScreenHide(editMasterTaskPart, Me)
 
     End Sub
 
@@ -621,7 +621,7 @@
 
         ' Change to masterTaskPartsMaintenance Form, and Hide (but don't close) this one
         previousScreen = Me
-        changeScreenHide(masterTaskPartsMaintenance, Me)
+        changeScreenHide(editMasterTaskPart, Me)
 
     End Sub
 

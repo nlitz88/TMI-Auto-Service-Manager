@@ -1,6 +1,6 @@
 ﻿Imports System.ComponentModel
 
-Public Class masterTaskPartsMaintenance
+Public Class editMasterTaskPart
 
 
 

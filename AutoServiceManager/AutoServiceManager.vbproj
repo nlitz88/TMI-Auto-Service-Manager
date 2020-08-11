@@ -143,10 +143,10 @@
     <Compile Include="masterTaskMaintenance.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="masterTaskPartsMaintenance.Designer.vb">
-      <DependentUpon>masterTaskPartsMaintenance.vb</DependentUpon>
+    <Compile Include="editMasterTaskPart.Designer.vb">
+      <DependentUpon>editMasterTaskPart.vb</DependentUpon>
     </Compile>
-    <Compile Include="masterTaskPartsMaintenance.vb">
+    <Compile Include="editMasterTaskPart.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="mfgMaintenance.Designer.vb">
@@ -230,8 +230,8 @@
     <EmbeddedResource Include="masterTaskMaintenance.resx">
       <DependentUpon>masterTaskMaintenance.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="masterTaskPartsMaintenance.resx">
-      <DependentUpon>masterTaskPartsMaintenance.vb</DependentUpon>
+    <EmbeddedResource Include="editMasterTaskPart.resx">
+      <DependentUpon>editMasterTaskPart.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="mfgMaintenance.resx">
       <DependentUpon>mfgMaintenance.vb</DependentUpon>
