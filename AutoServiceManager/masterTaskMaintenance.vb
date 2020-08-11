@@ -44,6 +44,7 @@
     ' ***************** GET/SET SUBS FOR EXTERNAL FORMS *****************
 
 
+    ' Retrieves mode variables
     Public Function GetMode(ByVal mode As String) As String
         Select Case mode
             Case "mtMode"
@@ -57,9 +58,21 @@
         End Select
     End Function
 
+    ' Retrieves current task value
     Public Function GetTask() As String
         Return TaskComboBox.Text
     End Function
+
+    ' Retrieves TaskLaborRow
+    Public Function GetTaskLaborRow() As String
+        Return TaskLaborRow
+    End Function
+
+    ' Retrieves TaskPartsRow
+    Public Function GetTaskPartsRow() As String
+        Return TaskPartsRow
+    End Function
+
 
 
     ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
