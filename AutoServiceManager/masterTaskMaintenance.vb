@@ -538,6 +538,8 @@
     End Sub
 
 
+
+
     ' Subs that handle disabling sorting on columns that are added to the DataGridViews
     Private Sub TaskLaborGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles TaskLaborGridView.ColumnAdded
         e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
