@@ -85,6 +85,59 @@ Public Class editMasterTaskPart
 
 
 
+    ' ***************** CRUD SUBS *****************
+
+
+    Private Function updateDataTable() As Boolean
+
+        ' Could got value by value in the datatable and assign values.
+        ' OR, could make adaptation of updateTable that uses similar algorithm to update Datatable
+
+        Dim ctrls As List(Of Object)
+        Dim ctrlValue As Object
+
+        For i As Integer = 0 To TaskPartsDataTable.Columns.Count - 1
+
+            ctrls = getAllControlsWithName(TaskPartsDataTable.Columns(i).ColumnName, "dataEditingControl", "_", Me)
+
+            If ctrls.Count = 0 Then Continue For
+
+            ctrlValue = getControlValue(ctrls(0))
+
+            ' Then, if null value, set null values in controls to defaults.
+            If ctrlValue = Nothing Then
+
+                Dim dataType = TaskPartsDataTable.Columns(i).DataType
+
+                'Console.WriteLine("Captured DBNull for row: " & DbDataTable.Rows.IndexOf(row) & " column: " & column.ColumnName & " | Supposed to be " & dataType.ToString())
+
+                Select Case dataType
+                    Case GetType(System.DateTime)
+                        ctrlValue = New DateTime
+                    Case GetType(System.String)
+                        ctrlValue = String.Empty
+                            'Console.WriteLine("DataType is " & dataValue.GetType().ToString() & ". Does datavalue = String.Empty?: " & (dataValue = String.Empty))
+                    Case GetType(System.Boolean)
+                        ctrlValue = False
+                    Case Else
+                        ctrlValue = 0
+                End Select
+
+            End If
+
+
+            ' Then, assign value into DataTable
+
+            TaskPartsDataTable.Rows(TaskPartsRow)(TaskPartsDataTable.Columns(i).ColumnName) = ctrlValue
+
+
+        Next
+
+    End Function
+
+
+
+
     ' **************** VALIDATION SUBS ****************
 
 
@@ -144,8 +197,10 @@ Public Class editMasterTaskPart
         TaskTextbox.Text = masterTaskMaintenance.GetTask()
 
         ' For the editing forms, we won't be initializing our dataEditingControls from a selection. Instead, we will initialize them just once on load
+        valuesInitialized = False
         ' Initialize all DataEditing Controls
         InitializeAllDataEditingControls()
+        valuesInitialized = True
         ' Establish initial values here, as we are exclusively editing on this form
         InitialPartValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
