@@ -32,9 +32,8 @@ Partial Class masterTaskPartsMaintenance
         Me.masterTaskPartsMaintenanceLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.masterTaskPartsMaintenanceLabel.Location = New System.Drawing.Point(94, 73)
         Me.masterTaskPartsMaintenanceLabel.Name = "masterTaskPartsMaintenanceLabel"
-        Me.masterTaskPartsMaintenanceLabel.Size = New System.Drawing.Size(216, 32)
+        Me.masterTaskPartsMaintenanceLabel.Size = New System.Drawing.Size(0, 32)
         Me.masterTaskPartsMaintenanceLabel.TabIndex = 130
-        Me.masterTaskPartsMaintenanceLabel.Text = "Dynamic Label"
         '
         'masterTaskPartsMaintenance
         '

@@ -595,6 +595,7 @@
     Private Sub tpEditButton_Click(sender As Object, e As EventArgs) Handles tpEditButton.Click
 
         tpMode = "editing"
+        changeScreenHide(masterTaskPartsMaintenance, Me)
 
     End Sub
 
