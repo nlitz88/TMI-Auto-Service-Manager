@@ -73,6 +73,16 @@
         Return TaskPartsRow
     End Function
 
+    ' Retrieves MasterTaskLabor DataTable
+    Public Function GetTaskLaborDataTable() As DataTable
+        Return TaskLaborDbController.DbDataTable
+    End Function
+
+    ' Retrieves MasterTaskParts DataTable
+    Public Function GetTaskPartsDataTable() As DataTable
+        Return TaskPartsDbController.DbDataTable
+    End Function
+
 
 
     ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
