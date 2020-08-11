@@ -781,12 +781,19 @@
 
 
     ' Just a copy of currencyInputValid; both use same logic, but this is just to differentiate when they're used
-    Public Function numericInputValid(ByVal ctrl As Object, ByRef keyChar As String) As Boolean
+    Public Function numericInputValid(ByVal ctrl As Object, ByRef keyChar As String, Optional ByVal intValue As Boolean = False) As Boolean
 
         Dim valid As Boolean = True
 
+        Dim validChars As String
+        If intValue Then
+            validChars = "1234567890Oo"
+        Else
+            validChars = "1234567890Oo."
+        End If
+
         ' First, ignore any input that isn't an number, period, or backspace
-        If (InStr("1234567890Oo.", keyChar) = 0 And Asc(keyChar) <> 8) Or (keyChar = "." And InStr(ctrl.Text, ".") > 0) Then
+        If (InStr(validChars, keyChar) = 0 And Asc(keyChar) <> 8) Or (keyChar = "." And InStr(ctrl.Text, ".") > 0) Then
             valid = False
             ' If it's a valid number or period, then check for length on right side of decimal, IF there is a decimal
         ElseIf InStr(ctrl.Text, ".") > 0 Then
@@ -991,7 +998,8 @@
 
 
     ' Just a copy of validCurrency; both use same logic, but this is just to differentiate when they're used
-    Public Function validNumber(ByVal label As String, ByVal required As Boolean, ByVal currencyValue As String, ByRef errorMessage As String) As Boolean
+    Public Function validNumber(ByVal label As String, ByVal required As Boolean, ByVal currencyValue As String, ByRef errorMessage As String,
+                                Optional ByVal intValue As Boolean = False) As Boolean
 
         If required Then
             ' If it is empty, return false, as this is not valid
@@ -1001,8 +1009,16 @@
             If isEmpty(label, required, currencyValue, errorMessage) Then Return True
         End If
 
+        Dim validChars As String
+
+        If intValue Then
+            validChars = "1234567890"
+        Else
+            validChars = "1234567890."
+        End If
+
         ' Ensure all chars in currencyValue are numbers or a decimal place
-        If Not allValidChars(label, currencyValue, "1234567890.", errorMessage) Then Return False
+        If Not allValidChars(label, currencyValue, validChars, errorMessage) Then Return False
 
         ' Check to see if there are duplicate decimal places in currencyValue
         Dim dcount As Integer = 0

@@ -95,7 +95,7 @@ Public Class editMasterTaskPart
         If Not isValidLength("Part Description", False, PartDescription_Textbox.Text, 50, errorMessage) Then PartDescription_Textbox.ForeColor = Color.Red
 
         ' Quantity
-        If Not validNumber("Quantity", True, Qty_Textbox.Text, errorMessage) Then Qty_Textbox.ForeColor = Color.Red
+        If Not validNumber("Quantity", True, Qty_Textbox.Text, errorMessage, True) Then Qty_Textbox.ForeColor = Color.Red
 
         ' Unit Price
         If Not validCurrency("Unit Price", False, PartPrice_Textbox.Text, errorMessage) Then PartPrice_Textbox.ForeColor = Color.Red
@@ -291,7 +291,7 @@ Public Class editMasterTaskPart
             Exit Sub
         End If
 
-        If Not numericInputValid(Qty_Textbox, e.KeyChar) Then
+        If Not numericInputValid(Qty_Textbox, e.KeyChar, True) Then
             e.KeyChar = Chr(0)
             e.Handled = True
         End If
@@ -303,6 +303,13 @@ Public Class editMasterTaskPart
         If Not valuesInitialized Then Exit Sub
 
         Qty_Textbox.ForeColor = DefaultForeColor
+
+        ' Handles pasting in invalid values/strings
+        Dim lastValidIndex As Integer = allValidChars(Qty_Textbox.Text, "1234567890")
+        If lastValidIndex <> -1 Then
+            Qty_Textbox.Text = Qty_Textbox.Text.Substring(0, lastValidIndex)
+            Qty_Textbox.SelectionStart = lastValidIndex
+        End If
 
         If InitialPartValues.CtrlValuesChanged() Then
             applyButton.Enabled = True
