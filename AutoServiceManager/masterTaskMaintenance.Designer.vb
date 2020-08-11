@@ -405,7 +405,6 @@ Partial Class masterTaskMaintenance
         'tlDeleteButton
         '
         Me.tlDeleteButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.tlDeleteButton.Enabled = False
         Me.tlDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.tlDeleteButton.ForeColor = System.Drawing.Color.White
         Me.tlDeleteButton.Location = New System.Drawing.Point(331, 437)
@@ -419,7 +418,6 @@ Partial Class masterTaskMaintenance
         'tlEditButton
         '
         Me.tlEditButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.tlEditButton.Enabled = False
         Me.tlEditButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.tlEditButton.ForeColor = System.Drawing.Color.White
         Me.tlEditButton.Location = New System.Drawing.Point(403, 437)
@@ -446,7 +444,6 @@ Partial Class masterTaskMaintenance
         'tpDeleteButton
         '
         Me.tpDeleteButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.tpDeleteButton.Enabled = False
         Me.tpDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.tpDeleteButton.ForeColor = System.Drawing.Color.White
         Me.tpDeleteButton.Location = New System.Drawing.Point(742, 436)
@@ -460,7 +457,6 @@ Partial Class masterTaskMaintenance
         'tpEditButton
         '
         Me.tpEditButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.tpEditButton.Enabled = False
         Me.tpEditButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.tpEditButton.ForeColor = System.Drawing.Color.White
         Me.tpEditButton.Location = New System.Drawing.Point(813, 436)
