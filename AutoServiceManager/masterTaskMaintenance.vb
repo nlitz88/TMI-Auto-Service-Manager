@@ -415,7 +415,7 @@
 
 
 
-    ' **************** CONTROL SUBS ****************
+    ' **************** CONTROL SUBS FOR MASTER TASKS ****************
 
 
     Private Sub TaskComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TaskComboBox.SelectedIndexChanged, TaskComboBox.TextChanged
@@ -566,6 +566,7 @@
 
 
 
+    ' **************** CONTROL SUBS FOR MASTER TASK LABOR ****************
 
     ' Subs that handle disabling sorting on columns that are added to the DataGridViews
     Private Sub TaskLaborGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles TaskLaborGridView.ColumnAdded
@@ -573,6 +574,28 @@
     End Sub
     Private Sub TaskPartsGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles TaskPartsGridView.ColumnAdded
         e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
+    End Sub
+
+
+
+    ' **************** CONTROL SUBS FOR MASTER TASK PARTS ****************
+
+
+    Private Sub tlAddButton_Click(sender As Object, e As EventArgs) Handles tlAddButton.Click
+
+        tlMode = "adding"
+
+        ' Change to masterTaskPartsMaintenance Form, and Hide (but don't close) this one
+        previousScreen = Me
+        changeScreenHide(masterTaskPartsMaintenance, Me)
+
+    End Sub
+
+
+    Private Sub tlEditButton_Click(sender As Object, e As EventArgs) Handles tlEditButton.Click
+
+        tlMode = "editing"
+
     End Sub
 
 

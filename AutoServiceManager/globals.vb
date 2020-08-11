@@ -1373,6 +1373,10 @@
     ' ****************** FORM CONTROL ******************
 
 
+    ' Public variable to keep track of the last screen in case a form needs to navigate back to it
+    Public previousScreen As Form = Nothing
+
+
     ' Function that handles switching screens
     Public Sub changeScreen(ByRef newScreen As Form, ByRef currentScreen As Form)
 
@@ -1389,6 +1393,28 @@
         If currentScreen IsNot Nothing Then
 
             currentScreen.Close()
+
+        End If
+
+    End Sub
+
+
+    ' Function that handles switching screens, but only hides the previous
+    Public Sub changeScreenHide(ByRef newScreen As Form, ByRef currentScreen As Form)
+
+        Try
+
+            newScreen.Location = New Point(currentScreen.Location.X, currentScreen.Location.Y)
+
+        Catch ex As Exception
+
+        End Try
+
+        newScreen.Show()
+
+        If currentScreen IsNot Nothing Then
+
+            currentScreen.Hide()
 
         End If
 
