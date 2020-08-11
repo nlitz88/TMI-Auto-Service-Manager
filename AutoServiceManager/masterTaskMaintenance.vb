@@ -50,12 +50,12 @@
     End Function
 
     ' Retrieves TaskLaborRow
-    Public Function GetTaskLaborRow() As String
+    Public Function GetTaskLaborRow() As Integer
         Return TaskLaborRow
     End Function
 
     ' Retrieves TaskPartsRow
-    Public Function GetTaskPartsRow() As String
+    Public Function GetTaskPartsRow() As Integer
         Return TaskPartsRow
     End Function
 

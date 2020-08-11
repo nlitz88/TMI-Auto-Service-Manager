@@ -41,15 +41,15 @@ Partial Class editMasterTaskPart
         Me.masterTaskPartsMaintenanceLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.masterTaskPartsMaintenanceLabel.Location = New System.Drawing.Point(94, 73)
         Me.masterTaskPartsMaintenanceLabel.Name = "masterTaskPartsMaintenanceLabel"
-        Me.masterTaskPartsMaintenanceLabel.Size = New System.Drawing.Size(91, 32)
+        Me.masterTaskPartsMaintenanceLabel.Size = New System.Drawing.Size(206, 32)
         Me.masterTaskPartsMaintenanceLabel.TabIndex = 130
-        Me.masterTaskPartsMaintenanceLabel.Text = "Temp"
+        Me.masterTaskPartsMaintenanceLabel.Text = "Edit Task Part"
         '
         'TaskNameLabel
         '
         Me.TaskNameLabel.AutoSize = True
         Me.TaskNameLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.TaskNameLabel.Location = New System.Drawing.Point(97, 231)
+        Me.TaskNameLabel.Location = New System.Drawing.Point(97, 202)
         Me.TaskNameLabel.Name = "TaskNameLabel"
         Me.TaskNameLabel.Size = New System.Drawing.Size(47, 17)
         Me.TaskNameLabel.TabIndex = 133
@@ -81,7 +81,7 @@ Partial Class editMasterTaskPart
         Me.TaskValue.AutoSize = True
         Me.TaskValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TaskValue.ForeColor = System.Drawing.Color.Black
-        Me.TaskValue.Location = New System.Drawing.Point(150, 228)
+        Me.TaskValue.Location = New System.Drawing.Point(150, 199)
         Me.TaskValue.Name = "TaskValue"
         Me.TaskValue.Size = New System.Drawing.Size(0, 20)
         Me.TaskValue.TabIndex = 138
@@ -143,7 +143,7 @@ Partial Class editMasterTaskPart
         Me.cancelButton.Text = "Back"
         Me.cancelButton.UseVisualStyleBackColor = False
         '
-        'masterTaskPartsMaintenance
+        'editMasterTaskPart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -161,7 +161,7 @@ Partial Class editMasterTaskPart
         Me.Controls.Add(Me.masterTaskPartsMaintenanceLabel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
-        Me.Name = "masterTaskPartsMaintenance"
+        Me.Name = "editMasterTaskPart"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Task Parts"
         Me.ResumeLayout(False)
