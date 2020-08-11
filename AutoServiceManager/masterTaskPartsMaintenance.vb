@@ -3,19 +3,43 @@
 Public Class masterTaskPartsMaintenance
 
 
+
+
+    ' Boolean to keep track of whether or not this form has been closed
+    Private closed As Boolean = False
+
+
+
+
+
+
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+
+
+    End Sub
+
     Private Sub masterTaskPartsMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ' Establish label based on "mode" variable in masterTaskMaintenance
         If masterTaskMaintenance.GetMode("tpMode") = "adding" Then
-            masterTaskPartsMaintenanceLabel.Text = "Adding Part For Task " & masterTaskMaintenance.GetTask()
+            masterTaskPartsMaintenanceLabel.Text = "Adding Part For Task '" & masterTaskMaintenance.GetTask() & "'"
         ElseIf masterTaskMaintenance.GetMode("tpMode") = "editing" Then
-            masterTaskPartsMaintenanceLabel.Text = "Edit Part For Task " & masterTaskMaintenance.GetTask()
+            masterTaskPartsMaintenanceLabel.Text = "Edit Part For Task '" & masterTaskMaintenance.GetTask() & "'"
         End If
 
     End Sub
 
 
-    Private closed As Boolean = False
+
+
+
+
 
     Private Sub masterTaskPartsMaintenance_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
 
