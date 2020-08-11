@@ -45,9 +45,25 @@ Public Class masterTaskPartsMaintenance
 
         If Not closed Then
 
-            Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            Dim decision As DialogResult = MessageBox.Show("Cancel without applying changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
             If decision = DialogResult.No Then
                 e.Cancel = True
+                Exit Sub
+            Else
+                closed = True
+                changeScreen(previousScreen, Me)
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
+
+        If Not closed Then
+
+            Dim decision As DialogResult = MessageBox.Show("Cancel without applying changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If decision = DialogResult.No Then
                 Exit Sub
             Else
                 closed = True
