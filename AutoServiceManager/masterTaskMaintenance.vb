@@ -581,9 +581,9 @@
     ' **************** CONTROL SUBS FOR MASTER TASK PARTS ****************
 
 
-    Private Sub tlAddButton_Click(sender As Object, e As EventArgs) Handles tlAddButton.Click
+    Private Sub tpAddButton_Click(sender As Object, e As EventArgs) Handles tpAddButton.Click
 
-        tlMode = "adding"
+        tpMode = "adding"
 
         ' Change to masterTaskPartsMaintenance Form, and Hide (but don't close) this one
         previousScreen = Me
@@ -592,9 +592,9 @@
     End Sub
 
 
-    Private Sub tlEditButton_Click(sender As Object, e As EventArgs) Handles tlEditButton.Click
+    Private Sub tpEditButton_Click(sender As Object, e As EventArgs) Handles tpEditButton.Click
 
-        tlMode = "editing"
+        tpMode = "editing"
 
     End Sub
 
