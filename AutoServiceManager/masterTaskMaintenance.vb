@@ -175,6 +175,27 @@
 
     End Sub
 
+    ' Sub that sets up both the TaskLaborDataGridView and TaskPartsDataGridView
+    Private Sub SetupGridViews()
+
+        ' Manually add DataGridView columns corresponding to only desired columns from DataTable
+
+        ' Task Labor GridView
+        TaskLaborGridView.AutoGenerateColumns = False
+        TaskLaborGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Description", .DataPropertyName = "Description"})
+        TaskLaborGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Rate", .DataPropertyName = "Rate"})
+        TaskLaborGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Hours", .DataPropertyName = "Hours"})
+        TaskLaborGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Amount", .DataPropertyName = "Amount"})
+
+        ' Task Parts GridView
+        TaskPartsGridView.AutoGenerateColumns = False
+        TaskPartsGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Quantity", .DataPropertyName = "Qty"})
+        TaskPartsGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Description", .DataPropertyName = "PartDescription"})
+        TaskPartsGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Part Price", .DataPropertyName = "PartPrice"})
+        TaskPartsGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Amount", .DataPropertyName = "PartAmount"})
+
+    End Sub
+
 
     ' Sub that will initialize/Calculate Task Labor Cost based on the total cost of all the labor codes in MasterTaskLabor with current TaskId
     Private Sub InitializeTaskLaborValue()
@@ -355,6 +376,7 @@
         End If
 
         ' Initialize TaskComboBox and all other preliminary ComboBoxes for the first time
+        SetupGridViews()
         InitializeTaskComboBox()
         TaskComboBox.SelectedIndex = 0
         InitializeTaskTypeComboBox()
@@ -501,24 +523,24 @@
     End Sub
 
 
-    ' Sub that handles hiding of unneeded columns in datagridview
-    Private Sub TaskLaborGridView_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles TaskLaborGridView.DataBindingComplete
+    '' Sub that handles hiding of unneeded columns in datagridview
+    'Private Sub TaskLaborGridView_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles TaskLaborGridView.DataBindingComplete
 
-        With TaskLaborGridView
-            .Columns("TaskId").Visible = False
-            .Columns("LaborCode").Visible = False
-        End With
+    '    With TaskLaborGridView
+    '        .Columns("TaskId").Visible = False
+    '        .Columns("LaborCode").Visible = False
+    '    End With
 
-    End Sub
+    'End Sub
 
-    Private Sub TaskPartsGridView_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles TaskPartsGridView.DataBindingComplete
+    'Private Sub TaskPartsGridView_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles TaskPartsGridView.DataBindingComplete
 
-        With TaskPartsGridView
-            .Columns("TaskId").Visible = False
-            .Columns("PartNbr").Visible = False
-            .Columns("ListPrice").Visible = False
-        End With
+    '    With TaskPartsGridView
+    '        .Columns("TaskId").Visible = False
+    '        .Columns("PartNbr").Visible = False
+    '        .Columns("ListPrice").Visible = False
+    '    End With
 
-    End Sub
+    'End Sub
 
 End Class
