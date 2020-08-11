@@ -37,7 +37,7 @@ Public Class editMasterTaskPart
     Private Sub masterTaskPartsMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
-
+        TaskTextbox.Text = masterTaskMaintenance.GetTask()
 
 
     End Sub
@@ -65,7 +65,7 @@ Public Class editMasterTaskPart
 
     End Sub
 
-    Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
+    Private Sub backButton_Click(sender As Object, e As EventArgs) Handles backButton.Click
 
         If Not MeClosed Then
 
