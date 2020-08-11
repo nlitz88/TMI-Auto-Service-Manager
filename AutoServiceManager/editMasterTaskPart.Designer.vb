@@ -104,6 +104,7 @@ Partial Class editMasterTaskPart
         'applyButton
         '
         Me.applyButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.applyButton.Enabled = False
         Me.applyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.applyButton.ForeColor = System.Drawing.Color.White
         Me.applyButton.Location = New System.Drawing.Point(216, 120)

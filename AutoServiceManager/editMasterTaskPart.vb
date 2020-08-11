@@ -138,6 +138,8 @@ Public Class editMasterTaskPart
         ' For the editing forms, we won't be initializing our dataEditingControls from a selection. Instead, we will initialize them just once on load
         ' Initialize all DataEditing Controls
         InitializeAllDataEditingControls()
+        ' Establish initial values here, as we are exclusively editing on this form
+        InitialPartValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
 
     End Sub
@@ -178,14 +180,82 @@ Public Class editMasterTaskPart
 
         If Not MeClosed Then
 
-            Dim decision As DialogResult = MessageBox.Show("Cancel without applying changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-            If decision = DialogResult.No Then
-                Exit Sub
+            If InitialPartValues.CtrlValuesChanged() Then
+
+                Dim decision As DialogResult = MessageBox.Show("Go back without applying changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If decision = DialogResult.No Then
+                    Exit Sub
+                Else
+                    MeClosed = True
+                    changeScreen(previousScreen, Me)
+                End If
+
             Else
+
                 MeClosed = True
                 changeScreen(previousScreen, Me)
+
             End If
 
+        End If
+
+    End Sub
+
+
+
+    Private Sub PartDescription_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PartDescription_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        PartDescription_Textbox.ForeColor = DefaultForeColor
+
+        If InitialPartValues.CtrlValuesChanged() Then
+            applyButton.Enabled = True
+        Else
+            applyButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub ListPrice_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ListPrice_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        ListPrice_Textbox.ForeColor = DefaultForeColor
+
+        If InitialPartValues.CtrlValuesChanged() Then
+            applyButton.Enabled = True
+        Else
+            applyButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub Qty_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Qty_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        Qty_Textbox.ForeColor = DefaultForeColor
+
+        If InitialPartValues.CtrlValuesChanged() Then
+            applyButton.Enabled = True
+        Else
+            applyButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub PartPrice_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PartPrice_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        PartPrice_Textbox.ForeColor = DefaultForeColor
+
+        If InitialPartValues.CtrlValuesChanged() Then
+            applyButton.Enabled = True
+        Else
+            applyButton.Enabled = False
         End If
 
     End Sub
