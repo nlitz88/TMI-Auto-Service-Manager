@@ -22,6 +22,8 @@ Partial Class masterTaskMaintenance
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.deleteButton = New System.Windows.Forms.Button()
         Me.masterTaskMaintenanceLabel = New System.Windows.Forms.Label()
         Me.editButton = New System.Windows.Forms.Button()
@@ -362,14 +364,30 @@ Partial Class masterTaskMaintenance
         '
         'TaskLaborGridView
         '
+        Me.TaskLaborGridView.AllowUserToAddRows = False
+        Me.TaskLaborGridView.AllowUserToDeleteRows = False
+        Me.TaskLaborGridView.AllowUserToResizeColumns = False
+        Me.TaskLaborGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.TaskLaborGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.TaskLaborGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TaskLaborGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.TaskLaborGridView.DefaultCellStyle = DataGridViewCellStyle1
         Me.TaskLaborGridView.Location = New System.Drawing.Point(100, 479)
         Me.TaskLaborGridView.MultiSelect = False
         Me.TaskLaborGridView.Name = "TaskLaborGridView"
         Me.TaskLaborGridView.ReadOnly = True
+        Me.TaskLaborGridView.RowHeadersVisible = False
         Me.TaskLaborGridView.RowHeadersWidth = 51
         Me.TaskLaborGridView.RowTemplate.Height = 24
         Me.TaskLaborGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.TaskLaborGridView.ShowEditingIcon = False
         Me.TaskLaborGridView.Size = New System.Drawing.Size(369, 200)
         Me.TaskLaborGridView.TabIndex = 232
         Me.TaskLaborGridView.Tag = "dataLabel"
@@ -482,14 +500,30 @@ Partial Class masterTaskMaintenance
         '
         'TaskPartsGridView
         '
+        Me.TaskPartsGridView.AllowUserToAddRows = False
+        Me.TaskPartsGridView.AllowUserToDeleteRows = False
+        Me.TaskPartsGridView.AllowUserToResizeColumns = False
+        Me.TaskPartsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.TaskPartsGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.TaskPartsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TaskPartsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.TaskPartsGridView.DefaultCellStyle = DataGridViewCellStyle2
         Me.TaskPartsGridView.Location = New System.Drawing.Point(509, 479)
         Me.TaskPartsGridView.MultiSelect = False
         Me.TaskPartsGridView.Name = "TaskPartsGridView"
         Me.TaskPartsGridView.ReadOnly = True
+        Me.TaskPartsGridView.RowHeadersVisible = False
         Me.TaskPartsGridView.RowHeadersWidth = 51
         Me.TaskPartsGridView.RowTemplate.Height = 24
         Me.TaskPartsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.TaskPartsGridView.ShowEditingIcon = False
         Me.TaskPartsGridView.Size = New System.Drawing.Size(369, 200)
         Me.TaskPartsGridView.TabIndex = 242
         Me.TaskPartsGridView.Tag = "dataLabel"
