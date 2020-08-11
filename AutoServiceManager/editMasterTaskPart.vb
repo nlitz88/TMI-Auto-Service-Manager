@@ -161,7 +161,13 @@ Public Class editMasterTaskPart
 
     Private Sub applyButton_Click(sender As Object, e As EventArgs) Handles applyButton.Click
 
+        ' 1.) VALIDATE DATAEDITING CONTROLS
+        If Not controlsValid() Then Exit Sub
 
+        ' 2.) WRITE CHANGES TO DATATABLE (but not to database yet)
+        ' updateDataTable()
+
+        ' 3.) If this is successful, then changeScreen!
 
     End Sub
 
