@@ -19,8 +19,10 @@
     Private TaskRow As Integer
     Private TaskId As Integer
 
+    ' Row indexes for use with TaskLabor and TaskParts DataGridViews
     Private TaskLaborRow As Integer
     Private TaskPartsRow As Integer
+    ' Row index for use with TaskType ComboBox
     Private TaskTypeRow As Integer
 
     ' Last selected variables for reinitialization of controls from DataTables
@@ -523,7 +525,17 @@
     End Sub
 
 
+    Private Sub TaskLaborGridView_SelectionChanged(sender As Object, e As EventArgs) Handles TaskLaborGridView.SelectionChanged
 
+        TaskLaborRow = TaskLaborGridView.CurrentRow.Index
+
+    End Sub
+
+    Private Sub TaskPartsGridView_SelectionChanged(sender As Object, e As EventArgs) Handles TaskPartsGridView.SelectionChanged
+
+        TaskPartsRow = TaskPartsGridView.CurrentRow.Index
+
+    End Sub
 
 
     ' Subs that handle disabling sorting on columns that are added to the DataGridViews
