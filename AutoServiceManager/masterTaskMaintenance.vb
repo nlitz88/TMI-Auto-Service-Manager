@@ -619,6 +619,52 @@
     End Sub
 
 
+    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+
+        Dim decision As DialogResult = MessageBox.Show("Save Changes?", "Confirm Changes", MessageBoxButtons.YesNo)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                If mtMode = "editing" Then
+
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    'If Not controlsValid() Then Exit Sub
+
+
+
+
+                    ' 5.) MOVE UI OUT OF EDITING MODE
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+                    nav.EnableAll()
+                    TaskComboBox.Enabled = True
+
+                ElseIf mtMode = "adding" Then
+
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    'If Not controlsValid() Then Exit Sub
+
+
+
+                    ' 5.) MOVE UI OUT OF Adding MODE
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+                    nav.EnableAll()
+                    TaskComboBox.Enabled = True
+
+                End If
+
+            Case DialogResult.No
+                ' Continue making changes or cancel editing
+        End Select
+
+    End Sub
+
+
+
 
     Private Sub TaskLaborGridView_SelectionChanged(sender As Object, e As EventArgs) Handles TaskLaborGridView.SelectionChanged
 
