@@ -220,9 +220,12 @@ Public Class editMasterTaskPart
         If Not controlsValid() Then Exit Sub
 
         ' 2.) WRITE CHANGES TO DATATABLE (but not to database yet)
-        ' updateDataTable()
+        updateDataTable()
 
         ' 3.) If this is successful, then changeScreen!
+        MeClosed = True
+        changeScreen(masterTaskMaintenance, Me)
+
 
     End Sub
 
