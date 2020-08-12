@@ -6,6 +6,8 @@ Public Class editMasterTaskPart
     Dim TaskPartsDbController As New DbControl()
     Dim InitialTaskPartsDataTable As New DataTable
     Dim TaskPartsRow As Integer
+    ' New Database control instance for updating, inserting, and deleting
+    Dim CRUD As New DbControl()
 
     ' Boolean to keep track of whether or not this form has been closed
     Private MeClosed As Boolean = False
@@ -95,27 +97,33 @@ Public Class editMasterTaskPart
         Dim aDT As DataTable = TaskPartsDbController.DbDataTable
 
         ' Add parameters for use in WHERE clause of statement (these are used to find the row that we want to update)
-        TaskPartsDbController.AddParams("@TaskIdLookup", iDT.Rows(TaskPartsRow)("TaskId"))
-        TaskPartsDbController.AddParams("@PartNbrLookup", iDT.Rows(TaskPartsRow)("PartNbr"))
-        TaskPartsDbController.AddParams("@QtyLookup", iDT.Rows(TaskPartsRow)("Qty"))
-        TaskPartsDbController.AddParams("@PartDescriptionLookup", iDT.Rows(TaskPartsRow)("PartDescription"))
-        TaskPartsDbController.AddParams("@PartPriceLookup", iDT.Rows(TaskPartsRow)("PartPrice"))
-        TaskPartsDbController.AddParams("@PartAmountLookup", iDT.Rows(TaskPartsRow)("PartAmount"))
-        TaskPartsDbController.AddParams("@ListPriceLookup", iDT.Rows(TaskPartsRow)("ListPrice"))
+        CRUD.AddParams("@TaskIdLookup", iDT.Rows(TaskPartsRow)("TaskId"))
+        CRUD.AddParams("@PartNbrLookup", iDT.Rows(TaskPartsRow)("PartNbr"))
+        CRUD.AddParams("@QtyLookup", iDT.Rows(TaskPartsRow)("Qty"))
+        CRUD.AddParams("@PartDescriptionLookup", iDT.Rows(TaskPartsRow)("PartDescription"))
+        CRUD.AddParams("@PartPriceLookup", iDT.Rows(TaskPartsRow)("PartPrice"))
+        CRUD.AddParams("@PartAmountLookup", iDT.Rows(TaskPartsRow)("PartAmount"))
+        CRUD.AddParams("@ListPriceLookup", iDT.Rows(TaskPartsRow)("ListPrice"))
 
         ' Add parameters for values we will update the row with
-        'TaskPartsDbController.AddParams("@TaskId", aDT.Rows(TaskPartsRow)("TaskId"))   ' don't need to update these as they don't change
-        'TaskPartsDbController.AddParams("@PartNbr", aDT.Rows(TaskPartsRow)("PartNbr"))
-        TaskPartsDbController.AddParams("@Qty", aDT.Rows(TaskPartsRow)("Qty"))
-        TaskPartsDbController.AddParams("@PartDescription", aDT.Rows(TaskPartsRow)("PartDescription"))
-        TaskPartsDbController.AddParams("@PartPrice", aDT.Rows(TaskPartsRow)("PartPrice"))
-        TaskPartsDbController.AddParams("@PartAmount", aDT.Rows(TaskPartsRow)("PartAmount"))
-        TaskPartsDbController.AddParams("@ListPrice", aDT.Rows(TaskPartsRow)("ListPrice"))
+        'CRUD.AddParams("@TaskId", aDT.Rows(TaskPartsRow)("TaskId"))   ' don't need to update these as they don't change
+        'CRUD.AddParams("@PartNbr", aDT.Rows(TaskPartsRow)("PartNbr"))
+        CRUD.AddParams("@Qty", aDT.Rows(TaskPartsRow)("Qty"))
+        CRUD.AddParams("@PartDescription", aDT.Rows(TaskPartsRow)("PartDescription"))
+        CRUD.AddParams("@PartPrice", aDT.Rows(TaskPartsRow)("PartPrice"))
+        CRUD.AddParams("@PartAmount", aDT.Rows(TaskPartsRow)("PartAmount"))
+        CRUD.AddParams("@ListPrice", aDT.Rows(TaskPartsRow)("ListPrice"))
 
         ' Execute Query
-        TaskPartsDbController.ExecQuery("UPDATE MasterTaskParts " &
-                                        "SET Qty=@Qty, PartDescription=@PartDescription, PartPrice=@PartPrice, PartAmount=@PartAmount, PartAmount=@PartAmount, ListPrice=@ListPrice " &
-                                        "WHERE TaskId=@TaskIdLookup AND PartNbr=@PartNbrLookup AND Qty=@QtyLookup AND PartDescription=@PartDescriptionLookup AND PartPrice=@PartPriceLookup AND PartAmount=@PartAmountLookup AND ListPrice=@ListPriceLookup")
+        'CRUD.ExecQuery("UPDATE MasterTaskParts " &
+        '                                "SET Qty=@Qty, PartDescription=@PartDescription, PartPrice=@PartPrice, PartAmount=@PartAmount, ListPrice=@ListPrice " &
+        '                                "WHERE TaskId=@TaskIdLookup AND PartNbr=@PartNbrLookup AND Qty=@QtyLookup AND PartDescription=@PartDescriptionLookup AND PartPrice=@PartPriceLookup AND PartAmount=@PartAmountLookup AND ListPrice=@ListPriceLookup")
+
+        CRUD.ExecQuery("UPDATE MasterTaskParts " &
+                                        "SET Qty=@Qty, PartDescription=@PartDescription, PartPrice=@PartPrice, PartAmount=@PartAmount, ListPrice=@ListPrice " &
+                                        "WHERE TaskId=@TaskIdLookup AND PartNbr=@PartNbrLookup")
+
+        ' UPDATE WHERE STATEMENTS STILL MUST NOT BE WORKING. TRY TO FIX THESE IN A BIT.
 
         ' Add handling for comparison against null values
 
