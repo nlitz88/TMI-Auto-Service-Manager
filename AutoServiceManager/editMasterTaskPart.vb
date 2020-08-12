@@ -3,11 +3,10 @@
 Public Class editMasterTaskPart
 
     ' DataTable that will maintain the DataTable passed to it from masterTaskMainentance
-    Dim TaskPartsDbController As New DbControl()
-    Dim InitialTaskPartsDataTable As New DataTable
-    Dim TaskPartsRow As Integer
+    Private TaskPartsDbController As New DbControl()
+    Private TaskPartsRow As Integer
     ' New Database control instance for updating, inserting, and deleting
-    Dim CRUD As New DbControl()
+    Private CRUD As New DbControl()
 
     ' Boolean to keep track of whether or not this form has been closed
     Private MeClosed As Boolean = False
@@ -93,39 +92,34 @@ Public Class editMasterTaskPart
     '   (Could try using just TaskId and partNbr, but that could get messy and unpredictable behavior). Ask Toni about this maybe?
     Private Function updateMasterTaskParts() As Boolean
 
-        Dim iDT As DataTable = InitialTaskPartsDataTable
-        Dim aDT As DataTable = TaskPartsDbController.DbDataTable
-
-        ' Add parameters for use in WHERE clause of statement (these are used to find the row that we want to update)
-        CRUD.AddParams("@TaskIdLookup", iDT.Rows(TaskPartsRow)("TaskId"))
-        CRUD.AddParams("@PartNbrLookup", iDT.Rows(TaskPartsRow)("PartNbr"))
-        CRUD.AddParams("@QtyLookup", iDT.Rows(TaskPartsRow)("Qty"))
-        CRUD.AddParams("@PartDescriptionLookup", iDT.Rows(TaskPartsRow)("PartDescription"))
-        CRUD.AddParams("@PartPriceLookup", iDT.Rows(TaskPartsRow)("PartPrice"))
-        CRUD.AddParams("@PartAmountLookup", iDT.Rows(TaskPartsRow)("PartAmount"))
-        CRUD.AddParams("@ListPriceLookup", iDT.Rows(TaskPartsRow)("ListPrice"))
+        Dim DT As DataTable = TaskPartsDbController.DbDataTable
 
         ' Add parameters for values we will update the row with
         'CRUD.AddParams("@TaskId", aDT.Rows(TaskPartsRow)("TaskId"))   ' don't need to update these as they don't change
         'CRUD.AddParams("@PartNbr", aDT.Rows(TaskPartsRow)("PartNbr"))
-        CRUD.AddParams("@Qty", aDT.Rows(TaskPartsRow)("Qty"))
-        CRUD.AddParams("@PartDescription", aDT.Rows(TaskPartsRow)("PartDescription"))
-        CRUD.AddParams("@PartPrice", aDT.Rows(TaskPartsRow)("PartPrice"))
-        CRUD.AddParams("@PartAmount", aDT.Rows(TaskPartsRow)("PartAmount"))
-        CRUD.AddParams("@ListPrice", aDT.Rows(TaskPartsRow)("ListPrice"))
+        CRUD.AddParams("@Qty", Convert.ToDouble(Qty_Textbox.Text))
+        CRUD.AddParams("@PartDescription", PartDescription_Textbox.Text)
+        CRUD.AddParams("@PartPrice", Convert.ToDecimal(PartPrice_Textbox.Text))
+        CRUD.AddParams("@PartAmount", Convert.ToDecimal(PartAmount_Textbox.Text))
+        CRUD.AddParams("@ListPrice", Convert.ToDecimal(ListPrice_Textbox.Text))
+
+        ' Add parameters for use in WHERE clause of statement (these are used to find the row that we want to update)
+        CRUD.AddParams("@TaskIdLookup", DT.Rows(TaskPartsRow)("TaskId"))
+        CRUD.AddParams("@PartNbrLookup", DT.Rows(TaskPartsRow)("PartNbr"))
+        CRUD.AddParams("@QtyLookup", DT.Rows(TaskPartsRow)("Qty"))
+        CRUD.AddParams("@PartDescriptionLookup", DT.Rows(TaskPartsRow)("PartDescription"))
+        CRUD.AddParams("@PartPriceLookup", DT.Rows(TaskPartsRow)("PartPrice"))
+        CRUD.AddParams("@PartAmountLookup", DT.Rows(TaskPartsRow)("PartAmount"))
+        CRUD.AddParams("@ListPriceLookup", DT.Rows(TaskPartsRow)("ListPrice"))
 
         ' Execute Query
-        'CRUD.ExecQuery("UPDATE MasterTaskParts " &
-        '                                "SET Qty=@Qty, PartDescription=@PartDescription, PartPrice=@PartPrice, PartAmount=@PartAmount, ListPrice=@ListPrice " &
-        '                                "WHERE TaskId=@TaskIdLookup AND PartNbr=@PartNbrLookup AND Qty=@QtyLookup AND PartDescription=@PartDescriptionLookup AND PartPrice=@PartPriceLookup AND PartAmount=@PartAmountLookup AND ListPrice=@ListPriceLookup")
-
         CRUD.ExecQuery("UPDATE MasterTaskParts " &
                                         "SET Qty=@Qty, PartDescription=@PartDescription, PartPrice=@PartPrice, PartAmount=@PartAmount, ListPrice=@ListPrice " &
-                                        "WHERE TaskId=@TaskIdLookup AND PartNbr=@PartNbrLookup")
-
-        ' UPDATE WHERE STATEMENTS STILL MUST NOT BE WORKING. TRY TO FIX THESE IN A BIT.
+                                        "WHERE TaskId=@TaskIdLookup AND PartNbr=@PartNbrLookup AND Qty=@QtyLookup AND PartDescription=@PartDescriptionLookup AND PartPrice=@PartPriceLookup AND PartAmount=@PartAmountLookup AND ListPrice=@ListPriceLookup")
 
         ' Add handling for comparison against null values
+
+        If CRUD.HasException() Then Return False
 
         Return True
 
@@ -181,7 +175,6 @@ Public Class editMasterTaskPart
 
         ' Get TaskPartsDbController here from masterTaskMaintenance
         TaskPartsDbController = masterTaskMaintenance.GetTaskPartsDbController()
-        InitialTaskPartsDataTable = TaskPartsDbController.DbDataTable.Copy()
         TaskPartsRow = masterTaskMaintenance.GetTaskPartsRow()
 
     End Sub
@@ -219,6 +212,8 @@ Public Class editMasterTaskPart
         If Not updateMasterTaskParts() Then
             MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
+        Else
+            MessageBox.Show("Update function ran?")
         End If
 
         ' 3.) If this is successful, then changeScreen!
