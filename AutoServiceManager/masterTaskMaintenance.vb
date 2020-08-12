@@ -472,7 +472,7 @@
             showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
             showHide(getAllControlsWithTag("dataLabel", Me), 0)
             showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
-            showHide(getAllControlsWithTag("taskEditingButton", Me), 0)
+            showHide(getAllControlsWithTag("subTaskEditingControl", Me), 0)
             ' Disable editing button
             editButton.Enabled = False
             deleteButton.Enabled = False
@@ -508,7 +508,7 @@
             showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
             showHide(getAllControlsWithTag("dataLabel", Me), 1)
             showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
-            showHide(getAllControlsWithTag("taskEditingButton", Me), 0)
+            showHide(getAllControlsWithTag("subTaskEditingControl", Me), 1)
 
             ' Enable editing and deleting button
             editButton.Enabled = True
@@ -521,7 +521,7 @@
             showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
             showHide(getAllControlsWithTag("dataLabel", Me), 0)
             showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
-            showHide(getAllControlsWithTag("taskEditingButton", Me), 0)
+            showHide(getAllControlsWithTag("subTaskEditingControl", Me), 0)
             ' Disable editing button
             editButton.Enabled = False
             deleteButton.Enabled = False
@@ -591,10 +591,14 @@
         nav.DisableAll()
         TaskComboBox.Enabled = False
 
+        ' Disable all task-related buttons and datagridviews
+        For Each ctrl In getAllControlsWithTag("subTaskEditingControl", Me)
+            ctrl.Enabled = False
+        Next
+
         ' Show/Hide various control types accordingly
         showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
         showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
-        showHide(getAllControlsWithTag("taskEditingButton", Me), 1)
 
     End Sub
 
@@ -621,6 +625,11 @@
             nav.EnableAll()
             TaskComboBox.Enabled = True
 
+            ' Re-enable all task-related buttons and datagridviews
+            For Each ctrl In getAllControlsWithTag("subTaskEditingControl", Me)
+                ctrl.Enabled = True
+            Next
+
             ' Show/Hide the dataViewingControls and dataEditingControls, respectively
             showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
             showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
@@ -642,6 +651,11 @@
             cancelButton.Enabled = False
             saveButton.Enabled = False
             nav.EnableAll()
+
+            ' Re-enable all task-related buttons and datagridviews
+            For Each ctrl In getAllControlsWithTag("subTaskEditingControl", Me)
+                ctrl.Enabled = True
+            Next
 
         End If
 
@@ -688,6 +702,11 @@
                     nav.EnableAll()
                     TaskComboBox.Enabled = True
 
+                    ' Re-enable all task-related buttons and datagridviews
+                    For Each ctrl In getAllControlsWithTag("subTaskEditingControl", Me)
+                        ctrl.Enabled = True
+                    Next
+
                 ElseIf mtMode = "adding" Then
 
                     ' 1.) VALIDATE DATAEDITING CONTROLS
@@ -701,6 +720,11 @@
                     saveButton.Enabled = False
                     nav.EnableAll()
                     TaskComboBox.Enabled = True
+
+                    ' Re-enable all task-related buttons and datagridviews
+                    For Each ctrl In getAllControlsWithTag("subTaskEditingControl", Me)
+                        ctrl.Enabled = True
+                    Next
 
                 End If
 
