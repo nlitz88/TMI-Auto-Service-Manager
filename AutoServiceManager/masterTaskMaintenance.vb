@@ -570,6 +570,56 @@
     End Sub
 
 
+    Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
+
+        ' Check for changes before cancelling. Don't need function here that calls all, as only working with one datatable's values
+        If InitialMTLValues.CtrlValuesChanged() Then
+
+            Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            ' If changes have been made, and the user selected that they don't want to cancel, then exit here.
+            If decision = DialogResult.No Then Exit Sub
+
+        End If
+
+        ' Otherwise, continue cancelling
+        If mtMode = "editing" Then
+
+            ' RESTORE USER CONTROLS TO NON-EDITING STATE
+            editButton.Enabled = True
+            addButton.Enabled = True
+            cancelButton.Enabled = False
+            saveButton.Enabled = False
+            nav.EnableAll()
+            TaskComboBox.Enabled = True
+
+            ' Show/Hide the dataViewingControls and dataEditingControls, respectively
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            showHide(getAllControlsWithTag("taskEditingButton", Me), 0)
+
+        ElseIf mtMode = "adding" Then
+
+            ' 1.) SET CustomerComboBox BACKK TO LAST SELECTED ITEM/INDEX
+            TaskComboBox.SelectedIndex = TaskComboBox.Items.IndexOf(lastSelectedTask)
+
+            ' 2.) IF LAST SELECTED WAS "SELECT ONE", Then simulate functionality from combobox text/selectedIndex changed
+            If lastSelectedTask = "Select One" Then
+                TaskComboBox_SelectedIndexChanged(TaskComboBox, New EventArgs())
+            End If
+
+            ' 3.) RESTORE USER CONTROLS TO NON-ADDING STATE (only those that are controlled by "adding")
+            TaskComboBox.Enabled = True
+            addButton.Enabled = True
+            cancelButton.Enabled = False
+            saveButton.Enabled = False
+            nav.EnableAll()
+
+        End If
+
+    End Sub
+
+
+
     Private Sub TaskLaborGridView_SelectionChanged(sender As Object, e As EventArgs) Handles TaskLaborGridView.SelectionChanged
 
         TaskLaborRow = TaskLaborGridView.CurrentRow.Index
