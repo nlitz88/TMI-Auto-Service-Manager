@@ -4,6 +4,7 @@ Public Class editMasterTaskPart
 
     ' DataTable that will maintain the DataTable passed to it from masterTaskMainentance
     Dim TaskPartsDbController As New DbControl()
+    Dim InitialTaskPartsDataTable As New DataTable
     Dim TaskPartsRow As Integer
 
     ' Boolean to keep track of whether or not this form has been closed
@@ -94,6 +95,10 @@ Public Class editMasterTaskPart
     Private Function updateMasterTaskParts() As Boolean
 
 
+        ' What do we want to do?
+        'TaskPartsDbController.AddParams("@TaskIdLookup", )
+
+
 
         Return True
 
@@ -149,6 +154,7 @@ Public Class editMasterTaskPart
 
         ' Get TaskPartsDbController here from masterTaskMaintenance
         TaskPartsDbController = masterTaskMaintenance.GetTaskPartsDbController()
+        InitialTaskPartsDataTable = TaskPartsDbController.DbDataTable.Copy()
         TaskPartsRow = masterTaskMaintenance.GetTaskPartsRow()
 
     End Sub
