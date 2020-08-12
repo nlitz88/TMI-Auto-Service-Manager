@@ -110,7 +110,7 @@ Partial Class editMasterTaskPart
         Me.applyButton.Location = New System.Drawing.Point(216, 120)
         Me.applyButton.Name = "applyButton"
         Me.applyButton.Size = New System.Drawing.Size(110, 30)
-        Me.applyButton.TabIndex = 142
+        Me.applyButton.TabIndex = 5
         Me.applyButton.Text = "Apply"
         Me.applyButton.UseVisualStyleBackColor = False
         '
@@ -122,7 +122,7 @@ Partial Class editMasterTaskPart
         Me.backButton.Location = New System.Drawing.Point(100, 120)
         Me.backButton.Name = "backButton"
         Me.backButton.Size = New System.Drawing.Size(110, 30)
-        Me.backButton.TabIndex = 143
+        Me.backButton.TabIndex = 4
         Me.backButton.Text = "Back"
         Me.backButton.UseVisualStyleBackColor = False
         '
@@ -166,7 +166,7 @@ Partial Class editMasterTaskPart
         Me.PartDescription_Textbox.MaxLength = 50
         Me.PartDescription_Textbox.Name = "PartDescription_Textbox"
         Me.PartDescription_Textbox.Size = New System.Drawing.Size(297, 27)
-        Me.PartDescription_Textbox.TabIndex = 145
+        Me.PartDescription_Textbox.TabIndex = 0
         Me.PartDescription_Textbox.Tag = "dataEditingControl"
         '
         'ListPrice_Textbox
@@ -175,7 +175,7 @@ Partial Class editMasterTaskPart
         Me.ListPrice_Textbox.Location = New System.Drawing.Point(618, 308)
         Me.ListPrice_Textbox.Name = "ListPrice_Textbox"
         Me.ListPrice_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.ListPrice_Textbox.TabIndex = 147
+        Me.ListPrice_Textbox.TabIndex = 1
         Me.ListPrice_Textbox.Tag = "dataEditingControl"
         '
         'ListPriceLabel
@@ -206,7 +206,7 @@ Partial Class editMasterTaskPart
         Me.PartPrice_Textbox.Location = New System.Drawing.Point(377, 358)
         Me.PartPrice_Textbox.Name = "PartPrice_Textbox"
         Me.PartPrice_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.PartPrice_Textbox.TabIndex = 146
+        Me.PartPrice_Textbox.TabIndex = 3
         Me.PartPrice_Textbox.Tag = "dataEditingControl"
         '
         'UnitPriceLabel
@@ -238,7 +238,7 @@ Partial Class editMasterTaskPart
         Me.Qty_Textbox.MaxLength = 14
         Me.Qty_Textbox.Name = "Qty_Textbox"
         Me.Qty_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.Qty_Textbox.TabIndex = 154
+        Me.Qty_Textbox.TabIndex = 2
         Me.Qty_Textbox.Tag = "dataEditingControl"
         '
         'QuantityLabel
