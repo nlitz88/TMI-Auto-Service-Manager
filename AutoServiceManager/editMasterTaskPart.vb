@@ -3,7 +3,7 @@
 Public Class editMasterTaskPart
 
     ' DataTable that will maintain the DataTable passed to it from masterTaskMainentance
-    Dim TaskPartsDataTable As DataTable
+    Dim TaskPartsDbController As New DbControl()
     Dim TaskPartsRow As Integer
 
     ' Boolean to keep track of whether or not this form has been closed
@@ -24,13 +24,13 @@ Public Class editMasterTaskPart
     ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
 
 
-    ' No need for DataTable loading functions here, as this form is entirely dependent on the DataTable from masterTaskMaintenance
+    ' No need for dataTable loading function here, as we are only going to use the dataTable associate with the controller that we receive
 
 
     ' Sub that initializes all dataEditingcontrols corresponding with values from the MasterTaskParts datatable
     Private Sub InitializeTaskPartsDataEditingControls()
 
-        initializeControlsFromRow(TaskPartsDataTable, TaskPartsRow, "dataEditingControl", "_", Me)
+        initializeControlsFromRow(TaskPartsDbController.DbDataTable, TaskPartsRow, "dataEditingControl", "_", Me)
 
     End Sub
 
@@ -92,7 +92,7 @@ Public Class editMasterTaskPart
 
         Try
 
-            updateDataTable(TaskPartsDataTable, TaskPartsRow, "_", "dataEditingControl", Me)
+            updateDataTable(TaskPartsDbController.DbDataTable, TaskPartsRow, "_", "dataEditingControl", Me)
             Return True
 
         Catch ex As Exception
@@ -157,10 +157,9 @@ Public Class editMasterTaskPart
 
         ' Add any initialization after the InitializeComponent() call.
 
-        ' Get TaskPartsDataTable and respective row from masterTaskMaintenance
-        TaskPartsDataTable = masterTaskMaintenance.GetTaskPartsDataTable()
+        ' Get TaskPartsDbController here from masterTaskMaintenance
+        TaskPartsDbController = masterTaskMaintenance.GetTaskPartsDbController()
         TaskPartsRow = masterTaskMaintenance.GetTaskPartsRow()
-
 
     End Sub
 

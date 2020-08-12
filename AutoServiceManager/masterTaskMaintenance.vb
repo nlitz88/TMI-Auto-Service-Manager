@@ -60,13 +60,13 @@
     End Function
 
     ' Retrieves MasterTaskLabor DataTable
-    Public Function GetTaskLaborDataTable() As DataTable
-        Return TaskLaborDbController.DbDataTable
+    Public Function GetTaskLaborDbController() As DbControl
+        Return TaskLaborDbController
     End Function
 
     ' Retrieves MasterTaskParts DataTable
-    Public Function GetTaskPartsDataTable() As DataTable
-        Return TaskPartsDbController.DbDataTable
+    Public Function GetTaskPartsDbController() As DbControl
+        Return TaskPartsDbController
     End Function
 
 
