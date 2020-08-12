@@ -94,11 +94,33 @@ Public Class editMasterTaskPart
     '   (Could try using just TaskId and partNbr, but that could get messy and unpredictable behavior). Ask Toni about this maybe?
     Private Function updateMasterTaskParts() As Boolean
 
+        Dim iDT As DataTable = InitialTaskPartsDataTable
+        Dim aDT As DataTable = TaskPartsDbController.DbDataTable
 
-        ' What do we want to do?
-        'TaskPartsDbController.AddParams("@TaskIdLookup", )
+        ' Add parameters for use in WHERE clause of statement (these are used to find the row that we want to update)
+        TaskPartsDbController.AddParams("@TaskIdLookup", iDT.Rows(TaskPartsRow)("TaskId"))
+        TaskPartsDbController.AddParams("@PartNbrLookup", iDT.Rows(TaskPartsRow)("PartNbr"))
+        TaskPartsDbController.AddParams("@QtyLookup", iDT.Rows(TaskPartsRow)("Qty"))
+        TaskPartsDbController.AddParams("@PartDescriptionLookup", iDT.Rows(TaskPartsRow)("PartDescription"))
+        TaskPartsDbController.AddParams("@PartPriceLookup", iDT.Rows(TaskPartsRow)("PartPrice"))
+        TaskPartsDbController.AddParams("@PartAmountLookup", iDT.Rows(TaskPartsRow)("PartAmount"))
+        TaskPartsDbController.AddParams("@ListPriceLookup", iDT.Rows(TaskPartsRow)("ListPrice"))
 
+        ' Add parameters for values we will update the row with
+        'TaskPartsDbController.AddParams("@TaskId", aDT.Rows(TaskPartsRow)("TaskId"))   ' don't need to update these as they don't change
+        'TaskPartsDbController.AddParams("@PartNbr", aDT.Rows(TaskPartsRow)("PartNbr"))
+        TaskPartsDbController.AddParams("@Qty", aDT.Rows(TaskPartsRow)("Qty"))
+        TaskPartsDbController.AddParams("@PartDescription", aDT.Rows(TaskPartsRow)("PartDescription"))
+        TaskPartsDbController.AddParams("@PartPrice", aDT.Rows(TaskPartsRow)("PartPrice"))
+        TaskPartsDbController.AddParams("@PartAmount", aDT.Rows(TaskPartsRow)("PartAmount"))
+        TaskPartsDbController.AddParams("@ListPrice", aDT.Rows(TaskPartsRow)("ListPrice"))
 
+        ' Execute Query
+        TaskPartsDbController.ExecQuery("UPDATE MasterTaskParts " &
+                                        "SET Qty=@Qty, PartDescription=@PartDescription, PartPrice=@PartPrice, PartAmount=@PartPrice, PartAmount=@PartAmount, ListPrice=@ListPrice " &
+                                        "WHERE TaskId=@TaskIdLookup AND PartNbr=@PartNbrLookup AND Qty=@QtyLookup AND PartDescription=@PartDescriptionLookup AND PartPrice=@PartPriceLookup AND PartAmount=@PartAmountLookup AND ListPrice=@ListPriceLookup")
+
+        ' Add handling for comparison against null values
 
         Return True
 
@@ -189,7 +211,10 @@ Public Class editMasterTaskPart
         If Not controlsValid() Then Exit Sub
 
         ' 2.) WRITE CHANGES TO DATABASE TABLE
-
+        If Not updateMasterTaskParts() Then
+            MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
 
 
 
