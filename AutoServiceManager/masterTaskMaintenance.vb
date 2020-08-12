@@ -762,7 +762,9 @@
 
 
     Private Sub TaskLaborGridView_SelectionChanged(sender As Object, e As EventArgs) Handles TaskLaborGridView.SelectionChanged
+
         TaskLaborRow = TaskLaborGridView.CurrentRow.Index
+
     End Sub
 
     ' Subs that handle disabling sorting on columns that are added to the DataGridViews
@@ -799,13 +801,6 @@
 
     Private Sub TaskPartsGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles TaskPartsGridView.ColumnAdded
         e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
-    End Sub
-
-    Private Sub TaskPartsGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles TaskPartsGridView.CellValueChanged
-
-        ' not the right event.
-        InitializeTaskPartsTextbox()
-
     End Sub
 
     ' Custom event that handles rowChanges in the TaskParts DataTable
