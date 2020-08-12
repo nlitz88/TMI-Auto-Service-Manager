@@ -389,12 +389,12 @@
 
 
         ' UPDATING FOR MASTER TASK LIST TABLE
-        ' Lookup CustomerId (primary key) based on selected CLF in ComboBox
-        Dim taskId As Integer = MTL.DbDataTable.Rows(TaskRow)("TaskId")
-        ' Using CustomerID as key, update customer row
-        updateTable(CRUD, MTL.DbDataTable, "MasterTaskList", taskId, "TaskId", "_", "dataEditingControl", Me)
-        ' Then, return exception status of CRUD controller. Do this after each call
-        If CRUD.HasException() Then Return False
+        '' Lookup CustomerId (primary key) based on selected CLF in ComboBox
+        'Dim taskId As Integer = MTL.DbDataTable.Rows(TaskRow)("TaskId")
+        '' Using CustomerID as key, update customer row
+        'updateTable(CRUD, MTL.DbDataTable, "MasterTaskList", taskId, "TaskId", "_", "dataEditingControl", Me)
+        '' Then, return exception status of CRUD controller. Do this after each call
+        'If CRUD.HasException() Then Return False
 
 
         ' UPDATING FOR TASKLABOR TABLE
@@ -506,6 +506,7 @@
             showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
             showHide(getAllControlsWithTag("dataLabel", Me), 1)
             showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            showHide(getAllControlsWithTag("taskEditingButton", Me), 0)
 
             ' Enable editing and deleting button
             editButton.Enabled = True
