@@ -228,6 +228,29 @@
     End Function
 
 
+    ' Function that returns an object with the default value of its provided DataType
+    Public Function setToDefaultValue(ByVal dataType As Object) As Object
+
+        Dim ctrlValue As Object
+
+        Select Case dataType
+            Case GetType(System.DateTime)
+                ctrlValue = New DateTime
+            Case GetType(System.String)
+                ctrlValue = String.Empty
+                            'Console.WriteLine("DataType is " & dataValue.GetType().ToString() & ". Does datavalue = String.Empty?: " & (dataValue = String.Empty))
+            Case GetType(System.Boolean)
+                ctrlValue = False
+            Case Else
+                ctrlValue = 0
+        End Select
+
+        Return ctrlValue
+
+    End Function
+
+
+
 
     ' ************************ DATABASE DATA INTERACTION/MANIPULATION ************************
 
@@ -587,6 +610,62 @@
     End Sub
 
 
+    ' Function that checks database connection
+    Public Function checkDbConn(Optional Report As Boolean = True) As Boolean
+
+        Dim testConn As New DbControl()
+
+        testConn.ExecQuery("SELECT 1")
+        If testConn.HasException() Then
+            If Report Then MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
+
+        Return True
+
+    End Function
+
+
+
+
+    ' ************************ DATATABLE DATA INTERACTION/MANIPULATION ************************
+
+
+    ' Function that dynamically updates dataTable column values (of a provided row) based on corresponding form control values of a specified control tag and name delimiter
+    Public Sub updateDataTable(ByVal dataTable As DataTable, ByVal dataTableRow As Integer, ByVal nameDelimiter As String, ByVal controlTag As String, ByRef form As Form)
+
+        Dim ctrls As List(Of Object)
+        Dim ctrlValue As Object
+
+        For i As Integer = 0 To dataTable.Columns.Count - 1
+
+            ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
+
+            If ctrls.Count = 0 Then Continue For
+
+            ctrlValue = getControlValue(ctrls(0))
+
+            ' To determine if we're going to insert a default (in place of a nothing value) instead of a value, we must consider all different types of values that warrant defaulting a value
+            ' First, check if it's a DateTime field
+            If dataTable.Columns(i).DataType = GetType(DateTime) Then
+                ' When this dataTable is actually written to a database, this New DataTime() could end up just getting turned into a DBNull
+                If ctrlValue.ToString().Replace(" ", "0") = "00/00/0000" Then ctrlValue = New DateTime()
+
+                ' For all other types of fields
+            ElseIf ctrlValue = Nothing Then
+
+                ctrlValue = setToDefaultValue(dataTable.Columns(i).DataType)
+
+            End If
+
+            ' Finally, assign ctrlValue to DataTable cell
+            dataTable.Rows(dataTableRow)(dataTable.Columns(i).ColumnName) = ctrlValue
+
+        Next
+
+    End Sub
+
+
     ' Function that generates sorted lists from datatable columns. Useful if binary search on values used.
     Public Function getListFromDataTable(ByVal datatable As DataTable, ByVal column As String, Optional ByVal sorted As Boolean = True) As List(Of Object)
 
@@ -688,20 +767,7 @@
     End Function
 
 
-    ' Function that checks database connection
-    Public Function checkDbConn(Optional Report As Boolean = True) As Boolean
 
-        Dim testConn As New DbControl()
-
-        testConn.ExecQuery("SELECT 1")
-        If testConn.HasException() Then
-            If Report Then MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return False
-        End If
-
-        Return True
-
-    End Function
 
 
     ' **************** KEYPRESS/INPUT VALIDATION ****************
