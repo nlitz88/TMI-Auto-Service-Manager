@@ -32,8 +32,6 @@
 
     ' Keeps track of whether or not user in "editing" or "adding" mode for various control groups
     Private mtMode As String
-    Private tlMode As String
-    Private tpMode As String
 
     ' Variable that allows certain keystrokes through restricted fields
     Private allowedKeystroke As Boolean = False
@@ -820,8 +818,6 @@
 
     Private Sub tpAddButton_Click(sender As Object, e As EventArgs) Handles tpAddButton.Click
 
-        tpMode = "adding"
-
         ' Change to masterTaskPartsMaintenance Form, and Hide (but don't close) this one
         previousScreen = Me
         changeScreenHide(editMasterTaskPart, Me)
@@ -830,8 +826,6 @@
 
 
     Private Sub tpEditButton_Click(sender As Object, e As EventArgs) Handles tpEditButton.Click
-
-        tpMode = "editing"
 
         ' Change to masterTaskPartsMaintenance Form, and Hide (but don't close) this one
         previousScreen = Me
