@@ -115,7 +115,7 @@ Public Class editMasterTaskPart
         ' Execute Query
         CRUD.ExecQuery("UPDATE MasterTaskParts " &
                                         "SET Qty=@Qty, PartDescription=@PartDescription, PartPrice=@PartPrice, PartAmount=@PartAmount, ListPrice=@ListPrice " &
-                                        "WHERE TaskId=@TaskIdLookup AND PartNbr=@PartNbrLookup AND Qty=@QtyLookup AND PartDescription=@PartDescriptionLookup AND PartPrice=@PartPriceLookup AND PartAmount=@PartAmountLookup AND ListPrice=@ListPriceLookup")
+                                        "WHERE TaskId=@TaskIdLookup AND PartNbr=@PartNbrLookup AND Qty=@QtyLookup AND PartDescription=@PartDescriptionLookup AND PartPrice=@PartPriceLookup AND PartAmount=@PartAmountLookup AND (ListPrice=@ListPriceLookup OR IsNull(ListPrice))")
 
         ' Add handling for comparison against null values
 
