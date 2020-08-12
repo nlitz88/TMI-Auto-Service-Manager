@@ -27,8 +27,8 @@ Partial Class editMasterTaskPart
         Me.PartNbr_Textbox = New System.Windows.Forms.TextBox()
         Me.PartNbr_Value = New System.Windows.Forms.Label()
         Me.PartNumberLabel = New System.Windows.Forms.Label()
-        Me.applyButton = New System.Windows.Forms.Button()
-        Me.backButton = New System.Windows.Forms.Button()
+        Me.saveButton = New System.Windows.Forms.Button()
+        Me.cancelButton = New System.Windows.Forms.Button()
         Me.TaskTextbox = New System.Windows.Forms.TextBox()
         Me.PartDescription_Value = New System.Windows.Forms.Label()
         Me.PartDescriptionLabel = New System.Windows.Forms.Label()
@@ -101,30 +101,30 @@ Partial Class editMasterTaskPart
         Me.PartNumberLabel.Tag = "dataLabel"
         Me.PartNumberLabel.Text = "Part Number :"
         '
-        'applyButton
+        'saveButton
         '
-        Me.applyButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.applyButton.Enabled = False
-        Me.applyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.applyButton.ForeColor = System.Drawing.Color.White
-        Me.applyButton.Location = New System.Drawing.Point(216, 120)
-        Me.applyButton.Name = "applyButton"
-        Me.applyButton.Size = New System.Drawing.Size(110, 30)
-        Me.applyButton.TabIndex = 5
-        Me.applyButton.Text = "Apply"
-        Me.applyButton.UseVisualStyleBackColor = False
+        Me.saveButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.saveButton.Enabled = False
+        Me.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.saveButton.ForeColor = System.Drawing.Color.White
+        Me.saveButton.Location = New System.Drawing.Point(100, 120)
+        Me.saveButton.Name = "saveButton"
+        Me.saveButton.Size = New System.Drawing.Size(110, 30)
+        Me.saveButton.TabIndex = 5
+        Me.saveButton.Text = "Save"
+        Me.saveButton.UseVisualStyleBackColor = False
         '
-        'backButton
+        'cancelButton
         '
-        Me.backButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.backButton.ForeColor = System.Drawing.Color.White
-        Me.backButton.Location = New System.Drawing.Point(100, 120)
-        Me.backButton.Name = "backButton"
-        Me.backButton.Size = New System.Drawing.Size(110, 30)
-        Me.backButton.TabIndex = 4
-        Me.backButton.Text = "Back"
-        Me.backButton.UseVisualStyleBackColor = False
+        Me.cancelButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cancelButton.ForeColor = System.Drawing.Color.White
+        Me.cancelButton.Location = New System.Drawing.Point(216, 120)
+        Me.cancelButton.Name = "cancelButton"
+        Me.cancelButton.Size = New System.Drawing.Size(110, 30)
+        Me.cancelButton.TabIndex = 4
+        Me.cancelButton.Text = "Back"
+        Me.cancelButton.UseVisualStyleBackColor = False
         '
         'TaskTextbox
         '
@@ -317,8 +317,8 @@ Partial Class editMasterTaskPart
         Me.Controls.Add(Me.UnitPriceLabel)
         Me.Controls.Add(Me.PartPrice_Value)
         Me.Controls.Add(Me.TaskTextbox)
-        Me.Controls.Add(Me.backButton)
-        Me.Controls.Add(Me.applyButton)
+        Me.Controls.Add(Me.cancelButton)
+        Me.Controls.Add(Me.saveButton)
         Me.Controls.Add(Me.PartNbr_Textbox)
         Me.Controls.Add(Me.PartNbr_Value)
         Me.Controls.Add(Me.PartNumberLabel)
@@ -339,8 +339,8 @@ Partial Class editMasterTaskPart
     Friend WithEvents PartNbr_Textbox As TextBox
     Friend WithEvents PartNbr_Value As Label
     Friend WithEvents PartNumberLabel As Label
-    Friend WithEvents applyButton As Button
-    Friend WithEvents backButton As Button
+    Friend WithEvents saveButton As Button
+    Friend WithEvents cancelButton As Button
     Friend WithEvents TaskTextbox As TextBox
     Friend WithEvents PartDescription_Value As Label
     Friend WithEvents PartDescriptionLabel As Label

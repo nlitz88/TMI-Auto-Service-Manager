@@ -186,18 +186,16 @@ Public Class editMasterTaskPart
     ' **************** CONTROL SUBS ****************
 
 
-    Private Sub applyButton_Click(sender As Object, e As EventArgs) Handles applyButton.Click
+    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
 
         ' No confirmation for edits at this time. May implement in the future.
 
         ' 1.) VALIDATE DATAEDITING CONTROLS
         If Not controlsValid() Then Exit Sub
 
-        ' 2.) WRITE CHANGES TO DATATABLE (but not to database yet)
-        If Not updateTaskPartsDataTable() Then
-            MessageBox.Show("Applying part unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
+        ' 2.) WRITE CHANGES TO DATABASE TABLE
+
+
 
 
         ' 3.) If this is successful, then changeScreen!
@@ -215,7 +213,7 @@ Public Class editMasterTaskPart
 
             If InitialPartValues.CtrlValuesChanged() Then
 
-                Dim decision As DialogResult = MessageBox.Show("Go back without applying changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
                 If decision = DialogResult.No Then
                     Exit Sub
@@ -235,13 +233,13 @@ Public Class editMasterTaskPart
 
     End Sub
 
-    Private Sub backButton_Click(sender As Object, e As EventArgs) Handles backButton.Click
+    Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
 
         If Not MeClosed Then
 
             If InitialPartValues.CtrlValuesChanged() Then
 
-                Dim decision As DialogResult = MessageBox.Show("Go back without applying changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
                 If decision = DialogResult.No Then
                     Exit Sub
@@ -270,9 +268,9 @@ Public Class editMasterTaskPart
         PartDescription_Textbox.ForeColor = DefaultForeColor
 
         If InitialPartValues.CtrlValuesChanged() Then
-            applyButton.Enabled = True
+            saveButton.Enabled = True
         Else
-            applyButton.Enabled = False
+            saveButton.Enabled = False
         End If
 
     End Sub
@@ -316,9 +314,9 @@ Public Class editMasterTaskPart
         End If
 
         If InitialPartValues.CtrlValuesChanged() Then
-            applyButton.Enabled = True
+            saveButton.Enabled = True
         Else
-            applyButton.Enabled = False
+            saveButton.Enabled = False
         End If
 
     End Sub
@@ -364,9 +362,9 @@ Public Class editMasterTaskPart
         InitializeTotalTaskTextbox()
 
         If InitialPartValues.CtrlValuesChanged() Then
-            applyButton.Enabled = True
+            saveButton.Enabled = True
         Else
-            applyButton.Enabled = False
+            saveButton.Enabled = False
         End If
 
     End Sub
@@ -412,9 +410,9 @@ Public Class editMasterTaskPart
         InitializeTotalTaskTextbox()
 
         If InitialPartValues.CtrlValuesChanged() Then
-            applyButton.Enabled = True
+            saveButton.Enabled = True
         Else
-            applyButton.Enabled = False
+            saveButton.Enabled = False
         End If
 
     End Sub
