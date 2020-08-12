@@ -384,6 +384,32 @@
     ' ***************** CRUD SUBS *****************
 
 
+    ' Function that makes updateTable calls for all relevant DataTables that need updated based on changes
+    Private Function updateAll() As Boolean
+
+
+        ' UPDATING FOR MASTER TASK LIST TABLE
+        ' Lookup CustomerId (primary key) based on selected CLF in ComboBox
+        Dim taskId As Integer = MTL.DbDataTable.Rows(TaskRow)("TaskId")
+        ' Using CustomerID as key, update customer row
+        updateTable(CRUD, MTL.DbDataTable, "MasterTaskList", taskId, "CustomerId", "_", "dataEditingControl", Me)
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
+
+
+        ' UPDATING FOR TASKLABOR TABLE
+
+
+        ' UPDATING FOR TASKPARTS TABLE
+
+
+
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
 
 
     ' ***************** VALIDATION SUBS *****************
@@ -631,8 +657,26 @@
                     ' 1.) VALIDATE DATAEDITING CONTROLS
                     'If Not controlsValid() Then Exit Sub
 
+                    ' 2.) UPDATE MASTER TASK LIST VALUES FIRST
+                    ' 3.) THEN, UPDATE TASKLABOR AND TASKPARTS TABLES
+                    ' This can be accomplished in the same updateAll sub()
+                    If Not updateAll() Then
+                        MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    Else
+                        MessageBox.Show("Successfully updated Master Task List")
+                    End If
 
+                    ' 4.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadMasterTaskListDataTable() Then
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
 
+                    ' 5.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                    InitializeTaskComboBox()
+                    ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
+                    ' If update failed, then revert selected back to lastSelected
+                    TaskComboBox.SelectedIndex = TaskComboBox.Items.IndexOf(TaskDescription_Textbox.Text)
 
                     ' 5.) MOVE UI OUT OF EDITING MODE
                     addButton.Enabled = True
