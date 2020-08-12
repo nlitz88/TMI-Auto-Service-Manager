@@ -389,6 +389,10 @@
 
 
         ' UPDATING FOR MASTER TASK LIST TABLE
+
+        ' Lookup corresponding taskType symbol for valid taskType description first.
+        ' Exclude task type from updateTable, then add its swapped value as an additional value
+
         '' Lookup CustomerId (primary key) based on selected CLF in ComboBox
         'Dim taskId As Integer = MTL.DbDataTable.Rows(TaskRow)("TaskId")
         '' Using CustomerID as key, update customer row
