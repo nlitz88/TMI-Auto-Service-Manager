@@ -195,6 +195,14 @@
 
     End Function
 
+    ' Sets Dependent DataTables Custom Handlers
+    Private Function setDependentDataTableHandlers()
+
+        AddHandler TaskPartsDbController.DbDataTable.RowChanged, New DataRowChangeEventHandler(AddressOf TaskParts_Row_Changed)
+        AddHandler TaskLaborDbController.DbDataTable.RowChanged, New DataRowChangeEventHandler(AddressOf TaskLabor_Row_Changed)
+
+    End Function
+
     ' Sub that initializes TaskLaborGridView
     Private Sub InitializeTaskLaborGridView()
 
@@ -458,6 +466,7 @@
             valuesInitialized = False
             ' Load TaskParts and TaskLabor datatables based on selected TaskId, then Initialize corresponding GridViews
             loadDependentDataTables()
+            setDependentDataTableHandlers()
             ' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
             ' This is because controls like TaskLaborCost (for instance) are calculated from those tables
             InitializeAllDataViewingControls()
@@ -581,14 +590,51 @@
     Private Sub TaskLaborGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles TaskLaborGridView.ColumnAdded
         e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
     End Sub
-    Private Sub TaskPartsGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles TaskPartsGridView.ColumnAdded
-        e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
+
+    ' Custom event that handles rowChanges in the TaskParts DataTable
+    Private Sub TaskLabor_Row_Changed(ByVal sender As Object, ByVal e As DataRowChangeEventArgs)
+
+        InitializeTaskLaborTextbox()
+
+    End Sub
+
+    Private Sub TaskLabor_Textbox_TextChanged(sender As Object, e As EventArgs) Handles TaskLabor_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        InitializeTotalTaskTextbox()
+
     End Sub
 
 
 
     ' **************** CONTROL SUBS FOR MASTER TASK PARTS ****************
 
+    Private Sub TaskPartsGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles TaskPartsGridView.ColumnAdded
+        e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
+    End Sub
+
+    Private Sub TaskPartsGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles TaskPartsGridView.CellValueChanged
+
+        ' not the right event.
+        InitializeTaskPartsTextbox()
+
+    End Sub
+
+    ' Custom event that handles rowChanges in the TaskParts DataTable
+    Private Sub TaskParts_Row_Changed(ByVal sender As Object, ByVal e As DataRowChangeEventArgs)
+
+        InitializeTaskPartsTextbox()
+
+    End Sub
+
+    Private Sub TaskParts_Textbox_TextChanged(sender As Object, e As EventArgs) Handles TaskParts_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        InitializeTotalTaskTextbox()
+
+    End Sub
 
     Private Sub tpAddButton_Click(sender As Object, e As EventArgs) Handles tpAddButton.Click
 
