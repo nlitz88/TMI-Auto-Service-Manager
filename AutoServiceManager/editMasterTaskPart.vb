@@ -88,26 +88,16 @@ Public Class editMasterTaskPart
     ' ***************** CRUD SUBS *****************
 
 
-    Private Function updateTaskPartsDataTable() As Boolean
-
-        Try
-
-            updateDataTable(TaskPartsDbController.DbDataTable, TaskPartsRow, "_", "dataEditingControl", Me)
-            Return True
-
-        Catch ex As Exception
-
-            Dim exception As String
-            exception = "DataTable Error" & vbNewLine & ex.Message
-            MessageBox.Show(exception, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return False
-
-        End Try
+    ' Function here that will update row in MasterTaskParts
+    ' Might have to store initial version of datatable here, as otherwise I won't be able to tell which row to edit.
+    '   (Could try using just TaskId and partNbr, but that could get messy and unpredictable behavior). Ask Toni about this maybe?
+    Private Function updateMasterTaskParts() As Boolean
 
 
+
+        Return True
 
     End Function
-
 
 
 

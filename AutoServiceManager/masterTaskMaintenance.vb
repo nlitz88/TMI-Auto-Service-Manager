@@ -385,7 +385,7 @@
 
 
     ' Function that makes updateTable calls for all relevant DataTables that need updated based on changes
-    Private Function updateAll() As Boolean
+    Private Function updateMasterTaskList() As Boolean
 
 
         ' UPDATING FOR MASTER TASK LIST TABLE
@@ -665,7 +665,7 @@
                     ' 2.) UPDATE MASTER TASK LIST VALUES FIRST
                     ' 3.) THEN, UPDATE TASKLABOR AND TASKPARTS TABLES
                     ' This can be accomplished in the same updateAll sub()
-                    If Not updateAll() Then
+                    If Not updateMasterTaskList() Then
                         MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Exit Sub
                     Else
