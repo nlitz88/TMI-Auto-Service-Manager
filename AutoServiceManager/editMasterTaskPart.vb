@@ -99,7 +99,7 @@ Public Class editMasterTaskPart
 
             Dim exception As String
             exception = "DataTable Error" & vbNewLine & ex.Message
-            MessageBox.Show(Exception, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(exception, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
 
         End Try
