@@ -123,7 +123,7 @@ Partial Class editMasterTaskPart
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
         Me.cancelButton.TabIndex = 4
-        Me.cancelButton.Text = "Back"
+        Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
         '
         'TaskTextbox
