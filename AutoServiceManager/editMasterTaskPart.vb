@@ -166,7 +166,6 @@ Public Class editMasterTaskPart
 
     Private Sub masterTaskPartsMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
         TaskTextbox.Text = masterTaskMaintenance.GetTask()
 
         ' For the editing forms, we won't be initializing our dataEditingControls from a selection. Instead, we will initialize them just once on load
@@ -188,6 +187,8 @@ Public Class editMasterTaskPart
 
 
     Private Sub applyButton_Click(sender As Object, e As EventArgs) Handles applyButton.Click
+
+        ' No confirmation for edits at this time. May implement in the future.
 
         ' 1.) VALIDATE DATAEDITING CONTROLS
         If Not controlsValid() Then Exit Sub
