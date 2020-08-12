@@ -39,10 +39,6 @@ Public Class editMasterTaskPart
     ' Sub that will initialize/Calculate Total Task Cost based on the product of the Quantity and Unit Price
     Private Sub InitializeTotalTaskTextbox()
 
-        Console.WriteLine("Qty: " & Qty_Textbox.Text & " | Unit Price : " & PartPrice_Textbox.Text)
-        Console.WriteLine("Valid Quant? " & validNumber("Quantity", True, Qty_Textbox.Text, String.Empty, True))
-        Console.WriteLine("Valid Price? " & validCurrency("Unit Price", True, PartPrice_Textbox.Text, String.Empty))
-
         ' First, Validate values that calculation is based on before attempting to parse and calculate
         If validNumber("Quantity", True, Qty_Textbox.Text, String.Empty, True) And validCurrency("Unit Price", True, PartPrice_Textbox.Text, String.Empty) Then
 
@@ -56,8 +52,6 @@ Public Class editMasterTaskPart
         Else
             PartAmount_Textbox.Text = String.Empty
         End If
-
-
 
     End Sub
 
@@ -120,7 +114,7 @@ Public Class editMasterTaskPart
 
         ' Execute Query
         TaskPartsDbController.ExecQuery("UPDATE MasterTaskParts " &
-                                        "SET Qty=@Qty, PartDescription=@PartDescription, PartPrice=@PartPrice, PartAmount=@PartPrice, PartAmount=@PartAmount, ListPrice=@ListPrice " &
+                                        "SET Qty=@Qty, PartDescription=@PartDescription, PartPrice=@PartPrice, PartAmount=@PartAmount, PartAmount=@PartAmount, ListPrice=@ListPrice " &
                                         "WHERE TaskId=@TaskIdLookup AND PartNbr=@PartNbrLookup AND Qty=@QtyLookup AND PartDescription=@PartDescriptionLookup AND PartPrice=@PartPriceLookup AND PartAmount=@PartAmountLookup AND ListPrice=@ListPriceLookup")
 
         ' Add handling for comparison against null values
