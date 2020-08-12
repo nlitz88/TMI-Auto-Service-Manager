@@ -392,7 +392,7 @@
         ' Lookup CustomerId (primary key) based on selected CLF in ComboBox
         Dim taskId As Integer = MTL.DbDataTable.Rows(TaskRow)("TaskId")
         ' Using CustomerID as key, update customer row
-        updateTable(CRUD, MTL.DbDataTable, "MasterTaskList", taskId, "CustomerId", "_", "dataEditingControl", Me)
+        updateTable(CRUD, MTL.DbDataTable, "MasterTaskList", taskId, "TaskId", "_", "dataEditingControl", Me)
         ' Then, return exception status of CRUD controller. Do this after each call
         If CRUD.HasException() Then Return False
 
@@ -708,23 +708,57 @@
     End Sub
 
 
+    Private Sub TaskDescription_Textbox_TextChanged(sender As Object, e As EventArgs) Handles TaskDescription_Textbox.TextChanged
 
+        If Not valuesInitialized Then Exit Sub
 
-    Private Sub TaskLaborGridView_SelectionChanged(sender As Object, e As EventArgs) Handles TaskLaborGridView.SelectionChanged
+        TaskDescription_Textbox.ForeColor = DefaultForeColor
 
-        TaskLaborRow = TaskLaborGridView.CurrentRow.Index
+        If InitialMTLValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
-    Private Sub TaskPartsGridView_SelectionChanged(sender As Object, e As EventArgs) Handles TaskPartsGridView.SelectionChanged
+    Private Sub Instructions_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Instructions_Textbox.TextChanged
 
-        TaskPartsRow = TaskPartsGridView.CurrentRow.Index
+        If Not valuesInitialized Then Exit Sub
+
+        Instructions_Textbox.ForeColor = DefaultForeColor
+
+        If InitialMTLValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
+
+    Private Sub TaskType_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TaskType_ComboBox.SelectedIndexChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        TaskType_ComboBox.ForeColor = DefaultForeColor
+
+        If InitialMTLValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
 
 
 
     ' **************** CONTROL SUBS FOR MASTER TASK LABOR ****************
+
+
+    Private Sub TaskLaborGridView_SelectionChanged(sender As Object, e As EventArgs) Handles TaskLaborGridView.SelectionChanged
+        TaskLaborRow = TaskLaborGridView.CurrentRow.Index
+    End Sub
 
     ' Subs that handle disabling sorting on columns that are added to the DataGridViews
     Private Sub TaskLaborGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles TaskLaborGridView.ColumnAdded
@@ -748,7 +782,15 @@
 
 
 
+
     ' **************** CONTROL SUBS FOR MASTER TASK PARTS ****************
+
+
+    Private Sub TaskPartsGridView_SelectionChanged(sender As Object, e As EventArgs) Handles TaskPartsGridView.SelectionChanged
+
+        TaskPartsRow = TaskPartsGridView.CurrentRow.Index
+
+    End Sub
 
     Private Sub TaskPartsGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles TaskPartsGridView.ColumnAdded
         e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
