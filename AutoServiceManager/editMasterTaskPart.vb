@@ -249,13 +249,13 @@ Public Class editMasterTaskPart
                     Exit Sub
                 Else
                     MeClosed = True
-                    changeScreen(previousScreen, Me)
+                    changeScreen(masterTaskMaintenance, Me)
                 End If
 
             Else
 
                 MeClosed = True
-                changeScreen(previousScreen, Me)
+                changeScreen(masterTaskMaintenance, Me)
 
             End If
 
@@ -275,13 +275,13 @@ Public Class editMasterTaskPart
                     Exit Sub
                 Else
                     MeClosed = True
-                    changeScreen(previousScreen, Me)
+                    changeScreen(masterTaskMaintenance, Me)
                 End If
 
             Else
 
                 MeClosed = True
-                changeScreen(previousScreen, Me)
+                changeScreen(masterTaskMaintenance, Me)
 
             End If
 

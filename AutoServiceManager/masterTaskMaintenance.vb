@@ -950,7 +950,6 @@
     Private Sub tpEditButton_Click(sender As Object, e As EventArgs) Handles tpEditButton.Click
 
         ' Change to masterTaskPartsMaintenance Form, and Hide (but don't close) this one
-        previousScreen = Me
         changeScreenHide(editMasterTaskPart, Me)
 
     End Sub
