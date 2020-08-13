@@ -82,6 +82,14 @@ Public Class addMasterTaskPart
     End Sub
 
 
+    ' Sub that will call formatting functions to add respective formats to already INITIALIZED DATAEDITINGCONTROLS (i.e. phone numbers, currency, etc.).
+    Private Sub formatDataEditingControls()
+
+        PartPrice_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(PartPrice_Textbox.Text))
+        ListPrice_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(ListPrice_Textbox.Text))
+
+    End Sub
+
 
     ' Sub that calls all individual dataEditingControl initialization subs in one (These can be used individually if desired)
     Private Sub InitializeAllDataEditingControls()
@@ -89,6 +97,7 @@ Public Class addMasterTaskPart
         ' Automated initializations
         InitializePartsDataEditingControls()
         ' Then, format dataEditingControls
+        formatDataEditingControls()
         ' Then, re-initialize and format any calculation based values
         InitializePartAmountTextbox()
         ' Set forecolor if not already initially default
@@ -162,9 +171,9 @@ Public Class addMasterTaskPart
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
-            InitializeAllDataEditingControls()
             ' Qty is a new value introduced here that is by default 0, so set this accordingly here
             Qty_Textbox.Text = 0
+            InitializeAllDataEditingControls()
             valuesInitialized = True
 
             ' Show labels and corresponding values
