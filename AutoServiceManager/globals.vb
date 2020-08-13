@@ -486,7 +486,7 @@
 
             updateController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
             valueParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName
-            If Not i = dataTable.Columns.Count - 2 Then valueParams += ","
+            If Not i = dataTable.Columns.Count - 1 Then valueParams += ","
 
         Next
 
@@ -517,12 +517,12 @@
             ' if it is, then we want to append a slightly different keyParam string that checks for EITHER: default value or NULL
             If isKeyDefaultValue Then
                 keyParams += "(" & dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & "Key" & " OR IsNull(" & dataTable.Columns(i).ColumnName & "))"
-                If Not i = dataTable.Columns.Count - 2 Then keyParams += " AND "
+                If Not i = dataTable.Columns.Count - 1 Then keyParams += " AND "
 
                 ' If not, append normal param string for WHERE clause
             Else
                 keyParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & "Key"
-                If Not i = dataTable.Columns.Count - 2 Then keyParams += " AND "
+                If Not i = dataTable.Columns.Count - 1 Then keyParams += " AND "
             End If
 
         Next

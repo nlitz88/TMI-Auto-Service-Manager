@@ -218,8 +218,6 @@ Public Class editMasterTaskPart
         If Not updateMasterTaskParts() Then
             MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
-        Else
-            MessageBox.Show("Update function ran?")
         End If
 
         ' 3.) If this is successful, then changeScreen!
