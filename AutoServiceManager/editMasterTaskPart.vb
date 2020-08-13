@@ -8,9 +8,6 @@ Public Class editMasterTaskPart
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
-    ' Boolean to keep track of whether or not this form has been closed
-    Private MeClosed As Boolean = False
-
     ' Initialize instance(s) of initialValues class
     Private InitialPartValues As New InitialValues()
 
@@ -19,6 +16,9 @@ Public Class editMasterTaskPart
 
     ' Variable that allows certain keystrokes through restricted fields
     Private allowedKeystroke As Boolean = False
+
+    ' Boolean to keep track of whether or not this form has been closed
+    Private MeClosed As Boolean = False
 
 
 

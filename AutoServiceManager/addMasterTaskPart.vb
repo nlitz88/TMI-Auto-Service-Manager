@@ -3,8 +3,8 @@
 Public Class addMasterTaskPart
 
     ' New Database Control instance for inventory (Parts) DataTable
-    Private IPDbController As New DbControl()
-    Private IPRow As Integer
+    Private PartsDbController As New DbControl()
+    Private PartRow As Integer
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
@@ -23,6 +23,19 @@ Public Class addMasterTaskPart
 
 
 
+    ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
+
+
+    ' Function that loads Parts DataTable from Database
+    Private Function loadPartsDataTable() As Boolean
+
+        PartsDbController.ExecQuery("SELECT p.PartDescription + ' - ' + p.PartNbr as PDPN, p.PartNbr, p.PartDescription, p.PartPrice, p.ListPrice FROM Parts p ORDER BY p.PartDescription ASC")
+        If PartsDbController.HasException() Then Return False
+
+    End Function
+
+
+
 
 
     Public Sub New()
@@ -33,6 +46,17 @@ Public Class addMasterTaskPart
         ' Add any initialization after the InitializeComponent() call.
 
         TaskTextbox.Text = masterTaskMaintenance.GetTask()
+
+        ' TEST DATABASE CONNECTION FIRST
+        If Not checkDbConn() Then Exit Sub
+
+        ' LOAD DATATABLES FROM DATABASE INITIALLY
+        If Not loadPartsDataTable() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+
 
     End Sub
 

@@ -46,6 +46,9 @@ Partial Class addMasterTaskPart
         Me.PartPrice_Value = New System.Windows.Forms.Label()
         Me.newPartButton = New System.Windows.Forms.Button()
         Me.orLabel = New System.Windows.Forms.Label()
+        Me.PartNbr_Textbox = New System.Windows.Forms.TextBox()
+        Me.PartNbr_Value = New System.Windows.Forms.Label()
+        Me.PartNumberLabel = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'cancelButton
@@ -130,7 +133,7 @@ Partial Class addMasterTaskPart
         '
         Me.PartAmount_Textbox.Enabled = False
         Me.PartAmount_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PartAmount_Textbox.Location = New System.Drawing.Point(554, 374)
+        Me.PartAmount_Textbox.Location = New System.Drawing.Point(554, 425)
         Me.PartAmount_Textbox.Name = "PartAmount_Textbox"
         Me.PartAmount_Textbox.Size = New System.Drawing.Size(105, 27)
         Me.PartAmount_Textbox.TabIndex = 172
@@ -140,7 +143,7 @@ Partial Class addMasterTaskPart
         '
         Me.TotalLabel.AutoSize = True
         Me.TotalLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.TotalLabel.Location = New System.Drawing.Point(500, 380)
+        Me.TotalLabel.Location = New System.Drawing.Point(500, 431)
         Me.TotalLabel.Name = "TotalLabel"
         Me.TotalLabel.Size = New System.Drawing.Size(48, 17)
         Me.TotalLabel.TabIndex = 174
@@ -152,7 +155,7 @@ Partial Class addMasterTaskPart
         Me.PartAmount_Value.AutoSize = True
         Me.PartAmount_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PartAmount_Value.ForeColor = System.Drawing.Color.Black
-        Me.PartAmount_Value.Location = New System.Drawing.Point(554, 377)
+        Me.PartAmount_Value.Location = New System.Drawing.Point(554, 428)
         Me.PartAmount_Value.Name = "PartAmount_Value"
         Me.PartAmount_Value.Size = New System.Drawing.Size(0, 20)
         Me.PartAmount_Value.TabIndex = 173
@@ -161,7 +164,7 @@ Partial Class addMasterTaskPart
         'Qty_Textbox
         '
         Me.Qty_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Qty_Textbox.Location = New System.Drawing.Point(172, 374)
+        Me.Qty_Textbox.Location = New System.Drawing.Point(172, 425)
         Me.Qty_Textbox.MaxLength = 14
         Me.Qty_Textbox.Name = "Qty_Textbox"
         Me.Qty_Textbox.Size = New System.Drawing.Size(105, 27)
@@ -172,7 +175,7 @@ Partial Class addMasterTaskPart
         '
         Me.QuantityLabel.AutoSize = True
         Me.QuantityLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.QuantityLabel.Location = New System.Drawing.Point(97, 380)
+        Me.QuantityLabel.Location = New System.Drawing.Point(97, 431)
         Me.QuantityLabel.Name = "QuantityLabel"
         Me.QuantityLabel.Size = New System.Drawing.Size(69, 17)
         Me.QuantityLabel.TabIndex = 171
@@ -184,7 +187,7 @@ Partial Class addMasterTaskPart
         Me.Qty_Value.AutoSize = True
         Me.Qty_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Qty_Value.ForeColor = System.Drawing.Color.Black
-        Me.Qty_Value.Location = New System.Drawing.Point(172, 377)
+        Me.Qty_Value.Location = New System.Drawing.Point(172, 428)
         Me.Qty_Value.Name = "Qty_Value"
         Me.Qty_Value.Size = New System.Drawing.Size(0, 20)
         Me.Qty_Value.TabIndex = 170
@@ -195,7 +198,7 @@ Partial Class addMasterTaskPart
         Me.PartDescription_Value.AutoSize = True
         Me.PartDescription_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PartDescription_Value.ForeColor = System.Drawing.Color.Black
-        Me.PartDescription_Value.Location = New System.Drawing.Point(220, 327)
+        Me.PartDescription_Value.Location = New System.Drawing.Point(220, 378)
         Me.PartDescription_Value.Name = "PartDescription_Value"
         Me.PartDescription_Value.Size = New System.Drawing.Size(0, 20)
         Me.PartDescription_Value.TabIndex = 169
@@ -205,7 +208,7 @@ Partial Class addMasterTaskPart
         '
         Me.PartDescriptionLabel.AutoSize = True
         Me.PartDescriptionLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.PartDescriptionLabel.Location = New System.Drawing.Point(97, 330)
+        Me.PartDescriptionLabel.Location = New System.Drawing.Point(97, 381)
         Me.PartDescriptionLabel.Name = "PartDescriptionLabel"
         Me.PartDescriptionLabel.Size = New System.Drawing.Size(117, 17)
         Me.PartDescriptionLabel.TabIndex = 168
@@ -215,7 +218,7 @@ Partial Class addMasterTaskPart
         'PartDescription_Textbox
         '
         Me.PartDescription_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PartDescription_Textbox.Location = New System.Drawing.Point(220, 324)
+        Me.PartDescription_Textbox.Location = New System.Drawing.Point(220, 375)
         Me.PartDescription_Textbox.MaxLength = 50
         Me.PartDescription_Textbox.Name = "PartDescription_Textbox"
         Me.PartDescription_Textbox.Size = New System.Drawing.Size(297, 27)
@@ -225,7 +228,7 @@ Partial Class addMasterTaskPart
         'ListPrice_Textbox
         '
         Me.ListPrice_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListPrice_Textbox.Location = New System.Drawing.Point(618, 324)
+        Me.ListPrice_Textbox.Location = New System.Drawing.Point(618, 375)
         Me.ListPrice_Textbox.Name = "ListPrice_Textbox"
         Me.ListPrice_Textbox.Size = New System.Drawing.Size(105, 27)
         Me.ListPrice_Textbox.TabIndex = 161
@@ -235,7 +238,7 @@ Partial Class addMasterTaskPart
         '
         Me.ListPriceLabel.AutoSize = True
         Me.ListPriceLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.ListPriceLabel.Location = New System.Drawing.Point(538, 330)
+        Me.ListPriceLabel.Location = New System.Drawing.Point(538, 381)
         Me.ListPriceLabel.Name = "ListPriceLabel"
         Me.ListPriceLabel.Size = New System.Drawing.Size(74, 17)
         Me.ListPriceLabel.TabIndex = 167
@@ -247,7 +250,7 @@ Partial Class addMasterTaskPart
         Me.ListPrice_Value.AutoSize = True
         Me.ListPrice_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListPrice_Value.ForeColor = System.Drawing.Color.Black
-        Me.ListPrice_Value.Location = New System.Drawing.Point(618, 327)
+        Me.ListPrice_Value.Location = New System.Drawing.Point(618, 378)
         Me.ListPrice_Value.Name = "ListPrice_Value"
         Me.ListPrice_Value.Size = New System.Drawing.Size(0, 20)
         Me.ListPrice_Value.TabIndex = 166
@@ -256,7 +259,7 @@ Partial Class addMasterTaskPart
         'PartPrice_Textbox
         '
         Me.PartPrice_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PartPrice_Textbox.Location = New System.Drawing.Point(377, 374)
+        Me.PartPrice_Textbox.Location = New System.Drawing.Point(377, 425)
         Me.PartPrice_Textbox.Name = "PartPrice_Textbox"
         Me.PartPrice_Textbox.Size = New System.Drawing.Size(105, 27)
         Me.PartPrice_Textbox.TabIndex = 163
@@ -266,7 +269,7 @@ Partial Class addMasterTaskPart
         '
         Me.UnitPriceLabel.AutoSize = True
         Me.UnitPriceLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.UnitPriceLabel.Location = New System.Drawing.Point(294, 380)
+        Me.UnitPriceLabel.Location = New System.Drawing.Point(294, 431)
         Me.UnitPriceLabel.Name = "UnitPriceLabel"
         Me.UnitPriceLabel.Size = New System.Drawing.Size(77, 17)
         Me.UnitPriceLabel.TabIndex = 165
@@ -278,7 +281,7 @@ Partial Class addMasterTaskPart
         Me.PartPrice_Value.AutoSize = True
         Me.PartPrice_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PartPrice_Value.ForeColor = System.Drawing.Color.Black
-        Me.PartPrice_Value.Location = New System.Drawing.Point(377, 377)
+        Me.PartPrice_Value.Location = New System.Drawing.Point(377, 428)
         Me.PartPrice_Value.Name = "PartPrice_Value"
         Me.PartPrice_Value.Size = New System.Drawing.Size(0, 20)
         Me.PartPrice_Value.TabIndex = 164
@@ -306,12 +309,48 @@ Partial Class addMasterTaskPart
         Me.orLabel.TabIndex = 176
         Me.orLabel.Text = "- OR -"
         '
+        'PartNbr_Textbox
+        '
+        Me.PartNbr_Textbox.Enabled = False
+        Me.PartNbr_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PartNbr_Textbox.Location = New System.Drawing.Point(199, 324)
+        Me.PartNbr_Textbox.MaxLength = 30
+        Me.PartNbr_Textbox.Name = "PartNbr_Textbox"
+        Me.PartNbr_Textbox.Size = New System.Drawing.Size(270, 27)
+        Me.PartNbr_Textbox.TabIndex = 177
+        Me.PartNbr_Textbox.Tag = "dataEditingControl"
+        '
+        'PartNbr_Value
+        '
+        Me.PartNbr_Value.AutoSize = True
+        Me.PartNbr_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PartNbr_Value.ForeColor = System.Drawing.Color.Black
+        Me.PartNbr_Value.Location = New System.Drawing.Point(199, 327)
+        Me.PartNbr_Value.Name = "PartNbr_Value"
+        Me.PartNbr_Value.Size = New System.Drawing.Size(0, 20)
+        Me.PartNbr_Value.TabIndex = 179
+        Me.PartNbr_Value.Tag = "dataViewingControl"
+        '
+        'PartNumberLabel
+        '
+        Me.PartNumberLabel.AutoSize = True
+        Me.PartNumberLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.PartNumberLabel.Location = New System.Drawing.Point(97, 330)
+        Me.PartNumberLabel.Name = "PartNumberLabel"
+        Me.PartNumberLabel.Size = New System.Drawing.Size(96, 17)
+        Me.PartNumberLabel.TabIndex = 178
+        Me.PartNumberLabel.Tag = "dataLabel"
+        Me.PartNumberLabel.Text = "Part Number :"
+        '
         'addMasterTaskPart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.PartNbr_Textbox)
+        Me.Controls.Add(Me.PartNbr_Value)
+        Me.Controls.Add(Me.PartNumberLabel)
         Me.Controls.Add(Me.orLabel)
         Me.Controls.Add(Me.newPartButton)
         Me.Controls.Add(Me.PartAmount_Textbox)
@@ -370,4 +409,7 @@ Partial Class addMasterTaskPart
     Friend WithEvents PartPrice_Value As Label
     Friend WithEvents newPartButton As Button
     Friend WithEvents orLabel As Label
+    Friend WithEvents PartNbr_Textbox As TextBox
+    Friend WithEvents PartNbr_Value As Label
+    Friend WithEvents PartNumberLabel As Label
 End Class
