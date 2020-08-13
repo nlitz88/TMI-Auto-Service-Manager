@@ -62,12 +62,35 @@ Public Class addMasterTaskPart
     End Sub
 
 
+    ' Sub that will initialize/Calculate PartAmount Cost based on the product of the Quantity and Unit Price
+    Private Sub InitializePartAmountTextbox()
+
+        ' First, Validate values that calculation is based on before attempting to parse and calculate
+        If validNumber("Quantity", True, Qty_Textbox.Text, String.Empty, True) And validCurrency("Unit Price", True, PartPrice_Textbox.Text, String.Empty) Then
+
+            Dim Quantity As Decimal = Convert.ToDecimal(Qty_Textbox.Text)
+            Dim Price As Decimal = Convert.ToDecimal(PartPrice_Textbox.Text)
+            Dim product As Decimal = Quantity * Price
+
+            ' Then, assign and format calculated sum
+            PartAmount_Textbox.Text = String.Format("{0:0.00}", product)
+
+        Else
+            PartAmount_Textbox.Text = String.Empty
+        End If
+
+    End Sub
+
+
 
     ' Sub that calls all individual dataEditingControl initialization subs in one (These can be used individually if desired)
     Private Sub InitializeAllDataEditingControls()
 
         ' Automated initializations
         InitializePartsDataEditingControls()
+        ' Then, format dataEditingControls
+        ' Then, re-initialize and format any calculation based values
+        InitializePartAmountTextbox()
         ' Set forecolor if not already initially default
         setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
 
@@ -140,7 +163,8 @@ Public Class addMasterTaskPart
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
             InitializeAllDataEditingControls()
-
+            ' Qty is a new value introduced here that is by default 0, so set this accordingly here
+            Qty_Textbox.Text = 0
             valuesInitialized = True
 
             ' Show labels and corresponding values
@@ -261,6 +285,31 @@ Public Class addMasterTaskPart
 
         previousScreen = Me
         changeScreenHide(inventoryMaintenance, previousScreen)
+
+    End Sub
+
+
+    Private Sub PartDescription_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PartDescription_Textbox.TextChanged
+
+    End Sub
+
+
+    Private Sub ListPrice_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ListPrice_Textbox.TextChanged
+
+    End Sub
+
+
+    Private Sub Qty_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Qty_Textbox.TextChanged
+
+    End Sub
+
+
+    Private Sub PartPrice_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PartPrice_Textbox.TextChanged
+
+    End Sub
+
+
+    Private Sub PartAmount_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PartAmount_Textbox.TextChanged
 
     End Sub
 

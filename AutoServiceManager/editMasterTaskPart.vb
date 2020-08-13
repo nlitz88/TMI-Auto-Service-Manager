@@ -37,7 +37,7 @@ Public Class editMasterTaskPart
     End Sub
 
 
-    ' Sub that will initialize/Calculate Total Task Cost based on the product of the Quantity and Unit Price
+    ' Sub that will initialize/Calculate PartAmount Cost based on the product of the Quantity and Unit Price
     Private Sub InitializePartAmountTextbox()
 
         ' First, Validate values that calculation is based on before attempting to parse and calculate
