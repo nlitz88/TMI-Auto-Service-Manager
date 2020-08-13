@@ -529,7 +529,8 @@
 
         ' Finally, build query
         query += "UPDATE " & tableName & " SET " & valueParams & " WHERE " & keyParams
-        Console.WriteLine(query)
+        'Console.WriteLine(query)
+        updateController.ExecQuery(query)
 
     End Sub
 
