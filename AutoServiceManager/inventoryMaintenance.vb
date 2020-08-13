@@ -2,7 +2,7 @@
 
 Public Class inventoryMaintenance
 
-    ' New Database control instances for insurance companies datatable
+    ' New Database control instances for Parts datatable
     Private IPDbController As New DbControl()
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()

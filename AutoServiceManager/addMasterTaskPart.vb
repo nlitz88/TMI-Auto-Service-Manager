@@ -2,23 +2,23 @@
 
 Public Class addMasterTaskPart
 
-    ' DataTable that will maintain the DataTable passed to it from masterTaskMainentance
-    Private TaskLaborDbController As New DbControl()
-    Private TaskLaborRow As Integer
+    ' New Database Control instance for inventory (Parts) DataTable
+    Private IPDbController As New DbControl()
+    Private IPRow As Integer
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
-    ' Boolean to keep track of whether or not this form has been closed
-    Private MeClosed As Boolean = False
-
     ' Initialize instance(s) of initialValues class
-    Private InitialLaborValues As New InitialValues()
+    Private InitialPartValues As New InitialValues()
 
     'Variable to keep track of whether form fully loaded or not
     Private valuesInitialized As Boolean = True
 
     ' Variable that allows certain keystrokes through restricted fields
     Private allowedKeystroke As Boolean = False
+
+    ' Boolean to keep track of whether or not this form has been closed
+    Private MeClosed As Boolean = False
 
 
 
@@ -31,6 +31,8 @@ Public Class addMasterTaskPart
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+
+        TaskTextbox.Text = masterTaskMaintenance.GetTask()
 
     End Sub
 
@@ -52,7 +54,7 @@ Public Class addMasterTaskPart
 
         If Not MeClosed Then
 
-            If InitialLaborValues.CtrlValuesChanged() Then
+            If InitialPartValues.CtrlValuesChanged() Then
 
                 Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
@@ -80,7 +82,7 @@ Public Class addMasterTaskPart
 
         If Not MeClosed Then
 
-            If InitialLaborValues.CtrlValuesChanged() Then
+            If InitialPartValues.CtrlValuesChanged() Then
 
                 Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
