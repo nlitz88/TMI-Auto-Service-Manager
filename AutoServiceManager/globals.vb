@@ -692,6 +692,57 @@
     End Sub
 
 
+    ' Sub that deletes row from specified table based on datatable values as keys
+    Public Sub deleteRow(ByRef deleteController As DbControl, ByVal dataTable As DataTable, ByVal dataTableRow As Integer,
+                           ByVal excludedKeyColumns As List(Of String), ByVal tableName As String)
+
+        Dim query As String = String.Empty
+
+        Dim keyValue As Object
+        Dim isKeyDefaultValue As Boolean = False
+        Dim keyParams As String = String.Empty      ' Used after WHERE in query
+
+        ' Add parameters for each value used (as key) in WHERE clause of query
+        For i As Integer = 0 To dataTable.Columns.Count - 1
+
+            ' Get keyValue from DataTable
+            keyValue = dataTable.Rows(dataTableRow)(dataTable.Columns(i).ColumnName)
+
+            deleteController.AddParams("@" & dataTable.Columns(i).ColumnName & "Key", keyValue)
+
+            ' Then, determine if this keyValue is a default value.
+            Select Case dataTable.Columns(i).DataType
+                Case GetType(System.DateTime)
+                    If keyValue = "00/00/0000" Then isKeyDefaultValue = True
+                Case GetType(System.String)
+                    If keyValue = String.Empty Then isKeyDefaultValue = True
+                Case GetType(System.Int32), GetType(System.Decimal), GetType(System.Double)
+                    If keyValue = 0 Then isKeyDefaultValue = True
+                Case Else
+                    If keyValue = 0 Then isKeyDefaultValue = True
+            End Select
+
+            ' if it is, then we want to append a slightly different keyParam string that checks for EITHER: default value or NULL
+            If isKeyDefaultValue Then
+                keyParams += "(" & dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & "Key" & " OR IsNull(" & dataTable.Columns(i).ColumnName & "))"
+                If Not i = dataTable.Columns.Count - 1 Then keyParams += " AND "
+
+                ' If not, append normal param string for WHERE clause
+            Else
+                keyParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & "Key"
+                If Not i = dataTable.Columns.Count - 1 Then keyParams += " AND "
+            End If
+
+        Next
+
+        ' Finally, build query
+        query += "DELETE FROM " & tableName & " WHERE " & keyParams
+        'Console.WriteLine(query)
+        deleteController.ExecQuery(query)
+
+    End Sub
+
+
     ' Function that checks database connection
     Public Function checkDbConn(Optional Report As Boolean = True) As Boolean
 
