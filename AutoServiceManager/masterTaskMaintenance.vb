@@ -193,13 +193,13 @@
 
     End Function
 
-    ' Sets Dependent DataTables Custom Handlers
-    Private Function setDependentDataTableHandlers()
+    '' Sets Dependent DataTables Custom Handlers
+    'Private Function setDependentDataTableHandlers()
 
-        AddHandler TaskPartsDbController.DbDataTable.RowChanged, New DataRowChangeEventHandler(AddressOf TaskParts_Row_Changed)
-        AddHandler TaskLaborDbController.DbDataTable.RowChanged, New DataRowChangeEventHandler(AddressOf TaskLabor_Row_Changed)
+    '    AddHandler TaskPartsDbController.DbDataTable.RowChanged, New DataRowChangeEventHandler(AddressOf TaskParts_Row_Changed)
+    '    AddHandler TaskLaborDbController.DbDataTable.RowChanged, New DataRowChangeEventHandler(AddressOf TaskLabor_Row_Changed)
 
-    End Function
+    'End Function
 
     ' Sub that initializes TaskLaborGridView
     Private Sub InitializeTaskLaborGridView()
@@ -451,6 +451,7 @@
 
         ' Initialize TaskComboBox and all other preliminary ComboBoxes for the first time
         SetupGridViews()
+        'setDependentDataTableHandlers()
         InitializeTaskComboBox()
         TaskComboBox.SelectedIndex = 0
         InitializeTaskTypeComboBox()
@@ -494,7 +495,6 @@
             valuesInitialized = False
             ' Load TaskParts and TaskLabor datatables based on selected TaskId, then Initialize corresponding GridViews
             loadDependentDataTables()
-            setDependentDataTableHandlers()
             ' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
             ' This is because controls like TaskLaborCost (for instance) are calculated from those tables
             InitializeAllDataViewingControls()
