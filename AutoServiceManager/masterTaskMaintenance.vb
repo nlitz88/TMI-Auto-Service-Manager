@@ -749,6 +749,7 @@
 
     End Sub
 
+
     Private Sub Instructions_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Instructions_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
@@ -762,6 +763,7 @@
         End If
 
     End Sub
+
 
     Private Sub TaskType_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TaskType_ComboBox.SelectedIndexChanged
 
@@ -778,29 +780,6 @@
     End Sub
 
 
-
-
-    ' **************** CONTROL SUBS FOR MASTER TASK LABOR ****************
-
-
-    Private Sub TaskLaborGridView_SelectionChanged(sender As Object, e As EventArgs) Handles TaskLaborGridView.SelectionChanged
-
-        TaskLaborRow = TaskLaborGridView.CurrentRow.Index
-
-    End Sub
-
-    ' Subs that handle disabling sorting on columns that are added to the DataGridViews
-    Private Sub TaskLaborGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles TaskLaborGridView.ColumnAdded
-        e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
-    End Sub
-
-    ' Custom event that handles rowChanges in the TaskParts DataTable
-    Private Sub TaskLabor_Row_Changed(ByVal sender As Object, ByVal e As DataRowChangeEventArgs)
-
-        InitializeTaskLaborTextbox()
-
-    End Sub
-
     Private Sub TaskLabor_Textbox_TextChanged(sender As Object, e As EventArgs) Handles TaskLabor_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
@@ -810,9 +789,50 @@
     End Sub
 
 
+    Private Sub TaskParts_Textbox_TextChanged(sender As Object, e As EventArgs) Handles TaskParts_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        InitializeTotalTaskTextbox()
+
+    End Sub
+
+
+
+
+
+    ' **************** CONTROL SUBS FOR MASTER TASK LABOR ****************
+
+
+    ' Subs that handle disabling sorting on columns that are added to the DataGridViews
+    Private Sub TaskLaborGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles TaskLaborGridView.ColumnAdded
+        e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
+    End Sub
+
+
+    Private Sub TaskLaborGridView_SelectionChanged(sender As Object, e As EventArgs) Handles TaskLaborGridView.SelectionChanged
+
+        TaskLaborRow = TaskLaborGridView.CurrentRow.Index
+
+    End Sub
+
+
+    ' Custom event that handles rowChanges in the TaskParts DataTable
+    Private Sub TaskLabor_Row_Changed(ByVal sender As Object, ByVal e As DataRowChangeEventArgs)
+
+        InitializeTaskLaborTextbox()
+
+    End Sub
+
+
 
 
     ' **************** CONTROL SUBS FOR MASTER TASK PARTS ****************
+
+
+    Private Sub TaskPartsGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles TaskPartsGridView.ColumnAdded
+        e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
+    End Sub
 
 
     Private Sub TaskPartsGridView_SelectionChanged(sender As Object, e As EventArgs) Handles TaskPartsGridView.SelectionChanged
@@ -821,9 +841,6 @@
 
     End Sub
 
-    Private Sub TaskPartsGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles TaskPartsGridView.ColumnAdded
-        e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
-    End Sub
 
     ' Custom event that handles rowChanges in the TaskParts DataTable
     Private Sub TaskParts_Row_Changed(ByVal sender As Object, ByVal e As DataRowChangeEventArgs)
@@ -832,13 +849,6 @@
 
     End Sub
 
-    Private Sub TaskParts_Textbox_TextChanged(sender As Object, e As EventArgs) Handles TaskParts_Textbox.TextChanged
-
-        If Not valuesInitialized Then Exit Sub
-
-        InitializeTotalTaskTextbox()
-
-    End Sub
 
     Private Sub tpAddButton_Click(sender As Object, e As EventArgs) Handles tpAddButton.Click
 
