@@ -182,11 +182,6 @@ Public Class editMasterTaskPart
         ' Get TaskPartsDbController here from masterTaskMaintenance
         TaskPartsDbController = masterTaskMaintenance.GetTaskPartsDbController()
         TaskPartsRow = masterTaskMaintenance.GetTaskPartsRow()
-
-    End Sub
-
-    Private Sub masterTaskPartsMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         TaskTextbox.Text = masterTaskMaintenance.GetTask()
 
         ' For the editing forms, we won't be initializing our dataEditingControls from a selection. Instead, we will initialize them just once on load
@@ -197,9 +192,12 @@ Public Class editMasterTaskPart
         ' Establish initial values here, as we are exclusively editing on this form
         InitialPartValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
-
     End Sub
 
+    Private Sub masterTaskPartsMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
+    End Sub
 
 
 
