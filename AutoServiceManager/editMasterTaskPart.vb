@@ -151,7 +151,7 @@ Public Class editMasterTaskPart
         If Not isValidLength("Part Description", False, PartDescription_Textbox.Text, 50, errorMessage) Then PartDescription_Textbox.ForeColor = Color.Red
 
         ' Quantity
-        If Not validNumber("Quantity", True, Qty_Textbox.Text, errorMessage, True) Then Qty_Textbox.ForeColor = Color.Red
+        If Not validNumber("Quantity", False, Qty_Textbox.Text, errorMessage, True) Then Qty_Textbox.ForeColor = Color.Red
 
         ' Unit Price
         If Not validCurrency("Unit Price", False, PartPrice_Textbox.Text, errorMessage) Then PartPrice_Textbox.ForeColor = Color.Red
@@ -220,7 +220,15 @@ Public Class editMasterTaskPart
             Exit Sub
         End If
 
-        ' 3.) If this is successful, then changeScreen!
+        ' 3.) If this is successful, then:
+        '       a.) Reinitialize Dependents on masterTaskMaintenance
+        '       b.) If that is successful, then change screen
+        If Not masterTaskMaintenance.reinitializeDependents() Then
+            MessageBox.Show("Reloading of Master Task List Unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            saveButton.Enabled = False
+            Exit Sub
+        End If
+
         MeClosed = True
         changeScreen(masterTaskMaintenance, Me)
 
