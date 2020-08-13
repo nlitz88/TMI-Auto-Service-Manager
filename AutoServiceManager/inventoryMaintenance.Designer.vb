@@ -43,6 +43,7 @@ Partial Class inventoryMaintenance
         Me.PartDescription_Textbox = New System.Windows.Forms.TextBox()
         Me.PartDescriptionLabel = New System.Windows.Forms.Label()
         Me.PartDescription_Value = New System.Windows.Forms.Label()
+        Me.returnButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'nav
@@ -276,12 +277,25 @@ Partial Class inventoryMaintenance
         Me.PartDescription_Value.TabIndex = 112
         Me.PartDescription_Value.Tag = "dataViewingControl"
         '
+        'returnButton
+        '
+        Me.returnButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.returnButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.returnButton.ForeColor = System.Drawing.Color.White
+        Me.returnButton.Location = New System.Drawing.Point(100, 418)
+        Me.returnButton.Name = "returnButton"
+        Me.returnButton.Size = New System.Drawing.Size(233, 30)
+        Me.returnButton.TabIndex = 113
+        Me.returnButton.Text = "Return To Add Task Part"
+        Me.returnButton.UseVisualStyleBackColor = False
+        '
         'inventoryMaintenance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.returnButton)
         Me.Controls.Add(Me.PartDescription_Value)
         Me.Controls.Add(Me.PartDescriptionLabel)
         Me.Controls.Add(Me.PartDescription_Textbox)
@@ -303,6 +317,7 @@ Partial Class inventoryMaintenance
         Me.Controls.Add(Me.saveButton)
         Me.Controls.Add(Me.addButton)
         Me.Controls.Add(Me.nav)
+        Me.MaximizeBox = False
         Me.Name = "inventoryMaintenance"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Inventory"
@@ -332,4 +347,5 @@ Partial Class inventoryMaintenance
     Friend WithEvents PartDescription_Textbox As TextBox
     Friend WithEvents PartDescriptionLabel As Label
     Friend WithEvents PartDescription_Value As Label
+    Friend WithEvents returnButton As Button
 End Class

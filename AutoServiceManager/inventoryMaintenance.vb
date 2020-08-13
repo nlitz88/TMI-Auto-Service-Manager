@@ -26,6 +26,9 @@ Public Class inventoryMaintenance
     ' Variable that allows certain keystrokes through restricted fields
     Private allowedKeystroke As Boolean = False
 
+    ' Boolean to keep track of whether or not this form has been closed
+    Private MeClosed As Boolean = False
+
 
 
 
@@ -237,6 +240,21 @@ Public Class inventoryMaintenance
             PartComboBox.Items.Add(row("PDPN"))
         Next
         PartComboBox.SelectedIndex = 0
+
+
+        ' FIRE ADDBUTTON EVENT IF ARRIVING HERE FROM ADDMASTERTASKPART
+        If previousScreen IsNot Nothing Then
+
+            If previousScreen Is addMasterTaskPart Then
+                nav.Visible = False
+                returnButton.Visible = True
+                addButton_Click(addButton, New EventArgs())
+            End If
+
+        Else
+            returnButton.Visible = False
+        End If
+
 
     End Sub
 
@@ -662,5 +680,92 @@ Public Class inventoryMaintenance
 
     End Sub
 
+
+
+    Private Sub returnButton_Click(sender As Object, e As EventArgs) Handles returnButton.Click
+
+        ' Will need to call reinitialization Function here to reinitialize elements on addMasterTaskPart
+        If Not MeClosed Then
+
+            If InitialIPValues.CtrlValuesChanged() Then
+
+                Dim decision As DialogResult = MessageBox.Show("Return without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If decision = DialogResult.No Then
+                    Exit Sub
+                Else
+
+                    ' CALL REINITIALIZATION HERE
+                    'If Not masterTaskMaintenance.reinitializeDependents() Then
+                    '    MessageBox.Show("Reloading of Master Task List Unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    '    saveButton.Enabled = False
+                    '    Exit Sub
+                    'End If
+
+
+                    MeClosed = True
+                    changeScreen(addMasterTaskPart, Me)
+                    previousScreen = Nothing
+                End If
+
+            Else
+
+                MeClosed = True
+                changeScreen(addMasterTaskPart, Me)
+                previousScreen = Nothing
+
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub inventoryMaintenance_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+
+        If Not MeClosed Then
+
+            If InitialIPValues.CtrlValuesChanged() Then
+
+                Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If decision = DialogResult.No Then
+                    e.Cancel = True
+                    Exit Sub
+                Else
+                    ' If coming from another screen, then change back to that screen
+                    If previousScreen IsNot Nothing Then
+                        If previousScreen Is addMasterTaskPart Then
+                            MeClosed = True
+                            changeScreen(addMasterTaskPart, Me)
+                            previousScreen = Nothing
+                        End If
+                        ' Otherwise, just exit the form
+                    Else
+                        MeClosed = True
+                        Me.Close()
+                    End If
+
+                End If
+
+            Else
+
+                ' If coming from another screen, then change back to that screen
+                If previousScreen IsNot Nothing Then
+                    If previousScreen Is addMasterTaskPart Then
+                        MeClosed = True
+                        changeScreen(addMasterTaskPart, Me)
+                        previousScreen = Nothing
+                    End If
+                    ' Otherwise, just exit the form
+                Else
+                    MeClosed = True
+                    Me.Close()
+                End If
+
+            End If
+
+        End If
+
+    End Sub
 
 End Class
