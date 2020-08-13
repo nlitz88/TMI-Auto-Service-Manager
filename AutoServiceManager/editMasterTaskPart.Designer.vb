@@ -135,7 +135,7 @@ Partial Class editMasterTaskPart
         Me.TaskTextbox.Name = "TaskTextbox"
         Me.TaskTextbox.Size = New System.Drawing.Size(253, 27)
         Me.TaskTextbox.TabIndex = 144
-        Me.TaskTextbox.Tag = "dataEditingControl"
+        Me.TaskTextbox.Tag = ""
         '
         'PartDescription_Value
         '

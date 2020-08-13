@@ -53,6 +53,11 @@
         Return TaskComboBox.Text
     End Function
 
+    ' Retrieves current TaskId corresponding to TaskValue
+    Public Function GetTaskId() As Integer
+        Return TaskId
+    End Function
+
     ' Retrieves TaskLaborRow
     Public Function GetTaskLaborRow() As Integer
         Return TaskLaborRow

@@ -31,23 +31,17 @@ Partial Class addMasterTaskPart
         Me.TaskNameLabel = New System.Windows.Forms.Label()
         Me.PartAmount_Textbox = New System.Windows.Forms.TextBox()
         Me.TotalLabel = New System.Windows.Forms.Label()
-        Me.PartAmount_Value = New System.Windows.Forms.Label()
         Me.Qty_Textbox = New System.Windows.Forms.TextBox()
         Me.QuantityLabel = New System.Windows.Forms.Label()
-        Me.Qty_Value = New System.Windows.Forms.Label()
-        Me.PartDescription_Value = New System.Windows.Forms.Label()
         Me.PartDescriptionLabel = New System.Windows.Forms.Label()
         Me.PartDescription_Textbox = New System.Windows.Forms.TextBox()
         Me.ListPrice_Textbox = New System.Windows.Forms.TextBox()
         Me.ListPriceLabel = New System.Windows.Forms.Label()
-        Me.ListPrice_Value = New System.Windows.Forms.Label()
         Me.PartPrice_Textbox = New System.Windows.Forms.TextBox()
         Me.UnitPriceLabel = New System.Windows.Forms.Label()
-        Me.PartPrice_Value = New System.Windows.Forms.Label()
         Me.newPartButton = New System.Windows.Forms.Button()
         Me.orLabel = New System.Windows.Forms.Label()
         Me.PartNbr_Textbox = New System.Windows.Forms.TextBox()
-        Me.PartNbr_Value = New System.Windows.Forms.Label()
         Me.PartNumberLabel = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -117,7 +111,7 @@ Partial Class addMasterTaskPart
         Me.TaskTextbox.Name = "TaskTextbox"
         Me.TaskTextbox.Size = New System.Drawing.Size(253, 27)
         Me.TaskTextbox.TabIndex = 146
-        Me.TaskTextbox.Tag = "dataEditingControl"
+        Me.TaskTextbox.Tag = ""
         '
         'TaskNameLabel
         '
@@ -150,17 +144,6 @@ Partial Class addMasterTaskPart
         Me.TotalLabel.Tag = "dataLabel"
         Me.TotalLabel.Text = "Total :"
         '
-        'PartAmount_Value
-        '
-        Me.PartAmount_Value.AutoSize = True
-        Me.PartAmount_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PartAmount_Value.ForeColor = System.Drawing.Color.Black
-        Me.PartAmount_Value.Location = New System.Drawing.Point(554, 428)
-        Me.PartAmount_Value.Name = "PartAmount_Value"
-        Me.PartAmount_Value.Size = New System.Drawing.Size(0, 20)
-        Me.PartAmount_Value.TabIndex = 173
-        Me.PartAmount_Value.Tag = "dataViewingControl"
-        '
         'Qty_Textbox
         '
         Me.Qty_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -181,28 +164,6 @@ Partial Class addMasterTaskPart
         Me.QuantityLabel.TabIndex = 171
         Me.QuantityLabel.Tag = "dataLabel"
         Me.QuantityLabel.Text = "Quantity :"
-        '
-        'Qty_Value
-        '
-        Me.Qty_Value.AutoSize = True
-        Me.Qty_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Qty_Value.ForeColor = System.Drawing.Color.Black
-        Me.Qty_Value.Location = New System.Drawing.Point(172, 428)
-        Me.Qty_Value.Name = "Qty_Value"
-        Me.Qty_Value.Size = New System.Drawing.Size(0, 20)
-        Me.Qty_Value.TabIndex = 170
-        Me.Qty_Value.Tag = "dataViewingControl"
-        '
-        'PartDescription_Value
-        '
-        Me.PartDescription_Value.AutoSize = True
-        Me.PartDescription_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PartDescription_Value.ForeColor = System.Drawing.Color.Black
-        Me.PartDescription_Value.Location = New System.Drawing.Point(220, 378)
-        Me.PartDescription_Value.Name = "PartDescription_Value"
-        Me.PartDescription_Value.Size = New System.Drawing.Size(0, 20)
-        Me.PartDescription_Value.TabIndex = 169
-        Me.PartDescription_Value.Tag = "dataViewingControl"
         '
         'PartDescriptionLabel
         '
@@ -245,17 +206,6 @@ Partial Class addMasterTaskPart
         Me.ListPriceLabel.Tag = "dataLabel"
         Me.ListPriceLabel.Text = "List Price :"
         '
-        'ListPrice_Value
-        '
-        Me.ListPrice_Value.AutoSize = True
-        Me.ListPrice_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListPrice_Value.ForeColor = System.Drawing.Color.Black
-        Me.ListPrice_Value.Location = New System.Drawing.Point(618, 378)
-        Me.ListPrice_Value.Name = "ListPrice_Value"
-        Me.ListPrice_Value.Size = New System.Drawing.Size(0, 20)
-        Me.ListPrice_Value.TabIndex = 166
-        Me.ListPrice_Value.Tag = "dataViewingControl"
-        '
         'PartPrice_Textbox
         '
         Me.PartPrice_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -275,17 +225,6 @@ Partial Class addMasterTaskPart
         Me.UnitPriceLabel.TabIndex = 165
         Me.UnitPriceLabel.Tag = "dataLabel"
         Me.UnitPriceLabel.Text = "Unit Price :"
-        '
-        'PartPrice_Value
-        '
-        Me.PartPrice_Value.AutoSize = True
-        Me.PartPrice_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PartPrice_Value.ForeColor = System.Drawing.Color.Black
-        Me.PartPrice_Value.Location = New System.Drawing.Point(377, 428)
-        Me.PartPrice_Value.Name = "PartPrice_Value"
-        Me.PartPrice_Value.Size = New System.Drawing.Size(0, 20)
-        Me.PartPrice_Value.TabIndex = 164
-        Me.PartPrice_Value.Tag = "dataViewingControl"
         '
         'newPartButton
         '
@@ -320,17 +259,6 @@ Partial Class addMasterTaskPart
         Me.PartNbr_Textbox.TabIndex = 177
         Me.PartNbr_Textbox.Tag = "dataEditingControl"
         '
-        'PartNbr_Value
-        '
-        Me.PartNbr_Value.AutoSize = True
-        Me.PartNbr_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PartNbr_Value.ForeColor = System.Drawing.Color.Black
-        Me.PartNbr_Value.Location = New System.Drawing.Point(199, 327)
-        Me.PartNbr_Value.Name = "PartNbr_Value"
-        Me.PartNbr_Value.Size = New System.Drawing.Size(0, 20)
-        Me.PartNbr_Value.TabIndex = 179
-        Me.PartNbr_Value.Tag = "dataViewingControl"
-        '
         'PartNumberLabel
         '
         Me.PartNumberLabel.AutoSize = True
@@ -349,25 +277,19 @@ Partial Class addMasterTaskPart
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
         Me.Controls.Add(Me.PartNbr_Textbox)
-        Me.Controls.Add(Me.PartNbr_Value)
         Me.Controls.Add(Me.PartNumberLabel)
         Me.Controls.Add(Me.orLabel)
         Me.Controls.Add(Me.newPartButton)
         Me.Controls.Add(Me.PartAmount_Textbox)
         Me.Controls.Add(Me.TotalLabel)
-        Me.Controls.Add(Me.PartAmount_Value)
         Me.Controls.Add(Me.Qty_Textbox)
         Me.Controls.Add(Me.QuantityLabel)
-        Me.Controls.Add(Me.Qty_Value)
-        Me.Controls.Add(Me.PartDescription_Value)
         Me.Controls.Add(Me.PartDescriptionLabel)
         Me.Controls.Add(Me.PartDescription_Textbox)
         Me.Controls.Add(Me.ListPrice_Textbox)
         Me.Controls.Add(Me.ListPriceLabel)
-        Me.Controls.Add(Me.ListPrice_Value)
         Me.Controls.Add(Me.PartPrice_Textbox)
         Me.Controls.Add(Me.UnitPriceLabel)
-        Me.Controls.Add(Me.PartPrice_Value)
         Me.Controls.Add(Me.TaskTextbox)
         Me.Controls.Add(Me.TaskNameLabel)
         Me.Controls.Add(Me.PartNumberComboLabel)
@@ -394,22 +316,16 @@ Partial Class addMasterTaskPart
     Friend WithEvents TaskNameLabel As Label
     Friend WithEvents PartAmount_Textbox As TextBox
     Friend WithEvents TotalLabel As Label
-    Friend WithEvents PartAmount_Value As Label
     Friend WithEvents Qty_Textbox As TextBox
     Friend WithEvents QuantityLabel As Label
-    Friend WithEvents Qty_Value As Label
-    Friend WithEvents PartDescription_Value As Label
     Friend WithEvents PartDescriptionLabel As Label
     Friend WithEvents PartDescription_Textbox As TextBox
     Friend WithEvents ListPrice_Textbox As TextBox
     Friend WithEvents ListPriceLabel As Label
-    Friend WithEvents ListPrice_Value As Label
     Friend WithEvents PartPrice_Textbox As TextBox
     Friend WithEvents UnitPriceLabel As Label
-    Friend WithEvents PartPrice_Value As Label
     Friend WithEvents newPartButton As Button
     Friend WithEvents orLabel As Label
     Friend WithEvents PartNbr_Textbox As TextBox
-    Friend WithEvents PartNbr_Value As Label
     Friend WithEvents PartNumberLabel As Label
 End Class

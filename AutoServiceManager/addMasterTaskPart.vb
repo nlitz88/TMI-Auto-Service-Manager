@@ -5,6 +5,10 @@ Public Class addMasterTaskPart
     ' New Database Control instance for inventory (Parts) DataTable
     Private PartsDbController As New DbControl()
     Private PartRow As Integer
+
+    ' Variable to maintain the TaskId of the current task we're adding to
+    Private TaskId As Integer
+
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
@@ -49,6 +53,25 @@ Public Class addMasterTaskPart
 
     End Sub
 
+    ' Sub that initializes all dataEditingControls corresponding with values in Parts DataTable
+    Private Sub InitializePartsDataEditingControls()
+
+        initializeControlsFromRow(PartsDbController.DbDataTable, PartRow, "dataEditingControl", "_", Me)
+
+    End Sub
+
+
+
+    ' Sub that calls all individual dataEditingControl initialization subs in one (These can be used individually if desired)
+    Private Sub InitializeAllDataEditingControls()
+
+        ' Automated initializations
+        InitializePartsDataEditingControls()
+        ' Set forecolor if not already initially default
+        setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
+
+    End Sub
+
 
 
     Public Sub New()
@@ -59,6 +82,7 @@ Public Class addMasterTaskPart
         ' Add any initialization after the InitializeComponent() call.
 
         TaskTextbox.Text = masterTaskMaintenance.GetTask()
+        TaskId = masterTaskMaintenance.GetTaskId()
 
         ' TEST DATABASE CONNECTION FIRST
         If Not checkDbConn() Then Exit Sub
@@ -72,8 +96,6 @@ Public Class addMasterTaskPart
         ' Then, initialize PartComboBox
         InitializePartComboBox()
         PartComboBox.SelectedIndex = 0
-
-
 
     End Sub
 
@@ -89,6 +111,60 @@ Public Class addMasterTaskPart
 
 
     ' **************** CONTROL SUBS ****************
+
+
+    Private Sub PartComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PartComboBox.SelectedIndexChanged, PartComboBox.TextChanged
+
+        ' Ensure that PartComboBox is only attempting to initialize values when on proper selected Index
+        If PartComboBox.SelectedIndex = -1 Then
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+            ' If no valid selection has been made, then they have nothing to save
+            saveButton.Enabled = False
+
+            Exit Sub
+
+        End If
+
+        ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid
+        PartRow = getDataTableRow(PartsDbController.DbDataTable, "PDPN", PartComboBox.Text)
+
+        ' If this query DOES return a valid row index, then initialize respective controls
+        If PartRow <> -1 Then
+
+            ' Initialize corresponding controls from DataTable values
+            valuesInitialized = False
+            InitializeAllDataEditingControls()
+            ' This form is exclusively editing only, so just after we initialize, set the initial values
+            InitialPartValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
+            valuesInitialized = True
+
+            ' Show labels and corresponding values
+            showHide(getAllControlsWithTag("dataLabel", Me), 1)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+
+            ' If a valid selection is made, then they can save right away without making any changes.
+            saveButton.Enabled = True
+
+
+            'If it does = -1, that means that value Is either "Select one" Or some other anomoly
+        Else
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+            ' If no valid selection has been made, then they have nothing to save
+            saveButton.Enabled = False
+
+
+        End If
+
+
+    End Sub
 
 
     Private Sub addMasterTaskPart_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
@@ -184,8 +260,6 @@ Public Class addMasterTaskPart
         changeScreenHide(inventoryMaintenance, previousScreen)
 
     End Sub
-
-
 
 
 End Class
