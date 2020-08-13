@@ -36,7 +36,18 @@ Public Class addMasterTaskPart
 
     End Function
 
+    ' Sub that initializes PartComboBox
+    Private Sub InitializePartComboBox()
 
+        PartComboBox.BeginUpdate()
+        PartComboBox.Items.Clear()
+        PartComboBox.Items.Add("Select One")
+        For Each row In PartsDbController.DbDataTable.Rows
+            PartComboBox.Items.Add(row("PDPN"))
+        Next
+        PartComboBox.EndUpdate()
+
+    End Sub
 
 
 
@@ -58,13 +69,17 @@ Public Class addMasterTaskPart
             Exit Sub
         End If
 
+        ' Then, initialize PartComboBox
+        InitializePartComboBox()
+        PartComboBox.SelectedIndex = 0
+
 
 
     End Sub
 
     Public Sub addMasterTaskPart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        'previousScreen = Nothing
+
 
     End Sub
 
