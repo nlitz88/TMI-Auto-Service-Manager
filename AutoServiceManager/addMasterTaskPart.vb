@@ -32,6 +32,8 @@ Public Class addMasterTaskPart
         PartsDbController.ExecQuery("SELECT p.PartDescription + ' - ' + p.PartNbr as PDPN, p.PartNbr, p.PartDescription, p.PartPrice, p.ListPrice FROM Parts p ORDER BY p.PartDescription ASC")
         If PartsDbController.HasException() Then Return False
 
+        Return True
+
     End Function
 
 
