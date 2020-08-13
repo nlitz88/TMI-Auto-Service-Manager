@@ -12,8 +12,9 @@ Public Class addMasterTaskPart
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
-    ' Initialize instance(s) of initialValues class
-    Private InitialPartValues As New InitialValues()
+    ' Variable to track whether or not current selection is valid.
+    ' In this form, this will be used in place of initialvalues to determine whether or not prompt user before cancelling/Closing
+    Private validSelection As Boolean
 
     'Variable to keep track of whether form fully loaded or not
     Private valuesInitialized As Boolean = True
@@ -124,6 +125,7 @@ Public Class addMasterTaskPart
 
             ' If no valid selection has been made, then they have nothing to save
             saveButton.Enabled = False
+            validSelection = False
 
             Exit Sub
 
@@ -138,8 +140,7 @@ Public Class addMasterTaskPart
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
             InitializeAllDataEditingControls()
-            ' This form is exclusively editing only, so just after we initialize, set the initial values
-            InitialPartValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
+
             valuesInitialized = True
 
             ' Show labels and corresponding values
@@ -148,6 +149,7 @@ Public Class addMasterTaskPart
 
             ' If a valid selection is made, then they can save right away without making any changes.
             saveButton.Enabled = True
+            validSelection = True
 
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
@@ -159,6 +161,7 @@ Public Class addMasterTaskPart
 
             ' If no valid selection has been made, then they have nothing to save
             saveButton.Enabled = False
+            validSelection = False
 
 
         End If
@@ -171,9 +174,9 @@ Public Class addMasterTaskPart
 
         If Not MeClosed Then
 
-            If InitialPartValues.CtrlValuesChanged() Then
+            If validSelection Then
 
-                Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                Dim decision As DialogResult = MessageBox.Show("Cancel without adding part?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
                 If decision = DialogResult.No Then
                     e.Cancel = True
@@ -199,9 +202,9 @@ Public Class addMasterTaskPart
 
         If Not MeClosed Then
 
-            If InitialPartValues.CtrlValuesChanged() Then
+            If validSelection Then
 
-                Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                Dim decision As DialogResult = MessageBox.Show("Cancel without adding part?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
                 If decision = DialogResult.No Then
                     Exit Sub
