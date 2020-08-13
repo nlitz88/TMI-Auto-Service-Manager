@@ -953,7 +953,7 @@
 
     Private Sub tpAddButton_Click(sender As Object, e As EventArgs) Handles tpAddButton.Click
 
-
+        changeScreenHide(addMasterTaskPart, Me)
 
     End Sub
 

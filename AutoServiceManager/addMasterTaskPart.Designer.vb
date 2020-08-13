@@ -339,6 +339,7 @@ Partial Class addMasterTaskPart
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "addMasterTaskPart"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Add Task Part"
         Me.ResumeLayout(False)
         Me.PerformLayout()

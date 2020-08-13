@@ -73,6 +73,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="addMasterTaskPart.Designer.vb">
+      <DependentUpon>addMasterTaskPart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="addMasterTaskPart.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="carModelMaintenance.Designer.vb">
       <DependentUpon>carModelMaintenance.vb</DependentUpon>
     </Compile>
@@ -197,6 +203,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="addMasterTaskPart.resx">
+      <DependentUpon>addMasterTaskPart.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="carModelMaintenance.resx">
       <DependentUpon>carModelMaintenance.vb</DependentUpon>
     </EmbeddedResource>
