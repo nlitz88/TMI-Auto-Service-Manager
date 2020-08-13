@@ -277,10 +277,6 @@ Public Class addMasterTaskPart
     End Sub
 
 
-
-
-
-
     Private Sub newPartButton_Click(sender As Object, e As EventArgs) Handles newPartButton.Click
 
         previousScreen = Me
@@ -289,27 +285,52 @@ Public Class addMasterTaskPart
     End Sub
 
 
+
     Private Sub PartDescription_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PartDescription_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        PartDescription_Textbox.ForeColor = DefaultForeColor
 
     End Sub
 
 
     Private Sub ListPrice_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ListPrice_Textbox.TextChanged
 
+        If Not valuesInitialized Then Exit Sub
+
+        ListPrice_Textbox.ForeColor = DefaultForeColor
+
     End Sub
 
 
     Private Sub Qty_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Qty_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        Qty_Textbox.ForeColor = DefaultForeColor
+
+        InitializePartAmountTextbox()
 
     End Sub
 
 
     Private Sub PartPrice_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PartPrice_Textbox.TextChanged
 
+        If Not valuesInitialized Then Exit Sub
+
+        PartPrice_Textbox.ForeColor = DefaultForeColor
+
+        InitializePartAmountTextbox()
+
     End Sub
 
 
     Private Sub PartAmount_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PartAmount_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        PartAmount_Textbox.ForeColor = DefaultForeColor
 
     End Sub
 
