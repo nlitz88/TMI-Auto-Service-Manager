@@ -817,12 +817,12 @@
     End Sub
 
 
-    ' Custom event that handles rowChanges in the TaskParts DataTable
-    Private Sub TaskLabor_Row_Changed(ByVal sender As Object, ByVal e As DataRowChangeEventArgs)
+    '' Custom event that handles rowChanges in the TaskParts DataTable (THIS SHOULDN'T EVER HAPPEN)
+    'Private Sub TaskLabor_Row_Changed(ByVal sender As Object, ByVal e As DataRowChangeEventArgs)
 
-        InitializeTaskLaborTextbox()
+    '    InitializeTaskLaborTextbox()
 
-    End Sub
+    'End Sub
 
 
 
@@ -842,12 +842,12 @@
     End Sub
 
 
-    ' Custom event that handles rowChanges in the TaskParts DataTable
-    Private Sub TaskParts_Row_Changed(ByVal sender As Object, ByVal e As DataRowChangeEventArgs)
+    '' Custom event that handles rowChanges in the TaskParts DataTable (THIS SHOULDN'T EVER HAPPEN)
+    'Private Sub TaskParts_Row_Changed(ByVal sender As Object, ByVal e As DataRowChangeEventArgs)
 
-        InitializeTaskPartsTextbox()
+    '    InitializeTaskPartsTextbox()
 
-    End Sub
+    'End Sub
 
 
     Private Sub tpAddButton_Click(sender As Object, e As EventArgs) Handles tpAddButton.Click
