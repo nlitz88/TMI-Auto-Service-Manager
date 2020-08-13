@@ -438,7 +438,7 @@
         CRUD.AddParams("@TotalTask", TotalTaskSum)
         CRUD.AddParams("@TaskId", TaskId)   ' added last, as used last (thanks OleDB)
 
-        CRUD.ExecQuery("UPDATE MasterTaskList SET TaskLabor=@TaskLabor, TaskParts=@TaskParts, TotalTask=@TotalTask WHERE TaskId=TaskId")
+        CRUD.ExecQuery("UPDATE MasterTaskList SET TaskLabor=@TaskLabor, TaskParts=@TaskParts, TotalTask=@TotalTask WHERE TaskId=@TaskId")
         If CRUD.HasException() Then Return False
 
         Return True
