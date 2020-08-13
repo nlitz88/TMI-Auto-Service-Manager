@@ -20,8 +20,14 @@
     Private TaskId As Integer
 
     ' Row indexes for use with TaskLabor and TaskParts DataGridViews
-    Private TaskLaborRow As Integer
-    Private TaskPartsRow As Integer
+    Private TaskLaborRow As Integer = -1
+    Private TaskPartsRow As Integer = -1
+
+    ' Variables that store calculated values for TaskLabor, TaskParts, and TotalTask Values/Textboxes
+    Private TaskLaborSum As Decimal = 0
+    Private TaskPartsSum As Decimal = 0
+    Private TotalTaskSum As Decimal = 0
+
     ' Row index for use with TaskType ComboBox
     Private TaskTypeRow As Integer
 
@@ -246,26 +252,24 @@
 
         ' All rows in MasterTaskLabor that are associated with the currently selectedTaskId will already be loaded into the datatable.
         ' So, to calculate the total, all we have to do is get the sum of the Amount Field in the Dependently loaded MasterTaskLabor DataTable
-        Dim sum As Decimal = 0
         ' Even if zero rows, shouldn't run into any issues
         For Each row In TaskLaborDbController.DbDataTable.Rows
-            sum += row("Amount")
+            TaskLaborSum += row("Amount")
         Next
 
         ' Then, assign the calculated sum
-        TaskLabor_Value.Text = sum
+        TaskLabor_Value.Text = TaskLaborSum
 
     End Sub
 
     Private Sub InitializeTaskLaborTextbox()
 
         ' Calculate TaskLabor sum
-        Dim sum As Decimal = 0
         For Each row In TaskLaborDbController.DbDataTable.Rows
-            sum += row("Amount")
+            TaskLaborSum += row("Amount")
         Next
 
-        TaskLabor_Textbox.Text = String.Format("{0:0.00}", sum)
+        TaskLabor_Textbox.Text = String.Format("{0:0.00}", TaskLaborSum)
 
     End Sub
 
@@ -273,25 +277,23 @@
     Private Sub InitializeTaskPartsValue()
 
         ' Calculate TaskParts sum
-        Dim sum As Decimal = 0
         For Each row In TaskPartsDbController.DbDataTable.Rows
-            sum += row("PartAmount")
+            TaskPartsSum += row("PartAmount")
         Next
 
         ' Then, assign the calculated sum
-        TaskParts_Value.Text = sum
+        TaskParts_Value.Text = TaskPartsSum
 
     End Sub
 
     Private Sub InitializeTaskPartsTextbox()
 
         ' Calculate TaskParts sum
-        Dim sum As Decimal = 0
         For Each row In TaskPartsDbController.DbDataTable.Rows
-            sum += row("PartAmount")
+            TaskPartsSum += row("PartAmount")
         Next
 
-        TaskParts_Textbox.Text = String.Format("{0:0.00}", sum)
+        TaskParts_Textbox.Text = String.Format("{0:0.00}", TaskPartsSum)
 
     End Sub
 
@@ -301,10 +303,10 @@
 
         Dim TaskLaborCost As Decimal = Convert.ToDecimal(TaskLabor_Value.Text)
         Dim TaskPartsCost As Decimal = Convert.ToDecimal(TaskParts_Value.Text)
-        Dim sum As Decimal = TaskLaborCost + TaskPartsCost
+        TotalTaskSum = TaskLaborCost + TaskPartsCost
 
         ' Then, assign the calculated sum
-        TotalTask_Value.Text = sum
+        TotalTask_Value.Text = TotalTaskSum
 
     End Sub
 
@@ -313,10 +315,10 @@
         ' In other scenarios, we would have to validate the values that we were finding these calculations from. However, becauase these values are calculated.
         Dim TaskLaborCost As Decimal = Convert.ToDecimal(TaskLabor_Textbox.Text)
         Dim TaskPartsCost As Decimal = Convert.ToDecimal(TaskParts_Textbox.Text)
-        Dim sum As Decimal = TaskLaborCost + TaskPartsCost
+        TotalTaskSum = TaskLaborCost + TaskPartsCost
 
         ' Then, assign and format calculated sum
-        TotalTask_Textbox.Text = String.Format("{0:0.00}", sum)
+        TotalTask_Textbox.Text = String.Format("{0:0.00}", TotalTaskSum)
 
     End Sub
 
@@ -324,6 +326,11 @@
 
     ' Sub that handles all initialization for dataEditingControls
     Private Sub InitializeAllDataEditingControls()
+
+        ' Reset calculated value variables
+        TaskLaborSum = 0
+        TaskPartsSum = 0
+        TotalTaskSum = 0
 
         ' Automated initializations
         InitializeMTLDataEditingControls()
@@ -341,6 +348,11 @@
 
     ' Sub that handles all initialization for dataViewingControls
     Private Sub InitializeAllDataViewingControls()
+
+        ' Reset calculated value variables
+        TaskLaborSum = 0
+        TaskPartsSum = 0
+        TotalTaskSum = 0
 
         ' Automated initializations
         InitializeMTLDataViewingControls()
@@ -373,6 +385,59 @@
         'TaskLabor_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TaskLabor_Textbox.Text))
         'TaskParts_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TaskParts_Textbox.Text))
         'TotalTask_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TotalTask_Textbox.Text))
+
+    End Sub
+
+
+
+    ' Public sub called after masterTaskLabor or masterTaskParts tables have been changed that reinitializes dependent DataTables, corresponding DataGridViews,
+    ' And subTaskEditingControls. Can be called from the edit/adding masterTask forms, or from within this form
+    Public Sub reinitializeDependents()
+
+        valuesInitialized = False
+
+        ' Load TaskParts and TaskLabor datatables based on selected TaskId, then Initialize corresponding GridViews
+        loadDependentDataTables()
+        ' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
+        ' This is because controls like TaskLaborCost (for instance) are calculated from those tables
+        InitializeAllDataViewingControls()
+        ' Initialize corresponding DataGridViews
+        InitializeTaskLaborGridView()
+        InitializeTaskPartsGridView()
+
+        valuesInitialized = True
+
+        ' Disable/Enable tlButtons for taskLaborGridView according to if rows present or not
+        If TaskLaborGridView.Rows.Count = 0 Then
+            TaskLaborRow = -1
+            tlDeleteButton.Enabled = False
+            tlEditButton.Enabled = False
+        Else
+            tlDeleteButton.Enabled = True
+            tlEditButton.Enabled = True
+        End If
+
+        ' Disable/Enable tlButtons for taskPartsGridView according to if rows present or not
+        If TaskPartsGridView.Rows.Count = 0 Then
+            TaskPartsRow = -1
+            tpDeleteButton.Enabled = False
+            tpEditButton.Enabled = False
+        Else
+            tpDeleteButton.Enabled = True
+            tpEditButton.Enabled = True
+        End If
+
+
+        ' This sub will only be called if changes were made to database table.
+        ' So, as sum of amounts in either datagridview may have changed, the taskLaborCost and taskPartsCost values may have changed
+        ' We have decided that it is better to write these new calculated values to the database automatically on change, as the user can't edit/modify them anways.
+        ' So, we will write these values to the database table to row based on taskId
+
+        CRUD.AddParams("@TaskId", TaskId)
+        CRUD.AddParams("@TaskLabor", TaskLaborSum)
+        CRUD.AddParams("@TaskParts", TaskPartsSum)
+        CRUD.AddParams("@TotalTask", TotalTaskSum)
+
 
     End Sub
 
@@ -493,6 +558,7 @@
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
+
             ' Load TaskParts and TaskLabor datatables based on selected TaskId, then Initialize corresponding GridViews
             loadDependentDataTables()
             ' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
@@ -503,6 +569,26 @@
             InitializeTaskPartsGridView()
 
             valuesInitialized = True
+
+            ' Disable/Enable tlButtons for taskLaborGridView according to if rows present or not
+            If TaskLaborGridView.Rows.Count = 0 Then
+                TaskLaborRow = -1
+                tlDeleteButton.Enabled = False
+                tlEditButton.Enabled = False
+            Else
+                tlDeleteButton.Enabled = True
+                tlEditButton.Enabled = True
+            End If
+
+            ' Disable/Enable tlButtons for taskPartsGridView according to if rows present or not
+            If TaskPartsGridView.Rows.Count = 0 Then
+                TaskPartsRow = -1
+                tpDeleteButton.Enabled = False
+                tpEditButton.Enabled = False
+            Else
+                tpDeleteButton.Enabled = True
+                tpEditButton.Enabled = True
+            End If
 
             ' Show labels and corresponding values
             showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
