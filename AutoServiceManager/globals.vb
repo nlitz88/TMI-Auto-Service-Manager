@@ -453,6 +453,33 @@
     End Sub
 
 
+    ' Sub that updates Database tables based on their respective control values on form using (initial) datatable values as keys for the update
+    Public Sub updateTable(ByRef updateController As DbControl, ByVal dataTable As DataTable, ByVal excludedKeyColumns As List(Of String), ByVal tableName As String,
+                           ByVal nameDelimiter As String, ByVal controlTag As String, ByRef form As Form, ByVal excludedControls As List(Of Control))
+
+        Dim ctrls As List(Of Object)
+        Dim ctrlValue As Object
+        Dim valueParams As String = String.Empty    ' Used after SET in query
+        Dim keyParams As String = String.Empty      ' Used after WHERE in query
+
+        ' Add parameters for each value that is to be updated/set
+        For i As Integer = 0 To dataTable.Columns.Count - 1
+
+            ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
+
+            If ctrls.Count = 0 Then Continue For
+            If excludedControls.Contains(ctrls(0)) Then Continue For
+
+            ctrlValue = getControlValue(ctrls(0))
+
+
+
+        Next
+
+
+    End Sub
+
+
     ' Sub that inserts new row into specified table
     Public Sub insertRow(ByRef insertController As DbControl, ByVal dataTable As DataTable, ByVal tableName As String,
                          ByVal nameDelimiter As String, ByVal controlTag As String, ByRef form As Form)
