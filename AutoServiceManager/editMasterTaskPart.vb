@@ -38,7 +38,7 @@ Public Class editMasterTaskPart
 
 
     ' Sub that will initialize/Calculate Total Task Cost based on the product of the Quantity and Unit Price
-    Private Sub InitializeTotalTaskTextbox()
+    Private Sub InitializePartAmountTextbox()
 
         ' First, Validate values that calculation is based on before attempting to parse and calculate
         If validNumber("Quantity", True, Qty_Textbox.Text, String.Empty, True) And validCurrency("Unit Price", True, PartPrice_Textbox.Text, String.Empty) Then
@@ -75,7 +75,7 @@ Public Class editMasterTaskPart
         ' Then, format dataEditingControls
         formatDataEditingControls()
         ' Then, re-initialize and format any calculation based values
-        InitializeTotalTaskTextbox()
+        InitializePartAmountTextbox()
         ' Set forecolor if not already initially default
         setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
 
@@ -386,7 +386,7 @@ Public Class editMasterTaskPart
             Qty_Textbox.SelectionStart = lastValidIndex
         End If
 
-        InitializeTotalTaskTextbox()
+        InitializePartAmountTextbox()
 
         If InitialPartValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -434,7 +434,7 @@ Public Class editMasterTaskPart
             PartPrice_Textbox.SelectionStart = lastValidIndex
         End If
 
-        InitializeTotalTaskTextbox()
+        InitializePartAmountTextbox()
 
         If InitialPartValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
