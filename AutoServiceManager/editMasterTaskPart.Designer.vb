@@ -328,7 +328,7 @@ Partial Class editMasterTaskPart
         Me.MaximizeBox = False
         Me.Name = "editMasterTaskPart"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
-        Me.Text = "Task Parts"
+        Me.Text = "Edit Task Part"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
