@@ -390,9 +390,9 @@
 
 
 
-    ' Public sub called after masterTaskLabor or masterTaskParts tables have been changed that reinitializes dependent DataTables, corresponding DataGridViews,
+    ' Public Function called after masterTaskLabor or masterTaskParts tables have been changed that reinitializes dependent DataTables, corresponding DataGridViews,
     ' And subTaskEditingControls. Can be called from the edit/adding masterTask forms, or from within this form
-    Public Sub reinitializeDependents()
+    Public Function reinitializeDependents() As Boolean
 
         valuesInitialized = False
 
@@ -433,13 +433,17 @@
         ' We have decided that it is better to write these new calculated values to the database automatically on change, as the user can't edit/modify them anways.
         ' So, we will write these values to the database table to row based on taskId
 
-        CRUD.AddParams("@TaskId", TaskId)
         CRUD.AddParams("@TaskLabor", TaskLaborSum)
         CRUD.AddParams("@TaskParts", TaskPartsSum)
         CRUD.AddParams("@TotalTask", TotalTaskSum)
+        CRUD.AddParams("@TaskId", TaskId)   ' added last, as used last (thanks OleDB)
 
+        CRUD.ExecQuery("UPDATE MasterTaskList SET TaskLabor=@TaskLabor, TaskParts=@TaskParts, TotalTask=@TotalTask WHERE TaskId=TaskId")
+        If CRUD.HasException() Then Return False
 
-    End Sub
+        Return True
+
+    End Function
 
 
 
