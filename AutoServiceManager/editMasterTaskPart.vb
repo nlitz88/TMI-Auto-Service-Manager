@@ -47,7 +47,7 @@ Public Class editMasterTaskPart
             Dim Price As Decimal = Convert.ToDecimal(PartPrice_Textbox.Text)
             Dim product As Decimal = Quantity * Price
 
-            ' Then, assign and format calculated sum
+            ' Then, assign and format calculated product
             PartAmount_Textbox.Text = String.Format("{0:0.00}", product)
 
         Else
