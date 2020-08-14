@@ -138,7 +138,7 @@ Public Class addMasterTaskLabor
         '   TaskId
 
         ' No exclusions, just additionalValues
-        Dim additionalValues As New Dictionary(Of String, Object) From {{"TaskId", TaskId}}
+        Dim additionalValues As New List(Of AdditionalValue) From {New AdditionalValue("TaskId", GetType(Int32), TaskId)}
 
         insertRow(CRUD, LaborCodesDbController.DbDataTable, "MasterTaskLabor", "_", "dataEditingControl", Me, additionalValues)
 

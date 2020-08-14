@@ -630,7 +630,7 @@
     ' Overload that accepts dictionary of additional columns and respective values to be inserted with the rest of the data
     Public Sub insertRow(ByRef insertController As DbControl, ByVal dataTable As DataTable, ByVal tableName As String,
                      ByVal nameDelimiter As String, ByVal controlTag As String, ByRef form As Form,
-                     ByVal additionalValues As Dictionary(Of String, Object))
+                     ByVal additionalValues As List(Of AdditionalValue))
 
         Dim ctrls As List(Of Object)
         Dim ctrlValue As Object
@@ -664,25 +664,25 @@
         Next
 
 
-        Dim additionalValue As Object
+        Dim addValue As Object
 
         ' Add additional query parameters for additionalValues as provided
-        For Each key In additionalValues.Keys
+        For Each additional In additionalValues
 
             ' Get additional value
-            additionalValue = additionalValues(key)
+            addValue = additional.Value
 
             ' Then, check if this additional value that is to be inserted should be a DBNull Value
-            If additionalValue.GetType() = GetType(DateTime) Then
-                If additionalValue.ToString().Replace(" ", "0") = "00/00/0000" Then additionalValue = DBNull.Value
+            If additional.ColumnDataType = GetType(DateTime) Then
+                If addValue.ToString().Replace(" ", "0") = "00/00/0000" Then addValue = DBNull.Value
                 ' For all other types of fields
             Else
-                If additionalValue = Nothing Then additionalValue = DBNull.Value
+                If addValue = Nothing Then addValue = DBNull.Value
             End If
 
-            insertController.AddParams("@" & key, additionalValue)
-            columnList += key & ","
-            valuesParamList += "@" & key & ","
+            insertController.AddParams("@" & additional.ColumnName, addValue)
+            columnList += additional.ColumnName & ","
+            valuesParamList += "@" & additional.ColumnName & ","
 
         Next
 
@@ -691,6 +691,7 @@
             ' The substring at the end ensures that there isn't an extra comma at the end
             columnList = "(" & columnList.Substring(0, columnList.Length - 1) & ")"
             valuesParamList = "(" & valuesParamList.Substring(0, valuesParamList.Length - 1) & ")"
+            Console.WriteLine("INSERT INTO " & tableName & " " & columnList & " VALUES " & valuesParamList)
             insertController.ExecQuery("INSERT INTO " & tableName & " " & columnList & " VALUES " & valuesParamList)
         End If
 

@@ -376,7 +376,7 @@
         ' No need for an exclusion list, as VehicleId (Autogen primary key) is not used in any controls
 
         ' Define additional values to add. In this case, just CustomerId
-        Dim additionalValues As New Dictionary(Of String, Object) From {{"CustomerId", CustomerId}}
+        Dim additionalValues As New List(Of AdditionalValue) From {New AdditionalValue("CustomerId", GetType(Int32), CustomerId)}
 
         insertRow(CRUD, VehicleDbController.DbDataTable, "Vehicle", "_", "dataEditingControl", Me, additionalValues)
 

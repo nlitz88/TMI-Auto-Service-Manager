@@ -73,6 +73,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="additionalValue.vb" />
     <Compile Include="addMasterTaskLabor.Designer.vb">
       <DependentUpon>addMasterTaskLabor.vb</DependentUpon>
     </Compile>

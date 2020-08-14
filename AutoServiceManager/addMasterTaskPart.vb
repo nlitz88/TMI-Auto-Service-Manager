@@ -138,8 +138,7 @@ Public Class addMasterTaskPart
         '   TaskId, Qty, PartAmount
 
         ' No exclusions, just additionalValues
-        Dim additionalValues As New Dictionary(Of String, Object) From {{"TaskId", TaskId}, {"Qty", Qty_Textbox.Text}, {"PartAmount", PartAmount_Textbox.Text}}
-
+        Dim additionalValues As New List(Of AdditionalValue) From {New AdditionalValue("TaskId", GetType(Int32), TaskId), New AdditionalValue("Qty", GetType(Double), Qty_Textbox.Text), New AdditionalValue("PartAmount", GetType(Decimal), PartAmount_Textbox.Text)}
         insertRow(CRUD, PartsDbController.DbDataTable, "MasterTaskParts", "_", "dataEditingControl", Me, additionalValues)
 
         Return True
