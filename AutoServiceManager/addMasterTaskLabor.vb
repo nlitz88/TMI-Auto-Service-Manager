@@ -30,7 +30,7 @@
 
 
     ' Function that loads LaborCodes DataTable from Database
-    Private Function loadPartsDataTable() As Boolean
+    Private Function loadLaborCodesDataTable() As Boolean
 
         LaborCodesDbController.ExecQuery("SELECT lc.Description + ' - ' + lc.LaborCode as LDLC, lc.LaborCode, lc.Description, lc.Rate, lc.Hours, lc.Amount FROM LaborCodes lc ORDER BY lc.Description ASC")
         If LaborCodesDbController.HasException() Then Return False
@@ -38,6 +38,20 @@
         Return True
 
     End Function
+
+
+    ' Sub that initializes LaborCodesCom
+    Private Sub InitializeLaborCodesComboBox()
+
+        LaborCodesComboBox.BeginUpdate()
+        LaborCodesComboBox.Items.Clear()
+        LaborCodesComboBox.Items.Add("Select One")
+        For Each row In LaborCodesDbController.DbDataTable.Rows
+            LaborCodesComboBox.Items.Add(row("LDLC"))
+        Next
+        LaborCodesComboBox.EndUpdate()
+
+    End Sub
 
 
     ' Sub that initializes all dataEditingControls corresponding with values in LaborCodes DataTable
@@ -89,6 +103,24 @@
         setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
 
     End Sub
+
+
+    ' Public Function called after LaborCodes table has been changed from LaborCodes Maintenance Form. LaborCodes DataTable and dependent controls are re-initialized
+    Public Function reInitializeLaborCodes() As Boolean
+
+        ' LOAD DATATABLES FROM DATABASE INITIALLY
+        If Not loadLaborCodesDataTable() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
+
+        ' Then, initialize PartComboBox
+        InitializeLaborCodesComboBox()
+        LaborCodesComboBox.SelectedIndex = 0
+
+        Return True
+
+    End Function
 
 
 

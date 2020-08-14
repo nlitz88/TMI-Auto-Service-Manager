@@ -45,7 +45,7 @@ Partial Class addMasterTaskLabor
         Me.LaborCode_Value = New System.Windows.Forms.Label()
         Me.LaborCodeLabel = New System.Windows.Forms.Label()
         Me.LaborCodeComboLabel = New System.Windows.Forms.Label()
-        Me.LCComboBox = New System.Windows.Forms.ComboBox()
+        Me.LaborCodesComboBox = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'orLabel
@@ -297,16 +297,16 @@ Partial Class addMasterTaskLabor
         Me.LaborCodeComboLabel.TabIndex = 205
         Me.LaborCodeComboLabel.Text = "Labor Code :"
         '
-        'LCComboBox
+        'LaborCodesComboBox
         '
-        Me.LCComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.LCComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.LCComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
-        Me.LCComboBox.FormattingEnabled = True
-        Me.LCComboBox.Location = New System.Drawing.Point(193, 258)
-        Me.LCComboBox.Name = "LCComboBox"
-        Me.LCComboBox.Size = New System.Drawing.Size(456, 28)
-        Me.LCComboBox.TabIndex = 200
+        Me.LaborCodesComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.LaborCodesComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.LaborCodesComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
+        Me.LaborCodesComboBox.FormattingEnabled = True
+        Me.LaborCodesComboBox.Location = New System.Drawing.Point(193, 258)
+        Me.LaborCodesComboBox.Name = "LaborCodesComboBox"
+        Me.LaborCodesComboBox.Size = New System.Drawing.Size(456, 28)
+        Me.LaborCodesComboBox.TabIndex = 200
         '
         'addMasterTaskLabor
         '
@@ -330,7 +330,7 @@ Partial Class addMasterTaskLabor
         Me.Controls.Add(Me.LaborCode_Value)
         Me.Controls.Add(Me.LaborCodeLabel)
         Me.Controls.Add(Me.LaborCodeComboLabel)
-        Me.Controls.Add(Me.LCComboBox)
+        Me.Controls.Add(Me.LaborCodesComboBox)
         Me.Controls.Add(Me.orLabel)
         Me.Controls.Add(Me.newLaborButton)
         Me.Controls.Add(Me.TaskTextbox)
@@ -370,5 +370,5 @@ Partial Class addMasterTaskLabor
     Friend WithEvents LaborCode_Value As Label
     Friend WithEvents LaborCodeLabel As Label
     Friend WithEvents LaborCodeComboLabel As Label
-    Friend WithEvents LCComboBox As ComboBox
+    Friend WithEvents LaborCodesComboBox As ComboBox
 End Class
