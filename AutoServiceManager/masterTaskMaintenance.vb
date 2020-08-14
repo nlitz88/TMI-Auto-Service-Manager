@@ -930,12 +930,31 @@
     End Sub
 
 
-    '' Custom event that handles rowChanges in the TaskParts DataTable (THIS SHOULDN'T EVER HAPPEN)
-    'Private Sub TaskLabor_Row_Changed(ByVal sender As Object, ByVal e As DataRowChangeEventArgs)
+    Private Sub tlAddButton_Click(sender As Object, e As EventArgs) Handles tlAddButton.Click
 
-    '    InitializeTaskLaborTextbox()
+        'changeScreenHide(addMasterTaskPart, Me)
 
-    'End Sub
+    End Sub
+
+    Private Sub tlDeleteButton_Click(sender As Object, e As EventArgs) Handles tlDeleteButton.Click
+
+        'If Not deleteMasterTaskPart() Then
+        '    MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    Exit Sub
+        'End If
+
+        If Not reinitializeDependents() Then
+            MessageBox.Show("Reloading of Master Task List Unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+    End Sub
+
+    Private Sub tlEditButton_Click(sender As Object, e As EventArgs) Handles tlEditButton.Click
+
+        changeScreenHide(editMasterTaskLabor, Me)
+
+    End Sub
 
 
 
@@ -953,14 +972,6 @@
         TaskPartsRow = TaskPartsGridView.CurrentRow.Index
 
     End Sub
-
-
-    '' Custom event that handles rowChanges in the TaskParts DataTable (THIS SHOULDN'T EVER HAPPEN)
-    'Private Sub TaskParts_Row_Changed(ByVal sender As Object, ByVal e As DataRowChangeEventArgs)
-
-    '    InitializeTaskPartsTextbox()
-
-    'End Sub
 
 
     Private Sub tpAddButton_Click(sender As Object, e As EventArgs) Handles tpAddButton.Click
@@ -991,8 +1002,6 @@
         changeScreenHide(editMasterTaskPart, Me)
 
     End Sub
-
-
 
 
 End Class
