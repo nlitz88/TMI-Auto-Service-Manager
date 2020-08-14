@@ -452,6 +452,75 @@
 
     End Sub
 
+    ' Overload that accepts a list of additional values to be updated with the rest of the data, AS WELL AS a list of controls whose values should be excluded from updated
+    Public Sub updateTable(ByRef updateController As DbControl, ByVal dataTable As DataTable, ByVal tableName As String, ByVal id As Object,
+                           ByVal idName As String, ByVal nameDelimiter As String, ByVal controlTag As String, ByRef form As Form,
+                           ByVal excludedControls As List(Of Control), ByVal additionalValues As List(Of AdditionalValue))
+
+        Dim ctrls As List(Of Object)
+        Dim ctrlValue As Object
+        Dim queryParams As String = String.Empty
+        Dim whereID As String = String.Empty
+
+        ' Add query parameters for each column value in DataTable
+        For i As Integer = 0 To dataTable.Columns.Count - 1
+
+            ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
+
+            If ctrls.Count = 0 Then Continue For
+            If excludedControls.Contains(ctrls(0)) Then Continue For
+
+            ' Get the value of only one control of the same name designation (assuming they control/correspond with the same table column value)
+            ctrlValue = getControlValue(ctrls(0))
+
+            ' To determine if we're going to insert a null instead of the value, we must consider all different types of values that warrant a DBNull insert
+            ' First, check if it's a DateTime field
+            If dataTable.Columns(i).DataType = GetType(DateTime) Then
+                If ctrlValue.ToString().Replace(" ", "0") = "00/00/0000" Then ctrlValue = DBNull.Value
+                ' For all other types of fields
+            Else
+                If ctrlValue = Nothing Then ctrlValue = DBNull.Value
+            End If
+
+            updateController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
+            queryParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & ","
+
+        Next
+
+        Dim addValue As Object
+
+        ' Add additional query parameters for additionalValues as provided
+        For Each additional In additionalValues
+
+            ' Get additional value
+            addValue = additional.Value
+
+            ' Then, check if this additional value that is to be inserted should be a DBNull Value
+            If additional.ColumnDataType = GetType(DateTime) Then
+                If addValue.ToString().Replace(" ", "0") = "00/00/0000" Then addValue = DBNull.Value
+                ' For all other types of fields
+            Else
+                If addValue = Nothing Then addValue = DBNull.Value
+            End If
+
+            updateController.AddParams("@" & additional.ColumnName, addValue)
+            queryParams += additional.ColumnName & "=@" & additional.ColumnName & ","
+
+        Next
+
+
+        updateController.AddParams("@id", id)
+        whereID = " WHERE " & idName & "=@id"
+
+        ' If query params isn't empty, then run update query
+        If Not String.IsNullOrEmpty(queryParams) Then
+            ' The substring at the end ensures that there isn't an extra comma at the end
+            queryParams = queryParams.Substring(0, queryParams.Length - 1)
+            updateController.ExecQuery("UPDATE " & tableName & " SET " & queryParams & whereID)
+        End If
+
+    End Sub
+
 
     ' Sub that updates Database tables based on their respective control values on form using (initial) datatable values as keys for the update
     Public Sub updateTable(ByRef updateController As DbControl, ByVal dataTable As DataTable, ByVal dataTableRow As Integer,
@@ -627,7 +696,7 @@
 
     End Sub
 
-    ' Overload that accepts dictionary of additional columns and respective values to be inserted with the rest of the data
+    ' Overload that accepts a list of additional values to be inserted with the rest of the data
     Public Sub insertRow(ByRef insertController As DbControl, ByVal dataTable As DataTable, ByVal tableName As String,
                      ByVal nameDelimiter As String, ByVal controlTag As String, ByRef form As Form,
                      ByVal additionalValues As List(Of AdditionalValue))
@@ -644,6 +713,77 @@
             ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
 
             If ctrls.Count = 0 Then Continue For
+
+            ' Get the value of only one control of the same name designation (assuming they control/correspond with the same table column value)
+            ctrlValue = getControlValue(ctrls(0))
+
+            ' To determine if we're going to insert a null instead of the value, we must consider all different types of values that warrant a DBNull insert
+            ' First, check if it's a DateTime field
+            If dataTable.Columns(i).DataType = GetType(DateTime) Then
+                If ctrlValue.ToString().Replace(" ", "0") = "00/00/0000" Then ctrlValue = DBNull.Value
+                ' For all other types of fields
+            Else
+                If ctrlValue = Nothing Then ctrlValue = DBNull.Value
+            End If
+
+            insertController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
+            columnList += dataTable.Columns(i).ColumnName & ","
+            valuesParamList += "@" & dataTable.Columns(i).ColumnName & ","
+
+        Next
+
+
+        Dim addValue As Object
+
+        ' Add additional query parameters for additionalValues as provided
+        For Each additional In additionalValues
+
+            ' Get additional value
+            addValue = additional.Value
+
+            ' Then, check if this additional value that is to be inserted should be a DBNull Value
+            If additional.ColumnDataType = GetType(DateTime) Then
+                If addValue.ToString().Replace(" ", "0") = "00/00/0000" Then addValue = DBNull.Value
+                ' For all other types of fields
+            Else
+                If addValue = Nothing Then addValue = DBNull.Value
+            End If
+
+            insertController.AddParams("@" & additional.ColumnName, addValue)
+            columnList += additional.ColumnName & ","
+            valuesParamList += "@" & additional.ColumnName & ","
+
+        Next
+
+        ' If lists aren't empty, then run query
+        If Not String.IsNullOrEmpty(columnList) And Not String.IsNullOrEmpty(valuesParamList) Then
+            ' The substring at the end ensures that there isn't an extra comma at the end
+            columnList = "(" & columnList.Substring(0, columnList.Length - 1) & ")"
+            valuesParamList = "(" & valuesParamList.Substring(0, valuesParamList.Length - 1) & ")"
+            Console.WriteLine("INSERT INTO " & tableName & " " & columnList & " VALUES " & valuesParamList)
+            insertController.ExecQuery("INSERT INTO " & tableName & " " & columnList & " VALUES " & valuesParamList)
+        End If
+
+    End Sub
+
+    ' Overload that accepts a list of additional values to be inserted with the rest of the data, AS WELL AS a list of controls whose values should be excluded from insertion
+    Public Sub insertRow(ByRef insertController As DbControl, ByVal dataTable As DataTable, ByVal tableName As String,
+                     ByVal nameDelimiter As String, ByVal controlTag As String, ByRef form As Form,
+                     ByVal excludedControls As List(Of Control), ByVal additionalValues As List(Of AdditionalValue))
+
+        Dim ctrls As List(Of Object)
+        Dim ctrlValue As Object
+        Dim columnList As String = String.Empty
+        Dim valuesParamList As String = String.Empty
+
+
+        ' Add query parameters for each column value in DataTable
+        For i As Integer = 0 To dataTable.Columns.Count - 1
+
+            ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
+
+            If ctrls.Count = 0 Then Continue For
+            If excludedControls.Contains(ctrls(0)) Then Continue For
 
             ' Get the value of only one control of the same name designation (assuming they control/correspond with the same table column value)
             ctrlValue = getControlValue(ctrls(0))
