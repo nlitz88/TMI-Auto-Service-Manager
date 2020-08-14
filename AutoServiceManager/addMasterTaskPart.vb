@@ -111,6 +111,25 @@ Public Class addMasterTaskPart
     ' ***************** CRUD SUBS *****************
 
 
+    Private Function InsertMasterTaskParts() As Boolean
+
+        ' Values that will automatically be grabbed from controls and inserted:
+        '   PartNumber, PartDescription, PartPrice, and ListPrice
+        ' In adddition to these, we must also insert (into the row) these newly associated values:
+        '   TaskId, Qty, PartAmount
+
+        ' No exclusions, just additionalValues
+        Dim additionalValues As New Dictionary(Of String, Object) From {{"TaskId", TaskId}, {"Qty", Qty_Textbox.Text}, {"PartAmount", PartAmount_Textbox}}
+
+        'insertRow()
+
+
+        Return True
+
+    End Function
+
+
+
 
 
     ' **************** VALIDATION SUBS ****************
@@ -151,6 +170,8 @@ Public Class addMasterTaskPart
         Return True
 
     End Function
+
+
 
 
     Public Sub New()
