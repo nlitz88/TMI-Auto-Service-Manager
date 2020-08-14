@@ -311,6 +311,8 @@ Public Class editMasterTaskLabor
             Rate_Textbox.SelectionStart = lastValidIndex
         End If
 
+        InitializeAmountTextbox()
+
         If InitialLaborValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
         Else
