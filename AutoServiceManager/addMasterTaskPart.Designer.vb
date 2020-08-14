@@ -53,7 +53,7 @@ Partial Class addMasterTaskPart
         Me.cancelButton.Location = New System.Drawing.Point(216, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
-        Me.cancelButton.TabIndex = 131
+        Me.cancelButton.TabIndex = 6
         Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
         '
@@ -66,7 +66,7 @@ Partial Class addMasterTaskPart
         Me.saveButton.Location = New System.Drawing.Point(100, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
-        Me.saveButton.TabIndex = 132
+        Me.saveButton.TabIndex = 5
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
         '
@@ -100,7 +100,7 @@ Partial Class addMasterTaskPart
         Me.PartComboBox.Location = New System.Drawing.Point(199, 258)
         Me.PartComboBox.Name = "PartComboBox"
         Me.PartComboBox.Size = New System.Drawing.Size(297, 28)
-        Me.PartComboBox.TabIndex = 134
+        Me.PartComboBox.TabIndex = 0
         '
         'TaskTextbox
         '
@@ -151,7 +151,7 @@ Partial Class addMasterTaskPart
         Me.Qty_Textbox.MaxLength = 14
         Me.Qty_Textbox.Name = "Qty_Textbox"
         Me.Qty_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.Qty_Textbox.TabIndex = 162
+        Me.Qty_Textbox.TabIndex = 3
         Me.Qty_Textbox.Tag = "dataEditingControl"
         '
         'QuantityLabel
@@ -183,7 +183,7 @@ Partial Class addMasterTaskPart
         Me.PartDescription_Textbox.MaxLength = 50
         Me.PartDescription_Textbox.Name = "PartDescription_Textbox"
         Me.PartDescription_Textbox.Size = New System.Drawing.Size(297, 27)
-        Me.PartDescription_Textbox.TabIndex = 160
+        Me.PartDescription_Textbox.TabIndex = 1
         Me.PartDescription_Textbox.Tag = "dataEditingControl"
         '
         'ListPrice_Textbox
@@ -192,7 +192,7 @@ Partial Class addMasterTaskPart
         Me.ListPrice_Textbox.Location = New System.Drawing.Point(618, 375)
         Me.ListPrice_Textbox.Name = "ListPrice_Textbox"
         Me.ListPrice_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.ListPrice_Textbox.TabIndex = 161
+        Me.ListPrice_Textbox.TabIndex = 2
         Me.ListPrice_Textbox.Tag = "dataEditingControl"
         '
         'ListPriceLabel
@@ -212,7 +212,7 @@ Partial Class addMasterTaskPart
         Me.PartPrice_Textbox.Location = New System.Drawing.Point(377, 425)
         Me.PartPrice_Textbox.Name = "PartPrice_Textbox"
         Me.PartPrice_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.PartPrice_Textbox.TabIndex = 163
+        Me.PartPrice_Textbox.TabIndex = 4
         Me.PartPrice_Textbox.Tag = "dataEditingControl"
         '
         'UnitPriceLabel
@@ -234,7 +234,7 @@ Partial Class addMasterTaskPart
         Me.newPartButton.Location = New System.Drawing.Point(554, 257)
         Me.newPartButton.Name = "newPartButton"
         Me.newPartButton.Size = New System.Drawing.Size(225, 30)
-        Me.newPartButton.TabIndex = 175
+        Me.newPartButton.TabIndex = 7
         Me.newPartButton.Text = "Add New Inventory Part"
         Me.newPartButton.UseVisualStyleBackColor = False
         '
