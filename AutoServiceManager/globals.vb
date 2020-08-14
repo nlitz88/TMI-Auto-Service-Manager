@@ -659,7 +659,7 @@
 
             insertController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
             columnList += dataTable.Columns(i).ColumnName & ","
-            valuesParamList += dataTable.Columns(i).ColumnName & ","
+            valuesParamList += "@" & dataTable.Columns(i).ColumnName & ","
 
         Next
 
@@ -682,7 +682,7 @@
 
             insertController.AddParams("@" & key, additionalValue)
             columnList += key & ","
-            valuesParamList += key & ","
+            valuesParamList += "@" & key & ","
 
         Next
 

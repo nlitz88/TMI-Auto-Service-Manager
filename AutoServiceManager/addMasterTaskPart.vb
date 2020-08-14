@@ -119,10 +119,9 @@ Public Class addMasterTaskPart
         '   TaskId, Qty, PartAmount
 
         ' No exclusions, just additionalValues
-        Dim additionalValues As New Dictionary(Of String, Object) From {{"TaskId", TaskId}, {"Qty", Qty_Textbox.Text}, {"PartAmount", PartAmount_Textbox}}
+        Dim additionalValues As New Dictionary(Of String, Object) From {{"TaskId", TaskId}, {"Qty", Qty_Textbox.Text}, {"PartAmount", PartAmount_Textbox.Text}}
 
-        'insertRow(CRUD, )
-
+        insertRow(CRUD, PartsDbController.DbDataTable, "MasterTaskParts", "_", "dataEditingControl", Me, additionalValues)
 
         Return True
 
@@ -333,10 +332,10 @@ Public Class addMasterTaskPart
         If Not controlsValid() Then Exit Sub
 
         ' 2.) WRITE CHANGES TO DATABASE TABLE
-        'If Not updateMasterTaskParts() Then
-        '    MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '    Exit Sub
-        'End If
+        If Not InsertMasterTaskParts() Then
+            MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
 
         ' 3.) If this is successful, then:
         '       a.) Reinitialize Dependents on masterTaskMaintenance
