@@ -453,7 +453,7 @@
 
 
     ' Function that makes updateTable calls for all relevant DataTables that need updated based on changes
-    Private Function updateMasterTaskList() As Boolean
+    Private Function updateMasterTask() As Boolean
 
         ' Lookup corresponding taskType symbol for valid taskType description first.
         ' Exclude task type from updateTable, then add its swapped value as an additional value
@@ -473,7 +473,7 @@
 
 
     ' Function that makes insertRow calls for all relevant DataTables
-    Private Function insertAll() As Boolean
+    Private Function insertMasterTask() As Boolean
 
         ' Lookup corresponding taskType symbol for valid taskType description first.
         ' Exclude task type from updateTable, then add its swapped value as an additional value
@@ -494,7 +494,7 @@
 
 
     ' Function that makes deleteRow calls for all relevant DataTables
-    Private Function deleteAll() As Boolean
+    Private Function deleteMasterTask() As Boolean
 
         deleteRow(CRUD, "MasterTaskList", TaskId, "TaskId")
         ' Then, return exception status of CRUD controller. Do this after each call
@@ -784,7 +784,7 @@
             Case DialogResult.Yes
 
                 ' 1.) Delete value from database
-                If Not deleteAll() Then
+                If Not deleteMasterTask() Then
                     MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
                     MessageBox.Show("Successfully deleted " & TaskComboBox.Text & " from Master Task List")
@@ -919,22 +919,20 @@
                     ' 1.) VALIDATE DATAEDITING CONTROLS
                     If Not controlsValid() Then Exit Sub
 
-                    ' 2.) UPDATE MASTER TASK LIST VALUES FIRST
-                    ' 3.) THEN, UPDATE TASKLABOR AND TASKPARTS TABLES
-                    ' This can be accomplished in the same updateAll sub()
-                    If Not updateMasterTaskList() Then
+                    ' 2.) UPDATE MASTER TASK LIST VALUES
+                    If Not updateMasterTask() Then
                         MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Exit Sub
                     Else
                         MessageBox.Show("Successfully updated Master Task List")
                     End If
 
-                    ' 4.) RELOAD DATATABLES FROM DATABASE
+                    ' 3.) RELOAD DATATABLES FROM DATABASE
                     If Not loadMasterTaskListDataTable() Then
                         MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
 
-                    ' 5.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                    ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
                     InitializeTaskComboBox()
                     ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
                     ' If update failed, then revert selected back to lastSelected
@@ -963,7 +961,45 @@
                     ' 1.) VALIDATE DATAEDITING CONTROLS
                     If Not controlsValid() Then Exit Sub
 
+                    ' 2.) INSERT NEW ROW INTO MASTER TASK LIST
+                    If Not insertMasterTask() Then
+                        MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    Else
+                        MessageBox.Show("Successfully added " & TaskDescription_Textbox.Text & " to Master Task List")
+                    End If
 
+                    ' 3.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadMasterTaskListDataTable() Then
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+
+                    ' 4.) REINITIALIZE CONTROLS (based on index of newly inserted value)
+                    InitializeTaskComboBox()
+
+                    ' Changing index of main combobox will also initialize respective dataViewing control values
+
+                    ' First, lookup most recent CustomerId added to the table
+                    CRUD.ExecQuery("SELECT TaskId FROM MasterTaskList WHERE TaskId=(SELECT max(TaskId) FROM MasterTaskList)")
+                    Dim newTaskId As Integer
+
+                    If CRUD.DbDataTable.Rows.Count <> 0 And Not CRUD.HasException(True) Then
+
+                        ' Get new TaskId if query successful
+                        newTaskId = CRUD.DbDataTable.Rows(0)("TaskId")
+                        ' Get new ComboBox item from datatable using newly retrieved ID
+                        Dim newItem As String = getRowValueWithKeyEquals(MTL.DbDataTable, "TaskDescription", "TaskId", newTaskId)
+
+                        ' Set ComboBox accordingly after one final check
+                        If newItem <> Nothing Then
+                            TaskComboBox.SelectedIndex = TaskComboBox.Items.IndexOf(newItem)
+                        Else
+                            TaskComboBox.SelectedIndex = TaskComboBox.Items.IndexOf(lastSelectedTask)
+                        End If
+
+                    Else
+                        TaskComboBox.SelectedIndex = lastSelectedTask
+                    End If
 
                     ' 5.) MOVE UI OUT OF Adding MODE
                     addButton.Enabled = True

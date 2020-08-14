@@ -760,7 +760,7 @@
             ' The substring at the end ensures that there isn't an extra comma at the end
             columnList = "(" & columnList.Substring(0, columnList.Length - 1) & ")"
             valuesParamList = "(" & valuesParamList.Substring(0, valuesParamList.Length - 1) & ")"
-            Console.WriteLine("INSERT INTO " & tableName & " " & columnList & " VALUES " & valuesParamList)
+            'Console.WriteLine("INSERT INTO " & tableName & " " & columnList & " VALUES " & valuesParamList)
             insertController.ExecQuery("INSERT INTO " & tableName & " " & columnList & " VALUES " & valuesParamList)
         End If
 
@@ -831,7 +831,7 @@
             ' The substring at the end ensures that there isn't an extra comma at the end
             columnList = "(" & columnList.Substring(0, columnList.Length - 1) & ")"
             valuesParamList = "(" & valuesParamList.Substring(0, valuesParamList.Length - 1) & ")"
-            Console.WriteLine("INSERT INTO " & tableName & " " & columnList & " VALUES " & valuesParamList)
+            'Console.WriteLine("INSERT INTO " & tableName & " " & columnList & " VALUES " & valuesParamList)
             insertController.ExecQuery("INSERT INTO " & tableName & " " & columnList & " VALUES " & valuesParamList)
         End If
 
