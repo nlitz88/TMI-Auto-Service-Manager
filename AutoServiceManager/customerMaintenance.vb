@@ -14,6 +14,7 @@
 
     ' Row index variables used for DataTable lookups
     Private CustomerRow As Integer
+    Private CustomerId As Integer                   ' Maintains corresponding CustomerId to CLFA currently selected
     Private zcRow As Integer
     Private lastSelected As String
 
@@ -466,6 +467,8 @@
         ' If this query DOES return a valid row index, then initialize respective controls
         If CustomerRow <> -1 Then
 
+            CustomerId = CustomerDbController.DbDataTable(CustomerRow)("CustomerId")
+
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
             InitializeAllDataViewingControls()
@@ -678,7 +681,7 @@
 
                     ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
                     ' If insertion failed, then revert selected back to lastSelected
-                    Dim updatedItem As String = getRowValueWithKeyEquals(CustomerDbController.DbDataTable, "CLFA", "CustomerId", Convert.ToInt32(CustomerId_Textbox.Text)) ' Could also use datatable lookup to get CustomerId. Either should work.
+                    Dim updatedItem As String = getRowValueWithKeyEquals(CustomerDbController.DbDataTable, "CLFA", "CustomerId", CustomerId)
                     If updatedItem <> Nothing Then
                         CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(updatedItem)
                     Else

@@ -23,7 +23,8 @@
     Private CustomerRow As Integer              ' Used to keep track of which Customer CLFA selected
     Private CustomerId As Integer               ' Maintains corresponding CustomerId to CLFA
 
-    Private VehicleRow As Integer
+    Private VehicleRow As Integer               ' Used to keep track of which Vehicle YMML selected
+    Private VehicleId As Integer                ' Maintains corresponding VehicleId to YMML
     Private lastSelectedVehicle As String
 
     ' Keeps track of whether or not user in "editing" or "adding" mode
@@ -717,6 +718,8 @@
         ' If this query DOES return a valid row index, then initialize respective controls
         If VehicleRow <> -1 Then
 
+            VehicleId = VehicleDbController.DbDataTable.Rows(VehicleRow)("VehicleId")
+
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
             InitializeAllDataViewingControls()
@@ -936,8 +939,7 @@
 
                     ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
                     ' If insertion failed, then revert selected back to lastSelected
-                    Dim currentVehicleId As Integer = VehicleDbController.DbDataTable.Rows(VehicleRow)("VehicleId")
-                    Dim updatedItem As String = getRowValueWithKeyEquals(VehicleDbController.DbDataTable, "YMML", "VehicleId", currentVehicleId)
+                    Dim updatedItem As String = getRowValueWithKeyEquals(VehicleDbController.DbDataTable, "YMML", "VehicleId", VehicleId)
                     If updatedItem <> Nothing Then
                         VehicleComboBox.SelectedIndex = VehicleComboBox.Items.IndexOf(updatedItem)
                     Else
