@@ -156,6 +156,9 @@ Public Class editMasterTaskPart
         ' Unit Price
         If Not validCurrency("Unit Price", False, PartPrice_Textbox.Text, errorMessage) Then PartPrice_Textbox.ForeColor = Color.Red
 
+        ' List Price
+        If Not validCurrency("List Price", False, ListPrice_Textbox.Text, errorMessage) Then ListPrice_Textbox.ForeColor = Color.Red
+
 
         ' Check if any invalid input has been found
         If Not String.IsNullOrEmpty(errorMessage) Then
