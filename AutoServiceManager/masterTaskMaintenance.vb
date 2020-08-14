@@ -472,6 +472,38 @@
     End Function
 
 
+    ' Function that makes insertRow calls for all relevant DataTables
+    Private Function insertAll() As Boolean
+
+        ' Lookup corresponding taskType symbol for valid taskType description first.
+        ' Exclude task type from updateTable, then add its swapped value as an additional value
+        Dim TaskTypeSymbol As String = getRowValueWithKey(TaskTypesDbController.DbDataTable, "TaskType", "TaskDescription", TaskType_ComboBox.Text)
+
+        Dim excludedControls As New List(Of Control) From {TaskType_ComboBox}
+        Dim additionalValues As New List(Of AdditionalValue) From {New AdditionalValue("TaskType", GetType(String), TaskTypeSymbol)}
+
+        ' Then, make calls to insertRow to all relevant tables
+        insertRow(CRUD, MTL.DbDataTable, "MasterTaskList", "_", "dataEditingControl", Me, excludedControls, additionalValues)
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
+
+    ' Function that makes deleteRow calls for all relevant DataTables
+    Private Function deleteAll() As Boolean
+
+        deleteRow(CRUD, "MasterTaskList", TaskId, "TaskId")
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
 
 
 
@@ -616,7 +648,6 @@
 
             ' Lookup TaskId based on selected TaskDescription
             TaskId = MTL.DbDataTable(TaskRow)("TaskId")
-            Console.WriteLine(TaskId)
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
@@ -690,11 +721,11 @@
             Case DialogResult.Yes
 
                 ' 1.) Delete value from database
-                'If Not deleteAll() Then
-                '    MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                'Else
-                '    MessageBox.Show("Successfully deleted " & TaskComboBox.Text & " from Customers")
-                'End If
+                If Not deleteAll() Then
+                    MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("Successfully deleted " & TaskComboBox.Text & " from Master Task List")
+                End If
 
                 ' 2.) RELOAD MASTERTASKLIST DATATABLE FROM DATABASE
                 If Not loadMasterTaskListDataTable() Then
