@@ -22,56 +22,37 @@ Partial Class addMasterTaskLabor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.PartNbr_Textbox = New System.Windows.Forms.TextBox()
-        Me.PartNumberLabel = New System.Windows.Forms.Label()
         Me.orLabel = New System.Windows.Forms.Label()
         Me.newLaborButton = New System.Windows.Forms.Button()
-        Me.PartAmount_Textbox = New System.Windows.Forms.TextBox()
-        Me.TotalLabel = New System.Windows.Forms.Label()
-        Me.Qty_Textbox = New System.Windows.Forms.TextBox()
-        Me.QuantityLabel = New System.Windows.Forms.Label()
-        Me.PartDescriptionLabel = New System.Windows.Forms.Label()
-        Me.PartDescription_Textbox = New System.Windows.Forms.TextBox()
-        Me.ListPrice_Textbox = New System.Windows.Forms.TextBox()
-        Me.ListPriceLabel = New System.Windows.Forms.Label()
-        Me.PartPrice_Textbox = New System.Windows.Forms.TextBox()
-        Me.UnitPriceLabel = New System.Windows.Forms.Label()
         Me.TaskTextbox = New System.Windows.Forms.TextBox()
         Me.TaskNameLabel = New System.Windows.Forms.Label()
-        Me.PartNumberComboLabel = New System.Windows.Forms.Label()
-        Me.PartComboBox = New System.Windows.Forms.ComboBox()
         Me.cancelButton = New System.Windows.Forms.Button()
         Me.saveButton = New System.Windows.Forms.Button()
         Me.addMasterTaskLaborLabel = New System.Windows.Forms.Label()
+        Me.Amount_Textbox = New System.Windows.Forms.TextBox()
+        Me.AmountLabel = New System.Windows.Forms.Label()
+        Me.Amount_Value = New System.Windows.Forms.Label()
+        Me.Description_Value = New System.Windows.Forms.Label()
+        Me.DescriptionLabel = New System.Windows.Forms.Label()
+        Me.Description_Textbox = New System.Windows.Forms.TextBox()
+        Me.Hours_Textbox = New System.Windows.Forms.TextBox()
+        Me.HoursLabel = New System.Windows.Forms.Label()
+        Me.Hours_Value = New System.Windows.Forms.Label()
+        Me.Rate_Textbox = New System.Windows.Forms.TextBox()
+        Me.RateLabel = New System.Windows.Forms.Label()
+        Me.Rate_Value = New System.Windows.Forms.Label()
+        Me.LaborCode_Textbox = New System.Windows.Forms.TextBox()
+        Me.LaborCode_Value = New System.Windows.Forms.Label()
+        Me.LaborCodeLabel = New System.Windows.Forms.Label()
+        Me.LaborCodeComboLabel = New System.Windows.Forms.Label()
+        Me.LCComboBox = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
-        '
-        'PartNbr_Textbox
-        '
-        Me.PartNbr_Textbox.Enabled = False
-        Me.PartNbr_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PartNbr_Textbox.Location = New System.Drawing.Point(199, 324)
-        Me.PartNbr_Textbox.MaxLength = 30
-        Me.PartNbr_Textbox.Name = "PartNbr_Textbox"
-        Me.PartNbr_Textbox.Size = New System.Drawing.Size(270, 27)
-        Me.PartNbr_Textbox.TabIndex = 198
-        Me.PartNbr_Textbox.Tag = "dataEditingControl"
-        '
-        'PartNumberLabel
-        '
-        Me.PartNumberLabel.AutoSize = True
-        Me.PartNumberLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.PartNumberLabel.Location = New System.Drawing.Point(97, 330)
-        Me.PartNumberLabel.Name = "PartNumberLabel"
-        Me.PartNumberLabel.Size = New System.Drawing.Size(96, 17)
-        Me.PartNumberLabel.TabIndex = 199
-        Me.PartNumberLabel.Tag = "dataLabel"
-        Me.PartNumberLabel.Text = "Part Number :"
         '
         'orLabel
         '
         Me.orLabel.AutoSize = True
         Me.orLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.orLabel.Location = New System.Drawing.Point(501, 264)
+        Me.orLabel.Location = New System.Drawing.Point(655, 264)
         Me.orLabel.Name = "orLabel"
         Me.orLabel.Size = New System.Drawing.Size(47, 17)
         Me.orLabel.TabIndex = 197
@@ -82,115 +63,12 @@ Partial Class addMasterTaskLabor
         Me.newLaborButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.newLaborButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.newLaborButton.ForeColor = System.Drawing.Color.White
-        Me.newLaborButton.Location = New System.Drawing.Point(554, 257)
+        Me.newLaborButton.Location = New System.Drawing.Point(708, 257)
         Me.newLaborButton.Name = "newLaborButton"
-        Me.newLaborButton.Size = New System.Drawing.Size(225, 30)
+        Me.newLaborButton.Size = New System.Drawing.Size(175, 30)
         Me.newLaborButton.TabIndex = 186
         Me.newLaborButton.Text = "Add New Labor Code"
         Me.newLaborButton.UseVisualStyleBackColor = False
-        '
-        'PartAmount_Textbox
-        '
-        Me.PartAmount_Textbox.Enabled = False
-        Me.PartAmount_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PartAmount_Textbox.Location = New System.Drawing.Point(554, 425)
-        Me.PartAmount_Textbox.Name = "PartAmount_Textbox"
-        Me.PartAmount_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.PartAmount_Textbox.TabIndex = 195
-        Me.PartAmount_Textbox.Tag = "dataEditingControl"
-        '
-        'TotalLabel
-        '
-        Me.TotalLabel.AutoSize = True
-        Me.TotalLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.TotalLabel.Location = New System.Drawing.Point(500, 431)
-        Me.TotalLabel.Name = "TotalLabel"
-        Me.TotalLabel.Size = New System.Drawing.Size(48, 17)
-        Me.TotalLabel.TabIndex = 196
-        Me.TotalLabel.Tag = "dataLabel"
-        Me.TotalLabel.Text = "Total :"
-        '
-        'Qty_Textbox
-        '
-        Me.Qty_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Qty_Textbox.Location = New System.Drawing.Point(172, 425)
-        Me.Qty_Textbox.MaxLength = 14
-        Me.Qty_Textbox.Name = "Qty_Textbox"
-        Me.Qty_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.Qty_Textbox.TabIndex = 182
-        Me.Qty_Textbox.Tag = "dataEditingControl"
-        '
-        'QuantityLabel
-        '
-        Me.QuantityLabel.AutoSize = True
-        Me.QuantityLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.QuantityLabel.Location = New System.Drawing.Point(97, 431)
-        Me.QuantityLabel.Name = "QuantityLabel"
-        Me.QuantityLabel.Size = New System.Drawing.Size(69, 17)
-        Me.QuantityLabel.TabIndex = 194
-        Me.QuantityLabel.Tag = "dataLabel"
-        Me.QuantityLabel.Text = "Quantity :"
-        '
-        'PartDescriptionLabel
-        '
-        Me.PartDescriptionLabel.AutoSize = True
-        Me.PartDescriptionLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.PartDescriptionLabel.Location = New System.Drawing.Point(97, 381)
-        Me.PartDescriptionLabel.Name = "PartDescriptionLabel"
-        Me.PartDescriptionLabel.Size = New System.Drawing.Size(117, 17)
-        Me.PartDescriptionLabel.TabIndex = 193
-        Me.PartDescriptionLabel.Tag = "dataLabel"
-        Me.PartDescriptionLabel.Text = "Part Description :"
-        '
-        'PartDescription_Textbox
-        '
-        Me.PartDescription_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PartDescription_Textbox.Location = New System.Drawing.Point(220, 375)
-        Me.PartDescription_Textbox.MaxLength = 50
-        Me.PartDescription_Textbox.Name = "PartDescription_Textbox"
-        Me.PartDescription_Textbox.Size = New System.Drawing.Size(297, 27)
-        Me.PartDescription_Textbox.TabIndex = 180
-        Me.PartDescription_Textbox.Tag = "dataEditingControl"
-        '
-        'ListPrice_Textbox
-        '
-        Me.ListPrice_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListPrice_Textbox.Location = New System.Drawing.Point(618, 375)
-        Me.ListPrice_Textbox.Name = "ListPrice_Textbox"
-        Me.ListPrice_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.ListPrice_Textbox.TabIndex = 181
-        Me.ListPrice_Textbox.Tag = "dataEditingControl"
-        '
-        'ListPriceLabel
-        '
-        Me.ListPriceLabel.AutoSize = True
-        Me.ListPriceLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.ListPriceLabel.Location = New System.Drawing.Point(538, 381)
-        Me.ListPriceLabel.Name = "ListPriceLabel"
-        Me.ListPriceLabel.Size = New System.Drawing.Size(74, 17)
-        Me.ListPriceLabel.TabIndex = 192
-        Me.ListPriceLabel.Tag = "dataLabel"
-        Me.ListPriceLabel.Text = "List Price :"
-        '
-        'PartPrice_Textbox
-        '
-        Me.PartPrice_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PartPrice_Textbox.Location = New System.Drawing.Point(377, 425)
-        Me.PartPrice_Textbox.Name = "PartPrice_Textbox"
-        Me.PartPrice_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.PartPrice_Textbox.TabIndex = 183
-        Me.PartPrice_Textbox.Tag = "dataEditingControl"
-        '
-        'UnitPriceLabel
-        '
-        Me.UnitPriceLabel.AutoSize = True
-        Me.UnitPriceLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.UnitPriceLabel.Location = New System.Drawing.Point(294, 431)
-        Me.UnitPriceLabel.Name = "UnitPriceLabel"
-        Me.UnitPriceLabel.Size = New System.Drawing.Size(77, 17)
-        Me.UnitPriceLabel.TabIndex = 191
-        Me.UnitPriceLabel.Tag = "dataLabel"
-        Me.UnitPriceLabel.Text = "Unit Price :"
         '
         'TaskTextbox
         '
@@ -212,27 +90,6 @@ Partial Class addMasterTaskLabor
         Me.TaskNameLabel.Size = New System.Drawing.Size(47, 17)
         Me.TaskNameLabel.TabIndex = 189
         Me.TaskNameLabel.Text = "Task :"
-        '
-        'PartNumberComboLabel
-        '
-        Me.PartNumberComboLabel.AutoSize = True
-        Me.PartNumberComboLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.PartNumberComboLabel.Location = New System.Drawing.Point(97, 264)
-        Me.PartNumberComboLabel.Name = "PartNumberComboLabel"
-        Me.PartNumberComboLabel.Size = New System.Drawing.Size(96, 17)
-        Me.PartNumberComboLabel.TabIndex = 188
-        Me.PartNumberComboLabel.Text = "Part Number :"
-        '
-        'PartComboBox
-        '
-        Me.PartComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.PartComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.PartComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
-        Me.PartComboBox.FormattingEnabled = True
-        Me.PartComboBox.Location = New System.Drawing.Point(199, 258)
-        Me.PartComboBox.Name = "PartComboBox"
-        Me.PartComboBox.Size = New System.Drawing.Size(297, 28)
-        Me.PartComboBox.TabIndex = 179
         '
         'cancelButton
         '
@@ -270,30 +127,214 @@ Partial Class addMasterTaskLabor
         Me.addMasterTaskLaborLabel.TabIndex = 187
         Me.addMasterTaskLaborLabel.Text = "Add Task Labor"
         '
+        'Amount_Textbox
+        '
+        Me.Amount_Textbox.Enabled = False
+        Me.Amount_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Amount_Textbox.Location = New System.Drawing.Point(518, 422)
+        Me.Amount_Textbox.Name = "Amount_Textbox"
+        Me.Amount_Textbox.Size = New System.Drawing.Size(105, 27)
+        Me.Amount_Textbox.TabIndex = 214
+        Me.Amount_Textbox.Tag = "dataEditingControl"
+        '
+        'AmountLabel
+        '
+        Me.AmountLabel.AutoSize = True
+        Me.AmountLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.AmountLabel.Location = New System.Drawing.Point(464, 428)
+        Me.AmountLabel.Name = "AmountLabel"
+        Me.AmountLabel.Size = New System.Drawing.Size(48, 17)
+        Me.AmountLabel.TabIndex = 216
+        Me.AmountLabel.Tag = "dataLabel"
+        Me.AmountLabel.Text = "Total :"
+        '
+        'Amount_Value
+        '
+        Me.Amount_Value.AutoSize = True
+        Me.Amount_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Amount_Value.ForeColor = System.Drawing.Color.Black
+        Me.Amount_Value.Location = New System.Drawing.Point(518, 425)
+        Me.Amount_Value.Name = "Amount_Value"
+        Me.Amount_Value.Size = New System.Drawing.Size(0, 20)
+        Me.Amount_Value.TabIndex = 215
+        Me.Amount_Value.Tag = "dataViewingControl"
+        '
+        'Description_Value
+        '
+        Me.Description_Value.AutoSize = True
+        Me.Description_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Description_Value.ForeColor = System.Drawing.Color.Black
+        Me.Description_Value.Location = New System.Drawing.Point(190, 375)
+        Me.Description_Value.Name = "Description_Value"
+        Me.Description_Value.Size = New System.Drawing.Size(0, 20)
+        Me.Description_Value.TabIndex = 213
+        Me.Description_Value.Tag = "dataViewingControl"
+        '
+        'DescriptionLabel
+        '
+        Me.DescriptionLabel.AutoSize = True
+        Me.DescriptionLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.DescriptionLabel.Location = New System.Drawing.Point(97, 378)
+        Me.DescriptionLabel.Name = "DescriptionLabel"
+        Me.DescriptionLabel.Size = New System.Drawing.Size(87, 17)
+        Me.DescriptionLabel.TabIndex = 212
+        Me.DescriptionLabel.Tag = "dataLabel"
+        Me.DescriptionLabel.Text = "Description :"
+        '
+        'Description_Textbox
+        '
+        Me.Description_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Description_Textbox.Location = New System.Drawing.Point(190, 372)
+        Me.Description_Textbox.MaxLength = 100
+        Me.Description_Textbox.Name = "Description_Textbox"
+        Me.Description_Textbox.Size = New System.Drawing.Size(662, 27)
+        Me.Description_Textbox.TabIndex = 202
+        Me.Description_Textbox.Tag = "dataEditingControl"
+        '
+        'Hours_Textbox
+        '
+        Me.Hours_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Hours_Textbox.Location = New System.Drawing.Point(333, 422)
+        Me.Hours_Textbox.MaxLength = 14
+        Me.Hours_Textbox.Name = "Hours_Textbox"
+        Me.Hours_Textbox.Size = New System.Drawing.Size(105, 27)
+        Me.Hours_Textbox.TabIndex = 204
+        Me.Hours_Textbox.Tag = "dataEditingControl"
+        '
+        'HoursLabel
+        '
+        Me.HoursLabel.AutoSize = True
+        Me.HoursLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.HoursLabel.Location = New System.Drawing.Point(273, 428)
+        Me.HoursLabel.Name = "HoursLabel"
+        Me.HoursLabel.Size = New System.Drawing.Size(54, 17)
+        Me.HoursLabel.TabIndex = 211
+        Me.HoursLabel.Tag = "dataLabel"
+        Me.HoursLabel.Text = "Hours :"
+        '
+        'Hours_Value
+        '
+        Me.Hours_Value.AutoSize = True
+        Me.Hours_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Hours_Value.ForeColor = System.Drawing.Color.Black
+        Me.Hours_Value.Location = New System.Drawing.Point(333, 425)
+        Me.Hours_Value.Name = "Hours_Value"
+        Me.Hours_Value.Size = New System.Drawing.Size(0, 20)
+        Me.Hours_Value.TabIndex = 210
+        Me.Hours_Value.Tag = "dataViewingControl"
+        '
+        'Rate_Textbox
+        '
+        Me.Rate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Rate_Textbox.Location = New System.Drawing.Point(149, 422)
+        Me.Rate_Textbox.Name = "Rate_Textbox"
+        Me.Rate_Textbox.Size = New System.Drawing.Size(105, 27)
+        Me.Rate_Textbox.TabIndex = 203
+        Me.Rate_Textbox.Tag = "dataEditingControl"
+        '
+        'RateLabel
+        '
+        Me.RateLabel.AutoSize = True
+        Me.RateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.RateLabel.Location = New System.Drawing.Point(97, 428)
+        Me.RateLabel.Name = "RateLabel"
+        Me.RateLabel.Size = New System.Drawing.Size(46, 17)
+        Me.RateLabel.TabIndex = 209
+        Me.RateLabel.Tag = "dataLabel"
+        Me.RateLabel.Text = "Rate :"
+        '
+        'Rate_Value
+        '
+        Me.Rate_Value.AutoSize = True
+        Me.Rate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Rate_Value.ForeColor = System.Drawing.Color.Black
+        Me.Rate_Value.Location = New System.Drawing.Point(149, 425)
+        Me.Rate_Value.Name = "Rate_Value"
+        Me.Rate_Value.Size = New System.Drawing.Size(0, 20)
+        Me.Rate_Value.TabIndex = 208
+        Me.Rate_Value.Tag = "dataViewingControl"
+        '
+        'LaborCode_Textbox
+        '
+        Me.LaborCode_Textbox.Enabled = False
+        Me.LaborCode_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LaborCode_Textbox.Location = New System.Drawing.Point(193, 322)
+        Me.LaborCode_Textbox.MaxLength = 15
+        Me.LaborCode_Textbox.Name = "LaborCode_Textbox"
+        Me.LaborCode_Textbox.Size = New System.Drawing.Size(270, 27)
+        Me.LaborCode_Textbox.TabIndex = 201
+        Me.LaborCode_Textbox.Tag = "dataEditingControl"
+        '
+        'LaborCode_Value
+        '
+        Me.LaborCode_Value.AutoSize = True
+        Me.LaborCode_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LaborCode_Value.ForeColor = System.Drawing.Color.Black
+        Me.LaborCode_Value.Location = New System.Drawing.Point(193, 325)
+        Me.LaborCode_Value.Name = "LaborCode_Value"
+        Me.LaborCode_Value.Size = New System.Drawing.Size(0, 20)
+        Me.LaborCode_Value.TabIndex = 207
+        Me.LaborCode_Value.Tag = "dataViewingControl"
+        '
+        'LaborCodeLabel
+        '
+        Me.LaborCodeLabel.AutoSize = True
+        Me.LaborCodeLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.LaborCodeLabel.Location = New System.Drawing.Point(97, 328)
+        Me.LaborCodeLabel.Name = "LaborCodeLabel"
+        Me.LaborCodeLabel.Size = New System.Drawing.Size(90, 17)
+        Me.LaborCodeLabel.TabIndex = 206
+        Me.LaborCodeLabel.Tag = "dataLabel"
+        Me.LaborCodeLabel.Text = "Labor Code :"
+        '
+        'LaborCodeComboLabel
+        '
+        Me.LaborCodeComboLabel.AutoSize = True
+        Me.LaborCodeComboLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.LaborCodeComboLabel.Location = New System.Drawing.Point(97, 264)
+        Me.LaborCodeComboLabel.Name = "LaborCodeComboLabel"
+        Me.LaborCodeComboLabel.Size = New System.Drawing.Size(90, 17)
+        Me.LaborCodeComboLabel.TabIndex = 205
+        Me.LaborCodeComboLabel.Text = "Labor Code :"
+        '
+        'LCComboBox
+        '
+        Me.LCComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.LCComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.LCComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
+        Me.LCComboBox.FormattingEnabled = True
+        Me.LCComboBox.Location = New System.Drawing.Point(193, 258)
+        Me.LCComboBox.Name = "LCComboBox"
+        Me.LCComboBox.Size = New System.Drawing.Size(456, 28)
+        Me.LCComboBox.TabIndex = 200
+        '
         'addMasterTaskLabor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
-        Me.Controls.Add(Me.PartNbr_Textbox)
-        Me.Controls.Add(Me.PartNumberLabel)
+        Me.Controls.Add(Me.Amount_Textbox)
+        Me.Controls.Add(Me.AmountLabel)
+        Me.Controls.Add(Me.Amount_Value)
+        Me.Controls.Add(Me.Description_Value)
+        Me.Controls.Add(Me.DescriptionLabel)
+        Me.Controls.Add(Me.Description_Textbox)
+        Me.Controls.Add(Me.Hours_Textbox)
+        Me.Controls.Add(Me.HoursLabel)
+        Me.Controls.Add(Me.Hours_Value)
+        Me.Controls.Add(Me.Rate_Textbox)
+        Me.Controls.Add(Me.RateLabel)
+        Me.Controls.Add(Me.Rate_Value)
+        Me.Controls.Add(Me.LaborCode_Textbox)
+        Me.Controls.Add(Me.LaborCode_Value)
+        Me.Controls.Add(Me.LaborCodeLabel)
+        Me.Controls.Add(Me.LaborCodeComboLabel)
+        Me.Controls.Add(Me.LCComboBox)
         Me.Controls.Add(Me.orLabel)
         Me.Controls.Add(Me.newLaborButton)
-        Me.Controls.Add(Me.PartAmount_Textbox)
-        Me.Controls.Add(Me.TotalLabel)
-        Me.Controls.Add(Me.Qty_Textbox)
-        Me.Controls.Add(Me.QuantityLabel)
-        Me.Controls.Add(Me.PartDescriptionLabel)
-        Me.Controls.Add(Me.PartDescription_Textbox)
-        Me.Controls.Add(Me.ListPrice_Textbox)
-        Me.Controls.Add(Me.ListPriceLabel)
-        Me.Controls.Add(Me.PartPrice_Textbox)
-        Me.Controls.Add(Me.UnitPriceLabel)
         Me.Controls.Add(Me.TaskTextbox)
         Me.Controls.Add(Me.TaskNameLabel)
-        Me.Controls.Add(Me.PartNumberComboLabel)
-        Me.Controls.Add(Me.PartComboBox)
         Me.Controls.Add(Me.cancelButton)
         Me.Controls.Add(Me.saveButton)
         Me.Controls.Add(Me.addMasterTaskLaborLabel)
@@ -306,26 +347,28 @@ Partial Class addMasterTaskLabor
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents PartNbr_Textbox As TextBox
-    Friend WithEvents PartNumberLabel As Label
     Friend WithEvents orLabel As Label
     Friend WithEvents newLaborButton As Button
-    Friend WithEvents PartAmount_Textbox As TextBox
-    Friend WithEvents TotalLabel As Label
-    Friend WithEvents Qty_Textbox As TextBox
-    Friend WithEvents QuantityLabel As Label
-    Friend WithEvents PartDescriptionLabel As Label
-    Friend WithEvents PartDescription_Textbox As TextBox
-    Friend WithEvents ListPrice_Textbox As TextBox
-    Friend WithEvents ListPriceLabel As Label
-    Friend WithEvents PartPrice_Textbox As TextBox
-    Friend WithEvents UnitPriceLabel As Label
     Friend WithEvents TaskTextbox As TextBox
     Friend WithEvents TaskNameLabel As Label
-    Friend WithEvents PartNumberComboLabel As Label
-    Friend WithEvents PartComboBox As ComboBox
     Friend WithEvents cancelButton As Button
     Friend WithEvents saveButton As Button
     Friend WithEvents addMasterTaskLaborLabel As Label
+    Friend WithEvents Amount_Textbox As TextBox
+    Friend WithEvents AmountLabel As Label
+    Friend WithEvents Amount_Value As Label
+    Friend WithEvents Description_Value As Label
+    Friend WithEvents DescriptionLabel As Label
+    Friend WithEvents Description_Textbox As TextBox
+    Friend WithEvents Hours_Textbox As TextBox
+    Friend WithEvents HoursLabel As Label
+    Friend WithEvents Hours_Value As Label
+    Friend WithEvents Rate_Textbox As TextBox
+    Friend WithEvents RateLabel As Label
+    Friend WithEvents Rate_Value As Label
+    Friend WithEvents LaborCode_Textbox As TextBox
+    Friend WithEvents LaborCode_Value As Label
+    Friend WithEvents LaborCodeLabel As Label
+    Friend WithEvents LaborCodeComboLabel As Label
+    Friend WithEvents LCComboBox As ComboBox
 End Class
