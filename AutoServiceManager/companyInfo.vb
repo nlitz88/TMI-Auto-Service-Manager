@@ -207,7 +207,12 @@ Public Class companyInfo
 
 
 
-    Private Sub companyInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
 
         ' TEST DATABASE CONNECTION FIRST
         If Not checkDbConn() Then
@@ -237,6 +242,16 @@ Public Class companyInfo
 
         valuesInitialized = True
 
+    End Sub
+
+
+    Private Sub companyInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        ' PRE-DRAW PRE-LOADED (Preliminary) COMBOBOXES. 
+        ' This way, we don't have to wait for them to draw on first edit/add
+
+        ZipCode_ComboBox.Visible = True
+        ZipCode_ComboBox.Visible = False
 
     End Sub
 
