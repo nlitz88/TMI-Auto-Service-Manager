@@ -136,10 +136,17 @@ Public Class companyInfo
     ' Function that makes updateTable calls for all relevant DataTables that need updated based on changes
     Private Function updateAll() As Boolean
 
-        ' First, remove any formatting that was added (specific to the controls on this form)
-        stripFormatting()
+
+        ' In order to accurately reflect the values in TaxRate and Shop Supply Charge in the database, we must divide their values by 100
+        Dim TaxRate As Decimal = Convert.ToDecimal(TaxRate_Textbox.Text) / 100
+        Dim ShopSupplyCharge As Decimal = Convert.ToDecimal(ShopSupplyCharge_Textbox.Text) / 100
+
+        ' List TaxRate and ShopSupplyCharge as excluded, and then add their values to the query via AdditionalValue list
+        Dim excludedControls As New List(Of Control) From {TaxRate_Textbox, ShopSupplyCharge_Textbox}
+        Dim additionalValues As New List(Of AdditionalValue) From {New AdditionalValue("TaxRate", GetType(Double), TaxRate), New AdditionalValue("ShopSupplyCharge", GetType(Double), ShopSupplyCharge)}
+
         ' Then, update all relevant tables that COUDLD have experienced changes
-        updateTable(updateController, CompanyMasterDbController.DbDataTable, "CompanyMaster", "_", "dataEditingControl", Me)
+        updateTable(updateController, CompanyMasterDbController.DbDataTable, "CompanyMaster", 1, 1, "_", "dataEditingControl", Me, excludedControls, additionalValues)
         ' Then, return exception status of updateController. Return false andfrom this function and reformat if there is an exception thrown (do this after each call).
         If updateController.HasException() Then Return False
 
@@ -372,10 +379,6 @@ Public Class companyInfo
 
 
     ' ************************ dataEditingControls TEXTBOX EVENT HANDLERS ************************
-
-    Private Sub dataEditingControls_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
 
 
     Private Sub CompanyName1_Textbox_TextChanged(sender As Object, e As EventArgs) Handles CompanyName1_Textbox.TextChanged
