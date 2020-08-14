@@ -483,15 +483,11 @@
     End Function
 
 
-    ' Function that handles deleting for MasterTaskParts Table (Add and Edit performed on editMasterTaskPart/addMasterTaskPart forms)
-    Public Function deleteMasterTaskPart() As Boolean
 
-        deleteRow(CRUD, TaskPartsDbController.DbDataTable, TaskPartsRow, New List(Of String), "MasterTaskParts")
-        If CRUD.HasException() Then Return False
 
-        Return True
 
-    End Function
+
+    ' ***************** CRUD subs for MasterTaskLabor and MasterTaskParts *****************
 
 
     ' Function that handles deleting for MasterTaskParts Table (Add and Edit performed on editMasterTaskPart/addMasterTaskPart forms)
@@ -503,6 +499,19 @@
         Return True
 
     End Function
+
+
+    ' Function that handles deleting for MasterTaskParts Table (Add and Edit performed on editMasterTaskPart/addMasterTaskPart forms)
+    Public Function deleteMasterTaskPart() As Boolean
+
+        deleteRow(CRUD, TaskPartsDbController.DbDataTable, TaskPartsRow, New List(Of String), "MasterTaskParts")
+        If CRUD.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+
 
 
 
