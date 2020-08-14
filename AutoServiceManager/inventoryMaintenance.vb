@@ -695,17 +695,17 @@ Public Class inventoryMaintenance
                     Exit Sub
                 Else
 
-                    ' CALL REINITIALIZATION HERE
-                    'If Not masterTaskMaintenance.reinitializeDependents() Then
-                    '    MessageBox.Show("Reloading of Master Task List Unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    '    saveButton.Enabled = False
-                    '    Exit Sub
-                    'End If
-
+                    'Call REINITIALIZATION HERE
+                    If Not addMasterTaskPart.reInitializeParts() Then
+                        MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        saveButton.Enabled = False
+                        Exit Sub
+                    End If
 
                     MeClosed = True
                     changeScreen(addMasterTaskPart, Me)
                     previousScreen = Nothing
+
                 End If
 
             Else
