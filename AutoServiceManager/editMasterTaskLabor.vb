@@ -206,7 +206,7 @@ Public Class editMasterTaskLabor
 
         If Not MeClosed Then
 
-            If InitialPartValues.CtrlValuesChanged() Then
+            If InitialLaborValues.CtrlValuesChanged() Then
 
                 Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
