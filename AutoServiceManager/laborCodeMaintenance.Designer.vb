@@ -22,7 +22,6 @@ Partial Class laborCodeMaintenance
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.nav = New AutoServiceManager.navigation()
         Me.Description_Value = New System.Windows.Forms.Label()
         Me.DescriptionLabel = New System.Windows.Forms.Label()
         Me.Description_Textbox = New System.Windows.Forms.TextBox()
@@ -46,16 +45,9 @@ Partial Class laborCodeMaintenance
         Me.Amount_Textbox = New System.Windows.Forms.TextBox()
         Me.AmountLabel = New System.Windows.Forms.Label()
         Me.Amount_Value = New System.Windows.Forms.Label()
+        Me.nav = New AutoServiceManager.navigation()
+        Me.returnButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
-        '
-        'nav
-        '
-        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.nav.Location = New System.Drawing.Point(0, 0)
-        Me.nav.Name = "nav"
-        Me.nav.Size = New System.Drawing.Size(982, 28)
-        Me.nav.TabIndex = 50
         '
         'Description_Value
         '
@@ -312,12 +304,34 @@ Partial Class laborCodeMaintenance
         Me.Amount_Value.TabIndex = 134
         Me.Amount_Value.Tag = "dataViewingControl"
         '
+        'nav
+        '
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(982, 28)
+        Me.nav.TabIndex = 50
+        '
+        'returnButton
+        '
+        Me.returnButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.returnButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.returnButton.ForeColor = System.Drawing.Color.White
+        Me.returnButton.Location = New System.Drawing.Point(100, 419)
+        Me.returnButton.Name = "returnButton"
+        Me.returnButton.Size = New System.Drawing.Size(233, 30)
+        Me.returnButton.TabIndex = 136
+        Me.returnButton.Text = "Return To Add Task Labor"
+        Me.returnButton.UseVisualStyleBackColor = False
+        '
         'laborCodeMaintenance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.returnButton)
         Me.Controls.Add(Me.Amount_Textbox)
         Me.Controls.Add(Me.AmountLabel)
         Me.Controls.Add(Me.Amount_Value)
@@ -376,4 +390,5 @@ Partial Class laborCodeMaintenance
     Friend WithEvents Amount_Textbox As TextBox
     Friend WithEvents AmountLabel As Label
     Friend WithEvents Amount_Value As Label
+    Friend WithEvents returnButton As Button
 End Class

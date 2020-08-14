@@ -734,7 +734,7 @@ Public Class inventoryMaintenance
 
             If PartNbr_Textbox.Visible And InitialIPValues.CtrlValuesChanged() Then
 
-                Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                Dim decision As DialogResult = MessageBox.Show("Exit without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
                 If decision = DialogResult.No Then
                     e.Cancel = True
