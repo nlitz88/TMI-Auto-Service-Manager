@@ -547,10 +547,24 @@
         ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
 
 
-        ' Task Description
+        ' Task Description (REQUIRED)(UNIQUE)
         If Not isValidLength("Description", True, TaskDescription_Textbox.Text, 50, errorMessage) Then
             TaskDescription_Textbox.ForeColor = Color.Red
+        Else
+            If mtMode = "editing" Then
+                Dim initial As String = MTL.DbDataTable.Rows(TaskRow)("TaskDescription").ToString().ToLower()
+                If TaskDescription_Textbox.Text.ToLower() <> initial Then
+                    If isDuplicate("Description", errorMessage, "TaskDescription", TaskDescription_Textbox.Text, MTL.DbDataTable) Then
+                        TaskDescription_Textbox.ForeColor = Color.Red
+                    End If
+                End If
+            ElseIf mtMode = "adding" Then
+                If isDuplicate("Description", errorMessage, "TaskDescription", TaskDescription_Textbox.Text, MTL.DbDataTable) Then
+                    TaskDescription_Textbox.ForeColor = Color.Red
+                End If
+            End If
         End If
+
 
         ' Instructions
         If Not isValidLength("Instructions", False, Instructions_Textbox.Text, 255, errorMessage) Then
@@ -876,6 +890,12 @@
                     ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
                     ' If update failed, then revert selected back to lastSelected
                     TaskComboBox.SelectedIndex = TaskComboBox.Items.IndexOf(TaskDescription_Textbox.Text)
+                    Dim updatedItem As String = getRowValueWithKeyEquals(MTL.DbDataTable, "TaskDescription", "TaskDescription", TaskDescription_Textbox.Text)
+                    If updatedItem <> Nothing Then
+                        TaskComboBox.SelectedIndex = TaskComboBox.Items.IndexOf(updatedItem)
+                    Else
+                        TaskComboBox.SelectedIndex = TaskComboBox.Items.IndexOf(lastSelectedTask)
+                    End If
 
                     ' 5.) MOVE UI OUT OF EDITING MODE
                     addButton.Enabled = True
