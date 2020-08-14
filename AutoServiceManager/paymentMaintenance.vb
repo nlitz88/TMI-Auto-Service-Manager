@@ -235,7 +235,7 @@ Public Class paymentMaintenance
         End If
 
         ' If the input in the combobox matches an entry in the table that it represents
-        If PTList.BinarySearch(PTComboBox.Text.ToLower()) >= 0 Then
+        If getDataTableRow(PTDbController.DbDataTable, "PaymentType", PTComboBox.Text) <> -1 Then
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
@@ -355,6 +355,8 @@ Public Class paymentMaintenance
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialPTValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
+        lastSelected = PTComboBox.Text
+
         ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
         editButton.Enabled = False
         addButton.Enabled = False
@@ -446,8 +448,14 @@ Public Class paymentMaintenance
                     For Each row In PTDbController.DbDataTable.Rows
                         PTComboBox.Items.Add(row("PaymentType"))
                     Next
-                    PTComboBox.SelectedIndex = PTComboBox.Items.IndexOf(PaymentType_Textbox.Text)
-                    'PTComboBox.SelectedIndex = amRow + 1
+
+                    ' Check to see if the edited item is in the newly loaded DataTable.
+                    ' If it is, set the combobox to this new item. If not, set it to the last Selected
+                    If getDataTableRow(PTDbController.DbDataTable, "PaymentType", PaymentType_Textbox.Text) <> -1 Then
+                        PTComboBox.SelectedIndex = PTComboBox.Items.IndexOf(PaymentType_Textbox.Text)
+                    Else
+                        PTComboBox.SelectedIndex = PTComboBox.Items.IndexOf(lastSelected)
+                    End If
 
                     ' dataViewingControl values reinitialized, as well as dataControls hide/show in combobox text/selectedindex change event
 
@@ -483,8 +491,14 @@ Public Class paymentMaintenance
                         PTComboBox.Items.Add(row("PaymentType"))
                     Next
 
+                    ' Check to see if the added item is in the newly loaded DataTable.
+                    ' If it is, set the combobox to this new item. If not, set it to the last Selected
+                    If getDataTableRow(PTDbController.DbDataTable, "PaymentType", PaymentType_Textbox.Text) <> -1 Then
+                        PTComboBox.SelectedIndex = PTComboBox.Items.IndexOf(PaymentType_Textbox.Text)
+                    Else
+                        PTComboBox.SelectedIndex = PTComboBox.Items.IndexOf(lastSelected)
+                    End If
                     ' Changing index of main combobox will also initialize respective dataViewing control values
-                    PTComboBox.SelectedIndex = PTComboBox.Items.IndexOf(PaymentType_Textbox.Text)
 
                     ' 5.) MOVE UI OUT OF Adding MODE
                     addButton.Enabled = True
