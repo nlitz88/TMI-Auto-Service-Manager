@@ -1,4 +1,6 @@
-﻿Public Class addMasterTaskLabor
+﻿Imports System.ComponentModel
+
+Public Class addMasterTaskLabor
 
     ' New Database Control instance for LaborCodes DataTable
     Private LaborCodesDbController As New DbControl()
@@ -190,6 +192,21 @@
 
         ' Add any initialization after the InitializeComponent() call.
 
+        TaskTextbox.Text = masterTaskMaintenance.GetTask()
+        TaskId = masterTaskMaintenance.GetTaskId()
+
+        ' TEST DATABASE CONNECTION FIRST
+        If Not checkDbConn() Then Exit Sub
+
+        ' LOAD DATATABLES FROM DATABASE INITIALLY
+        If Not loadLaborCodesDataTable() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        ' Then, initialize LaborCodesComboBox
+        InitializeLaborCodesComboBox()
+        LaborCodesComboBox.SelectedIndex = 0
 
 
     End Sub
@@ -200,4 +217,72 @@
 
 
 
+
+    ' **************** CONTROL SUBS ****************
+
+
+    Private Sub LaborCodesComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LaborCodesComboBox.SelectedIndexChanged, LaborCodesComboBox.TextChanged
+
+        ' Ensure that LaborCodesComboBox is only attempting to initialize values when on proper selected Index
+        If LaborCodesComboBox.SelectedIndex = -1 Then
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+            ' If no valid selection has been made, then they have nothing to save
+            saveButton.Enabled = False
+            validSelection = False
+
+            Exit Sub
+
+        End If
+
+        ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid
+        LaborCodesRow = getDataTableRow(LaborCodesDbController.DbDataTable, "LDLC", LaborCodesComboBox.Text)
+
+        ' If this query DOES return a valid row index, then initialize respective controls
+        If LaborCodesRow <> -1 Then
+
+            ' Initialize corresponding controls from DataTable values
+            valuesInitialized = False
+            InitializeAllDataEditingControls()
+            valuesInitialized = True
+
+            ' Show labels and corresponding values
+            showHide(getAllControlsWithTag("dataLabel", Me), 1)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+
+            ' If a valid selection is made, then they can save right away without making any changes.
+            saveButton.Enabled = True
+            validSelection = True
+
+
+            'If it does = -1, that means that value Is either "Select one" Or some other anomoly
+        Else
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+            ' If no valid selection has been made, then they have nothing to save
+            saveButton.Enabled = False
+            validSelection = False
+
+
+        End If
+
+    End Sub
+
+    Private Sub addMasterTaskLabor_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+
+    End Sub
+
+    Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
+
+    End Sub
+
+    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+
+    End Sub
 End Class
