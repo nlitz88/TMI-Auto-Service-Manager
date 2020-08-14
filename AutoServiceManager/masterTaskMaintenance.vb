@@ -727,6 +727,55 @@
     End Sub
 
 
+
+
+    Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
+
+        mtMode = "adding"
+
+        ' Initialize values for dataEditingControls
+        valuesInitialized = False
+        clearControls(getAllControlsWithTag("dataEditingControl", Me))
+        ' Clear DataGridViews (on cancel/save, they will be reinitialized, so no problem)
+        TaskLaborGridView.DataSource = Nothing
+        TaskPartsGridView.DataSource = Nothing
+        ' Set TaskType ComboBox selected index = -1
+        TaskType_ComboBox.SelectedIndex = -1
+        valuesInitialized = True
+        ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
+        InitialMTLValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
+
+        ' First, disable editButton, addButton, enable cancelButton, and disable nav
+        editButton.Enabled = False
+        addButton.Enabled = False
+        cancelButton.Enabled = True
+        nav.DisableAll()
+        TaskComboBox.Enabled = False
+
+        ' Disable all task-related buttons and datagridviews
+        For Each ctrl In getAllControlsWithTag("subTaskEditingControl", Me)
+            ctrl.Enabled = False
+        Next
+
+
+        ' Get lastSelected
+        If getDataTableRow(MTL.DbDataTable, "TaskDescription", TaskComboBox.Text) <> -1 Then
+            lastSelectedTask = TaskComboBox.Text
+        Else
+            lastSelectedTask = "Select One"
+        End If
+
+        TaskComboBox.SelectedIndex = 0
+
+        ' Hide/Show the dataViewingControls and dataEditingControls, respectively
+        showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+        showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+        showHide(getAllControlsWithTag("dataLabel", Me), 1)
+        showHide(getAllControlsWithTag("subTaskEditingControl", Me), 1)
+
+    End Sub
+
+
     Private Sub deleteButton_Click(sender As Object, e As EventArgs) Handles deleteButton.Click
 
         Dim decision As DialogResult = MessageBox.Show("Are you sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
