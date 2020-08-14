@@ -1,4 +1,6 @@
-﻿Public Class editMasterTaskLabor
+﻿Imports System.ComponentModel
+
+Public Class editMasterTaskLabor
 
     ' DataTable that will maintain the DataTable passed to it from masterTaskMainentance
     Private TaskLaborDbController As New DbControl()
@@ -147,10 +149,109 @@
 
         ' Add any initialization after the InitializeComponent() call.
 
+        ' Get TaskLaborDbController here from masterTaskMaintenance
+        TaskLaborDbController = masterTaskMaintenance.GetTaskLaborDbController()
+        TaskLaborRow = masterTaskMaintenance.GetTaskLaborRow()
+        TaskTextbox.Text = masterTaskMaintenance.GetTask()
+
+        ' For the editing forms, we won't be initializing our dataEditingControls from a selection. Instead, we will initialize them just once on load
+        valuesInitialized = False
+        ' Initialize all DataEditing Controls
+        InitializeAllDataEditingControls()
+        valuesInitialized = True
+        ' Establish initial values here, as we are exclusively editing on this form
+        InitialLaborValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
+
     End Sub
 
 
     Private Sub editMasterTaskLabor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+
+
+
+    ' **************** CONTROL SUBS ****************
+
+
+    Private Sub editMasterTaskLabor_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+
+        If Not MeClosed Then
+
+            If InitialLaborValues.CtrlValuesChanged() Then
+
+                Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If decision = DialogResult.No Then
+                    e.Cancel = True
+                    Exit Sub
+                Else
+                    MeClosed = True
+                    changeScreen(masterTaskMaintenance, Me)
+                End If
+
+            Else
+
+                MeClosed = True
+                changeScreen(masterTaskMaintenance, Me)
+
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
+
+        If Not MeClosed Then
+
+            If InitialPartValues.CtrlValuesChanged() Then
+
+                Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If decision = DialogResult.No Then
+                    Exit Sub
+                Else
+                    MeClosed = True
+                    changeScreen(masterTaskMaintenance, Me)
+                End If
+
+            Else
+
+                MeClosed = True
+                changeScreen(masterTaskMaintenance, Me)
+
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+
+        ' No confirmation for edits at this time. May implement in the future.
+
+        ' 1.) VALIDATE DATAEDITING CONTROLS
+        If Not controlsValid() Then Exit Sub
+
+        ' 2.) WRITE CHANGES TO DATABASE TABLE
+        If Not updateMasterTaskLabor() Then
+            MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        ' 3.) If this is successful, then:
+        '       a.) Reinitialize Dependents on masterTaskMaintenance
+        '       b.) If that is successful, then change screen
+        If Not masterTaskMaintenance.reinitializeDependents() Then
+            MessageBox.Show("Reloading of Master Task List Unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            saveButton.Enabled = False
+            Exit Sub
+        End If
+
+        MeClosed = True
+        changeScreen(masterTaskMaintenance, Me)
 
     End Sub
 
