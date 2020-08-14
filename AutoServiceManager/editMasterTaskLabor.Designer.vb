@@ -290,6 +290,7 @@ Partial Class editMasterTaskLabor
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "editMasterTaskLabor"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Edit Task Labor"
         Me.ResumeLayout(False)
         Me.PerformLayout()
