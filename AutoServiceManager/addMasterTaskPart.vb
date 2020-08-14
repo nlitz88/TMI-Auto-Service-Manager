@@ -161,9 +161,6 @@ Public Class addMasterTaskPart
         ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
 
 
-        ' CONSIDER ADDING VALIDATION HERE THAT PREVENTS USER FROM ENTERING EXACT DUPLICATE PART TO TASK
-        '    - however, might not need this really, as duplicate rows will just be treated as the same until one changes. Not a huge deal
-
         ' Part Description
         If Not isValidLength("Part Description", False, PartDescription_Textbox.Text, 50, errorMessage) Then PartDescription_Textbox.ForeColor = Color.Red
 
