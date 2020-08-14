@@ -1,7 +1,7 @@
 ﻿Public Class addMasterTaskLabor
 
 
-    Private Sub New()
+    Public Sub New()
 
         ' This call is required by the designer.
         InitializeComponent()

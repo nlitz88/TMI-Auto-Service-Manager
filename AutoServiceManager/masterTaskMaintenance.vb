@@ -943,7 +943,7 @@
 
     Private Sub tlAddButton_Click(sender As Object, e As EventArgs) Handles tlAddButton.Click
 
-        'changeScreenHide(addMasterTaskPart, Me)
+        changeScreenHide(addMasterTaskLabor, Me)
 
     End Sub
 
