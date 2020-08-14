@@ -234,7 +234,7 @@ Public Class insuranceMaintenance
         End If
 
         ' If the input in the combobox matches an entry in the table that it represents
-        If ICList.BinarySearch(ICComboBox.Text.ToLower()) >= 0 Then
+        If getDataTableRow(ICDbController.DbDataTable, "CompanyName", ICComboBox.Text) <> -1 Then
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
@@ -353,6 +353,8 @@ Public Class insuranceMaintenance
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialICValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
+        lastSelected = ICComboBox.Text
+
         ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
         editButton.Enabled = False
         addButton.Enabled = False
@@ -444,9 +446,14 @@ Public Class insuranceMaintenance
                     For Each row In ICDbController.DbDataTable.Rows
                         ICComboBox.Items.Add(row("CompanyName"))
                     Next
-                    ICComboBox.SelectedIndex = ICComboBox.Items.IndexOf(CompanyName_Textbox.Text)
-                    'ICComboBox.SelectedIndex = amRow + 1
 
+                    ' Check to see if the edited item is in the newly loaded DataTable.
+                    ' If it is, set the combobox to this new item. If not, set it to the last Selected
+                    If getDataTableRow(ICDbController.DbDataTable, "CompanyName", CompanyName_Textbox.Text) <> -1 Then
+                        ICComboBox.SelectedIndex = ICComboBox.Items.IndexOf(CompanyName_Textbox.Text)
+                    Else
+                        ICComboBox.SelectedIndex = ICComboBox.Items.IndexOf(lastSelected)
+                    End If
                     ' dataViewingControl values reinitialized, as well as dataControls hide/show in combobox text/selectedindex change event
 
                     ' 5.) MOVE UI OUT OF EDITING MODE
@@ -481,8 +488,14 @@ Public Class insuranceMaintenance
                         ICComboBox.Items.Add(row("CompanyName"))
                     Next
 
+                    ' Check to see if the edited item is in the newly loaded DataTable.
+                    ' If it is, set the combobox to this new item. If not, set it to the last Selected
+                    If getDataTableRow(ICDbController.DbDataTable, "CompanyName", CompanyName_Textbox.Text) <> -1 Then
+                        ICComboBox.SelectedIndex = ICComboBox.Items.IndexOf(CompanyName_Textbox.Text)
+                    Else
+                        ICComboBox.SelectedIndex = ICComboBox.Items.IndexOf(lastSelected)
+                    End If
                     ' Changing index of main combobox will also initialize respective dataViewing control values
-                    ICComboBox.SelectedIndex = ICComboBox.Items.IndexOf(CompanyName_Textbox.Text)
 
                     ' 5.) MOVE UI OUT OF Adding MODE
                     addButton.Enabled = True

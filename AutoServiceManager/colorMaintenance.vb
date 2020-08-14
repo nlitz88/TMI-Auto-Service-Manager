@@ -236,7 +236,7 @@ Public Class colorMaintenance
         End If
 
         ' If the input in the combobox matches an entry in the table that it represents
-        If ACList.BinarySearch(ACComboBox.Text.ToLower()) >= 0 Then
+        If getDataTableRow(ACDbController.DbDataTable, "Color", ACComboBox.Text) <> -1 Then
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
@@ -355,6 +355,8 @@ Public Class colorMaintenance
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialACValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
+        lastSelected = ACComboBox.Text
+
         ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
         editButton.Enabled = False
         addButton.Enabled = False
@@ -446,8 +448,14 @@ Public Class colorMaintenance
                     For Each row In ACDbController.DbDataTable.Rows
                         ACComboBox.Items.Add(row("Color"))
                     Next
-                    ACComboBox.SelectedIndex = ACComboBox.Items.IndexOf(Color_Textbox.Text)
-                    'ACComboBox.SelectedIndex = amRow + 1
+
+                    ' Check to see if the edited item is in the newly loaded DataTable.
+                    ' If it is, set the combobox to this new item. If not, set it to the last Selected
+                    If getDataTableRow(ACDbController.DbDataTable, "Color", Color_Textbox.Text) <> -1 Then
+                        ACComboBox.SelectedIndex = ACComboBox.Items.IndexOf(Color_Textbox.Text)
+                    Else
+                        ACComboBox.SelectedIndex = ACComboBox.Items.IndexOf(lastSelected)
+                    End If
 
                     ' dataViewingControl values reinitialized, as well as dataControls hide/show in combobox text/selectedindex change event
 
@@ -483,8 +491,14 @@ Public Class colorMaintenance
                         ACComboBox.Items.Add(row("Color"))
                     Next
 
+                    ' Check to see if the edited item is in the newly loaded DataTable.
+                    ' If it is, set the combobox to this new item. If not, set it to the last Selected
+                    If getDataTableRow(ACDbController.DbDataTable, "Color", Color_Textbox.Text) <> -1 Then
+                        ACComboBox.SelectedIndex = ACComboBox.Items.IndexOf(Color_Textbox.Text)
+                    Else
+                        ACComboBox.SelectedIndex = ACComboBox.Items.IndexOf(lastSelected)
+                    End If
                     ' Changing index of main combobox will also initialize respective dataViewing control values
-                    ACComboBox.SelectedIndex = ACComboBox.Items.IndexOf(Color_Textbox.Text)
 
                     ' 5.) MOVE UI OUT OF Adding MODE
                     addButton.Enabled = True

@@ -235,7 +235,7 @@ Public Class mfgMaintenance
         End If
 
         ' If the input in the combobox matches an entry in the table that it represents
-        If AutoManufacturersList.BinarySearch(AutoMakeComboBox.Text.ToLower()) >= 0 Then
+        If getDataTableRow(AutoManufacturersDbController.DbDataTable, "AutoMake", AutoMakeComboBox.Text) <> -1 Then
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
@@ -355,6 +355,8 @@ Public Class mfgMaintenance
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialAutoManufacturersValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
+        lastSelected = AutoMakeComboBox.Text
+
         ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
         editButton.Enabled = False
         addButton.Enabled = False
@@ -446,8 +448,14 @@ Public Class mfgMaintenance
                     For Each row In AutoManufacturersDbController.DbDataTable.Rows
                         AutoMakeComboBox.Items.Add(row("AutoMake"))
                     Next
-                    AutoMakeComboBox.SelectedIndex = AutoMakeComboBox.Items.IndexOf(AutoMake_Textbox.Text)
-                    'AutoMakeComboBox.SelectedIndex = amRow + 1
+
+                    ' Check to see if the edited item is in the newly loaded DataTable.
+                    ' If it is, set the combobox to this new item. If not, set it to the last Selected
+                    If getDataTableRow(AutoManufacturersDbController.DbDataTable, "AutoMake", AutoMake_Textbox.Text) <> -1 Then
+                        AutoMakeComboBox.SelectedIndex = AutoMakeComboBox.Items.IndexOf(AutoMake_Textbox.Text)
+                    Else
+                        AutoMakeComboBox.SelectedIndex = AutoMakeComboBox.Items.IndexOf(lastSelected)
+                    End If
 
                     ' dataViewingControl values reinitialized, as well as dataControls hide/show in combobox text/selectedindex change event
 
@@ -483,8 +491,14 @@ Public Class mfgMaintenance
                         AutoMakeComboBox.Items.Add(row("AutoMake"))
                     Next
 
+                    ' Check to see if the added item is in the newly loaded DataTable.
+                    ' If it is, set the combobox to this new item. If not, set it to the last Selected
+                    If getDataTableRow(AutoManufacturersDbController.DbDataTable, "AutoMake", AutoMake_Textbox.Text) <> -1 Then
+                        AutoMakeComboBox.SelectedIndex = AutoMakeComboBox.Items.IndexOf(AutoMake_Textbox.Text)
+                    Else
+                        AutoMakeComboBox.SelectedIndex = AutoMakeComboBox.Items.IndexOf(lastSelected)
+                    End If
                     ' Changing index of main combobox will also initialize respective dataViewing control values
-                    AutoMakeComboBox.SelectedIndex = AutoMakeComboBox.Items.IndexOf(AutoMake_Textbox.Text)
 
                     ' 5.) MOVE UI OUT OF Adding MODE
                     addButton.Enabled = True

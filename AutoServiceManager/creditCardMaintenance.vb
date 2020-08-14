@@ -236,7 +236,7 @@ Public Class creditCardMaintenance
         End If
 
         ' If the input in the combobox matches an entry in the table that it represents
-        If CCList.BinarySearch(CCComboBox.Text.ToLower()) >= 0 Then
+        If getDataTableRow(CCDbController.DbDataTable, "CreditCard", CCComboBox.Text) <> -1 Then
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
@@ -355,6 +355,8 @@ Public Class creditCardMaintenance
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialCCValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
+        lastSelected = CCComboBox.Text
+
         ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
         editButton.Enabled = False
         addButton.Enabled = False
@@ -446,8 +448,14 @@ Public Class creditCardMaintenance
                     For Each row In CCDbController.DbDataTable.Rows
                         CCComboBox.Items.Add(row("CreditCard"))
                     Next
-                    CCComboBox.SelectedIndex = CCComboBox.Items.IndexOf(CreditCard_Textbox.Text)
-                    'CCComboBox.SelectedIndex = amRow + 1
+
+                    ' Check to see if the edited item is in the newly loaded DataTable.
+                    ' If it is, set the combobox to this new item. If not, set it to the last Selected
+                    If getDataTableRow(CCDbController.DbDataTable, "CreditCard", CreditCard_Textbox.Text) <> -1 Then
+                        CCComboBox.SelectedIndex = CCComboBox.Items.IndexOf(CreditCard_Textbox.Text)
+                    Else
+                        CCComboBox.SelectedIndex = CCComboBox.Items.IndexOf(lastSelected)
+                    End If
 
                     ' dataViewingControl values reinitialized, as well as dataControls hide/show in combobox text/selectedindex change event
 
@@ -483,8 +491,14 @@ Public Class creditCardMaintenance
                         CCComboBox.Items.Add(row("CreditCard"))
                     Next
 
+                    ' Check to see if the edited item is in the newly loaded DataTable.
+                    ' If it is, set the combobox to this new item. If not, set it to the last Selected
+                    If getDataTableRow(CCDbController.DbDataTable, "CreditCard", CreditCard_Textbox.Text) <> -1 Then
+                        CCComboBox.SelectedIndex = CCComboBox.Items.IndexOf(CreditCard_Textbox.Text)
+                    Else
+                        CCComboBox.SelectedIndex = CCComboBox.Items.IndexOf(lastSelected)
+                    End If
                     ' Changing index of main combobox will also initialize respective dataViewing control values
-                    CCComboBox.SelectedIndex = CCComboBox.Items.IndexOf(CreditCard_Textbox.Text)
 
                     ' 5.) MOVE UI OUT OF Adding MODE
                     addButton.Enabled = True
