@@ -455,27 +455,16 @@
     ' Function that makes updateTable calls for all relevant DataTables that need updated based on changes
     Private Function updateMasterTaskList() As Boolean
 
-
-        ' UPDATING FOR MASTER TASK LIST TABLE
-
         ' Lookup corresponding taskType symbol for valid taskType description first.
         ' Exclude task type from updateTable, then add its swapped value as an additional value
+        Dim TaskTypeSymbol As String = getRowValueWithKey(TaskTypesDbController.DbDataTable, "TaskType", "TaskDescription", TaskType_ComboBox.Text)
 
-        '' Lookup CustomerId (primary key) based on selected CLF in ComboBox
-        'Dim taskId As Integer = MTL.DbDataTable.Rows(TaskRow)("TaskId")
-        '' Using CustomerID as key, update customer row
-        'updateTable(CRUD, MTL.DbDataTable, "MasterTaskList", taskId, "TaskId", "_", "dataEditingControl", Me)
-        '' Then, return exception status of CRUD controller. Do this after each call
-        'If CRUD.HasException() Then Return False
+        Dim excludedControls As New List(Of Control) From {TaskType_ComboBox}
+        Dim additionalValues As New List(Of AdditionalValue) From {New AdditionalValue("TaskType", GetType(String), TaskTypeSymbol)}
 
-
-        ' UPDATING FOR TASKLABOR TABLE
-
-
-        ' UPDATING FOR TASKPARTS TABLE
-
-
-
+        updateTable(CRUD, MTL.DbDataTable, "MasterTaskList", TaskId, "TaskId", "_", "dataEditingControl", Me, excludedControls, additionalValues)
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
 
         ' Otherwise, return true
         Return True
