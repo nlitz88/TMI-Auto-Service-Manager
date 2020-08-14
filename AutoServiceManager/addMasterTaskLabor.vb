@@ -128,6 +128,22 @@
     ' ***************** CRUD SUBS *****************
 
 
+    Private Function InsertMasterTaskLabor() As Boolean
+
+        ' Values that will automatically be grabbed from controls and inserted:
+        '   LaborCode, Description, Rate, Hours, Amount
+        ' In adddition to these, we must also insert (into the row) these newly associated values:
+        '   TaskId
+
+        ' No exclusions, just additionalValues
+        Dim additionalValues As New Dictionary(Of String, Object) From {{"TaskId", TaskId}}
+
+        insertRow(CRUD, LaborCodesDbController.DbDataTable, "MasterTaskLabor", "_", "dataEditingControl", Me, additionalValues)
+
+        Return True
+
+    End Function
+
 
 
 
