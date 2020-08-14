@@ -81,6 +81,29 @@
 
 
 
+    ' ***************** CRUD SUBS *****************
+
+
+    ' Function that will update row in MasterTaskParts (using function overload that uses DataTable values as keys)
+    Private Function updateMasterTaskLabor() As Boolean
+
+        Dim DT As DataTable = TaskLaborDbController.DbDataTable
+
+        ' Make list of excluded controls here
+        Dim excludedControls As New List(Of Control) From {LaborCode_Textbox}
+
+        updateTable(CRUD, DT, TaskLaborRow, New List(Of String), "MasterTaskLabor", "_", "dataEditingControl", Me, excludedControls)
+
+        If CRUD.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+
+
+
+
     Public Sub New()
 
         ' This call is required by the designer.

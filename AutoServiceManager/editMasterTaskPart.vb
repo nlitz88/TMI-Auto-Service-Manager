@@ -87,38 +87,10 @@ Public Class editMasterTaskPart
     ' ***************** CRUD SUBS *****************
 
 
-    ' Function here that will update row in MasterTaskParts
-    ' Might have to store initial version of datatable here, as otherwise I won't be able to tell which row to edit.
-    '   (Could try using just TaskId and partNbr, but that could get messy and unpredictable behavior). Ask Toni about this maybe?
+    ' Function that will update row in MasterTaskParts (using function overload that uses DataTable values as keys)
     Private Function updateMasterTaskParts() As Boolean
 
         Dim DT As DataTable = TaskPartsDbController.DbDataTable
-
-        '' Add parameters for values we will update the row with
-        ''CRUD.AddParams("@TaskId", aDT.Rows(TaskPartsRow)("TaskId"))   ' don't need to update these as they don't change
-        ''CRUD.AddParams("@PartNbr", aDT.Rows(TaskPartsRow)("PartNbr"))
-        'CRUD.AddParams("@Qty", Convert.ToDouble(Qty_Textbox.Text))
-        'CRUD.AddParams("@PartDescription", PartDescription_Textbox.Text)
-        'CRUD.AddParams("@PartPrice", Convert.ToDecimal(PartPrice_Textbox.Text))
-        'CRUD.AddParams("@PartAmount", Convert.ToDecimal(PartAmount_Textbox.Text))
-        'CRUD.AddParams("@ListPrice", Convert.ToDecimal(ListPrice_Textbox.Text))
-
-        '' Add parameters for use in WHERE clause of statement (these are used to find the row that we want to update)
-        'CRUD.AddParams("@TaskIdLookup", DT.Rows(TaskPartsRow)("TaskId"))
-        'CRUD.AddParams("@PartNbrLookup", DT.Rows(TaskPartsRow)("PartNbr"))
-        'CRUD.AddParams("@QtyLookup", DT.Rows(TaskPartsRow)("Qty"))
-        'CRUD.AddParams("@PartDescriptionLookup", DT.Rows(TaskPartsRow)("PartDescription"))
-        'CRUD.AddParams("@PartPriceLookup", DT.Rows(TaskPartsRow)("PartPrice"))
-        'CRUD.AddParams("@PartAmountLookup", DT.Rows(TaskPartsRow)("PartAmount"))
-        'CRUD.AddParams("@ListPriceLookup", DT.Rows(TaskPartsRow)("ListPrice"))
-
-        '' Execute Query
-        'CRUD.ExecQuery("UPDATE MasterTaskParts " &
-        '                                "SET Qty=@Qty, PartDescription=@PartDescription, PartPrice=@PartPrice, PartAmount=@PartAmount, ListPrice=@ListPrice " &
-        '                                "WHERE TaskId=@TaskIdLookup AND PartNbr=@PartNbrLookup AND Qty=@QtyLookup AND PartDescription=@PartDescriptionLookup AND PartPrice=@PartPriceLookup AND PartAmount=@PartAmountLookup AND (ListPrice=@ListPriceLookup OR IsNull(ListPrice))")
-
-        '' Add handling for comparison against null values
-
 
         ' Make list of excluded controls here
         Dim excludedControls As New List(Of Control) From {PartNbr_Textbox}

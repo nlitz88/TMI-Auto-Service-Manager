@@ -105,7 +105,7 @@ Partial Class editMasterTaskLabor
         '
         Me.Amount_Textbox.Enabled = False
         Me.Amount_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Amount_Textbox.Location = New System.Drawing.Point(534, 358)
+        Me.Amount_Textbox.Location = New System.Drawing.Point(518, 358)
         Me.Amount_Textbox.Name = "Amount_Textbox"
         Me.Amount_Textbox.Size = New System.Drawing.Size(105, 27)
         Me.Amount_Textbox.TabIndex = 195
@@ -127,7 +127,7 @@ Partial Class editMasterTaskLabor
         Me.Amount_Value.AutoSize = True
         Me.Amount_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Amount_Value.ForeColor = System.Drawing.Color.Black
-        Me.Amount_Value.Location = New System.Drawing.Point(534, 361)
+        Me.Amount_Value.Location = New System.Drawing.Point(518, 361)
         Me.Amount_Value.Name = "Amount_Value"
         Me.Amount_Value.Size = New System.Drawing.Size(0, 20)
         Me.Amount_Value.TabIndex = 196
