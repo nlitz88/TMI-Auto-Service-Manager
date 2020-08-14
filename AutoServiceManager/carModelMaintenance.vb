@@ -232,6 +232,25 @@
     ' Handles changes made to AutoMakeComboBox
     Private Sub AutoMakeComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AutoMakeComboBox.SelectedIndexChanged, AutoMakeComboBox.TextChanged
 
+        ' Ensure that ComboBox is only attempting to initialize values when on proper selected Index
+        If AutoMakeComboBox.SelectedIndex = -1 Then
+
+            ' If not already, clear and empty the CarModelComboBox
+            If CarModelComboBox.Text <> String.Empty And CarModelComboBox.Items.Count <> 0 Then
+                CarModelComboBox.Items.Clear()
+                CarModelComboBox.Text = String.Empty
+            End If
+            CarModelComboBox.Visible = False
+            ModelLabel.Visible = False
+            CarModelComboBox.SelectedIndex = -1
+
+            ' Disable user from adding new model, as no valid manufacturer has been selected
+            addButton.Enabled = False
+
+            Exit Sub
+
+        End If
+
         ' First, lookup newly changed value in respective dataTable to see if the selected value exists and is valid
         AutoMakeRow = getDataTableRow(AutoMakeDbController.DbDataTable, "AutoMake", AutoMakeComboBox.Text)
 
@@ -272,9 +291,19 @@
     ' Handles changes made to CarModelComboBox
     Private Sub CarModelComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CarModelComboBox.SelectedIndexChanged, CarModelComboBox.TextChanged
 
-        ' Before anything, ensure that AutoMakeComboBox has a valid entry. Otherwise, we can't be entering values into CarModelComboBox
-        ' I think I can get rid of the If Automake = -1 in the next selectedIndexChanged, as if it's hidden it doesn't matter
-        'If AutoMakeRow = -1 Then Exit Sub
+        ' Ensure that VehicleCombobox is only attempting to initialize values when on proper selected Index
+        If CarModelComboBox.SelectedIndex = -1 Then
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            ' Disable editing button
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+            Exit Sub
+
+        End If
 
 
         ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid

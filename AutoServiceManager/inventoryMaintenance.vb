@@ -267,6 +267,20 @@ Public Class inventoryMaintenance
     ' Main eventhandler that handles most of the initialization for all subsequent elements/controls.
     Private Sub PartCombobox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PartComboBox.SelectedIndexChanged, PartComboBox.TextChanged
 
+        ' Ensure that ComboBox is only attempting to initialize values when on proper selected Index
+        If PartComboBox.SelectedIndex = -1 Then
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            ' Disable editing button
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+            Exit Sub
+
+        End If
+
         ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid
         IPRow = getDataTableRow(IPDbController.DbDataTable, "PDPN", PartComboBox.Text)
 

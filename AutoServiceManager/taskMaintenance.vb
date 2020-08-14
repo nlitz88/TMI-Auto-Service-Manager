@@ -218,6 +218,20 @@ Public Class taskMaintenance
     ' Main eventhandler that handles most of the initialization for all subsequent elements/controls.
     Private Sub TTCombobox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TTComboBox.SelectedIndexChanged, TTComboBox.TextChanged
 
+        ' Ensure that ComboBox is only attempting to initialize values when on proper selected Index
+        If TTComboBox.SelectedIndex = -1 Then
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            ' Disable editing button
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+            Exit Sub
+
+        End If
+
         ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid
         TTRow = getDataTableRow(TTDbController.DbDataTable, "TTD", TTComboBox.Text)
 

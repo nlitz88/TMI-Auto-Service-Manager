@@ -296,6 +296,20 @@ Public Class laborCodeMaintenance
     ' Main eventhandler that handles most of the initialization for all subsequent elements/controls.
     Private Sub LCCombobox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LCComboBox.SelectedIndexChanged, LCComboBox.TextChanged
 
+        ' Ensure that ComboBox is only attempting to initialize values when on proper selected Index
+        If LCComboBox.SelectedIndex = -1 Then
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            ' Disable editing button
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+            Exit Sub
+
+        End If
+
         ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid
         LCRow = getDataTableRow(LCDbController.DbDataTable, "LDLC", LCComboBox.Text)
 

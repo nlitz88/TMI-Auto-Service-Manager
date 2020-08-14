@@ -936,7 +936,6 @@
                     InitializeTaskComboBox()
                     ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
                     ' If update failed, then revert selected back to lastSelected
-                    TaskComboBox.SelectedIndex = TaskComboBox.Items.IndexOf(TaskDescription_Textbox.Text)
                     Dim updatedItem As String = getRowValueWithKeyEquals(MTL.DbDataTable, "TaskDescription", "TaskDescription", TaskDescription_Textbox.Text)
                     If updatedItem <> Nothing Then
                         TaskComboBox.SelectedIndex = TaskComboBox.Items.IndexOf(updatedItem)

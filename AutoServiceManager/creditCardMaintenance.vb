@@ -221,6 +221,20 @@ Public Class creditCardMaintenance
     ' Main eventhandler that handles most of the initialization for all subsequent elements/controls.
     Private Sub CCCombobox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CCComboBox.SelectedIndexChanged, CCComboBox.TextChanged
 
+        ' Ensure that ComboBox is only attempting to initialize values when on proper selected Index
+        If CCComboBox.SelectedIndex = -1 Then
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            ' Disable editing button
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+            Exit Sub
+
+        End If
+
         ' If the input in the combobox matches an entry in the table that it represents
         If CCList.BinarySearch(CCComboBox.Text.ToLower()) >= 0 Then
 

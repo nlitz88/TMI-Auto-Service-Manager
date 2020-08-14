@@ -219,6 +219,20 @@ Public Class insuranceMaintenance
     ' Main eventhandler that handles most of the initialization for all subsequent elements/controls.
     Private Sub ICCombobox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ICComboBox.SelectedIndexChanged, ICComboBox.TextChanged
 
+        ' Ensure that ComboBox is only attempting to initialize values when on proper selected Index
+        If ICComboBox.SelectedIndex = -1 Then
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            ' Disable editing button
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+            Exit Sub
+
+        End If
+
         ' If the input in the combobox matches an entry in the table that it represents
         If ICList.BinarySearch(ICComboBox.Text.ToLower()) >= 0 Then
 
