@@ -402,7 +402,11 @@
         valuesInitialized = False
 
         ' Load TaskParts and TaskLabor datatables based on selected TaskId, then Initialize corresponding GridViews
-        loadDependentDataTables()
+        If Not loadDependentDataTables() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
+
         ' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
         ' This is because controls like TaskLaborCost (for instance) are calculated from those tables
         InitializeAllDataViewingControls()
@@ -580,7 +584,10 @@
             valuesInitialized = False
 
             ' Load TaskParts and TaskLabor datatables based on selected TaskId, then Initialize corresponding GridViews
-            loadDependentDataTables()
+            If Not loadDependentDataTables() Then
+                MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
             ' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
             ' This is because controls like TaskLaborCost (for instance) are calculated from those tables
             InitializeAllDataViewingControls()
