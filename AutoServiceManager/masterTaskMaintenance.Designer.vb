@@ -22,10 +22,10 @@ Partial Class masterTaskMaintenance
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.deleteButton = New System.Windows.Forms.Button()
         Me.masterTaskMaintenanceLabel = New System.Windows.Forms.Label()
         Me.editButton = New System.Windows.Forms.Button()
@@ -76,7 +76,7 @@ Partial Class masterTaskMaintenance
         Me.deleteButton.Location = New System.Drawing.Point(216, 120)
         Me.deleteButton.Name = "deleteButton"
         Me.deleteButton.Size = New System.Drawing.Size(110, 30)
-        Me.deleteButton.TabIndex = 125
+        Me.deleteButton.TabIndex = 11
         Me.deleteButton.Text = "Delete"
         Me.deleteButton.UseVisualStyleBackColor = False
         '
@@ -100,7 +100,7 @@ Partial Class masterTaskMaintenance
         Me.editButton.Location = New System.Drawing.Point(332, 120)
         Me.editButton.Name = "editButton"
         Me.editButton.Size = New System.Drawing.Size(110, 30)
-        Me.editButton.TabIndex = 126
+        Me.editButton.TabIndex = 12
         Me.editButton.Text = "Edit"
         Me.editButton.UseVisualStyleBackColor = False
         '
@@ -113,7 +113,7 @@ Partial Class masterTaskMaintenance
         Me.cancelButton.Location = New System.Drawing.Point(563, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
-        Me.cancelButton.TabIndex = 128
+        Me.cancelButton.TabIndex = 14
         Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
         '
@@ -126,7 +126,7 @@ Partial Class masterTaskMaintenance
         Me.saveButton.Location = New System.Drawing.Point(448, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
-        Me.saveButton.TabIndex = 127
+        Me.saveButton.TabIndex = 13
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
         '
@@ -138,7 +138,7 @@ Partial Class masterTaskMaintenance
         Me.addButton.Location = New System.Drawing.Point(100, 120)
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(110, 30)
-        Me.addButton.TabIndex = 124
+        Me.addButton.TabIndex = 10
         Me.addButton.Tag = ""
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = False
@@ -162,7 +162,7 @@ Partial Class masterTaskMaintenance
         Me.TaskComboBox.Location = New System.Drawing.Point(150, 194)
         Me.TaskComboBox.Name = "TaskComboBox"
         Me.TaskComboBox.Size = New System.Drawing.Size(408, 28)
-        Me.TaskComboBox.TabIndex = 130
+        Me.TaskComboBox.TabIndex = 0
         '
         'TaskDescription_Value
         '
@@ -193,7 +193,7 @@ Partial Class masterTaskMaintenance
         Me.TaskDescription_Textbox.MaxLength = 50
         Me.TaskDescription_Textbox.Name = "TaskDescription_Textbox"
         Me.TaskDescription_Textbox.Size = New System.Drawing.Size(408, 27)
-        Me.TaskDescription_Textbox.TabIndex = 133
+        Me.TaskDescription_Textbox.TabIndex = 1
         Me.TaskDescription_Textbox.Tag = "dataEditingControl"
         Me.TaskDescription_Textbox.Visible = False
         '
@@ -226,7 +226,7 @@ Partial Class masterTaskMaintenance
         Me.Instructions_Textbox.MaxLength = 255
         Me.Instructions_Textbox.Name = "Instructions_Textbox"
         Me.Instructions_Textbox.Size = New System.Drawing.Size(641, 27)
-        Me.Instructions_Textbox.TabIndex = 136
+        Me.Instructions_Textbox.TabIndex = 2
         Me.Instructions_Textbox.Tag = "dataEditingControl"
         Me.Instructions_Textbox.Visible = False
         '
@@ -240,7 +240,7 @@ Partial Class masterTaskMaintenance
         Me.TaskType_ComboBox.MaxLength = 15
         Me.TaskType_ComboBox.Name = "TaskType_ComboBox"
         Me.TaskType_ComboBox.Size = New System.Drawing.Size(195, 28)
-        Me.TaskType_ComboBox.TabIndex = 218
+        Me.TaskType_ComboBox.TabIndex = 3
         Me.TaskType_ComboBox.Tag = "dataEditingControl"
         Me.TaskType_ComboBox.Visible = False
         '
@@ -372,23 +372,23 @@ Partial Class masterTaskMaintenance
         Me.TaskLaborGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.TaskLaborGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.TaskLaborGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.TaskLaborGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.TaskLaborGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.TaskLaborGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.TaskLaborGridView.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.TaskLaborGridView.DefaultCellStyle = DataGridViewCellStyle2
         Me.TaskLaborGridView.Location = New System.Drawing.Point(100, 479)
         Me.TaskLaborGridView.MultiSelect = False
         Me.TaskLaborGridView.Name = "TaskLaborGridView"
@@ -410,7 +410,7 @@ Partial Class masterTaskMaintenance
         Me.tlDeleteButton.Location = New System.Drawing.Point(331, 437)
         Me.tlDeleteButton.Name = "tlDeleteButton"
         Me.tlDeleteButton.Size = New System.Drawing.Size(66, 30)
-        Me.tlDeleteButton.TabIndex = 234
+        Me.tlDeleteButton.TabIndex = 5
         Me.tlDeleteButton.Tag = "subTaskEditingControl"
         Me.tlDeleteButton.Text = "Delete"
         Me.tlDeleteButton.UseVisualStyleBackColor = False
@@ -423,7 +423,7 @@ Partial Class masterTaskMaintenance
         Me.tlEditButton.Location = New System.Drawing.Point(403, 437)
         Me.tlEditButton.Name = "tlEditButton"
         Me.tlEditButton.Size = New System.Drawing.Size(66, 30)
-        Me.tlEditButton.TabIndex = 235
+        Me.tlEditButton.TabIndex = 6
         Me.tlEditButton.Tag = "subTaskEditingControl"
         Me.tlEditButton.Text = "Edit"
         Me.tlEditButton.UseVisualStyleBackColor = False
@@ -436,7 +436,7 @@ Partial Class masterTaskMaintenance
         Me.tlAddButton.Location = New System.Drawing.Point(259, 437)
         Me.tlAddButton.Name = "tlAddButton"
         Me.tlAddButton.Size = New System.Drawing.Size(66, 30)
-        Me.tlAddButton.TabIndex = 233
+        Me.tlAddButton.TabIndex = 4
         Me.tlAddButton.Tag = "subTaskEditingControl"
         Me.tlAddButton.Text = "Add"
         Me.tlAddButton.UseVisualStyleBackColor = False
@@ -449,7 +449,7 @@ Partial Class masterTaskMaintenance
         Me.tpDeleteButton.Location = New System.Drawing.Point(742, 436)
         Me.tpDeleteButton.Name = "tpDeleteButton"
         Me.tpDeleteButton.Size = New System.Drawing.Size(65, 30)
-        Me.tpDeleteButton.TabIndex = 238
+        Me.tpDeleteButton.TabIndex = 8
         Me.tpDeleteButton.Tag = "subTaskEditingControl"
         Me.tpDeleteButton.Text = "Delete"
         Me.tpDeleteButton.UseVisualStyleBackColor = False
@@ -462,7 +462,7 @@ Partial Class masterTaskMaintenance
         Me.tpEditButton.Location = New System.Drawing.Point(813, 436)
         Me.tpEditButton.Name = "tpEditButton"
         Me.tpEditButton.Size = New System.Drawing.Size(65, 30)
-        Me.tpEditButton.TabIndex = 239
+        Me.tpEditButton.TabIndex = 9
         Me.tpEditButton.Tag = "subTaskEditingControl"
         Me.tpEditButton.Text = "Edit"
         Me.tpEditButton.UseVisualStyleBackColor = False
@@ -475,7 +475,7 @@ Partial Class masterTaskMaintenance
         Me.tpAddButton.Location = New System.Drawing.Point(671, 436)
         Me.tpAddButton.Name = "tpAddButton"
         Me.tpAddButton.Size = New System.Drawing.Size(65, 30)
-        Me.tpAddButton.TabIndex = 237
+        Me.tpAddButton.TabIndex = 7
         Me.tpAddButton.Tag = "subTaskEditingControl"
         Me.tpAddButton.Text = "Add"
         Me.tpAddButton.UseVisualStyleBackColor = False
@@ -512,23 +512,23 @@ Partial Class masterTaskMaintenance
         Me.TaskPartsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.TaskPartsGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.TaskPartsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.TaskPartsGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.TaskPartsGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.TaskPartsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.TaskPartsGridView.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.TaskPartsGridView.DefaultCellStyle = DataGridViewCellStyle4
         Me.TaskPartsGridView.Location = New System.Drawing.Point(509, 479)
         Me.TaskPartsGridView.MultiSelect = False
         Me.TaskPartsGridView.Name = "TaskPartsGridView"
