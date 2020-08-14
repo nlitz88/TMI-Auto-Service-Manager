@@ -663,10 +663,24 @@
 
         Next
 
+
+        Dim additionalValue As Object
+
         ' Add additional query parameters for additionalValues as provided
         For Each key In additionalValues.Keys
 
-            insertController.AddParams("@" & key, additionalValues(key))
+            ' Get additional value
+            additionalValue = additionalValues(key)
+
+            ' Then, check if this additional value that is to be inserted should be a DBNull Value
+            If additionalValue.GetType() = GetType(DateTime) Then
+                If additionalValue.ToString().Replace(" ", "0") = "00/00/0000" Then additionalValue = DBNull.Value
+                ' For all other types of fields
+            Else
+                If additionalValue = Nothing Then additionalValue = DBNull.Value
+            End If
+
+            insertController.AddParams("@" & key, additionalValue)
             columnList += key & ","
             valuesParamList += key & ","
 
