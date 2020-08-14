@@ -502,6 +502,17 @@
     End Function
 
 
+    ' Function that handles deleting for MasterTaskParts Table (Add and Edit performed on editMasterTaskPart/addMasterTaskPart forms)
+    Public Function deleteMasterTaskLabor() As Boolean
+
+        deleteRow(CRUD, TaskLaborDbController.DbDataTable, TaskLaborRow, New List(Of String), "MasterTaskLabor")
+        If CRUD.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+
 
     ' ***************** VALIDATION SUBS *****************
 
@@ -938,10 +949,10 @@
 
     Private Sub tlDeleteButton_Click(sender As Object, e As EventArgs) Handles tlDeleteButton.Click
 
-        'If Not deleteMasterTaskPart() Then
-        '    MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '    Exit Sub
-        'End If
+        If Not deleteMasterTaskLabor() Then
+            MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
 
         If Not reinitializeDependents() Then
             MessageBox.Show("Reloading of Master Task List Unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
