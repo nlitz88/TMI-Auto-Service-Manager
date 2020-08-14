@@ -80,6 +80,7 @@
 
 
 
+
     ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
 
 
@@ -204,15 +205,6 @@
 
     End Function
 
-    '' Sets Dependent DataTables Custom Handlers
-    'Private Function setDependentDataTableHandlers()
-
-    '    AddHandler TaskPartsDbController.DbDataTable.RowChanged, New DataRowChangeEventHandler(AddressOf TaskParts_Row_Changed)
-    '    AddHandler TaskLaborDbController.DbDataTable.RowChanged, New DataRowChangeEventHandler(AddressOf TaskLabor_Row_Changed)
-
-    'End Function
-
-    ' Sub that initializes TaskLaborGridView
     Private Sub InitializeTaskLaborGridView()
 
         TaskLaborGridView.DataSource = TaskLaborDbController.DbDataTable
@@ -517,6 +509,43 @@
     ' ***************** VALIDATION SUBS *****************
 
 
+    ' Sub that runs validation for all form controls. Also handles error reporting
+    Private Function controlsValid() As Boolean
+
+        Dim errorMessage As String = String.Empty
+
+        ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
+
+
+        ' Task Description
+        If Not isValidLength("Description", True, TaskDescription_Textbox.Text, 50, errorMessage) Then
+            TaskDescription_Textbox.ForeColor = Color.Red
+        End If
+
+        ' Instructions
+        If Not isValidLength("Instructions", False, Instructions_Textbox.Text, 255, errorMessage) Then
+            Instructions_Textbox.ForeColor = Color.Red
+        End If
+
+        ' TaskType
+        If Not valueExists("Task Type", errorMessage, "TaskDescription", TaskType_ComboBox.Text, TaskTypesDbController.DbDataTable) Then
+            TaskType_ComboBox.ForeColor = Color.Red
+        End If
+
+
+        ' Check if any invalid input has been found
+        If Not String.IsNullOrEmpty(errorMessage) Then
+
+            MessageBox.Show(errorMessage, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+
+        End If
+
+        Return True
+
+    End Function
+
+
 
 
     Private Sub masterTaskMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -796,7 +825,7 @@
                 If mtMode = "editing" Then
 
                     ' 1.) VALIDATE DATAEDITING CONTROLS
-                    'If Not controlsValid() Then Exit Sub
+                    If Not controlsValid() Then Exit Sub
 
                     ' 2.) UPDATE MASTER TASK LIST VALUES FIRST
                     ' 3.) THEN, UPDATE TASKLABOR AND TASKPARTS TABLES
@@ -834,7 +863,7 @@
                 ElseIf mtMode = "adding" Then
 
                     ' 1.) VALIDATE DATAEDITING CONTROLS
-                    'If Not controlsValid() Then Exit Sub
+                    If Not controlsValid() Then Exit Sub
 
 
 
@@ -889,7 +918,7 @@
     End Sub
 
 
-    Private Sub TaskType_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TaskType_ComboBox.SelectedIndexChanged
+    Private Sub TaskType_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TaskType_ComboBox.SelectedIndexChanged, TaskType_ComboBox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
 

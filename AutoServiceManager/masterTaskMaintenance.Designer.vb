@@ -190,7 +190,7 @@ Partial Class masterTaskMaintenance
         '
         Me.TaskDescription_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TaskDescription_Textbox.Location = New System.Drawing.Point(190, 258)
-        Me.TaskDescription_Textbox.MaxLength = 20
+        Me.TaskDescription_Textbox.MaxLength = 50
         Me.TaskDescription_Textbox.Name = "TaskDescription_Textbox"
         Me.TaskDescription_Textbox.Size = New System.Drawing.Size(408, 27)
         Me.TaskDescription_Textbox.TabIndex = 133
@@ -223,7 +223,7 @@ Partial Class masterTaskMaintenance
         '
         Me.Instructions_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Instructions_Textbox.Location = New System.Drawing.Point(191, 299)
-        Me.Instructions_Textbox.MaxLength = 20
+        Me.Instructions_Textbox.MaxLength = 255
         Me.Instructions_Textbox.Name = "Instructions_Textbox"
         Me.Instructions_Textbox.Size = New System.Drawing.Size(641, 27)
         Me.Instructions_Textbox.TabIndex = 136
@@ -237,7 +237,7 @@ Partial Class masterTaskMaintenance
         Me.TaskType_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TaskType_ComboBox.FormattingEnabled = True
         Me.TaskType_ComboBox.Location = New System.Drawing.Point(186, 340)
-        Me.TaskType_ComboBox.MaxLength = 20
+        Me.TaskType_ComboBox.MaxLength = 15
         Me.TaskType_ComboBox.Name = "TaskType_ComboBox"
         Me.TaskType_ComboBox.Size = New System.Drawing.Size(195, 28)
         Me.TaskType_ComboBox.TabIndex = 218
