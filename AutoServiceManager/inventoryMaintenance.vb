@@ -687,7 +687,8 @@ Public Class inventoryMaintenance
         ' Will need to call reinitialization Function here to reinitialize elements on addMasterTaskPart
         If Not MeClosed Then
 
-            If InitialIPValues.CtrlValuesChanged() Then
+            ' Only want to ask them if the ctrl values are currently being edited AND they're values have changed
+            If PartNbr_Textbox.Visible And InitialIPValues.CtrlValuesChanged() Then
 
                 Dim decision As DialogResult = MessageBox.Show("Return without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
@@ -710,6 +711,13 @@ Public Class inventoryMaintenance
 
             Else
 
+                'Call REINITIALIZATION HERE
+                If Not addMasterTaskPart.reInitializeParts() Then
+                    MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    saveButton.Enabled = False
+                    Exit Sub
+                End If
+
                 MeClosed = True
                 changeScreen(addMasterTaskPart, Me)
                 previousScreen = Nothing
@@ -724,7 +732,7 @@ Public Class inventoryMaintenance
 
         If Not MeClosed Then
 
-            If InitialIPValues.CtrlValuesChanged() Then
+            If PartNbr_Textbox.Visible And InitialIPValues.CtrlValuesChanged() Then
 
                 Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
@@ -735,9 +743,18 @@ Public Class inventoryMaintenance
                     ' If coming from another screen, then change back to that screen
                     If previousScreen IsNot Nothing Then
                         If previousScreen Is addMasterTaskPart Then
+
+                            'Call REINITIALIZATION HERE
+                            If Not addMasterTaskPart.reInitializeParts() Then
+                                MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                saveButton.Enabled = False
+                                Exit Sub
+                            End If
+
                             MeClosed = True
                             changeScreen(addMasterTaskPart, Me)
                             previousScreen = Nothing
+
                         End If
                         ' Otherwise, just exit the form
                     Else
@@ -752,9 +769,18 @@ Public Class inventoryMaintenance
                 ' If coming from another screen, then change back to that screen
                 If previousScreen IsNot Nothing Then
                     If previousScreen Is addMasterTaskPart Then
+
+                        'Call REINITIALIZATION HERE
+                        If Not addMasterTaskPart.reInitializeParts() Then
+                            MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            saveButton.Enabled = False
+                            Exit Sub
+                        End If
+
                         MeClosed = True
                         changeScreen(addMasterTaskPart, Me)
                         previousScreen = Nothing
+
                     End If
                     ' Otherwise, just exit the form
                 Else
