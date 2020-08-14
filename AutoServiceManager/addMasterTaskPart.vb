@@ -107,6 +107,25 @@ Public Class addMasterTaskPart
 
 
 
+    ' Public Function called after Parts table has been changed from Inventory Maintenance Form. Parts DataTable and dependent controls are re-initialized
+    Public Function reInitializeParts() As Boolean
+
+        ' LOAD DATATABLES FROM DATABASE INITIALLY
+        If Not loadPartsDataTable() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
+
+        ' Then, initialize PartComboBox
+        InitializePartComboBox()
+        PartComboBox.SelectedIndex = 0
+
+        Return True
+
+    End Function
+
+
+
 
     ' ***************** CRUD SUBS *****************
 
