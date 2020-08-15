@@ -7,9 +7,6 @@ Public Class creditCardMaintenance
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
-    ' Initialize new lists to store certain row values of datatables (easily sorted and BINARY SEARCHED FOR SPEED)
-    Private CCList As List(Of Object)
-
     ' Initialize instance(s) of initialValues class
     Private InitialCCValues As New InitialValues()
 
@@ -34,12 +31,6 @@ Public Class creditCardMaintenance
 
         CCDbController.ExecQuery("SELECT cca.CreditCard FROM CreditCardsAccepted cca ORDER BY cca.CreditCard ASC")
         If CCDbController.HasException() Then Return False
-
-        ' Also, populate respective lists with data
-        CCList = getListFromDataTable(CCDbController.DbDataTable, "CreditCard")
-        For i As Integer = 0 To CCList.Count - 1
-            CCList(i) = CCList(i).ToString().ToLower()
-        Next
 
         Return True
 
@@ -165,12 +156,12 @@ Public Class creditCardMaintenance
             If mode = "editing" Then
                 Dim initial As String = CCDbController.DbDataTable.Rows(CCRow)("CreditCard").ToString()
                 If CreditCard_Textbox.Text.ToLower() <> initial.ToLower() Then
-                    If isDuplicate("Credit Card Name", CreditCard_Textbox.Text.ToLower(), errorMessage, CCList) Then
+                    If isDuplicate("Credit Card Company", errorMessage, "CreditCard", CreditCard_Textbox.Text, CCDbController.DbDataTable) Then
                         CreditCard_Textbox.ForeColor = Color.Red
                     End If
                 End If
             ElseIf mode = "adding" Then
-                If isDuplicate("Credit Card Name", CreditCard_Textbox.Text.ToLower(), errorMessage, CCList) Then
+                If isDuplicate("Credit Card Company", errorMessage, "CreditCard", CreditCard_Textbox.Text, CCDbController.DbDataTable) Then
                     CreditCard_Textbox.ForeColor = Color.Red
                 End If
             End If
@@ -240,7 +231,7 @@ Public Class creditCardMaintenance
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
-            InitializeCCDataViewingControls()
+            InitializeAllDataViewingControls()
             valuesInitialized = True
 
             ' Show labels and corresponding values
@@ -350,7 +341,7 @@ Public Class creditCardMaintenance
 
         ' Initialize values for dataEditingControls
         valuesInitialized = False
-        InitializeCCDataEditingControls()
+        InitializeAllDataEditingControls()
         valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialCCValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))

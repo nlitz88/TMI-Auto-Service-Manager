@@ -7,9 +7,6 @@ Public Class paymentMaintenance
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
-    ' Initialize new lists to store certain row values of datatables (easily sorted and BINARY SEARCHED FOR SPEED)
-    Private PTList As List(Of Object)
-
     ' Initialize instance(s) of initialValues class
     Private InitialPTValues As New InitialValues()
 
@@ -34,12 +31,6 @@ Public Class paymentMaintenance
 
         PTDbController.ExecQuery("SELECT pt.PaymentType FROM PaymentTypes pt ORDER BY pt.PaymentType ASC")
         If PTDbController.HasException() Then Return False
-
-        ' Also, populate respective lists with data
-        PTList = getListFromDataTable(PTDbController.DbDataTable, "PaymentType")
-        For i As Integer = 0 To PTList.Count - 1
-            PTList(i) = PTList(i).ToString().ToLower()
-        Next
 
         Return True
 
@@ -165,12 +156,12 @@ Public Class paymentMaintenance
             If mode = "editing" Then
                 Dim initial As String = PTDbController.DbDataTable.Rows(PTRow)("PaymentType").ToString()
                 If PaymentType_Textbox.Text.ToLower() <> initial.ToLower() Then
-                    If isDuplicate("Payment Type Name", PaymentType_Textbox.Text.ToLower(), errorMessage, PTList) Then
+                    If isDuplicate("Payment Type Name", errorMessage, "PaymentType", PaymentType_Textbox.Text, PTDbController.DbDataTable) Then
                         PaymentType_Textbox.ForeColor = Color.Red
                     End If
                 End If
             ElseIf mode = "adding" Then
-                If isDuplicate("Payment Type Name", PaymentType_Textbox.Text.ToLower(), errorMessage, PTList) Then
+                If isDuplicate("Payment Type Name", errorMessage, "PaymentType", PaymentType_Textbox.Text, PTDbController.DbDataTable) Then
                     PaymentType_Textbox.ForeColor = Color.Red
                 End If
             End If
@@ -239,7 +230,7 @@ Public Class paymentMaintenance
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
-            InitializePTDataViewingControls()
+            InitializeAllDataViewingControls()
             valuesInitialized = True
 
             ' Show labels and corresponding values
@@ -350,7 +341,7 @@ Public Class paymentMaintenance
 
         ' Initialize values for dataEditingControls
         valuesInitialized = False
-        InitializePTDataEditingControls()
+        InitializeAllDataEditingControls()
         valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialPTValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))

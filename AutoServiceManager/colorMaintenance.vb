@@ -7,9 +7,6 @@ Public Class colorMaintenance
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
-    ' Initialize new lists to store certain row values of datatables (easily sorted and BINARY SEARCHED FOR SPEED)
-    Private ACList As List(Of Object)
-
     ' Initialize instance(s) of initialValues class
     Private InitialACValues As New InitialValues()
 
@@ -34,12 +31,6 @@ Public Class colorMaintenance
 
         ACDbController.ExecQuery("SELECT ac.Color FROM Colors ac ORDER BY ac.Color ASC")
         If ACDbController.HasException() Then Return False
-
-        ' Also, populate respective lists with data
-        ACList = getListFromDataTable(ACDbController.DbDataTable, "Color")
-        For i As Integer = 0 To ACList.Count - 1
-            ACList(i) = ACList(i).ToString().ToLower()
-        Next
 
         Return True
 
@@ -165,12 +156,12 @@ Public Class colorMaintenance
             If mode = "editing" Then
                 Dim initial As String = ACDbController.DbDataTable.Rows(ACRow)("Color").ToString()
                 If Color_Textbox.Text.ToLower() <> initial.ToLower() Then
-                    If isDuplicate("Color Name", Color_Textbox.Text.ToLower(), errorMessage, ACList) Then
+                    If isDuplicate("Color Name", errorMessage, "Color", Color_Textbox.Text, ACDbController.DbDataTable) Then
                         Color_Textbox.ForeColor = Color.Red
                     End If
                 End If
             ElseIf mode = "adding" Then
-                If isDuplicate("Color Name", Color_Textbox.Text.ToLower(), errorMessage, ACList) Then
+                If isDuplicate("Color Name", errorMessage, "Color", Color_Textbox.Text, ACDbController.DbDataTable) Then
                     Color_Textbox.ForeColor = Color.Red
                 End If
             End If
@@ -240,7 +231,7 @@ Public Class colorMaintenance
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
-            InitializeACDataViewingControls()
+            InitializeAllDataViewingControls()
             valuesInitialized = True
 
             ' Show labels and corresponding values
@@ -350,7 +341,7 @@ Public Class colorMaintenance
 
         ' Initialize values for dataEditingControls
         valuesInitialized = False
-        InitializeACDataEditingControls()
+        InitializeAllDataEditingControls()
         valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialACValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))

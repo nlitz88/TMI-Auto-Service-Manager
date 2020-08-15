@@ -7,9 +7,6 @@ Public Class insuranceMaintenance
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
-    ' Initialize new lists to store certain row values of datatables (easily sorted and BINARY SEARCHED FOR SPEED)
-    Private ICList As List(Of Object)
-
     ' Initialize instance(s) of initialValues class
     Private InitialICValues As New InitialValues()
 
@@ -32,12 +29,6 @@ Public Class insuranceMaintenance
 
         ICDbController.ExecQuery("SELECT ic.CompanyName FROM InsuranceCompanies ic ORDER BY ic.CompanyName ASC")
         If ICDbController.HasException() Then Return False
-
-        ' Also, populate respective lists with data
-        ICList = getListFromDataTable(ICDbController.DbDataTable, "CompanyName")
-        For i As Integer = 0 To ICList.Count - 1
-            ICList(i) = ICList(i).ToString().ToLower()
-        Next
 
         Return True
 
@@ -163,12 +154,12 @@ Public Class insuranceMaintenance
             If mode = "editing" Then
                 Dim initial As String = ICDbController.DbDataTable.Rows(ICRow)("CompanyName").ToString()
                 If CompanyName_Textbox.Text.ToLower() <> initial.ToLower() Then
-                    If isDuplicate("Insurance Company Name", CompanyName_Textbox.Text.ToLower(), errorMessage, ICList) Then
+                    If isDuplicate("Insurance Company", errorMessage, "CompanyName", CompanyName_Textbox.Text, ICDbController.DbDataTable) Then
                         CompanyName_Textbox.ForeColor = Color.Red
                     End If
                 End If
             ElseIf mode = "adding" Then
-                If isDuplicate("Insurance Company Name", CompanyName_Textbox.Text.ToLower(), errorMessage, ICList) Then
+                If isDuplicate("Insurance Company", errorMessage, "CompanyName", CompanyName_Textbox.Text, ICDbController.DbDataTable) Then
                     CompanyName_Textbox.ForeColor = Color.Red
                 End If
             End If
@@ -238,7 +229,7 @@ Public Class insuranceMaintenance
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
-            InitializeICDataViewingControls()
+            InitializeAllDataViewingControls()
             valuesInitialized = True
 
             ' Show labels and corresponding values
@@ -348,7 +339,7 @@ Public Class insuranceMaintenance
 
         ' Initialize values for dataEditingControls
         valuesInitialized = False
-        InitializeICDataEditingControls()
+        InitializeAllDataEditingControls()
         valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialICValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))

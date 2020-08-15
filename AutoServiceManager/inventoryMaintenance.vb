@@ -7,9 +7,6 @@ Public Class inventoryMaintenance
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
-    ' Initialize new lists to store certain row values of datatables (easily sorted and BINARY SEARCHED FOR SPEED)
-    Private IPList As List(Of Object)
-
     ' Initialize instance(s) of initialValues class
     Private InitialIPValues As New InitialValues()
 
@@ -40,12 +37,6 @@ Public Class inventoryMaintenance
 
         IPDbController.ExecQuery("SELECT p.PartDescription + ' - ' + p.PartNbr as PDPN, p.PartNbr, p.PartDescription, p.PartPrice, p.ListPrice FROM Parts p ORDER BY p.PartDescription ASC")
         If IPDbController.HasException() Then Return False
-
-        ' Also, populate respective lists with data
-        IPList = getListFromDataTable(IPDbController.DbDataTable, "PartNbr")
-        For i As Integer = 0 To IPList.Count - 1
-            IPList(i) = IPList(i).ToString().ToLower()
-        Next
 
         Return True
 
@@ -186,12 +177,12 @@ Public Class inventoryMaintenance
             If mode = "editing" Then
                 Dim initial As String = IPDbController.DbDataTable.Rows(IPRow)("PartNbr").ToString().ToLower()
                 If PartNbr_Textbox.Text.ToLower() <> initial Then
-                    If isDuplicate("Part Number", PartNbr_Textbox.Text.ToLower(), errorMessage, IPList) Then
+                    If isDuplicate("Part Number", errorMessage, "PartNbr", PartNbr_Textbox.Text, IPDbController.DbDataTable) Then
                         PartNbr_Textbox.ForeColor = Color.Red
                     End If
                 End If
             ElseIf mode = "adding" Then
-                If isDuplicate("Part Number", PartNbr_Textbox.Text.ToLower(), errorMessage, IPList) Then
+                If isDuplicate("Part Number", errorMessage, "PartNbr", PartNbr_Textbox.Text, IPDbController.DbDataTable) Then
                     PartNbr_Textbox.ForeColor = Color.Red
                 End If
             End If

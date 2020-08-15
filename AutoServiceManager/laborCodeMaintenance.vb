@@ -7,9 +7,6 @@ Public Class laborCodeMaintenance
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
-    ' Initialize new lists to store certain row values of datatables (easily sorted and BINARY SEARCHED FOR SPEED)
-    Private LCList As List(Of Object)
-
     ' Initialize instance(s) of initialValues class
     Private InitialLCValues As New InitialValues()
 
@@ -40,12 +37,6 @@ Public Class laborCodeMaintenance
 
         LCDbController.ExecQuery("SELECT lc.Description + ' - ' + lc.LaborCode as LDLC, lc.LaborCode, lc.Description, lc.Rate, lc.Hours, lc.Amount FROM LaborCodes lc ORDER BY lc.Description ASC")
         If LCDbController.HasException() Then Return False
-
-        ' Also, populate respective lists with data
-        LCList = getListFromDataTable(LCDbController.DbDataTable, "LaborCode")
-        For i As Integer = 0 To LCList.Count - 1
-            LCList(i) = LCList(i).ToString().ToLower()
-        Next
 
         Return True
 
@@ -216,12 +207,12 @@ Public Class laborCodeMaintenance
             If mode = "editing" Then
                 Dim initial As String = LCDbController.DbDataTable.Rows(LCRow)("LaborCode").ToString().ToLower()
                 If LaborCode_Textbox.Text.ToLower() <> initial Then
-                    If isDuplicate("Labor Code", LaborCode_Textbox.Text.ToLower(), errorMessage, LCList) Then
+                    If isDuplicate("Labor Code", errorMessage, "LaborCode", LaborCode_Textbox.Text, LCDbController.DbDataTable) Then
                         LaborCode_Textbox.ForeColor = Color.Red
                     End If
                 End If
             ElseIf mode = "adding" Then
-                If isDuplicate("Labor Code", LaborCode_Textbox.Text.ToLower(), errorMessage, LCList) Then
+                If isDuplicate("Labor Code", errorMessage, "LaborCode", LaborCode_Textbox.Text, LCDbController.DbDataTable) Then
                     LaborCode_Textbox.ForeColor = Color.Red
                 End If
             End If

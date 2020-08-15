@@ -6,9 +6,6 @@
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
-    ' Initialize new lists to store certain row values of datatables (easily sorted and BINARY SEARCHED FOR SPEED)
-    Private CarModelList As List(Of Object)
-
     ' Initialize instance(s) of initialValues class
     Private InitialCarModelValues As New InitialValues()
 
@@ -62,12 +59,6 @@
         CarModelDbController.AddParams("@automake", "%" & AutoMakeComboBox.Text & "%")
         CarModelDbController.ExecQuery("SELECT cm.AutoMake, cm.AutoModel FROM CarModels cm WHERE cm.AutoMake LIKE @automake ORDER BY cm.AutoModel ASC")
         If CarModelDbController.HasException() Then Return False
-
-        ' Also, populate respective list with data
-        CarModelList = getListFromDataTable(CarModelDbController.DbDataTable, "AutoModel")
-        For i As Integer = 0 To CarModelList.Count - 1
-            CarModelList(i) = CarModelList(i).ToString().ToLower()
-        Next
 
         Return True
 
@@ -181,12 +172,12 @@
             If mode = "editing" Then
                 Dim initial As String = CarModelDbController.DbDataTable.Rows(CarModelRow)("AutoModel").ToString().ToLower()
                 If AutoModel_Textbox.Text.ToLower() <> initial Then
-                    If isDuplicate("Car Model", AutoModel_Textbox.Text.ToLower(), errorMessage, CarModelList) Then
+                    If isDuplicate("Car Model", errorMessage, "AutoModel", AutoModel_Textbox.Text, CarModelDbController.DbDataTable) Then
                         AutoModel_Textbox.ForeColor = Color.Red
                     End If
                 End If
             ElseIf mode = "adding" Then
-                If isDuplicate("Car Model", AutoModel_Textbox.Text.ToLower(), errorMessage, CarModelList) Then
+                If isDuplicate("Car Model", errorMessage, "AutoModel", AutoModel_Textbox.Text, CarModelDbController.DbDataTable) Then
                     AutoModel_Textbox.ForeColor = Color.Red
                 End If
             End If

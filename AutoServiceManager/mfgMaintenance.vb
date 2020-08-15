@@ -7,9 +7,6 @@ Public Class mfgMaintenance
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
-    ' Initialize new lists to store certain row values of datatables (easily sorted and BINARY SEARCHED FOR SPEED)
-    Private AutoManufacturersList As List(Of Object)
-
     ' Initialize instance(s) of initialValues class
     Private InitialAutoManufacturersValues As New InitialValues()
 
@@ -32,12 +29,6 @@ Public Class mfgMaintenance
 
         AutoManufacturersDbController.ExecQuery("SELECT am.AutoMake FROM AutoManufacturers am ORDER BY AutoMake ASC")
         If AutoManufacturersDbController.HasException() Then Return False
-
-        ' Also, populate respective lists with data
-        AutoManufacturersList = getListFromDataTable(AutoManufacturersDbController.DbDataTable, "AutoMake")
-        For i As Integer = 0 To AutoManufacturersList.Count - 1
-            AutoManufacturersList(i) = AutoManufacturersList(i).ToString().ToLower()
-        Next
 
         Return True
 
@@ -163,12 +154,12 @@ Public Class mfgMaintenance
             If mode = "editing" Then
                 Dim initial As String = AutoManufacturersDbController.DbDataTable.Rows(amRow)("AutoMake").ToString()
                 If AutoMake_Textbox.Text.ToLower() <> initial.ToLower() Then
-                    If isDuplicate("Manufacturer Name", AutoMake_Textbox.Text.ToLower(), errorMessage, AutoManufacturersList) Then
+                    If isDuplicate("Manufacturer Name", errorMessage, "AutoMake", AutoMake_Textbox.Text, AutoManufacturersDbController.DbDataTable) Then
                         AutoMake_Textbox.ForeColor = Color.Red
                     End If
                 End If
             ElseIf mode = "adding" Then
-                If isDuplicate("Manufacturer Name", AutoMake_Textbox.Text.ToLower(), errorMessage, AutoManufacturersList) Then
+                If isDuplicate("Manufacturer Name", errorMessage, "AutoMake", AutoMake_Textbox.Text, AutoManufacturersDbController.DbDataTable) Then
                     AutoMake_Textbox.ForeColor = Color.Red
                 End If
             End If
@@ -202,7 +193,6 @@ Public Class mfgMaintenance
 
 
         ' SETUP CONTROLS HERE
-        'AutoMakeComboBox.DropDownStyle = ComboBoxStyle.DropDownList
         AutoMakeComboBox.Items.Add("Select One")
         For Each row In AutoManufacturersDbController.DbDataTable.Rows
             AutoMakeComboBox.Items.Add(row("AutoMake"))
@@ -239,7 +229,7 @@ Public Class mfgMaintenance
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
-            InitializeAutoManufacturersDataViewingControls()
+            InitializeAllDataViewingControls()
             valuesInitialized = True
 
             ' Show labels and corresponding values
@@ -350,7 +340,7 @@ Public Class mfgMaintenance
 
         ' Initialize values for dataEditingControls
         valuesInitialized = False
-        InitializeAutoManufacturersDataEditingControls()
+        InitializeAllDataEditingControls()
         valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialAutoManufacturersValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))

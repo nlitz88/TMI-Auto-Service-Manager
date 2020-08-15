@@ -7,9 +7,6 @@ Public Class taskMaintenance
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
-    ' Initialize new lists to store certain row values of datatables (easily sorted and BINARY SEARCHED FOR SPEED)
-    Private TTList As List(Of Object)
-
     ' Initialize instance(s) of initialValues class
     Private InitialTTValues As New InitialValues()
 
@@ -35,12 +32,6 @@ Public Class taskMaintenance
         'TTDbController.ExecQuery("SELECT tt.TaskType, tt.TaskDescription FROM TaskTypes tt ORDER BY tt.TaskType ASC")
         TTDbController.ExecQuery("SELECT tt.TaskType + ' - ' + tt.TaskDescription as TTD, tt.TaskType, tt.TaskDescription FROM TaskTypes tt ORDER BY tt.TaskType ASC")
         If TTDbController.HasException() Then Return False
-
-        ' Also, populate respective lists with data
-        TTList = getListFromDataTable(TTDbController.DbDataTable, "TaskType")
-        For i As Integer = 0 To TTList.Count - 1
-            TTList(i) = TTList(i).ToString().ToLower()
-        Next
 
         Return True
 
@@ -158,12 +149,12 @@ Public Class taskMaintenance
             If mode = "editing" Then
                 Dim initial As String = TTDbController.DbDataTable.Rows(TTRow)("TaskType").ToString().ToLower()
                 If TaskType_Textbox.Text.ToLower() <> initial Then
-                    If isDuplicate("Task Type Symbol", TaskType_Textbox.Text.ToLower(), errorMessage, TTList) Then
+                    If isDuplicate("Task Type Symbol", errorMessage, "TaskType", TaskType_Textbox.Text, TTDbController.DbDataTable) Then
                         TaskType_Textbox.ForeColor = Color.Red
                     End If
                 End If
             ElseIf mode = "adding" Then
-                If isDuplicate("Task Type Symbol", TaskType_Textbox.Text.ToLower(), errorMessage, TTList) Then
+                If isDuplicate("Task Type Symbol", errorMessage, "TaskType", TaskType_Textbox.Text, TTDbController.DbDataTable) Then
                     TaskType_Textbox.ForeColor = Color.Red
                 End If
             End If
