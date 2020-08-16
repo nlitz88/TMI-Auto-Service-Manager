@@ -1900,8 +1900,67 @@
 
         Dim files() As String = IO.Directory.GetFiles(BackupDirectory)
 
+        ' Variables used for parsing
+        Dim fileName As String = String.Empty
+        Dim fileDate As String = String.Empty
+        Dim pattern As String = "????-??-??"
+        Dim fileSubstr As String
+
         For Each file In files
             ' parse date here using _
+            fileName = IO.Path.GetFileName(file)
+
+
+            ' 1.) GET DATE FROM FILENAME
+
+            ' For as many positions in fileName that pattern can fit in,
+            ' check to see if substring (from i to pattern.length) matches the Date pattern.
+            ' If it's a match, then this is the date we're looking for
+
+            For i As Integer = 0 To fileName.Length - pattern.Length
+
+                fileSubstr = fileName.Substring(i, pattern.Length)
+                If fileSubstr Like pattern Then
+                    fileDate = fileSubstr
+                    Exit For
+                End If
+
+            Next
+
+            ' If a date was found in the file, then find the year from that date in the same fashion
+            ' (really, this could be extremely simplified by just 
+            If fileDate <> String.Empty Then
+
+                Dim year As String = String.Empty
+                Dim yearPattern As String = "????"
+                Dim dateSubstr As String
+
+                For i As Integer = 0 To fileDate.Length - yearPattern.Length
+
+                    dateSubstr = fileDate.Substring(i, yearPattern.Length)
+                    If dateSubstr Like yearPattern Then
+                        year = dateSubstr
+                        Exit For
+                    End If
+
+                Next
+
+                ' Once we have a valid year, then we can move on
+
+                ' If (fildDate) LIKE ????-01-01 Then, delete all others except
+
+
+            Else
+                ' If fileDate not found in file, this file will be skipped in pruning
+                Continue For
+            End If
+
+
+
+
+            ' reset fileDate
+            fileDate = String.Empty
+
         Next
 
 
