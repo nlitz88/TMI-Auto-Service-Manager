@@ -657,4 +657,10 @@ Public Class companyInfo
     End Sub
 
 
+    Private Sub companyInfo_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        backupDb()
+        Console.WriteLine("Company info closing!")
+    End Sub
+
+
 End Class

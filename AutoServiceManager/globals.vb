@@ -1791,4 +1791,92 @@
     End Sub
 
 
+
+
+    ' ****************** FILE IO / DATABASE BACKUP ******************
+
+
+    ' Sub that gets data from INI files. Data is retrieved by looking for a line in the INI that contains the provided key,
+    ' and then reading in the data that follows until the EndOn string is reached
+    Public Function readINI(ByVal iniFileName As String, ByVal key As String, Optional ByVal EndOn As String = "") As String
+
+        Dim line As String = String.Empty
+        Dim value As String = String.Empty
+        Dim valueStartIndex As Integer
+        Dim valueEndIndex As Integer
+        Dim INIFile As New System.IO.StreamReader(Application.StartupPath & "\" & iniFileName)
+
+        ' Do loop in case connection string is eventually moved to a different row in the ini configuration file
+        Do Until INIFile.EndOfStream
+            line = INIFile.ReadLine()
+            If line.IndexOf(key) <> -1 Then
+                Exit Do
+            End If
+        Loop
+
+        If Not String.IsNullOrEmpty(line) Then
+
+            ' Get everything after key and store it in value
+            valueStartIndex = line.IndexOf(key) + key.Length
+            value = line.Substring(valueStartIndex, (line.Length - key.Length))
+
+            If EndOn <> String.Empty Then
+
+                ' Then, get everything after key UP TO the EndOn String
+                valueEndIndex = value.IndexOf(EndOn)
+                ' As long as the End value is in the value, then set the , set value
+                If valueEndIndex <> -1 Then value = line.Substring(0, valueEndIndex)
+
+            End If
+
+
+        End If
+
+        Return value
+
+    End Function
+
+
+    ' Sub that creates a backup of the database on close/logout.
+    Public Sub backupDb()
+
+        Try
+
+            Dim FileToCopy As String
+            Dim WithoutExt As String
+            Dim NewDate As String
+            Dim NewCopy As String
+
+            FileToCopy = readINI("PrimaryDatabaseFilePath.ini", "DATABASE-FILEPATH=")
+
+            Console.WriteLine("File to Copy : " & FileToCopy)
+
+            If FileToCopy IsNot Nothing Then
+                WithoutExt = FileToCopy.Substring(0, FileToCopy.IndexOf(".mdb"))
+                NewDate = DateTime.Now.ToString("yyyy-MM-dd")
+                NewCopy = WithoutExt & "(" & NewDate & ").mdb"
+            End If
+
+
+            If System.IO.File.Exists(FileToCopy) Then
+
+                System.IO.File.Copy(FileToCopy, NewCopy)
+                MessageBox.Show("Database backup created successfully at " & vbNewLine & NewCopy)
+
+            End If
+
+        Catch ex As Exception
+
+            MessageBox.Show("Database backup unsuccessful." & vbNewLine & "Please ensure that the filepath to the primary database is correct in PrimaryDatabaseFilePath.ini", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        End Try
+
+
+
+    End Sub
+
+
+
+
+
 End Module
