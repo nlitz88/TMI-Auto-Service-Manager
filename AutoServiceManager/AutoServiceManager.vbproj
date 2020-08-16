@@ -299,7 +299,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PrimaryDatabaseFilePath.ini">
+    <None Include="DatabaseBackupParams.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\SchweikarthsLogo.png" />

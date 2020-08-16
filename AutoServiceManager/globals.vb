@@ -1843,22 +1843,24 @@
         Dim success As Boolean = True
 
         Dim FileToCopy As String
-        Dim WithoutExt As String
+        Dim FileName As String
+        Dim BackupDirectory As String
         Dim NewDate As String
-        Dim NewCopy As String
+        Dim NewCopy As String = String.Empty
 
         Try
 
-            FileToCopy = readINI("PrimaryDatabaseFilePath.ini", "DATABASE-FILEPATH=")
+            FileToCopy = readINI("DatabaseBackupParams.ini", "PRIMARY-DATABASE-FILEPATH=")
+            BackupDirectory = readINI("DatabaseBackupParams.ini", "BACKUP-DIRECTORY=")
 
             ' First, ensure that there was a valid entry in the INI
             If FileToCopy <> String.Empty Then
                 ' Then, check to see if the path returned was a file that actually exists
-                If System.IO.File.Exists(FileToCopy) Then
+                If System.IO.File.Exists(FileToCopy) And System.IO.Directory.Exists(BackupDirectory) Then
 
-                    WithoutExt = FileToCopy.Substring(0, FileToCopy.IndexOf(".mdb"))
+                    FileName = System.IO.Path.GetFileNameWithoutExtension(FileToCopy)
                     NewDate = DateTime.Now.ToString("yyyy-MM-dd")
-                    NewCopy = WithoutExt & "(" & NewDate & ").mdb"
+                    NewCopy = BackupDirectory & FileName & "(" & NewDate & ").mdb"
 
                     ' Then, check to see if NewCopy file already exists. If so, delete existing and make new copy
                     ' If not, then just create a new copy
@@ -1884,14 +1886,17 @@
         If success Then
             MessageBox.Show("Database backup created successfully at " & vbNewLine & NewCopy)
         Else
-            MessageBox.Show("Database backup unsuccessful." & vbNewLine & "Please ensure that the filepath to the primary database is correct in PrimaryDatabaseFilePath.ini", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Database backup unsuccessful." & vbNewLine & "Please ensure that the filepath to the primary database is correct and that the backup directory is a valid path", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
-
 
     End Sub
 
 
+    Public Sub pruneBackups()
 
+        'Dim files() As String = IO.Directory.GetFiles()
+
+    End Sub
 
 
 End Module
