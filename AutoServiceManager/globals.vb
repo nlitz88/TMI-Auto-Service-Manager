@@ -1860,7 +1860,7 @@
 
                     FileName = System.IO.Path.GetFileNameWithoutExtension(FileToCopy)
                     NewDate = DateTime.Now.ToString("yyyy-MM-dd")
-                    NewCopy = BackupDirectory & FileName & "(" & NewDate & ").mdb"
+                    NewCopy = BackupDirectory & FileName & "_" & NewDate & ".mdb"
 
                     ' Then, check to see if NewCopy file already exists. If so, delete existing and make new copy
                     ' If not, then just create a new copy
@@ -1885,6 +1885,7 @@
 
         If success Then
             MessageBox.Show("Database backup created successfully at " & vbNewLine & NewCopy)
+            pruneBackups()
         Else
             MessageBox.Show("Database backup unsuccessful." & vbNewLine & "Please ensure that the filepath to the primary database is correct and that the backup directory is a valid path", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
@@ -1894,7 +1895,15 @@
 
     Public Sub pruneBackups()
 
-        'Dim files() As String = IO.Directory.GetFiles()
+        Dim BackupDirectory As String = readINI("DatabaseBackupParams.ini", "BACKUP-DIRECTORY=")
+        If Not System.IO.Directory.Exists(BackupDirectory) Then Exit Sub
+
+        Dim files() As String = IO.Directory.GetFiles(BackupDirectory)
+
+        For Each file In files
+            ' parse date here using _
+        Next
+
 
     End Sub
 
