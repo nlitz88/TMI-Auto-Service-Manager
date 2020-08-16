@@ -1895,12 +1895,7 @@
 
     Public Sub pruneBackups()
 
-        ' 1.) CHECK IF CURRENT DATE IS THE 1ST OF THE YEAR 1/1.
-        ' If it's the first of the year, then "prune" (delete all others EXCEPT for those with date 12/31)
-        ' If not, then exit sub
-        If Not DateTime.Now.ToString("yyyy-MM-dd") Like "####-01-01" Then Exit Sub
-
-        ' 2.) BEGIN PROCESS TO PRUNE BACKUPS DIRECTORY
+        ' 1.) BEGIN PROCESS TO PRUNE BACKUPS DIRECTORY
         Dim BackupDirectory As String = readINI("DatabaseBackupParams.ini", "BACKUP-DIRECTORY=")
         If Not System.IO.Directory.Exists(BackupDirectory) Then Exit Sub
 
@@ -1917,12 +1912,19 @@
             ' 3.) GET DATE FROM FILENAME
             fileDate = ParsePattern(fileName, datePattern)
 
-            ' If a valid date was found for this file, then we can check to see if it is 12/31
+            Dim year As String = String.Empty
+            Dim yearPattern As String = "####"
+            Dim currentYear As String = DateTime.Now.ToString("yyyy")
+
+            ' If a valid date was found for this file, then we can check if a.) it's from the current year,
+            ' and b.) if it's date is 12/31
             If fileDate <> String.Empty Then
 
-                ' If the file's date is not 12/31, then delete file
-                If Not fileDate Like "####-12-31" Then
+                year = ParsePattern(fileDate, yearPattern)
+
+                If year <> currentYear And Not fileDate Like "####-12-31" Then
                     IO.File.Delete(file)
+                    'Console.WriteLine(fileName & " to be deleted!")
                 End If
 
                 ' reset fileDate
@@ -1945,6 +1947,9 @@
 
         Dim result As String = String.Empty
         Dim substr As String = String.Empty
+
+        ' Prevents it from trying to find a pattern in a string that is shorter than the pattern itself
+        If searchStr.Length < pattern.Length Then Return result
 
         For i As Integer = 0 To searchStr.Length - pattern.Length
 
