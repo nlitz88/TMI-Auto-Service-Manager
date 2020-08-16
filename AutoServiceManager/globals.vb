@@ -1895,6 +1895,12 @@
 
     Public Sub pruneBackups()
 
+        ' 1.) CHECK IF CURRENT DATE IS THE 1ST OF THE YEAR 1/1.
+        ' If it's the first of the year, then "prune" (delete all others EXCEPT for those with date 12/31)
+        ' If not, then exit sub
+        If Not DateTime.Now.ToString("yyyy-MM-dd") Like "####-01-01" Then Exit Sub
+
+        ' 2.) BEGIN PROCESS TO PRUNE BACKUPS DIRECTORY
         Dim BackupDirectory As String = readINI("DatabaseBackupParams.ini", "BACKUP-DIRECTORY=")
         If Not System.IO.Directory.Exists(BackupDirectory) Then Exit Sub
 
@@ -1903,68 +1909,56 @@
         ' Variables used for parsing
         Dim fileName As String = String.Empty
         Dim fileDate As String = String.Empty
-        Dim pattern As String = "????-??-??"
-        Dim fileSubstr As String
+        Dim datePattern As String = "####-##-##"
 
         For Each file In files
-            ' parse date here using _
+
             fileName = IO.Path.GetFileName(file)
+            ' 3.) GET DATE FROM FILENAME
+            fileDate = ParsePattern(fileName, datePattern)
 
-
-            ' 1.) GET DATE FROM FILENAME
-
-            ' For as many positions in fileName that pattern can fit in,
-            ' check to see if substring (from i to pattern.length) matches the Date pattern.
-            ' If it's a match, then this is the date we're looking for
-
-            For i As Integer = 0 To fileName.Length - pattern.Length
-
-                fileSubstr = fileName.Substring(i, pattern.Length)
-                If fileSubstr Like pattern Then
-                    fileDate = fileSubstr
-                    Exit For
-                End If
-
-            Next
-
-            ' If a date was found in the file, then find the year from that date in the same fashion
-            ' (really, this could be extremely simplified by just 
+            ' If a valid date was found for this file, then we can check to see if it is 12/31
             If fileDate <> String.Empty Then
 
-                Dim year As String = String.Empty
-                Dim yearPattern As String = "????"
-                Dim dateSubstr As String
+                ' If the file's date is not 12/31, then delete file
+                If Not fileDate Like "####-12-31" Then
+                    IO.File.Delete(file)
+                End If
 
-                For i As Integer = 0 To fileDate.Length - yearPattern.Length
+                ' reset fileDate
+                fileDate = String.Empty
 
-                    dateSubstr = fileDate.Substring(i, yearPattern.Length)
-                    If dateSubstr Like yearPattern Then
-                        year = dateSubstr
-                        Exit For
-                    End If
-
-                Next
-
-                ' Once we have a valid year, then we can move on
-
-                ' If (fildDate) LIKE ????-01-01 Then, delete all others except
-
-
-            Else
-                ' If fileDate not found in file, this file will be skipped in pruning
-                Continue For
+            Else Continue For
             End If
-
-
-
-
-            ' reset fileDate
-            fileDate = String.Empty
 
         Next
 
 
     End Sub
+
+
+    Public Function ParsePattern(ByVal searchStr As String, ByVal pattern As String) As String
+
+        ' For as many positions in searchStr that pattern can fit in,
+        ' check to see if substring (from i to pattern.length) matches the pattern.
+        ' If it's a match, then this is the value we're looking for --> return this
+
+        Dim result As String = String.Empty
+        Dim substr As String = String.Empty
+
+        For i As Integer = 0 To searchStr.Length - pattern.Length
+
+            substr = searchStr.Substring(i, pattern.Length)
+            If substr Like pattern Then
+                result = substr
+                Exit For
+            End If
+
+        Next
+
+        Return result
+
+    End Function
 
 
 End Module
