@@ -1840,37 +1840,52 @@
     ' Sub that creates a backup of the database on close/logout.
     Public Sub backupDb()
 
-        Try
+        Dim success As Boolean = True
 
-            Dim FileToCopy As String
-            Dim WithoutExt As String
-            Dim NewDate As String
-            Dim NewCopy As String
+        Dim FileToCopy As String
+        Dim WithoutExt As String
+        Dim NewDate As String
+        Dim NewCopy As String
+
+        Try
 
             FileToCopy = readINI("PrimaryDatabaseFilePath.ini", "DATABASE-FILEPATH=")
 
-            Console.WriteLine("File to Copy : " & FileToCopy)
+            ' First, ensure that there was a valid entry in the INI
+            If FileToCopy <> String.Empty Then
+                ' Then, check to see if the path returned was a file that actually exists
+                If System.IO.File.Exists(FileToCopy) Then
 
-            If FileToCopy IsNot Nothing Then
-                WithoutExt = FileToCopy.Substring(0, FileToCopy.IndexOf(".mdb"))
-                NewDate = DateTime.Now.ToString("yyyy-MM-dd")
-                NewCopy = WithoutExt & "(" & NewDate & ").mdb"
-            End If
+                    WithoutExt = FileToCopy.Substring(0, FileToCopy.IndexOf(".mdb"))
+                    NewDate = DateTime.Now.ToString("yyyy-MM-dd")
+                    NewCopy = WithoutExt & "(" & NewDate & ").mdb"
 
+                    ' Then, check to see if NewCopy file already exists. If so, delete existing and make new copy
+                    ' If not, then just create a new copy
+                    If System.IO.File.Exists(NewCopy) Then
+                        System.IO.File.Delete(NewCopy)
+                        System.IO.File.Copy(FileToCopy, NewCopy)
+                    Else
+                        System.IO.File.Copy(FileToCopy, NewCopy)
+                    End If
 
-            If System.IO.File.Exists(FileToCopy) Then
+                Else success = False
+                End If
 
-                System.IO.File.Copy(FileToCopy, NewCopy)
-                MessageBox.Show("Database backup created successfully at " & vbNewLine & NewCopy)
-
+            Else success = False
             End If
 
         Catch ex As Exception
 
-            MessageBox.Show("Database backup unsuccessful." & vbNewLine & "Please ensure that the filepath to the primary database is correct in PrimaryDatabaseFilePath.ini", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            success = False
 
         End Try
 
+        If success Then
+            MessageBox.Show("Database backup created successfully at " & vbNewLine & NewCopy)
+        Else
+            MessageBox.Show("Database backup unsuccessful." & vbNewLine & "Please ensure that the filepath to the primary database is correct in PrimaryDatabaseFilePath.ini", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
 
 
     End Sub

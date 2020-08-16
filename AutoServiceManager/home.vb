@@ -6,4 +6,8 @@ Public Class home
 
     End Sub
 
+    Private Sub home_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        backupDb()
+    End Sub
+
 End Class
