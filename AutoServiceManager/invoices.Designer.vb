@@ -389,6 +389,7 @@ Partial Class invoices
         Me.Phone1Label.Name = "Phone1Label"
         Me.Phone1Label.Size = New System.Drawing.Size(69, 17)
         Me.Phone1Label.TabIndex = 260
+        Me.Phone1Label.Tag = "dataLabel"
         Me.Phone1Label.Text = "Phone 1 :"
         '
         'ContactPhone1_ComboBox
@@ -401,6 +402,7 @@ Partial Class invoices
         Me.ContactPhone1_ComboBox.Name = "ContactPhone1_ComboBox"
         Me.ContactPhone1_ComboBox.Size = New System.Drawing.Size(181, 28)
         Me.ContactPhone1_ComboBox.TabIndex = 259
+        Me.ContactPhone1_ComboBox.Tag = "dataEditingControl"
         '
         'ContactPhone1_Value
         '
@@ -432,6 +434,7 @@ Partial Class invoices
         Me.Phone2Label.Name = "Phone2Label"
         Me.Phone2Label.Size = New System.Drawing.Size(69, 17)
         Me.Phone2Label.TabIndex = 263
+        Me.Phone2Label.Tag = "dataLabel"
         Me.Phone2Label.Text = "Phone 2 :"
         '
         'ContactPhone2_ComboBox
@@ -444,6 +447,7 @@ Partial Class invoices
         Me.ContactPhone2_ComboBox.Name = "ContactPhone2_ComboBox"
         Me.ContactPhone2_ComboBox.Size = New System.Drawing.Size(181, 28)
         Me.ContactPhone2_ComboBox.TabIndex = 262
+        Me.ContactPhone2_ComboBox.Tag = "dataEditingControl"
         '
         'VehicleLabel
         '

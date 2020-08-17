@@ -224,6 +224,7 @@
             invoiceNumLabel.Visible = False
 
             invoiceNumComboBox.SelectedIndex = -1
+            invoiceNumComboBox_SelectedIndexChanged(invoiceNumComboBox, New EventArgs())
 
             ' Disable user from creating new invoice until valid vehicle selected
             newInvButton.Enabled = False
@@ -263,9 +264,65 @@
             invoiceNumLabel.Visible = False
 
             invoiceNumComboBox.SelectedIndex = -1
+            invoiceNumComboBox_SelectedIndexChanged(invoiceNumComboBox, New EventArgs())
 
             ' Disable user from creating new invoice until valid vehicle selected
             newInvButton.Enabled = False
+
+        End If
+
+    End Sub
+
+
+    Private Sub invoiceNumComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles invoiceNumComboBox.SelectedIndexChanged, invoiceNumComboBox.TextChanged
+
+        ' Ensure that invoiceNumComboBox is only attempting to initialize values when on proper selected Index
+        If invoiceNumComboBox.SelectedIndex = -1 Then
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            ' Disable editing button
+            modifyInvButton.Enabled = False
+            deleteInvButton.Enabled = False
+            Exit Sub
+
+        End If
+
+        ' Lookup newly selected row and see if it is valid (valid if it corresponds with a datatable row)
+        InvRow = getDataTableRow(InvDbController.DbDataTable, "InvNbr", invoiceNumComboBox.Text)
+
+        ' If this query DOES return a valid row index, then initialize respective controls
+        If InvRow <> -1 Then
+
+            'InvId = InvDbController.DbDataTable.Rows(InvRow)("InvId")
+            InvId = invoiceNumComboBox.Text
+
+            ' Initialize corresponding controls from DataTable values
+            valuesInitialized = False
+            'InitializeAllDataViewingControls()
+            valuesInitialized = True
+
+            ' Show labels and corresponding values
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+            showHide(getAllControlsWithTag("dataLabel", Me), 1)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+            ' Enable editing and deleting button
+            modifyInvButton.Enabled = True
+            deleteInvButton.Enabled = True
+
+            'If it does = -1, that means that value Is either "Select one" Or some other anomoly
+        Else
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            ' Disable editing button
+            modifyInvButton.Enabled = False
+            deleteInvButton.Enabled = False
 
         End If
 
