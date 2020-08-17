@@ -65,6 +65,19 @@
 
     End Sub
 
+    ' Sub that initializes all dataViewingControls corresponding to values in Vehicle DataTable (TaxExempt)
+    Private Sub InitializeCustomerDataViewingControls()
+
+        initializeControlsFromRow(CustomerDbController.DbDataTable, CustomerRow, "dataViewingControl", "_", Me)
+
+    End Sub
+    ' Sub that initializes all dataEditingControls corresponding to values in Vehicle DataTable (TaxExempt)
+    Private Sub InitializeCustomerDataEditingControls()
+
+        initializeControlsFromRow(CustomerDbController.DbDataTable, CustomerRow, "dataEditingControl", "_", Me)
+
+    End Sub
+
 
     ' Sub that loads States DataTable
     Private Function loadStatesDataTable() As Boolean
@@ -93,7 +106,7 @@
 
         VehicleDbController.AddParams("@customerId", CustomerId)
         VehicleDbController.ExecQuery("SELECT CSTR(IIF(ISNULL(v.makeYear), 0, v.makeYear)) + ' ' + IIF(ISNULL(v.Make), '', v.Make) + ' ' + IIF(ISNULL(v.Model), '', v.Model) + '  -  ' + IIF(ISNULL(v.LicensePlate), '', v.LicensePlate) as YMML, " &
-                                      "v.VehicleId, v.InspectionStickerNbr, v.InspectionMonth " &
+                                      "v.VehicleId, v.InspectionStickerNbr as InspectionSticker, v.InspectionMonth " &
                                       "FROM Vehicle v " &
                                       "WHERE v.CustomerId=@customerId " &
                                       "ORDER BY v.makeYear ASC")
@@ -114,6 +127,20 @@
             VehicleComboBox.Items.Add(row("YMML"))
         Next
         VehicleComboBox.EndUpdate()
+
+    End Sub
+
+    ' Sub that initializes all dataViewingControls corresponding to values in Vehicle DataTable (inspection month, inspection sticker number)
+    Private Sub InitializeVehicleDataViewingControls()
+
+        initializeControlsFromRow(VehicleDbController.DbDataTable, VehicleRow, "dataViewingControl", "_", Me)
+
+    End Sub
+
+    ' Sub that initializes all dataEditingControls corresponding to values in Vehicle DataTable (inspection month, inspection sticker number)
+    Private Sub InitializeVehicleDataEditingControls()
+
+        initializeControlsFromRow(VehicleDbController.DbDataTable, VehicleRow, "dataEditingControl", "_", Me)
 
     End Sub
 
@@ -147,6 +174,48 @@
 
     End Sub
 
+    ' Sub that initializes all dataViewingControls corresponding to values in invoice DataTable
+    Private Sub InitializeInvoiceDataViewingControls()
+
+        initializeControlsFromRow(InvDbController.DbDataTable, InvRow, "dataViewingControl", "_", Me)
+
+    End Sub
+    ' Sub that initializes all dataEditingControls corresponding to values in invoice DataTable
+    Private Sub InitializeInvoiceDataEditingControls()
+
+        initializeControlsFromRow(InvDbController.DbDataTable, InvRow, "dataEditingControl", "_", Me)
+
+    End Sub
+
+
+    ' Sub that calls all individual dataViewingControl initialization subs in one (These can be used individually if desired)
+    Private Sub InitializeAllDataViewingControls()
+
+        ' Automated initializations
+        InitializeInvoiceDataViewingControls()
+        InitializeVehicleDataViewingControls()
+        InitializeCustomerDataViewingControls()
+        ' Then, format dataViewingControls
+        'formatDataViewingControls()
+
+    End Sub
+
+    ' Sub that calls all individual dataEditingControl initialization subs in one (These can be used individually if desired)
+    Private Sub InitializeAllDataEditingControls()
+
+        ' Automated initializations
+        InitializeInvoiceDataEditingControls()
+        InitializeVehicleDataEditingControls()
+        InitializeCustomerDataEditingControls()
+        ' Then, format dataEditingControls
+        'formatDataEditingControls()
+        ' Set forecolor if not already initially default
+        setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
+
+    End Sub
+
+
+
 
 
     Public Sub New()
@@ -155,9 +224,11 @@
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+
         loadCustomerDataTable()
         InitializeCustomerComboBox()
         CustomerComboBox.SelectedIndex = 0
+
         loadStatesDataTable()
         InitializeStateComboBox()
         LicenseStateComboBox.SelectedIndex = LicenseStateComboBox.Items.IndexOf("PA")   ' Most cars will have PA licenses
@@ -165,6 +236,8 @@
     End Sub
 
     Private Sub invoices_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        TotalLabor_Value.Text = "Hello"
 
     End Sub
 
@@ -341,7 +414,7 @@
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
-            'InitializeAllDataViewingControls()
+            InitializeAllDataViewingControls()
             valuesInitialized = True
 
             ' Show labels and corresponding values
