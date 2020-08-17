@@ -128,6 +128,7 @@
         ' Add any initialization after the InitializeComponent() call.
         loadCustomerDataTable()
         InitializeCustomerComboBox()
+        CustomerComboBox.SelectedIndex = 0
         loadStatesDataTable()
         InitializeStateComboBox()
         LicenseStateComboBox.SelectedIndex = LicenseStateComboBox.Items.IndexOf("PA")   ' Most cars will have PA licenses
@@ -137,6 +138,75 @@
     Private Sub invoices_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
+
+
+
+    ' **************** CONTROL SUBS ****************
+
+
+    Private Sub CustomerComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CustomerComboBox.SelectedIndexChanged, CustomerComboBox.TextChanged
+
+        ' Ensure that CustomerCombobox is only enabling user to select vehicle if valid index selected
+        If CustomerComboBox.SelectedIndex = -1 Then
+
+            ' If not already, clear and empty the VehicleComboBox
+            If VehicleComboBox.Text <> String.Empty And VehicleComboBox.Items.Count <> 0 Then
+                VehicleComboBox.Items.Clear()
+                VehicleComboBox.Text = String.Empty
+            End If
+            VehicleComboBox.Visible = False
+            VehicleLabel.Visible = False
+
+            VehicleComboBox.SelectedIndex = -1
+            ' This is the important part: when vehicle combo gets -1 as selectedIndex, it will subsequently set the selectedindex
+            ' of the invCombobox to -1, which will THEN hide all of the controls in a CASCADING FASHION
+
+            ' Disable user from creating new invoice until valid vehicle selected
+            newInvButton.Enabled = False
+
+            Exit Sub
+
+        End If
+
+        ' Lookup newly selected row and see if it is valid (valid if it corresponds with a datatable row)
+        CustomerRow = getDataTableRow(CustomerDbController.DbDataTable, "CLFA", CustomerComboBox.Text)
+
+        If CustomerRow <> -1 Then
+
+            ' CustomerRow doesn't mean anything to vehicleComboBox. VehicleComboBox query only concerned about the CustomerId
+            ' So, if the customer entered in CustomerComboBox exists (valid CLFA), then lookup the corresponding ID
+            CustomerId = CustomerDbController.DbDataTable(CustomerRow)("CustomerId")
+
+            ' Then, load the vehicleDataTable and initialize vehicleComboBox based on this newfound CustomerId
+            loadVehicleDataTable()
+            InitializeVehicleComboBox()
+            VehicleComboBox.Visible = True
+            VehicleLabel.Visible = True
+            VehicleComboBox.SelectedIndex = 0
+
+            'If it does = -1, that means that value Is either "Select one" Or some other anomoly
+        Else
+
+            ' If not already, clear and empty the VehicleComboBox
+            If VehicleComboBox.Text <> String.Empty And VehicleComboBox.Items.Count <> 0 Then
+                VehicleComboBox.Items.Clear()
+                VehicleComboBox.Text = String.Empty
+            End If
+            VehicleComboBox.Visible = False
+            VehicleLabel.Visible = False
+
+            VehicleComboBox.SelectedIndex = -1
+
+            ' Disable user from creating new invoice until valid vehicle selected
+            newInvButton.Enabled = False
+
+        End If
+
+    End Sub
+
+
+
 
 
 
