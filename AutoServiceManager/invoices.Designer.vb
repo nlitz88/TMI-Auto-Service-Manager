@@ -29,7 +29,7 @@ Partial Class invoices
         Me.saveButton = New System.Windows.Forms.Button()
         Me.newInvButton = New System.Windows.Forms.Button()
         Me.invoiceNumLabel = New System.Windows.Forms.Label()
-        Me.invoiceNumComboBox = New System.Windows.Forms.ComboBox()
+        Me.InvoiceNumComboBox = New System.Windows.Forms.ComboBox()
         Me.CustomerComboLabel = New System.Windows.Forms.Label()
         Me.CustomerComboBox = New System.Windows.Forms.ComboBox()
         Me.invDate_Textbox = New System.Windows.Forms.MaskedTextBox()
@@ -214,16 +214,16 @@ Partial Class invoices
         Me.invoiceNumLabel.TabIndex = 143
         Me.invoiceNumLabel.Text = "Invoice # :"
         '
-        'invoiceNumComboBox
+        'InvoiceNumComboBox
         '
-        Me.invoiceNumComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.invoiceNumComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.invoiceNumComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
-        Me.invoiceNumComboBox.FormattingEnabled = True
-        Me.invoiceNumComboBox.Location = New System.Drawing.Point(175, 279)
-        Me.invoiceNumComboBox.Name = "invoiceNumComboBox"
-        Me.invoiceNumComboBox.Size = New System.Drawing.Size(213, 28)
-        Me.invoiceNumComboBox.TabIndex = 141
+        Me.InvoiceNumComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.InvoiceNumComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.InvoiceNumComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
+        Me.InvoiceNumComboBox.FormattingEnabled = True
+        Me.InvoiceNumComboBox.Location = New System.Drawing.Point(175, 279)
+        Me.InvoiceNumComboBox.Name = "InvoiceNumComboBox"
+        Me.InvoiceNumComboBox.Size = New System.Drawing.Size(213, 28)
+        Me.InvoiceNumComboBox.TabIndex = 141
         '
         'CustomerComboLabel
         '
@@ -1422,7 +1422,7 @@ Partial Class invoices
         Me.Controls.Add(Me.InvoiceDateLabel)
         Me.Controls.Add(Me.CustomerComboBox)
         Me.Controls.Add(Me.invoiceNumLabel)
-        Me.Controls.Add(Me.invoiceNumComboBox)
+        Me.Controls.Add(Me.InvoiceNumComboBox)
         Me.Controls.Add(Me.CustomerComboLabel)
         Me.Controls.Add(Me.deleteInvButton)
         Me.Controls.Add(Me.invoiceMaintenanceLabel)
@@ -1455,7 +1455,7 @@ Partial Class invoices
     Friend WithEvents saveButton As Button
     Friend WithEvents newInvButton As Button
     Friend WithEvents invoiceNumLabel As Label
-    Friend WithEvents invoiceNumComboBox As ComboBox
+    Friend WithEvents InvoiceNumComboBox As ComboBox
     Friend WithEvents CustomerComboLabel As Label
     Friend WithEvents CustomerComboBox As ComboBox
     Friend WithEvents invDate_Textbox As MaskedTextBox

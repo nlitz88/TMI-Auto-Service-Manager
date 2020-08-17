@@ -88,7 +88,7 @@
     End Sub
 
 
-    ' Loads datatable from Vehicle database table based on CustomerId
+    ' Sub that loads Vehicle DataTable based on CustomerId
     Private Function loadVehicleDataTable() As Boolean
 
         VehicleDbController.AddParams("@customerId", CustomerId)
@@ -104,7 +104,7 @@
 
     End Function
 
-    ' Sub that initializes CarModelComboBox after valid AutoMakeComboBox selection has been made
+    ' Sub that initializes VehicleComboBox after valid Customer selection has been made
     Private Sub InitializeVehicleComboBox()
 
         VehicleComboBox.BeginUpdate()
@@ -117,6 +117,35 @@
 
     End Sub
 
+
+    ' Sub that loads InvoiceHdr DataTable based on VehicleId
+    Private Function loadInvoiceDataTable() As Boolean
+
+        InvDbController.AddParams("@vehicleId", VehicleId)
+        InvDbController.ExecQuery("SELECT i.InvNbr, i.CustomerId, i.VehicleId, i.Mileage, i.InvDate, i.Complete, i.NbrTasks, i.WorkDate, i.ApptDate, i.ContactName, i.ContactPhone1, i.ContactPhone2, i.Notes, i.TotalLabor, i.TotalParts, i.Towing, " &
+                                      "i.Gas, i.ShopCharges, i.Tax, i.InvTotal, i.TotalPaid, i.PayDate, i.ShopSupplies " &
+                                      "FROM InvHdr i " &
+                                      "WHERE i.VehicleId=@vehicleId " &
+                                      "ORDER BY i.InvNbr ASC")
+
+        If InvDbController.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+    ' Sub that initializes invoiceNumComboBox after valid Vehicle selection has been made
+    Private Sub InitializeInvoiceNumComboBox()
+
+        InvoiceNumComboBox.BeginUpdate()
+        InvoiceNumComboBox.Items.Clear()
+        InvoiceNumComboBox.Items.Add("Select One")
+        For Each row In InvDbController.DbDataTable.Rows
+            InvoiceNumComboBox.Items.Add(row("InvNbr"))
+        Next
+        InvoiceNumComboBox.EndUpdate()
+
+    End Sub
 
 
 
@@ -210,21 +239,19 @@
 
     Private Sub VehicleComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles VehicleComboBox.SelectedIndexChanged, VehicleComboBox.TextChanged
 
-        Console.WriteLine("Vehicle ComboBox selected index changed!")
-
         ' Ensure that VehicleComboBox is only enabling user to select invoiceNum if valid index selected
         If VehicleComboBox.SelectedIndex = -1 Then
 
             ' If not already, clear and empty the invoiceNumComboBox
-            If invoiceNumComboBox.Text <> String.Empty And invoiceNumComboBox.Items.Count <> 0 Then
-                invoiceNumComboBox.Items.Clear()
-                invoiceNumComboBox.Text = String.Empty
+            If InvoiceNumComboBox.Text <> String.Empty And InvoiceNumComboBox.Items.Count <> 0 Then
+                InvoiceNumComboBox.Items.Clear()
+                InvoiceNumComboBox.Text = String.Empty
             End If
-            invoiceNumComboBox.Visible = False
+            InvoiceNumComboBox.Visible = False
             invoiceNumLabel.Visible = False
 
-            invoiceNumComboBox.SelectedIndex = -1
-            invoiceNumComboBox_SelectedIndexChanged(invoiceNumComboBox, New EventArgs())
+            InvoiceNumComboBox.SelectedIndex = -1
+            InvoiceNumComboBox_SelectedIndexChanged(InvoiceNumComboBox, New EventArgs())
 
             ' Disable user from creating new invoice until valid vehicle selected
             newInvButton.Enabled = False
@@ -243,11 +270,11 @@
             VehicleId = VehicleDbController.DbDataTable(VehicleRow)("VehicleId")
 
             ' Then, load the Invoice DataTable and initialize InvComboBox based on this newfound VehicleId
-            'loadVehicleDataTable()
-            'InitializeVehicleComboBox()
-            invoiceNumComboBox.Visible = True
+            loadInvoiceDataTable()
+            InitializeInvoiceNumComboBox()
+            InvoiceNumComboBox.Visible = True
             invoiceNumLabel.Visible = True
-            'invoiceNumComboBox.SelectedIndex = 0
+            InvoiceNumComboBox.SelectedIndex = 0
 
             ' Now that valid vehicle selected, user may add new invoice associated with that vehicle
             newInvButton.Enabled = True
@@ -256,15 +283,15 @@
         Else
 
             ' If not already, clear and empty the invoiceNumComboBox
-            If invoiceNumComboBox.Text <> String.Empty And invoiceNumComboBox.Items.Count <> 0 Then
-                invoiceNumComboBox.Items.Clear()
-                invoiceNumComboBox.Text = String.Empty
+            If InvoiceNumComboBox.Text <> String.Empty And InvoiceNumComboBox.Items.Count <> 0 Then
+                InvoiceNumComboBox.Items.Clear()
+                InvoiceNumComboBox.Text = String.Empty
             End If
-            invoiceNumComboBox.Visible = False
+            InvoiceNumComboBox.Visible = False
             invoiceNumLabel.Visible = False
 
-            invoiceNumComboBox.SelectedIndex = -1
-            invoiceNumComboBox_SelectedIndexChanged(invoiceNumComboBox, New EventArgs())
+            InvoiceNumComboBox.SelectedIndex = -1
+            InvoiceNumComboBox_SelectedIndexChanged(InvoiceNumComboBox, New EventArgs())
 
             ' Disable user from creating new invoice until valid vehicle selected
             newInvButton.Enabled = False
@@ -274,10 +301,10 @@
     End Sub
 
 
-    Private Sub invoiceNumComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles invoiceNumComboBox.SelectedIndexChanged, invoiceNumComboBox.TextChanged
+    Private Sub InvoiceNumComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InvoiceNumComboBox.SelectedIndexChanged, InvoiceNumComboBox.TextChanged
 
         ' Ensure that invoiceNumComboBox is only attempting to initialize values when on proper selected Index
-        If invoiceNumComboBox.SelectedIndex = -1 Then
+        If InvoiceNumComboBox.SelectedIndex = -1 Then
 
             ' Have all labels and corresponding values hidden
             showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
@@ -291,13 +318,13 @@
         End If
 
         ' Lookup newly selected row and see if it is valid (valid if it corresponds with a datatable row)
-        InvRow = getDataTableRow(InvDbController.DbDataTable, "InvNbr", invoiceNumComboBox.Text)
+        InvRow = getDataTableRow(InvDbController.DbDataTable, "InvNbr", InvoiceNumComboBox.Text)
 
         ' If this query DOES return a valid row index, then initialize respective controls
         If InvRow <> -1 Then
 
             'InvId = InvDbController.DbDataTable.Rows(InvRow)("InvId")
-            InvId = invoiceNumComboBox.Text
+            InvId = InvoiceNumComboBox.Text
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
