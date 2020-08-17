@@ -54,11 +54,27 @@ Partial Class invoices
         Me.ContactPhone2_ComboBox = New System.Windows.Forms.ComboBox()
         Me.VehicleLabel = New System.Windows.Forms.Label()
         Me.VehicleComboBox = New System.Windows.Forms.ComboBox()
-        Me.nav = New AutoServiceManager.navigation()
         Me.Mileage_Value = New System.Windows.Forms.Label()
         Me.MileageLabel = New System.Windows.Forms.Label()
         Me.Mileage_Textbox = New System.Windows.Forms.TextBox()
         Me.vehicleHistoryButton = New System.Windows.Forms.Button()
+        Me.ApptDate_Textbox = New System.Windows.Forms.MaskedTextBox()
+        Me.ApptDate_Value = New System.Windows.Forms.Label()
+        Me.AppointmentDate_Label = New System.Windows.Forms.Label()
+        Me.WorkDate_Textbox = New System.Windows.Forms.MaskedTextBox()
+        Me.WorkDate_Value = New System.Windows.Forms.Label()
+        Me.WorkDateLabel = New System.Windows.Forms.Label()
+        Me.nav = New AutoServiceManager.navigation()
+        Me.NbrTasks_Value = New System.Windows.Forms.Label()
+        Me.NbrTasksLabel = New System.Windows.Forms.Label()
+        Me.InspectionSticker_Value = New System.Windows.Forms.Label()
+        Me.InspectionStickerLabel = New System.Windows.Forms.Label()
+        Me.InspectionSticker_Textbox = New System.Windows.Forms.TextBox()
+        Me.InspectionMonth_ComboBox = New System.Windows.Forms.ComboBox()
+        Me.InspectionMonth_Value = New System.Windows.Forms.Label()
+        Me.InspectionMonthLabel = New System.Windows.Forms.Label()
+        Me.newVehicleButton = New System.Windows.Forms.Button()
+        Me.newCustomerButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'deleteButton
@@ -319,7 +335,7 @@ Partial Class invoices
         Me.ComboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.ComboBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(179, 347)
+        Me.ComboBox2.Location = New System.Drawing.Point(320, 347)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(508, 28)
         Me.ComboBox2.TabIndex = 258
@@ -328,7 +344,7 @@ Partial Class invoices
         '
         Me.Label1.AutoSize = True
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(97, 353)
+        Me.Label1.Location = New System.Drawing.Point(238, 353)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(76, 17)
         Me.Label1.TabIndex = 257
@@ -404,7 +420,7 @@ Partial Class invoices
         '
         Me.VehicleLabel.AutoSize = True
         Me.VehicleLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.VehicleLabel.Location = New System.Drawing.Point(97, 439)
+        Me.VehicleLabel.Location = New System.Drawing.Point(238, 440)
         Me.VehicleLabel.Name = "VehicleLabel"
         Me.VehicleLabel.Size = New System.Drawing.Size(62, 17)
         Me.VehicleLabel.TabIndex = 266
@@ -416,26 +432,17 @@ Partial Class invoices
         Me.VehicleComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.VehicleComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.VehicleComboBox.FormattingEnabled = True
-        Me.VehicleComboBox.Location = New System.Drawing.Point(165, 433)
+        Me.VehicleComboBox.Location = New System.Drawing.Point(306, 434)
         Me.VehicleComboBox.Name = "VehicleComboBox"
         Me.VehicleComboBox.Size = New System.Drawing.Size(352, 28)
         Me.VehicleComboBox.TabIndex = 265
-        '
-        'nav
-        '
-        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.nav.Location = New System.Drawing.Point(0, 0)
-        Me.nav.Name = "nav"
-        Me.nav.Size = New System.Drawing.Size(1182, 28)
-        Me.nav.TabIndex = 267
         '
         'Mileage_Value
         '
         Me.Mileage_Value.AutoSize = True
         Me.Mileage_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Mileage_Value.ForeColor = System.Drawing.Color.Black
-        Me.Mileage_Value.Location = New System.Drawing.Point(611, 436)
+        Me.Mileage_Value.Location = New System.Drawing.Point(741, 437)
         Me.Mileage_Value.Name = "Mileage_Value"
         Me.Mileage_Value.Size = New System.Drawing.Size(0, 20)
         Me.Mileage_Value.TabIndex = 270
@@ -445,7 +452,7 @@ Partial Class invoices
         '
         Me.MileageLabel.AutoSize = True
         Me.MileageLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.MileageLabel.Location = New System.Drawing.Point(540, 439)
+        Me.MileageLabel.Location = New System.Drawing.Point(670, 440)
         Me.MileageLabel.Name = "MileageLabel"
         Me.MileageLabel.Size = New System.Drawing.Size(65, 17)
         Me.MileageLabel.TabIndex = 269
@@ -455,7 +462,7 @@ Partial Class invoices
         'Mileage_Textbox
         '
         Me.Mileage_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Mileage_Textbox.Location = New System.Drawing.Point(611, 433)
+        Me.Mileage_Textbox.Location = New System.Drawing.Point(741, 434)
         Me.Mileage_Textbox.MaxLength = 14
         Me.Mileage_Textbox.Name = "Mileage_Textbox"
         Me.Mileage_Textbox.Size = New System.Drawing.Size(146, 27)
@@ -468,12 +475,218 @@ Partial Class invoices
         Me.vehicleHistoryButton.Enabled = False
         Me.vehicleHistoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.vehicleHistoryButton.ForeColor = System.Drawing.Color.White
-        Me.vehicleHistoryButton.Location = New System.Drawing.Point(780, 432)
+        Me.vehicleHistoryButton.Location = New System.Drawing.Point(903, 433)
         Me.vehicleHistoryButton.Name = "vehicleHistoryButton"
-        Me.vehicleHistoryButton.Size = New System.Drawing.Size(182, 30)
+        Me.vehicleHistoryButton.Size = New System.Drawing.Size(159, 30)
         Me.vehicleHistoryButton.TabIndex = 271
         Me.vehicleHistoryButton.Text = "Vehicle History"
         Me.vehicleHistoryButton.UseVisualStyleBackColor = False
+        '
+        'ApptDate_Textbox
+        '
+        Me.ApptDate_Textbox.AllowPromptAsInput = False
+        Me.ApptDate_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
+        Me.ApptDate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
+        Me.ApptDate_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
+        Me.ApptDate_Textbox.Location = New System.Drawing.Point(232, 476)
+        Me.ApptDate_Textbox.Mask = "00/00/0000"
+        Me.ApptDate_Textbox.Name = "ApptDate_Textbox"
+        Me.ApptDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.ApptDate_Textbox.Size = New System.Drawing.Size(181, 27)
+        Me.ApptDate_Textbox.TabIndex = 272
+        Me.ApptDate_Textbox.Tag = "dataEditingControl"
+        Me.ApptDate_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
+        Me.ApptDate_Textbox.ValidatingType = GetType(Date)
+        '
+        'ApptDate_Value
+        '
+        Me.ApptDate_Value.AutoSize = True
+        Me.ApptDate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ApptDate_Value.ForeColor = System.Drawing.Color.Black
+        Me.ApptDate_Value.Location = New System.Drawing.Point(231, 479)
+        Me.ApptDate_Value.Name = "ApptDate_Value"
+        Me.ApptDate_Value.Size = New System.Drawing.Size(0, 20)
+        Me.ApptDate_Value.TabIndex = 274
+        Me.ApptDate_Value.Tag = "dataViewingControl"
+        '
+        'AppointmentDate_Label
+        '
+        Me.AppointmentDate_Label.AutoSize = True
+        Me.AppointmentDate_Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.AppointmentDate_Label.Location = New System.Drawing.Point(97, 482)
+        Me.AppointmentDate_Label.Name = "AppointmentDate_Label"
+        Me.AppointmentDate_Label.Size = New System.Drawing.Size(129, 17)
+        Me.AppointmentDate_Label.TabIndex = 273
+        Me.AppointmentDate_Label.Tag = "dataLabel"
+        Me.AppointmentDate_Label.Text = "Appointment Date :"
+        '
+        'WorkDate_Textbox
+        '
+        Me.WorkDate_Textbox.AllowPromptAsInput = False
+        Me.WorkDate_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
+        Me.WorkDate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
+        Me.WorkDate_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
+        Me.WorkDate_Textbox.Location = New System.Drawing.Point(186, 513)
+        Me.WorkDate_Textbox.Mask = "00/00/0000"
+        Me.WorkDate_Textbox.Name = "WorkDate_Textbox"
+        Me.WorkDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.WorkDate_Textbox.Size = New System.Drawing.Size(181, 27)
+        Me.WorkDate_Textbox.TabIndex = 275
+        Me.WorkDate_Textbox.Tag = "dataEditingControl"
+        Me.WorkDate_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
+        Me.WorkDate_Textbox.ValidatingType = GetType(Date)
+        '
+        'WorkDate_Value
+        '
+        Me.WorkDate_Value.AutoSize = True
+        Me.WorkDate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.WorkDate_Value.ForeColor = System.Drawing.Color.Black
+        Me.WorkDate_Value.Location = New System.Drawing.Point(185, 516)
+        Me.WorkDate_Value.Name = "WorkDate_Value"
+        Me.WorkDate_Value.Size = New System.Drawing.Size(0, 20)
+        Me.WorkDate_Value.TabIndex = 277
+        Me.WorkDate_Value.Tag = "dataViewingControl"
+        '
+        'WorkDateLabel
+        '
+        Me.WorkDateLabel.AutoSize = True
+        Me.WorkDateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.WorkDateLabel.Location = New System.Drawing.Point(97, 519)
+        Me.WorkDateLabel.Name = "WorkDateLabel"
+        Me.WorkDateLabel.Size = New System.Drawing.Size(83, 17)
+        Me.WorkDateLabel.TabIndex = 276
+        Me.WorkDateLabel.Tag = "dataLabel"
+        Me.WorkDateLabel.Text = "Work Date :"
+        '
+        'nav
+        '
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(1182, 28)
+        Me.nav.TabIndex = 267
+        '
+        'NbrTasks_Value
+        '
+        Me.NbrTasks_Value.AutoSize = True
+        Me.NbrTasks_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NbrTasks_Value.ForeColor = System.Drawing.Color.Black
+        Me.NbrTasks_Value.Location = New System.Drawing.Point(298, 683)
+        Me.NbrTasks_Value.Name = "NbrTasks_Value"
+        Me.NbrTasks_Value.Size = New System.Drawing.Size(0, 20)
+        Me.NbrTasks_Value.TabIndex = 280
+        Me.NbrTasks_Value.Tag = "dataViewingControl"
+        '
+        'NbrTasksLabel
+        '
+        Me.NbrTasksLabel.AutoSize = True
+        Me.NbrTasksLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.NbrTasksLabel.Location = New System.Drawing.Point(168, 686)
+        Me.NbrTasksLabel.Name = "NbrTasksLabel"
+        Me.NbrTasksLabel.Size = New System.Drawing.Size(124, 17)
+        Me.NbrTasksLabel.TabIndex = 279
+        Me.NbrTasksLabel.Tag = "dataLabel"
+        Me.NbrTasksLabel.Text = "Number of Tasks :"
+        '
+        'InspectionSticker_Value
+        '
+        Me.InspectionSticker_Value.AutoSize = True
+        Me.InspectionSticker_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InspectionSticker_Value.ForeColor = System.Drawing.Color.Black
+        Me.InspectionSticker_Value.Location = New System.Drawing.Point(563, 479)
+        Me.InspectionSticker_Value.Name = "InspectionSticker_Value"
+        Me.InspectionSticker_Value.Size = New System.Drawing.Size(0, 20)
+        Me.InspectionSticker_Value.TabIndex = 283
+        Me.InspectionSticker_Value.Tag = "dataViewingControl"
+        Me.InspectionSticker_Value.Visible = False
+        '
+        'InspectionStickerLabel
+        '
+        Me.InspectionStickerLabel.AutoSize = True
+        Me.InspectionStickerLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.InspectionStickerLabel.Location = New System.Drawing.Point(430, 482)
+        Me.InspectionStickerLabel.Name = "InspectionStickerLabel"
+        Me.InspectionStickerLabel.Size = New System.Drawing.Size(127, 17)
+        Me.InspectionStickerLabel.TabIndex = 282
+        Me.InspectionStickerLabel.Tag = "dataLabel"
+        Me.InspectionStickerLabel.Text = "Inspection Sticker :"
+        Me.InspectionStickerLabel.Visible = False
+        '
+        'InspectionSticker_Textbox
+        '
+        Me.InspectionSticker_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InspectionSticker_Textbox.Location = New System.Drawing.Point(563, 476)
+        Me.InspectionSticker_Textbox.MaxLength = 15
+        Me.InspectionSticker_Textbox.Name = "InspectionSticker_Textbox"
+        Me.InspectionSticker_Textbox.Size = New System.Drawing.Size(229, 27)
+        Me.InspectionSticker_Textbox.TabIndex = 281
+        Me.InspectionSticker_Textbox.Tag = "dataEditingControl"
+        Me.InspectionSticker_Textbox.Visible = False
+        '
+        'InspectionMonth_ComboBox
+        '
+        Me.InspectionMonth_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.InspectionMonth_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.InspectionMonth_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InspectionMonth_ComboBox.FormattingEnabled = True
+        Me.InspectionMonth_ComboBox.Location = New System.Drawing.Point(559, 513)
+        Me.InspectionMonth_ComboBox.MaxLength = 3
+        Me.InspectionMonth_ComboBox.Name = "InspectionMonth_ComboBox"
+        Me.InspectionMonth_ComboBox.Size = New System.Drawing.Size(73, 28)
+        Me.InspectionMonth_ComboBox.TabIndex = 284
+        Me.InspectionMonth_ComboBox.Tag = "dataEditingControl"
+        Me.InspectionMonth_ComboBox.Visible = False
+        '
+        'InspectionMonth_Value
+        '
+        Me.InspectionMonth_Value.AutoSize = True
+        Me.InspectionMonth_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InspectionMonth_Value.ForeColor = System.Drawing.Color.Black
+        Me.InspectionMonth_Value.Location = New System.Drawing.Point(559, 516)
+        Me.InspectionMonth_Value.Name = "InspectionMonth_Value"
+        Me.InspectionMonth_Value.Size = New System.Drawing.Size(0, 20)
+        Me.InspectionMonth_Value.TabIndex = 286
+        Me.InspectionMonth_Value.Tag = "dataViewingControl"
+        Me.InspectionMonth_Value.Visible = False
+        '
+        'InspectionMonthLabel
+        '
+        Me.InspectionMonthLabel.AutoSize = True
+        Me.InspectionMonthLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.InspectionMonthLabel.Location = New System.Drawing.Point(430, 519)
+        Me.InspectionMonthLabel.Name = "InspectionMonthLabel"
+        Me.InspectionMonthLabel.Size = New System.Drawing.Size(123, 17)
+        Me.InspectionMonthLabel.TabIndex = 285
+        Me.InspectionMonthLabel.Tag = "dataLabel"
+        Me.InspectionMonthLabel.Text = "Inspection Month :"
+        Me.InspectionMonthLabel.Visible = False
+        '
+        'newVehicleButton
+        '
+        Me.newVehicleButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.newVehicleButton.Enabled = False
+        Me.newVehicleButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.newVehicleButton.ForeColor = System.Drawing.Color.White
+        Me.newVehicleButton.Location = New System.Drawing.Point(100, 433)
+        Me.newVehicleButton.Name = "newVehicleButton"
+        Me.newVehicleButton.Size = New System.Drawing.Size(132, 30)
+        Me.newVehicleButton.TabIndex = 287
+        Me.newVehicleButton.Text = "New Vehicle"
+        Me.newVehicleButton.UseVisualStyleBackColor = False
+        '
+        'newCustomerButton
+        '
+        Me.newCustomerButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.newCustomerButton.Enabled = False
+        Me.newCustomerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.newCustomerButton.ForeColor = System.Drawing.Color.White
+        Me.newCustomerButton.Location = New System.Drawing.Point(100, 346)
+        Me.newCustomerButton.Name = "newCustomerButton"
+        Me.newCustomerButton.Size = New System.Drawing.Size(132, 30)
+        Me.newCustomerButton.TabIndex = 288
+        Me.newCustomerButton.Text = "New Customer"
+        Me.newCustomerButton.UseVisualStyleBackColor = False
         '
         'invoices
         '
@@ -481,6 +694,22 @@ Partial Class invoices
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1182, 853)
+        Me.Controls.Add(Me.newCustomerButton)
+        Me.Controls.Add(Me.newVehicleButton)
+        Me.Controls.Add(Me.InspectionMonth_ComboBox)
+        Me.Controls.Add(Me.InspectionMonth_Value)
+        Me.Controls.Add(Me.InspectionMonthLabel)
+        Me.Controls.Add(Me.InspectionSticker_Value)
+        Me.Controls.Add(Me.InspectionStickerLabel)
+        Me.Controls.Add(Me.InspectionSticker_Textbox)
+        Me.Controls.Add(Me.NbrTasks_Value)
+        Me.Controls.Add(Me.NbrTasksLabel)
+        Me.Controls.Add(Me.WorkDate_Textbox)
+        Me.Controls.Add(Me.WorkDate_Value)
+        Me.Controls.Add(Me.WorkDateLabel)
+        Me.Controls.Add(Me.ApptDate_Textbox)
+        Me.Controls.Add(Me.ApptDate_Value)
+        Me.Controls.Add(Me.AppointmentDate_Label)
         Me.Controls.Add(Me.vehicleHistoryButton)
         Me.Controls.Add(Me.Mileage_Value)
         Me.Controls.Add(Me.MileageLabel)
@@ -565,4 +794,20 @@ Partial Class invoices
     Friend WithEvents MileageLabel As Label
     Friend WithEvents Mileage_Textbox As TextBox
     Friend WithEvents vehicleHistoryButton As Button
+    Friend WithEvents ApptDate_Textbox As MaskedTextBox
+    Friend WithEvents ApptDate_Value As Label
+    Friend WithEvents AppointmentDate_Label As Label
+    Friend WithEvents WorkDate_Textbox As MaskedTextBox
+    Friend WithEvents WorkDate_Value As Label
+    Friend WithEvents WorkDateLabel As Label
+    Friend WithEvents NbrTasks_Value As Label
+    Friend WithEvents NbrTasksLabel As Label
+    Friend WithEvents InspectionSticker_Value As Label
+    Friend WithEvents InspectionStickerLabel As Label
+    Friend WithEvents InspectionSticker_Textbox As TextBox
+    Friend WithEvents InspectionMonth_ComboBox As ComboBox
+    Friend WithEvents InspectionMonth_Value As Label
+    Friend WithEvents InspectionMonthLabel As Label
+    Friend WithEvents newVehicleButton As Button
+    Friend WithEvents newCustomerButton As Button
 End Class
