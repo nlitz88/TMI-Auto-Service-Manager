@@ -159,6 +159,7 @@
             VehicleLabel.Visible = False
 
             VehicleComboBox.SelectedIndex = -1
+            VehicleComboBox_SelectedIndexChanged(VehicleComboBox, New EventArgs())
             ' This is the important part: when vehicle combo gets -1 as selectedIndex, it will subsequently set the selectedindex
             ' of the invCombobox to -1, which will THEN hide all of the controls in a CASCADING FASHION
 
@@ -197,6 +198,7 @@
             VehicleLabel.Visible = False
 
             VehicleComboBox.SelectedIndex = -1
+            VehicleComboBox_SelectedIndexChanged(VehicleComboBox, New EventArgs())
 
             ' Disable user from creating new invoice until valid vehicle selected
             newInvButton.Enabled = False
@@ -205,6 +207,69 @@
 
     End Sub
 
+
+    Private Sub VehicleComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles VehicleComboBox.SelectedIndexChanged, VehicleComboBox.TextChanged
+
+        Console.WriteLine("Vehicle ComboBox selected index changed!")
+
+        ' Ensure that VehicleComboBox is only enabling user to select invoiceNum if valid index selected
+        If VehicleComboBox.SelectedIndex = -1 Then
+
+            ' If not already, clear and empty the invoiceNumComboBox
+            If invoiceNumComboBox.Text <> String.Empty And invoiceNumComboBox.Items.Count <> 0 Then
+                invoiceNumComboBox.Items.Clear()
+                invoiceNumComboBox.Text = String.Empty
+            End If
+            invoiceNumComboBox.Visible = False
+            invoiceNumLabel.Visible = False
+
+            invoiceNumComboBox.SelectedIndex = -1
+
+            ' Disable user from creating new invoice until valid vehicle selected
+            newInvButton.Enabled = False
+
+            Exit Sub
+
+        End If
+
+        ' Lookup newly selected row and see if it is valid (valid if it corresponds with a datatable row)
+        VehicleRow = getDataTableRow(VehicleDbController.DbDataTable, "YMML", VehicleComboBox.Text)
+
+        If VehicleRow <> -1 Then
+
+            ' VehicleRow doesn't mean anything to InvComboBox. InvComboBox query only concerned about the VehicleId
+            ' So, if the vehicle entered in VehicleComboBox exists (valid YMML), then lookup the corresponding ID
+            VehicleId = VehicleDbController.DbDataTable(VehicleRow)("VehicleId")
+
+            ' Then, load the Invoice DataTable and initialize InvComboBox based on this newfound VehicleId
+            'loadVehicleDataTable()
+            'InitializeVehicleComboBox()
+            invoiceNumComboBox.Visible = True
+            invoiceNumLabel.Visible = True
+            'invoiceNumComboBox.SelectedIndex = 0
+
+            ' Now that valid vehicle selected, user may add new invoice associated with that vehicle
+            newInvButton.Enabled = True
+
+            'If it does = -1, that means that value Is either "Select one" Or some other anomoly
+        Else
+
+            ' If not already, clear and empty the invoiceNumComboBox
+            If invoiceNumComboBox.Text <> String.Empty And invoiceNumComboBox.Items.Count <> 0 Then
+                invoiceNumComboBox.Items.Clear()
+                invoiceNumComboBox.Text = String.Empty
+            End If
+            invoiceNumComboBox.Visible = False
+            invoiceNumLabel.Visible = False
+
+            invoiceNumComboBox.SelectedIndex = -1
+
+            ' Disable user from creating new invoice until valid vehicle selected
+            newInvButton.Enabled = False
+
+        End If
+
+    End Sub
 
 
 

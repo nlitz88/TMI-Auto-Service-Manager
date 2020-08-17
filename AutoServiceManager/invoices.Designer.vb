@@ -508,6 +508,7 @@ Partial Class invoices
         Me.vehicleHistoryButton.Name = "vehicleHistoryButton"
         Me.vehicleHistoryButton.Size = New System.Drawing.Size(138, 30)
         Me.vehicleHistoryButton.TabIndex = 271
+        Me.vehicleHistoryButton.Tag = "dataLabel"
         Me.vehicleHistoryButton.Text = "Vehicle History"
         Me.vehicleHistoryButton.UseVisualStyleBackColor = False
         '
@@ -699,6 +700,7 @@ Partial Class invoices
         Me.tasksButton.Name = "tasksButton"
         Me.tasksButton.Size = New System.Drawing.Size(189, 30)
         Me.tasksButton.TabIndex = 290
+        Me.tasksButton.Tag = "dataLabel"
         Me.tasksButton.Text = "Tasks"
         Me.tasksButton.UseVisualStyleBackColor = False
         '
@@ -712,6 +714,7 @@ Partial Class invoices
         Me.paymentsButton.Name = "paymentsButton"
         Me.paymentsButton.Size = New System.Drawing.Size(189, 30)
         Me.paymentsButton.TabIndex = 291
+        Me.paymentsButton.Tag = "dataLabel"
         Me.paymentsButton.Text = "Payments"
         Me.paymentsButton.UseVisualStyleBackColor = False
         '
@@ -977,6 +980,7 @@ Partial Class invoices
         Me.CostTableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.CostTableLayoutPanel.Size = New System.Drawing.Size(288, 235)
         Me.CostTableLayoutPanel.TabIndex = 313
+        Me.CostTableLayoutPanel.Tag = "dataLabel"
         '
         'Panel2
         '
@@ -1283,7 +1287,7 @@ Partial Class invoices
         Me.LicenseStateComboBox.Name = "LicenseStateComboBox"
         Me.LicenseStateComboBox.Size = New System.Drawing.Size(177, 28)
         Me.LicenseStateComboBox.TabIndex = 316
-        Me.LicenseStateComboBox.Tag = "dataEditingControl"
+        Me.LicenseStateComboBox.Tag = ""
         '
         'LicenseState_Value
         '
@@ -1304,7 +1308,7 @@ Partial Class invoices
         Me.LicenseStateLabel.Name = "LicenseStateLabel"
         Me.LicenseStateLabel.Size = New System.Drawing.Size(102, 17)
         Me.LicenseStateLabel.TabIndex = 317
-        Me.LicenseStateLabel.Tag = "dataLabel"
+        Me.LicenseStateLabel.Tag = ""
         Me.LicenseStateLabel.Text = "License State :"
         '
         'LicensePlateLabel
@@ -1315,7 +1319,7 @@ Partial Class invoices
         Me.LicensePlateLabel.Name = "LicensePlateLabel"
         Me.LicensePlateLabel.Size = New System.Drawing.Size(101, 17)
         Me.LicensePlateLabel.TabIndex = 320
-        Me.LicensePlateLabel.Tag = "dataLabel"
+        Me.LicensePlateLabel.Tag = ""
         Me.LicensePlateLabel.Text = "License Plate :"
         '
         'LicensePlateTextbox
@@ -1326,7 +1330,7 @@ Partial Class invoices
         Me.LicensePlateTextbox.Name = "LicensePlateTextbox"
         Me.LicensePlateTextbox.Size = New System.Drawing.Size(178, 27)
         Me.LicensePlateTextbox.TabIndex = 319
-        Me.LicensePlateTextbox.Tag = "dataEditingControl"
+        Me.LicensePlateTextbox.Tag = ""
         '
         'nav
         '
