@@ -354,7 +354,7 @@ Partial Class invoices
         Me.ContactName_Value.AutoSize = True
         Me.ContactName_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ContactName_Value.ForeColor = System.Drawing.Color.Black
-        Me.ContactName_Value.Location = New System.Drawing.Point(167, 393)
+        Me.ContactName_Value.Location = New System.Drawing.Point(167, 388)
         Me.ContactName_Value.Name = "ContactName_Value"
         Me.ContactName_Value.Size = New System.Drawing.Size(0, 20)
         Me.ContactName_Value.TabIndex = 256
@@ -364,7 +364,7 @@ Partial Class invoices
         '
         Me.ContactLabel.AutoSize = True
         Me.ContactLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.ContactLabel.Location = New System.Drawing.Point(97, 396)
+        Me.ContactLabel.Location = New System.Drawing.Point(97, 391)
         Me.ContactLabel.Name = "ContactLabel"
         Me.ContactLabel.Size = New System.Drawing.Size(64, 17)
         Me.ContactLabel.TabIndex = 255
@@ -374,7 +374,7 @@ Partial Class invoices
         'ContactName_Textbox
         '
         Me.ContactName_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ContactName_Textbox.Location = New System.Drawing.Point(167, 390)
+        Me.ContactName_Textbox.Location = New System.Drawing.Point(167, 385)
         Me.ContactName_Textbox.MaxLength = 20
         Me.ContactName_Textbox.Name = "ContactName_Textbox"
         Me.ContactName_Textbox.Size = New System.Drawing.Size(315, 27)
@@ -385,7 +385,7 @@ Partial Class invoices
         '
         Me.Phone1Label.AutoSize = True
         Me.Phone1Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.Phone1Label.Location = New System.Drawing.Point(501, 396)
+        Me.Phone1Label.Location = New System.Drawing.Point(501, 391)
         Me.Phone1Label.Name = "Phone1Label"
         Me.Phone1Label.Size = New System.Drawing.Size(69, 17)
         Me.Phone1Label.TabIndex = 260
@@ -397,7 +397,7 @@ Partial Class invoices
         Me.ContactPhone1_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.ContactPhone1_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.ContactPhone1_ComboBox.FormattingEnabled = True
-        Me.ContactPhone1_ComboBox.Location = New System.Drawing.Point(576, 390)
+        Me.ContactPhone1_ComboBox.Location = New System.Drawing.Point(576, 385)
         Me.ContactPhone1_ComboBox.Name = "ContactPhone1_ComboBox"
         Me.ContactPhone1_ComboBox.Size = New System.Drawing.Size(181, 28)
         Me.ContactPhone1_ComboBox.TabIndex = 259
@@ -407,7 +407,7 @@ Partial Class invoices
         Me.ContactPhone1_Value.AutoSize = True
         Me.ContactPhone1_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ContactPhone1_Value.ForeColor = System.Drawing.Color.Black
-        Me.ContactPhone1_Value.Location = New System.Drawing.Point(576, 393)
+        Me.ContactPhone1_Value.Location = New System.Drawing.Point(576, 388)
         Me.ContactPhone1_Value.Name = "ContactPhone1_Value"
         Me.ContactPhone1_Value.Size = New System.Drawing.Size(0, 20)
         Me.ContactPhone1_Value.TabIndex = 261
@@ -418,7 +418,7 @@ Partial Class invoices
         Me.ContactPhone2_Value.AutoSize = True
         Me.ContactPhone2_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ContactPhone2_Value.ForeColor = System.Drawing.Color.Black
-        Me.ContactPhone2_Value.Location = New System.Drawing.Point(852, 393)
+        Me.ContactPhone2_Value.Location = New System.Drawing.Point(852, 388)
         Me.ContactPhone2_Value.Name = "ContactPhone2_Value"
         Me.ContactPhone2_Value.Size = New System.Drawing.Size(0, 20)
         Me.ContactPhone2_Value.TabIndex = 264
@@ -428,7 +428,7 @@ Partial Class invoices
         '
         Me.Phone2Label.AutoSize = True
         Me.Phone2Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.Phone2Label.Location = New System.Drawing.Point(777, 396)
+        Me.Phone2Label.Location = New System.Drawing.Point(777, 391)
         Me.Phone2Label.Name = "Phone2Label"
         Me.Phone2Label.Size = New System.Drawing.Size(69, 17)
         Me.Phone2Label.TabIndex = 263
@@ -440,7 +440,7 @@ Partial Class invoices
         Me.ContactPhone2_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.ContactPhone2_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.ContactPhone2_ComboBox.FormattingEnabled = True
-        Me.ContactPhone2_ComboBox.Location = New System.Drawing.Point(852, 390)
+        Me.ContactPhone2_ComboBox.Location = New System.Drawing.Point(852, 385)
         Me.ContactPhone2_ComboBox.Name = "ContactPhone2_ComboBox"
         Me.ContactPhone2_ComboBox.Size = New System.Drawing.Size(181, 28)
         Me.ContactPhone2_ComboBox.TabIndex = 262
@@ -471,7 +471,7 @@ Partial Class invoices
         Me.Mileage_Value.AutoSize = True
         Me.Mileage_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Mileage_Value.ForeColor = System.Drawing.Color.Black
-        Me.Mileage_Value.Location = New System.Drawing.Point(741, 437)
+        Me.Mileage_Value.Location = New System.Drawing.Point(763, 433)
         Me.Mileage_Value.Name = "Mileage_Value"
         Me.Mileage_Value.Size = New System.Drawing.Size(0, 20)
         Me.Mileage_Value.TabIndex = 270
@@ -481,7 +481,7 @@ Partial Class invoices
         '
         Me.MileageLabel.AutoSize = True
         Me.MileageLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.MileageLabel.Location = New System.Drawing.Point(670, 440)
+        Me.MileageLabel.Location = New System.Drawing.Point(692, 436)
         Me.MileageLabel.Name = "MileageLabel"
         Me.MileageLabel.Size = New System.Drawing.Size(65, 17)
         Me.MileageLabel.TabIndex = 269
@@ -491,7 +491,7 @@ Partial Class invoices
         'Mileage_Textbox
         '
         Me.Mileage_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Mileage_Textbox.Location = New System.Drawing.Point(741, 434)
+        Me.Mileage_Textbox.Location = New System.Drawing.Point(763, 430)
         Me.Mileage_Textbox.MaxLength = 14
         Me.Mileage_Textbox.Name = "Mileage_Textbox"
         Me.Mileage_Textbox.Size = New System.Drawing.Size(146, 27)
@@ -504,9 +504,9 @@ Partial Class invoices
         Me.vehicleHistoryButton.Enabled = False
         Me.vehicleHistoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.vehicleHistoryButton.ForeColor = System.Drawing.Color.White
-        Me.vehicleHistoryButton.Location = New System.Drawing.Point(903, 433)
+        Me.vehicleHistoryButton.Location = New System.Drawing.Point(924, 429)
         Me.vehicleHistoryButton.Name = "vehicleHistoryButton"
-        Me.vehicleHistoryButton.Size = New System.Drawing.Size(159, 30)
+        Me.vehicleHistoryButton.Size = New System.Drawing.Size(138, 30)
         Me.vehicleHistoryButton.TabIndex = 271
         Me.vehicleHistoryButton.Text = "Vehicle History"
         Me.vehicleHistoryButton.UseVisualStyleBackColor = False
@@ -517,7 +517,7 @@ Partial Class invoices
         Me.ApptDate_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
         Me.ApptDate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.ApptDate_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
-        Me.ApptDate_Textbox.Location = New System.Drawing.Point(232, 524)
+        Me.ApptDate_Textbox.Location = New System.Drawing.Point(232, 499)
         Me.ApptDate_Textbox.Mask = "00/00/0000"
         Me.ApptDate_Textbox.Name = "ApptDate_Textbox"
         Me.ApptDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -532,7 +532,7 @@ Partial Class invoices
         Me.ApptDate_Value.AutoSize = True
         Me.ApptDate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ApptDate_Value.ForeColor = System.Drawing.Color.Black
-        Me.ApptDate_Value.Location = New System.Drawing.Point(231, 527)
+        Me.ApptDate_Value.Location = New System.Drawing.Point(231, 502)
         Me.ApptDate_Value.Name = "ApptDate_Value"
         Me.ApptDate_Value.Size = New System.Drawing.Size(0, 20)
         Me.ApptDate_Value.TabIndex = 274
@@ -542,7 +542,7 @@ Partial Class invoices
         '
         Me.AppointmentDate_Label.AutoSize = True
         Me.AppointmentDate_Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.AppointmentDate_Label.Location = New System.Drawing.Point(97, 530)
+        Me.AppointmentDate_Label.Location = New System.Drawing.Point(97, 505)
         Me.AppointmentDate_Label.Name = "AppointmentDate_Label"
         Me.AppointmentDate_Label.Size = New System.Drawing.Size(129, 17)
         Me.AppointmentDate_Label.TabIndex = 273
@@ -555,7 +555,7 @@ Partial Class invoices
         Me.WorkDate_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
         Me.WorkDate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.WorkDate_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
-        Me.WorkDate_Textbox.Location = New System.Drawing.Point(450, 524)
+        Me.WorkDate_Textbox.Location = New System.Drawing.Point(450, 499)
         Me.WorkDate_Textbox.Mask = "00/00/0000"
         Me.WorkDate_Textbox.Name = "WorkDate_Textbox"
         Me.WorkDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -570,7 +570,7 @@ Partial Class invoices
         Me.WorkDate_Value.AutoSize = True
         Me.WorkDate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.WorkDate_Value.ForeColor = System.Drawing.Color.Black
-        Me.WorkDate_Value.Location = New System.Drawing.Point(449, 527)
+        Me.WorkDate_Value.Location = New System.Drawing.Point(449, 502)
         Me.WorkDate_Value.Name = "WorkDate_Value"
         Me.WorkDate_Value.Size = New System.Drawing.Size(0, 20)
         Me.WorkDate_Value.TabIndex = 277
@@ -580,7 +580,7 @@ Partial Class invoices
         '
         Me.WorkDateLabel.AutoSize = True
         Me.WorkDateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.WorkDateLabel.Location = New System.Drawing.Point(361, 530)
+        Me.WorkDateLabel.Location = New System.Drawing.Point(361, 505)
         Me.WorkDateLabel.Name = "WorkDateLabel"
         Me.WorkDateLabel.Size = New System.Drawing.Size(83, 17)
         Me.WorkDateLabel.TabIndex = 276
@@ -592,7 +592,7 @@ Partial Class invoices
         Me.NbrTasks_Value.AutoSize = True
         Me.NbrTasks_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NbrTasks_Value.ForeColor = System.Drawing.Color.Black
-        Me.NbrTasks_Value.Location = New System.Drawing.Point(768, 564)
+        Me.NbrTasks_Value.Location = New System.Drawing.Point(768, 539)
         Me.NbrTasks_Value.Name = "NbrTasks_Value"
         Me.NbrTasks_Value.Size = New System.Drawing.Size(0, 20)
         Me.NbrTasks_Value.TabIndex = 280
@@ -602,7 +602,7 @@ Partial Class invoices
         '
         Me.NbrTasksLabel.AutoSize = True
         Me.NbrTasksLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.NbrTasksLabel.Location = New System.Drawing.Point(638, 567)
+        Me.NbrTasksLabel.Location = New System.Drawing.Point(638, 542)
         Me.NbrTasksLabel.Name = "NbrTasksLabel"
         Me.NbrTasksLabel.Size = New System.Drawing.Size(124, 17)
         Me.NbrTasksLabel.TabIndex = 279
@@ -614,7 +614,7 @@ Partial Class invoices
         Me.InspectionSticker_Value.AutoSize = True
         Me.InspectionSticker_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.InspectionSticker_Value.ForeColor = System.Drawing.Color.Black
-        Me.InspectionSticker_Value.Location = New System.Drawing.Point(450, 478)
+        Me.InspectionSticker_Value.Location = New System.Drawing.Point(450, 433)
         Me.InspectionSticker_Value.Name = "InspectionSticker_Value"
         Me.InspectionSticker_Value.Size = New System.Drawing.Size(0, 20)
         Me.InspectionSticker_Value.TabIndex = 283
@@ -624,7 +624,7 @@ Partial Class invoices
         '
         Me.InspectionStickerLabel.AutoSize = True
         Me.InspectionStickerLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.InspectionStickerLabel.Location = New System.Drawing.Point(317, 481)
+        Me.InspectionStickerLabel.Location = New System.Drawing.Point(317, 436)
         Me.InspectionStickerLabel.Name = "InspectionStickerLabel"
         Me.InspectionStickerLabel.Size = New System.Drawing.Size(127, 17)
         Me.InspectionStickerLabel.TabIndex = 282
@@ -634,7 +634,7 @@ Partial Class invoices
         'InspectionSticker_Textbox
         '
         Me.InspectionSticker_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.InspectionSticker_Textbox.Location = New System.Drawing.Point(450, 475)
+        Me.InspectionSticker_Textbox.Location = New System.Drawing.Point(450, 430)
         Me.InspectionSticker_Textbox.MaxLength = 15
         Me.InspectionSticker_Textbox.Name = "InspectionSticker_Textbox"
         Me.InspectionSticker_Textbox.Size = New System.Drawing.Size(229, 27)
@@ -647,7 +647,7 @@ Partial Class invoices
         Me.InspectionMonth_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.InspectionMonth_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.InspectionMonth_ComboBox.FormattingEnabled = True
-        Me.InspectionMonth_ComboBox.Location = New System.Drawing.Point(226, 475)
+        Me.InspectionMonth_ComboBox.Location = New System.Drawing.Point(226, 430)
         Me.InspectionMonth_ComboBox.MaxLength = 3
         Me.InspectionMonth_ComboBox.Name = "InspectionMonth_ComboBox"
         Me.InspectionMonth_ComboBox.Size = New System.Drawing.Size(73, 28)
@@ -659,7 +659,7 @@ Partial Class invoices
         Me.InspectionMonth_Value.AutoSize = True
         Me.InspectionMonth_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.InspectionMonth_Value.ForeColor = System.Drawing.Color.Black
-        Me.InspectionMonth_Value.Location = New System.Drawing.Point(226, 478)
+        Me.InspectionMonth_Value.Location = New System.Drawing.Point(226, 433)
         Me.InspectionMonth_Value.Name = "InspectionMonth_Value"
         Me.InspectionMonth_Value.Size = New System.Drawing.Size(0, 20)
         Me.InspectionMonth_Value.TabIndex = 286
@@ -669,7 +669,7 @@ Partial Class invoices
         '
         Me.InspectionMonthLabel.AutoSize = True
         Me.InspectionMonthLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.InspectionMonthLabel.Location = New System.Drawing.Point(97, 481)
+        Me.InspectionMonthLabel.Location = New System.Drawing.Point(97, 436)
         Me.InspectionMonthLabel.Name = "InspectionMonthLabel"
         Me.InspectionMonthLabel.Size = New System.Drawing.Size(123, 17)
         Me.InspectionMonthLabel.TabIndex = 285
@@ -695,7 +695,7 @@ Partial Class invoices
         Me.tasksButton.Enabled = False
         Me.tasksButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.tasksButton.ForeColor = System.Drawing.Color.White
-        Me.tasksButton.Location = New System.Drawing.Point(637, 523)
+        Me.tasksButton.Location = New System.Drawing.Point(637, 498)
         Me.tasksButton.Name = "tasksButton"
         Me.tasksButton.Size = New System.Drawing.Size(189, 30)
         Me.tasksButton.TabIndex = 290
@@ -708,7 +708,7 @@ Partial Class invoices
         Me.paymentsButton.Enabled = False
         Me.paymentsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.paymentsButton.ForeColor = System.Drawing.Color.White
-        Me.paymentsButton.Location = New System.Drawing.Point(873, 523)
+        Me.paymentsButton.Location = New System.Drawing.Point(873, 498)
         Me.paymentsButton.Name = "paymentsButton"
         Me.paymentsButton.Size = New System.Drawing.Size(189, 30)
         Me.paymentsButton.TabIndex = 291
@@ -720,7 +720,7 @@ Partial Class invoices
         Me.PayDate_Value.AutoSize = True
         Me.PayDate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PayDate_Value.ForeColor = System.Drawing.Color.Black
-        Me.PayDate_Value.Location = New System.Drawing.Point(950, 564)
+        Me.PayDate_Value.Location = New System.Drawing.Point(950, 539)
         Me.PayDate_Value.Name = "PayDate_Value"
         Me.PayDate_Value.Size = New System.Drawing.Size(0, 20)
         Me.PayDate_Value.TabIndex = 293
@@ -730,7 +730,7 @@ Partial Class invoices
         '
         Me.PayDateLabel.AutoSize = True
         Me.PayDateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.PayDateLabel.Location = New System.Drawing.Point(870, 567)
+        Me.PayDateLabel.Location = New System.Drawing.Point(870, 542)
         Me.PayDateLabel.Name = "PayDateLabel"
         Me.PayDateLabel.Size = New System.Drawing.Size(74, 17)
         Me.PayDateLabel.TabIndex = 292
@@ -742,7 +742,7 @@ Partial Class invoices
         Me.TotalPaid_Value.AutoSize = True
         Me.TotalPaid_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TotalPaid_Value.ForeColor = System.Drawing.Color.Black
-        Me.TotalPaid_Value.Location = New System.Drawing.Point(950, 599)
+        Me.TotalPaid_Value.Location = New System.Drawing.Point(950, 574)
         Me.TotalPaid_Value.Name = "TotalPaid_Value"
         Me.TotalPaid_Value.Size = New System.Drawing.Size(0, 20)
         Me.TotalPaid_Value.TabIndex = 295
@@ -752,7 +752,7 @@ Partial Class invoices
         '
         Me.TotalPaidLabel.AutoSize = True
         Me.TotalPaidLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.TotalPaidLabel.Location = New System.Drawing.Point(870, 602)
+        Me.TotalPaidLabel.Location = New System.Drawing.Point(870, 577)
         Me.TotalPaidLabel.Name = "TotalPaidLabel"
         Me.TotalPaidLabel.Size = New System.Drawing.Size(80, 17)
         Me.TotalPaidLabel.TabIndex = 294
@@ -763,7 +763,7 @@ Partial Class invoices
         '
         Me.NbrTasks_Textbox.Enabled = False
         Me.NbrTasks_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NbrTasks_Textbox.Location = New System.Drawing.Point(768, 561)
+        Me.NbrTasks_Textbox.Location = New System.Drawing.Point(768, 536)
         Me.NbrTasks_Textbox.MaxLength = 14
         Me.NbrTasks_Textbox.Name = "NbrTasks_Textbox"
         Me.NbrTasks_Textbox.Size = New System.Drawing.Size(58, 27)
@@ -777,7 +777,7 @@ Partial Class invoices
         Me.PayDate_Textbox.Enabled = False
         Me.PayDate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.PayDate_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
-        Me.PayDate_Textbox.Location = New System.Drawing.Point(950, 561)
+        Me.PayDate_Textbox.Location = New System.Drawing.Point(950, 536)
         Me.PayDate_Textbox.Mask = "00/00/0000"
         Me.PayDate_Textbox.Name = "PayDate_Textbox"
         Me.PayDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -791,7 +791,7 @@ Partial Class invoices
         '
         Me.TotalPaid_Textbox.Enabled = False
         Me.TotalPaid_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TotalPaid_Textbox.Location = New System.Drawing.Point(956, 596)
+        Me.TotalPaid_Textbox.Location = New System.Drawing.Point(956, 571)
         Me.TotalPaid_Textbox.MaxLength = 14
         Me.TotalPaid_Textbox.Name = "TotalPaid_Textbox"
         Me.TotalPaid_Textbox.Size = New System.Drawing.Size(106, 27)
@@ -802,7 +802,7 @@ Partial Class invoices
         '
         Me.BalanceTextbox.Enabled = False
         Me.BalanceTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BalanceTextbox.Location = New System.Drawing.Point(943, 631)
+        Me.BalanceTextbox.Location = New System.Drawing.Point(943, 606)
         Me.BalanceTextbox.MaxLength = 14
         Me.BalanceTextbox.Name = "BalanceTextbox"
         Me.BalanceTextbox.Size = New System.Drawing.Size(119, 27)
@@ -814,7 +814,7 @@ Partial Class invoices
         Me.BalanceValue.AutoSize = True
         Me.BalanceValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BalanceValue.ForeColor = System.Drawing.Color.Black
-        Me.BalanceValue.Location = New System.Drawing.Point(943, 634)
+        Me.BalanceValue.Location = New System.Drawing.Point(943, 609)
         Me.BalanceValue.Name = "BalanceValue"
         Me.BalanceValue.Size = New System.Drawing.Size(0, 20)
         Me.BalanceValue.TabIndex = 300
@@ -824,7 +824,7 @@ Partial Class invoices
         '
         Me.BalanceLabel.AutoSize = True
         Me.BalanceLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.BalanceLabel.Location = New System.Drawing.Point(870, 637)
+        Me.BalanceLabel.Location = New System.Drawing.Point(870, 612)
         Me.BalanceLabel.Name = "BalanceLabel"
         Me.BalanceLabel.Size = New System.Drawing.Size(67, 17)
         Me.BalanceLabel.TabIndex = 299
@@ -835,9 +835,9 @@ Partial Class invoices
         '
         Me.Notes_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Notes_Value.ForeColor = System.Drawing.Color.Black
-        Me.Notes_Value.Location = New System.Drawing.Point(697, 719)
+        Me.Notes_Value.Location = New System.Drawing.Point(697, 658)
         Me.Notes_Value.Name = "Notes_Value"
-        Me.Notes_Value.Size = New System.Drawing.Size(365, 104)
+        Me.Notes_Value.Size = New System.Drawing.Size(365, 165)
         Me.Notes_Value.TabIndex = 304
         Me.Notes_Value.Tag = "dataViewingControl"
         '
@@ -845,7 +845,7 @@ Partial Class invoices
         '
         Me.NotesLabel.AutoSize = True
         Me.NotesLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.NotesLabel.Location = New System.Drawing.Point(638, 722)
+        Me.NotesLabel.Location = New System.Drawing.Point(638, 661)
         Me.NotesLabel.Name = "NotesLabel"
         Me.NotesLabel.Size = New System.Drawing.Size(53, 17)
         Me.NotesLabel.TabIndex = 303
@@ -855,11 +855,11 @@ Partial Class invoices
         'Notes_Textbox
         '
         Me.Notes_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Notes_Textbox.Location = New System.Drawing.Point(697, 719)
+        Me.Notes_Textbox.Location = New System.Drawing.Point(697, 658)
         Me.Notes_Textbox.MaxLength = 255
         Me.Notes_Textbox.Multiline = True
         Me.Notes_Textbox.Name = "Notes_Textbox"
-        Me.Notes_Textbox.Size = New System.Drawing.Size(365, 104)
+        Me.Notes_Textbox.Size = New System.Drawing.Size(365, 165)
         Me.Notes_Textbox.TabIndex = 302
         Me.Notes_Textbox.Tag = "dataEditingControl"
         '
@@ -1273,11 +1273,11 @@ Partial Class invoices
         'TextBox1
         '
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(697, 716)
+        Me.TextBox1.Location = New System.Drawing.Point(697, 655)
         Me.TextBox1.MaxLength = 255
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(365, 108)
+        Me.TextBox1.Size = New System.Drawing.Size(365, 169)
         Me.TextBox1.TabIndex = 314
         Me.TextBox1.Tag = "dataEditingControl"
         '
