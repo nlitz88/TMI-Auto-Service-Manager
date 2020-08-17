@@ -39,8 +39,8 @@ Partial Class navigation
         Me.CarModelsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CustomersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CustomerVehiclesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MasterTaskListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mainMs.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -152,17 +152,17 @@ Partial Class navigation
         Me.CustomerVehiclesToolStripMenuItem.Size = New System.Drawing.Size(256, 26)
         Me.CustomerVehiclesToolStripMenuItem.Text = "Customer Vehicles"
         '
-        'ReportsToolStripMenuItem
-        '
-        Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
-        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(74, 24)
-        Me.ReportsToolStripMenuItem.Text = "Reports"
-        '
         'MasterTaskListToolStripMenuItem
         '
         Me.MasterTaskListToolStripMenuItem.Name = "MasterTaskListToolStripMenuItem"
         Me.MasterTaskListToolStripMenuItem.Size = New System.Drawing.Size(256, 26)
         Me.MasterTaskListToolStripMenuItem.Text = "Master Task List"
+        '
+        'ReportsToolStripMenuItem
+        '
+        Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
+        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(74, 24)
+        Me.ReportsToolStripMenuItem.Text = "Reports"
         '
         'navigation
         '
