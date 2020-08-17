@@ -122,6 +122,7 @@ Partial Class invoices
         Me.LaborLabel = New System.Windows.Forms.Label()
         Me.ShopChargesLabel = New System.Windows.Forms.Label()
         Me.nav = New AutoServiceManager.navigation()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.CostTableLayoutPanel.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.GasPanel.SuspendLayout()
@@ -883,7 +884,7 @@ Partial Class invoices
         Me.Notes_Value.ForeColor = System.Drawing.Color.Black
         Me.Notes_Value.Location = New System.Drawing.Point(697, 719)
         Me.Notes_Value.Name = "Notes_Value"
-        Me.Notes_Value.Size = New System.Drawing.Size(365, 60)
+        Me.Notes_Value.Size = New System.Drawing.Size(365, 104)
         Me.Notes_Value.TabIndex = 304
         Me.Notes_Value.Tag = "dataViewingControl"
         '
@@ -905,7 +906,7 @@ Partial Class invoices
         Me.Notes_Textbox.MaxLength = 255
         Me.Notes_Textbox.Multiline = True
         Me.Notes_Textbox.Name = "Notes_Textbox"
-        Me.Notes_Textbox.Size = New System.Drawing.Size(365, 60)
+        Me.Notes_Textbox.Size = New System.Drawing.Size(365, 104)
         Me.Notes_Textbox.TabIndex = 302
         Me.Notes_Textbox.Tag = "dataEditingControl"
         '
@@ -914,7 +915,7 @@ Partial Class invoices
         Me.ShopSupplies_Value.AutoSize = True
         Me.ShopSupplies_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ShopSupplies_Value.ForeColor = System.Drawing.Color.Black
-        Me.ShopSupplies_Value.Location = New System.Drawing.Point(751, 603)
+        Me.ShopSupplies_Value.Location = New System.Drawing.Point(514, 651)
         Me.ShopSupplies_Value.Name = "ShopSupplies_Value"
         Me.ShopSupplies_Value.Size = New System.Drawing.Size(0, 20)
         Me.ShopSupplies_Value.TabIndex = 305
@@ -923,7 +924,7 @@ Partial Class invoices
         'ShopSupplies_CheckBox
         '
         Me.ShopSupplies_CheckBox.AutoSize = True
-        Me.ShopSupplies_CheckBox.Location = New System.Drawing.Point(751, 607)
+        Me.ShopSupplies_CheckBox.Location = New System.Drawing.Point(514, 655)
         Me.ShopSupplies_CheckBox.Name = "ShopSupplies_CheckBox"
         Me.ShopSupplies_CheckBox.Size = New System.Drawing.Size(18, 17)
         Me.ShopSupplies_CheckBox.TabIndex = 307
@@ -934,7 +935,7 @@ Partial Class invoices
         '
         Me.ShopSuppliesLabel.AutoSize = True
         Me.ShopSuppliesLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.ShopSuppliesLabel.Location = New System.Drawing.Point(638, 606)
+        Me.ShopSuppliesLabel.Location = New System.Drawing.Point(401, 654)
         Me.ShopSuppliesLabel.Name = "ShopSuppliesLabel"
         Me.ShopSuppliesLabel.Size = New System.Drawing.Size(107, 17)
         Me.ShopSuppliesLabel.TabIndex = 306
@@ -946,7 +947,7 @@ Partial Class invoices
         Me.TaxExempt_Value.AutoSize = True
         Me.TaxExempt_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TaxExempt_Value.ForeColor = System.Drawing.Color.Black
-        Me.TaxExempt_Value.Location = New System.Drawing.Point(965, 669)
+        Me.TaxExempt_Value.Location = New System.Drawing.Point(496, 710)
         Me.TaxExempt_Value.Name = "TaxExempt_Value"
         Me.TaxExempt_Value.Size = New System.Drawing.Size(0, 20)
         Me.TaxExempt_Value.TabIndex = 308
@@ -955,7 +956,7 @@ Partial Class invoices
         'TaxExempt_CheckBox
         '
         Me.TaxExempt_CheckBox.AutoSize = True
-        Me.TaxExempt_CheckBox.Location = New System.Drawing.Point(965, 673)
+        Me.TaxExempt_CheckBox.Location = New System.Drawing.Point(496, 714)
         Me.TaxExempt_CheckBox.Name = "TaxExempt_CheckBox"
         Me.TaxExempt_CheckBox.Size = New System.Drawing.Size(18, 17)
         Me.TaxExempt_CheckBox.TabIndex = 310
@@ -966,7 +967,7 @@ Partial Class invoices
         '
         Me.TaxExemptLabel.AutoSize = True
         Me.TaxExemptLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.TaxExemptLabel.Location = New System.Drawing.Point(870, 672)
+        Me.TaxExemptLabel.Location = New System.Drawing.Point(401, 713)
         Me.TaxExemptLabel.Name = "TaxExemptLabel"
         Me.TaxExemptLabel.Size = New System.Drawing.Size(89, 17)
         Me.TaxExemptLabel.TabIndex = 309
@@ -1329,12 +1330,24 @@ Partial Class invoices
         Me.nav.Size = New System.Drawing.Size(1182, 28)
         Me.nav.TabIndex = 267
         '
+        'TextBox1
+        '
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(697, 716)
+        Me.TextBox1.MaxLength = 255
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(365, 108)
+        Me.TextBox1.TabIndex = 314
+        Me.TextBox1.Tag = "dataEditingControl"
+        '
         'invoices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1182, 853)
+        Me.ClientSize = New System.Drawing.Size(1182, 903)
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.CostTableLayoutPanel)
         Me.Controls.Add(Me.printInvButton)
         Me.Controls.Add(Me.previewInvButton)
@@ -1531,4 +1544,5 @@ Partial Class invoices
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Towing_Textbox As TextBox
     Friend WithEvents Towing_Value As Label
+    Friend WithEvents TextBox1 As TextBox
 End Class
