@@ -31,7 +31,7 @@ Partial Class invoices
         Me.invoiceNumLabel = New System.Windows.Forms.Label()
         Me.invoiceNumComboBox = New System.Windows.Forms.ComboBox()
         Me.CustomerComboLabel = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.CustomerComboBox = New System.Windows.Forms.ComboBox()
         Me.invDate_Textbox = New System.Windows.Forms.MaskedTextBox()
         Me.invDate_Value = New System.Windows.Forms.Label()
         Me.InvoiceDateLabel = New System.Windows.Forms.Label()
@@ -116,13 +116,13 @@ Partial Class invoices
         Me.PartsLabel = New System.Windows.Forms.Label()
         Me.LaborLabel = New System.Windows.Forms.Label()
         Me.ShopChargesLabel = New System.Windows.Forms.Label()
-        Me.nav = New AutoServiceManager.navigation()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.LicenseStateComboBox = New System.Windows.Forms.ComboBox()
         Me.LicenseState_Value = New System.Windows.Forms.Label()
         Me.LicenseStateLabel = New System.Windows.Forms.Label()
         Me.LicensePlateLabel = New System.Windows.Forms.Label()
         Me.LicensePlateTextbox = New System.Windows.Forms.TextBox()
+        Me.nav = New AutoServiceManager.navigation()
         Me.CostTableLayoutPanel.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.GasPanel.SuspendLayout()
@@ -235,16 +235,16 @@ Partial Class invoices
         Me.CustomerComboLabel.TabIndex = 142
         Me.CustomerComboLabel.Text = "Customer :"
         '
-        'ComboBox1
+        'CustomerComboBox
         '
-        Me.ComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.ComboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(179, 194)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(508, 28)
-        Me.ComboBox1.TabIndex = 144
+        Me.CustomerComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CustomerComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.CustomerComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
+        Me.CustomerComboBox.FormattingEnabled = True
+        Me.CustomerComboBox.Location = New System.Drawing.Point(179, 194)
+        Me.CustomerComboBox.Name = "CustomerComboBox"
+        Me.CustomerComboBox.Size = New System.Drawing.Size(508, 28)
+        Me.CustomerComboBox.TabIndex = 144
         '
         'invDate_Textbox
         '
@@ -1261,15 +1261,6 @@ Partial Class invoices
         Me.ShopChargesLabel.Text = "Shop Charges"
         Me.ShopChargesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'nav
-        '
-        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.nav.Location = New System.Drawing.Point(0, 0)
-        Me.nav.Name = "nav"
-        Me.nav.Size = New System.Drawing.Size(1182, 28)
-        Me.nav.TabIndex = 267
-        '
         'TextBox1
         '
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1293,7 +1284,6 @@ Partial Class invoices
         Me.LicenseStateComboBox.Size = New System.Drawing.Size(177, 28)
         Me.LicenseStateComboBox.TabIndex = 316
         Me.LicenseStateComboBox.Tag = "dataEditingControl"
-        Me.LicenseStateComboBox.Visible = False
         '
         'LicenseState_Value
         '
@@ -1305,7 +1295,6 @@ Partial Class invoices
         Me.LicenseState_Value.Size = New System.Drawing.Size(0, 20)
         Me.LicenseState_Value.TabIndex = 318
         Me.LicenseState_Value.Tag = "dataViewingControl"
-        Me.LicenseState_Value.Visible = False
         '
         'LicenseStateLabel
         '
@@ -1317,7 +1306,6 @@ Partial Class invoices
         Me.LicenseStateLabel.TabIndex = 317
         Me.LicenseStateLabel.Tag = "dataLabel"
         Me.LicenseStateLabel.Text = "License State :"
-        Me.LicenseStateLabel.Visible = False
         '
         'LicensePlateLabel
         '
@@ -1329,7 +1317,6 @@ Partial Class invoices
         Me.LicensePlateLabel.TabIndex = 320
         Me.LicensePlateLabel.Tag = "dataLabel"
         Me.LicensePlateLabel.Text = "License Plate :"
-        Me.LicensePlateLabel.Visible = False
         '
         'LicensePlateTextbox
         '
@@ -1340,7 +1327,15 @@ Partial Class invoices
         Me.LicensePlateTextbox.Size = New System.Drawing.Size(178, 27)
         Me.LicensePlateTextbox.TabIndex = 319
         Me.LicensePlateTextbox.Tag = "dataEditingControl"
-        Me.LicensePlateTextbox.Visible = False
+        '
+        'nav
+        '
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(1182, 28)
+        Me.nav.TabIndex = 267
         '
         'invoices
         '
@@ -1417,7 +1412,7 @@ Partial Class invoices
         Me.Controls.Add(Me.invDate_Textbox)
         Me.Controls.Add(Me.invDate_Value)
         Me.Controls.Add(Me.InvoiceDateLabel)
-        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.CustomerComboBox)
         Me.Controls.Add(Me.invoiceNumLabel)
         Me.Controls.Add(Me.invoiceNumComboBox)
         Me.Controls.Add(Me.CustomerComboLabel)
@@ -1454,7 +1449,7 @@ Partial Class invoices
     Friend WithEvents invoiceNumLabel As Label
     Friend WithEvents invoiceNumComboBox As ComboBox
     Friend WithEvents CustomerComboLabel As Label
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents CustomerComboBox As ComboBox
     Friend WithEvents invDate_Textbox As MaskedTextBox
     Friend WithEvents invDate_Value As Label
     Friend WithEvents InvoiceDateLabel As Label

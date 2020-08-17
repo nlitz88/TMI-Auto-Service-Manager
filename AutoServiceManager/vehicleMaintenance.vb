@@ -219,7 +219,7 @@
     End Function
 
 
-    ' Sub that initializes CarModelComboBox after valid AutoMakeComboBox selection has been made
+    ' Sub that initializes VehicleComboBox after valid CustomerComboBox selection has been made
     Private Sub InitializeVehicleComboBox()
 
         VehicleComboBox.BeginUpdate()
