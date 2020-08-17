@@ -317,8 +317,21 @@
 
         End If
 
+
+        ' This logic checks to see if the value in InvoiceNumComboBox is numeric. If so, then convert it to an int
+        ' If not, invNbr will remain as -1, subsequently producing a -1 on lookup from getDataTableRowEquals()
+        Dim invNbr As Integer = -1
+        If allValidChars(InvoiceNumComboBox.Text, "0123456789") = -1 Then
+            Try
+                invNbr = Convert.ToInt32(InvoiceNumComboBox.Text)
+            Catch ex As Exception
+
+            End Try
+        End If
+
+
         ' Lookup newly selected row and see if it is valid (valid if it corresponds with a datatable row)
-        InvRow = getDataTableRow(InvDbController.DbDataTable, "InvNbr", InvoiceNumComboBox.Text)
+        InvRow = getDataTableRowEquals(InvDbController.DbDataTable, "InvNbr", invNbr)
 
         ' If this query DOES return a valid row index, then initialize respective controls
         If InvRow <> -1 Then
