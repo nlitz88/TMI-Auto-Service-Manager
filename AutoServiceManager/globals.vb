@@ -306,6 +306,25 @@
     End Function
 
 
+    ' Function that returns a properly formatted Phone Number. Input's invalid characters will be stripped, and only valid part of number will be returned.
+    ' If an input is stripped and has nothing left, then an empty string will be returned.
+    Public Function formatPhoneNumber(ByVal unformattedNumber As String, Optional ByVal phoneFormat As String = "{0:(000) 000-0000}") As String
+
+        Dim result As String = String.Empty
+        Dim strippedText As String
+
+        If Not String.IsNullOrEmpty(unformattedNumber) Then
+            strippedText = removeInvalidChars(unformattedNumber, "1234567890")
+            If Not String.IsNullOrEmpty(strippedText) Then
+                result = String.Format("{0:(000) 000-0000}", Long.Parse(strippedText))
+            End If
+        End If
+
+        Return result
+
+    End Function
+
+
 
 
     ' ************************ DATABASE DATA INTERACTION/MANIPULATION ************************
