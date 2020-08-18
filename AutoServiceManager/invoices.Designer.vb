@@ -1305,6 +1305,7 @@ Partial Class invoices
         'TotalLabor_Textbox
         '
         Me.TotalLabor_Textbox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TotalLabor_Textbox.Enabled = False
         Me.TotalLabor_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TotalLabor_Textbox.Location = New System.Drawing.Point(0, 0)
         Me.TotalLabor_Textbox.Margin = New System.Windows.Forms.Padding(0)
@@ -1342,6 +1343,7 @@ Partial Class invoices
         'TotalParts_Textbox
         '
         Me.TotalParts_Textbox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TotalParts_Textbox.Enabled = False
         Me.TotalParts_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TotalParts_Textbox.Location = New System.Drawing.Point(0, 0)
         Me.TotalParts_Textbox.Margin = New System.Windows.Forms.Padding(0)
@@ -1379,6 +1381,7 @@ Partial Class invoices
         'SubTotalTextbox
         '
         Me.SubTotalTextbox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SubTotalTextbox.Enabled = False
         Me.SubTotalTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SubTotalTextbox.Location = New System.Drawing.Point(0, 0)
         Me.SubTotalTextbox.Margin = New System.Windows.Forms.Padding(0)
@@ -1416,6 +1419,7 @@ Partial Class invoices
         'Tax_Textbox
         '
         Me.Tax_Textbox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Tax_Textbox.Enabled = False
         Me.Tax_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Tax_Textbox.Location = New System.Drawing.Point(0, 0)
         Me.Tax_Textbox.Margin = New System.Windows.Forms.Padding(0)
@@ -1453,6 +1457,7 @@ Partial Class invoices
         'InvTotal_Textbox
         '
         Me.InvTotal_Textbox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.InvTotal_Textbox.Enabled = False
         Me.InvTotal_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.InvTotal_Textbox.Location = New System.Drawing.Point(0, 0)
         Me.InvTotal_Textbox.Margin = New System.Windows.Forms.Padding(0)
