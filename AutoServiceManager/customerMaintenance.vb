@@ -176,33 +176,10 @@
     Private Sub formatDataViewingControls()
 
         ' Formatting for labels that contain values from DataTable
-
-        ' For these phone numbers, first strip them of any invalidCharacters, then format their respective labels (if stripped not null)
-        Dim strippedTexted As String
-        If Not String.IsNullOrEmpty(HomePhone_Value.Text) Then
-            strippedTexted = removeInvalidChars(HomePhone_Value.Text, "1234567890")
-            If Not String.IsNullOrEmpty(strippedTexted) Then
-                HomePhone_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(removeInvalidChars(HomePhone_Value.Text, "1234567890")))
-            End If
-        End If
-        If Not String.IsNullOrEmpty(WorkPhone_Value.Text) Then
-            strippedTexted = removeInvalidChars(WorkPhone_Value.Text, "1234567890")
-            If Not String.IsNullOrEmpty(strippedTexted) Then
-                WorkPhone_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(removeInvalidChars(WorkPhone_Value.Text, "1234567890")))
-            End If
-        End If
-        If Not String.IsNullOrEmpty(CellPhone1_Value.Text) Then
-            strippedTexted = removeInvalidChars(CellPhone1_Value.Text, "1234567890")
-            If Not String.IsNullOrEmpty(strippedTexted) Then
-                CellPhone1_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(removeInvalidChars(CellPhone1_Value.Text, "1234567890")))
-            End If
-        End If
-        If Not String.IsNullOrEmpty(CellPhone2_Value.Text) Then
-            strippedTexted = removeInvalidChars(CellPhone2_Value.Text, "1234567890")
-            If Not String.IsNullOrEmpty(strippedTexted) Then
-                CellPhone2_Value.Text = String.Format("{0:(000) 000-0000}", Long.Parse(removeInvalidChars(CellPhone2_Value.Text, "1234567890")))
-            End If
-        End If
+        HomePhone_Value.Text = formatPhoneNumber(HomePhone_Value.Text)
+        WorkPhone_Value.Text = formatPhoneNumber(WorkPhone_Value.Text)
+        CellPhone1_Value.Text = formatPhoneNumber(CellPhone1_Value.Text)
+        CellPhone2_Value.Text = formatPhoneNumber(CellPhone2_Value.Text)
 
     End Sub
 
