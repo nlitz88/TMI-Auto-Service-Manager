@@ -488,7 +488,16 @@
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
+
+            ' Load ALl depedent DataTables based on InvId selected, then reinitialize corresponding depedent calculated control-values
+            If Not loadDependentDataTables() Then
+                MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
+
+            ' Recalculate and Reinitialize dependent controls
             InitializeAllDataViewingControls()
+
             valuesInitialized = True
 
             ' Show labels and corresponding values
