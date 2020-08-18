@@ -32,12 +32,12 @@ Partial Class invoices
         Me.InvoiceNumComboBox = New System.Windows.Forms.ComboBox()
         Me.CustomerComboLabel = New System.Windows.Forms.Label()
         Me.CustomerComboBox = New System.Windows.Forms.ComboBox()
-        Me.invDate_Textbox = New System.Windows.Forms.MaskedTextBox()
-        Me.invDate_Value = New System.Windows.Forms.Label()
+        Me.InvDate_Textbox = New System.Windows.Forms.MaskedTextBox()
+        Me.InvDate_Value = New System.Windows.Forms.Label()
         Me.InvoiceDateLabel = New System.Windows.Forms.Label()
-        Me.invNbr_Value = New System.Windows.Forms.Label()
+        Me.InvNbr_Value = New System.Windows.Forms.Label()
         Me.InvoiceNumberLabel = New System.Windows.Forms.Label()
-        Me.invNbr_Textbox = New System.Windows.Forms.TextBox()
+        Me.InvNbr_Textbox = New System.Windows.Forms.TextBox()
         Me.Complete_Value = New System.Windows.Forms.Label()
         Me.Complete_CheckBox = New System.Windows.Forms.CheckBox()
         Me.CompleteLabel = New System.Windows.Forms.Label()
@@ -246,32 +246,32 @@ Partial Class invoices
         Me.CustomerComboBox.Size = New System.Drawing.Size(508, 28)
         Me.CustomerComboBox.TabIndex = 144
         '
-        'invDate_Textbox
+        'InvDate_Textbox
         '
-        Me.invDate_Textbox.AllowPromptAsInput = False
-        Me.invDate_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
-        Me.invDate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
-        Me.invDate_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
-        Me.invDate_Textbox.Location = New System.Drawing.Point(461, 340)
-        Me.invDate_Textbox.Mask = "00/00/0000"
-        Me.invDate_Textbox.Name = "invDate_Textbox"
-        Me.invDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.invDate_Textbox.Size = New System.Drawing.Size(181, 27)
-        Me.invDate_Textbox.TabIndex = 240
-        Me.invDate_Textbox.Tag = "dataEditingControl"
-        Me.invDate_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
-        Me.invDate_Textbox.ValidatingType = GetType(Date)
+        Me.InvDate_Textbox.AllowPromptAsInput = False
+        Me.InvDate_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
+        Me.InvDate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
+        Me.InvDate_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
+        Me.InvDate_Textbox.Location = New System.Drawing.Point(461, 340)
+        Me.InvDate_Textbox.Mask = "00/00/0000"
+        Me.InvDate_Textbox.Name = "InvDate_Textbox"
+        Me.InvDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.InvDate_Textbox.Size = New System.Drawing.Size(181, 27)
+        Me.InvDate_Textbox.TabIndex = 240
+        Me.InvDate_Textbox.Tag = "dataEditingControl"
+        Me.InvDate_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
+        Me.InvDate_Textbox.ValidatingType = GetType(Date)
         '
-        'invDate_Value
+        'InvDate_Value
         '
-        Me.invDate_Value.AutoSize = True
-        Me.invDate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.invDate_Value.ForeColor = System.Drawing.Color.Black
-        Me.invDate_Value.Location = New System.Drawing.Point(460, 343)
-        Me.invDate_Value.Name = "invDate_Value"
-        Me.invDate_Value.Size = New System.Drawing.Size(0, 20)
-        Me.invDate_Value.TabIndex = 242
-        Me.invDate_Value.Tag = "dataViewingControl"
+        Me.InvDate_Value.AutoSize = True
+        Me.InvDate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InvDate_Value.ForeColor = System.Drawing.Color.Black
+        Me.InvDate_Value.Location = New System.Drawing.Point(460, 343)
+        Me.InvDate_Value.Name = "InvDate_Value"
+        Me.InvDate_Value.Size = New System.Drawing.Size(0, 20)
+        Me.InvDate_Value.TabIndex = 242
+        Me.InvDate_Value.Tag = "dataViewingControl"
         '
         'InvoiceDateLabel
         '
@@ -284,16 +284,16 @@ Partial Class invoices
         Me.InvoiceDateLabel.Tag = "dataLabel"
         Me.InvoiceDateLabel.Text = "Invoice Date :"
         '
-        'invNbr_Value
+        'InvNbr_Value
         '
-        Me.invNbr_Value.AutoSize = True
-        Me.invNbr_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.invNbr_Value.ForeColor = System.Drawing.Color.Black
-        Me.invNbr_Value.Location = New System.Drawing.Point(217, 343)
-        Me.invNbr_Value.Name = "invNbr_Value"
-        Me.invNbr_Value.Size = New System.Drawing.Size(0, 20)
-        Me.invNbr_Value.TabIndex = 247
-        Me.invNbr_Value.Tag = "dataViewingControl"
+        Me.InvNbr_Value.AutoSize = True
+        Me.InvNbr_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InvNbr_Value.ForeColor = System.Drawing.Color.Black
+        Me.InvNbr_Value.Location = New System.Drawing.Point(217, 343)
+        Me.InvNbr_Value.Name = "InvNbr_Value"
+        Me.InvNbr_Value.Size = New System.Drawing.Size(0, 20)
+        Me.InvNbr_Value.TabIndex = 247
+        Me.InvNbr_Value.Tag = "dataViewingControl"
         '
         'InvoiceNumberLabel
         '
@@ -306,16 +306,16 @@ Partial Class invoices
         Me.InvoiceNumberLabel.Tag = "dataLabel"
         Me.InvoiceNumberLabel.Text = "Invoice Number :"
         '
-        'invNbr_Textbox
+        'InvNbr_Textbox
         '
-        Me.invNbr_Textbox.Enabled = False
-        Me.invNbr_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.invNbr_Textbox.Location = New System.Drawing.Point(217, 340)
-        Me.invNbr_Textbox.MaxLength = 10
-        Me.invNbr_Textbox.Name = "invNbr_Textbox"
-        Me.invNbr_Textbox.Size = New System.Drawing.Size(126, 27)
-        Me.invNbr_Textbox.TabIndex = 245
-        Me.invNbr_Textbox.Tag = "dataEditingControl"
+        Me.InvNbr_Textbox.Enabled = False
+        Me.InvNbr_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InvNbr_Textbox.Location = New System.Drawing.Point(217, 340)
+        Me.InvNbr_Textbox.MaxLength = 10
+        Me.InvNbr_Textbox.Name = "InvNbr_Textbox"
+        Me.InvNbr_Textbox.Size = New System.Drawing.Size(126, 27)
+        Me.InvNbr_Textbox.TabIndex = 245
+        Me.InvNbr_Textbox.Tag = "dataEditingControl"
         '
         'Complete_Value
         '
@@ -684,7 +684,6 @@ Partial Class invoices
         'licensePlateSearchButton
         '
         Me.licensePlateSearchButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.licensePlateSearchButton.Enabled = False
         Me.licensePlateSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.licensePlateSearchButton.ForeColor = System.Drawing.Color.White
         Me.licensePlateSearchButton.Location = New System.Drawing.Point(780, 193)
@@ -1414,11 +1413,11 @@ Partial Class invoices
         Me.Controls.Add(Me.Complete_Value)
         Me.Controls.Add(Me.Complete_CheckBox)
         Me.Controls.Add(Me.CompleteLabel)
-        Me.Controls.Add(Me.invNbr_Value)
+        Me.Controls.Add(Me.InvNbr_Value)
         Me.Controls.Add(Me.InvoiceNumberLabel)
-        Me.Controls.Add(Me.invNbr_Textbox)
-        Me.Controls.Add(Me.invDate_Textbox)
-        Me.Controls.Add(Me.invDate_Value)
+        Me.Controls.Add(Me.InvNbr_Textbox)
+        Me.Controls.Add(Me.InvDate_Textbox)
+        Me.Controls.Add(Me.InvDate_Value)
         Me.Controls.Add(Me.InvoiceDateLabel)
         Me.Controls.Add(Me.CustomerComboBox)
         Me.Controls.Add(Me.invoiceNumLabel)
@@ -1458,12 +1457,12 @@ Partial Class invoices
     Friend WithEvents InvoiceNumComboBox As ComboBox
     Friend WithEvents CustomerComboLabel As Label
     Friend WithEvents CustomerComboBox As ComboBox
-    Friend WithEvents invDate_Textbox As MaskedTextBox
-    Friend WithEvents invDate_Value As Label
+    Friend WithEvents InvDate_Textbox As MaskedTextBox
+    Friend WithEvents InvDate_Value As Label
     Friend WithEvents InvoiceDateLabel As Label
-    Friend WithEvents invNbr_Value As Label
+    Friend WithEvents InvNbr_Value As Label
     Friend WithEvents InvoiceNumberLabel As Label
-    Friend WithEvents invNbr_Textbox As TextBox
+    Friend WithEvents InvNbr_Textbox As TextBox
     Friend WithEvents Complete_Value As Label
     Friend WithEvents Complete_CheckBox As CheckBox
     Friend WithEvents CompleteLabel As Label

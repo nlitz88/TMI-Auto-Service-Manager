@@ -238,9 +238,7 @@
 
     Private Sub invoices_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        For Each ctrl In CostTableLayoutPanel.Controls
-            Console.WriteLine(ctrl.Name)
-        Next
+
 
     End Sub
 
