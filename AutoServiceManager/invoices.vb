@@ -183,7 +183,7 @@
     End Sub
 
     ' Sub that Sets inspection months value to the month abreviation that corresponds to the initialized month int (that is no longer being used)
-    Private Sub correctInpectionMonthComboBox()
+    Private Sub correctInspectionMonthComboBox()
 
         ' First, check if empty. If empty, we don't need to do anything
         If String.IsNullOrWhiteSpace(InspectionMonth_ComboBox.Text) Then Exit Sub
@@ -201,7 +201,7 @@
     End Sub
 
     ' Variant for use with corresponding value
-    Private Sub correctInpectionMonthValue()
+    Private Sub correctInspectionMonthValue()
 
         ' First, check if empty. If empty, we don't need to do anything
         If String.IsNullOrWhiteSpace(InspectionMonth_Value.Text) Then Exit Sub
@@ -547,7 +547,7 @@
         ' Automated initializations
         InitializeInvoiceDataViewingControls()
         InitializeVehicleDataViewingControls()
-        correctInpectionMonthValue()    ' Correction for value initialized from Vehicle DataTable
+        correctInspectionMonthValue()    ' Correction for value initialized from Vehicle DataTable
         InitializeCustomerDataViewingControls()
         ' Then, re-initialize and format any calculation based values
         InitializeInvLaborValue()
