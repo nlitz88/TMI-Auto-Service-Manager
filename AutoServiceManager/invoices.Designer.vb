@@ -712,7 +712,6 @@ Partial Class invoices
         'tasksButton
         '
         Me.tasksButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.tasksButton.Enabled = False
         Me.tasksButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.tasksButton.ForeColor = System.Drawing.Color.White
         Me.tasksButton.Location = New System.Drawing.Point(637, 498)
@@ -726,7 +725,6 @@ Partial Class invoices
         'paymentsButton
         '
         Me.paymentsButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.paymentsButton.Enabled = False
         Me.paymentsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.paymentsButton.ForeColor = System.Drawing.Color.White
         Me.paymentsButton.Location = New System.Drawing.Point(873, 498)

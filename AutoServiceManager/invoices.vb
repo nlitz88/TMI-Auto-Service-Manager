@@ -623,6 +623,8 @@
         InitializeSubTotalTextbox()
         InitializeTaxTextbox()
         ' Additional Values that require initialization
+        InitializeInvPaymentsTextbox()
+        InitializeNumberTasksTextbox()
         InitializeContactPhone1ComboBox()
         InitializeContactPhone2ComboBox()
         ' Then, format dataEditingControls
@@ -893,6 +895,7 @@
             ' Disable editing button
             modifyInvButton.Enabled = False
             deleteInvButton.Enabled = False
+
             Exit Sub
 
         End If
@@ -961,6 +964,8 @@
 
     Private Sub newInvButton_Click(sender As Object, e As EventArgs) Handles newInvButton.Click
 
+
+
     End Sub
 
 
@@ -991,6 +996,10 @@
         CustomerComboBox.Enabled = False
         VehicleComboBox.Enabled = False
         InvoiceNumComboBox.Enabled = False
+
+        ' Disable Task and Payment Buttons
+        tasksButton.Enabled = False
+        paymentsButton.Enabled = False
 
         ' Disable all licensePlate searching controls
         For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
