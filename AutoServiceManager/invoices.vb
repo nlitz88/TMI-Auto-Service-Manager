@@ -552,6 +552,32 @@
     End Sub
 
 
+    ' Sub that initializes Balance based on Total Paid (Total of Payments made) and the total
+    Private Sub InitializeBalanceValue()
+
+        Dim balance As Decimal = InvTotalSum - InvPaymentsSum
+        BalanceValue.Text = balance
+
+    End Sub
+
+    Private Sub InitializeBalanceTextbox()
+
+        Dim balance As Decimal
+
+        ' Will need to validate Total as a currency
+        If validCurrency("InvTotal", True, InvTotal_Textbox.Text, String.Empty) And
+            validCurrency("Total Paid", True, TotalPaid_Textbox.Text, String.Empty) Then
+
+            balance = InvTotalSum - InvPaymentsSum
+            BalanceTextbox.Text = String.Format("{0:0.00}", balance)
+
+        Else
+            BalanceTextbox.Text = String.Empty
+        End If
+
+    End Sub
+
+
     ' Sub that initializes Number of Tasks
     Private Sub InitializeNumberTasksValue()
 
@@ -602,6 +628,7 @@
         InitializeTotalValue()
         ' Additional Values that require initialization
         InitializeInvPaymentsValue()
+        InitializeBalanceValue()
         InitializeNumberTasksValue()
 
         ' Then, format dataViewingControls
@@ -631,6 +658,7 @@
         formatDataEditingControls()
         ' This must be initialized after all currency based cost values are initialized and formatted properly
         InitializeTotalTextbox()
+        InitializeBalanceTextbox()
 
         ' Set forecolor if not already initially default
         setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
@@ -666,6 +694,7 @@
         InvTotal_Value.Text = FormatCurrency(InvTotal_Value.Text)
 
         TotalPaid_Value.Text = FormatCurrency(TotalPaid_Value.Text)
+        BalanceValue.Text = FormatCurrency(BalanceValue.Text)
 
     End Sub
 
