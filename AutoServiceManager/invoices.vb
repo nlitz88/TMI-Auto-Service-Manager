@@ -605,7 +605,7 @@
         InitializeVehicleDataEditingControls()
         InitializeCustomerDataEditingControls()
         ' Then, format dataEditingControls
-        'formatDataEditingControls()
+        formatDataEditingControls()
         ' Set forecolor if not already initially default
         setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
 
@@ -644,7 +644,15 @@
     End Sub
 
     ' Sub that will add formatting to already initialized dataEditingControls
+    Private Sub formatDataEditingControls()
 
+        ' Formatting for Dates. Use globals function to do New DateTime checking and set value accordingly
+        InvDate_Textbox.Text = formatDate(InvDbController.DbDataTable(InvRow)("InvDate"))
+        ApptDate_Textbox.Text = formatDate(InvDbController.DbDataTable(InvRow)("ApptDate"))
+        WorkDate_Textbox.Text = formatDate(InvDbController.DbDataTable(InvRow)("WorkDate"))
+        PayDate_Textbox.Text = formatDate(InvDbController.DbDataTable(InvRow)("PayDate"))
+
+    End Sub
 
 
 
