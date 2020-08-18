@@ -9,6 +9,7 @@
     ' New Database control instances for Tasks and Payments (for calculating values locally)
     Private InvLaborDbController As New DbControl()
     Private InvPartsDbController As New DbControl()
+    Private InvTaskDbController As New DbControl()
     Private InvPaymentsDbController As New DbControl()
     Private CMDbController As New DbControl()
     ' New Database control instance for updating, inserting, and deleting
@@ -233,6 +234,13 @@
                                         "WHERE ip.InvNbr=@invId")
         If InvPartsDbController.HasException() Then Return False
 
+        ' Loads only InvNbr from InvTask
+        InvTaskDbController.AddParams("@invId", InvId)
+        InvTaskDbController.ExecQuery("SELECT it.InvNbr " &
+                                       "FROM InvTask it " &
+                                       "WHERE it.InvNbr=@invId")
+        If InvTaskDbController.HasException() Then Return False
+
         ' Loads rows from InvPayments based on seleceted InvNbr from InvHdr
         InvPaymentsDbController.AddParams("@invId", InvId)
         InvPaymentsDbController.ExecQuery("SELECT ip.PayAmount " &
@@ -284,27 +292,6 @@
         Next
 
         'TotalParts_Textbox.Text = String.Format("{0:0.00}", InvPartsSum)
-
-    End Sub
-
-    ' Sub that intializes and calculates Invoice Total Paid amount based on the total of all of the payments in InvPayments with current InvId
-    Private Sub InitializeInvPaymentsValue()
-
-        For Each row In InvPaymentsDbController.DbDataTable.Rows
-            InvPaymentsSum += row("PayAmount")
-        Next
-
-        TotalPaid_Value.Text = InvPaymentsSum
-
-    End Sub
-
-    Private Sub InitializeInvPaymentsTextbox()
-
-        For Each row In InvPaymentsDbController.DbDataTable.Rows
-            InvPaymentsSum += row("PayAmount")
-        Next
-
-        TotalPaid_Textbox.Text = String.Format("{0:0.00}", InvPaymentsSum)
 
     End Sub
 
@@ -438,12 +425,49 @@
     End Sub
 
 
+    ' Sub that intializes and calculates Invoice Total Paid amount based on the total of all of the payments in InvPayments with current InvId
+    Private Sub InitializeInvPaymentsValue()
+
+        For Each row In InvPaymentsDbController.DbDataTable.Rows
+            InvPaymentsSum += row("PayAmount")
+        Next
+
+        TotalPaid_Value.Text = InvPaymentsSum
+
+    End Sub
+
+    Private Sub InitializeInvPaymentsTextbox()
+
+        For Each row In InvPaymentsDbController.DbDataTable.Rows
+            InvPaymentsSum += row("PayAmount")
+        Next
+
+        TotalPaid_Textbox.Text = String.Format("{0:0.00}", InvPaymentsSum)
+
+    End Sub
+
+
+    ' Sub that initializes Number of Tasks
+    Private Sub InitializeNumberTasksValue()
+
+        Dim NbrTasks As Integer = InvTaskDbController.DbDataTable.Rows.Count
+        NbrTasks_Value.Text = NbrTasks
+
+    End Sub
+
+    Private Sub InitializeNumberTasksTextbox()
+
+        Dim NbrTasks As Integer = InvTaskDbController.DbDataTable.Rows.Count
+        NbrTasks_Textbox.Text = NbrTasks
+
+    End Sub
+
     ' Calculation based initialization subs here for:
     '   (DONE) Shop Charges        ShopCharges = Round(SupplyCost * (TotalParts + TotalLabor), 2)
     '   (DONE) SubTotal
     '   (DONE) Tax
     '   (DONE) Total
-    '   Number of Tasks
+    '   (DONE) Number of Tasks
 
 
 
@@ -472,6 +496,8 @@
         InitializeTotalValue()
 
         InitializeInvPaymentsValue()
+        InitializeNumberTasksValue()
+
         ' Then, format dataViewingControls
         formatDataViewingControls()
 
