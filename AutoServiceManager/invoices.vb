@@ -32,9 +32,12 @@
 
     Private CMRow As Integer = 0
 
-    ' Variables that store calculated values for InvoiceLabor, InvoiceParts, and InvoiceTotal Values/Textboxes
+    ' Variables that store calculated values for various controls
     Private InvLaborSum As Decimal = 0
     Private InvPartsSum As Decimal = 0
+    Private ShopCharges As Decimal = 0
+    Private SubTotal As Decimal = 0
+    Private Tax As Decimal = 0
     Private InvTotalSum As Decimal = 0
     Private InvPaymentsSum As Decimal = 0
 
@@ -312,21 +315,88 @@
         Dim shopSupplies As Boolean = InvDbController.DbDataTable(InvRow)("ShopSupplies")
 
         If shopSupplies Then
-            Console.WriteLine("ShopSupplies is checked!")
             Dim shopSupplyCharge As Decimal = CMDbController.DbDataTable.Rows(CMRow)("ShopSupplyCharge")
             Dim laborPartsTotal As Decimal = InvLaborSum + InvPartsSum
-            Dim ShopCharges As Decimal = Math.Round((shopSupplyCharge * laborPartsTotal), 2)
-            ShopCharges_Value.Text = ShopCharges
+            ShopCharges = Math.Round((shopSupplyCharge * laborPartsTotal), 2)
         Else
-            ShopCharges_Value.Text = 0
+            ShopCharges = 0
         End If
+
+        ShopCharges_Value.Text = ShopCharges
 
     End Sub
 
+    Private Sub InitializeShopChargesTextbox()
+
+        Dim shopSupplies As Boolean = InvDbController.DbDataTable(InvRow)("ShopSupplies")
+
+        If shopSupplies Then
+            Dim shopSupplyCharge As Decimal = CMDbController.DbDataTable.Rows(CMRow)("ShopSupplyCharge")
+            Dim laborPartsTotal As Decimal = InvLaborSum + InvPartsSum
+            ShopCharges = Math.Round((shopSupplyCharge * laborPartsTotal), 2)
+        Else
+            ShopCharges = 0
+        End If
+
+        ShopCharges_Textbox.Text = String.Format("{0:0.00}", ShopCharges)
+
+    End Sub
+
+
+    ' Sub that initializes and calculates SubTotal TotalLabor and TotalParts
+    Private Sub InitializeSubTotalValue()
+
+        SubTotal = InvLaborSum + InvPartsSum + ShopCharges
+        SubTotalValue.Text = SubTotal
+
+    End Sub
+
+    Private Sub InitializeSubTotalTextbox()
+
+        SubTotal = InvLaborSum + InvPartsSum + ShopCharges
+        SubTotalValue.Text = String.Format("{0:0.00}", SubTotal)
+
+    End Sub
+
+
+    ' Sub that initializes and calculates Tax from SubTotal and TaxRate
+    Private Sub InitializeTaxValue()
+
+        ' Check if tax exempt first
+        Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
+
+        If Not TaxExempt Then
+            Dim TaxRate As Decimal = CMDbController.DbDataTable(CMRow)("TaxRate")
+            Tax = Math.Round(TaxRate * SubTotal, 2)
+        Else
+            Tax = 0
+        End If
+
+        Tax_Value.Text = Tax
+
+    End Sub
+
+    Private Sub InitializeTaxTextbox()
+
+        ' Check if tax exempt first
+        Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
+
+        If Not TaxExempt Then
+            Dim TaxRate As Decimal = CMDbController.DbDataTable(CMRow)("TaxRate")
+            Tax = Math.Round(TaxRate * SubTotal, 2)
+        Else
+            Tax = 0
+        End If
+
+        Tax_Textbox.Text = String.Format("{0:0.00}", Tax)
+
+    End Sub
+
+
     ' Calculation based initialization subs here for:
-    '   Shop Charges        ShopCharges = Round(SupplyCost * (TotalParts + TotalLabor), 2)
-    '   SubTotal
-    '   Tax
+    '   (DONE) Shop Charges        ShopCharges = Round(SupplyCost * (TotalParts + TotalLabor), 2)
+    '   (DONE) SubTotal
+    '   (DONE) Tax
     '   Total
 
 
@@ -337,6 +407,9 @@
 
         InvLaborSum = 0
         InvPartsSum = 0
+        ShopCharges = 0
+        SubTotal = 0
+        Tax = 0
         InvTotalSum = 0
         InvPaymentsSum = 0
 
@@ -348,6 +421,9 @@
         InitializeInvLaborValue()
         InitializeInvPartsValue()
         InitializeShopChargesValue()
+        InitializeSubTotalValue()
+        InitializeTaxValue()
+
         InitializeInvPaymentsValue()
         ' Then, format dataViewingControls
         formatDataViewingControls()
@@ -378,6 +454,8 @@
         TotalParts_Value.Text = FormatCurrency(TotalParts_Value.Text)
 
         ShopCharges_Value.Text = FormatCurrency(ShopCharges_Value.Text)
+        SubTotalValue.Text = FormatCurrency(SubTotalValue.Text)
+        Tax_Value.Text = FormatCurrency(Tax_Value.Text)
 
         TotalPaid_Value.Text = FormatCurrency(TotalPaid_Value.Text)
 
