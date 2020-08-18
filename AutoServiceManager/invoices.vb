@@ -10,6 +10,7 @@
     Private InvLaborDbController As New DbControl()
     Private InvPartsDbController As New DbControl()
     Private InvPaymentsDbController As New DbControl()
+    Private CMDbController As New DbControl()
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
