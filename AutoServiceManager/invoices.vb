@@ -31,9 +31,10 @@
     Private InvId As Integer                    ' InvNbr from same row that ""
 
     ' Variables that store calculated values for InvoiceLabor, InvoiceParts, and InvoiceTotal Values/Textboxes
-    Private InvLaborSum As Decimal
-    Private InvPartsSum As Decimal
-    Private InvTotalSum As Decimal
+    Private InvLaborSum As Decimal = 0
+    Private InvPartsSum As Decimal = 0
+    Private InvTotalSum As Decimal = 0
+    Private InvPaymentsSum As Decimal = 0
 
     ' Keeps track of whether or not user in "editing" or "adding" mode
     Private mode As String
@@ -242,23 +243,95 @@
     ' Sub that initializes and calculates Invoice Labor Cost based on the total cost of all of the labor codes in InvLabor with current InvId
     Private Sub InitializeInvLaborValue()
 
+        For Each row In InvLaborDbController.DbDataTable.Rows
+            InvLaborSum += row("LaborAmount")
+        Next
+
+        TotalLabor_Value.Text = InvLaborSum
+
     End Sub
 
     Private Sub InitializeInvLaborTextbox()
 
+        For Each row In InvLaborDbController.DbDataTable.Rows
+            InvLaborSum += row("LaborAmount")
+        Next
+
+        'TotalLabor_Textbox.Text = String.Format("{0:0.00}", InvLaborSum)
+
     End Sub
+
+    ' Sub that initializes and calculates Invoice Parts Cost based on the total cost of all of the Parts in InvParts with current InvId
+    Private Sub InitializeInvPartsValue()
+
+        For Each row In InvPartsDbController.DbDataTable.Rows
+            InvPartsSum += row("PartAmount")
+        Next
+
+        TotalParts_Value.Text = InvPartsSum
+
+    End Sub
+
+    Private Sub InitializeInvPartsTextbox()
+
+        For Each row In InvPartsDbController.DbDataTable.Rows
+            InvPartsSum += row("PartAmount")
+        Next
+
+        'TotalParts_Textbox.Text = String.Format("{0:0.00}", InvPartsSum)
+
+    End Sub
+
+    ' Sub that intializes and calculates Invoice Total Paid amount based on the total of all of the payments in InvPayments with current InvId
+    Private Sub InitializeInvPaymentsValue()
+
+        For Each row In InvPaymentsDbController.DbDataTable.Rows
+            InvPaymentsSum += row("PayAmount")
+        Next
+
+        TotalPaid_Value.Text = InvPaymentsSum
+
+    End Sub
+
+    Private Sub InitializeInvPaymentsTextbox()
+
+        For Each row In InvPaymentsDbController.DbDataTable.Rows
+            InvPaymentsSum += row("PayAmount")
+        Next
+
+        TotalPaid_Textbox.Text = String.Format("{0:0.00}", InvPaymentsSum)
+
+    End Sub
+
+
+
+    ' Calculation based initialization subs here for:
+    '   Shop Charges
+    '   SubTotal
+    '   Tax
+    '   Total
+
 
 
 
     ' Sub that calls all individual dataViewingControl initialization subs in one (These can be used individually if desired)
     Private Sub InitializeAllDataViewingControls()
 
+        InvLaborSum = 0
+        InvPartsSum = 0
+        InvTotalSum = 0
+        InvPaymentsSum = 0
+
         ' Automated initializations
         InitializeInvoiceDataViewingControls()
         InitializeVehicleDataViewingControls()
         InitializeCustomerDataViewingControls()
+        ' Then, re-initialize and format any calculation based values
+        InitializeInvLaborValue()
+        InitializeInvPartsValue()
+        InitializeInvPaymentsValue()
         ' Then, format dataViewingControls
-        'formatDataViewingControls()
+        formatDataViewingControls()
 
     End Sub
 
@@ -275,6 +348,20 @@
         setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
 
     End Sub
+
+
+    ' NOTE: these subs only format controls that don't have their FORMATTING handled by a separate sub
+    ' Sub that will add formatting to already initialized dataViewingControls
+    Private Sub formatDataViewingControls()
+
+        ' These three calculation based fields are formatted here after the fact, as otherwise, TotalTask can't parse the decimal values from TaskLabor and TaskParts
+        TotalLabor_Value.Text = FormatCurrency(TotalLabor_Value.Text)
+        TotalParts_Value.Text = FormatCurrency(TotalParts_Value.Text)
+        TotalPaid_Value.Text = FormatCurrency(TotalPaid_Value.Text)
+
+    End Sub
+
+    ' Sub that will add formatting to already initialized dataEditingControls
 
 
 
