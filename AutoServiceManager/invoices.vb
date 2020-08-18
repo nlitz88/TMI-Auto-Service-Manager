@@ -2,6 +2,7 @@
 
     ' New Database control instances for Customers, Vehicles, and InvHdr datatables
     Private CustomerDbController As New DbControl()
+    Private CustomerPhoneList As New List(Of String)
     Private VehicleDbController As New DbControl()
     Private InvDbController As New DbControl()
     ' New Database control instances for License Plate Search controls (just license State)
@@ -71,6 +72,17 @@
 
     End Function
 
+    ' Sub that initializes CustomerPhoneList (used later in initialization of ContactPhone ComboBoxes) (Should be called after each time new valid Customer Selected)
+    Private Sub InitializeCustomerPhoneList()
+
+        CustomerPhoneList.Clear()
+        CustomerPhoneList.Add(formatPhoneNumber(CustomerDbController.DbDataTable(CustomerRow)("HomePhone")))
+        CustomerPhoneList.Add(formatPhoneNumber(CustomerDbController.DbDataTable(CustomerRow)("WorkPhone")))
+        CustomerPhoneList.Add(formatPhoneNumber(CustomerDbController.DbDataTable(CustomerRow)("CellPhone1")))
+        CustomerPhoneList.Add(formatPhoneNumber(CustomerDbController.DbDataTable(CustomerRow)("CellPhone2")))
+
+    End Sub
+
     ' Sub that initializes Customer ComboBox
     Private Sub InitializeCustomerComboBox()
 
@@ -90,10 +102,9 @@
         ContactPhone1_ComboBox.BeginUpdate()
         ContactPhone1_ComboBox.Items.Clear()
         ' Add the four different phone numbers from Customer to the ComboBox here
-        ContactPhone1_ComboBox.Items.Add(CustomerDbController.DbDataTable(CustomerRow)("HomePhone"))
-        ContactPhone1_ComboBox.Items.Add(CustomerDbController.DbDataTable(CustomerRow)("WorkPhone"))
-        ContactPhone1_ComboBox.Items.Add(CustomerDbController.DbDataTable(CustomerRow)("CellPhone1"))
-        ContactPhone1_ComboBox.Items.Add(CustomerDbController.DbDataTable(CustomerRow)("CellPhone2"))
+        For Each phoneNum In CustomerPhoneList
+            ContactPhone1_ComboBox.Items.Add(phoneNum)
+        Next
         ContactPhone1_ComboBox.EndUpdate()
 
     End Sub
@@ -104,10 +115,9 @@
         ContactPhone2_ComboBox.BeginUpdate()
         ContactPhone2_ComboBox.Items.Clear()
         ' Add the four different phone numbers from Customer to the ComboBox here
-        ContactPhone2_ComboBox.Items.Add(CustomerDbController.DbDataTable(CustomerRow)("HomePhone"))
-        ContactPhone2_ComboBox.Items.Add(CustomerDbController.DbDataTable(CustomerRow)("WorkPhone"))
-        ContactPhone2_ComboBox.Items.Add(CustomerDbController.DbDataTable(CustomerRow)("CellPhone1"))
-        ContactPhone2_ComboBox.Items.Add(CustomerDbController.DbDataTable(CustomerRow)("CellPhone2"))
+        For Each phoneNum In CustomerPhoneList
+            ContactPhone2_ComboBox.Items.Add(phoneNum)
+        Next
         ContactPhone2_ComboBox.EndUpdate()
 
     End Sub
@@ -604,6 +614,10 @@
         InitializeInvoiceDataEditingControls()
         InitializeVehicleDataEditingControls()
         InitializeCustomerDataEditingControls()
+
+        InitializeContactPhone1ComboBox()
+        InitializeContactPhone2ComboBox()
+
         ' Then, format dataEditingControls
         formatDataEditingControls()
         ' Set forecolor if not already initially default
@@ -651,6 +665,8 @@
         ApptDate_Textbox.Text = formatDate(InvDbController.DbDataTable(InvRow)("ApptDate"))
         WorkDate_Textbox.Text = formatDate(InvDbController.DbDataTable(InvRow)("WorkDate"))
         PayDate_Textbox.Text = formatDate(InvDbController.DbDataTable(InvRow)("PayDate"))
+
+        ' Format phone number for ContactPhone1 and ContactPhone 2
 
     End Sub
 
@@ -700,9 +716,6 @@
         InspectionMonth_ComboBox.Visible = True
         InspectionMonth_ComboBox.Visible = False
 
-        ' Contact Phone 1
-        ' Contact Phone 2
-
     End Sub
 
 
@@ -744,6 +757,9 @@
             ' CustomerRow doesn't mean anything to vehicleComboBox. VehicleComboBox query only concerned about the CustomerId
             ' So, if the customer entered in CustomerComboBox exists (valid CLFA), then lookup the corresponding ID
             CustomerId = CustomerDbController.DbDataTable(CustomerRow)("CustomerId")
+
+            ' Initialize Customer Phone List after valid Customer has been selected
+            InitializeCustomerPhoneList()
 
             ' Then, load the vehicleDataTable and initialize vehicleComboBox based on this newfound CustomerId
             loadVehicleDataTable()
