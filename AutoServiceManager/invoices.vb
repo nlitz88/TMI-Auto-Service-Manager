@@ -667,6 +667,8 @@
         PayDate_Textbox.Text = formatDate(InvDbController.DbDataTable(InvRow)("PayDate"))
 
         ' Format phone number for ContactPhone1 and ContactPhone 2
+        ContactPhone1_ComboBox.Text = formatPhoneNumber(ContactPhone1_ComboBox.Text)
+        ContactPhone2_ComboBox.Text = formatPhoneNumber(ContactPhone2_ComboBox.Text)
 
     End Sub
 
