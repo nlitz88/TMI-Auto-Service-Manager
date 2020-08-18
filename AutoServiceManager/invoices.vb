@@ -99,6 +99,7 @@
     ' Sub that intializes ContactPhone1 ComboBox (Called after valid Customer has been selected)
     Private Sub InitializeContactPhone1ComboBox()
 
+        ContactPhone1_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList
         ContactPhone1_ComboBox.BeginUpdate()
         ContactPhone1_ComboBox.Items.Clear()
         ' Add the four different phone numbers from Customer to the ComboBox here
@@ -112,6 +113,7 @@
     ' Sub that intializes ContactPhone2 ComboBox (Called after valid Customer has been selected)
     Private Sub InitializeContactPhone2ComboBox()
 
+        ContactPhone2_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList
         ContactPhone2_ComboBox.BeginUpdate()
         ContactPhone2_ComboBox.Items.Clear()
         ' Add the four different phone numbers from Customer to the ComboBox here
@@ -673,6 +675,17 @@
     End Sub
 
 
+
+
+    ' ***************** CRUD SUBS *****************
+
+
+
+
+    ' **************** VALIDATION SUBS ****************
+
+
+    ' Make sure to ensure that ContactPhone1 does not have the same value as Contact Phone 2, and also make sure that the values in both exist in the CustomerPhoneList
 
 
     Public Sub New()
