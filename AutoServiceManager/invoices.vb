@@ -30,6 +30,11 @@
     Private InvRow As Integer                   ' Maintains row in DataTable that corresponds to the currently selected InvoiceNbr
     Private InvId As Integer                    ' InvNbr from same row that ""
 
+    ' Variables that store calculated values for InvoiceLabor, InvoiceParts, and InvoiceTotal Values/Textboxes
+    Private InvLaborSum As Decimal
+    Private InvPartsSum As Decimal
+    Private InvTotalSum As Decimal
+
     ' Keeps track of whether or not user in "editing" or "adding" mode
     Private mode As String
 
@@ -115,7 +120,6 @@
         Return True
 
     End Function
-
 
 
     ' Sub that loads Vehicle DataTable based on CustomerId
@@ -204,6 +208,46 @@
         initializeNestedControlsFromRow(InvDbController.DbDataTable, InvRow, "dataEditingControl", "_", Me)
 
     End Sub
+
+
+    ' Function that will load all invoice selection-dependent DataTables (InvLabor, InvParts, and InvPayments)
+    Private Function loadDependentDataTables() As Boolean
+
+        ' Loads rows from InvLabor based on selected InvNbr from InvHdr
+        InvLaborDbController.AddParams("@invId", InvId)
+        InvLaborDbController.ExecQuery("SELECT il.LaborAmount " &
+                                        "FROM InvLabor il " &
+                                        "WHERE il.InvNbr=@invId")
+        If InvLaborDbController.HasException() Then Return False
+
+        ' Loads rows from InvParts based on selected InvNbr from InvHdr
+        InvPartsDbController.AddParams("@invId", InvId)
+        InvPartsDbController.ExecQuery("SELECT ip.PartAmount " &
+                                        "FROM InvParts ip " &
+                                        "WHERE ip.InvNbr=@invId")
+        If InvPartsDbController.HasException() Then Return False
+
+        ' Loads rows from InvPayments based on seleceted InvNbr from InvHdr
+        InvPaymentsDbController.AddParams("@invId", InvId)
+        InvPaymentsDbController.ExecQuery("SELECT ip.PayAmount " &
+                                        "FROM InvPayments ip " &
+                                        "WHERE ip.InvNbr=@invId")
+        If InvPaymentsDbController.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+
+    ' Sub that initializes and calculates Invoice Labor Cost based on the total cost of all of the labor codes in InvLabor with current InvId
+    Private Sub InitializeInvLaborValue()
+
+    End Sub
+
+    Private Sub InitializeInvLaborTextbox()
+
+    End Sub
+
 
 
     ' Sub that calls all individual dataViewingControl initialization subs in one (These can be used individually if desired)
