@@ -94,25 +94,20 @@ Partial Class invoices
         Me.TaxExemptLabel = New System.Windows.Forms.Label()
         Me.printInvButton = New System.Windows.Forms.Button()
         Me.CostTableLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TowingPanel = New System.Windows.Forms.Panel()
         Me.Towing_Textbox = New System.Windows.Forms.TextBox()
         Me.Towing_Value = New System.Windows.Forms.Label()
-        Me.InvTotal_Value = New System.Windows.Forms.Label()
         Me.GasPanel = New System.Windows.Forms.Panel()
         Me.Gas_Textbox = New System.Windows.Forms.TextBox()
         Me.Gas_Value = New System.Windows.Forms.Label()
-        Me.TaxValue = New System.Windows.Forms.Label()
         Me.ShopChargesPanel = New System.Windows.Forms.Panel()
         Me.ShopCharges_Textbox = New System.Windows.Forms.TextBox()
         Me.ShopCharges_Value = New System.Windows.Forms.Label()
-        Me.SubTotalValue = New System.Windows.Forms.Label()
         Me.TotalLabel = New System.Windows.Forms.Label()
         Me.TowingLabel = New System.Windows.Forms.Label()
         Me.GasLabel = New System.Windows.Forms.Label()
         Me.TaxLabel = New System.Windows.Forms.Label()
         Me.SubTotalLabel = New System.Windows.Forms.Label()
-        Me.TotalParts_Value = New System.Windows.Forms.Label()
-        Me.TotalLabor_Value = New System.Windows.Forms.Label()
         Me.PartsLabel = New System.Windows.Forms.Label()
         Me.LaborLabel = New System.Windows.Forms.Label()
         Me.ShopChargesLabel = New System.Windows.Forms.Label()
@@ -123,10 +118,30 @@ Partial Class invoices
         Me.LicensePlateLabel = New System.Windows.Forms.Label()
         Me.LicensePlateTextbox = New System.Windows.Forms.TextBox()
         Me.nav = New AutoServiceManager.navigation()
+        Me.LaborPanel = New System.Windows.Forms.Panel()
+        Me.TotalLabor_Textbox = New System.Windows.Forms.TextBox()
+        Me.TotalLabor_Value = New System.Windows.Forms.Label()
+        Me.PartsPanel = New System.Windows.Forms.Panel()
+        Me.TotalParts_Textbox = New System.Windows.Forms.TextBox()
+        Me.TotalParts_Value = New System.Windows.Forms.Label()
+        Me.SubTotalPanel = New System.Windows.Forms.Panel()
+        Me.SubTotalTextbox = New System.Windows.Forms.TextBox()
+        Me.SubTotalValue = New System.Windows.Forms.Label()
+        Me.TaxPanel = New System.Windows.Forms.Panel()
+        Me.Tax_Textbox = New System.Windows.Forms.TextBox()
+        Me.Tax_Value = New System.Windows.Forms.Label()
+        Me.TotalPanel = New System.Windows.Forms.Panel()
+        Me.InvTotal_Textbox = New System.Windows.Forms.TextBox()
+        Me.InvTotal_Value = New System.Windows.Forms.Label()
         Me.CostTableLayoutPanel.SuspendLayout()
-        Me.Panel2.SuspendLayout()
+        Me.TowingPanel.SuspendLayout()
         Me.GasPanel.SuspendLayout()
         Me.ShopChargesPanel.SuspendLayout()
+        Me.LaborPanel.SuspendLayout()
+        Me.PartsPanel.SuspendLayout()
+        Me.SubTotalPanel.SuspendLayout()
+        Me.TaxPanel.SuspendLayout()
+        Me.TotalPanel.SuspendLayout()
         Me.SuspendLayout()
         '
         'deleteInvButton
@@ -952,19 +967,19 @@ Partial Class invoices
         Me.CostTableLayoutPanel.ColumnCount = 2
         Me.CostTableLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.CostTableLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.CostTableLayoutPanel.Controls.Add(Me.Panel2, 1, 6)
-        Me.CostTableLayoutPanel.Controls.Add(Me.InvTotal_Value, 1, 7)
-        Me.CostTableLayoutPanel.Controls.Add(Me.GasPanel, 1, 5)
-        Me.CostTableLayoutPanel.Controls.Add(Me.TaxValue, 1, 4)
+        Me.CostTableLayoutPanel.Controls.Add(Me.TotalPanel, 1, 7)
+        Me.CostTableLayoutPanel.Controls.Add(Me.TaxPanel, 1, 4)
+        Me.CostTableLayoutPanel.Controls.Add(Me.SubTotalPanel, 1, 3)
+        Me.CostTableLayoutPanel.Controls.Add(Me.PartsPanel, 1, 1)
+        Me.CostTableLayoutPanel.Controls.Add(Me.LaborPanel, 1, 0)
         Me.CostTableLayoutPanel.Controls.Add(Me.ShopChargesPanel, 1, 2)
-        Me.CostTableLayoutPanel.Controls.Add(Me.SubTotalValue, 1, 3)
+        Me.CostTableLayoutPanel.Controls.Add(Me.TowingPanel, 1, 6)
+        Me.CostTableLayoutPanel.Controls.Add(Me.GasPanel, 1, 5)
         Me.CostTableLayoutPanel.Controls.Add(Me.TotalLabel, 0, 7)
         Me.CostTableLayoutPanel.Controls.Add(Me.TowingLabel, 0, 6)
         Me.CostTableLayoutPanel.Controls.Add(Me.GasLabel, 0, 5)
         Me.CostTableLayoutPanel.Controls.Add(Me.TaxLabel, 0, 4)
         Me.CostTableLayoutPanel.Controls.Add(Me.SubTotalLabel, 0, 3)
-        Me.CostTableLayoutPanel.Controls.Add(Me.TotalParts_Value, 1, 1)
-        Me.CostTableLayoutPanel.Controls.Add(Me.TotalLabor_Value, 1, 0)
         Me.CostTableLayoutPanel.Controls.Add(Me.PartsLabel, 0, 1)
         Me.CostTableLayoutPanel.Controls.Add(Me.LaborLabel, 0, 0)
         Me.CostTableLayoutPanel.Controls.Add(Me.ShopChargesLabel, 0, 2)
@@ -980,22 +995,21 @@ Partial Class invoices
         Me.CostTableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
         Me.CostTableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
         Me.CostTableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
-        Me.CostTableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.CostTableLayoutPanel.Size = New System.Drawing.Size(288, 235)
         Me.CostTableLayoutPanel.TabIndex = 313
         Me.CostTableLayoutPanel.Tag = "dataLabel"
         '
-        'Panel2
+        'TowingPanel
         '
-        Me.Panel2.AutoSize = True
-        Me.Panel2.Controls.Add(Me.Towing_Textbox)
-        Me.Panel2.Controls.Add(Me.Towing_Value)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(144, 175)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(0)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(143, 28)
-        Me.Panel2.TabIndex = 321
+        Me.TowingPanel.AutoSize = True
+        Me.TowingPanel.Controls.Add(Me.Towing_Textbox)
+        Me.TowingPanel.Controls.Add(Me.Towing_Value)
+        Me.TowingPanel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TowingPanel.Location = New System.Drawing.Point(144, 175)
+        Me.TowingPanel.Margin = New System.Windows.Forms.Padding(0)
+        Me.TowingPanel.Name = "TowingPanel"
+        Me.TowingPanel.Size = New System.Drawing.Size(143, 28)
+        Me.TowingPanel.TabIndex = 321
         '
         'Towing_Textbox
         '
@@ -1020,21 +1034,7 @@ Partial Class invoices
         Me.Towing_Value.Size = New System.Drawing.Size(143, 28)
         Me.Towing_Value.TabIndex = 318
         Me.Towing_Value.Tag = "dataViewingControl"
-        Me.Towing_Value.Text = "Test"
         Me.Towing_Value.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'InvTotal_Value
-        '
-        Me.InvTotal_Value.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.InvTotal_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.InvTotal_Value.ForeColor = System.Drawing.Color.Black
-        Me.InvTotal_Value.Location = New System.Drawing.Point(147, 204)
-        Me.InvTotal_Value.Name = "InvTotal_Value"
-        Me.InvTotal_Value.Size = New System.Drawing.Size(137, 30)
-        Me.InvTotal_Value.TabIndex = 327
-        Me.InvTotal_Value.Tag = "dataViewingControl"
-        Me.InvTotal_Value.Text = "TestTotal"
-        Me.InvTotal_Value.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'GasPanel
         '
@@ -1071,21 +1071,7 @@ Partial Class invoices
         Me.Gas_Value.Size = New System.Drawing.Size(143, 28)
         Me.Gas_Value.TabIndex = 318
         Me.Gas_Value.Tag = "dataViewingControl"
-        Me.Gas_Value.Text = "Test"
         Me.Gas_Value.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TaxValue
-        '
-        Me.TaxValue.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TaxValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TaxValue.ForeColor = System.Drawing.Color.Black
-        Me.TaxValue.Location = New System.Drawing.Point(147, 117)
-        Me.TaxValue.Name = "TaxValue"
-        Me.TaxValue.Size = New System.Drawing.Size(137, 28)
-        Me.TaxValue.TabIndex = 326
-        Me.TaxValue.Tag = "dataViewingControl"
-        Me.TaxValue.Text = "TestTax"
-        Me.TaxValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ShopChargesPanel
         '
@@ -1122,21 +1108,7 @@ Partial Class invoices
         Me.ShopCharges_Value.Size = New System.Drawing.Size(143, 28)
         Me.ShopCharges_Value.TabIndex = 318
         Me.ShopCharges_Value.Tag = "dataViewingControl"
-        Me.ShopCharges_Value.Text = "Test"
         Me.ShopCharges_Value.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'SubTotalValue
-        '
-        Me.SubTotalValue.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SubTotalValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SubTotalValue.ForeColor = System.Drawing.Color.Black
-        Me.SubTotalValue.Location = New System.Drawing.Point(147, 88)
-        Me.SubTotalValue.Name = "SubTotalValue"
-        Me.SubTotalValue.Size = New System.Drawing.Size(137, 28)
-        Me.SubTotalValue.TabIndex = 325
-        Me.SubTotalValue.Tag = "dataViewingControl"
-        Me.SubTotalValue.Text = "TestSubtotal"
-        Me.SubTotalValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TotalLabel
         '
@@ -1202,32 +1174,6 @@ Partial Class invoices
         Me.SubTotalLabel.Tag = "dataLabel"
         Me.SubTotalLabel.Text = "SubTotal"
         Me.SubTotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'TotalParts_Value
-        '
-        Me.TotalParts_Value.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TotalParts_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TotalParts_Value.ForeColor = System.Drawing.Color.Black
-        Me.TotalParts_Value.Location = New System.Drawing.Point(147, 30)
-        Me.TotalParts_Value.Name = "TotalParts_Value"
-        Me.TotalParts_Value.Size = New System.Drawing.Size(137, 28)
-        Me.TotalParts_Value.TabIndex = 317
-        Me.TotalParts_Value.Tag = "dataViewingControl"
-        Me.TotalParts_Value.Text = "Test Parts"
-        Me.TotalParts_Value.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TotalLabor_Value
-        '
-        Me.TotalLabor_Value.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TotalLabor_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TotalLabor_Value.ForeColor = System.Drawing.Color.Black
-        Me.TotalLabor_Value.Location = New System.Drawing.Point(147, 1)
-        Me.TotalLabor_Value.Name = "TotalLabor_Value"
-        Me.TotalLabor_Value.Size = New System.Drawing.Size(137, 28)
-        Me.TotalLabor_Value.TabIndex = 314
-        Me.TotalLabor_Value.Tag = "dataViewingControl"
-        Me.TotalLabor_Value.Text = "Test"
-        Me.TotalLabor_Value.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'PartsLabel
         '
@@ -1344,6 +1290,191 @@ Partial Class invoices
         Me.nav.Size = New System.Drawing.Size(1182, 28)
         Me.nav.TabIndex = 267
         '
+        'LaborPanel
+        '
+        Me.LaborPanel.AutoSize = True
+        Me.LaborPanel.Controls.Add(Me.TotalLabor_Textbox)
+        Me.LaborPanel.Controls.Add(Me.TotalLabor_Value)
+        Me.LaborPanel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.LaborPanel.Location = New System.Drawing.Point(144, 1)
+        Me.LaborPanel.Margin = New System.Windows.Forms.Padding(0)
+        Me.LaborPanel.Name = "LaborPanel"
+        Me.LaborPanel.Size = New System.Drawing.Size(143, 28)
+        Me.LaborPanel.TabIndex = 320
+        '
+        'TotalLabor_Textbox
+        '
+        Me.TotalLabor_Textbox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TotalLabor_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TotalLabor_Textbox.Location = New System.Drawing.Point(0, 0)
+        Me.TotalLabor_Textbox.Margin = New System.Windows.Forms.Padding(0)
+        Me.TotalLabor_Textbox.Name = "TotalLabor_Textbox"
+        Me.TotalLabor_Textbox.Size = New System.Drawing.Size(143, 27)
+        Me.TotalLabor_Textbox.TabIndex = 319
+        Me.TotalLabor_Textbox.Tag = "dataEditingControl"
+        Me.TotalLabor_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TotalLabor_Value
+        '
+        Me.TotalLabor_Value.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TotalLabor_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TotalLabor_Value.ForeColor = System.Drawing.Color.Black
+        Me.TotalLabor_Value.Location = New System.Drawing.Point(0, 0)
+        Me.TotalLabor_Value.Margin = New System.Windows.Forms.Padding(0)
+        Me.TotalLabor_Value.Name = "TotalLabor_Value"
+        Me.TotalLabor_Value.Size = New System.Drawing.Size(143, 28)
+        Me.TotalLabor_Value.TabIndex = 318
+        Me.TotalLabor_Value.Tag = "dataViewingControl"
+        Me.TotalLabor_Value.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'PartsPanel
+        '
+        Me.PartsPanel.AutoSize = True
+        Me.PartsPanel.Controls.Add(Me.TotalParts_Textbox)
+        Me.PartsPanel.Controls.Add(Me.TotalParts_Value)
+        Me.PartsPanel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PartsPanel.Location = New System.Drawing.Point(144, 30)
+        Me.PartsPanel.Margin = New System.Windows.Forms.Padding(0)
+        Me.PartsPanel.Name = "PartsPanel"
+        Me.PartsPanel.Size = New System.Drawing.Size(143, 28)
+        Me.PartsPanel.TabIndex = 320
+        '
+        'TotalParts_Textbox
+        '
+        Me.TotalParts_Textbox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TotalParts_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TotalParts_Textbox.Location = New System.Drawing.Point(0, 0)
+        Me.TotalParts_Textbox.Margin = New System.Windows.Forms.Padding(0)
+        Me.TotalParts_Textbox.Name = "TotalParts_Textbox"
+        Me.TotalParts_Textbox.Size = New System.Drawing.Size(143, 27)
+        Me.TotalParts_Textbox.TabIndex = 319
+        Me.TotalParts_Textbox.Tag = "dataEditingControl"
+        Me.TotalParts_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TotalParts_Value
+        '
+        Me.TotalParts_Value.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TotalParts_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TotalParts_Value.ForeColor = System.Drawing.Color.Black
+        Me.TotalParts_Value.Location = New System.Drawing.Point(0, 0)
+        Me.TotalParts_Value.Margin = New System.Windows.Forms.Padding(0)
+        Me.TotalParts_Value.Name = "TotalParts_Value"
+        Me.TotalParts_Value.Size = New System.Drawing.Size(143, 28)
+        Me.TotalParts_Value.TabIndex = 318
+        Me.TotalParts_Value.Tag = "dataViewingControl"
+        Me.TotalParts_Value.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'SubTotalPanel
+        '
+        Me.SubTotalPanel.AutoSize = True
+        Me.SubTotalPanel.Controls.Add(Me.SubTotalTextbox)
+        Me.SubTotalPanel.Controls.Add(Me.SubTotalValue)
+        Me.SubTotalPanel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SubTotalPanel.Location = New System.Drawing.Point(144, 88)
+        Me.SubTotalPanel.Margin = New System.Windows.Forms.Padding(0)
+        Me.SubTotalPanel.Name = "SubTotalPanel"
+        Me.SubTotalPanel.Size = New System.Drawing.Size(143, 28)
+        Me.SubTotalPanel.TabIndex = 320
+        '
+        'SubTotalTextbox
+        '
+        Me.SubTotalTextbox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SubTotalTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SubTotalTextbox.Location = New System.Drawing.Point(0, 0)
+        Me.SubTotalTextbox.Margin = New System.Windows.Forms.Padding(0)
+        Me.SubTotalTextbox.Name = "SubTotalTextbox"
+        Me.SubTotalTextbox.Size = New System.Drawing.Size(143, 27)
+        Me.SubTotalTextbox.TabIndex = 319
+        Me.SubTotalTextbox.Tag = "dataEditingControl"
+        Me.SubTotalTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'SubTotalValue
+        '
+        Me.SubTotalValue.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SubTotalValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SubTotalValue.ForeColor = System.Drawing.Color.Black
+        Me.SubTotalValue.Location = New System.Drawing.Point(0, 0)
+        Me.SubTotalValue.Margin = New System.Windows.Forms.Padding(0)
+        Me.SubTotalValue.Name = "SubTotalValue"
+        Me.SubTotalValue.Size = New System.Drawing.Size(143, 28)
+        Me.SubTotalValue.TabIndex = 318
+        Me.SubTotalValue.Tag = "dataViewingControl"
+        Me.SubTotalValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TaxPanel
+        '
+        Me.TaxPanel.AutoSize = True
+        Me.TaxPanel.Controls.Add(Me.Tax_Textbox)
+        Me.TaxPanel.Controls.Add(Me.Tax_Value)
+        Me.TaxPanel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TaxPanel.Location = New System.Drawing.Point(144, 117)
+        Me.TaxPanel.Margin = New System.Windows.Forms.Padding(0)
+        Me.TaxPanel.Name = "TaxPanel"
+        Me.TaxPanel.Size = New System.Drawing.Size(143, 28)
+        Me.TaxPanel.TabIndex = 320
+        '
+        'Tax_Textbox
+        '
+        Me.Tax_Textbox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Tax_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Tax_Textbox.Location = New System.Drawing.Point(0, 0)
+        Me.Tax_Textbox.Margin = New System.Windows.Forms.Padding(0)
+        Me.Tax_Textbox.Name = "Tax_Textbox"
+        Me.Tax_Textbox.Size = New System.Drawing.Size(143, 27)
+        Me.Tax_Textbox.TabIndex = 319
+        Me.Tax_Textbox.Tag = "dataEditingControl"
+        Me.Tax_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Tax_Value
+        '
+        Me.Tax_Value.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Tax_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Tax_Value.ForeColor = System.Drawing.Color.Black
+        Me.Tax_Value.Location = New System.Drawing.Point(0, 0)
+        Me.Tax_Value.Margin = New System.Windows.Forms.Padding(0)
+        Me.Tax_Value.Name = "Tax_Value"
+        Me.Tax_Value.Size = New System.Drawing.Size(143, 28)
+        Me.Tax_Value.TabIndex = 318
+        Me.Tax_Value.Tag = "dataViewingControl"
+        Me.Tax_Value.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TotalPanel
+        '
+        Me.TotalPanel.AutoSize = True
+        Me.TotalPanel.Controls.Add(Me.InvTotal_Textbox)
+        Me.TotalPanel.Controls.Add(Me.InvTotal_Value)
+        Me.TotalPanel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TotalPanel.Location = New System.Drawing.Point(144, 204)
+        Me.TotalPanel.Margin = New System.Windows.Forms.Padding(0)
+        Me.TotalPanel.Name = "TotalPanel"
+        Me.TotalPanel.Size = New System.Drawing.Size(143, 30)
+        Me.TotalPanel.TabIndex = 320
+        '
+        'InvTotal_Textbox
+        '
+        Me.InvTotal_Textbox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.InvTotal_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InvTotal_Textbox.Location = New System.Drawing.Point(0, 0)
+        Me.InvTotal_Textbox.Margin = New System.Windows.Forms.Padding(0)
+        Me.InvTotal_Textbox.Name = "InvTotal_Textbox"
+        Me.InvTotal_Textbox.Size = New System.Drawing.Size(143, 27)
+        Me.InvTotal_Textbox.TabIndex = 319
+        Me.InvTotal_Textbox.Tag = "dataEditingControl"
+        Me.InvTotal_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'InvTotal_Value
+        '
+        Me.InvTotal_Value.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.InvTotal_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InvTotal_Value.ForeColor = System.Drawing.Color.Black
+        Me.InvTotal_Value.Location = New System.Drawing.Point(0, 0)
+        Me.InvTotal_Value.Margin = New System.Windows.Forms.Padding(0)
+        Me.InvTotal_Value.Name = "InvTotal_Value"
+        Me.InvTotal_Value.Size = New System.Drawing.Size(143, 30)
+        Me.InvTotal_Value.TabIndex = 318
+        Me.InvTotal_Value.Tag = "dataViewingControl"
+        Me.InvTotal_Value.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'invoices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1436,12 +1567,22 @@ Partial Class invoices
         Me.Text = "Invoices"
         Me.CostTableLayoutPanel.ResumeLayout(False)
         Me.CostTableLayoutPanel.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
+        Me.TowingPanel.ResumeLayout(False)
+        Me.TowingPanel.PerformLayout()
         Me.GasPanel.ResumeLayout(False)
         Me.GasPanel.PerformLayout()
         Me.ShopChargesPanel.ResumeLayout(False)
         Me.ShopChargesPanel.PerformLayout()
+        Me.LaborPanel.ResumeLayout(False)
+        Me.LaborPanel.PerformLayout()
+        Me.PartsPanel.ResumeLayout(False)
+        Me.PartsPanel.PerformLayout()
+        Me.SubTotalPanel.ResumeLayout(False)
+        Me.SubTotalPanel.PerformLayout()
+        Me.TaxPanel.ResumeLayout(False)
+        Me.TaxPanel.PerformLayout()
+        Me.TotalPanel.ResumeLayout(False)
+        Me.TotalPanel.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1521,7 +1662,6 @@ Partial Class invoices
     Friend WithEvents printInvButton As Button
     Friend WithEvents CostTableLayoutPanel As TableLayoutPanel
     Friend WithEvents ShopChargesLabel As Label
-    Friend WithEvents TotalLabor_Value As Label
     Friend WithEvents PartsLabel As Label
     Friend WithEvents LaborLabel As Label
     Friend WithEvents TaxLabel As Label
@@ -1529,17 +1669,13 @@ Partial Class invoices
     Friend WithEvents TotalLabel As Label
     Friend WithEvents TowingLabel As Label
     Friend WithEvents GasLabel As Label
-    Friend WithEvents InvTotal_Value As Label
-    Friend WithEvents TaxValue As Label
-    Friend WithEvents SubTotalValue As Label
-    Friend WithEvents TotalParts_Value As Label
     Friend WithEvents ShopChargesPanel As Panel
     Friend WithEvents ShopCharges_Value As Label
     Friend WithEvents ShopCharges_Textbox As TextBox
     Friend WithEvents GasPanel As Panel
     Friend WithEvents Gas_Textbox As TextBox
     Friend WithEvents Gas_Value As Label
-    Friend WithEvents Panel2 As Panel
+    Friend WithEvents TowingPanel As Panel
     Friend WithEvents Towing_Textbox As TextBox
     Friend WithEvents Towing_Value As Label
     Friend WithEvents TextBox1 As TextBox
@@ -1548,4 +1684,19 @@ Partial Class invoices
     Friend WithEvents LicenseStateLabel As Label
     Friend WithEvents LicensePlateLabel As Label
     Friend WithEvents LicensePlateTextbox As TextBox
+    Friend WithEvents LaborPanel As Panel
+    Friend WithEvents TotalLabor_Textbox As TextBox
+    Friend WithEvents TotalLabor_Value As Label
+    Friend WithEvents PartsPanel As Panel
+    Friend WithEvents TotalParts_Textbox As TextBox
+    Friend WithEvents TotalParts_Value As Label
+    Friend WithEvents SubTotalPanel As Panel
+    Friend WithEvents SubTotalTextbox As TextBox
+    Friend WithEvents SubTotalValue As Label
+    Friend WithEvents TaxPanel As Panel
+    Friend WithEvents Tax_Textbox As TextBox
+    Friend WithEvents Tax_Value As Label
+    Friend WithEvents TotalPanel As Panel
+    Friend WithEvents InvTotal_Textbox As TextBox
+    Friend WithEvents InvTotal_Value As Label
 End Class
