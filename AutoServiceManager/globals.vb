@@ -21,6 +21,25 @@
 
     End Function
 
+    Public Function getAllNestedControlsWithTag(ByVal tag As String, ByRef parent As Object) As List(Of Object)
+
+        Dim ctrls As New List(Of Object)
+
+        Dim ctl As Control = parent.GetNextControl(parent, True) 'Get the first control in the tab order.
+        Do Until ctl Is Nothing
+
+            If ctl.Tag = tag Then
+                ctrls.Add(ctl)
+            End If
+
+            ctl = parent.GetNextControl(ctl, True) 'Get the next control in the tab order.
+
+        Loop
+
+        Return ctrls
+
+    End Function
+
 
     ' Function used to return list of all items with a certain name
     Public Function getAllControlsWithName(ByVal name As String, ByRef form As Form) As List(Of Object)
@@ -68,6 +87,29 @@
                 End If
             End If
         Next
+
+        Return ctrls
+
+    End Function
+
+
+    ' Sub that recursively finds all controls in a parent and returns controls provided specified names, a tag, and a nameDelimiter
+    Public Function getAllNestedControlsWithName(ByVal name As String, ByVal tag As String, ByVal nameDelimiter As String, ByRef parent As Object) As List(Of Object)
+
+        Dim ctrls As New List(Of Object)
+
+        Dim ctl As Control = parent.GetNextControl(parent, True) 'Get the first control in the tab order.
+        Do Until ctl Is Nothing
+            'Use ctl here.
+            If ctl.Name.ToString().IndexOf(nameDelimiter) > 0 Then
+                If ctl.Name.ToString().Substring(0, ctl.Name.ToString().IndexOf(nameDelimiter)) = name And ctl.Tag = tag Then
+                    ctrls.Add(ctl)
+                End If
+            End If
+
+            ctl = parent.GetNextControl(ctl, True) 'Get the next control in the tab order.
+
+        Loop
 
         Return ctrls
 
@@ -296,6 +338,32 @@
 
             ' Get all of the controls on the form that are to be set/initialized by way of matching the first part of their name to the column name
             ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
+
+            ' Initialize values of each control that holds the value of this column
+            For Each ctrl In ctrls
+
+                dataValue = dataTable.Rows(dataTableRow)(dataTable.Columns(i).ColumnName)
+                setControlValue(ctrl, dataValue)
+
+            Next
+
+
+        Next
+
+    End Sub
+
+
+    ' Sub that initializes all nested controls from DataTable
+    Public Sub initializeNestedControlsFromRow(ByVal dataTable As DataTable, ByVal dataTableRow As Integer, ByVal controlTag As String, ByVal nameDelimiter As String, ByRef parent As Object)
+
+        Dim ctrls As List(Of Object)
+        Dim dataValue As Object
+
+        ' For each column in the dataTable
+        For i As Integer = 0 To dataTable.Columns.Count - 1
+
+            ' Get all of the controls on the form that are to be set/initialized by way of matching the first part of their name to the column name
+            ctrls = getAllNestedControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, parent)
 
             ' Initialize values of each control that holds the value of this column
             For Each ctrl In ctrls

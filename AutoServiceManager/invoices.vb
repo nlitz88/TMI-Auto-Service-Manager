@@ -177,13 +177,14 @@
     ' Sub that initializes all dataViewingControls corresponding to values in invoice DataTable
     Private Sub InitializeInvoiceDataViewingControls()
 
-        initializeControlsFromRow(InvDbController.DbDataTable, InvRow, "dataViewingControl", "_", Me)
+        'initializeControlsFromRow(InvDbController.DbDataTable, InvRow, "dataViewingControl", "_", Me)
+        initializeNestedControlsFromRow(InvDbController.DbDataTable, InvRow, "dataViewingControl", "_", Me)
 
     End Sub
     ' Sub that initializes all dataEditingControls corresponding to values in invoice DataTable
     Private Sub InitializeInvoiceDataEditingControls()
 
-        initializeControlsFromRow(InvDbController.DbDataTable, InvRow, "dataEditingControl", "_", Me)
+        initializeNestedControlsFromRow(InvDbController.DbDataTable, InvRow, "dataEditingControl", "_", Me)
 
     End Sub
 
@@ -237,7 +238,9 @@
 
     Private Sub invoices_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        TotalLabor_Value.Text = "Hello"
+        For Each ctrl In CostTableLayoutPanel.Controls
+            Console.WriteLine(ctrl.Name)
+        Next
 
     End Sub
 
@@ -380,9 +383,9 @@
         If InvoiceNumComboBox.SelectedIndex = -1 Then
 
             ' Have all labels and corresponding values hidden
-            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
-            showHide(getAllControlsWithTag("dataLabel", Me), 0)
-            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            showHide(getAllNestedControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllNestedControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllNestedControlsWithTag("dataEditingControl", Me), 0)
             ' Disable editing button
             modifyInvButton.Enabled = False
             deleteInvButton.Enabled = False
@@ -418,9 +421,9 @@
             valuesInitialized = True
 
             ' Show labels and corresponding values
-            showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
-            showHide(getAllControlsWithTag("dataLabel", Me), 1)
-            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            showHide(getAllNestedControlsWithTag("dataViewingControl", Me), 1)
+            showHide(getAllNestedControlsWithTag("dataLabel", Me), 1)
+            showHide(getAllNestedControlsWithTag("dataEditingControl", Me), 0)
 
             ' Enable editing and deleting button
             modifyInvButton.Enabled = True
@@ -430,9 +433,9 @@
         Else
 
             ' Have all labels and corresponding values hidden
-            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
-            showHide(getAllControlsWithTag("dataLabel", Me), 0)
-            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            showHide(getAllNestedControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllNestedControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllNestedControlsWithTag("dataEditingControl", Me), 0)
             ' Disable editing button
             modifyInvButton.Enabled = False
             deleteInvButton.Enabled = False
