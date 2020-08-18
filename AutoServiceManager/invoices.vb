@@ -353,8 +353,13 @@
 
     Private Sub InitializeSubTotalTextbox()
 
-        SubTotal = InvLaborSum + InvPartsSum + ShopCharges
-        SubTotalValue.Text = String.Format("{0:0.00}", SubTotal)
+        If validCurrency("Shop Charges", True, ShopCharges_Textbox.Text, String.Empty) Then
+            SubTotal = InvLaborSum + InvPartsSum + ShopCharges
+            SubTotalTextbox.Text = String.Format("{0:0.00}", SubTotal)
+        Else
+            SubTotalTextbox.Text = String.Empty
+        End If
+
 
     End Sub
 
@@ -381,14 +386,54 @@
         ' Check if tax exempt first
         Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
 
-        If Not TaxExempt Then
-            Dim TaxRate As Decimal = CMDbController.DbDataTable(CMRow)("TaxRate")
-            Tax = Math.Round(TaxRate * SubTotal, 2)
+        If validCurrency("SubTotal", True, SubTotalTextbox.Text, String.Empty) Then
+
+            If Not TaxExempt Then
+                Dim TaxRate As Decimal = CMDbController.DbDataTable(CMRow)("TaxRate")
+                Tax = Math.Round(TaxRate * SubTotal, 2)
+            Else
+                Tax = 0
+            End If
+
+            Tax_Textbox.Text = String.Format("{0:0.00}", Tax)
+
         Else
-            Tax = 0
+            Tax_Textbox.Text = String.Empty
         End If
 
-        Tax_Textbox.Text = String.Format("{0:0.00}", Tax)
+
+    End Sub
+
+
+    ' Sub that initializes and calculates InvTotal from SubTotal and Tax
+    Private Sub InitializeTotalValue()
+
+        ' No need for currency validation here, as the values for Gas and Towing should/will always be valid from the DataTable
+        Dim GasCost As Decimal = InvDbController.DbDataTable(InvRow)("Gas")
+        Dim TowingCost As Decimal = InvDbController.DbDataTable(InvRow)("Towing")
+
+        InvTotalSum = SubTotal + Tax + GasCost + TowingCost
+        InvTotal_Value.Text = InvTotalSum
+
+    End Sub
+
+    Private Sub InitializeTotalTextbox()
+
+        ' Add validation checking for Gas and Towing Cost Inputs
+        If validCurrency("Gas", True, Gas_Textbox.Text, String.Empty) &
+            validCurrency("Towing", True, Towing_Textbox.Text, String.Empty) &
+            validCurrency("Tax", True, Tax_Textbox.Text, String.Empty) &
+            validCurrency("SubTotal", True, SubTotalTextbox.Text, String.Empty) Then
+
+            Dim GasCost As Decimal = Gas_Textbox.Text
+            Dim TowingCost As Decimal = Towing_Textbox.Text
+
+            InvTotalSum = SubTotal + Tax + GasCost + TowingCost
+            InvTotal_Textbox.Text = String.Format("{0:0.00}", InvTotalSum)
+
+        Else
+            InvTotal_Textbox.Text = String.Empty
+        End If
 
     End Sub
 
@@ -397,7 +442,8 @@
     '   (DONE) Shop Charges        ShopCharges = Round(SupplyCost * (TotalParts + TotalLabor), 2)
     '   (DONE) SubTotal
     '   (DONE) Tax
-    '   Total
+    '   (DONE) Total
+    '   Number of Tasks
 
 
 
@@ -423,6 +469,7 @@
         InitializeShopChargesValue()
         InitializeSubTotalValue()
         InitializeTaxValue()
+        InitializeTotalValue()
 
         InitializeInvPaymentsValue()
         ' Then, format dataViewingControls
@@ -456,8 +503,13 @@
         ShopCharges_Value.Text = FormatCurrency(ShopCharges_Value.Text)
         SubTotalValue.Text = FormatCurrency(SubTotalValue.Text)
         Tax_Value.Text = FormatCurrency(Tax_Value.Text)
+        Gas_Value.Text = FormatCurrency(Gas_Value.Text)
+        Towing_Value.Text = FormatCurrency(Towing_Value.Text)
+        InvTotal_Value.Text = FormatCurrency(InvTotal_Value.Text)
 
         TotalPaid_Value.Text = FormatCurrency(TotalPaid_Value.Text)
+
+
 
     End Sub
 
