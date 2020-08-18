@@ -51,6 +51,8 @@
                                        "ORDER BY c.LastName ASC")
         If CustomerDbController.HasException() Then Return False
 
+        Return True
+
     End Function
 
     ' Sub that initializes Customer ComboBox
@@ -87,6 +89,8 @@
         StateDbController.ExecQuery("SELECT s.State FROM States s ORDER BY s.State ASC")
         If StateDbController.HasException() Then Return False
 
+        Return True
+
     End Function
 
     ' Sub that initializes StateComboBox
@@ -100,6 +104,16 @@
         LicenseStateComboBox.EndUpdate()
 
     End Sub
+
+
+    ' Sub that loads Company Master DataTable
+    Private Function loadCMDataTable() As Boolean
+
+        CMDbController.ExecQuery("SELECT cm.TaxRate, cm.ShopSupplyCharge, cm.LaborRate FROM CompanyMaster cm")
+        If CMDbController.HasException() Then Return False
+
+    End Function
+
 
 
     ' Sub that loads Vehicle DataTable based on CustomerId
@@ -226,14 +240,26 @@
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+        If Not checkDbConn() Then Exit Sub
 
-        loadCustomerDataTable()
+        If Not loadCustomerDataTable() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
         InitializeCustomerComboBox()
         CustomerComboBox.SelectedIndex = 0
 
-        loadStatesDataTable()
+        If Not loadStatesDataTable() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
         InitializeStateComboBox()
         LicenseStateComboBox.SelectedIndex = LicenseStateComboBox.Items.IndexOf("PA")   ' Most cars will have PA licenses
+
+        If Not loadCMDataTable() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
 
     End Sub
 
