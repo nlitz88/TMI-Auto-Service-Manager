@@ -12,6 +12,7 @@
     Private InvTaskDbController As New DbControl()
     Private InvPaymentsDbController As New DbControl()
     Private CMDbController As New DbControl()
+    Private MonthDbController As New DbControl()
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
 
@@ -129,6 +130,29 @@
     End Function
 
 
+    ' Sub that loads Months DataTable
+    Private Function loadMonthDataTable() As Boolean
+
+        MonthDbController.ExecQuery("SELECT m.Month, m.IntMonth FROM Months m ORDER BY m.IntMonth ASC")
+        If MonthDbController.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+    ' Sub that initializes InspectionMonth ComboBox
+    Private Sub InitializeInspectionMonthComboBox()
+
+        InspectionMonth_ComboBox.Items.Clear()
+        InspectionMonth_ComboBox.BeginUpdate()
+        For Each row In MonthDbController.DbDataTable.Rows
+            InspectionMonth_ComboBox.Items.Add(row("Month"))
+        Next
+        InspectionMonth_ComboBox.EndUpdate()
+
+    End Sub
+
+
     ' Sub that loads Vehicle DataTable based on CustomerId
     Private Function loadVehicleDataTable() As Boolean
 
@@ -157,6 +181,43 @@
         VehicleComboBox.EndUpdate()
 
     End Sub
+
+    ' Sub that Sets inspection months value to the month abreviation that corresponds to the initialized month int (that is no longer being used)
+    Private Sub correctInpectionMonthComboBox()
+
+        ' First, check if empty. If empty, we don't need to do anything
+        If String.IsNullOrWhiteSpace(InspectionMonth_ComboBox.Text) Then Exit Sub
+
+        ' Then, check to see if it is an intMonth using allValidChars. If it's not, then exit sub. No change necessary
+        If allValidChars(InspectionMonth_ComboBox.Text.ToLower(), "abcdefghijklmnopqrstuvwxyz") = -1 Then Exit Sub
+
+        ' If not an abreviation, then use the intMonth to find the Month abreviation
+        Dim month As String = getRowValueWithKeyEquals(MonthDbController.DbDataTable, "Month", "IntMonth", Convert.ToInt32(InspectionMonth_ComboBox.Text))
+        ' If the query comes back with an abreviation, we can assign it.
+        If month <> Nothing Then
+            InspectionMonth_ComboBox.Text = month
+        End If
+
+    End Sub
+
+    ' Variant for use with corresponding value
+    Private Sub correctInpectionMonthValue()
+
+        ' First, check if empty. If empty, we don't need to do anything
+        If String.IsNullOrWhiteSpace(InspectionMonth_Value.Text) Then Exit Sub
+
+        ' Then, check to see if it is an intMonth using allValidChars. If it's not, then exit sub. No change necessary
+        If allValidChars(InspectionMonth_Value.Text.ToLower(), "abcdefghijklmnopqrstuvwxyz") = -1 Then Exit Sub
+
+        ' If not an abreviation, then use the intMonth to find the Month abreviation
+        Dim month As String = getRowValueWithKeyEquals(MonthDbController.DbDataTable, "Month", "IntMonth", Convert.ToInt32(InspectionMonth_Value.Text))
+        ' If the query comes back with an abreviation, we can assign it.
+        If month <> Nothing Then
+            InspectionMonth_Value.Text = month
+        End If
+
+    End Sub
+
 
     ' Sub that initializes all dataViewingControls corresponding to values in Vehicle DataTable (inspection month, inspection sticker number)
     Private Sub InitializeVehicleDataViewingControls()
@@ -486,6 +547,7 @@
         ' Automated initializations
         InitializeInvoiceDataViewingControls()
         InitializeVehicleDataViewingControls()
+        correctInpectionMonthValue()    ' Correction for value initialized from Vehicle DataTable
         InitializeCustomerDataViewingControls()
         ' Then, re-initialize and format any calculation based values
         InitializeInvLaborValue()
@@ -582,11 +644,24 @@
             Exit Sub
         End If
 
+        If Not loadMonthDataTable() Then
+            MessageBox.Show("Failed to load Months table; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+        InitializeInspectionMonthComboBox()
+
     End Sub
 
     Private Sub invoices_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ' PRE-DRAW PRE-LOADED (Preliminary) COMBOBOXES. 
+        ' This way, we don't have to wait for them to draw on first edit/add
 
+        InspectionMonth_ComboBox.Visible = True
+        InspectionMonth_ComboBox.Visible = False
+
+        ' Contact Phone 1
+        ' Contact Phone 2
 
     End Sub
 
