@@ -81,6 +81,35 @@
 
     End Sub
 
+    ' Sub that intializes ContactPhone1 ComboBox (Called after valid Customer has been selected)
+    Private Sub InitializeContactPhone1ComboBox()
+
+        ContactPhone1_ComboBox.BeginUpdate()
+        ContactPhone1_ComboBox.Items.Clear()
+        ' Add the four different phone numbers from Customer to the ComboBox here
+        ContactPhone1_ComboBox.Items.Add(CustomerDbController.DbDataTable(CustomerRow)("HomePhone"))
+        ContactPhone1_ComboBox.Items.Add(CustomerDbController.DbDataTable(CustomerRow)("WorkPhone"))
+        ContactPhone1_ComboBox.Items.Add(CustomerDbController.DbDataTable(CustomerRow)("CellPhone1"))
+        ContactPhone1_ComboBox.Items.Add(CustomerDbController.DbDataTable(CustomerRow)("CellPhone2"))
+        ContactPhone1_ComboBox.EndUpdate()
+
+    End Sub
+
+    ' Sub that intializes ContactPhone2 ComboBox (Called after valid Customer has been selected)
+    Private Sub InitializeContactPhone2ComboBox()
+
+        ContactPhone2_ComboBox.BeginUpdate()
+        ContactPhone2_ComboBox.Items.Clear()
+        ' Add the four different phone numbers from Customer to the ComboBox here
+        ContactPhone2_ComboBox.Items.Add(CustomerDbController.DbDataTable(CustomerRow)("HomePhone"))
+        ContactPhone2_ComboBox.Items.Add(CustomerDbController.DbDataTable(CustomerRow)("WorkPhone"))
+        ContactPhone2_ComboBox.Items.Add(CustomerDbController.DbDataTable(CustomerRow)("CellPhone1"))
+        ContactPhone2_ComboBox.Items.Add(CustomerDbController.DbDataTable(CustomerRow)("CellPhone2"))
+        ContactPhone2_ComboBox.EndUpdate()
+
+    End Sub
+
+
     ' Sub that initializes all dataViewingControls corresponding to values in Vehicle DataTable (TaxExempt)
     Private Sub InitializeCustomerDataViewingControls()
 
