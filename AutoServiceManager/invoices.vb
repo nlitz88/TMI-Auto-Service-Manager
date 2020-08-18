@@ -112,6 +112,8 @@
         CMDbController.ExecQuery("SELECT cm.TaxRate, cm.ShopSupplyCharge, cm.LaborRate FROM CompanyMaster cm")
         If CMDbController.HasException() Then Return False
 
+        Return True
+
     End Function
 
 
@@ -243,21 +245,21 @@
         If Not checkDbConn() Then Exit Sub
 
         If Not loadCustomerDataTable() Then
-            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Failed to load Customer table; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
         InitializeCustomerComboBox()
         CustomerComboBox.SelectedIndex = 0
 
         If Not loadStatesDataTable() Then
-            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Failed to load States table; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
         InitializeStateComboBox()
         LicenseStateComboBox.SelectedIndex = LicenseStateComboBox.Items.IndexOf("PA")   ' Most cars will have PA licenses
 
         If Not loadCMDataTable() Then
-            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Failed to load Company Master table; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 
