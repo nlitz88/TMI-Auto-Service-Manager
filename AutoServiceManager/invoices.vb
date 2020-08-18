@@ -34,6 +34,9 @@
 
     Private CMRow As Integer = 0
 
+    ' Variable that Maintains the last selected Invoice
+    Private lastSelected As String
+
     ' Variables that store calculated values for various controls
     Private InvLaborSum As Decimal = 0
     Private InvPartsSum As Decimal = 0
@@ -905,6 +908,52 @@
 
 
 
+    Private Sub newInvButton_Click(sender As Object, e As EventArgs) Handles newInvButton.Click
+
+    End Sub
 
 
+    Private Sub deleteInvButton_Click(sender As Object, e As EventArgs) Handles deleteInvButton.Click
+
+    End Sub
+
+
+    Private Sub modifyInvButton_Click(sender As Object, e As EventArgs) Handles modifyInvButton.Click
+
+        mode = "editing"
+
+        ' Initialize values for dataEditingControls
+        valuesInitialized = False
+        InitializeAllDataEditingControls()
+        valuesInitialized = True
+        ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
+        InitialInvValues.SetInitialValues(getAllNestedControlsWithTag("dataEditingControl", Me))
+
+        ' Store the last selected item in the ComboBox (in case update fails and it must revert)
+        lastSelected = InvoiceNumComboBox.Text
+
+        ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
+        modifyInvButton.Enabled = False
+        newInvButton.Enabled = False
+        cancelButton.Enabled = True
+        nav.DisableAll()
+        CustomerComboBox.Enabled = False
+        VehicleComboBox.Enabled = False
+        InvoiceNumComboBox.Enabled = False
+
+        ' Hide/Show the dataViewingControls and dataEditingControls, respectively
+        showHide(getAllNestedControlsWithTag("dataViewingControl", Me), 0)
+        showHide(getAllNestedControlsWithTag("dataEditingControl", Me), 1)
+
+    End Sub
+
+
+    Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
+
+    End Sub
+
+
+    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+
+    End Sub
 End Class
