@@ -30,6 +30,8 @@
     Private InvRow As Integer                   ' Maintains row in DataTable that corresponds to the currently selected InvoiceNbr
     Private InvId As Integer                    ' InvNbr from same row that ""
 
+    Private CMRow As Integer = 0
+
     ' Variables that store calculated values for InvoiceLabor, InvoiceParts, and InvoiceTotal Values/Textboxes
     Private InvLaborSum As Decimal = 0
     Private InvPartsSum As Decimal = 0
@@ -304,9 +306,25 @@
     End Sub
 
 
+    ' Sub that initializes and calculates Shop Charges based TotalLabor, TotalParts IF Shop Supplies checked
+    Private Sub InitializeShopChargesValue()
+
+        Dim shopSupplies As Boolean = InvDbController.DbDataTable(InvRow)("ShopSupplies")
+
+        If shopSupplies Then
+            Console.WriteLine("ShopSupplies is checked!")
+            Dim shopSupplyCharge As Decimal = CMDbController.DbDataTable.Rows(CMRow)("ShopSupplyCharge")
+            Dim laborPartsTotal As Decimal = InvLaborSum + InvPartsSum
+            Dim ShopCharges As Decimal = Math.Round((shopSupplyCharge * laborPartsTotal), 2)
+            ShopCharges_Value.Text = ShopCharges
+        Else
+            ShopCharges_Value.Text = 0
+        End If
+
+    End Sub
 
     ' Calculation based initialization subs here for:
-    '   Shop Charges
+    '   Shop Charges        ShopCharges = Round(SupplyCost * (TotalParts + TotalLabor), 2)
     '   SubTotal
     '   Tax
     '   Total
@@ -329,6 +347,7 @@
         ' Then, re-initialize and format any calculation based values
         InitializeInvLaborValue()
         InitializeInvPartsValue()
+        InitializeShopChargesValue()
         InitializeInvPaymentsValue()
         ' Then, format dataViewingControls
         formatDataViewingControls()
@@ -357,6 +376,9 @@
         ' These three calculation based fields are formatted here after the fact, as otherwise, TotalTask can't parse the decimal values from TaskLabor and TaskParts
         TotalLabor_Value.Text = FormatCurrency(TotalLabor_Value.Text)
         TotalParts_Value.Text = FormatCurrency(TotalParts_Value.Text)
+
+        ShopCharges_Value.Text = FormatCurrency(ShopCharges_Value.Text)
+
         TotalPaid_Value.Text = FormatCurrency(TotalPaid_Value.Text)
 
     End Sub
