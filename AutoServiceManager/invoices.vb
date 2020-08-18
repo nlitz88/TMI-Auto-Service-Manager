@@ -463,7 +463,7 @@
     End Sub
 
     ' Calculation based initialization subs here for:
-    '   (DONE) Shop Charges        ShopCharges = Round(SupplyCost * (TotalParts + TotalLabor), 2)
+    '   (DONE) Shop Charges        Make sure to call this whenever Shop Supplies CheckBox checked
     '   (DONE) SubTotal
     '   (DONE) Tax
     '   (DONE) Total
