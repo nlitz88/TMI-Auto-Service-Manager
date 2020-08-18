@@ -375,7 +375,7 @@
             InvLaborSum += row("LaborAmount")
         Next
 
-        'TotalLabor_Textbox.Text = String.Format("{0:0.00}", InvLaborSum)
+        TotalLabor_Textbox.Text = String.Format("{0:0.00}", InvLaborSum)
 
     End Sub
 
@@ -396,7 +396,7 @@
             InvPartsSum += row("PartAmount")
         Next
 
-        'TotalParts_Textbox.Text = String.Format("{0:0.00}", InvPartsSum)
+        TotalParts_Textbox.Text = String.Format("{0:0.00}", InvPartsSum)
 
     End Sub
 
@@ -512,9 +512,9 @@
     Private Sub InitializeTotalTextbox()
 
         ' Add validation checking for Gas and Towing Cost Inputs
-        If validCurrency("Gas", True, Gas_Textbox.Text, String.Empty) &
-            validCurrency("Towing", True, Towing_Textbox.Text, String.Empty) &
-            validCurrency("Tax", True, Tax_Textbox.Text, String.Empty) &
+        If validCurrency("Gas", True, Gas_Textbox.Text, String.Empty) And
+            validCurrency("Towing", True, Towing_Textbox.Text, String.Empty) And
+            validCurrency("Tax", True, Tax_Textbox.Text, String.Empty) And
             validCurrency("SubTotal", True, SubTotalTextbox.Text, String.Empty) Then
 
             Dim GasCost As Decimal = Gas_Textbox.Text
@@ -600,7 +600,7 @@
         InitializeSubTotalValue()
         InitializeTaxValue()
         InitializeTotalValue()
-
+        ' Additional Values that require initialization
         InitializeInvPaymentsValue()
         InitializeNumberTasksValue()
 
@@ -616,12 +616,20 @@
         InitializeInvoiceDataEditingControls()
         InitializeVehicleDataEditingControls()
         InitializeCustomerDataEditingControls()
-
+        ' Then, re-initialize and format any calculation based values
+        InitializeInvLaborTextbox()
+        InitializeInvPartsTextbox()
+        InitializeShopChargesTextbox()
+        InitializeSubTotalTextbox()
+        InitializeTaxTextbox()
+        ' Additional Values that require initialization
         InitializeContactPhone1ComboBox()
         InitializeContactPhone2ComboBox()
-
         ' Then, format dataEditingControls
         formatDataEditingControls()
+        ' This must be initialized after all currency based cost values are initialized and formatted properly
+        InitializeTotalTextbox()
+
         ' Set forecolor if not already initially default
         setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
 
@@ -644,7 +652,7 @@
         ContactPhone1_Value.Text = formatPhoneNumber(ContactPhone1_Value.Text)
         ContactPhone2_Value.Text = formatPhoneNumber(ContactPhone2_Value.Text)
 
-        ' These three calculation based fields are formatted here after the fact, as otherwise, TotalTask can't parse the decimal values from TaskLabor and TaskParts
+        ' Calculation based fields are formatted here
         TotalLabor_Value.Text = FormatCurrency(TotalLabor_Value.Text)
         TotalParts_Value.Text = FormatCurrency(TotalParts_Value.Text)
 
@@ -671,6 +679,10 @@
         ' Format phone number for ContactPhone1 and ContactPhone 2
         ContactPhone1_ComboBox.Text = formatPhoneNumber(ContactPhone1_ComboBox.Text)
         ContactPhone2_ComboBox.Text = formatPhoneNumber(ContactPhone2_ComboBox.Text)
+
+        ' Initial formatting for currency values that may be modified
+        Gas_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(Gas_Textbox.Text))
+        Towing_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(Towing_Textbox.Text))
 
     End Sub
 
