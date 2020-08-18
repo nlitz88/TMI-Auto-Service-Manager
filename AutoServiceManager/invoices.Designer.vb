@@ -153,7 +153,7 @@ Partial Class invoices
         Me.deleteInvButton.Location = New System.Drawing.Point(376, 120)
         Me.deleteInvButton.Name = "deleteInvButton"
         Me.deleteInvButton.Size = New System.Drawing.Size(132, 30)
-        Me.deleteInvButton.TabIndex = 131
+        Me.deleteInvButton.TabIndex = 20
         Me.deleteInvButton.Text = "Delete Invoice"
         Me.deleteInvButton.UseVisualStyleBackColor = False
         '
@@ -177,7 +177,7 @@ Partial Class invoices
         Me.modifyInvButton.Location = New System.Drawing.Point(238, 120)
         Me.modifyInvButton.Name = "modifyInvButton"
         Me.modifyInvButton.Size = New System.Drawing.Size(132, 30)
-        Me.modifyInvButton.TabIndex = 132
+        Me.modifyInvButton.TabIndex = 19
         Me.modifyInvButton.Text = "Modify Invoice"
         Me.modifyInvButton.UseVisualStyleBackColor = False
         '
@@ -190,7 +190,7 @@ Partial Class invoices
         Me.cancelButton.Location = New System.Drawing.Point(652, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(132, 30)
-        Me.cancelButton.TabIndex = 134
+        Me.cancelButton.TabIndex = 22
         Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
         '
@@ -203,7 +203,7 @@ Partial Class invoices
         Me.saveButton.Location = New System.Drawing.Point(514, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(132, 30)
-        Me.saveButton.TabIndex = 133
+        Me.saveButton.TabIndex = 21
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
         '
@@ -215,7 +215,7 @@ Partial Class invoices
         Me.newInvButton.Location = New System.Drawing.Point(100, 120)
         Me.newInvButton.Name = "newInvButton"
         Me.newInvButton.Size = New System.Drawing.Size(132, 30)
-        Me.newInvButton.TabIndex = 130
+        Me.newInvButton.TabIndex = 18
         Me.newInvButton.Text = "New Invoice"
         Me.newInvButton.UseVisualStyleBackColor = False
         '
@@ -238,7 +238,7 @@ Partial Class invoices
         Me.InvoiceNumComboBox.Location = New System.Drawing.Point(175, 279)
         Me.InvoiceNumComboBox.Name = "InvoiceNumComboBox"
         Me.InvoiceNumComboBox.Size = New System.Drawing.Size(213, 28)
-        Me.InvoiceNumComboBox.TabIndex = 141
+        Me.InvoiceNumComboBox.TabIndex = 2
         '
         'CustomerComboLabel
         '
@@ -259,7 +259,7 @@ Partial Class invoices
         Me.CustomerComboBox.Location = New System.Drawing.Point(179, 194)
         Me.CustomerComboBox.Name = "CustomerComboBox"
         Me.CustomerComboBox.Size = New System.Drawing.Size(508, 28)
-        Me.CustomerComboBox.TabIndex = 144
+        Me.CustomerComboBox.TabIndex = 0
         '
         'InvDate_Textbox
         '
@@ -272,7 +272,7 @@ Partial Class invoices
         Me.InvDate_Textbox.Name = "InvDate_Textbox"
         Me.InvDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.InvDate_Textbox.Size = New System.Drawing.Size(181, 27)
-        Me.InvDate_Textbox.TabIndex = 240
+        Me.InvDate_Textbox.TabIndex = 4
         Me.InvDate_Textbox.Tag = "dataEditingControl"
         Me.InvDate_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
         Me.InvDate_Textbox.ValidatingType = GetType(Date)
@@ -329,7 +329,7 @@ Partial Class invoices
         Me.InvNbr_Textbox.MaxLength = 10
         Me.InvNbr_Textbox.Name = "InvNbr_Textbox"
         Me.InvNbr_Textbox.Size = New System.Drawing.Size(126, 27)
-        Me.InvNbr_Textbox.TabIndex = 245
+        Me.InvNbr_Textbox.TabIndex = 3
         Me.InvNbr_Textbox.Tag = "dataEditingControl"
         '
         'Complete_Value
@@ -340,7 +340,7 @@ Partial Class invoices
         Me.Complete_Value.Location = New System.Drawing.Point(741, 343)
         Me.Complete_Value.Name = "Complete_Value"
         Me.Complete_Value.Size = New System.Drawing.Size(0, 20)
-        Me.Complete_Value.TabIndex = 251
+        Me.Complete_Value.TabIndex = 5
         Me.Complete_Value.Tag = "dataViewingControl"
         '
         'Complete_CheckBox
@@ -349,7 +349,7 @@ Partial Class invoices
         Me.Complete_CheckBox.Location = New System.Drawing.Point(741, 347)
         Me.Complete_CheckBox.Name = "Complete_CheckBox"
         Me.Complete_CheckBox.Size = New System.Drawing.Size(18, 17)
-        Me.Complete_CheckBox.TabIndex = 253
+        Me.Complete_CheckBox.TabIndex = 5
         Me.Complete_CheckBox.Tag = "dataEditingControl"
         Me.Complete_CheckBox.UseVisualStyleBackColor = True
         '
@@ -393,7 +393,7 @@ Partial Class invoices
         Me.ContactName_Textbox.MaxLength = 20
         Me.ContactName_Textbox.Name = "ContactName_Textbox"
         Me.ContactName_Textbox.Size = New System.Drawing.Size(315, 27)
-        Me.ContactName_Textbox.TabIndex = 254
+        Me.ContactName_Textbox.TabIndex = 6
         Me.ContactName_Textbox.Tag = "dataEditingControl"
         '
         'Phone1Label
@@ -416,7 +416,7 @@ Partial Class invoices
         Me.ContactPhone1_ComboBox.Location = New System.Drawing.Point(576, 385)
         Me.ContactPhone1_ComboBox.Name = "ContactPhone1_ComboBox"
         Me.ContactPhone1_ComboBox.Size = New System.Drawing.Size(181, 28)
-        Me.ContactPhone1_ComboBox.TabIndex = 259
+        Me.ContactPhone1_ComboBox.TabIndex = 7
         Me.ContactPhone1_ComboBox.Tag = "dataEditingControl"
         '
         'ContactPhone1_Value
@@ -461,7 +461,7 @@ Partial Class invoices
         Me.ContactPhone2_ComboBox.Location = New System.Drawing.Point(852, 385)
         Me.ContactPhone2_ComboBox.Name = "ContactPhone2_ComboBox"
         Me.ContactPhone2_ComboBox.Size = New System.Drawing.Size(181, 28)
-        Me.ContactPhone2_ComboBox.TabIndex = 262
+        Me.ContactPhone2_ComboBox.TabIndex = 8
         Me.ContactPhone2_ComboBox.Tag = "dataEditingControl"
         '
         'VehicleLabel
@@ -483,7 +483,7 @@ Partial Class invoices
         Me.VehicleComboBox.Location = New System.Drawing.Point(165, 236)
         Me.VehicleComboBox.Name = "VehicleComboBox"
         Me.VehicleComboBox.Size = New System.Drawing.Size(352, 28)
-        Me.VehicleComboBox.TabIndex = 265
+        Me.VehicleComboBox.TabIndex = 1
         '
         'Mileage_Value
         '
@@ -514,7 +514,7 @@ Partial Class invoices
         Me.Mileage_Textbox.MaxLength = 14
         Me.Mileage_Textbox.Name = "Mileage_Textbox"
         Me.Mileage_Textbox.Size = New System.Drawing.Size(146, 27)
-        Me.Mileage_Textbox.TabIndex = 268
+        Me.Mileage_Textbox.TabIndex = 11
         Me.Mileage_Textbox.Tag = "dataEditingControl"
         '
         'vehicleHistoryButton
@@ -526,7 +526,7 @@ Partial Class invoices
         Me.vehicleHistoryButton.Location = New System.Drawing.Point(924, 429)
         Me.vehicleHistoryButton.Name = "vehicleHistoryButton"
         Me.vehicleHistoryButton.Size = New System.Drawing.Size(138, 30)
-        Me.vehicleHistoryButton.TabIndex = 271
+        Me.vehicleHistoryButton.TabIndex = 12
         Me.vehicleHistoryButton.Tag = "dataLabel"
         Me.vehicleHistoryButton.Text = "Vehicle History"
         Me.vehicleHistoryButton.UseVisualStyleBackColor = False
@@ -542,7 +542,7 @@ Partial Class invoices
         Me.ApptDate_Textbox.Name = "ApptDate_Textbox"
         Me.ApptDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.ApptDate_Textbox.Size = New System.Drawing.Size(111, 27)
-        Me.ApptDate_Textbox.TabIndex = 272
+        Me.ApptDate_Textbox.TabIndex = 13
         Me.ApptDate_Textbox.Tag = "dataEditingControl"
         Me.ApptDate_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
         Me.ApptDate_Textbox.ValidatingType = GetType(Date)
@@ -580,7 +580,7 @@ Partial Class invoices
         Me.WorkDate_Textbox.Name = "WorkDate_Textbox"
         Me.WorkDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.WorkDate_Textbox.Size = New System.Drawing.Size(111, 27)
-        Me.WorkDate_Textbox.TabIndex = 275
+        Me.WorkDate_Textbox.TabIndex = 14
         Me.WorkDate_Textbox.Tag = "dataEditingControl"
         Me.WorkDate_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
         Me.WorkDate_Textbox.ValidatingType = GetType(Date)
@@ -658,7 +658,7 @@ Partial Class invoices
         Me.InspectionSticker_Textbox.MaxLength = 15
         Me.InspectionSticker_Textbox.Name = "InspectionSticker_Textbox"
         Me.InspectionSticker_Textbox.Size = New System.Drawing.Size(229, 27)
-        Me.InspectionSticker_Textbox.TabIndex = 281
+        Me.InspectionSticker_Textbox.TabIndex = 10
         Me.InspectionSticker_Textbox.Tag = "dataEditingControl"
         '
         'InspectionMonth_ComboBox
@@ -671,7 +671,7 @@ Partial Class invoices
         Me.InspectionMonth_ComboBox.MaxLength = 3
         Me.InspectionMonth_ComboBox.Name = "InspectionMonth_ComboBox"
         Me.InspectionMonth_ComboBox.Size = New System.Drawing.Size(73, 28)
-        Me.InspectionMonth_ComboBox.TabIndex = 284
+        Me.InspectionMonth_ComboBox.TabIndex = 9
         Me.InspectionMonth_ComboBox.Tag = "dataEditingControl"
         '
         'InspectionMonth_Value
@@ -717,7 +717,7 @@ Partial Class invoices
         Me.tasksButton.Location = New System.Drawing.Point(637, 498)
         Me.tasksButton.Name = "tasksButton"
         Me.tasksButton.Size = New System.Drawing.Size(189, 30)
-        Me.tasksButton.TabIndex = 290
+        Me.tasksButton.TabIndex = 15
         Me.tasksButton.Tag = "dataLabel"
         Me.tasksButton.Text = "Tasks"
         Me.tasksButton.UseVisualStyleBackColor = False
@@ -731,7 +731,7 @@ Partial Class invoices
         Me.paymentsButton.Location = New System.Drawing.Point(873, 498)
         Me.paymentsButton.Name = "paymentsButton"
         Me.paymentsButton.Size = New System.Drawing.Size(189, 30)
-        Me.paymentsButton.TabIndex = 291
+        Me.paymentsButton.TabIndex = 16
         Me.paymentsButton.Tag = "dataLabel"
         Me.paymentsButton.Text = "Payments"
         Me.paymentsButton.UseVisualStyleBackColor = False
@@ -892,7 +892,7 @@ Partial Class invoices
         Me.ShopSupplies_Value.Location = New System.Drawing.Point(514, 651)
         Me.ShopSupplies_Value.Name = "ShopSupplies_Value"
         Me.ShopSupplies_Value.Size = New System.Drawing.Size(0, 20)
-        Me.ShopSupplies_Value.TabIndex = 305
+        Me.ShopSupplies_Value.TabIndex = 17
         Me.ShopSupplies_Value.Tag = "dataViewingControl"
         '
         'ShopSupplies_CheckBox
@@ -924,12 +924,13 @@ Partial Class invoices
         Me.TaxExempt_Value.Location = New System.Drawing.Point(496, 710)
         Me.TaxExempt_Value.Name = "TaxExempt_Value"
         Me.TaxExempt_Value.Size = New System.Drawing.Size(0, 20)
-        Me.TaxExempt_Value.TabIndex = 308
+        Me.TaxExempt_Value.TabIndex = 18
         Me.TaxExempt_Value.Tag = "dataViewingControl"
         '
         'TaxExempt_CheckBox
         '
         Me.TaxExempt_CheckBox.AutoSize = True
+        Me.TaxExempt_CheckBox.Enabled = False
         Me.TaxExempt_CheckBox.Location = New System.Drawing.Point(496, 714)
         Me.TaxExempt_CheckBox.Name = "TaxExempt_CheckBox"
         Me.TaxExempt_CheckBox.Size = New System.Drawing.Size(18, 17)
@@ -957,7 +958,7 @@ Partial Class invoices
         Me.printInvButton.Location = New System.Drawing.Point(790, 120)
         Me.printInvButton.Name = "printInvButton"
         Me.printInvButton.Size = New System.Drawing.Size(132, 30)
-        Me.printInvButton.TabIndex = 312
+        Me.printInvButton.TabIndex = 23
         Me.printInvButton.Text = "Print Invoice"
         Me.printInvButton.UseVisualStyleBackColor = False
         '
@@ -1019,7 +1020,7 @@ Partial Class invoices
         Me.Towing_Textbox.Margin = New System.Windows.Forms.Padding(0)
         Me.Towing_Textbox.Name = "Towing_Textbox"
         Me.Towing_Textbox.Size = New System.Drawing.Size(143, 27)
-        Me.Towing_Textbox.TabIndex = 319
+        Me.Towing_Textbox.TabIndex = 0
         Me.Towing_Textbox.Tag = "dataEditingControl"
         Me.Towing_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -1056,7 +1057,7 @@ Partial Class invoices
         Me.Gas_Textbox.Margin = New System.Windows.Forms.Padding(0)
         Me.Gas_Textbox.Name = "Gas_Textbox"
         Me.Gas_Textbox.Size = New System.Drawing.Size(143, 27)
-        Me.Gas_Textbox.TabIndex = 319
+        Me.Gas_Textbox.TabIndex = 0
         Me.Gas_Textbox.Tag = "dataEditingControl"
         Me.Gas_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -1093,7 +1094,7 @@ Partial Class invoices
         Me.ShopCharges_Textbox.Margin = New System.Windows.Forms.Padding(0)
         Me.ShopCharges_Textbox.Name = "ShopCharges_Textbox"
         Me.ShopCharges_Textbox.Size = New System.Drawing.Size(143, 27)
-        Me.ShopCharges_Textbox.TabIndex = 319
+        Me.ShopCharges_Textbox.TabIndex = 0
         Me.ShopCharges_Textbox.Tag = "dataEditingControl"
         Me.ShopCharges_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -1222,7 +1223,7 @@ Partial Class invoices
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(365, 169)
-        Me.TextBox1.TabIndex = 314
+        Me.TextBox1.TabIndex = 19
         Me.TextBox1.Tag = "dataEditingControl"
         '
         'LicenseStateComboBox
@@ -1235,7 +1236,7 @@ Partial Class invoices
         Me.LicenseStateComboBox.MaxLength = 2
         Me.LicenseStateComboBox.Name = "LicenseStateComboBox"
         Me.LicenseStateComboBox.Size = New System.Drawing.Size(177, 28)
-        Me.LicenseStateComboBox.TabIndex = 316
+        Me.LicenseStateComboBox.TabIndex = 24
         Me.LicenseStateComboBox.Tag = ""
         '
         'LicenseState_Value
@@ -1278,7 +1279,7 @@ Partial Class invoices
         Me.LicensePlateTextbox.MaxLength = 10
         Me.LicensePlateTextbox.Name = "LicensePlateTextbox"
         Me.LicensePlateTextbox.Size = New System.Drawing.Size(178, 27)
-        Me.LicensePlateTextbox.TabIndex = 319
+        Me.LicensePlateTextbox.TabIndex = 25
         Me.LicensePlateTextbox.Tag = ""
         '
         'nav
@@ -1311,7 +1312,7 @@ Partial Class invoices
         Me.TotalLabor_Textbox.Margin = New System.Windows.Forms.Padding(0)
         Me.TotalLabor_Textbox.Name = "TotalLabor_Textbox"
         Me.TotalLabor_Textbox.Size = New System.Drawing.Size(143, 27)
-        Me.TotalLabor_Textbox.TabIndex = 319
+        Me.TotalLabor_Textbox.TabIndex = 0
         Me.TotalLabor_Textbox.Tag = "dataEditingControl"
         Me.TotalLabor_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -1349,7 +1350,7 @@ Partial Class invoices
         Me.TotalParts_Textbox.Margin = New System.Windows.Forms.Padding(0)
         Me.TotalParts_Textbox.Name = "TotalParts_Textbox"
         Me.TotalParts_Textbox.Size = New System.Drawing.Size(143, 27)
-        Me.TotalParts_Textbox.TabIndex = 319
+        Me.TotalParts_Textbox.TabIndex = 0
         Me.TotalParts_Textbox.Tag = "dataEditingControl"
         Me.TotalParts_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -1387,7 +1388,7 @@ Partial Class invoices
         Me.SubTotalTextbox.Margin = New System.Windows.Forms.Padding(0)
         Me.SubTotalTextbox.Name = "SubTotalTextbox"
         Me.SubTotalTextbox.Size = New System.Drawing.Size(143, 27)
-        Me.SubTotalTextbox.TabIndex = 319
+        Me.SubTotalTextbox.TabIndex = 0
         Me.SubTotalTextbox.Tag = "dataEditingControl"
         Me.SubTotalTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -1425,7 +1426,7 @@ Partial Class invoices
         Me.Tax_Textbox.Margin = New System.Windows.Forms.Padding(0)
         Me.Tax_Textbox.Name = "Tax_Textbox"
         Me.Tax_Textbox.Size = New System.Drawing.Size(143, 27)
-        Me.Tax_Textbox.TabIndex = 319
+        Me.Tax_Textbox.TabIndex = 0
         Me.Tax_Textbox.Tag = "dataEditingControl"
         Me.Tax_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -1463,7 +1464,7 @@ Partial Class invoices
         Me.InvTotal_Textbox.Margin = New System.Windows.Forms.Padding(0)
         Me.InvTotal_Textbox.Name = "InvTotal_Textbox"
         Me.InvTotal_Textbox.Size = New System.Drawing.Size(143, 27)
-        Me.InvTotal_Textbox.TabIndex = 319
+        Me.InvTotal_Textbox.TabIndex = 0
         Me.InvTotal_Textbox.Tag = "dataEditingControl"
         Me.InvTotal_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
