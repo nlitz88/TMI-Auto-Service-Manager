@@ -292,6 +292,20 @@
     End Function
 
 
+    ' Function that returns a formatted DateTime value
+    Public Function formatDate(ByVal unformattedDate As DateTime, Optional ByVal dateFormat As String = "{0:MM/dd/yyyy}") As String
+
+        Dim result As String = String.Empty
+
+        If DateTime.Compare(unformattedDate, New DateTime) <> 0 Then
+            result = String.Format(dateFormat, unformattedDate)
+        End If
+
+        Return result
+
+    End Function
+
+
 
 
     ' ************************ DATABASE DATA INTERACTION/MANIPULATION ************************

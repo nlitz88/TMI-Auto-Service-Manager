@@ -522,6 +522,12 @@
     ' Sub that will add formatting to already initialized dataViewingControls
     Private Sub formatDataViewingControls()
 
+        ' Formatting for Dates. Use globals function to do New DateTime checking and set value accordingly
+        InvDate_Value.Text = formatDate(InvDbController.DbDataTable(InvRow)("InvDate"))
+        ApptDate_Value.Text = formatDate(InvDbController.DbDataTable(InvRow)("ApptDate"))
+        WorkDate_Value.Text = formatDate(InvDbController.DbDataTable(InvRow)("WorkDate"))
+        PayDate_Value.Text = formatDate(InvDbController.DbDataTable(InvRow)("PayDate"))
+
         ' These three calculation based fields are formatted here after the fact, as otherwise, TotalTask can't parse the decimal values from TaskLabor and TaskParts
         TotalLabor_Value.Text = FormatCurrency(TotalLabor_Value.Text)
         TotalParts_Value.Text = FormatCurrency(TotalParts_Value.Text)
