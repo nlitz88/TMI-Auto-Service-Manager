@@ -992,6 +992,11 @@
         VehicleComboBox.Enabled = False
         InvoiceNumComboBox.Enabled = False
 
+        ' Disable all licensePlate searching controls
+        For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
+            ctrl.Enabled = False
+        Next
+
         ' Hide/Show the dataViewingControls and dataEditingControls, respectively
         showHide(getAllNestedControlsWithTag("dataViewingControl", Me), 0)
         showHide(getAllNestedControlsWithTag("dataEditingControl", Me), 1)
