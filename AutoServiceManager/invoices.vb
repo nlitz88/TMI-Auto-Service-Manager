@@ -1150,16 +1150,47 @@
         valuesInitialized = False
 
         clearControls(getAllNestedControlsWithTag("dataEditingControl", Me))
-        ' Set InspectionMonth and ContactPhone ComboBoxes selectedIndex = -1
-        InspectionMonth_ComboBox.SelectedIndex = -1
+
+        ' Initialize values from Customer and Vehicle
+        InitializeVehicleDataEditingControls()
+        correctInspectionMonthComboBox()
+        InitializeCustomerDataEditingControls()
+        ' setup ComboBoxes
         ContactPhone1_ComboBox.SelectedIndex = -1
         ContactPhone2_ComboBox.SelectedIndex = -1
         ' Initialize Invoice Date, AppointDate, and WorkDates as today's date
         InvDate_Textbox.Text = formatDate(DateTime.Now)
         ApptDate_Textbox.Text = formatDate(DateTime.Now)
         WorkDate_Textbox.Text = formatDate(DateTime.Now)
+        ' Reset calculated values
+        InvLaborSum = 0
+        InvPartsSum = 0
+        ShopCharges = 0
+        SubTotal = 0
+        Tax = 0
+        InvTotalSum = 0
+        InvPaymentsSum = 0
+
+        InvRow = -1
+        InvId = -1
+
+        ' Load any dependent DataTables that might be used for initial calculations (should all return 0)
+        loadDependentDataTables()
+        ' Make Initialization Calls. Should all amount to zero initially.
+        InitializeInvLaborTextbox()
+        InitializeInvPartsTextbox()
+        InitializeShopChargesTextbox()
+        InitializeSubTotalTextbox()
+        InitializeTaxTextbox()
+        InitializeInvPaymentsTextbox()
+        InitializeNumberTasksTextbox()
+        Gas_Textbox.Text = String.Format("{0:0.00}", 0)
+        Towing_Textbox.Text = String.Format("{0:0.00}", 0)
+        InitializeTotalTextbox()
+        InitializeBalanceTextbox()
 
         valuesInitialized = True
+
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialInvValues.SetInitialValues(getAllNestedControlsWithTag("dataEditingControl", Me))
 
