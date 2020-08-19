@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class customerMaintenance
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class customerMaintenance
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.LastName_Value = New System.Windows.Forms.Label()
         Me.LastNameLabel = New System.Windows.Forms.Label()
@@ -68,8 +68,8 @@ Partial Class customerMaintenance
         Me.TaxExemptLabel = New System.Windows.Forms.Label()
         Me.TaxExempt_CheckBox = New System.Windows.Forms.CheckBox()
         Me.CustomerId_Textbox = New System.Windows.Forms.TextBox()
-        Me.TaxExempt_Value = New System.Windows.Forms.Label()
         Me.nav = New AutoServiceManager.navigation()
+        Me.TaxExempt_Value = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'LastName_Value
@@ -612,17 +612,6 @@ Partial Class customerMaintenance
         Me.CustomerId_Textbox.Tag = "dataEditingControl"
         Me.CustomerId_Textbox.Visible = False
         '
-        'TaxExempt_Value
-        '
-        Me.TaxExempt_Value.AutoSize = True
-        Me.TaxExempt_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TaxExempt_Value.ForeColor = System.Drawing.Color.Black
-        Me.TaxExempt_Value.Location = New System.Drawing.Point(596, 262)
-        Me.TaxExempt_Value.Name = "TaxExempt_Value"
-        Me.TaxExempt_Value.Size = New System.Drawing.Size(0, 20)
-        Me.TaxExempt_Value.TabIndex = 10
-        Me.TaxExempt_Value.Tag = "dataViewingControl"
-        '
         'nav
         '
         Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -632,6 +621,17 @@ Partial Class customerMaintenance
         Me.nav.Name = "nav"
         Me.nav.Size = New System.Drawing.Size(982, 28)
         Me.nav.TabIndex = 50
+        '
+        'TaxExempt_Value
+        '
+        Me.TaxExempt_Value.AutoCheck = False
+        Me.TaxExempt_Value.AutoSize = True
+        Me.TaxExempt_Value.Location = New System.Drawing.Point(596, 265)
+        Me.TaxExempt_Value.Name = "TaxExempt_Value"
+        Me.TaxExempt_Value.Size = New System.Drawing.Size(18, 17)
+        Me.TaxExempt_Value.TabIndex = 322
+        Me.TaxExempt_Value.Tag = "dataViewingControl"
+        Me.TaxExempt_Value.UseVisualStyleBackColor = True
         '
         'customerMaintenance
         '
@@ -745,5 +745,5 @@ Partial Class customerMaintenance
     Friend WithEvents TaxExemptLabel As Label
     Friend WithEvents TaxExempt_CheckBox As CheckBox
     Friend WithEvents CustomerId_Textbox As TextBox
-    Friend WithEvents TaxExempt_Value As Label
+    Friend WithEvents TaxExempt_Value As CheckBox
 End Class
