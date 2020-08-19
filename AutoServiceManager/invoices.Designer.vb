@@ -234,7 +234,7 @@ Partial Class invoices
         Me.InvoiceNumComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.InvoiceNumComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.InvoiceNumComboBox.FormattingEnabled = True
-        Me.InvoiceNumComboBox.Location = New System.Drawing.Point(175, 279)
+        Me.InvoiceNumComboBox.Location = New System.Drawing.Point(179, 279)
         Me.InvoiceNumComboBox.Name = "InvoiceNumComboBox"
         Me.InvoiceNumComboBox.Size = New System.Drawing.Size(213, 28)
         Me.InvoiceNumComboBox.TabIndex = 2
@@ -481,7 +481,7 @@ Partial Class invoices
         Me.VehicleComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.VehicleComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.VehicleComboBox.FormattingEnabled = True
-        Me.VehicleComboBox.Location = New System.Drawing.Point(165, 236)
+        Me.VehicleComboBox.Location = New System.Drawing.Point(179, 236)
         Me.VehicleComboBox.Name = "VehicleComboBox"
         Me.VehicleComboBox.Size = New System.Drawing.Size(352, 28)
         Me.VehicleComboBox.TabIndex = 1
