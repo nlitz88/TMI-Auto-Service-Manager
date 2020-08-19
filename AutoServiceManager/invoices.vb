@@ -1067,6 +1067,121 @@
 
     Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
 
+        Dim decision As DialogResult = MessageBox.Show("Save Changes?", "Confirm Changes", MessageBoxButtons.YesNo)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                If mode = "editing" Then
+
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    'If Not controlsValid() Then Exit Sub
+
+                    ' 2.) UPDATE MASTER TASK LIST VALUES
+                    'If Not updateMasterTask() Then
+                    '    MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    '    Exit Sub
+                    'Else
+                    '    MessageBox.Show("Successfully updated Master Task List")
+                    'End If
+
+                    ' 3.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadInvoiceDataTable() Then 'And Not loadVehicleDataTable And Not loadCustomerDataTable
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+                    ' Going to also have to reload vehicleDataTable
+                    ' ALso going to have to reload CustomerDataTable (if TaxExempt Editable)
+
+                    ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                    InitializeInvoiceNumComboBox()  'This could probably be avoided, as these don't change
+
+                    ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
+                    ' If update failed, then revert selected back to lastSelected
+                    Dim updatedItem As String = getRowValueWithKeyEquals(InvDbController.DbDataTable, "InvNbr", "InvNbr", InvId)
+                    If updatedItem <> Nothing Then
+                        InvoiceNumComboBox.SelectedIndex = InvoiceNumComboBox.Items.IndexOf(updatedItem)
+                    Else
+                        InvoiceNumComboBox.SelectedIndex = InvoiceNumComboBox.Items.IndexOf(lastSelected)
+                    End If
+
+                    ' 5.) MOVE UI OUT OF EDITING MODE
+                    newInvButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+                    nav.EnableAll()
+                    CustomerComboBox.Enabled = True
+                    VehicleComboBox.Enabled = True
+                    InvoiceNumComboBox.Enabled = True
+
+                    ' Re-Enable Task and Payment Buttons
+                    tasksButton.Enabled = True
+                    paymentsButton.Enabled = True
+
+
+                ElseIf mode = "adding" Then
+
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    'If Not controlsValid() Then Exit Sub
+
+                    ' 2.) INSERT NEW ROW INTO MASTER TASK LIST
+                    'If Not insertMasterTask() Then
+                    '    MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    '    Exit Sub
+                    'Else
+                    '    MessageBox.Show("Successfully added " & TaskDescription_Textbox.Text & " to Master Task List")
+                    'End If
+
+                    ' 3.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadInvoiceDataTable() Then  'And Not loadVehicleDataTable And Not loadCustomerDataTable
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+
+                    ' 4.) REINITIALIZE CONTROLS (based on index of newly inserted value)
+                    InitializeInvoiceNumComboBox()
+
+                    ' Changing index of main combobox will also initialize respective dataViewing control values
+
+                    ' First, lookup most recent CustomerId added to the table
+                    CRUD.ExecQuery("SELECT InvNbr FROM InvHdr WHERE InvNbr=(SELECT max(InvNbr) FROM InvHdr)")
+                    Dim newInvNbr As Integer
+
+                    If CRUD.DbDataTable.Rows.Count <> 0 And Not CRUD.HasException(True) Then
+
+                        ' Get new TaskId if query successful
+                        newInvNbr = CRUD.DbDataTable.Rows(0)("InvNbr")
+                        ' Get new ComboBox item from datatable using newly retrieved ID
+                        Dim newItem As String = getRowValueWithKeyEquals(InvDbController.DbDataTable, "InvNbr", "InvNbr", newInvNbr)
+
+                        ' Set ComboBox accordingly after one final check
+                        If newItem <> Nothing Then
+                            InvoiceNumComboBox.SelectedIndex = InvoiceNumComboBox.Items.IndexOf(newItem)
+                        Else
+                            InvoiceNumComboBox.SelectedIndex = InvoiceNumComboBox.Items.IndexOf(lastSelected)
+                        End If
+
+                    Else
+                        InvoiceNumComboBox.SelectedIndex = lastSelected
+                    End If
+
+                    ' 5.) MOVE UI OUT OF Adding MODE
+                    newInvButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+                    nav.EnableAll()
+                    CustomerComboBox.Enabled = True
+                    VehicleComboBox.Enabled = True
+                    InvoiceNumComboBox.Enabled = True
+
+                    ' Re-Enable Task and Payment Buttons
+                    tasksButton.Enabled = True
+                    paymentsButton.Enabled = True
+
+                End If
+
+            Case DialogResult.No
+                ' Continue making changes or cancel editing
+        End Select
+
     End Sub
 
 
