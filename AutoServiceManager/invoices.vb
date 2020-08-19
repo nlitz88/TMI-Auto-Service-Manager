@@ -446,7 +446,7 @@
     Private Sub InitializeSubTotalTextbox()
 
         If validCurrency("Shop Charges", True, ShopCharges_Textbox.Text, String.Empty) Then
-            SubTotal = InvLaborSum + InvPartsSum + ShopCharges
+            SubTotal = InvLaborSum + InvPartsSum + Convert.ToDecimal(ShopCharges_Textbox.Text)
             SubTotalTextbox.Text = String.Format("{0:0.00}", SubTotal)
         Else
             SubTotalTextbox.Text = String.Empty
@@ -482,7 +482,7 @@
 
             If Not TaxExempt Then
                 Dim TaxRate As Decimal = CMDbController.DbDataTable(CMRow)("TaxRate")
-                Tax = Math.Round(TaxRate * SubTotal, 2)
+                Tax = Math.Round(TaxRate * Convert.ToDecimal(SubTotalTextbox.Text), 2)
             Else
                 Tax = 0
             End If
@@ -517,10 +517,12 @@
             validCurrency("Tax", True, Tax_Textbox.Text, String.Empty) And
             validCurrency("SubTotal", True, SubTotalTextbox.Text, String.Empty) Then
 
-            Dim GasCost As Decimal = Gas_Textbox.Text
-            Dim TowingCost As Decimal = Towing_Textbox.Text
+            Dim GasCost As Decimal = Convert.ToDecimal(Gas_Textbox.Text)
+            Dim TowingCost As Decimal = Convert.ToDecimal(Towing_Textbox.Text)
+            Dim SubTotalFromTextbox As Decimal = Convert.ToDecimal(SubTotalTextbox.Text)
+            Dim TaxFromTextbox As Decimal = Convert.ToDecimal(Tax)
 
-            InvTotalSum = SubTotal + Tax + GasCost + TowingCost
+            InvTotalSum = SubTotalFromTextbox + TaxFromTextbox + GasCost + TowingCost
             InvTotal_Textbox.Text = String.Format("{0:0.00}", InvTotalSum)
 
         Else
@@ -568,7 +570,10 @@
         If validCurrency("InvTotal", True, InvTotal_Textbox.Text, String.Empty) And
             validCurrency("Total Paid", True, TotalPaid_Textbox.Text, String.Empty) Then
 
-            balance = InvTotalSum - InvPaymentsSum
+            Dim TotalFromTextbox As Decimal = Convert.ToDecimal(InvTotal_Textbox.Text)
+            Dim PaymentsSumFromTextbox As Decimal = Convert.ToDecimal(TotalPaid_Textbox.Text)
+
+            balance = TotalFromTextbox - PaymentsSumFromTextbox
             BalanceTextbox.Text = String.Format("{0:0.00}", balance)
 
         Else
@@ -1091,7 +1096,7 @@
             Exit Sub
         End If
 
-        If Not currencyInputValid(ShopCharges_Textbox.Text, e.KeyChar) Then
+        If Not currencyInputValid(ShopCharges_Textbox, e.KeyChar) Then
             e.KeyChar = Chr(0)
             e.Handled = True
         End If
@@ -1114,6 +1119,16 @@
         InitializeSubTotalTextbox()
 
     End Sub
+
+    Private Sub SubTotalTextbox_TextChanged(sender As Object, e As EventArgs) Handles SubTotalTextbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        InitializeTaxTextbox()
+
+    End Sub
+
+
 
 
 End Class
