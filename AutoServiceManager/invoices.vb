@@ -818,7 +818,6 @@
             ContactPhone2_ComboBox.ForeColor = Color.Red
         End If
 
-
         ' Inspection Month
         If Not isValidLength("Inspection Month", False, InspectionMonth_ComboBox.Text, 3, errorMessage) Then
             InspectionMonth_ComboBox.ForeColor = Color.Red
@@ -827,17 +826,43 @@
             InspectionMonth_ComboBox.ForeColor = Color.Red
         End If
 
-
         ' Inspection Sticker
+        If Not isValidLength("Inspection Sticker Number", False, InspectionSticker_Textbox.Text, 15, errorMessage) Then
+            InspectionSticker_Textbox.ForeColor = Color.Red
+        End If
+
         ' Mileage
+        If Not validNumber("Mileage", False, Mileage_Textbox.Text, errorMessage, True) Then Mileage_Textbox.ForeColor = Color.Red
+
         ' Appointment Date
+        If Not validDateTime("Appointment Date", True, ApptDate_Textbox.Text, errorMessage) Then
+            ApptDate_Textbox.ForeColor = Color.Red
+        End If
+
         ' Work Date
+        If Not validDateTime("Work Date", True, WorkDate_Textbox.Text, errorMessage) Then
+            WorkDate_Textbox.ForeColor = Color.Red
+        End If
+
         ' Notes
+        If Not isValidLength("Notes", False, Notes_Textbox.Text, 255, errorMessage) Then
+            Notes_Textbox.ForeColor = Color.Red
+        End If
 
         ' Shop Charges
-        ' Gas
-        ' Towing
+        If Not validCurrency("Shop Charges", False, ShopCharges_Textbox.Text, errorMessage) Then
+            ShopCharges_Textbox.ForeColor = Color.Red
+        End If
 
+        ' Gas
+        If Not validCurrency("Gas", False, Gas_Textbox.Text, errorMessage) Then
+            Gas_Textbox.ForeColor = Color.Red
+        End If
+
+        ' Towing
+        If Not validCurrency("Towing", False, Towing_Textbox.Text, errorMessage) Then
+            Towing_Textbox.ForeColor = Color.Red
+        End If
 
 
         ' Check if any invalid input has been found
