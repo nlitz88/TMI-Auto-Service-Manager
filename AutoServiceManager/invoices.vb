@@ -736,7 +736,8 @@
 
 
     ' ***************** CRUD SUBS *****************
-
+    ' Remember to calculate and add non-taxable as a field to insert/update in the DataBase (Sum of towing, gas, and ONLY subtotal if Tax-Exempt)
+    ' Add Taxable as a field as well (this is the SubTotal)
 
 
 
@@ -744,7 +745,7 @@
 
 
     ' Make sure to ensure that ContactPhone1 does not have the same value as Contact Phone 2, and also make sure that the values in both exist in the CustomerPhoneList
-
+    ' Maybe write custom validation function for mileage if we allow them to use numbers with commas (instead of writing global function)
 
     Public Sub New()
 
@@ -1076,6 +1077,12 @@
         '   (might have to set DataTable value here if reading the CheckState doesn't work)
         InitializeShopChargesTextbox()
 
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
 
 
@@ -1118,13 +1125,31 @@
 
         InitializeSubTotalTextbox()
 
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
+
 
     Private Sub SubTotalTextbox_TextChanged(sender As Object, e As EventArgs) Handles SubTotalTextbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
 
         InitializeTaxTextbox()
+
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+
+    Private Sub TaxExempt_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles TaxExempt_CheckBox.CheckedChanged
 
     End Sub
 
@@ -1133,6 +1158,12 @@
         If Not valuesInitialized Then Exit Sub
 
         InitializeTotalTextbox()
+
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
@@ -1176,6 +1207,12 @@
 
         InitializeTotalTextbox()
 
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
 
 
@@ -1218,13 +1255,39 @@
 
         InitializeTotalTextbox()
 
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
+
 
     Private Sub InvTotal_Textbox_TextChanged(sender As Object, e As EventArgs) Handles InvTotal_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
 
         InitializeBalanceTextbox()
+
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+
+    Private Sub BalanceTextbox_TextChanged(sender As Object, e As EventArgs) Handles BalanceTextbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
@@ -1233,35 +1296,91 @@
 
     Private Sub InvDate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles InvDate_Textbox.TextChanged
 
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
 
 
     Private Sub Complete_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles Complete_CheckBox.CheckedChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
 
     Private Sub ContactName_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ContactName_Textbox.TextChanged
 
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
 
 
     Private Sub ContactPhone1_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ContactPhone1_ComboBox.SelectedIndexChanged, ContactPhone1_ComboBox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
 
     Private Sub ContactPhone2_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ContactPhone2_ComboBox.SelectedIndexChanged, ContactPhone2_ComboBox.TextChanged
 
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
 
 
     Private Sub InspectionMonth_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InspectionMonth_ComboBox.SelectedIndexChanged, InspectionMonth_ComboBox.TextChanged
 
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
 
 
     Private Sub InspectionSticker_Textbox_TextChanged(sender As Object, e As EventArgs) Handles InspectionSticker_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
@@ -1288,6 +1407,14 @@
             e.Handled = True
         End If
 
+    End Sub
+
+    Private Sub Mileage_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Mileage_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        Mileage_Textbox.ForeColor = DefaultForeColor
+
         ' Handles pasting in invalid values/strings
         Dim lastValidIndex As Integer = allValidChars(Mileage_Textbox.Text, "1234567890")
         If lastValidIndex <> -1 Then
@@ -1295,9 +1422,48 @@
             Mileage_Textbox.SelectionStart = lastValidIndex
         End If
 
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
     End Sub
 
-    Private Sub Mileage_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Mileage_Textbox.TextChanged
+    Private Sub ApptDate_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles ApptDate_Textbox.MaskInputRejected
+
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub WorkDate_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles WorkDate_Textbox.MaskInputRejected
+
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+
+    Private Sub Notes_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Notes_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 

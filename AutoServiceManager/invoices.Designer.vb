@@ -83,9 +83,7 @@ Partial Class invoices
         Me.BalanceTextbox = New System.Windows.Forms.TextBox()
         Me.BalanceValue = New System.Windows.Forms.Label()
         Me.BalanceLabel = New System.Windows.Forms.Label()
-        Me.Notes_Value = New System.Windows.Forms.Label()
         Me.NotesLabel = New System.Windows.Forms.Label()
-        Me.Notes_Textbox = New System.Windows.Forms.TextBox()
         Me.ShopSupplies_Value = New System.Windows.Forms.Label()
         Me.ShopSupplies_CheckBox = New System.Windows.Forms.CheckBox()
         Me.ShopSuppliesLabel = New System.Windows.Forms.Label()
@@ -126,13 +124,14 @@ Partial Class invoices
         Me.PartsLabel = New System.Windows.Forms.Label()
         Me.LaborLabel = New System.Windows.Forms.Label()
         Me.ShopChargesLabel = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Notes_Textbox = New System.Windows.Forms.TextBox()
         Me.LicenseStateComboBox = New System.Windows.Forms.ComboBox()
         Me.LicenseState_Value = New System.Windows.Forms.Label()
         Me.LicenseStateLabel = New System.Windows.Forms.Label()
         Me.LicensePlateLabel = New System.Windows.Forms.Label()
         Me.LicensePlateTextbox = New System.Windows.Forms.TextBox()
         Me.nav = New AutoServiceManager.navigation()
+        Me.Notes_Value = New System.Windows.Forms.Label()
         Me.CostTableLayoutPanel.SuspendLayout()
         Me.TotalPanel.SuspendLayout()
         Me.TaxPanel.SuspendLayout()
@@ -851,16 +850,6 @@ Partial Class invoices
         Me.BalanceLabel.Tag = "dataLabel"
         Me.BalanceLabel.Text = "Balance :"
         '
-        'Notes_Value
-        '
-        Me.Notes_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Notes_Value.ForeColor = System.Drawing.Color.Black
-        Me.Notes_Value.Location = New System.Drawing.Point(697, 658)
-        Me.Notes_Value.Name = "Notes_Value"
-        Me.Notes_Value.Size = New System.Drawing.Size(365, 165)
-        Me.Notes_Value.TabIndex = 304
-        Me.Notes_Value.Tag = "dataViewingControl"
-        '
         'NotesLabel
         '
         Me.NotesLabel.AutoSize = True
@@ -871,17 +860,6 @@ Partial Class invoices
         Me.NotesLabel.TabIndex = 303
         Me.NotesLabel.Tag = "dataLabel"
         Me.NotesLabel.Text = "Notes :"
-        '
-        'Notes_Textbox
-        '
-        Me.Notes_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Notes_Textbox.Location = New System.Drawing.Point(697, 658)
-        Me.Notes_Textbox.MaxLength = 255
-        Me.Notes_Textbox.Multiline = True
-        Me.Notes_Textbox.Name = "Notes_Textbox"
-        Me.Notes_Textbox.Size = New System.Drawing.Size(365, 165)
-        Me.Notes_Textbox.TabIndex = 302
-        Me.Notes_Textbox.Tag = "dataEditingControl"
         '
         'ShopSupplies_Value
         '
@@ -1404,16 +1382,16 @@ Partial Class invoices
         Me.ShopChargesLabel.Text = "Shop Charges"
         Me.ShopChargesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'TextBox1
+        'Notes_Textbox
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(697, 655)
-        Me.TextBox1.MaxLength = 255
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(365, 169)
-        Me.TextBox1.TabIndex = 19
-        Me.TextBox1.Tag = "dataEditingControl"
+        Me.Notes_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Notes_Textbox.Location = New System.Drawing.Point(697, 655)
+        Me.Notes_Textbox.MaxLength = 255
+        Me.Notes_Textbox.Multiline = True
+        Me.Notes_Textbox.Name = "Notes_Textbox"
+        Me.Notes_Textbox.Size = New System.Drawing.Size(365, 169)
+        Me.Notes_Textbox.TabIndex = 19
+        Me.Notes_Textbox.Tag = "dataEditingControl"
         '
         'LicenseStateComboBox
         '
@@ -1480,6 +1458,16 @@ Partial Class invoices
         Me.nav.Size = New System.Drawing.Size(1182, 28)
         Me.nav.TabIndex = 267
         '
+        'Notes_Value
+        '
+        Me.Notes_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Notes_Value.ForeColor = System.Drawing.Color.Black
+        Me.Notes_Value.Location = New System.Drawing.Point(697, 658)
+        Me.Notes_Value.Name = "Notes_Value"
+        Me.Notes_Value.Size = New System.Drawing.Size(365, 165)
+        Me.Notes_Value.TabIndex = 304
+        Me.Notes_Value.Tag = "dataViewingControl"
+        '
         'invoices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1491,7 +1479,7 @@ Partial Class invoices
         Me.Controls.Add(Me.LicenseStateComboBox)
         Me.Controls.Add(Me.LicenseState_Value)
         Me.Controls.Add(Me.LicenseStateLabel)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.Notes_Textbox)
         Me.Controls.Add(Me.CostTableLayoutPanel)
         Me.Controls.Add(Me.printInvButton)
         Me.Controls.Add(Me.TaxExempt_Value)
@@ -1502,7 +1490,6 @@ Partial Class invoices
         Me.Controls.Add(Me.ShopSuppliesLabel)
         Me.Controls.Add(Me.Notes_Value)
         Me.Controls.Add(Me.NotesLabel)
-        Me.Controls.Add(Me.Notes_Textbox)
         Me.Controls.Add(Me.BalanceTextbox)
         Me.Controls.Add(Me.BalanceValue)
         Me.Controls.Add(Me.BalanceLabel)
@@ -1655,9 +1642,7 @@ Partial Class invoices
     Friend WithEvents BalanceTextbox As TextBox
     Friend WithEvents BalanceValue As Label
     Friend WithEvents BalanceLabel As Label
-    Friend WithEvents Notes_Value As Label
     Friend WithEvents NotesLabel As Label
-    Friend WithEvents Notes_Textbox As TextBox
     Friend WithEvents ShopSupplies_Value As Label
     Friend WithEvents ShopSupplies_CheckBox As CheckBox
     Friend WithEvents ShopSuppliesLabel As Label
@@ -1683,7 +1668,7 @@ Partial Class invoices
     Friend WithEvents TowingPanel As Panel
     Friend WithEvents Towing_Textbox As TextBox
     Friend WithEvents Towing_Value As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Notes_Textbox As TextBox
     Friend WithEvents LicenseStateComboBox As ComboBox
     Friend WithEvents LicenseState_Value As Label
     Friend WithEvents LicenseStateLabel As Label
@@ -1704,4 +1689,5 @@ Partial Class invoices
     Friend WithEvents TotalPanel As Panel
     Friend WithEvents InvTotal_Textbox As TextBox
     Friend WithEvents InvTotal_Value As Label
+    Friend WithEvents Notes_Value As Label
 End Class
