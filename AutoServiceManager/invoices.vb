@@ -1139,9 +1139,25 @@
 
     Private Sub Gas_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles Gas_Textbox.KeyDown
 
+        ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
+            allowedKeystroke = True
+        End If
+
     End Sub
 
     Private Sub Gas_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Gas_Textbox.KeyPress
+
+        ' If certain keystroke exceptions allowed through, then skip input validation here
+        If allowedKeystroke Then
+            allowedKeystroke = False
+            Exit Sub
+        End If
+
+        If Not currencyInputValid(Gas_Textbox, e.KeyChar) Then
+            e.KeyChar = Chr(0)
+            e.Handled = True
+        End If
 
     End Sub
 
@@ -1151,6 +1167,13 @@
 
         Gas_Textbox.ForeColor = DefaultForeColor
 
+        ' Handles pasting in invalid values/strings
+        Dim lastValidIndex As Integer = allValidChars(Gas_Textbox.Text, "1234567890.")
+        If lastValidIndex <> -1 Then
+            Gas_Textbox.Text = Gas_Textbox.Text.Substring(0, lastValidIndex)
+            Gas_Textbox.SelectionStart = lastValidIndex
+        End If
+
         InitializeTotalTextbox()
 
     End Sub
@@ -1158,9 +1181,25 @@
 
     Private Sub Towing_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles Towing_Textbox.KeyDown
 
+        ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
+            allowedKeystroke = True
+        End If
+
     End Sub
 
     Private Sub Towing_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Towing_Textbox.KeyPress
+
+        ' If certain keystroke exceptions allowed through, then skip input validation here
+        If allowedKeystroke Then
+            allowedKeystroke = False
+            Exit Sub
+        End If
+
+        If Not currencyInputValid(Towing_Textbox, e.KeyChar) Then
+            e.KeyChar = Chr(0)
+            e.Handled = True
+        End If
 
     End Sub
 
@@ -1169,6 +1208,13 @@
         If Not valuesInitialized Then Exit Sub
 
         Towing_Textbox.ForeColor = DefaultForeColor
+
+        ' Handles pasting in invalid values/strings
+        Dim lastValidIndex As Integer = allValidChars(Towing_Textbox.Text, "1234567890.")
+        If lastValidIndex <> -1 Then
+            Towing_Textbox.Text = Towing_Textbox.Text.Substring(0, lastValidIndex)
+            Towing_Textbox.SelectionStart = lastValidIndex
+        End If
 
         InitializeTotalTextbox()
 
