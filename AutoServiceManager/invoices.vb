@@ -1245,6 +1245,45 @@
 
     Private Sub deleteInvButton_Click(sender As Object, e As EventArgs) Handles deleteInvButton.Click
 
+        Dim decision As DialogResult = MessageBox.Show("Are you sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                ' 1.) Delete value from database
+                'If Not deleteAll() Then
+                '    MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                'Else
+                '    MessageBox.Show("Successfully deleted " & VehicleComboBox.Text & " from Vehicles")
+                'End If
+
+                ' 2.) RELOAD DATATABLES FROM DATABASE
+                If Not loadInvoiceDataTable() Then
+                    MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
+                ' 3.) REINITIALIZE CONTROLS (Based on the selected index)
+                InitializeInvoiceNumComboBox()
+                InvoiceNumComboBox.SelectedIndex = 0
+
+                ' 4.) RESTORE USER CONTROLS TO NON-EDITING/SELECTING STATE
+                CustomerComboBox.Enabled = True
+                VehicleComboBox.Enabled = True
+                InvoiceNumComboBox.Enabled = True
+                newInvButton.Enabled = True
+                cancelButton.Enabled = False
+                saveButton.Enabled = False
+                nav.EnableAll()
+
+                ' Re-Enable all licensePlate searching controls
+                For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
+                    ctrl.Enabled = True
+                Next
+
+            Case DialogResult.No
+
+        End Select
+
     End Sub
 
 
