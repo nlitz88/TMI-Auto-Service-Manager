@@ -1149,6 +1149,7 @@
         ' Initialize values for dataEditingControls
         valuesInitialized = False
 
+
         clearControls(getAllNestedControlsWithTag("dataEditingControl", Me))
 
         ' Initialize values from Customer and Vehicle
@@ -1188,6 +1189,7 @@
         Towing_Textbox.Text = String.Format("{0:0.00}", 0)
         InitializeTotalTextbox()
         InitializeBalanceTextbox()
+
 
         valuesInitialized = True
 
