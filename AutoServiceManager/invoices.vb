@@ -739,6 +739,8 @@
     ' Remember to calculate and add non-taxable as a field to insert/update in the DataBase (Sum of towing, gas, and ONLY subtotal if Tax-Exempt)
     ' Add Taxable as a field as well (this is the SubTotal)
 
+    ' Update InspectionNbr and Inspection month for vehicle to Vehicle Table
+    ' IF we decide they can change this here (For whatever justification that may be), then update TaxExempt in Customer Table as well
 
 
     ' **************** VALIDATION SUBS ****************
