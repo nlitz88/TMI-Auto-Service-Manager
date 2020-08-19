@@ -104,7 +104,7 @@ Public Class DbControl
         Dim line As String = String.Empty
         Dim connString = String.Empty
         Dim key As String = "CONNECTION-STRING="
-        Dim INIFile As New StreamReader(Application.StartupPath & "\connection.ini")
+        Dim INIFile As New StreamReader(Application.StartupPath & "\AutoServiceManagerParams.ini")
 
         ' Do loop in case connection string is eventually moved to a different row in the ini configuration file
         Do Until INIFile.EndOfStream

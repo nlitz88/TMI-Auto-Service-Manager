@@ -1951,8 +1951,8 @@
 
         Try
 
-            FileToCopy = readINI("DatabaseBackupParams.ini", "PRIMARY-DATABASE-FILEPATH=")
-            BackupDirectory = readINI("DatabaseBackupParams.ini", "BACKUP-DIRECTORY=")
+            FileToCopy = readINI("AutoServiceManagerParams.ini", "PRIMARY-DATABASE-FILEPATH=")
+            BackupDirectory = readINI("AutoServiceManagerParams.ini", "BACKUP-DIRECTORY=")
 
             ' First, ensure that there was a valid entry in the INI
             If FileToCopy <> String.Empty Then
@@ -1997,7 +1997,7 @@
     Public Sub pruneBackups()
 
         ' 1.) BEGIN PROCESS TO PRUNE BACKUPS DIRECTORY
-        Dim BackupDirectory As String = readINI("DatabaseBackupParams.ini", "BACKUP-DIRECTORY=")
+        Dim BackupDirectory As String = readINI("AutoServiceManagerParams.ini", "BACKUP-DIRECTORY=")
         If Not System.IO.Directory.Exists(BackupDirectory) Then Exit Sub
 
         Dim files() As String = IO.Directory.GetFiles(BackupDirectory)
