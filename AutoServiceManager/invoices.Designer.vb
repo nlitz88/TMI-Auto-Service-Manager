@@ -87,7 +87,6 @@ Partial Class invoices
         Me.ShopSupplies_CheckBox = New System.Windows.Forms.CheckBox()
         Me.ShopSuppliesLabel = New System.Windows.Forms.Label()
         Me.TaxExempt_Value = New System.Windows.Forms.Label()
-        Me.TaxExempt_CheckBox = New System.Windows.Forms.CheckBox()
         Me.TaxExemptLabel = New System.Windows.Forms.Label()
         Me.printInvButton = New System.Windows.Forms.Button()
         Me.CostTableLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
@@ -130,8 +129,9 @@ Partial Class invoices
         Me.LicensePlateLabel = New System.Windows.Forms.Label()
         Me.LicensePlateTextbox = New System.Windows.Forms.TextBox()
         Me.Notes_Value = New System.Windows.Forms.Label()
-        Me.nav = New AutoServiceManager.navigation()
         Me.Complete_Value = New System.Windows.Forms.CheckBox()
+        Me.TaxExempt_Textbox = New System.Windows.Forms.TextBox()
+        Me.nav = New AutoServiceManager.navigation()
         Me.CostTableLayoutPanel.SuspendLayout()
         Me.TotalPanel.SuspendLayout()
         Me.TaxPanel.SuspendLayout()
@@ -894,17 +894,6 @@ Partial Class invoices
         Me.TaxExempt_Value.TabIndex = 18
         Me.TaxExempt_Value.Tag = "dataViewingControl"
         '
-        'TaxExempt_CheckBox
-        '
-        Me.TaxExempt_CheckBox.AutoSize = True
-        Me.TaxExempt_CheckBox.Enabled = False
-        Me.TaxExempt_CheckBox.Location = New System.Drawing.Point(496, 737)
-        Me.TaxExempt_CheckBox.Name = "TaxExempt_CheckBox"
-        Me.TaxExempt_CheckBox.Size = New System.Drawing.Size(18, 17)
-        Me.TaxExempt_CheckBox.TabIndex = 310
-        Me.TaxExempt_CheckBox.Tag = "dataEditingControl"
-        Me.TaxExempt_CheckBox.UseVisualStyleBackColor = True
-        '
         'TaxExemptLabel
         '
         Me.TaxExemptLabel.AutoSize = True
@@ -1449,15 +1438,6 @@ Partial Class invoices
         Me.Notes_Value.TabIndex = 304
         Me.Notes_Value.Tag = "dataViewingControl"
         '
-        'nav
-        '
-        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.nav.Location = New System.Drawing.Point(0, 0)
-        Me.nav.Name = "nav"
-        Me.nav.Size = New System.Drawing.Size(1182, 28)
-        Me.nav.TabIndex = 267
-        '
         'Complete_Value
         '
         Me.Complete_Value.AutoCheck = False
@@ -1469,12 +1449,34 @@ Partial Class invoices
         Me.Complete_Value.Tag = "dataViewingControl"
         Me.Complete_Value.UseVisualStyleBackColor = True
         '
+        'TaxExempt_Textbox
+        '
+        Me.TaxExempt_Textbox.Enabled = False
+        Me.TaxExempt_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TaxExempt_Textbox.Location = New System.Drawing.Point(496, 730)
+        Me.TaxExempt_Textbox.MaxLength = 0
+        Me.TaxExempt_Textbox.Name = "TaxExempt_Textbox"
+        Me.TaxExempt_Textbox.Size = New System.Drawing.Size(150, 27)
+        Me.TaxExempt_Textbox.TabIndex = 322
+        Me.TaxExempt_Textbox.Tag = "dataEditingControl"
+        Me.TaxExempt_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'nav
+        '
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(1182, 28)
+        Me.nav.TabIndex = 267
+        '
         'invoices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1182, 903)
+        Me.Controls.Add(Me.TaxExempt_Textbox)
         Me.Controls.Add(Me.Complete_Value)
         Me.Controls.Add(Me.LicensePlateLabel)
         Me.Controls.Add(Me.LicensePlateTextbox)
@@ -1485,7 +1487,6 @@ Partial Class invoices
         Me.Controls.Add(Me.CostTableLayoutPanel)
         Me.Controls.Add(Me.printInvButton)
         Me.Controls.Add(Me.TaxExempt_Value)
-        Me.Controls.Add(Me.TaxExempt_CheckBox)
         Me.Controls.Add(Me.TaxExemptLabel)
         Me.Controls.Add(Me.ShopSupplies_Value)
         Me.Controls.Add(Me.ShopSupplies_CheckBox)
@@ -1647,7 +1648,6 @@ Partial Class invoices
     Friend WithEvents ShopSupplies_CheckBox As CheckBox
     Friend WithEvents ShopSuppliesLabel As Label
     Friend WithEvents TaxExempt_Value As Label
-    Friend WithEvents TaxExempt_CheckBox As CheckBox
     Friend WithEvents TaxExemptLabel As Label
     Friend WithEvents printInvButton As Button
     Friend WithEvents CostTableLayoutPanel As TableLayoutPanel
@@ -1691,4 +1691,5 @@ Partial Class invoices
     Friend WithEvents InvTotal_Value As Label
     Friend WithEvents Notes_Value As Label
     Friend WithEvents Complete_Value As CheckBox
+    Friend WithEvents TaxExempt_Textbox As TextBox
 End Class

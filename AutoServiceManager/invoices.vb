@@ -153,13 +153,30 @@
     ' Sub that initializes all dataViewingControls corresponding to values in Vehicle DataTable (TaxExempt)
     Private Sub InitializeCustomerDataViewingControls()
 
-        initializeControlsFromRow(CustomerDbController.DbDataTable, CustomerRow, "dataViewingControl", "_", Me)
+        'initializeControlsFromRow(CustomerDbController.DbDataTable, CustomerRow, "dataViewingControl", "_", Me)
+
+        ' We are only initializing TaxExempt from Customer DataTable, so do this here manually to set value to textual alternative
+        Dim TaxExemptStatus As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
+        Select Case TaxExemptStatus
+            Case True
+                TaxExempt_Value.Text = "Tax Exempt"
+            Case False
+                TaxExempt_Value.Text = "Not Tax Exempt"
+        End Select
 
     End Sub
     ' Sub that initializes all dataEditingControls corresponding to values in Vehicle DataTable (TaxExempt)
     Private Sub InitializeCustomerDataEditingControls()
 
-        initializeControlsFromRow(CustomerDbController.DbDataTable, CustomerRow, "dataEditingControl", "_", Me)
+        'initializeControlsFromRow(CustomerDbController.DbDataTable, CustomerRow, "dataEditingControl", "_", Me)
+        ' We are only initializing TaxExempt from Customer DataTable, so do this here manually to set value to textual alternative
+        Dim TaxExemptStatus As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
+        Select Case TaxExemptStatus
+            Case True
+                TaxExempt_Textbox.Text = "Tax Exempt"
+            Case False
+                TaxExempt_Textbox.Text = "Not Tax Exempt"
+        End Select
 
     End Sub
 
@@ -1595,7 +1612,7 @@
     End Sub
 
 
-    Private Sub TaxExempt_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles TaxExempt_CheckBox.CheckedChanged
+    Private Sub TaxExempt_CheckBox_CheckedChanged(sender As Object, e As EventArgs)
 
     End Sub
 
