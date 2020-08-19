@@ -1128,7 +1128,58 @@
 
     End Sub
 
+    Private Sub Tax_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Tax_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        InitializeTotalTextbox()
+
+    End Sub
 
 
+    Private Sub Gas_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles Gas_Textbox.KeyDown
+
+    End Sub
+
+    Private Sub Gas_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Gas_Textbox.KeyPress
+
+    End Sub
+
+    Private Sub Gas_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Gas_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        Gas_Textbox.ForeColor = DefaultForeColor
+
+        InitializeTotalTextbox()
+
+    End Sub
+
+
+    Private Sub Towing_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles Towing_Textbox.KeyDown
+
+    End Sub
+
+    Private Sub Towing_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Towing_Textbox.KeyPress
+
+    End Sub
+
+    Private Sub Towing_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Towing_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        Towing_Textbox.ForeColor = DefaultForeColor
+
+        InitializeTotalTextbox()
+
+    End Sub
+
+    Private Sub InvTotal_Textbox_TextChanged(sender As Object, e As EventArgs) Handles InvTotal_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        InitializeBalanceTextbox()
+
+    End Sub
 
 End Class
