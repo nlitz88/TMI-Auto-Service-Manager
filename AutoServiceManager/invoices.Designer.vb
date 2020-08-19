@@ -38,7 +38,6 @@ Partial Class invoices
         Me.InvNbr_Value = New System.Windows.Forms.Label()
         Me.InvoiceNumberLabel = New System.Windows.Forms.Label()
         Me.InvNbr_Textbox = New System.Windows.Forms.TextBox()
-        Me.Complete_Value = New System.Windows.Forms.Label()
         Me.Complete_CheckBox = New System.Windows.Forms.CheckBox()
         Me.CompleteLabel = New System.Windows.Forms.Label()
         Me.ContactName_Value = New System.Windows.Forms.Label()
@@ -132,6 +131,7 @@ Partial Class invoices
         Me.LicensePlateTextbox = New System.Windows.Forms.TextBox()
         Me.Notes_Value = New System.Windows.Forms.Label()
         Me.nav = New AutoServiceManager.navigation()
+        Me.Complete_Value = New System.Windows.Forms.CheckBox()
         Me.CostTableLayoutPanel.SuspendLayout()
         Me.TotalPanel.SuspendLayout()
         Me.TaxPanel.SuspendLayout()
@@ -330,17 +330,6 @@ Partial Class invoices
         Me.InvNbr_Textbox.Size = New System.Drawing.Size(126, 27)
         Me.InvNbr_Textbox.TabIndex = 3
         Me.InvNbr_Textbox.Tag = "dataEditingControl"
-        '
-        'Complete_Value
-        '
-        Me.Complete_Value.AutoSize = True
-        Me.Complete_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Complete_Value.ForeColor = System.Drawing.Color.Black
-        Me.Complete_Value.Location = New System.Drawing.Point(693, 391)
-        Me.Complete_Value.Name = "Complete_Value"
-        Me.Complete_Value.Size = New System.Drawing.Size(0, 20)
-        Me.Complete_Value.TabIndex = 5
-        Me.Complete_Value.Tag = "dataViewingControl"
         '
         'Complete_CheckBox
         '
@@ -1469,12 +1458,24 @@ Partial Class invoices
         Me.nav.Size = New System.Drawing.Size(1182, 28)
         Me.nav.TabIndex = 267
         '
+        'Complete_Value
+        '
+        Me.Complete_Value.AutoCheck = False
+        Me.Complete_Value.AutoSize = True
+        Me.Complete_Value.Location = New System.Drawing.Point(693, 395)
+        Me.Complete_Value.Name = "Complete_Value"
+        Me.Complete_Value.Size = New System.Drawing.Size(18, 17)
+        Me.Complete_Value.TabIndex = 321
+        Me.Complete_Value.Tag = "dataViewingControl"
+        Me.Complete_Value.UseVisualStyleBackColor = True
+        '
         'invoices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1182, 903)
+        Me.Controls.Add(Me.Complete_Value)
         Me.Controls.Add(Me.LicensePlateLabel)
         Me.Controls.Add(Me.LicensePlateTextbox)
         Me.Controls.Add(Me.LicenseStateComboBox)
@@ -1534,7 +1535,6 @@ Partial Class invoices
         Me.Controls.Add(Me.ContactName_Value)
         Me.Controls.Add(Me.ContactLabel)
         Me.Controls.Add(Me.ContactName_Textbox)
-        Me.Controls.Add(Me.Complete_Value)
         Me.Controls.Add(Me.Complete_CheckBox)
         Me.Controls.Add(Me.CompleteLabel)
         Me.Controls.Add(Me.InvNbr_Value)
@@ -1597,7 +1597,6 @@ Partial Class invoices
     Friend WithEvents InvNbr_Value As Label
     Friend WithEvents InvoiceNumberLabel As Label
     Friend WithEvents InvNbr_Textbox As TextBox
-    Friend WithEvents Complete_Value As Label
     Friend WithEvents Complete_CheckBox As CheckBox
     Friend WithEvents CompleteLabel As Label
     Friend WithEvents ContactName_Value As Label
@@ -1691,4 +1690,5 @@ Partial Class invoices
     Friend WithEvents InvTotal_Textbox As TextBox
     Friend WithEvents InvTotal_Value As Label
     Friend WithEvents Notes_Value As Label
+    Friend WithEvents Complete_Value As CheckBox
 End Class
