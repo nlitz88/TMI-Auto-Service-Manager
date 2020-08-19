@@ -1298,6 +1298,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        InvDate_Textbox.ForeColor = DefaultForeColor
+
         If InitialInvValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
         Else
@@ -1310,6 +1312,8 @@
     Private Sub Complete_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles Complete_CheckBox.CheckedChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        Complete_CheckBox.ForeColor = DefaultForeColor
 
         If InitialInvValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -1324,6 +1328,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        ContactName_Textbox.ForeColor = DefaultForeColor
+
         If InitialInvValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
         Else
@@ -1337,6 +1343,8 @@
 
         If Not valuesInitialized Then Exit Sub
 
+        ContactPhone1_ComboBox.ForeColor = DefaultForeColor
+
         If InitialInvValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
         Else
@@ -1349,6 +1357,8 @@
     Private Sub ContactPhone2_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ContactPhone2_ComboBox.SelectedIndexChanged, ContactPhone2_ComboBox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        ContactPhone2_ComboBox.ForeColor = DefaultForeColor
 
         If InitialInvValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -1375,6 +1385,8 @@
     Private Sub InspectionSticker_Textbox_TextChanged(sender As Object, e As EventArgs) Handles InspectionSticker_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        InspectionSticker_Textbox.ForeColor = DefaultForeColor
 
         If InitialInvValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -1409,6 +1421,7 @@
 
     End Sub
 
+
     Private Sub Mileage_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Mileage_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
@@ -1430,9 +1443,12 @@
 
     End Sub
 
-    Private Sub ApptDate_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles ApptDate_Textbox.MaskInputRejected
+
+    Private Sub ApptDate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ApptDate_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        ApptDate_Textbox.ForeColor = DefaultForeColor
 
         If InitialInvValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -1442,9 +1458,12 @@
 
     End Sub
 
-    Private Sub WorkDate_Textbox_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles WorkDate_Textbox.MaskInputRejected
+
+    Private Sub WorkDate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles WorkDate_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        WorkDate_Textbox.ForeColor = DefaultForeColor
 
         If InitialInvValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -1458,6 +1477,8 @@
     Private Sub Notes_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Notes_Textbox.TextChanged
 
         If Not valuesInitialized Then Exit Sub
+
+        Notes_Textbox.ForeColor = DefaultForeColor
 
         If InitialInvValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
