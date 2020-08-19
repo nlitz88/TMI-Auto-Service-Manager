@@ -2,7 +2,6 @@
 
     ' New Database control instances for Customers, Vehicles, and InvHdr datatables
     Private CustomerDbController As New DbControl()
-    Private CustomerPhoneList As New List(Of String)
     Private VehicleDbController As New DbControl()
     Private InvDbController As New DbControl()
     ' New Database control instances for License Plate Search controls (just license State)
@@ -34,6 +33,10 @@
     Private InvId As Long                       ' InvNbr from same row that ""
 
     Private CMRow As Integer = 0
+
+    ' Values from Customer that are used for validation and selection
+    Private CustomerPhoneList As New List(Of String)
+    Private PhonesMatching As Boolean
 
     ' Variable that Maintains the last selected Invoice
     Private lastSelected As String
@@ -76,10 +79,34 @@
     Private Sub InitializeCustomerPhoneList()
 
         CustomerPhoneList.Clear()
-        CustomerPhoneList.Add(formatPhoneNumber(CustomerDbController.DbDataTable(CustomerRow)("HomePhone")))
-        CustomerPhoneList.Add(formatPhoneNumber(CustomerDbController.DbDataTable(CustomerRow)("WorkPhone")))
-        CustomerPhoneList.Add(formatPhoneNumber(CustomerDbController.DbDataTable(CustomerRow)("CellPhone1")))
-        CustomerPhoneList.Add(formatPhoneNumber(CustomerDbController.DbDataTable(CustomerRow)("CellPhone2")))
+        Dim HomePhone As String = CustomerDbController.DbDataTable(CustomerRow)("HomePhone")
+        If Not String.IsNullOrEmpty(HomePhone) Then
+            HomePhone = removeInvalidChars(HomePhone, "0123456789")
+            If Not String.IsNullOrEmpty(HomePhone) Then
+                CustomerPhoneList.Add(HomePhone)
+            End If
+        End If
+        Dim WorkPhone As String = CustomerDbController.DbDataTable(CustomerRow)("WorkPhone")
+        If Not String.IsNullOrEmpty(WorkPhone) Then
+            WorkPhone = removeInvalidChars(WorkPhone, "0123456789")
+            If Not String.IsNullOrEmpty(WorkPhone) Then
+                CustomerPhoneList.Add(WorkPhone)
+            End If
+        End If
+        Dim CellPhone1 As String = CustomerDbController.DbDataTable(CustomerRow)("CellPhone1")
+        If Not String.IsNullOrEmpty(CellPhone1) Then
+            CellPhone1 = removeInvalidChars(CellPhone1, "0123456789")
+            If Not String.IsNullOrEmpty(CellPhone1) Then
+                CustomerPhoneList.Add(CellPhone1)
+            End If
+        End If
+        Dim CellPhone2 As String = CustomerDbController.DbDataTable(CustomerRow)("CellPhone2")
+        If Not String.IsNullOrEmpty(CellPhone2) Then
+            CellPhone2 = removeInvalidChars(CellPhone2, "0123456789")
+            If Not String.IsNullOrEmpty(CellPhone2) Then
+                CustomerPhoneList.Add(CellPhone2)
+            End If
+        End If
 
     End Sub
 
@@ -99,12 +126,11 @@
     ' Sub that intializes ContactPhone1 ComboBox (Called after valid Customer has been selected)
     Private Sub InitializeContactPhone1ComboBox()
 
-        ContactPhone1_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList
         ContactPhone1_ComboBox.BeginUpdate()
         ContactPhone1_ComboBox.Items.Clear()
         ' Add the four different phone numbers from Customer to the ComboBox here
         For Each phoneNum In CustomerPhoneList
-            ContactPhone1_ComboBox.Items.Add(phoneNum)
+            ContactPhone1_ComboBox.Items.Add(formatPhoneNumber(phoneNum))
         Next
         ContactPhone1_ComboBox.EndUpdate()
 
@@ -113,12 +139,11 @@
     ' Sub that intializes ContactPhone2 ComboBox (Called after valid Customer has been selected)
     Private Sub InitializeContactPhone2ComboBox()
 
-        ContactPhone2_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList
         ContactPhone2_ComboBox.BeginUpdate()
         ContactPhone2_ComboBox.Items.Clear()
         ' Add the four different phone numbers from Customer to the ComboBox here
         For Each phoneNum In CustomerPhoneList
-            ContactPhone2_ComboBox.Items.Add(phoneNum)
+            ContactPhone2_ComboBox.Items.Add(formatPhoneNumber(phoneNum))
         Next
         ContactPhone2_ComboBox.EndUpdate()
 
@@ -743,11 +768,84 @@
     ' IF we decide they can change this here (For whatever justification that may be), then update TaxExempt in Customer Table as well
 
 
+
+
     ' **************** VALIDATION SUBS ****************
 
 
     ' Make sure to ensure that ContactPhone1 does not have the same value as Contact Phone 2, and also make sure that the values in both exist in the CustomerPhoneList
     ' Maybe write custom validation function for mileage if we allow them to use numbers with commas (instead of writing global function)
+    Private Function controlsValid() As Boolean
+
+        Dim errorMessage As String = String.Empty
+
+        ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
+
+
+        ' Invoice Date (REQUIRED)
+        If Not validDateTime("Invoice Date", True, InvDate_Textbox.Text, errorMessage) Then
+            InvDate_Textbox.ForeColor = Color.Red
+        End If
+
+        ' Contact
+        If Not isValidLength("Contact", False, ContactName_Textbox.Text, 25, errorMessage) Then
+            ContactName_Textbox.ForeColor = Color.Red
+        End If
+
+        ' Contact Phone Validation
+        PhonesMatching = False
+        Dim p1 As String = removeInvalidChars(ContactPhone1_ComboBox.Text, "0123456789")
+        Dim p2 As String = removeInvalidChars(ContactPhone2_ComboBox.Text, "0123456789")
+
+        ' Contact Phone 1 (Must exist in CustomerPhoneList, and cannot equal the value in Contact Phone 2)
+        If Not String.IsNullOrWhiteSpace(ContactPhone1_ComboBox.Text) And Not CustomerPhoneList.Contains(p1) Then
+            errorMessage += "ERROR: " & ContactPhone1_ComboBox.Text & " does not exist" & vbNewLine
+            ContactPhone1_ComboBox.ForeColor = Color.Red
+        End If
+
+        ' Contact Phone 2 (Must exist in CustomerPhoneList, and cannot equal the value in Contact Phone 1)
+        If Not String.IsNullOrWhiteSpace(ContactPhone2_ComboBox.Text) And Not CustomerPhoneList.Contains(p2) Then
+            errorMessage += "ERROR: " & ContactPhone2_ComboBox.Text & " does not exist" & vbNewLine
+            ContactPhone2_ComboBox.ForeColor = Color.Red
+        End If
+
+        ' Checking if both ContactPhones are equivalent
+        If Not String.IsNullOrEmpty(p1) And Not String.IsNullOrEmpty(p2) And p1 = p2 Then
+            errorMessage += "ERROR: Contact Phone 1 and Contact Phone 2 cannot have the same phone number" & vbNewLine
+            PhonesMatching = True
+            ContactPhone1_ComboBox.ForeColor = Color.Red
+            ContactPhone2_ComboBox.ForeColor = Color.Red
+        End If
+
+
+        ' Inspection Month
+
+        ' Inspection Sticker
+        ' Mileage
+        ' Appointment Date
+        ' Work Date
+        ' Notes
+
+        ' Shop Charges
+        ' Gas
+        ' Towing
+
+
+
+        ' Check if any invalid input has been found
+        If Not String.IsNullOrEmpty(errorMessage) Then
+
+            MessageBox.Show(errorMessage, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+
+        End If
+
+        Return True
+
+    End Function
+
+
+
 
     Public Sub New()
 
@@ -1075,7 +1173,7 @@
                 If mode = "editing" Then
 
                     ' 1.) VALIDATE DATAEDITING CONTROLS
-                    'If Not controlsValid() Then Exit Sub
+                    If Not controlsValid() Then Exit Sub
 
                     ' 2.) UPDATE MASTER TASK LIST VALUES
                     'If Not updateMasterTask() Then
@@ -1127,7 +1225,7 @@
                 ElseIf mode = "adding" Then
 
                     ' 1.) VALIDATE DATAEDITING CONTROLS
-                    'If Not controlsValid() Then Exit Sub
+                    If Not controlsValid() Then Exit Sub
 
                     ' 2.) INSERT NEW ROW INTO MASTER TASK LIST
                     'If Not insertMasterTask() Then
@@ -1466,7 +1564,14 @@
 
         If Not valuesInitialized Then Exit Sub
 
-        ContactPhone1_ComboBox.ForeColor = DefaultForeColor
+        If PhonesMatching Then
+            ContactPhone1_ComboBox.ForeColor = DefaultForeColor
+            ContactPhone2_ComboBox.ForeColor = DefaultForeColor
+            PhonesMatching = False
+        Else
+            ContactPhone1_ComboBox.ForeColor = DefaultForeColor
+        End If
+
 
         If InitialInvValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
@@ -1481,7 +1586,13 @@
 
         If Not valuesInitialized Then Exit Sub
 
-        ContactPhone2_ComboBox.ForeColor = DefaultForeColor
+        If PhonesMatching Then
+            ContactPhone2_ComboBox.ForeColor = DefaultForeColor
+            ContactPhone1_ComboBox.ForeColor = DefaultForeColor
+            PhonesMatching = False
+        Else
+            ContactPhone2_ComboBox.ForeColor = DefaultForeColor
+        End If
 
         If InitialInvValues.CtrlValuesChanged() Then
             saveButton.Enabled = True

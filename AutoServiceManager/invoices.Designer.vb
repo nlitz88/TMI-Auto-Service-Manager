@@ -389,7 +389,7 @@ Partial Class invoices
         '
         Me.ContactName_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ContactName_Textbox.Location = New System.Drawing.Point(167, 385)
-        Me.ContactName_Textbox.MaxLength = 20
+        Me.ContactName_Textbox.MaxLength = 25
         Me.ContactName_Textbox.Name = "ContactName_Textbox"
         Me.ContactName_Textbox.Size = New System.Drawing.Size(315, 27)
         Me.ContactName_Textbox.TabIndex = 6
@@ -413,6 +413,7 @@ Partial Class invoices
         Me.ContactPhone1_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.ContactPhone1_ComboBox.FormattingEnabled = True
         Me.ContactPhone1_ComboBox.Location = New System.Drawing.Point(576, 385)
+        Me.ContactPhone1_ComboBox.MaxLength = 20
         Me.ContactPhone1_ComboBox.Name = "ContactPhone1_ComboBox"
         Me.ContactPhone1_ComboBox.Size = New System.Drawing.Size(181, 28)
         Me.ContactPhone1_ComboBox.TabIndex = 7
@@ -458,6 +459,7 @@ Partial Class invoices
         Me.ContactPhone2_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.ContactPhone2_ComboBox.FormattingEnabled = True
         Me.ContactPhone2_ComboBox.Location = New System.Drawing.Point(852, 385)
+        Me.ContactPhone2_ComboBox.MaxLength = 20
         Me.ContactPhone2_ComboBox.Name = "ContactPhone2_ComboBox"
         Me.ContactPhone2_ComboBox.Size = New System.Drawing.Size(181, 28)
         Me.ContactPhone2_ComboBox.TabIndex = 8
