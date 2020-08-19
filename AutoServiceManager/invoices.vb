@@ -682,6 +682,7 @@
         ' Automated initializations
         InitializeInvoiceDataEditingControls()
         InitializeVehicleDataEditingControls()
+        correctInspectionMonthComboBox()    ' Correction for value initialized from Vehicle DataTable
         InitializeCustomerDataEditingControls()
         ' Then, re-initialize and format any calculation based values
         InitializeInvLaborTextbox()
@@ -819,6 +820,13 @@
 
 
         ' Inspection Month
+        If Not isValidLength("Inspection Month", False, InspectionMonth_ComboBox.Text, 3, errorMessage) Then
+            InspectionMonth_ComboBox.ForeColor = Color.Red
+        ElseIf Not String.IsNullOrWhiteSpace(InspectionMonth_ComboBox.Text) And Not valueExists("Month", InspectionMonth_ComboBox.Text, MonthDbController.DbDataTable) Then
+            errorMessage += "ERROR: " & InspectionMonth_ComboBox.Text & " is not a valid Month" & vbNewLine
+            InspectionMonth_ComboBox.ForeColor = Color.Red
+        End If
+
 
         ' Inspection Sticker
         ' Mileage
@@ -1571,7 +1579,6 @@
         Else
             ContactPhone1_ComboBox.ForeColor = DefaultForeColor
         End If
-
 
         If InitialInvValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
