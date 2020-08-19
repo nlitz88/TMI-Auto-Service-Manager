@@ -130,8 +130,8 @@ Partial Class invoices
         Me.LicenseStateLabel = New System.Windows.Forms.Label()
         Me.LicensePlateLabel = New System.Windows.Forms.Label()
         Me.LicensePlateTextbox = New System.Windows.Forms.TextBox()
-        Me.nav = New AutoServiceManager.navigation()
         Me.Notes_Value = New System.Windows.Forms.Label()
+        Me.nav = New AutoServiceManager.navigation()
         Me.CostTableLayoutPanel.SuspendLayout()
         Me.TotalPanel.SuspendLayout()
         Me.TaxPanel.SuspendLayout()
@@ -270,7 +270,7 @@ Partial Class invoices
         Me.InvDate_Textbox.Mask = "00/00/0000"
         Me.InvDate_Textbox.Name = "InvDate_Textbox"
         Me.InvDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.InvDate_Textbox.Size = New System.Drawing.Size(181, 27)
+        Me.InvDate_Textbox.Size = New System.Drawing.Size(132, 27)
         Me.InvDate_Textbox.TabIndex = 4
         Me.InvDate_Textbox.Tag = "dataEditingControl"
         Me.InvDate_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
@@ -336,7 +336,7 @@ Partial Class invoices
         Me.Complete_Value.AutoSize = True
         Me.Complete_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Complete_Value.ForeColor = System.Drawing.Color.Black
-        Me.Complete_Value.Location = New System.Drawing.Point(741, 343)
+        Me.Complete_Value.Location = New System.Drawing.Point(693, 343)
         Me.Complete_Value.Name = "Complete_Value"
         Me.Complete_Value.Size = New System.Drawing.Size(0, 20)
         Me.Complete_Value.TabIndex = 5
@@ -345,7 +345,7 @@ Partial Class invoices
         'Complete_CheckBox
         '
         Me.Complete_CheckBox.AutoSize = True
-        Me.Complete_CheckBox.Location = New System.Drawing.Point(741, 347)
+        Me.Complete_CheckBox.Location = New System.Drawing.Point(693, 347)
         Me.Complete_CheckBox.Name = "Complete_CheckBox"
         Me.Complete_CheckBox.Size = New System.Drawing.Size(18, 17)
         Me.Complete_CheckBox.TabIndex = 5
@@ -356,7 +356,7 @@ Partial Class invoices
         '
         Me.CompleteLabel.AutoSize = True
         Me.CompleteLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.CompleteLabel.Location = New System.Drawing.Point(660, 346)
+        Me.CompleteLabel.Location = New System.Drawing.Point(612, 346)
         Me.CompleteLabel.Name = "CompleteLabel"
         Me.CompleteLabel.Size = New System.Drawing.Size(75, 17)
         Me.CompleteLabel.TabIndex = 252
@@ -542,7 +542,7 @@ Partial Class invoices
         Me.ApptDate_Textbox.Mask = "00/00/0000"
         Me.ApptDate_Textbox.Name = "ApptDate_Textbox"
         Me.ApptDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.ApptDate_Textbox.Size = New System.Drawing.Size(111, 27)
+        Me.ApptDate_Textbox.Size = New System.Drawing.Size(132, 27)
         Me.ApptDate_Textbox.TabIndex = 13
         Me.ApptDate_Textbox.Tag = "dataEditingControl"
         Me.ApptDate_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
@@ -576,11 +576,11 @@ Partial Class invoices
         Me.WorkDate_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
         Me.WorkDate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.WorkDate_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
-        Me.WorkDate_Textbox.Location = New System.Drawing.Point(450, 499)
+        Me.WorkDate_Textbox.Location = New System.Drawing.Point(475, 499)
         Me.WorkDate_Textbox.Mask = "00/00/0000"
         Me.WorkDate_Textbox.Name = "WorkDate_Textbox"
         Me.WorkDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.WorkDate_Textbox.Size = New System.Drawing.Size(111, 27)
+        Me.WorkDate_Textbox.Size = New System.Drawing.Size(132, 27)
         Me.WorkDate_Textbox.TabIndex = 14
         Me.WorkDate_Textbox.Tag = "dataEditingControl"
         Me.WorkDate_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
@@ -591,7 +591,7 @@ Partial Class invoices
         Me.WorkDate_Value.AutoSize = True
         Me.WorkDate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.WorkDate_Value.ForeColor = System.Drawing.Color.Black
-        Me.WorkDate_Value.Location = New System.Drawing.Point(449, 502)
+        Me.WorkDate_Value.Location = New System.Drawing.Point(474, 502)
         Me.WorkDate_Value.Name = "WorkDate_Value"
         Me.WorkDate_Value.Size = New System.Drawing.Size(0, 20)
         Me.WorkDate_Value.TabIndex = 277
@@ -601,7 +601,7 @@ Partial Class invoices
         '
         Me.WorkDateLabel.AutoSize = True
         Me.WorkDateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.WorkDateLabel.Location = New System.Drawing.Point(361, 505)
+        Me.WorkDateLabel.Location = New System.Drawing.Point(386, 505)
         Me.WorkDateLabel.Name = "WorkDateLabel"
         Me.WorkDateLabel.Size = New System.Drawing.Size(83, 17)
         Me.WorkDateLabel.TabIndex = 276
@@ -1451,15 +1451,6 @@ Partial Class invoices
         Me.LicensePlateTextbox.TabIndex = 25
         Me.LicensePlateTextbox.Tag = "licensePlateSearchControl"
         '
-        'nav
-        '
-        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.nav.Location = New System.Drawing.Point(0, 0)
-        Me.nav.Name = "nav"
-        Me.nav.Size = New System.Drawing.Size(1182, 28)
-        Me.nav.TabIndex = 267
-        '
         'Notes_Value
         '
         Me.Notes_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1469,6 +1460,15 @@ Partial Class invoices
         Me.Notes_Value.Size = New System.Drawing.Size(365, 165)
         Me.Notes_Value.TabIndex = 304
         Me.Notes_Value.Tag = "dataViewingControl"
+        '
+        'nav
+        '
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(1182, 28)
+        Me.nav.TabIndex = 267
         '
         'invoices
         '

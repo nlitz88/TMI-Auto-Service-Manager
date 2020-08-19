@@ -693,8 +693,8 @@
         ' Additional Values that require initialization
         InitializeInvPaymentsTextbox()
         InitializeNumberTasksTextbox()
-        InitializeContactPhone1ComboBox()
-        InitializeContactPhone2ComboBox()
+        'InitializeContactPhone1ComboBox()
+        'InitializeContactPhone2ComboBox()
         ' Then, format dataEditingControls
         formatDataEditingControls()
         ' This must be initialized after all currency based cost values are initialized and formatted properly
@@ -967,6 +967,8 @@
 
             ' Initialize Customer Phone List after valid Customer has been selected
             InitializeCustomerPhoneList()
+            InitializeContactPhone1ComboBox()
+            InitializeContactPhone2ComboBox()
 
             ' Then, load the vehicleDataTable and initialize vehicleComboBox based on this newfound CustomerId
             loadVehicleDataTable()
@@ -1081,7 +1083,7 @@
 
         ' This logic checks to see if the value in InvoiceNumComboBox is numeric. If so, then convert it to an int
         ' If not, invNbr will remain as -1, subsequently producing a -1 on lookup from getDataTableRowEquals()
-        Dim invNbr As Integer = -1
+        Dim invNbr As Long = -1
         If allValidChars(InvoiceNumComboBox.Text, "0123456789") = -1 Then
             Try
                 invNbr = Convert.ToInt64(InvoiceNumComboBox.Text)
@@ -1142,7 +1144,62 @@
 
     Private Sub newInvButton_Click(sender As Object, e As EventArgs) Handles newInvButton.Click
 
+        mode = "adding"
 
+        ' Initialize values for dataEditingControls
+        valuesInitialized = False
+
+        clearControls(getAllNestedControlsWithTag("dataEditingControl", Me))
+        ' Set InspectionMonth and ContactPhone ComboBoxes selectedIndex = -1
+        InspectionMonth_ComboBox.SelectedIndex = -1
+        ContactPhone1_ComboBox.SelectedIndex = -1
+        ContactPhone2_ComboBox.SelectedIndex = -1
+        ' Initialize Invoice Date, AppointDate, and WorkDates as today's date
+        InvDate_Textbox.Text = formatDate(DateTime.Now)
+        ApptDate_Textbox.Text = formatDate(DateTime.Now)
+        WorkDate_Textbox.Text = formatDate(DateTime.Now)
+
+        valuesInitialized = True
+        ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
+        InitialInvValues.SetInitialValues(getAllNestedControlsWithTag("dataEditingControl", Me))
+
+        ' First, disable editButton, addButton, enable cancelButton, and disable nav
+        CustomerComboBox.Enabled = False
+        VehicleComboBox.Enabled = False
+        InvoiceNumComboBox.Enabled = False
+        modifyInvButton.Enabled = False
+        newInvButton.Enabled = False
+        cancelButton.Enabled = True
+        nav.DisableAll()
+
+        ' Disable all licensePlate searching controls
+        For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
+            ctrl.Enabled = False
+        Next
+
+        ' Logic that is used to determine if the current selected item is numeric. Dictates whether or not to look it up.
+        Dim invNbr As Long = -1
+        If allValidChars(InvoiceNumComboBox.Text, "0123456789") = -1 Then
+            Try
+                invNbr = Convert.ToInt64(InvoiceNumComboBox.Text)
+            Catch ex As Exception
+
+            End Try
+        End If
+
+        ' Get lastSelectedVehicle
+        If getDataTableRowEquals(InvDbController.DbDataTable, "InvNbr", invNbr) <> -1 Then
+            lastSelected = InvoiceNumComboBox.Text
+        Else
+            lastSelected = "Select One"
+        End If
+
+        InvoiceNumComboBox.SelectedIndex = 0
+
+        ' Hide/Show the dataViewingControls and dataEditingControls, respectively
+        showHide(getAllNestedControlsWithTag("dataViewingControl", Me), 0)
+        showHide(getAllNestedControlsWithTag("dataEditingControl", Me), 1)
+        showHide(getAllNestedControlsWithTag("dataLabel", Me), 1)
 
     End Sub
 
@@ -1227,7 +1284,7 @@
         ElseIf mode = "adding" Then
 
             ' 1.) SET VehicleComboBox BACKK TO LAST SELECTED ITEM/INDEX
-            InvoiceNumComboBox.SelectedIndex = VehicleComboBox.Items.IndexOf(lastSelected)
+            InvoiceNumComboBox.SelectedIndex = InvoiceNumComboBox.Items.IndexOf(lastSelected)
 
             ' 2.) IF LAST SELECTED WAS "SELECT ONE", Then simulate functionality from combobox text/selectedIndex changed
             If lastSelected = "Select One" Then
