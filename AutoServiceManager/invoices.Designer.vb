@@ -527,7 +527,7 @@ Partial Class invoices
         Me.vehicleHistoryButton.Name = "vehicleHistoryButton"
         Me.vehicleHistoryButton.Size = New System.Drawing.Size(211, 30)
         Me.vehicleHistoryButton.TabIndex = 12
-        Me.vehicleHistoryButton.Tag = "dataLabel"
+        Me.vehicleHistoryButton.Tag = ""
         Me.vehicleHistoryButton.Text = "Vehicle History"
         Me.vehicleHistoryButton.UseVisualStyleBackColor = False
         '
