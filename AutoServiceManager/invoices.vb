@@ -1065,9 +1065,53 @@
 
     Private Sub ShopSupplies_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles ShopSupplies_CheckBox.CheckedChanged
 
+        If Not valuesInitialized Then Exit Sub
+
         ' Initialize ShopCharges Textbox no matter what. It will determine whether or include or not based on CheckStatus
         '   (might have to set DataTable value here if reading the CheckState doesn't work)
         InitializeShopChargesTextbox()
+
+    End Sub
+
+
+    Private Sub ShopCharges_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles ShopCharges_Textbox.KeyDown
+
+        ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
+            allowedKeystroke = True
+        End If
+
+    End Sub
+
+    Private Sub ShopCharges_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ShopCharges_Textbox.KeyPress
+
+        ' If certain keystroke exceptions allowed through, then skip input validation here
+        If allowedKeystroke Then
+            allowedKeystroke = False
+            Exit Sub
+        End If
+
+        If Not currencyInputValid(ShopCharges_Textbox.Text, e.KeyChar) Then
+            e.KeyChar = Chr(0)
+            e.Handled = True
+        End If
+
+    End Sub
+
+    Private Sub ShopCharges_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ShopCharges_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        ShopCharges_Textbox.ForeColor = DefaultForeColor
+
+        ' Handles pasting in invalid values/strings
+        Dim lastValidIndex As Integer = allValidChars(ShopCharges_Textbox.Text, "1234567890.")
+        If lastValidIndex <> -1 Then
+            ShopCharges_Textbox.Text = ShopCharges_Textbox.Text.Substring(0, lastValidIndex)
+            ShopCharges_Textbox.SelectionStart = lastValidIndex
+        End If
+
+        InitializeSubTotalTextbox()
 
     End Sub
 
