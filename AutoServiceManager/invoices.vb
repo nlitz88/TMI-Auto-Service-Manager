@@ -340,13 +340,13 @@
     ' Sub that initializes invoiceNumComboBox after valid Vehicle selection has been made
     Private Sub InitializeInvoiceNumComboBox()
 
-        InvoiceNumComboBox.BeginUpdate()
-        InvoiceNumComboBox.Items.Clear()
-        InvoiceNumComboBox.Items.Add("Select One")
+        InvoiceComboBox.BeginUpdate()
+        InvoiceComboBox.Items.Clear()
+        InvoiceComboBox.Items.Add("Select One")
         For Each row In InvDbController.DbDataTable.Rows
-            InvoiceNumComboBox.Items.Add(row("INID").ToString())
+            InvoiceComboBox.Items.Add(row("INID").ToString())
         Next
-        InvoiceNumComboBox.EndUpdate()
+        InvoiceComboBox.EndUpdate()
 
     End Sub
 
@@ -1023,15 +1023,15 @@
         If VehicleComboBox.SelectedIndex = -1 Then
 
             ' If not already, clear and empty the invoiceNumComboBox
-            If InvoiceNumComboBox.Text <> String.Empty And InvoiceNumComboBox.Items.Count <> 0 Then
-                InvoiceNumComboBox.Items.Clear()
-                InvoiceNumComboBox.Text = String.Empty
+            If InvoiceComboBox.Text <> String.Empty And InvoiceComboBox.Items.Count <> 0 Then
+                InvoiceComboBox.Items.Clear()
+                InvoiceComboBox.Text = String.Empty
             End If
-            InvoiceNumComboBox.Visible = False
-            invoiceNumLabel.Visible = False
+            InvoiceComboBox.Visible = False
+            invoiceLabel.Visible = False
 
-            InvoiceNumComboBox.SelectedIndex = -1
-            InvoiceNumComboBox_SelectedIndexChanged(InvoiceNumComboBox, New EventArgs())
+            InvoiceComboBox.SelectedIndex = -1
+            InvoiceNumComboBox_SelectedIndexChanged(InvoiceComboBox, New EventArgs())
 
             ' Disable user from creating new invoice until valid vehicle selected
             newInvButton.Enabled = False
@@ -1054,9 +1054,9 @@
             ' Then, load the Invoice DataTable and initialize InvComboBox based on this newfound VehicleId
             loadInvoiceDataTable()
             InitializeInvoiceNumComboBox()
-            InvoiceNumComboBox.Visible = True
-            invoiceNumLabel.Visible = True
-            InvoiceNumComboBox.SelectedIndex = 0
+            InvoiceComboBox.Visible = True
+            invoiceLabel.Visible = True
+            InvoiceComboBox.SelectedIndex = 0
 
             ' Now that valid vehicle selected, user may add new invoice associated with that vehicle
             newInvButton.Enabled = True
@@ -1067,15 +1067,15 @@
         Else
 
             ' If not already, clear and empty the invoiceNumComboBox
-            If InvoiceNumComboBox.Text <> String.Empty And InvoiceNumComboBox.Items.Count <> 0 Then
-                InvoiceNumComboBox.Items.Clear()
-                InvoiceNumComboBox.Text = String.Empty
+            If InvoiceComboBox.Text <> String.Empty And InvoiceComboBox.Items.Count <> 0 Then
+                InvoiceComboBox.Items.Clear()
+                InvoiceComboBox.Text = String.Empty
             End If
-            InvoiceNumComboBox.Visible = False
-            invoiceNumLabel.Visible = False
+            InvoiceComboBox.Visible = False
+            invoiceLabel.Visible = False
 
-            InvoiceNumComboBox.SelectedIndex = -1
-            InvoiceNumComboBox_SelectedIndexChanged(InvoiceNumComboBox, New EventArgs())
+            InvoiceComboBox.SelectedIndex = -1
+            InvoiceNumComboBox_SelectedIndexChanged(InvoiceComboBox, New EventArgs())
 
             ' Disable user from creating new invoice until valid vehicle selected
             newInvButton.Enabled = False
@@ -1087,10 +1087,10 @@
     End Sub
 
 
-    Private Sub InvoiceNumComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InvoiceNumComboBox.SelectedIndexChanged, InvoiceNumComboBox.TextChanged
+    Private Sub InvoiceNumComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InvoiceComboBox.SelectedIndexChanged, InvoiceComboBox.TextChanged
 
         ' Ensure that invoiceNumComboBox is only attempting to initialize values when on proper selected Index
-        If InvoiceNumComboBox.SelectedIndex = -1 Then
+        If InvoiceComboBox.SelectedIndex = -1 Then
 
             ' Have all labels and corresponding values hidden
             showHide(getAllNestedControlsWithTag("dataViewingControl", Me), 0)
@@ -1105,7 +1105,7 @@
         End If
 
         ' Lookup newly selected row and see if it is valid (valid if it corresponds with a datatable row)
-        InvRow = getDataTableRowEquals(InvDbController.DbDataTable, "INID", InvoiceNumComboBox.Text)
+        InvRow = getDataTableRowEquals(InvDbController.DbDataTable, "INID", InvoiceComboBox.Text)
 
         ' If this query DOES return a valid row index, then initialize respective controls
         If InvRow <> -1 Then
@@ -1209,7 +1209,7 @@
         ' First, disable editButton, addButton, enable cancelButton, and disable nav
         CustomerComboBox.Enabled = False
         VehicleComboBox.Enabled = False
-        InvoiceNumComboBox.Enabled = False
+        InvoiceComboBox.Enabled = False
         modifyInvButton.Enabled = False
         newInvButton.Enabled = False
         cancelButton.Enabled = True
@@ -1221,13 +1221,13 @@
         Next
 
         ' Get lastSelected
-        If getDataTableRowEquals(InvDbController.DbDataTable, "INID", InvoiceNumComboBox.Text) <> -1 Then
-            lastSelected = InvoiceNumComboBox.Text
+        If getDataTableRowEquals(InvDbController.DbDataTable, "INID", InvoiceComboBox.Text) <> -1 Then
+            lastSelected = InvoiceComboBox.Text
         Else
             lastSelected = "Select One"
         End If
 
-        InvoiceNumComboBox.SelectedIndex = 0
+        InvoiceComboBox.SelectedIndex = 0
 
         ' Hide/Show the dataViewingControls and dataEditingControls, respectively
         showHide(getAllNestedControlsWithTag("dataViewingControl", Me), 0)
@@ -1258,12 +1258,12 @@
 
                 ' 3.) REINITIALIZE CONTROLS (Based on the selected index)
                 InitializeInvoiceNumComboBox()
-                InvoiceNumComboBox.SelectedIndex = 0
+                InvoiceComboBox.SelectedIndex = 0
 
                 ' 4.) RESTORE USER CONTROLS TO NON-EDITING/SELECTING STATE
                 CustomerComboBox.Enabled = True
                 VehicleComboBox.Enabled = True
-                InvoiceNumComboBox.Enabled = True
+                InvoiceComboBox.Enabled = True
                 newInvButton.Enabled = True
                 cancelButton.Enabled = False
                 saveButton.Enabled = False
@@ -1293,7 +1293,7 @@
         InitialInvValues.SetInitialValues(getAllNestedControlsWithTag("dataEditingControl", Me))
 
         ' Store the last selected item in the ComboBox (in case update fails and it must revert)
-        lastSelected = InvoiceNumComboBox.Text
+        lastSelected = InvoiceComboBox.Text
 
         ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
         modifyInvButton.Enabled = False
@@ -1302,7 +1302,7 @@
         nav.DisableAll()
         CustomerComboBox.Enabled = False
         VehicleComboBox.Enabled = False
-        InvoiceNumComboBox.Enabled = False
+        InvoiceComboBox.Enabled = False
 
         ' Disable Task and Payment Buttons
         tasksButton.Enabled = False
@@ -1337,7 +1337,7 @@
             ' RESTORE USER CONTROLS TO NON-EDITING STATE
             CustomerComboBox.Enabled = True
             VehicleComboBox.Enabled = True
-            InvoiceNumComboBox.Enabled = True
+            InvoiceComboBox.Enabled = True
             modifyInvButton.Enabled = True
             newInvButton.Enabled = True
             cancelButton.Enabled = False
@@ -1356,17 +1356,17 @@
         ElseIf mode = "adding" Then
 
             ' 1.) SET VehicleComboBox BACKK TO LAST SELECTED ITEM/INDEX
-            InvoiceNumComboBox.SelectedIndex = InvoiceNumComboBox.Items.IndexOf(lastSelected)
+            InvoiceComboBox.SelectedIndex = InvoiceComboBox.Items.IndexOf(lastSelected)
 
             ' 2.) IF LAST SELECTED WAS "SELECT ONE", Then simulate functionality from combobox text/selectedIndex changed
             If lastSelected = "Select One" Then
-                InvoiceNumComboBox_SelectedIndexChanged(InvoiceNumComboBox, New EventArgs())
+                InvoiceNumComboBox_SelectedIndexChanged(InvoiceComboBox, New EventArgs())
             End If
 
             ' 3.) RESTORE USER CONTROLS TO NON-ADDING STATE (only those that are controlled by "adding")
             CustomerComboBox.Enabled = True
             VehicleComboBox.Enabled = True
-            InvoiceNumComboBox.Enabled = True
+            InvoiceComboBox.Enabled = True
             newInvButton.Enabled = True
             cancelButton.Enabled = False
             saveButton.Enabled = False
@@ -1416,9 +1416,9 @@
                     ' If update failed, then revert selected back to lastSelected
                     Dim updatedItem As String = getRowValueWithKeyEquals(InvDbController.DbDataTable, "INID", "InvNbr", InvId)
                     If updatedItem <> Nothing Then
-                        InvoiceNumComboBox.SelectedIndex = InvoiceNumComboBox.Items.IndexOf(updatedItem)
+                        InvoiceComboBox.SelectedIndex = InvoiceComboBox.Items.IndexOf(updatedItem)
                     Else
-                        InvoiceNumComboBox.SelectedIndex = InvoiceNumComboBox.Items.IndexOf(lastSelected)
+                        InvoiceComboBox.SelectedIndex = InvoiceComboBox.Items.IndexOf(lastSelected)
                     End If
 
                     ' 5.) MOVE UI OUT OF EDITING MODE
@@ -1428,7 +1428,7 @@
                     nav.EnableAll()
                     CustomerComboBox.Enabled = True
                     VehicleComboBox.Enabled = True
-                    InvoiceNumComboBox.Enabled = True
+                    InvoiceComboBox.Enabled = True
 
                     ' Re-Enable Task and Payment Buttons
                     tasksButton.Enabled = True
@@ -1471,13 +1471,13 @@
 
                         ' Set ComboBox accordingly after one final check
                         If newItem <> Nothing Then
-                            InvoiceNumComboBox.SelectedIndex = InvoiceNumComboBox.Items.IndexOf(newItem)
+                            InvoiceComboBox.SelectedIndex = InvoiceComboBox.Items.IndexOf(newItem)
                         Else
-                            InvoiceNumComboBox.SelectedIndex = InvoiceNumComboBox.Items.IndexOf(lastSelected)
+                            InvoiceComboBox.SelectedIndex = InvoiceComboBox.Items.IndexOf(lastSelected)
                         End If
 
                     Else
-                        InvoiceNumComboBox.SelectedIndex = lastSelected
+                        InvoiceComboBox.SelectedIndex = lastSelected
                     End If
 
                     ' 5.) MOVE UI OUT OF Adding MODE
@@ -1487,7 +1487,7 @@
                     nav.EnableAll()
                     CustomerComboBox.Enabled = True
                     VehicleComboBox.Enabled = True
-                    InvoiceNumComboBox.Enabled = True
+                    InvoiceComboBox.Enabled = True
 
                     ' Re-Enable Task and Payment Buttons
                     tasksButton.Enabled = True

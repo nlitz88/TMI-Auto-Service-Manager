@@ -28,8 +28,8 @@ Partial Class invoices
         Me.cancelButton = New System.Windows.Forms.Button()
         Me.saveButton = New System.Windows.Forms.Button()
         Me.newInvButton = New System.Windows.Forms.Button()
-        Me.invoiceNumLabel = New System.Windows.Forms.Label()
-        Me.InvoiceNumComboBox = New System.Windows.Forms.ComboBox()
+        Me.invoiceLabel = New System.Windows.Forms.Label()
+        Me.InvoiceComboBox = New System.Windows.Forms.ComboBox()
         Me.CustomerComboLabel = New System.Windows.Forms.Label()
         Me.CustomerComboBox = New System.Windows.Forms.ComboBox()
         Me.InvDate_Textbox = New System.Windows.Forms.MaskedTextBox()
@@ -218,26 +218,26 @@ Partial Class invoices
         Me.newInvButton.Text = "New Invoice"
         Me.newInvButton.UseVisualStyleBackColor = False
         '
-        'invoiceNumLabel
+        'invoiceLabel
         '
-        Me.invoiceNumLabel.AutoSize = True
-        Me.invoiceNumLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.invoiceNumLabel.Location = New System.Drawing.Point(97, 332)
-        Me.invoiceNumLabel.Name = "invoiceNumLabel"
-        Me.invoiceNumLabel.Size = New System.Drawing.Size(72, 17)
-        Me.invoiceNumLabel.TabIndex = 143
-        Me.invoiceNumLabel.Text = "Invoice # :"
+        Me.invoiceLabel.AutoSize = True
+        Me.invoiceLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.invoiceLabel.Location = New System.Drawing.Point(97, 332)
+        Me.invoiceLabel.Name = "invoiceLabel"
+        Me.invoiceLabel.Size = New System.Drawing.Size(60, 17)
+        Me.invoiceLabel.TabIndex = 143
+        Me.invoiceLabel.Text = "Invoice :"
         '
-        'InvoiceNumComboBox
+        'InvoiceComboBox
         '
-        Me.InvoiceNumComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.InvoiceNumComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.InvoiceNumComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
-        Me.InvoiceNumComboBox.FormattingEnabled = True
-        Me.InvoiceNumComboBox.Location = New System.Drawing.Point(179, 326)
-        Me.InvoiceNumComboBox.Name = "InvoiceNumComboBox"
-        Me.InvoiceNumComboBox.Size = New System.Drawing.Size(213, 28)
-        Me.InvoiceNumComboBox.TabIndex = 2
+        Me.InvoiceComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.InvoiceComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.InvoiceComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
+        Me.InvoiceComboBox.FormattingEnabled = True
+        Me.InvoiceComboBox.Location = New System.Drawing.Point(179, 326)
+        Me.InvoiceComboBox.Name = "InvoiceComboBox"
+        Me.InvoiceComboBox.Size = New System.Drawing.Size(213, 28)
+        Me.InvoiceComboBox.TabIndex = 2
         '
         'CustomerComboLabel
         '
@@ -1545,8 +1545,8 @@ Partial Class invoices
         Me.Controls.Add(Me.InvDate_Value)
         Me.Controls.Add(Me.InvoiceDateLabel)
         Me.Controls.Add(Me.CustomerComboBox)
-        Me.Controls.Add(Me.invoiceNumLabel)
-        Me.Controls.Add(Me.InvoiceNumComboBox)
+        Me.Controls.Add(Me.invoiceLabel)
+        Me.Controls.Add(Me.InvoiceComboBox)
         Me.Controls.Add(Me.CustomerComboLabel)
         Me.Controls.Add(Me.deleteInvButton)
         Me.Controls.Add(Me.invoiceMaintenanceLabel)
@@ -1588,8 +1588,8 @@ Partial Class invoices
     Friend WithEvents cancelButton As Button
     Friend WithEvents saveButton As Button
     Friend WithEvents newInvButton As Button
-    Friend WithEvents invoiceNumLabel As Label
-    Friend WithEvents InvoiceNumComboBox As ComboBox
+    Friend WithEvents invoiceLabel As Label
+    Friend WithEvents InvoiceComboBox As ComboBox
     Friend WithEvents CustomerComboLabel As Label
     Friend WithEvents CustomerComboBox As ComboBox
     Friend WithEvents InvDate_Textbox As MaskedTextBox
