@@ -420,7 +420,7 @@
 
     Private Sub InitializeShopChargesTextbox()
 
-        Dim shopSupplies As Boolean = InvDbController.DbDataTable(InvRow)("ShopSupplies")
+        Dim shopSupplies As Boolean = ShopSupplies_CheckBox.Checked
 
         If shopSupplies Then
             Dim shopSupplyCharge As Decimal = CMDbController.DbDataTable.Rows(CMRow)("ShopSupplyCharge")
@@ -606,6 +606,7 @@
     ' Sub that calls all individual dataViewingControl initialization subs in one (These can be used individually if desired)
     Private Sub InitializeAllDataViewingControls()
 
+        ' Reset calculated values
         InvLaborSum = 0
         InvPartsSum = 0
         ShopCharges = 0
@@ -638,6 +639,15 @@
 
     ' Sub that calls all individual dataEditingControl initialization subs in one (These can be used individually if desired)
     Private Sub InitializeAllDataEditingControls()
+
+        ' Reset calculated values
+        InvLaborSum = 0
+        InvPartsSum = 0
+        ShopCharges = 0
+        SubTotal = 0
+        Tax = 0
+        InvTotalSum = 0
+        InvPaymentsSum = 0
 
         ' Automated initializations
         InitializeInvoiceDataEditingControls()
@@ -1050,4 +1060,16 @@
     Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
 
     End Sub
+
+
+
+    Private Sub ShopSupplies_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles ShopSupplies_CheckBox.CheckedChanged
+
+        ' Initialize ShopCharges Textbox no matter what. It will determine whether or include or not based on CheckStatus
+        '   (might have to set DataTable value here if reading the CheckState doesn't work)
+        InitializeShopChargesTextbox()
+
+    End Sub
+
+
 End Class
