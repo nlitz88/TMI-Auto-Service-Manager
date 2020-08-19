@@ -521,12 +521,11 @@ Partial Class invoices
         'vehicleHistoryButton
         '
         Me.vehicleHistoryButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.vehicleHistoryButton.Enabled = False
         Me.vehicleHistoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.vehicleHistoryButton.ForeColor = System.Drawing.Color.White
-        Me.vehicleHistoryButton.Location = New System.Drawing.Point(924, 475)
+        Me.vehicleHistoryButton.Location = New System.Drawing.Point(552, 282)
         Me.vehicleHistoryButton.Name = "vehicleHistoryButton"
-        Me.vehicleHistoryButton.Size = New System.Drawing.Size(138, 30)
+        Me.vehicleHistoryButton.Size = New System.Drawing.Size(211, 30)
         Me.vehicleHistoryButton.TabIndex = 12
         Me.vehicleHistoryButton.Tag = "dataLabel"
         Me.vehicleHistoryButton.Text = "Vehicle History"
@@ -702,9 +701,9 @@ Partial Class invoices
         Me.licensePlateSearchButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.licensePlateSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.licensePlateSearchButton.ForeColor = System.Drawing.Color.White
-        Me.licensePlateSearchButton.Location = New System.Drawing.Point(590, 193)
+        Me.licensePlateSearchButton.Location = New System.Drawing.Point(596, 192)
         Me.licensePlateSearchButton.Name = "licensePlateSearchButton"
-        Me.licensePlateSearchButton.Size = New System.Drawing.Size(282, 30)
+        Me.licensePlateSearchButton.Size = New System.Drawing.Size(250, 30)
         Me.licensePlateSearchButton.TabIndex = 289
         Me.licensePlateSearchButton.Tag = "licensePlateSearchControl"
         Me.licensePlateSearchButton.Text = "License Plate Search"

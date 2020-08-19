@@ -1017,6 +1017,8 @@
 
             ' Disable user from creating new invoice until valid vehicle selected
             newInvButton.Enabled = False
+            ' User may not view vehicle history when no valid vehicle selected
+            vehicleHistoryButton.Visible = False
 
             Exit Sub
 
@@ -1040,6 +1042,8 @@
 
             ' Now that valid vehicle selected, user may add new invoice associated with that vehicle
             newInvButton.Enabled = True
+            ' User may now also view vehicle history of the selected vehicle
+            vehicleHistoryButton.Visible = True
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
@@ -1057,6 +1061,8 @@
 
             ' Disable user from creating new invoice until valid vehicle selected
             newInvButton.Enabled = False
+            ' User may not view vehicle history when no valid vehicle selected
+            vehicleHistoryButton.Visible = False
 
         End If
 
