@@ -29,7 +29,7 @@
     Private VehicleRow As Integer               ' Maintains row in DataTable that corresponds to the currently selected YMML
     Private VehicleId As Integer                ' VehicleId from same row that ""
 
-    Private InvRow As Long                      ' Maintains row in DataTable that corresponds to the currently selected InvoiceNbr
+    Private InvRow As Integer                   ' Maintains row in DataTable that corresponds to the currently selected InvoiceNbr
     Private InvId As Long                       ' InvNbr from same row that ""
 
     Private CMRow As Integer = 0
@@ -324,11 +324,12 @@
     Private Function loadInvoiceDataTable() As Boolean
 
         InvDbController.AddParams("@vehicleId", VehicleId)
-        InvDbController.ExecQuery("SELECT i.InvNbr, i.CustomerId, i.VehicleId, i.Mileage, i.InvDate, i.Complete, i.NbrTasks, i.WorkDate, i.ApptDate, i.ContactName, i.ContactPhone1, i.ContactPhone2, i.Notes, i.TotalLabor, i.TotalParts, i.Towing, " &
-                                      "i.Gas, i.ShopCharges, i.Tax, i.InvTotal, i.TotalPaid, i.PayDate, i.ShopSupplies " &
-                                      "FROM InvHdr i " &
-                                      "WHERE i.VehicleId=@vehicleId " &
-                                      "ORDER BY i.InvNbr ASC")
+        InvDbController.ExecQuery("SELECT CSTR(IIF(ISNULL(i.InvNbr), 0, i.InvNbr)) + ' - ' + CSTR(IIF(ISNULL(i.InvDate), '', i.InvDate)) as INID, " &
+                                  "i.InvNbr, i.CustomerId, i.VehicleId, i.Mileage, i.InvDate, i.Complete, i.NbrTasks, i.WorkDate, i.ApptDate, i.ContactName, i.ContactPhone1, i.ContactPhone2, i.Notes, i.TotalLabor, i.TotalParts, i.Towing, " &
+                                  "i.Gas, i.ShopCharges, i.Tax, i.InvTotal, i.TotalPaid, i.PayDate, i.ShopSupplies " &
+                                  "FROM InvHdr i " &
+                                  "WHERE i.VehicleId=@vehicleId " &
+                                  "ORDER BY i.InvNbr ASC")
 
         If InvDbController.HasException() Then Return False
 
@@ -343,7 +344,7 @@
         InvoiceNumComboBox.Items.Clear()
         InvoiceNumComboBox.Items.Add("Select One")
         For Each row In InvDbController.DbDataTable.Rows
-            InvoiceNumComboBox.Items.Add(row("InvNbr").ToString())
+            InvoiceNumComboBox.Items.Add(row("INID").ToString())
         Next
         InvoiceNumComboBox.EndUpdate()
 
@@ -1103,27 +1104,13 @@
 
         End If
 
-
-        ' This logic checks to see if the value in InvoiceNumComboBox is numeric. If so, then convert it to an int
-        ' If not, invNbr will remain as -1, subsequently producing a -1 on lookup from getDataTableRowEquals()
-        Dim invNbr As Long = -1
-        If allValidChars(InvoiceNumComboBox.Text, "0123456789") = -1 Then
-            Try
-                invNbr = Convert.ToInt64(InvoiceNumComboBox.Text)
-            Catch ex As Exception
-
-            End Try
-        End If
-
-
         ' Lookup newly selected row and see if it is valid (valid if it corresponds with a datatable row)
-        InvRow = getDataTableRowEquals(InvDbController.DbDataTable, "InvNbr", invNbr)
+        InvRow = getDataTableRowEquals(InvDbController.DbDataTable, "INID", InvoiceNumComboBox.Text)
 
         ' If this query DOES return a valid row index, then initialize respective controls
         If InvRow <> -1 Then
 
-            'InvId = InvDbController.DbDataTable.Rows(InvRow)("InvId")
-            InvId = Convert.ToInt64(InvoiceNumComboBox.Text)
+            InvId = InvDbController.DbDataTable.Rows(InvRow)("InvNbr")
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
@@ -1233,18 +1220,8 @@
             ctrl.Enabled = False
         Next
 
-        ' Logic that is used to determine if the current selected item is numeric. Dictates whether or not to look it up.
-        Dim invNbr As Long = -1
-        If allValidChars(InvoiceNumComboBox.Text, "0123456789") = -1 Then
-            Try
-                invNbr = Convert.ToInt64(InvoiceNumComboBox.Text)
-            Catch ex As Exception
-
-            End Try
-        End If
-
-        ' Get lastSelectedVehicle
-        If getDataTableRowEquals(InvDbController.DbDataTable, "InvNbr", invNbr) <> -1 Then
+        ' Get lastSelected
+        If getDataTableRowEquals(InvDbController.DbDataTable, "INID", InvoiceNumComboBox.Text) <> -1 Then
             lastSelected = InvoiceNumComboBox.Text
         Else
             lastSelected = "Select One"
@@ -1433,22 +1410,16 @@
                     ' ALso going to have to reload CustomerDataTable (if TaxExempt Editable)
 
                     ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
-                    InitializeInvoiceNumComboBox()  'This could probably be avoided, as these don't change
+                    InitializeInvoiceNumComboBox()
 
                     ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
                     ' If update failed, then revert selected back to lastSelected
-                    'Dim updatedItem As String = getRowValueWithKeyEquals(InvDbController.DbDataTable, "InvNbr", "InvNbr", InvId)
-                    'If updatedItem <> Nothing Then
-                    '    InvoiceNumComboBox.SelectedIndex = InvoiceNumComboBox.Items.IndexOf(updatedItem)
-                    '    InvoiceNumComboBox_SelectedIndexChanged(InvoiceNumComboBox, New EventArgs())
-                    'Else
-                    '    InvoiceNumComboBox.SelectedIndex = InvoiceNumComboBox.Items.IndexOf(lastSelected)
-                    '    InvoiceNumComboBox_SelectedIndexChanged(InvoiceNumComboBox, New EventArgs())
-                    'End If
-
-                    ' Because Primary Key is the comboBox Item, and this particular primary key never changes, we don't need to lookup new value.
-                    InvoiceNumComboBox.SelectedIndex = InvoiceNumComboBox.Items.IndexOf(lastSelected)
-                    'InvoiceNumComboBox_SelectedIndexChanged(InvoiceNumComboBox, New EventArgs())
+                    Dim updatedItem As String = getRowValueWithKeyEquals(InvDbController.DbDataTable, "INID", "InvNbr", InvId)
+                    If updatedItem <> Nothing Then
+                        InvoiceNumComboBox.SelectedIndex = InvoiceNumComboBox.Items.IndexOf(updatedItem)
+                    Else
+                        InvoiceNumComboBox.SelectedIndex = InvoiceNumComboBox.Items.IndexOf(lastSelected)
+                    End If
 
                     ' 5.) MOVE UI OUT OF EDITING MODE
                     newInvButton.Enabled = True
@@ -1496,7 +1467,7 @@
                         ' Get new TaskId if query successful
                         newInvNbr = CRUD.DbDataTable.Rows(0)("InvNbr")
                         ' Get new ComboBox item from datatable using newly retrieved ID
-                        Dim newItem As String = getRowValueWithKeyEquals(InvDbController.DbDataTable, "InvNbr", "InvNbr", newInvNbr)
+                        Dim newItem As String = getRowValueWithKeyEquals(InvDbController.DbDataTable, "INID", "InvNbr", newInvNbr)
 
                         ' Set ComboBox accordingly after one final check
                         If newItem <> Nothing Then
