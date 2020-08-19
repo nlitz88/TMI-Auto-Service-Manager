@@ -32,7 +32,6 @@ Partial Class vehicleMaintenance
         Me.VehicleComboBox = New System.Windows.Forms.ComboBox()
         Me.CustomerComboLabel = New System.Windows.Forms.Label()
         Me.CustomerComboBox = New System.Windows.Forms.ComboBox()
-        Me.Alarm_Value = New System.Windows.Forms.Label()
         Me.Alarm_CheckBox = New System.Windows.Forms.CheckBox()
         Me.AlarmLabel = New System.Windows.Forms.Label()
         Me.VIN_Value = New System.Windows.Forms.Label()
@@ -71,13 +70,10 @@ Partial Class vehicleMaintenance
         Me.ExpirationDate_Value = New System.Windows.Forms.Label()
         Me.ExpirationDateLabel = New System.Windows.Forms.Label()
         Me.ExpirationDate_Textbox = New System.Windows.Forms.MaskedTextBox()
-        Me.ABS_Value = New System.Windows.Forms.Label()
         Me.ABS_CheckBox = New System.Windows.Forms.CheckBox()
         Me.ABSLabel = New System.Windows.Forms.Label()
-        Me.AirBags_Value = New System.Windows.Forms.Label()
         Me.AirBags_CheckBox = New System.Windows.Forms.CheckBox()
         Me.AirbagsLabel = New System.Windows.Forms.Label()
-        Me.AC_Value = New System.Windows.Forms.Label()
         Me.AC_CheckBox = New System.Windows.Forms.CheckBox()
         Me.ACLabel = New System.Windows.Forms.Label()
         Me.Engine_Value = New System.Windows.Forms.Label()
@@ -87,6 +83,10 @@ Partial Class vehicleMaintenance
         Me.NotesLabel = New System.Windows.Forms.Label()
         Me.Notes_Textbox = New System.Windows.Forms.TextBox()
         Me.nav = New AutoServiceManager.navigation()
+        Me.Alarm_Value = New System.Windows.Forms.CheckBox()
+        Me.ABS_Value = New System.Windows.Forms.CheckBox()
+        Me.AirBags_Value = New System.Windows.Forms.CheckBox()
+        Me.AC_Value = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'deleteButton
@@ -205,18 +205,6 @@ Partial Class vehicleMaintenance
         Me.CustomerComboBox.Name = "CustomerComboBox"
         Me.CustomerComboBox.Size = New System.Drawing.Size(508, 28)
         Me.CustomerComboBox.TabIndex = 0
-        '
-        'Alarm_Value
-        '
-        Me.Alarm_Value.AutoSize = True
-        Me.Alarm_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Alarm_Value.ForeColor = System.Drawing.Color.Black
-        Me.Alarm_Value.Location = New System.Drawing.Point(206, 581)
-        Me.Alarm_Value.Name = "Alarm_Value"
-        Me.Alarm_Value.Size = New System.Drawing.Size(0, 20)
-        Me.Alarm_Value.TabIndex = 14
-        Me.Alarm_Value.Tag = "dataViewingControl"
-        Me.Alarm_Value.Visible = False
         '
         'Alarm_CheckBox
         '
@@ -685,18 +673,6 @@ Partial Class vehicleMaintenance
         Me.ExpirationDate_Textbox.ValidatingType = GetType(Date)
         Me.ExpirationDate_Textbox.Visible = False
         '
-        'ABS_Value
-        '
-        Me.ABS_Value.AutoSize = True
-        Me.ABS_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ABS_Value.ForeColor = System.Drawing.Color.Black
-        Me.ABS_Value.Location = New System.Drawing.Point(394, 581)
-        Me.ABS_Value.Name = "ABS_Value"
-        Me.ABS_Value.Size = New System.Drawing.Size(0, 20)
-        Me.ABS_Value.TabIndex = 15
-        Me.ABS_Value.Tag = "dataViewingControl"
-        Me.ABS_Value.Visible = False
-        '
         'ABS_CheckBox
         '
         Me.ABS_CheckBox.AutoSize = True
@@ -720,18 +696,6 @@ Partial Class vehicleMaintenance
         Me.ABSLabel.Text = "ABS Brakes :"
         Me.ABSLabel.Visible = False
         '
-        'AirBags_Value
-        '
-        Me.AirBags_Value.AutoSize = True
-        Me.AirBags_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AirBags_Value.ForeColor = System.Drawing.Color.Black
-        Me.AirBags_Value.Location = New System.Drawing.Point(556, 581)
-        Me.AirBags_Value.Name = "AirBags_Value"
-        Me.AirBags_Value.Size = New System.Drawing.Size(0, 20)
-        Me.AirBags_Value.TabIndex = 16
-        Me.AirBags_Value.Tag = "dataViewingControl"
-        Me.AirBags_Value.Visible = False
-        '
         'AirBags_CheckBox
         '
         Me.AirBags_CheckBox.AutoSize = True
@@ -754,18 +718,6 @@ Partial Class vehicleMaintenance
         Me.AirbagsLabel.Tag = "dataLabel"
         Me.AirbagsLabel.Text = "AirBags :"
         Me.AirbagsLabel.Visible = False
-        '
-        'AC_Value
-        '
-        Me.AC_Value.AutoSize = True
-        Me.AC_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AC_Value.ForeColor = System.Drawing.Color.Black
-        Me.AC_Value.Location = New System.Drawing.Point(691, 582)
-        Me.AC_Value.Name = "AC_Value"
-        Me.AC_Value.Size = New System.Drawing.Size(0, 20)
-        Me.AC_Value.TabIndex = 17
-        Me.AC_Value.Tag = "dataViewingControl"
-        Me.AC_Value.Visible = False
         '
         'AC_CheckBox
         '
@@ -869,12 +821,64 @@ Partial Class vehicleMaintenance
         Me.nav.Size = New System.Drawing.Size(982, 28)
         Me.nav.TabIndex = 257
         '
+        'Alarm_Value
+        '
+        Me.Alarm_Value.AutoCheck = False
+        Me.Alarm_Value.AutoSize = True
+        Me.Alarm_Value.Location = New System.Drawing.Point(206, 585)
+        Me.Alarm_Value.Name = "Alarm_Value"
+        Me.Alarm_Value.Size = New System.Drawing.Size(18, 17)
+        Me.Alarm_Value.TabIndex = 322
+        Me.Alarm_Value.Tag = "dataViewingControl"
+        Me.Alarm_Value.UseVisualStyleBackColor = True
+        Me.Alarm_Value.Visible = False
+        '
+        'ABS_Value
+        '
+        Me.ABS_Value.AutoCheck = False
+        Me.ABS_Value.AutoSize = True
+        Me.ABS_Value.Location = New System.Drawing.Point(394, 585)
+        Me.ABS_Value.Name = "ABS_Value"
+        Me.ABS_Value.Size = New System.Drawing.Size(18, 17)
+        Me.ABS_Value.TabIndex = 323
+        Me.ABS_Value.Tag = "dataViewingControl"
+        Me.ABS_Value.UseVisualStyleBackColor = True
+        Me.ABS_Value.Visible = False
+        '
+        'AirBags_Value
+        '
+        Me.AirBags_Value.AutoCheck = False
+        Me.AirBags_Value.AutoSize = True
+        Me.AirBags_Value.Location = New System.Drawing.Point(556, 585)
+        Me.AirBags_Value.Name = "AirBags_Value"
+        Me.AirBags_Value.Size = New System.Drawing.Size(18, 17)
+        Me.AirBags_Value.TabIndex = 324
+        Me.AirBags_Value.Tag = "dataViewingControl"
+        Me.AirBags_Value.UseVisualStyleBackColor = True
+        Me.AirBags_Value.Visible = False
+        '
+        'AC_Value
+        '
+        Me.AC_Value.AutoCheck = False
+        Me.AC_Value.AutoSize = True
+        Me.AC_Value.Location = New System.Drawing.Point(691, 586)
+        Me.AC_Value.Name = "AC_Value"
+        Me.AC_Value.Size = New System.Drawing.Size(18, 17)
+        Me.AC_Value.TabIndex = 325
+        Me.AC_Value.Tag = "dataViewingControl"
+        Me.AC_Value.UseVisualStyleBackColor = True
+        Me.AC_Value.Visible = False
+        '
         'vehicleMaintenance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.AC_Value)
+        Me.Controls.Add(Me.AirBags_Value)
+        Me.Controls.Add(Me.ABS_Value)
+        Me.Controls.Add(Me.Alarm_Value)
         Me.Controls.Add(Me.nav)
         Me.Controls.Add(Me.Notes_Value)
         Me.Controls.Add(Me.NotesLabel)
@@ -882,13 +886,10 @@ Partial Class vehicleMaintenance
         Me.Controls.Add(Me.Engine_Value)
         Me.Controls.Add(Me.EngineLabel)
         Me.Controls.Add(Me.Engine_Textbox)
-        Me.Controls.Add(Me.AC_Value)
         Me.Controls.Add(Me.AC_CheckBox)
         Me.Controls.Add(Me.ACLabel)
-        Me.Controls.Add(Me.AirBags_Value)
         Me.Controls.Add(Me.AirBags_CheckBox)
         Me.Controls.Add(Me.AirbagsLabel)
-        Me.Controls.Add(Me.ABS_Value)
         Me.Controls.Add(Me.ABS_CheckBox)
         Me.Controls.Add(Me.ABSLabel)
         Me.Controls.Add(Me.ExpirationDate_Textbox)
@@ -922,7 +923,6 @@ Partial Class vehicleMaintenance
         Me.Controls.Add(Me.Make_ComboBox)
         Me.Controls.Add(Me.Model_Value)
         Me.Controls.Add(Me.ModelLabel)
-        Me.Controls.Add(Me.Alarm_Value)
         Me.Controls.Add(Me.Alarm_CheckBox)
         Me.Controls.Add(Me.AlarmLabel)
         Me.Controls.Add(Me.VIN_Value)
@@ -960,7 +960,6 @@ Partial Class vehicleMaintenance
     Friend WithEvents VehicleComboBox As ComboBox
     Friend WithEvents CustomerComboLabel As Label
     Friend WithEvents CustomerComboBox As ComboBox
-    Friend WithEvents Alarm_Value As Label
     Friend WithEvents Alarm_CheckBox As CheckBox
     Friend WithEvents AlarmLabel As Label
     Friend WithEvents VIN_Value As Label
@@ -999,13 +998,10 @@ Partial Class vehicleMaintenance
     Friend WithEvents ExpirationDate_Value As Label
     Friend WithEvents ExpirationDateLabel As Label
     Friend WithEvents ExpirationDate_Textbox As MaskedTextBox
-    Friend WithEvents ABS_Value As Label
     Friend WithEvents ABS_CheckBox As CheckBox
     Friend WithEvents ABSLabel As Label
-    Friend WithEvents AirBags_Value As Label
     Friend WithEvents AirBags_CheckBox As CheckBox
     Friend WithEvents AirbagsLabel As Label
-    Friend WithEvents AC_Value As Label
     Friend WithEvents AC_CheckBox As CheckBox
     Friend WithEvents ACLabel As Label
     Friend WithEvents Engine_Value As Label
@@ -1015,4 +1011,8 @@ Partial Class vehicleMaintenance
     Friend WithEvents NotesLabel As Label
     Friend WithEvents Notes_Textbox As TextBox
     Friend WithEvents nav As navigation
+    Friend WithEvents Alarm_Value As CheckBox
+    Friend WithEvents ABS_Value As CheckBox
+    Friend WithEvents AirBags_Value As CheckBox
+    Friend WithEvents AC_Value As CheckBox
 End Class
