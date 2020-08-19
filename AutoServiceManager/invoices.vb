@@ -1228,4 +1228,78 @@
 
     End Sub
 
+
+
+
+    Private Sub InvDate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles InvDate_Textbox.TextChanged
+
+    End Sub
+
+
+    Private Sub Complete_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles Complete_CheckBox.CheckedChanged
+
+    End Sub
+
+
+    Private Sub ContactName_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ContactName_Textbox.TextChanged
+
+    End Sub
+
+
+    Private Sub ContactPhone1_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ContactPhone1_ComboBox.SelectedIndexChanged, ContactPhone1_ComboBox.TextChanged
+
+    End Sub
+
+
+    Private Sub ContactPhone2_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ContactPhone2_ComboBox.SelectedIndexChanged, ContactPhone2_ComboBox.TextChanged
+
+    End Sub
+
+
+    Private Sub InspectionMonth_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InspectionMonth_ComboBox.SelectedIndexChanged, InspectionMonth_ComboBox.TextChanged
+
+    End Sub
+
+
+    Private Sub InspectionSticker_Textbox_TextChanged(sender As Object, e As EventArgs) Handles InspectionSticker_Textbox.TextChanged
+
+    End Sub
+
+
+    Private Sub Mileage_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles Mileage_Textbox.KeyDown
+
+        ' Allow certain keystrokes through here. Oftentimes, these will be common shortcuts
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
+            allowedKeystroke = True
+        End If
+
+    End Sub
+
+    Private Sub Mileage_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Mileage_Textbox.KeyPress
+
+        ' If certain keystroke exceptions allowed throuhg, then skip input validation here
+        If allowedKeystroke Then
+            allowedKeystroke = False
+            Exit Sub
+        End If
+
+        If Not numericInputValid(Mileage_Textbox, e.KeyChar, True) Then
+            e.KeyChar = Chr(0)
+            e.Handled = True
+        End If
+
+        ' Handles pasting in invalid values/strings
+        Dim lastValidIndex As Integer = allValidChars(Mileage_Textbox.Text, "1234567890")
+        If lastValidIndex <> -1 Then
+            Mileage_Textbox.Text = Mileage_Textbox.Text.Substring(0, lastValidIndex)
+            Mileage_Textbox.SelectionStart = lastValidIndex
+        End If
+
+    End Sub
+
+    Private Sub Mileage_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Mileage_Textbox.TextChanged
+
+    End Sub
+
+
 End Class

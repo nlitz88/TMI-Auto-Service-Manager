@@ -496,7 +496,7 @@
         End If
 
         ' Year
-        If Not validNumber("Year", False, makeYear_Textbox.Text, errorMessage) Then makeYear_Textbox.ForeColor = Color.Red
+        If Not validNumber("Year", False, makeYear_Textbox.Text, errorMessage, True) Then makeYear_Textbox.ForeColor = Color.Red
 
         ' Color
         If Not isValidLength("Color", False, Color_ComboBox.Text, 20, errorMessage) Then
@@ -1088,7 +1088,7 @@
             Exit Sub
         End If
 
-        If Not numericInputValid(makeYear_Textbox, e.KeyChar) Then
+        If Not numericInputValid(makeYear_Textbox, e.KeyChar, True) Then
             e.KeyChar = Chr(0)
             e.Handled = True
         End If
@@ -1100,6 +1100,13 @@
         If Not valuesInitialized Then Exit Sub
 
         makeYear_Textbox.ForeColor = DefaultForeColor
+
+        ' Handles pasting in invalid values/strings
+        Dim lastValidIndex As Integer = allValidChars(makeYear_Textbox.Text, "1234567890")
+        If lastValidIndex <> -1 Then
+            makeYear_Textbox.Text = makeYear_Textbox.Text.Substring(0, lastValidIndex)
+            makeYear_Textbox.SelectionStart = lastValidIndex
+        End If
 
         If InitialVehicleValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
