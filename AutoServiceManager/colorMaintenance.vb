@@ -523,4 +523,22 @@ Public Class colorMaintenance
     End Sub
 
 
+
+    Private Sub colorMaintenance_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+
+        ' Check if editing/adding, and if editing/adding, check if control values changed
+        If Color_Textbox.Visible And InitialACValues.CtrlValuesChanged() Then
+
+            Dim decision As DialogResult = MessageBox.Show("Exit without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+            If decision = DialogResult.No Then
+                e.Cancel = True
+                Exit Sub
+            End If
+
+        End If
+
+    End Sub
+
+
 End Class
