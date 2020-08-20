@@ -788,9 +788,8 @@ Public Class invoices
     ' Update InspectionNbr and Inspection month for vehicle to Vehicle Table
     ' IF we decide they can change this here (For whatever justification that may be), then update TaxExempt in Customer Table as well
 
-    ' make separate sub for updating Vehicle (will have to provide custom additional value because column name different?)
 
-    '
+    ' UPDATING CRUD SUBS
     Private Function updateInvoice() As Boolean
 
         ' Excluded Value List
@@ -837,6 +836,7 @@ Public Class invoices
 
     End Function
 
+    ' Update CRUD function used for updating vehicle values editable from invoice form here
     Private Function updateVehicle() As Boolean
 
         ' Because inspectionSticker is queried with a different column name, we must exclude it and add it as an additional value where we can customize its column name
@@ -852,6 +852,48 @@ Public Class invoices
     End Function
 
 
+    ' INSERTING CRUD SUB
+    Private Function insertInvoice() As Boolean
+
+        ' Other additional values that were not included in update that are needed here:
+        '   CustomerId, VehicleId
+
+        Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
+
+        ' Calculate Taxable and NonTaxable
+        Dim Taxable, NonTaxable As Decimal
+        If TaxExempt Then
+            Taxable = 0
+            NonTaxable = Convert.ToDecimal(InvTotal_Textbox.Text)
+        Else
+            Taxable = Convert.ToDecimal(SubTotalTextbox.Text)
+            Dim gas As Decimal = Convert.ToDecimal(Gas_Textbox.Text)
+            Dim towing As Decimal = Convert.ToDecimal(Towing_Textbox.Text)
+            NonTaxable = gas + towing
+        End If
+
+        ' Get stripped versions of Contact Phone Numbers
+        Dim ContactPhone1 As String = removeInvalidChars(ContactPhone1_ComboBox.Text, "0123456789")
+        Dim ContactPhone2 As String = removeInvalidChars(ContactPhone2_ComboBox.Text, "0123456789")
+
+
+        Dim excludedControls As New List(Of Control) From {TaxExempt_Textbox, ContactPhone1_ComboBox, ContactPhone2_ComboBox, InvNbr_Textbox}
+        Dim additionalValues As New List(Of AdditionalValue) From {
+            New AdditionalValue("CustomerId", GetType(Integer), CustomerId),
+            New AdditionalValue("VehicleId", GetType(Integer), VehicleId),
+            New AdditionalValue("TaxExempt", GetType(Boolean), TaxExempt),
+            New AdditionalValue("Taxable", GetType(Decimal), Taxable),
+            New AdditionalValue("NonTaxable", GetType(Decimal), NonTaxable),
+            New AdditionalValue("ContactPhone1", GetType(String), ContactPhone1),
+            New AdditionalValue("ContactPhone2", GetType(String), ContactPhone2)}
+
+        insertRow(CRUD, InvDbController.DbDataTable, "InvHdr", "_", "dataEditingControl", Me, excludedControls, additionalValues)
+        If CRUD.HasException() Then Return False
+
+        Return True
+
+    End Function
+    ' No additional for inserting vehicle, as the user can only update certain existing vehicle information on this form (even when adding a new invoice)
 
 
 
@@ -1281,6 +1323,10 @@ Public Class invoices
         cancelButton.Enabled = True
         nav.DisableAll()
 
+        ' Disable Task and Payment Buttons
+        tasksButton.Enabled = False
+        paymentsButton.Enabled = False
+
         ' Disable all licensePlate searching controls
         For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
             ctrl.Enabled = False
@@ -1410,6 +1456,10 @@ Public Class invoices
             saveButton.Enabled = False
             nav.EnableAll()
 
+            ' Re-Enable Task and Payment Buttons
+            tasksButton.Enabled = True
+            paymentsButton.Enabled = True
+
             ' Re-Enable all licensePlate searching controls
             For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
                 ctrl.Enabled = True
@@ -1437,6 +1487,10 @@ Public Class invoices
             cancelButton.Enabled = False
             saveButton.Enabled = False
             nav.EnableAll()
+
+            ' Re-Enable Task and Payment Buttons
+            tasksButton.Enabled = True
+            paymentsButton.Enabled = True
 
             ' Re-Enable all licensePlate searching controls
             For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
@@ -1507,12 +1561,13 @@ Public Class invoices
                     If Not controlsValid() Then Exit Sub
 
                     ' 2.) INSERT NEW ROW INTO MASTER TASK LIST
-                    'If Not insertMasterTask() Then
-                    '    MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    '    Exit Sub
-                    'Else
-                    '    MessageBox.Show("Successfully added " & TaskDescription_Textbox.Text & " to Master Task List")
-                    'End If
+                    ' We use update vehicle here, as we're not inserting a new vehicle, but we may be updating vehicle values when editing this form
+                    If Not insertInvoice() Or Not updateVehicle() Then
+                        MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    Else
+                        MessageBox.Show("Successfully added invoice " & InvoiceComboBox.Text & " to invoices")
+                    End If
 
                     ' 3.) RELOAD DATATABLES FROM DATABASE
                     If Not loadInvoiceDataTable() Then  'And Not loadVehicleDataTable And Not loadCustomerDataTable

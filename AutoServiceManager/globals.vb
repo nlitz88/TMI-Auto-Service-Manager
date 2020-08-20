@@ -881,7 +881,7 @@
         ' Add query parameters for each column value in DataTable
         For i As Integer = 0 To dataTable.Columns.Count - 1
 
-            ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
+            ctrls = getAllNestedControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
 
             If ctrls.Count = 0 Then Continue For
             If excludedControls.Contains(ctrls(0)) Then Continue For
