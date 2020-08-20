@@ -788,6 +788,70 @@ Public Class invoices
     ' Update InspectionNbr and Inspection month for vehicle to Vehicle Table
     ' IF we decide they can change this here (For whatever justification that may be), then update TaxExempt in Customer Table as well
 
+    ' make separate sub for updating Vehicle (will have to provide custom additional value because column name different?)
+
+    '
+    Private Function updateInvoice() As Boolean
+
+        ' Excluded Value List
+        '   TaxExempt, ContactPhone1, ContactPhone2, and InvNbr (InvNbr primary auto-increment key, can't be updated)
+
+        ' Additional Values:
+        '   Taxable, NonTaxable, TaxExempt, ContactPhone1, ContactPhone2
+        '       All of these either need calculated or their formatting changed in some way before formatting
+
+
+        ' Get Tax Exempt Status From Customer DataTable (don't bother with the values here, as they don't change)
+        ' We can get it from Customer DT, as this isn't something that is changed on this form
+        Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
+
+        ' Calculate Taxable and NonTaxable
+        Dim Taxable, NonTaxable As Decimal
+        If TaxExempt Then
+            Taxable = 0
+            NonTaxable = Convert.ToDecimal(InvTotal_Textbox.Text)
+        Else
+            Taxable = Convert.ToDecimal(SubTotalTextbox.Text)
+            Dim gas As Decimal = Convert.ToDecimal(Gas_Textbox.Text)
+            Dim towing As Decimal = Convert.ToDecimal(Towing_Textbox.Text)
+            NonTaxable = gas + towing
+        End If
+
+        ' Get stripped versions of Contact Phone Numbers
+        Dim ContactPhone1 As String = removeInvalidChars(ContactPhone1_ComboBox.Text, "0123456789")
+        Dim ContactPhone2 As String = removeInvalidChars(ContactPhone2_ComboBox.Text, "0123456789")
+
+
+        Dim excludedControls As New List(Of Control) From {TaxExempt_Textbox, ContactPhone1_ComboBox, ContactPhone2_ComboBox, InvNbr_Textbox}
+        Dim additionalValues As New List(Of AdditionalValue) From {
+            New AdditionalValue("TaxExempt", GetType(Boolean), TaxExempt),
+            New AdditionalValue("Taxable", GetType(Decimal), Taxable),
+            New AdditionalValue("NonTaxable", GetType(Decimal), NonTaxable),
+            New AdditionalValue("ContactPhone1", GetType(String), ContactPhone1),
+            New AdditionalValue("ContactPhone2", GetType(String), ContactPhone2)}
+
+        updateTable(CRUD, InvDbController.DbDataTable, "InvHdr", InvId, "InvNbr", "_", "dataEditingControl", Me, excludedControls, additionalValues)
+        If CRUD.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+    Private Function updateVehicle() As Boolean
+
+        ' Because inspectionSticker is queried with a different column name, we must exclude it and add it as an additional value where we can customize its column name
+        ' Inspection month should be fine, so we can leave this as it is for the function to pick up
+        Dim excludedControls As New List(Of Control) From {InspectionSticker_Textbox}
+        Dim additionalValues As New List(Of AdditionalValue) From {New AdditionalValue("InspectionStickerNbr", GetType(String), InspectionSticker_Textbox.Text)}
+
+        updateTable(CRUD, VehicleDbController.DbDataTable, "Vehicle", VehicleId, "VehicleId", "_", "dataEditingControl", Me, excludedControls, additionalValues)
+        If CRUD.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+
 
 
 
@@ -1397,12 +1461,12 @@ Public Class invoices
                     If Not controlsValid() Then Exit Sub
 
                     ' 2.) UPDATE MASTER TASK LIST VALUES
-                    'If Not updateMasterTask() Then
-                    '    MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    '    Exit Sub
-                    'Else
-                    '    MessageBox.Show("Successfully updated Master Task List")
-                    'End If
+                    If Not updateInvoice() Or Not updateVehicle() Then
+                        MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    Else
+                        MessageBox.Show("Successfully updated Invoice")
+                    End If
 
                     ' 3.) RELOAD DATATABLES FROM DATABASE
                     If Not loadInvoiceDataTable() Then 'And Not loadVehicleDataTable And Not loadCustomerDataTable
