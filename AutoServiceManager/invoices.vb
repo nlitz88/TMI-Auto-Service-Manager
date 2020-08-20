@@ -818,6 +818,13 @@ Public Class invoices
             NonTaxable = gas + towing
         End If
 
+        ' First, separately insert Taxable and NonTaxable
+        CRUD.AddParams("@taxable", Taxable)
+        CRUD.AddParams("@nontaxable", NonTaxable)
+        CRUD.AddParams("@invId", InvId)
+        CRUD.ExecQuery("UPDATE InvHdr SET Taxable=@taxable, NonTaxable=@nontaxable WHERE InvNbr=@invId")
+        If CRUD.HasException() Then Return False
+
         ' Get inspection sticker and month from controls
         Dim InspectionSticker As String = InspectionSticker_Textbox.Text
         Dim InspectionMonth As String = InspectionMonth_ComboBox.Text
@@ -828,8 +835,6 @@ Public Class invoices
 
         Dim excludedControls As New List(Of Control) From {TaxExempt_Textbox, ContactPhone1_ComboBox, ContactPhone2_ComboBox, InvNbr_Textbox}
         Dim additionalValues As New List(Of AdditionalValue) From {
-            New AdditionalValue("Taxable", GetType(Decimal), Taxable),
-            New AdditionalValue("NonTaxable", GetType(Decimal), NonTaxable),
             New AdditionalValue("ContactPhone1", GetType(String), ContactPhone1),
             New AdditionalValue("ContactPhone2", GetType(String), ContactPhone2),
             New AdditionalValue("TaxExempt", GetType(Boolean), TaxExempt),
@@ -891,8 +896,6 @@ Public Class invoices
         Dim additionalValues As New List(Of AdditionalValue) From {
             New AdditionalValue("CustomerId", GetType(Integer), CustomerId),
             New AdditionalValue("VehicleId", GetType(Integer), VehicleId),
-            New AdditionalValue("Taxable", GetType(Decimal), Taxable),
-            New AdditionalValue("NonTaxable", GetType(Decimal), NonTaxable),
             New AdditionalValue("ContactPhone1", GetType(String), ContactPhone1),
             New AdditionalValue("ContactPhone2", GetType(String), ContactPhone2),
             New AdditionalValue("TaxExempt", GetType(Boolean), TaxExempt),
@@ -900,6 +903,22 @@ Public Class invoices
             New AdditionalValue("InspectionMonth", GetType(String), InspectionMonth)}
 
         insertRow(CRUD, InvDbController.DbDataTable, "InvHdr", "_", "dataEditingControl", Me, excludedControls, additionalValues)
+        If CRUD.HasException() Then Return False
+
+        ' Then, in new row, manually insert Taxable and NonTaxable
+        CRUD.ExecQuery("SELECT InvNbr FROM InvHdr WHERE InvNbr=(SELECT max(InvNbr) FROM InvHdr)")
+        Dim newInvNbr As Long
+        If CRUD.DbDataTable.Rows.Count <> 0 And Not CRUD.HasException(True) Then
+            ' Get new InvNbr if query successful
+            newInvNbr = CRUD.DbDataTable.Rows(0)("InvNbr")
+        Else
+            Return False
+        End If
+
+        CRUD.AddParams("@taxable", Taxable)
+        CRUD.AddParams("@nontaxable", NonTaxable)
+        CRUD.AddParams("@invId", newInvNbr)
+        CRUD.ExecQuery("UPDATE InvHdr SET Taxable=@taxable, NonTaxable=@nontaxable WHERE InvNbr=@invId")
         If CRUD.HasException() Then Return False
 
         Return True
@@ -1603,7 +1622,7 @@ Public Class invoices
 
                     If CRUD.DbDataTable.Rows.Count <> 0 And Not CRUD.HasException(True) Then
 
-                        ' Get new TaskId if query successful
+                        ' Get new InvNbr if query successful
                         newInvNbr = CRUD.DbDataTable.Rows(0)("InvNbr")
                         ' Get new ComboBox item from datatable using newly retrieved ID
                         Dim newItem As String = getRowValueWithKeyEquals(InvDbController.DbDataTable, "INID", "InvNbr", newInvNbr)
