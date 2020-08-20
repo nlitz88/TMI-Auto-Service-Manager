@@ -69,6 +69,10 @@ Public Class invoices
         Return InvoiceComboBox.Text
     End Function
 
+    Public Function GetInvId() As Long
+        Return InvId
+    End Function
+
 
 
 

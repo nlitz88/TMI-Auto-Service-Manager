@@ -15,6 +15,8 @@
     Private valuesInitialized As Boolean = True
 
     ' Row index variables used for DataTable lookups
+    Private InvId As Long
+
     Private InvTaskRow As Integer
     Private InvTaskId As Integer
 
@@ -41,6 +43,83 @@
     ' Boolean to keep track of whether or not this form has been closed
     Private MeClosed As Boolean = False
 
+
+
+
+    ' ***************** GET/SET SUBS FOR EXTERNAL FORMS *****************
+
+
+    ' Retrieves current task value
+    Public Function GetTask() As String
+        Return InvTaskComboBox.Text
+    End Function
+
+    ' Retrieves current InvTaskId corresponding to TaskValue
+    Public Function GetTaskId() As Integer
+        Return InvTaskId
+    End Function
+
+    ' Retrieves InvTaskLaborRow
+    Public Function GetTaskLaborRow() As Integer
+        Return InvTaskLaborRow
+    End Function
+
+    ' Retrieves InvTaskPartsRow
+    Public Function GetTaskPartsRow() As Integer
+        Return InvTaskPartsRow
+    End Function
+
+    ' Retrieves InvTaskLaborDbController Db controller
+    Public Function GetTaskLaborDbController() As DbControl
+        Return InvTaskLaborDbController
+    End Function
+
+    ' Retrieves InvTaskPartsDbController Db controller
+    Public Function GetTaskPartsDbController() As DbControl
+        Return InvTaskPartsDbController
+    End Function
+
+
+
+
+    ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
+
+
+    ' Function that will load Invoice Tasks based on current invoice
+    Private Function loadInvTaskDataTable()
+
+        ' Loads rows from InvTask based on current invoice (indicated by InvNbr)
+        InvTasksDbController.AddParams("@invid", InvId)
+        InvTasksDbController.ExecQuery("SELECT CSTR(IIF(ISNULL(it.TaskNbr), 0, it.TaskNbr)) + ' - ' + IIF(ISNULL(it.TaskDescription), '', it.TaskDescription) as TNTD, " &
+                                       "it.InvNbr, it.TaskNbr, it.TaskID, it.TaskDescription, it.Instructions, it.TaskLabor, it.TaskParts " &
+                                       "FROM InvTask it " &
+                                       "WHERE InvNbr=@invid " &
+                                       "ORDER BY it.TaskNbr ASC")
+
+        If InvTasksDbController.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+    ' Sub that initializes InvTaskComboBox
+    Private Sub InitializeInvTaskComboBox()
+
+        InvTaskComboBox.BeginUpdate()
+        InvTaskComboBox.Items.Clear()
+        InvTaskComboBox.Items.Add("Select One")
+        For Each row In InvTasksDbController.DbDataTable.Rows
+            InvTaskComboBox.Items.Add(row("TNTD"))
+        Next
+        InvTaskComboBox.EndUpdate()
+
+    End Sub
+
+
+
+
+
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -50,6 +129,17 @@
 
         ' Get invoice number and date to display in InvoiceValue
         InvoiceValue.Text = invoices.GetINID()
+        InvId = invoices.GetInvId()
+
+        ' Load InvTask DataTable
+        If Not loadInvTaskDataTable() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        ' Setup GridViews and initialize ComboBoxes for first time
+        InitializeInvTaskComboBox()
+
 
 
     End Sub

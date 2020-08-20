@@ -148,10 +148,10 @@
     <Compile Include="invoices.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InvoiceTasks.Designer.vb">
-      <DependentUpon>InvoiceTasks.vb</DependentUpon>
+    <Compile Include="invoiceTasks.Designer.vb">
+      <DependentUpon>invoiceTasks.vb</DependentUpon>
     </Compile>
-    <Compile Include="InvoiceTasks.vb">
+    <Compile Include="invoiceTasks.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="laborCodeMaintenance.Designer.vb">
@@ -264,8 +264,8 @@
     <EmbeddedResource Include="invoices.resx">
       <DependentUpon>invoices.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InvoiceTasks.resx">
-      <DependentUpon>InvoiceTasks.vb</DependentUpon>
+    <EmbeddedResource Include="invoiceTasks.resx">
+      <DependentUpon>invoiceTasks.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="laborCodeMaintenance.resx">
       <DependentUpon>laborCodeMaintenance.vb</DependentUpon>
