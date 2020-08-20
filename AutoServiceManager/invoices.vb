@@ -1381,6 +1381,10 @@ Public Class invoices
                 saveButton.Enabled = False
                 nav.EnableAll()
 
+                ' Re-Enable Task and Payment Buttons
+                tasksButton.Enabled = True
+                paymentsButton.Enabled = True
+
                 ' Re-Enable all licensePlate searching controls
                 For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
                     ctrl.Enabled = True
