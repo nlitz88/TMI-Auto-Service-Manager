@@ -83,7 +83,6 @@ Partial Class invoices
         Me.BalanceValue = New System.Windows.Forms.Label()
         Me.BalanceLabel = New System.Windows.Forms.Label()
         Me.NotesLabel = New System.Windows.Forms.Label()
-        Me.ShopSupplies_Value = New System.Windows.Forms.Label()
         Me.ShopSupplies_CheckBox = New System.Windows.Forms.CheckBox()
         Me.ShopSuppliesLabel = New System.Windows.Forms.Label()
         Me.TaxExempt_Value = New System.Windows.Forms.Label()
@@ -132,6 +131,7 @@ Partial Class invoices
         Me.Complete_Value = New System.Windows.Forms.CheckBox()
         Me.TaxExempt_Textbox = New System.Windows.Forms.TextBox()
         Me.nav = New AutoServiceManager.navigation()
+        Me.ShopSupplies_Value = New System.Windows.Forms.CheckBox()
         Me.CostTableLayoutPanel.SuspendLayout()
         Me.TotalPanel.SuspendLayout()
         Me.TaxPanel.SuspendLayout()
@@ -851,17 +851,6 @@ Partial Class invoices
         Me.NotesLabel.Tag = "dataLabel"
         Me.NotesLabel.Text = "Notes :"
         '
-        'ShopSupplies_Value
-        '
-        Me.ShopSupplies_Value.AutoSize = True
-        Me.ShopSupplies_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ShopSupplies_Value.ForeColor = System.Drawing.Color.Black
-        Me.ShopSupplies_Value.Location = New System.Drawing.Point(514, 674)
-        Me.ShopSupplies_Value.Name = "ShopSupplies_Value"
-        Me.ShopSupplies_Value.Size = New System.Drawing.Size(0, 20)
-        Me.ShopSupplies_Value.TabIndex = 17
-        Me.ShopSupplies_Value.Tag = "dataViewingControl"
-        '
         'ShopSupplies_CheckBox
         '
         Me.ShopSupplies_CheckBox.AutoSize = True
@@ -1470,12 +1459,24 @@ Partial Class invoices
         Me.nav.Size = New System.Drawing.Size(1182, 28)
         Me.nav.TabIndex = 267
         '
+        'ShopSupplies_Value
+        '
+        Me.ShopSupplies_Value.AutoCheck = False
+        Me.ShopSupplies_Value.AutoSize = True
+        Me.ShopSupplies_Value.Location = New System.Drawing.Point(514, 678)
+        Me.ShopSupplies_Value.Name = "ShopSupplies_Value"
+        Me.ShopSupplies_Value.Size = New System.Drawing.Size(18, 17)
+        Me.ShopSupplies_Value.TabIndex = 323
+        Me.ShopSupplies_Value.Tag = "dataViewingControl"
+        Me.ShopSupplies_Value.UseVisualStyleBackColor = True
+        '
         'invoices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1182, 903)
+        Me.Controls.Add(Me.ShopSupplies_Value)
         Me.Controls.Add(Me.TaxExempt_Textbox)
         Me.Controls.Add(Me.Complete_Value)
         Me.Controls.Add(Me.LicensePlateLabel)
@@ -1488,7 +1489,6 @@ Partial Class invoices
         Me.Controls.Add(Me.printInvButton)
         Me.Controls.Add(Me.TaxExempt_Value)
         Me.Controls.Add(Me.TaxExemptLabel)
-        Me.Controls.Add(Me.ShopSupplies_Value)
         Me.Controls.Add(Me.ShopSupplies_CheckBox)
         Me.Controls.Add(Me.ShopSuppliesLabel)
         Me.Controls.Add(Me.Notes_Value)
@@ -1644,7 +1644,6 @@ Partial Class invoices
     Friend WithEvents BalanceValue As Label
     Friend WithEvents BalanceLabel As Label
     Friend WithEvents NotesLabel As Label
-    Friend WithEvents ShopSupplies_Value As Label
     Friend WithEvents ShopSupplies_CheckBox As CheckBox
     Friend WithEvents ShopSuppliesLabel As Label
     Friend WithEvents TaxExempt_Value As Label
@@ -1692,4 +1691,5 @@ Partial Class invoices
     Friend WithEvents Notes_Value As Label
     Friend WithEvents Complete_Value As CheckBox
     Friend WithEvents TaxExempt_Textbox As TextBox
+    Friend WithEvents ShopSupplies_Value As CheckBox
 End Class
