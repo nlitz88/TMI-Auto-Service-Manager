@@ -520,16 +520,34 @@
     End Sub
 
 
+
+
+    ' **************** CONTROL SUBS FOR INVOICE TASK LABOR ****************
+
+
+    Private Sub InvTaskLaborGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles InvTaskLaborGridView.ColumnAdded
+        e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
+    End Sub
+
     Private Sub TaskLaborGridView_SelectionChanged(sender As Object, e As EventArgs) Handles InvTaskLaborGridView.SelectionChanged
 
         InvTaskLaborRow = InvTaskLaborGridView.CurrentRow.Index
 
     End Sub
 
+
+
+    ' **************** CONTROL SUBS FOR INVOICE TASK PARTS ****************
+
+
     Private Sub TaskPartsGridView_SelectionChanged(sender As Object, e As EventArgs) Handles InvTaskPartsGridView.SelectionChanged
 
         InvTaskPartsRow = InvTaskPartsGridView.CurrentRow.Index
 
+    End Sub
+
+    Private Sub InvTaskPartsGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles InvTaskPartsGridView.ColumnAdded
+        e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
     End Sub
 
 
