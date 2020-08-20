@@ -5,6 +5,11 @@
     ' New Database control instances for all Invoice Task selection-dependent data
     Private InvTaskLaborDbController As New DbControl()
     Private InvTaskPartsDbController As New DbControl()
+    ' New Database control instances for Master Task DataTable
+    Private MTLDbController As New DbControl()
+    ' New Database control instances for all Invoice Task selection-dependent data
+    Private TaskLaborDbController As New DbControl()
+    Private TaskPartsDbController As New DbControl()
 
     ' New Database control instance for updating, inserting, and deleting
     Private CRUD As New DbControl()
@@ -15,7 +20,7 @@
     'Variable to keep track of whether form fully loaded or not
     Private valuesInitialized As Boolean = True
 
-    ' Row index variables used for DataTable lookups
+    ' Row index variables used for Invoice related DataTable lookups
     Private InvId As Long
 
     Private InvTaskRow As Integer
@@ -25,6 +30,13 @@
     ' Row indexes for use with InvTaskLabor and InvTaskParts DataGridViews
     Private InvTaskLaborRow As Integer = -1
     Private InvTaskPartsRow As Integer = -1
+
+    ' Row index variables used for Master Task related DataTable lookups
+    Private TaskRow As Integer
+    Private TaskId As Integer
+
+    Private TaskLaborRow As Integer = -1
+    Private TaskPartsRow As Integer = -1
 
     ' Variables that store calculated values for InvTaskLabor, InvTaskParts, and InvTotalTask Values/Textboxes
     Private InvTaskLaborSum As Decimal = 0
@@ -343,6 +355,216 @@
 
 
 
+
+
+    ' ***************** INITIALIZATION AND CONFIGURATION SUBS (FOR MASTER TASK LIST IN "ADD MODE" *****************
+
+    ' Will essentially need a copy of every sub that is abot this (that is initialization related)
+    ' Implement and use these whenever working with values from Master Task List (I.E. whenever we're adding a new task to our invoice)
+
+
+    ' Function that will load main TaskComboBox
+    Private Function loadMasterTaskListDataTable()
+
+        ' Loads datatable from MasterTaskList table
+        MTLDbController.ExecQuery("SELECT mtl.TaskId, mtl.TaskDescription, mtl.Instructions, mtl.TaskLabor, mtl.TaskParts, mtl.TotalTask " &
+                                       "FROM MasterTaskList mtl " &
+                                       "WHERE Trim(mtl.TaskDescription) <> '' " &
+                                       "ORDER BY mtl.TaskDescription ASC")
+
+        If MTLDbController.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+    ' Sub that initializes TaskComboBox
+    Private Sub InitializeTaskComboBox()
+
+        TaskComboBox.BeginUpdate()
+        TaskComboBox.Items.Clear()
+        TaskComboBox.Items.Add("Select One")
+        For Each row In MTLDbController.DbDataTable.Rows
+            TaskComboBox.Items.Add(row("TaskDescription"))
+        Next
+        TaskComboBox.EndUpdate()
+
+    End Sub
+
+    ' Sub that initializes all dataEditingcontrols corresponding with values from the MasterTaskList datatable
+    Private Sub InitializeMTLDataEditingControls()
+
+        initializeControlsFromRow(MTLDbController.DbDataTable, TaskRow, "dataEditingControl", "_", Me)
+
+    End Sub
+
+    ' Sub that initializes all dataViewingControls corresponding with values from the MasterTaskList datatable
+    Private Sub InitializeMTLDataViewingControls()
+
+        initializeControlsFromRow(MTLDbController.DbDataTable, TaskRow, "dataViewingControl", "_", Me)
+
+    End Sub
+
+
+    ' Function that will load all selection-dependent DataTables
+    Private Function loadDependentDataTables()
+
+        ' Loads rows from MasterTaskLabor based on selected TaskId from MasterTaskList
+        TaskLaborDbController.AddParams("@taskId", TaskId)
+        TaskLaborDbController.ExecQuery("SELECT tl.TaskId, tl.LaborCode, tl.Description, tl.Rate, tl.Hours, tl.Amount " &
+                                        "FROM MasterTaskLabor tl " &
+                                        "WHERE tl.TaskId=@taskId")
+        If TaskLaborDbController.HasException() Then Return False
+
+        ' Loads rows from MasterTaskParts based on selected TaskId from MasterTaskList
+        TaskPartsDbController.AddParams("@taskId", TaskId)
+        TaskPartsDbController.ExecQuery("SELECT tp.TaskId, tp.PartNbr, tp.Qty, tp.PartDescription, tp.PartPrice, tp.PartAmount, tp.ListPrice " &
+                                        "FROM MasterTaskParts tp " &
+                                        "WHERE tp.TaskId=@taskId")
+        If TaskPartsDbController.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+
+    ' Even though being used with Master Task related Data, we can still reuse the same DataGridViews
+
+    Private Sub InitializeInvTaskLaborGridView()
+
+        InvTaskLaborGridView.DataSource = TaskLaborDbController.DbDataTable
+
+    End Sub
+
+    ' Sub that initializes TaskPartsGridView
+    Private Sub InitializeInvTaskPartsGridView()
+
+        InvTaskPartsGridView.DataSource = TaskPartsDbController.DbDataTable
+
+    End Sub
+
+
+    ' Sub that sets up both the TaskLaborDataGridView and TaskPartsDataGridView
+    Private Sub SetupGridViews()
+
+        ' Manually add DataGridView columns corresponding to only desired columns from DataTable
+
+        ' Task Labor GridView
+        InvTaskLaborGridView.AutoGenerateColumns = False
+        InvTaskLaborGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Description", .DataPropertyName = "Description"})
+        InvTaskLaborGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Rate", .DataPropertyName = "Rate"})
+        InvTaskLaborGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Hours", .DataPropertyName = "Hours"})
+        InvTaskLaborGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Amount", .DataPropertyName = "Amount"})
+        InvTaskLaborGridView.Columns(1).DefaultCellStyle.Format = "c"      ' Applies currency format to the cells of this column
+        InvTaskLaborGridView.Columns(3).DefaultCellStyle.Format = "c"
+
+        ' Task Parts GridView
+        InvTaskPartsGridView.AutoGenerateColumns = False
+        InvTaskPartsGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Description", .DataPropertyName = "PartDescription"})
+        InvTaskPartsGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Quantity", .DataPropertyName = "Qty"})
+        InvTaskPartsGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Part Price", .DataPropertyName = "PartPrice"})
+        InvTaskPartsGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Amount", .DataPropertyName = "PartAmount"})
+        InvTaskPartsGridView.Columns(2).DefaultCellStyle.Format = "c"
+        InvTaskPartsGridView.Columns(3).DefaultCellStyle.Format = "c"
+
+    End Sub
+
+
+    ' Sub that will initialize/Calculate Task Labor Cost based on the total cost of all the labor codes in MasterTaskLabor with current TaskId
+    Private Sub InitializeTaskLaborValue()
+
+        ' All rows in MasterTaskLabor that are associated with the currently selectedTaskId will already be loaded into the datatable.
+        ' So, to calculate the total, all we have to do is get the sum of the Amount Field in the Dependently loaded MasterTaskLabor DataTable
+        ' Even if zero rows, shouldn't run into any issues
+        For Each row In TaskLaborDbController.DbDataTable.Rows
+            InvTaskLaborSum += row("Amount")
+        Next
+
+        ' Then, assign the calculated sum
+        InvTaskLabor_Value.Text = InvTaskLaborSum
+
+    End Sub
+
+    Private Sub InitializeTaskLaborTextbox()
+
+        ' Calculate TaskLabor sum
+        For Each row In TaskLaborDbController.DbDataTable.Rows
+            InvTaskLaborSum += row("Amount")
+        Next
+
+        InvTaskLabor_Textbox.Text = String.Format("{0:0.00}", InvTaskLaborSum)
+
+    End Sub
+
+    ' Sub that will initialize/Calculate Task Part Cost based on the total cost of all the parts in MasterTaskParts with current TaskId
+    Private Sub InitializeTaskPartsValue()
+
+        ' Calculate TaskParts sum
+        For Each row In TaskPartsDbController.DbDataTable.Rows
+            InvTaskPartsSum += row("PartAmount")
+        Next
+
+        ' Then, assign the calculated sum
+        InvTaskParts_Value.Text = InvTaskPartsSum
+
+    End Sub
+
+    Private Sub InitializeTaskPartsTextbox()
+
+        ' Calculate TaskParts sum
+        For Each row In TaskPartsDbController.DbDataTable.Rows
+            InvTaskPartsSum += row("PartAmount")
+        Next
+
+        InvTaskParts_Textbox.Text = String.Format("{0:0.00}", InvTaskPartsSum)
+
+    End Sub
+
+
+    ' Sub that handles all initialization for dataEditingControls
+    Private Sub InitializeAllDataEditingControls()
+
+        ' Reset calculated value variables
+        InvTaskLaborSum = 0
+        InvTaskPartsSum = 0
+        InvTotalTaskSum = 0
+
+        ' Automated initializations
+        InitializeMTLDataEditingControls()
+        ' Then, re-initialize and format any calculation based values
+        InitializeTaskLaborTextbox()
+        InitializeTaskPartsTextbox()
+        InitializeInvTotalTaskTextbox()
+        ' Then, format dataEditingControls
+        formatDataEditingControls()
+        ' Set forecolor if not already initially default
+        setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
+
+    End Sub
+
+    ' Sub that handles all initialization for dataViewingControls
+    Private Sub InitializeAllDataViewingControls()
+
+        ' Reset calculated value variables
+        InvTaskLaborSum = 0
+        InvTaskPartsSum = 0
+        InvTotalTaskSum = 0
+
+        ' Automated initializations
+        InitializeMTLDataViewingControls()
+        ' Then, re-initialize and format any calculation based values
+        InitializeTaskLaborValue()
+        InitializeTaskPartsValue()
+        InitializeInvTotalTaskValue()
+        ' Then, format dataViewingControls
+        formatDataViewingControls()
+
+    End Sub
+
+
+
+
+
     ' ***************** CRUD SUBS *****************
 
 
@@ -592,8 +814,16 @@
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
 
-        'mode = "adding"
+        mode = "adding"
 
+        ' Make TaskComboBox and label visible, and hide the others
+        InvTaskComboBox.Visible = False
+        InvTaskComboLabel.Visible = False
+
+        TaskComboBox.Visible = True
+        TaskComboLabel.Visible = True
+
+        loadMasterTaskListDataTable()
 
 
         '' Initialize values for dataEditingControls

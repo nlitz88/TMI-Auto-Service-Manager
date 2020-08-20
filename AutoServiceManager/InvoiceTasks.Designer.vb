@@ -22,10 +22,10 @@ Partial Class invoiceTasks
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.deleteButton = New System.Windows.Forms.Button()
         Me.invoiceTasksLabel = New System.Windows.Forms.Label()
         Me.editButton = New System.Windows.Forms.Button()
@@ -62,6 +62,8 @@ Partial Class invoiceTasks
         Me.tlAddButton = New System.Windows.Forms.Button()
         Me.InvTaskLaborGridView = New System.Windows.Forms.DataGridView()
         Me.returnButton = New System.Windows.Forms.Button()
+        Me.TaskComboLabel = New System.Windows.Forms.Label()
+        Me.TaskComboBox = New System.Windows.Forms.ComboBox()
         CType(Me.InvTaskPartsGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.InvTaskLaborGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -355,23 +357,23 @@ Partial Class invoiceTasks
         Me.InvTaskPartsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.InvTaskPartsGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.InvTaskPartsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
-        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle29.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle29.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.InvTaskPartsGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle29
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.InvTaskPartsGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.InvTaskPartsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle30.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.InvTaskPartsGridView.DefaultCellStyle = DataGridViewCellStyle30
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.InvTaskPartsGridView.DefaultCellStyle = DataGridViewCellStyle2
         Me.InvTaskPartsGridView.Location = New System.Drawing.Point(509, 482)
         Me.InvTaskPartsGridView.MultiSelect = False
         Me.InvTaskPartsGridView.Name = "InvTaskPartsGridView"
@@ -495,23 +497,23 @@ Partial Class invoiceTasks
         Me.InvTaskLaborGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.InvTaskLaborGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.InvTaskLaborGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
-        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle31.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.InvTaskLaborGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle31
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.InvTaskLaborGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.InvTaskLaborGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle32.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle32.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.InvTaskLaborGridView.DefaultCellStyle = DataGridViewCellStyle32
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.InvTaskLaborGridView.DefaultCellStyle = DataGridViewCellStyle4
         Me.InvTaskLaborGridView.Location = New System.Drawing.Point(100, 482)
         Me.InvTaskLaborGridView.MultiSelect = False
         Me.InvTaskLaborGridView.Name = "InvTaskLaborGridView"
@@ -537,12 +539,37 @@ Partial Class invoiceTasks
         Me.returnButton.Text = "Return To Invoice"
         Me.returnButton.UseVisualStyleBackColor = False
         '
+        'TaskComboLabel
+        '
+        Me.TaskComboLabel.AutoSize = True
+        Me.TaskComboLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.TaskComboLabel.Location = New System.Drawing.Point(97, 240)
+        Me.TaskComboLabel.Name = "TaskComboLabel"
+        Me.TaskComboLabel.Size = New System.Drawing.Size(47, 17)
+        Me.TaskComboLabel.TabIndex = 257
+        Me.TaskComboLabel.Text = "Task :"
+        Me.TaskComboLabel.Visible = False
+        '
+        'TaskComboBox
+        '
+        Me.TaskComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.TaskComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.TaskComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
+        Me.TaskComboBox.FormattingEnabled = True
+        Me.TaskComboBox.Location = New System.Drawing.Point(150, 234)
+        Me.TaskComboBox.Name = "TaskComboBox"
+        Me.TaskComboBox.Size = New System.Drawing.Size(408, 28)
+        Me.TaskComboBox.TabIndex = 256
+        Me.TaskComboBox.Visible = False
+        '
         'invoiceTasks
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.TaskComboLabel)
+        Me.Controls.Add(Me.TaskComboBox)
         Me.Controls.Add(Me.returnButton)
         Me.Controls.Add(Me.InvTaskPartsGridView)
         Me.Controls.Add(Me.TaskPartsLabel)
@@ -627,4 +654,6 @@ Partial Class invoiceTasks
     Friend WithEvents tlAddButton As Button
     Friend WithEvents InvTaskLaborGridView As DataGridView
     Friend WithEvents returnButton As Button
+    Friend WithEvents TaskComboLabel As Label
+    Friend WithEvents TaskComboBox As ComboBox
 End Class
