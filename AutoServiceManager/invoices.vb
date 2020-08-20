@@ -1527,10 +1527,12 @@ Public Class invoices
                     End If
 
                     ' 3.) RELOAD DATATABLES FROM DATABASE
-                    If Not loadInvoiceDataTable() Then 'And Not loadVehicleDataTable And Not loadCustomerDataTable
+                    If Not loadInvoiceDataTable() Or Not loadVehicleDataTable() Then ' And Not loadCustomerDataTable
                         MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
-                    ' Going to also have to reload vehicleDataTable
+                    ' If values changed in vehicle DataTable, must reload here so that controls can be initialized with updated values.
+                    ' If vehicles was in loaddependentDataTables, then this wouldn't be necessary. However, it serves more than one purpose
+
                     ' ALso going to have to reload CustomerDataTable (if TaxExempt Editable)
 
                     ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
@@ -1574,7 +1576,7 @@ Public Class invoices
                     End If
 
                     ' 3.) RELOAD DATATABLES FROM DATABASE
-                    If Not loadInvoiceDataTable() Then  'And Not loadVehicleDataTable And Not loadCustomerDataTable
+                    If Not loadInvoiceDataTable() Or Not loadVehicleDataTable() Then  ' And Not loadCustomerDataTable
                         MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
 
