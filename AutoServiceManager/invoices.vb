@@ -61,6 +61,17 @@ Public Class invoices
 
 
 
+    ' ***************** GET/SET SUBS FOR EXTERNAL FORMS *****************
+
+
+    ' Retrieves current invoice+date INID selected
+    Public Function GetINID() As String
+        Return InvoiceComboBox.Text
+    End Function
+
+
+
+
     ' ***************** INITIALIZATION AND CONFIGURATION SUBS *****************
 
 
