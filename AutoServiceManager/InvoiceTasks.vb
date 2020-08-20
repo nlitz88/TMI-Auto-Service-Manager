@@ -253,7 +253,7 @@
 
     ' Sub that will initialize/Calculate Total Task Cost based on the Sums found in InvTotalLaborCost and InvTotalPartsCost
     ' NOTE: must be called after InitializeInvTaskLaborValue and InitializeInvTaskPartsValue
-    Private Sub InitializeTotalTaskValue()
+    Private Sub InitializeInvTotalTaskValue()
 
         Dim InvTaskLaborCost As Decimal = Convert.ToDecimal(InvTaskLabor_Value.Text)
         Dim InvTaskPartsCost As Decimal = Convert.ToDecimal(InvTaskParts_Value.Text)
@@ -273,6 +273,69 @@
 
         ' Then, assign and format calculated sum
         InvTotalTaskTextbox.Text = String.Format("{0:0.00}", InvTotalTaskSum)
+
+    End Sub
+
+
+
+    ' Sub that handles all initialization for dataEditingControls
+    Private Sub InitializeAllDataEditingControls()
+
+        ' Reset calculated value variables
+        InvTaskLaborSum = 0
+        InvTaskPartsSum = 0
+        InvTotalTaskSum = 0
+
+        ' Automated initializations
+        InitializeInvTaskDataEditingControls()
+        ' Then, re-initialize and format any calculation based values
+        InitializeInvTaskLaborTextbox()
+        InitializeInvTaskPartsTextbox()
+        InitializeInvTotalTaskTextbox()
+        ' Then, format dataEditingControls
+        formatDataEditingControls()
+        ' Set forecolor if not already initially default
+        setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
+
+    End Sub
+
+    ' Sub that handles all initialization for dataViewingControls
+    Private Sub InitializeAllDataViewingControls()
+
+        ' Reset calculated value variables
+        InvTaskLaborSum = 0
+        InvTaskPartsSum = 0
+        InvTotalTaskSum = 0
+
+        ' Automated initializations
+        InitializeInvTaskDataViewingControls()
+        ' Then, re-initialize and format any calculation based values
+        InitializeInvTaskLaborValue()
+        InitializeInvTaskPartsValue()
+        InitializeInvTotalTaskValue()
+        ' Then, format dataViewingControls
+        formatDataViewingControls()
+
+    End Sub
+
+
+    ' Sub that will add formatting to already initialized dataViewingControls
+    ' NOTE: these subs only format controls that don't have their formatting handled by a separate sub
+    Private Sub formatDataViewingControls()
+
+        ' These three calculation based fields are formatted here after the fact, as otherwise, TotalTask can't parse the decimal values from TaskLabor and TaskParts
+        InvTaskLabor_Value.Text = FormatCurrency(InvTaskLabor_Value.Text)
+        InvTaskParts_Value.Text = FormatCurrency(InvTaskParts_Value.Text)
+        InvTotalTaskValue.Text = FormatCurrency(InvTotalTaskValue.Text)
+
+    End Sub
+
+    ' Sub that will add formatting to already initialized dataEditingControls
+    Private Sub formatDataEditingControls()
+
+        'TaskLabor_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TaskLabor_Textbox.Text))
+        'TaskParts_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TaskParts_Textbox.Text))
+        'TotalTask_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TotalTask_Textbox.Text))
 
     End Sub
 
@@ -345,7 +408,7 @@
             End If
             ' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
             ' This is because controls like TaskLaborCost (for instance) are calculated from those tables
-            'InitializeAllDataViewingControls()
+            InitializeAllDataViewingControls()
             ' Initialize corresponding DataGridViews
             InitializeInvTaskLaborGridView()
             InitializeInvTaskPartsGridView()
