@@ -796,8 +796,10 @@ Public Class invoices
         '   TaxExempt, ContactPhone1, ContactPhone2, and InvNbr (InvNbr primary auto-increment key, can't be updated)
 
         ' Additional Values:
-        '   Taxable, NonTaxable, TaxExempt, ContactPhone1, ContactPhone2
+        '   Taxable, NonTaxable, ContactPhone1, ContactPhone2, TaxExempt, InspectionSticker, and InspectionMonth
         '       All of these either need calculated or their formatting changed in some way before formatting
+        '       TaxExempt, InspectionSticker, and InspectionMonth are all values that are stored in other datatables, and are therefore
+        '       not used to initialize our values here. However, they still need to be written to this DataTable. So we add them as additionals
 
 
         ' Get Tax Exempt Status From Customer DataTable (don't bother with the values here, as they don't change)
@@ -816,18 +818,23 @@ Public Class invoices
             NonTaxable = gas + towing
         End If
 
+        ' Get inspection sticker and month from controls
+        Dim InspectionSticker As String = InspectionSticker_Textbox.Text
+        Dim InspectionMonth As String = InspectionMonth_ComboBox.Text
+
         ' Get stripped versions of Contact Phone Numbers
         Dim ContactPhone1 As String = removeInvalidChars(ContactPhone1_ComboBox.Text, "0123456789")
         Dim ContactPhone2 As String = removeInvalidChars(ContactPhone2_ComboBox.Text, "0123456789")
 
-
         Dim excludedControls As New List(Of Control) From {TaxExempt_Textbox, ContactPhone1_ComboBox, ContactPhone2_ComboBox, InvNbr_Textbox}
         Dim additionalValues As New List(Of AdditionalValue) From {
-            New AdditionalValue("TaxExempt", GetType(Boolean), TaxExempt),
             New AdditionalValue("Taxable", GetType(Decimal), Taxable),
             New AdditionalValue("NonTaxable", GetType(Decimal), NonTaxable),
             New AdditionalValue("ContactPhone1", GetType(String), ContactPhone1),
-            New AdditionalValue("ContactPhone2", GetType(String), ContactPhone2)}
+            New AdditionalValue("ContactPhone2", GetType(String), ContactPhone2),
+            New AdditionalValue("TaxExempt", GetType(Boolean), TaxExempt),
+            New AdditionalValue("InspectionSticker", GetType(String), InspectionSticker),
+            New AdditionalValue("InspectionMonth", GetType(String), InspectionMonth)}
 
         updateTable(CRUD, InvDbController.DbDataTable, "InvHdr", InvId, "InvNbr", "_", "dataEditingControl", Me, excludedControls, additionalValues)
         If CRUD.HasException() Then Return False
@@ -872,20 +879,25 @@ Public Class invoices
             NonTaxable = gas + towing
         End If
 
+        ' Get inspection sticker and month from controls
+        Dim InspectionSticker As String = InspectionSticker_Textbox.Text
+        Dim InspectionMonth As String = InspectionMonth_ComboBox.Text
+
         ' Get stripped versions of Contact Phone Numbers
         Dim ContactPhone1 As String = removeInvalidChars(ContactPhone1_ComboBox.Text, "0123456789")
         Dim ContactPhone2 As String = removeInvalidChars(ContactPhone2_ComboBox.Text, "0123456789")
-
 
         Dim excludedControls As New List(Of Control) From {TaxExempt_Textbox, ContactPhone1_ComboBox, ContactPhone2_ComboBox, InvNbr_Textbox}
         Dim additionalValues As New List(Of AdditionalValue) From {
             New AdditionalValue("CustomerId", GetType(Integer), CustomerId),
             New AdditionalValue("VehicleId", GetType(Integer), VehicleId),
-            New AdditionalValue("TaxExempt", GetType(Boolean), TaxExempt),
             New AdditionalValue("Taxable", GetType(Decimal), Taxable),
             New AdditionalValue("NonTaxable", GetType(Decimal), NonTaxable),
             New AdditionalValue("ContactPhone1", GetType(String), ContactPhone1),
-            New AdditionalValue("ContactPhone2", GetType(String), ContactPhone2)}
+            New AdditionalValue("ContactPhone2", GetType(String), ContactPhone2),
+            New AdditionalValue("TaxExempt", GetType(Boolean), TaxExempt),
+            New AdditionalValue("InspectionSticker", GetType(String), InspectionSticker),
+            New AdditionalValue("InspectionMonth", GetType(String), InspectionMonth)}
 
         insertRow(CRUD, InvDbController.DbDataTable, "InvHdr", "_", "dataEditingControl", Me, excludedControls, additionalValues)
         If CRUD.HasException() Then Return False
