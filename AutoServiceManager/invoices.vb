@@ -1939,7 +1939,7 @@ Public Class invoices
 
     Private Sub invoices_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
 
-        ' First, check if editing, and if editing, check if control values changed
+        ' First, check if editing/adding, and if editing/adding, check if control values changed
         If InvNbr_Textbox.Visible And InitialInvValues.CtrlValuesChanged() Then
 
             Dim decision As DialogResult = MessageBox.Show("Exit without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
