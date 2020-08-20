@@ -927,6 +927,19 @@ Public Class invoices
     ' No additional for inserting vehicle, as the user can only update certain existing vehicle information on this form (even when adding a new invoice)
 
 
+    ' Function that makes deleteRow calls for all relevant DataTables
+    Private Function deleteInvoice() As Boolean
+
+        deleteRow(CRUD, "InvHdr", InvId, "InvNbr")
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
+
+
 
     ' **************** VALIDATION SUBS ****************
 
@@ -1388,11 +1401,11 @@ Public Class invoices
             Case DialogResult.Yes
 
                 ' 1.) Delete value from database
-                'If Not deleteAll() Then
-                '    MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                'Else
-                '    MessageBox.Show("Successfully deleted " & VehicleComboBox.Text & " from Vehicles")
-                'End If
+                If Not deleteInvoice() Then
+                    MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("Successfully deleted invoice")
+                End If
 
                 ' 2.) RELOAD DATATABLES FROM DATABASE
                 If Not loadInvoiceDataTable() Then
@@ -1554,7 +1567,7 @@ Public Class invoices
                         MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Exit Sub
                     Else
-                        MessageBox.Show("Successfully updated Invoice")
+                        MessageBox.Show("Successfully updated invoice")
                     End If
 
                     ' 3.) RELOAD DATATABLES FROM DATABASE
@@ -1603,7 +1616,7 @@ Public Class invoices
                         MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Exit Sub
                     Else
-                        MessageBox.Show("Successfully added invoice " & InvoiceComboBox.Text & " to invoices")
+                        MessageBox.Show("Successfully added new invoice")
                     End If
 
                     ' 3.) RELOAD DATATABLES FROM DATABASE
