@@ -19,6 +19,7 @@
 
     Private InvTaskRow As Integer
     Private InvTaskId As Integer
+    Private InvTaskNbr As Integer
 
     ' Row indexes for use with InvTaskLabor and InvTaskParts DataGridViews
     Private InvTaskLaborRow As Integer = -1
@@ -57,6 +58,11 @@
     ' Retrieves current InvTaskId corresponding to TaskValue
     Public Function GetTaskId() As Integer
         Return InvTaskId
+    End Function
+
+    ' Retrieves current TaskNbr corresponding to current selected Task
+    Public Function GetTaskNbr() As Integer
+        Return InvTaskNbr
     End Function
 
     ' Retrieves InvTaskLaborRow
@@ -116,6 +122,84 @@
     End Sub
 
 
+    ' Sub that initializes all dataEditingcontrols corresponding with values from the InvTask DataTable
+    Private Sub InitializeInvTaskDataEditingControls()
+
+        initializeControlsFromRow(InvTasksDbController.DbDataTable, InvTaskRow, "dataEditingControl", "_", Me)
+
+    End Sub
+
+    ' Sub that initializes all dataViewingControls corresponding with values from the InvTask DataTable
+    Private Sub InitializeInvTaskDataViewingControls()
+
+        initializeControlsFromRow(InvTasksDbController.DbDataTable, InvTaskRow, "dataViewingControl", "_", Me)
+
+    End Sub
+
+
+
+    ' Function that will load all selection-dependent DataTables
+    Private Function loadDependentDataTables()
+
+        ' Loads rows from InvTaskLabor based on selected InvTaskId from InvTask and InvTaskNbr
+        InvTaskLaborDbController.AddParams("@invTaskId", InvTaskId)
+        InvTaskLaborDbController.AddParams("@invTaskNbr", InvTaskNbr)
+        '  Might have to include TaskId here as well
+        InvTaskLaborDbController.ExecQuery("SELECT il.InvNbr, il.TaskNbr, il.TaskId, il.LaborCode, il.LaborDescription, il.LaborRate, il.LaborHours, il.LaborAmount " &
+                                        "FROM InvLabor il " &
+                                        "WHERE InvNbr=@taskId AND TaskNbr=@invTaskNbr")
+        If InvTaskLaborDbController.HasException() Then Return False
+
+        ' Loads rows from InvTaskParts based on selected InvTaskId from InvTask
+        InvTaskPartsDbController.AddParams("@invTaskId", InvTaskId)
+        InvTaskLaborDbController.AddParams("@invTaskNbr", InvTaskNbr)
+        InvTaskPartsDbController.ExecQuery("SELECT ip.InvNbr, ip.TaskNbr, ip.TaskId, ip.PartNbr, ip.Qty, ip.PartDescription, ip.PartPrice, ip.PartAmount, ip.ListPrice " &
+                                        "FROM InvParts ip " &
+                                        "WHERE ip.InvNbr=@taskId AND TaskNbr=@invTaskNbr")
+        If InvTaskPartsDbController.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+    Private Sub InitializeInvTaskLaborGridView()
+
+        InvTaskLaborGridView.DataSource = InvTaskLaborDbController.DbDataTable
+
+    End Sub
+
+    ' Sub that initializes TaskPartsGridView
+    Private Sub InitializeInvTaskPartsGridView()
+
+        InvTaskPartsGridView.DataSource = InvTaskPartsDbController.DbDataTable
+
+    End Sub
+
+    ' Sub that sets up both the InvTaskLaborDataGridView and InvTaskPartsDataGridView
+    Private Sub SetupGridViews()
+
+        ' Manually add DataGridView columns corresponding to only desired columns from DataTable
+
+        ' Invoice Task Labor GridView
+        InvTaskLaborGridView.AutoGenerateColumns = False
+        InvTaskLaborGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Description", .DataPropertyName = "LaborDescription"})
+        InvTaskLaborGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Rate", .DataPropertyName = "LaborRate"})
+        InvTaskLaborGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Hours", .DataPropertyName = "LaborHours"})
+        InvTaskLaborGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Amount", .DataPropertyName = "LaborAmount"})
+        InvTaskLaborGridView.Columns(1).DefaultCellStyle.Format = "c"      ' Applies currency format to the cells of this column
+        InvTaskLaborGridView.Columns(3).DefaultCellStyle.Format = "c"
+
+        ' Invoice Task Parts GridView
+        InvTaskPartsGridView.AutoGenerateColumns = False
+        InvTaskPartsGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Description", .DataPropertyName = "PartDescription"})
+        InvTaskPartsGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Quantity", .DataPropertyName = "Qty"})
+        InvTaskPartsGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Part Price", .DataPropertyName = "PartPrice"})
+        InvTaskPartsGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Amount", .DataPropertyName = "PartAmount"})
+        InvTaskPartsGridView.Columns(2).DefaultCellStyle.Format = "c"
+        InvTaskPartsGridView.Columns(3).DefaultCellStyle.Format = "c"
+
+    End Sub
+
 
 
 
@@ -148,6 +232,17 @@
     Private Sub InvoiceTasks_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
+
+
+
+    Private Sub InvTaskComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InvTaskComboBox.SelectedIndexChanged
+
+        ' Make sure to get TaskNbr each time a valid task is selected
+
+    End Sub
+
+
 
 
     Private Sub InvoiceTasks_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -204,4 +299,19 @@
         End If
 
     End Sub
+
+
+    Private Sub TaskLaborGridView_SelectionChanged(sender As Object, e As EventArgs) Handles InvTaskLaborGridView.SelectionChanged
+
+        InvTaskLaborRow = InvTaskLaborGridView.CurrentRow.Index
+
+    End Sub
+
+    Private Sub TaskPartsGridView_SelectionChanged(sender As Object, e As EventArgs) Handles InvTaskPartsGridView.SelectionChanged
+
+        InvTaskPartsRow = InvTaskPartsGridView.CurrentRow.Index
+
+    End Sub
+
+
 End Class

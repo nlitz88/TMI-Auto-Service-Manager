@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class InvoiceTasks
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class invoiceTasks
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,12 +20,12 @@ Partial Class InvoiceTasks
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.deleteButton = New System.Windows.Forms.Button()
         Me.invoiceTasksLabel = New System.Windows.Forms.Label()
         Me.editButton = New System.Windows.Forms.Button()
@@ -51,7 +51,7 @@ Partial Class InvoiceTasks
         Me.TaskDescription_Value = New System.Windows.Forms.Label()
         Me.DescriptionLabel = New System.Windows.Forms.Label()
         Me.TaskDescription_Textbox = New System.Windows.Forms.TextBox()
-        Me.TaskPartsGridView = New System.Windows.Forms.DataGridView()
+        Me.InvTaskPartsGridView = New System.Windows.Forms.DataGridView()
         Me.TaskPartsLabel = New System.Windows.Forms.Label()
         Me.TaskLaborLabel = New System.Windows.Forms.Label()
         Me.tpDeleteButton = New System.Windows.Forms.Button()
@@ -60,10 +60,10 @@ Partial Class InvoiceTasks
         Me.tlDeleteButton = New System.Windows.Forms.Button()
         Me.tlEditButton = New System.Windows.Forms.Button()
         Me.tlAddButton = New System.Windows.Forms.Button()
-        Me.TaskLaborGridView = New System.Windows.Forms.DataGridView()
+        Me.InvTaskLaborGridView = New System.Windows.Forms.DataGridView()
         Me.returnButton = New System.Windows.Forms.Button()
-        CType(Me.TaskPartsGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TaskLaborGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.InvTaskPartsGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.InvTaskLaborGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'deleteButton
@@ -347,43 +347,43 @@ Partial Class InvoiceTasks
         Me.TaskDescription_Textbox.Tag = "dataEditingControl"
         Me.TaskDescription_Textbox.Visible = False
         '
-        'TaskPartsGridView
+        'InvTaskPartsGridView
         '
-        Me.TaskPartsGridView.AllowUserToAddRows = False
-        Me.TaskPartsGridView.AllowUserToDeleteRows = False
-        Me.TaskPartsGridView.AllowUserToResizeColumns = False
-        Me.TaskPartsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.TaskPartsGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.TaskPartsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.TaskPartsGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
-        Me.TaskPartsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.TaskPartsGridView.DefaultCellStyle = DataGridViewCellStyle6
-        Me.TaskPartsGridView.Location = New System.Drawing.Point(509, 482)
-        Me.TaskPartsGridView.MultiSelect = False
-        Me.TaskPartsGridView.Name = "TaskPartsGridView"
-        Me.TaskPartsGridView.ReadOnly = True
-        Me.TaskPartsGridView.RowHeadersVisible = False
-        Me.TaskPartsGridView.RowHeadersWidth = 51
-        Me.TaskPartsGridView.RowTemplate.Height = 24
-        Me.TaskPartsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.TaskPartsGridView.ShowEditingIcon = False
-        Me.TaskPartsGridView.Size = New System.Drawing.Size(369, 200)
-        Me.TaskPartsGridView.TabIndex = 254
-        Me.TaskPartsGridView.Tag = "subTaskEditingControl"
+        Me.InvTaskPartsGridView.AllowUserToAddRows = False
+        Me.InvTaskPartsGridView.AllowUserToDeleteRows = False
+        Me.InvTaskPartsGridView.AllowUserToResizeColumns = False
+        Me.InvTaskPartsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.InvTaskPartsGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.InvTaskPartsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.InvTaskPartsGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.InvTaskPartsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.InvTaskPartsGridView.DefaultCellStyle = DataGridViewCellStyle2
+        Me.InvTaskPartsGridView.Location = New System.Drawing.Point(509, 482)
+        Me.InvTaskPartsGridView.MultiSelect = False
+        Me.InvTaskPartsGridView.Name = "InvTaskPartsGridView"
+        Me.InvTaskPartsGridView.ReadOnly = True
+        Me.InvTaskPartsGridView.RowHeadersVisible = False
+        Me.InvTaskPartsGridView.RowHeadersWidth = 51
+        Me.InvTaskPartsGridView.RowTemplate.Height = 24
+        Me.InvTaskPartsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.InvTaskPartsGridView.ShowEditingIcon = False
+        Me.InvTaskPartsGridView.Size = New System.Drawing.Size(369, 200)
+        Me.InvTaskPartsGridView.TabIndex = 254
+        Me.InvTaskPartsGridView.Tag = "subTaskEditingControl"
         '
         'TaskPartsLabel
         '
@@ -487,43 +487,43 @@ Partial Class InvoiceTasks
         Me.tlAddButton.Text = "Add"
         Me.tlAddButton.UseVisualStyleBackColor = False
         '
-        'TaskLaborGridView
+        'InvTaskLaborGridView
         '
-        Me.TaskLaborGridView.AllowUserToAddRows = False
-        Me.TaskLaborGridView.AllowUserToDeleteRows = False
-        Me.TaskLaborGridView.AllowUserToResizeColumns = False
-        Me.TaskLaborGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.TaskLaborGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.TaskLaborGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.TaskLaborGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
-        Me.TaskLaborGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.TaskLaborGridView.DefaultCellStyle = DataGridViewCellStyle8
-        Me.TaskLaborGridView.Location = New System.Drawing.Point(100, 482)
-        Me.TaskLaborGridView.MultiSelect = False
-        Me.TaskLaborGridView.Name = "TaskLaborGridView"
-        Me.TaskLaborGridView.ReadOnly = True
-        Me.TaskLaborGridView.RowHeadersVisible = False
-        Me.TaskLaborGridView.RowHeadersWidth = 51
-        Me.TaskLaborGridView.RowTemplate.Height = 24
-        Me.TaskLaborGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.TaskLaborGridView.ShowEditingIcon = False
-        Me.TaskLaborGridView.Size = New System.Drawing.Size(369, 200)
-        Me.TaskLaborGridView.TabIndex = 251
-        Me.TaskLaborGridView.Tag = "subTaskEditingControl"
+        Me.InvTaskLaborGridView.AllowUserToAddRows = False
+        Me.InvTaskLaborGridView.AllowUserToDeleteRows = False
+        Me.InvTaskLaborGridView.AllowUserToResizeColumns = False
+        Me.InvTaskLaborGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.InvTaskLaborGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.InvTaskLaborGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.InvTaskLaborGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
+        Me.InvTaskLaborGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.InvTaskLaborGridView.DefaultCellStyle = DataGridViewCellStyle4
+        Me.InvTaskLaborGridView.Location = New System.Drawing.Point(100, 482)
+        Me.InvTaskLaborGridView.MultiSelect = False
+        Me.InvTaskLaborGridView.Name = "InvTaskLaborGridView"
+        Me.InvTaskLaborGridView.ReadOnly = True
+        Me.InvTaskLaborGridView.RowHeadersVisible = False
+        Me.InvTaskLaborGridView.RowHeadersWidth = 51
+        Me.InvTaskLaborGridView.RowTemplate.Height = 24
+        Me.InvTaskLaborGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.InvTaskLaborGridView.ShowEditingIcon = False
+        Me.InvTaskLaborGridView.Size = New System.Drawing.Size(369, 200)
+        Me.InvTaskLaborGridView.TabIndex = 251
+        Me.InvTaskLaborGridView.Tag = "subTaskEditingControl"
         '
         'returnButton
         '
@@ -537,14 +537,14 @@ Partial Class InvoiceTasks
         Me.returnButton.Text = "Return To Invoice"
         Me.returnButton.UseVisualStyleBackColor = False
         '
-        'InvoiceTasks
+        'invoiceTasks
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
         Me.Controls.Add(Me.returnButton)
-        Me.Controls.Add(Me.TaskPartsGridView)
+        Me.Controls.Add(Me.InvTaskPartsGridView)
         Me.Controls.Add(Me.TaskPartsLabel)
         Me.Controls.Add(Me.TaskLaborLabel)
         Me.Controls.Add(Me.tpDeleteButton)
@@ -553,7 +553,7 @@ Partial Class InvoiceTasks
         Me.Controls.Add(Me.tlDeleteButton)
         Me.Controls.Add(Me.tlEditButton)
         Me.Controls.Add(Me.tlAddButton)
-        Me.Controls.Add(Me.TaskLaborGridView)
+        Me.Controls.Add(Me.InvTaskLaborGridView)
         Me.Controls.Add(Me.TotalTaskTextbox)
         Me.Controls.Add(Me.TotalCostLabel)
         Me.Controls.Add(Me.TotalTaskValue)
@@ -581,11 +581,11 @@ Partial Class InvoiceTasks
         Me.Controls.Add(Me.addButton)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
-        Me.Name = "InvoiceTasks"
+        Me.Name = "invoiceTasks"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Invoice Tasks"
-        CType(Me.TaskPartsGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TaskLaborGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.InvTaskPartsGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.InvTaskLaborGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -616,7 +616,7 @@ Partial Class InvoiceTasks
     Friend WithEvents TaskDescription_Value As Label
     Friend WithEvents DescriptionLabel As Label
     Friend WithEvents TaskDescription_Textbox As TextBox
-    Friend WithEvents TaskPartsGridView As DataGridView
+    Friend WithEvents InvTaskPartsGridView As DataGridView
     Friend WithEvents TaskPartsLabel As Label
     Friend WithEvents TaskLaborLabel As Label
     Friend WithEvents tpDeleteButton As Button
@@ -625,6 +625,6 @@ Partial Class InvoiceTasks
     Friend WithEvents tlDeleteButton As Button
     Friend WithEvents tlEditButton As Button
     Friend WithEvents tlAddButton As Button
-    Friend WithEvents TaskLaborGridView As DataGridView
+    Friend WithEvents InvTaskLaborGridView As DataGridView
     Friend WithEvents returnButton As Button
 End Class
