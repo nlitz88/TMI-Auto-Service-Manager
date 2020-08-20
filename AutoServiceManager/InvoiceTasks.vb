@@ -341,6 +341,95 @@
 
 
 
+
+    ' ***************** CRUD SUBS *****************
+
+
+    ' Function that makes updateTable calls for all relevant DataTables that need updated based on changes
+    Private Function updateInvTask() As Boolean
+
+        ' Columns that will not be included in the WHERE clause the UPDATE query
+        Dim excludedKeyColumns As New List(Of String) From {"TaskID", "TaskDescription", "Instructions", "TaskLabor", "TaskParts"}
+
+        updateTable(CRUD, InvTasksDbController.DbDataTable, InvTaskRow, excludedKeyColumns, "InvTask", "_", "dataEditingControl", Me, New List(Of Control))
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
+
+    ' Function that makes insertRow calls for all relevant DataTables
+    Private Function insertMasterTask() As Boolean
+
+        '' Lookup corresponding taskType symbol for valid taskType description first.
+        '' Exclude task type from updateTable, then add its swapped value as an additional value
+        'Dim TaskTypeSymbol As String = getRowValueWithKey(TaskTypesDbController.DbDataTable, "TaskType", "TaskDescription", TaskType_ComboBox.Text)
+
+        'Dim excludedControls As New List(Of Control) From {TaskType_ComboBox}
+        'Dim additionalValues As New List(Of AdditionalValue) From {New AdditionalValue("TaskType", GetType(String), TaskTypeSymbol)}
+
+        '' Then, make calls to insertRow to all relevant tables
+        'insertRow(CRUD, MTL.DbDataTable, "MasterTaskList", "_", "dataEditingControl", Me, excludedControls, additionalValues)
+        '' Then, return exception status of CRUD controller. Do this after each call
+        'If CRUD.HasException() Then Return False
+
+        '' Otherwise, return true
+        'Return True
+
+    End Function
+
+
+    ' Function that makes deleteRow calls for all relevant DataTables
+    Private Function deleteMasterTask() As Boolean
+
+        ' Columns that will not be included in the WHERE clause the query
+        Dim excludedKeyColumns As New List(Of String) From {"TaskID", "TaskDescription", "Instructions", "TaskLabor", "TaskParts"}
+
+        deleteRow(CRUD, InvTasksDbController.DbDataTable, InvTaskRow, excludedKeyColumns, "InvTask")
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
+
+
+
+    ' ***************** CRUD subs for InvLabor and InvParts *****************
+
+
+    ' Function that handles deleting for InvLabor Table (Add and Edit performed on editInvLabor/addInvLabor forms)
+    Public Function deleteMasterTaskLabor() As Boolean
+
+        deleteRow(CRUD, InvTaskLaborDbController.DbDataTable, InvTaskLaborRow, New List(Of String), "InvLabor")
+        If CRUD.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+
+    ' Function that handles deleting for InvParts Table (Add and Edit performed on editMInvParts/addInvParts forms)
+    Public Function deleteMasterTaskPart() As Boolean
+
+        deleteRow(CRUD, InvTaskPartsDbController.DbDataTable, InvTaskPartsRow, New List(Of String), "InvParts")
+        If CRUD.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+
+
+
+
+
+
     Private Sub InvoiceTasks_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -460,6 +549,9 @@
         End If
 
     End Sub
+
+
+
 
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click

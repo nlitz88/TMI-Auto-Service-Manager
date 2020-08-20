@@ -667,6 +667,9 @@
         ' Add parameters for each value used (as key) in WHERE clause of query
         For i As Integer = 0 To dataTable.Columns.Count - 1
 
+            ' First, ensure that this column in not in the excluded list
+            If excludedKeyColumns.Contains(dataTable.Columns(i).ColumnName) Then Continue For
+
             ' Get keyValue from DataTable
             keyValue = dataTable.Rows(dataTableRow)(dataTable.Columns(i).ColumnName)
 
@@ -960,6 +963,9 @@
 
         ' Add parameters for each value used (as key) in WHERE clause of query
         For i As Integer = 0 To dataTable.Columns.Count - 1
+
+            ' First, ensure that this column in not in the excluded list
+            If excludedKeyColumns.Contains(dataTable.Columns(i).ColumnName) Then Continue For
 
             ' Get keyValue from DataTable
             keyValue = dataTable.Rows(dataTableRow)(dataTable.Columns(i).ColumnName)
