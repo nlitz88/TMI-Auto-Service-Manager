@@ -141,21 +141,20 @@
     ' Function that will load all selection-dependent DataTables
     Private Function loadDependentDataTables()
 
-        ' Loads rows from InvTaskLabor based on selected InvTaskId from InvTask and InvTaskNbr
-        InvTaskLaborDbController.AddParams("@invTaskId", InvTaskId)
+        ' Loads rows from InvTaskLabor based on invNbr and selected TaskNbr
+        InvTaskLaborDbController.AddParams("@invId", InvId)
         InvTaskLaborDbController.AddParams("@invTaskNbr", InvTaskNbr)
-        '  Might have to include TaskId here as well
-        InvTaskLaborDbController.ExecQuery("SELECT il.InvNbr, il.TaskNbr, il.TaskId, il.LaborCode, il.LaborDescription, il.LaborRate, il.LaborHours, il.LaborAmount " &
+        InvTaskLaborDbController.ExecQuery("SELECT il.InvNbr, il.TaskNbr, il.TaskID, il.LaborCode, il.LaborDescription, il.LaborRate, il.LaborHours, il.LaborAmount " &
                                         "FROM InvLabor il " &
-                                        "WHERE InvNbr=@taskId AND TaskNbr=@invTaskNbr")
+                                        "WHERE InvNbr=@invId AND TaskNbr=@invTaskNbr")
         If InvTaskLaborDbController.HasException() Then Return False
 
-        ' Loads rows from InvTaskParts based on selected InvTaskId from InvTask
-        InvTaskPartsDbController.AddParams("@invTaskId", InvTaskId)
-        InvTaskLaborDbController.AddParams("@invTaskNbr", InvTaskNbr)
-        InvTaskPartsDbController.ExecQuery("SELECT ip.InvNbr, ip.TaskNbr, ip.TaskId, ip.PartNbr, ip.Qty, ip.PartDescription, ip.PartPrice, ip.PartAmount, ip.ListPrice " &
+        ' Loads rows from InvTaskParts based on invNbr and selected TaskNbr
+        InvTaskPartsDbController.AddParams("@invId", InvId)
+        InvTaskPartsDbController.AddParams("@invTaskNbr", InvTaskNbr)
+        InvTaskPartsDbController.ExecQuery("SELECT ip.InvNbr, ip.TaskNbr, ip.TaskID, ip.PartNbr, ip.Qty, ip.PartDescription, ip.PartPrice, ip.PartAmount, ip.ListPrice " &
                                         "FROM InvParts ip " &
-                                        "WHERE ip.InvNbr=@taskId AND TaskNbr=@invTaskNbr")
+                                        "WHERE InvNbr=@invId AND TaskNbr=@invTaskNbr")
         If InvTaskPartsDbController.HasException() Then Return False
 
         Return True
@@ -202,7 +201,9 @@
 
 
 
+    Private Sub InvoiceTasks_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 
     Public Sub New()
 
@@ -222,23 +223,101 @@
         End If
 
         ' Setup GridViews and initialize ComboBoxes for first time
+        SetupGridViews()
+
         InitializeInvTaskComboBox()
-
+        InvTaskComboBox.SelectedIndex = 0
 
 
     End Sub
-
-
-    Private Sub InvoiceTasks_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
-
 
 
     Private Sub InvTaskComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InvTaskComboBox.SelectedIndexChanged
 
-        ' Make sure to get TaskNbr each time a valid task is selected
+        ' Ensure that InvTaskComboBox is only attempting to initialize values when on proper selected Index
+        If InvTaskComboBox.SelectedIndex = -1 Then
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            showHide(getAllControlsWithTag("subTaskEditingControl", Me), 0)
+            ' Disable editing button
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+            Exit Sub
+
+        End If
+
+        ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid
+        InvTaskRow = getDataTableRow(InvTasksDbController.DbDataTable, "TNTD", InvTaskComboBox.Text)
+
+        ' If this query DOES return a valid row index, then initialize respective controls
+        If InvTaskRow <> -1 Then
+
+            ' Lookup TaskNbr based on selected TaskDescription
+            InvTaskNbr = InvTasksDbController.DbDataTable(InvTaskRow)("TaskNbr")
+
+            ' Initialize corresponding controls from DataTable values
+            valuesInitialized = False
+
+            ' Load TaskParts and TaskLabor datatables based on selected TaskId, then Initialize corresponding GridViews
+            If Not loadDependentDataTables() Then
+                MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
+            ' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
+            ' This is because controls like TaskLaborCost (for instance) are calculated from those tables
+            'InitializeAllDataViewingControls()
+            ' Initialize corresponding DataGridViews
+            InitializeInvTaskLaborGridView()
+            InitializeInvTaskPartsGridView()
+
+            valuesInitialized = True
+
+            ' Disable/Enable tlButtons for taskLaborGridView according to if rows present or not
+            If InvTaskLaborGridView.Rows.Count = 0 Then
+                InvTaskLaborRow = -1
+                tlDeleteButton.Enabled = False
+                tlEditButton.Enabled = False
+            Else
+                tlDeleteButton.Enabled = True
+                tlEditButton.Enabled = True
+            End If
+
+            ' Disable/Enable tlButtons for taskPartsGridView according to if rows present or not
+            If InvTaskPartsGridView.Rows.Count = 0 Then
+                InvTaskPartsRow = -1
+                tpDeleteButton.Enabled = False
+                tpEditButton.Enabled = False
+            Else
+                tpDeleteButton.Enabled = True
+                tpEditButton.Enabled = True
+            End If
+
+            ' Show labels and corresponding values
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+            showHide(getAllControlsWithTag("dataLabel", Me), 1)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            showHide(getAllControlsWithTag("subTaskEditingControl", Me), 1)
+
+            ' Enable editing and deleting button
+            editButton.Enabled = True
+            deleteButton.Enabled = True
+
+            'If it does = -1, that means that value Is either "Select one" Or some other anomoly
+        Else
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            showHide(getAllControlsWithTag("subTaskEditingControl", Me), 0)
+            ' Disable editing button
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+
+        End If
 
     End Sub
 
