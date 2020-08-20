@@ -18,8 +18,8 @@
     Private InvId As Long
 
     Private InvTaskRow As Integer
-    Private InvTaskId As Integer
     Private InvTaskNbr As Integer
+    Private InvTaskId As Integer
 
     ' Row indexes for use with InvTaskLabor and InvTaskParts DataGridViews
     Private InvTaskLaborRow As Integer = -1
@@ -196,6 +196,83 @@
         InvTaskPartsGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Amount", .DataPropertyName = "PartAmount"})
         InvTaskPartsGridView.Columns(2).DefaultCellStyle.Format = "c"
         InvTaskPartsGridView.Columns(3).DefaultCellStyle.Format = "c"
+
+    End Sub
+
+
+    ' Sub that will initialize/Calculate Invoice Task Labor Cost based on the total cost of all the labor codes in InvLabor with current InvNbr and TaskNbr
+    Private Sub InitializeInvTaskLaborValue()
+
+        ' All rows in InvLabor that are associated with the currently selected TaskNbr (and InvoiceNbr) will already be loaded into the datatable.
+        ' So, to calculate the total, all we have to do is get the sum of the Amount Field in the Dependently loaded InvLabor DataTable
+        ' Even if zero rows, shouldn't run into any issues
+        For Each row In InvTaskLaborDbController.DbDataTable.Rows
+            InvTaskLaborSum += row("LaborAmount")
+        Next
+
+        ' Then, assign the calculated sum
+        InvTaskLabor_Value.Text = InvTaskLaborSum
+
+    End Sub
+
+    Private Sub InitializeInvTaskLaborTextbox()
+
+        ' Calculate InvTaskLabor sum
+        For Each row In InvTaskLaborDbController.DbDataTable.Rows
+            InvTaskLaborSum += row("LaborAmount")
+        Next
+
+        InvTaskLabor_Textbox.Text = String.Format("{0:0.00}", InvTaskLaborSum)
+
+    End Sub
+
+
+    ' Sub that will initialize/Calculate Task Part Cost based on the total cost of all the parts in MasterTaskParts with current TaskId
+    Private Sub InitializeInvTaskPartsValue()
+
+        ' Calculate InvTaskParts sum
+        For Each row In InvTaskPartsDbController.DbDataTable.Rows
+            InvTaskPartsSum += row("PartAmount")
+        Next
+
+        ' Then, assign the calculated sum
+        InvTaskParts_Value.Text = InvTaskPartsSum
+
+    End Sub
+
+    Private Sub InitializeInvTaskPartsTextbox()
+
+        ' Calculate TaskParts sum
+        For Each row In InvTaskPartsDbController.DbDataTable.Rows
+            InvTaskPartsSum += row("PartAmount")
+        Next
+
+        InvTaskParts_Textbox.Text = String.Format("{0:0.00}", InvTaskPartsSum)
+
+    End Sub
+
+    ' Sub that will initialize/Calculate Total Task Cost based on the Sums found in InvTotalLaborCost and InvTotalPartsCost
+    ' NOTE: must be called after InitializeInvTaskLaborValue and InitializeInvTaskPartsValue
+    Private Sub InitializeTotalTaskValue()
+
+        Dim InvTaskLaborCost As Decimal = Convert.ToDecimal(InvTaskLabor_Value.Text)
+        Dim InvTaskPartsCost As Decimal = Convert.ToDecimal(InvTaskParts_Value.Text)
+        InvTotalTaskSum = InvTaskLaborCost + InvTaskPartsCost
+
+        ' Then, assign the calculated sum
+        InvTotalTaskValue.Text = InvTotalTaskSum
+
+    End Sub
+
+    Private Sub InitializeInvTotalTaskTextbox()
+
+        ' In other scenarios, we would have to validate the values that we were finding these calculations from. However, these are calculated, and will always be valid.
+        Dim InvTaskLaborCost As Decimal = Convert.ToDecimal(InvTaskLabor_Textbox.Text)
+        Dim InvTaskPartsCost As Decimal = Convert.ToDecimal(InvTaskParts_Textbox.Text)
+        InvTotalTaskSum = InvTaskLaborCost + InvTaskPartsCost
+
+        ' Then, assign and format calculated sum
+        InvTotalTaskTextbox.Text = String.Format("{0:0.00}", InvTotalTaskSum)
 
     End Sub
 

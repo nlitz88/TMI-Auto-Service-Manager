@@ -22,10 +22,10 @@ Partial Class invoiceTasks
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.deleteButton = New System.Windows.Forms.Button()
         Me.invoiceTasksLabel = New System.Windows.Forms.Label()
         Me.editButton = New System.Windows.Forms.Button()
@@ -36,15 +36,15 @@ Partial Class invoiceTasks
         Me.InvTaskComboBox = New System.Windows.Forms.ComboBox()
         Me.InvoiceLabel = New System.Windows.Forms.Label()
         Me.InvoiceValue = New System.Windows.Forms.Label()
-        Me.TotalTaskTextbox = New System.Windows.Forms.TextBox()
+        Me.InvTotalTaskTextbox = New System.Windows.Forms.TextBox()
         Me.TotalCostLabel = New System.Windows.Forms.Label()
-        Me.TotalTaskValue = New System.Windows.Forms.Label()
-        Me.TaskParts_Textbox = New System.Windows.Forms.TextBox()
+        Me.InvTotalTaskValue = New System.Windows.Forms.Label()
+        Me.InvTaskParts_Textbox = New System.Windows.Forms.TextBox()
         Me.TotalPartsCostLabel = New System.Windows.Forms.Label()
-        Me.TaskParts_Value = New System.Windows.Forms.Label()
-        Me.TaskLabor_Textbox = New System.Windows.Forms.TextBox()
+        Me.InvTaskParts_Value = New System.Windows.Forms.Label()
+        Me.InvTaskLabor_Textbox = New System.Windows.Forms.TextBox()
         Me.TotalLaborCostLabel = New System.Windows.Forms.Label()
-        Me.TaskLabor_Value = New System.Windows.Forms.Label()
+        Me.InvTaskLabor_Value = New System.Windows.Forms.Label()
         Me.Instructions_Value = New System.Windows.Forms.Label()
         Me.InstructionsLabel = New System.Windows.Forms.Label()
         Me.Instructions_Textbox = New System.Windows.Forms.TextBox()
@@ -185,15 +185,15 @@ Partial Class invoiceTasks
         Me.InvoiceValue.TabIndex = 225
         Me.InvoiceValue.Tag = ""
         '
-        'TotalTaskTextbox
+        'InvTotalTaskTextbox
         '
-        Me.TotalTaskTextbox.Enabled = False
-        Me.TotalTaskTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TotalTaskTextbox.Location = New System.Drawing.Point(681, 380)
-        Me.TotalTaskTextbox.Name = "TotalTaskTextbox"
-        Me.TotalTaskTextbox.Size = New System.Drawing.Size(105, 27)
-        Me.TotalTaskTextbox.TabIndex = 242
-        Me.TotalTaskTextbox.Tag = "dataEditingControl"
+        Me.InvTotalTaskTextbox.Enabled = False
+        Me.InvTotalTaskTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InvTotalTaskTextbox.Location = New System.Drawing.Point(681, 380)
+        Me.InvTotalTaskTextbox.Name = "InvTotalTaskTextbox"
+        Me.InvTotalTaskTextbox.Size = New System.Drawing.Size(105, 27)
+        Me.InvTotalTaskTextbox.TabIndex = 242
+        Me.InvTotalTaskTextbox.Tag = "dataEditingControl"
         '
         'TotalCostLabel
         '
@@ -206,26 +206,26 @@ Partial Class invoiceTasks
         Me.TotalCostLabel.Tag = "dataLabel"
         Me.TotalCostLabel.Text = "Total Cost :"
         '
-        'TotalTaskValue
+        'InvTotalTaskValue
         '
-        Me.TotalTaskValue.AutoSize = True
-        Me.TotalTaskValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TotalTaskValue.ForeColor = System.Drawing.Color.Black
-        Me.TotalTaskValue.Location = New System.Drawing.Point(681, 383)
-        Me.TotalTaskValue.Name = "TotalTaskValue"
-        Me.TotalTaskValue.Size = New System.Drawing.Size(0, 20)
-        Me.TotalTaskValue.TabIndex = 243
-        Me.TotalTaskValue.Tag = "dataViewingControl"
+        Me.InvTotalTaskValue.AutoSize = True
+        Me.InvTotalTaskValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InvTotalTaskValue.ForeColor = System.Drawing.Color.Black
+        Me.InvTotalTaskValue.Location = New System.Drawing.Point(681, 383)
+        Me.InvTotalTaskValue.Name = "InvTotalTaskValue"
+        Me.InvTotalTaskValue.Size = New System.Drawing.Size(0, 20)
+        Me.InvTotalTaskValue.TabIndex = 243
+        Me.InvTotalTaskValue.Tag = "dataViewingControl"
         '
-        'TaskParts_Textbox
+        'InvTaskParts_Textbox
         '
-        Me.TaskParts_Textbox.Enabled = False
-        Me.TaskParts_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TaskParts_Textbox.Location = New System.Drawing.Point(469, 380)
-        Me.TaskParts_Textbox.Name = "TaskParts_Textbox"
-        Me.TaskParts_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.TaskParts_Textbox.TabIndex = 239
-        Me.TaskParts_Textbox.Tag = "dataEditingControl"
+        Me.InvTaskParts_Textbox.Enabled = False
+        Me.InvTaskParts_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InvTaskParts_Textbox.Location = New System.Drawing.Point(469, 380)
+        Me.InvTaskParts_Textbox.Name = "InvTaskParts_Textbox"
+        Me.InvTaskParts_Textbox.Size = New System.Drawing.Size(105, 27)
+        Me.InvTaskParts_Textbox.TabIndex = 239
+        Me.InvTaskParts_Textbox.Tag = "dataEditingControl"
         '
         'TotalPartsCostLabel
         '
@@ -238,26 +238,26 @@ Partial Class invoiceTasks
         Me.TotalPartsCostLabel.Tag = "dataLabel"
         Me.TotalPartsCostLabel.Text = "Total Parts Cost :"
         '
-        'TaskParts_Value
+        'InvTaskParts_Value
         '
-        Me.TaskParts_Value.AutoSize = True
-        Me.TaskParts_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TaskParts_Value.ForeColor = System.Drawing.Color.Black
-        Me.TaskParts_Value.Location = New System.Drawing.Point(469, 383)
-        Me.TaskParts_Value.Name = "TaskParts_Value"
-        Me.TaskParts_Value.Size = New System.Drawing.Size(0, 20)
-        Me.TaskParts_Value.TabIndex = 240
-        Me.TaskParts_Value.Tag = "dataViewingControl"
+        Me.InvTaskParts_Value.AutoSize = True
+        Me.InvTaskParts_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InvTaskParts_Value.ForeColor = System.Drawing.Color.Black
+        Me.InvTaskParts_Value.Location = New System.Drawing.Point(469, 383)
+        Me.InvTaskParts_Value.Name = "InvTaskParts_Value"
+        Me.InvTaskParts_Value.Size = New System.Drawing.Size(0, 20)
+        Me.InvTaskParts_Value.TabIndex = 240
+        Me.InvTaskParts_Value.Tag = "dataViewingControl"
         '
-        'TaskLabor_Textbox
+        'InvTaskLabor_Textbox
         '
-        Me.TaskLabor_Textbox.Enabled = False
-        Me.TaskLabor_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TaskLabor_Textbox.Location = New System.Drawing.Point(221, 380)
-        Me.TaskLabor_Textbox.Name = "TaskLabor_Textbox"
-        Me.TaskLabor_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.TaskLabor_Textbox.TabIndex = 236
-        Me.TaskLabor_Textbox.Tag = "dataEditingControl"
+        Me.InvTaskLabor_Textbox.Enabled = False
+        Me.InvTaskLabor_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InvTaskLabor_Textbox.Location = New System.Drawing.Point(221, 380)
+        Me.InvTaskLabor_Textbox.Name = "InvTaskLabor_Textbox"
+        Me.InvTaskLabor_Textbox.Size = New System.Drawing.Size(105, 27)
+        Me.InvTaskLabor_Textbox.TabIndex = 236
+        Me.InvTaskLabor_Textbox.Tag = "dataEditingControl"
         '
         'TotalLaborCostLabel
         '
@@ -270,16 +270,16 @@ Partial Class invoiceTasks
         Me.TotalLaborCostLabel.Tag = "dataLabel"
         Me.TotalLaborCostLabel.Text = "Total Labor Cost :"
         '
-        'TaskLabor_Value
+        'InvTaskLabor_Value
         '
-        Me.TaskLabor_Value.AutoSize = True
-        Me.TaskLabor_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TaskLabor_Value.ForeColor = System.Drawing.Color.Black
-        Me.TaskLabor_Value.Location = New System.Drawing.Point(221, 383)
-        Me.TaskLabor_Value.Name = "TaskLabor_Value"
-        Me.TaskLabor_Value.Size = New System.Drawing.Size(0, 20)
-        Me.TaskLabor_Value.TabIndex = 237
-        Me.TaskLabor_Value.Tag = "dataViewingControl"
+        Me.InvTaskLabor_Value.AutoSize = True
+        Me.InvTaskLabor_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InvTaskLabor_Value.ForeColor = System.Drawing.Color.Black
+        Me.InvTaskLabor_Value.Location = New System.Drawing.Point(221, 383)
+        Me.InvTaskLabor_Value.Name = "InvTaskLabor_Value"
+        Me.InvTaskLabor_Value.Size = New System.Drawing.Size(0, 20)
+        Me.InvTaskLabor_Value.TabIndex = 237
+        Me.InvTaskLabor_Value.Tag = "dataViewingControl"
         '
         'Instructions_Value
         '
@@ -355,23 +355,23 @@ Partial Class invoiceTasks
         Me.InvTaskPartsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.InvTaskPartsGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.InvTaskPartsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.InvTaskPartsGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.InvTaskPartsGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.InvTaskPartsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.InvTaskPartsGridView.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.InvTaskPartsGridView.DefaultCellStyle = DataGridViewCellStyle6
         Me.InvTaskPartsGridView.Location = New System.Drawing.Point(509, 482)
         Me.InvTaskPartsGridView.MultiSelect = False
         Me.InvTaskPartsGridView.Name = "InvTaskPartsGridView"
@@ -495,23 +495,23 @@ Partial Class invoiceTasks
         Me.InvTaskLaborGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.InvTaskLaborGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.InvTaskLaborGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.InvTaskLaborGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.InvTaskLaborGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.InvTaskLaborGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.InvTaskLaborGridView.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.InvTaskLaborGridView.DefaultCellStyle = DataGridViewCellStyle8
         Me.InvTaskLaborGridView.Location = New System.Drawing.Point(100, 482)
         Me.InvTaskLaborGridView.MultiSelect = False
         Me.InvTaskLaborGridView.Name = "InvTaskLaborGridView"
@@ -554,15 +554,15 @@ Partial Class invoiceTasks
         Me.Controls.Add(Me.tlEditButton)
         Me.Controls.Add(Me.tlAddButton)
         Me.Controls.Add(Me.InvTaskLaborGridView)
-        Me.Controls.Add(Me.TotalTaskTextbox)
+        Me.Controls.Add(Me.InvTotalTaskTextbox)
         Me.Controls.Add(Me.TotalCostLabel)
-        Me.Controls.Add(Me.TotalTaskValue)
-        Me.Controls.Add(Me.TaskParts_Textbox)
+        Me.Controls.Add(Me.InvTotalTaskValue)
+        Me.Controls.Add(Me.InvTaskParts_Textbox)
         Me.Controls.Add(Me.TotalPartsCostLabel)
-        Me.Controls.Add(Me.TaskParts_Value)
-        Me.Controls.Add(Me.TaskLabor_Textbox)
+        Me.Controls.Add(Me.InvTaskParts_Value)
+        Me.Controls.Add(Me.InvTaskLabor_Textbox)
         Me.Controls.Add(Me.TotalLaborCostLabel)
-        Me.Controls.Add(Me.TaskLabor_Value)
+        Me.Controls.Add(Me.InvTaskLabor_Value)
         Me.Controls.Add(Me.Instructions_Value)
         Me.Controls.Add(Me.InstructionsLabel)
         Me.Controls.Add(Me.Instructions_Textbox)
@@ -601,15 +601,15 @@ Partial Class invoiceTasks
     Friend WithEvents InvTaskComboBox As ComboBox
     Friend WithEvents InvoiceLabel As Label
     Friend WithEvents InvoiceValue As Label
-    Friend WithEvents TotalTaskTextbox As TextBox
+    Friend WithEvents InvTotalTaskTextbox As TextBox
     Friend WithEvents TotalCostLabel As Label
-    Friend WithEvents TotalTaskValue As Label
-    Friend WithEvents TaskParts_Textbox As TextBox
+    Friend WithEvents InvTotalTaskValue As Label
+    Friend WithEvents InvTaskParts_Textbox As TextBox
     Friend WithEvents TotalPartsCostLabel As Label
-    Friend WithEvents TaskParts_Value As Label
-    Friend WithEvents TaskLabor_Textbox As TextBox
+    Friend WithEvents InvTaskParts_Value As Label
+    Friend WithEvents InvTaskLabor_Textbox As TextBox
     Friend WithEvents TotalLaborCostLabel As Label
-    Friend WithEvents TaskLabor_Value As Label
+    Friend WithEvents InvTaskLabor_Value As Label
     Friend WithEvents Instructions_Value As Label
     Friend WithEvents InstructionsLabel As Label
     Friend WithEvents Instructions_Textbox As TextBox
