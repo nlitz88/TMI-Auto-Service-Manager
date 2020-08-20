@@ -2142,7 +2142,7 @@ Public Class invoices
 
     Private Sub tasksButton_Click(sender As Object, e As EventArgs) Handles tasksButton.Click
 
-        changeScreenHide(InvoiceTasks, Me)
+        changeScreenHide(invoiceTasks, Me)
 
     End Sub
 

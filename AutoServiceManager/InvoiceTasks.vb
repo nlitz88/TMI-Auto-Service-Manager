@@ -1,4 +1,4 @@
-﻿Public Class InvoiceTasks
+﻿Public Class invoiceTasks
 
     ' New Database control instances for all preliminary datatables
     Private InvTasksDbController As New DbControl()
