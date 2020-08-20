@@ -1,4 +1,6 @@
-﻿Public Class invoices
+﻿Imports System.ComponentModel
+
+Public Class invoices
 
     ' New Database control instances for Customers, Vehicles, and InvHdr datatables
     Private CustomerDbController As New DbControl()
@@ -1935,4 +1937,23 @@
     End Sub
 
 
+    Private Sub invoices_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+
+        ' First, check if editing, and if editing, check if control values changed
+        If InvNbr_Textbox.Visible And InitialInvValues.CtrlValuesChanged() Then
+
+            Dim decision As DialogResult = MessageBox.Show("Exit without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+            If decision = DialogResult.No Then
+                e.Cancel = True
+                Exit Sub
+            End If
+
+        End If
+
+        ' Otherwise, just let the form close
+
+        'If e.CloseReason = CloseReason.UserClosing Then
+
+    End Sub
 End Class

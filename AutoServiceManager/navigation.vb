@@ -22,6 +22,14 @@
     End Sub
 
 
+    Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogoutToolStripMenuItem.Click
+
+        ' No need to check for changes being made on form, as they can only logout while viewing information
+        Me.ParentForm.Close()
+
+    End Sub
+
+
     Private Sub HomeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HomeToolStripMenuItem.Click
         If Me.ParentForm Is home Then Exit Sub
         changeScreen(home, Me.ParentForm)
@@ -96,5 +104,6 @@
         If Me.ParentForm Is invoices Then Exit Sub
         changeScreen(invoices, Me.ParentForm)
     End Sub
+
 
 End Class
