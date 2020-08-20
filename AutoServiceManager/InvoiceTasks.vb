@@ -349,7 +349,7 @@
     Private Function updateInvTask() As Boolean
 
         ' Columns that will not be included in the WHERE clause the UPDATE query
-        Dim excludedKeyColumns As New List(Of String) From {"TaskID", "TaskDescription", "Instructions", "TaskLabor", "TaskParts"}
+        Dim excludedKeyColumns As New List(Of String) From {"TNTD", "TaskID", "TaskDescription", "Instructions", "TaskLabor", "TaskParts"}
 
         updateTable(CRUD, InvTasksDbController.DbDataTable, InvTaskRow, excludedKeyColumns, "InvTask", "_", "dataEditingControl", Me, New List(Of Control))
         ' Then, return exception status of CRUD controller. Do this after each call
@@ -362,7 +362,7 @@
 
 
     ' Function that makes insertRow calls for all relevant DataTables
-    Private Function insertMasterTask() As Boolean
+    Private Function insertInvTask() As Boolean
 
         '' Lookup corresponding taskType symbol for valid taskType description first.
         '' Exclude task type from updateTable, then add its swapped value as an additional value
@@ -383,10 +383,10 @@
 
 
     ' Function that makes deleteRow calls for all relevant DataTables
-    Private Function deleteMasterTask() As Boolean
+    Private Function deleteInvTask() As Boolean
 
         ' Columns that will not be included in the WHERE clause the query
-        Dim excludedKeyColumns As New List(Of String) From {"TaskID", "TaskDescription", "Instructions", "TaskLabor", "TaskParts"}
+        Dim excludedKeyColumns As New List(Of String) From {"TNTD", "TaskID", "TaskDescription", "Instructions", "TaskLabor", "TaskParts"}
 
         deleteRow(CRUD, InvTasksDbController.DbDataTable, InvTaskRow, excludedKeyColumns, "InvTask")
         ' Then, return exception status of CRUD controller. Do this after each call
@@ -404,7 +404,7 @@
 
 
     ' Function that handles deleting for InvLabor Table (Add and Edit performed on editInvLabor/addInvLabor forms)
-    Public Function deleteMasterTaskLabor() As Boolean
+    Public Function deleteInvTaskLabor() As Boolean
 
         deleteRow(CRUD, InvTaskLaborDbController.DbDataTable, InvTaskLaborRow, New List(Of String), "InvLabor")
         If CRUD.HasException() Then Return False
@@ -415,7 +415,7 @@
 
 
     ' Function that handles deleting for InvParts Table (Add and Edit performed on editMInvParts/addInvParts forms)
-    Public Function deleteMasterTaskPart() As Boolean
+    Public Function deleteInvTaskPart() As Boolean
 
         deleteRow(CRUD, InvTaskPartsDbController.DbDataTable, InvTaskPartsRow, New List(Of String), "InvParts")
         If CRUD.HasException() Then Return False
@@ -424,6 +424,42 @@
 
     End Function
 
+
+
+
+    ' ***************** VALIDATION SUBS *****************
+
+
+    ' Sub that runs validation for all form controls. Also handles error reporting
+    Private Function controlsValid() As Boolean
+
+        Dim errorMessage As String = String.Empty
+
+        ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
+
+
+        ' Task Description (REQUIRED)
+        If Not isValidLength("Description", False, TaskDescription_Textbox.Text, 50, errorMessage) Then
+            TaskDescription_Textbox.ForeColor = Color.Red
+        End If
+
+        ' Instructions
+        If Not isValidLength("Instructions", False, Instructions_Textbox.Text, 255, errorMessage) Then
+            Instructions_Textbox.ForeColor = Color.Red
+        End If
+
+
+        ' Check if any invalid input has been found
+        If Not String.IsNullOrEmpty(errorMessage) Then
+
+            MessageBox.Show(errorMessage, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+
+        End If
+
+        Return True
+
+    End Function
 
 
 
@@ -560,6 +596,37 @@
 
     Private Sub deleteButton_Click(sender As Object, e As EventArgs) Handles deleteButton.Click
 
+        Dim decision As DialogResult = MessageBox.Show("Are you sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                ' 1.) Delete value from database
+                If Not deleteInvTask() Then
+                    MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("Successfully deleted " & TaskDescription_Textbox.Text & " from invoice")
+                End If
+
+                ' 2.) RELOAD MASTERTASKLIST DATATABLE FROM DATABASE
+                If Not loadInvTaskDataTable() Then
+                    MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
+                ' 3.) REINITIALIZE CONTROLS (Based on the selected index)
+                InitializeInvTaskComboBox()
+                InvTaskComboBox.SelectedIndex = 0
+
+                ' 4.) RESTORE USER CONTROLS TO NON-EDITING/SELECTING STATE
+                InvTaskComboBox.Enabled = True
+                addButton.Enabled = True
+                cancelButton.Enabled = False
+                saveButton.Enabled = False
+
+            Case DialogResult.No
+
+        End Select
+
     End Sub
 
     Private Sub editButton_Click(sender As Object, e As EventArgs) Handles editButton.Click
@@ -651,6 +718,114 @@
 
     Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
 
+        Dim decision As DialogResult = MessageBox.Show("Save Changes?", "Confirm Changes", MessageBoxButtons.YesNo)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                If mode = "editing" Then
+
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    If Not controlsValid() Then Exit Sub
+
+                    ' 2.) UPDATE MASTER TASK LIST VALUES
+                    If Not updateInvTask() Then
+                        MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    Else
+                        MessageBox.Show("Successfully updated invoice task")
+                    End If
+
+                    ' 3.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadInvTaskDataTable() Then
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+
+                    ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                    InitializeInvTaskComboBox()
+                    ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
+                    ' If update failed, then revert selected back to lastSelected
+                    Dim updatedItem As String = getRowValueWithKeyEquals(InvTasksDbController.DbDataTable, "TNTD", "TaskNbr", InvTaskNbr)
+                    If updatedItem <> Nothing Then
+                        InvTaskComboBox.SelectedIndex = InvTaskComboBox.Items.IndexOf(updatedItem)
+                    Else
+                        InvTaskComboBox.SelectedIndex = InvTaskComboBox.Items.IndexOf(lastSelectedInvTask)
+                    End If
+
+                    ' 5.) MOVE UI OUT OF EDITING MODE
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+                    InvTaskComboBox.Enabled = True
+
+                    ' Re-enable all task-related buttons and datagridviews
+                    For Each ctrl In getAllControlsWithTag("subTaskEditingControl", Me)
+                        ctrl.Enabled = True
+                    Next
+
+                ElseIf mode = "adding" Then
+
+                    '' 1.) VALIDATE DATAEDITING CONTROLS
+                    'If Not controlsValid() Then Exit Sub
+
+                    '' 2.) INSERT NEW ROW INTO MASTER TASK LIST
+                    'If Not insertMasterTask() Then
+                    '    MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    '    Exit Sub
+                    'Else
+                    '    MessageBox.Show("Successfully added " & TaskDescription_Textbox.Text & " to Master Task List")
+                    'End If
+
+                    '' 3.) RELOAD DATATABLES FROM DATABASE
+                    'If Not loadMasterTaskListDataTable() Then
+                    '    MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    'End If
+
+                    '' 4.) REINITIALIZE CONTROLS (based on index of newly inserted value)
+                    'InitializeTaskComboBox()
+
+                    '' Changing index of main combobox will also initialize respective dataViewing control values
+
+                    '' First, lookup most recent CustomerId added to the table
+                    'CRUD.ExecQuery("SELECT TaskId FROM MasterTaskList WHERE TaskId=(SELECT max(TaskId) FROM MasterTaskList)")
+                    'Dim newTaskId As Integer
+
+                    'If CRUD.DbDataTable.Rows.Count <> 0 And Not CRUD.HasException(True) Then
+
+                    '    ' Get new TaskId if query successful
+                    '    newTaskId = CRUD.DbDataTable.Rows(0)("TaskId")
+                    '    ' Get new ComboBox item from datatable using newly retrieved ID
+                    '    Dim newItem As String = getRowValueWithKeyEquals(MTL.DbDataTable, "TaskDescription", "TaskId", newTaskId)
+
+                    '    ' Set ComboBox accordingly after one final check
+                    '    If newItem <> Nothing Then
+                    '        TaskComboBox.SelectedIndex = TaskComboBox.Items.IndexOf(newItem)
+                    '    Else
+                    '        TaskComboBox.SelectedIndex = TaskComboBox.Items.IndexOf(lastSelectedTask)
+                    '    End If
+
+                    'Else
+                    '    TaskComboBox.SelectedIndex = lastSelectedTask
+                    'End If
+
+                    '' 5.) MOVE UI OUT OF Adding MODE
+                    'addButton.Enabled = True
+                    'cancelButton.Enabled = False
+                    'saveButton.Enabled = False
+                    'nav.EnableAll()
+                    'TaskComboBox.Enabled = True
+
+                    '' Re-enable all task-related buttons and datagridviews
+                    'For Each ctrl In getAllControlsWithTag("subTaskEditingControl", Me)
+                    '    ctrl.Enabled = True
+                    'Next
+
+                End If
+
+            Case DialogResult.No
+                ' Continue making changes or cancel editing
+        End Select
+
     End Sub
 
 
@@ -709,6 +884,36 @@
 
             End If
 
+        End If
+
+    End Sub
+
+
+
+    Private Sub TaskDescription_Textbox_TextChanged(sender As Object, e As EventArgs) Handles TaskDescription_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        TaskDescription_Textbox.ForeColor = DefaultForeColor
+
+        If InitialInvTasksValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub Instructions_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Instructions_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        Instructions_Textbox.ForeColor = DefaultForeColor
+
+        If InitialInvTasksValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
         End If
 
     End Sub

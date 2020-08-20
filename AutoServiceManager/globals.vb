@@ -635,13 +635,25 @@
         Dim ctrlValue As Object
         Dim valueParams As String = String.Empty    ' Used after SET in query
 
+        Dim firstValueParam As Integer = 0
+
         ' Add parameters for each value that is to be updated in SET clause of query
         For i As Integer = 0 To dataTable.Columns.Count - 1
 
             ctrls = getAllControlsWithName(dataTable.Columns(i).ColumnName, controlTag, nameDelimiter, form)
 
-            If ctrls.Count = 0 Then Continue For
-            If excludedControls.Contains(ctrls(0)) Then Continue For
+            If ctrls.Count = 0 Then
+                firstValueParam = i + 1
+                Continue For
+            End If
+            If excludedControls.Contains(ctrls(0)) Then
+                firstValueParam = i + 1
+                Console.WriteLine("First value param bumped up to the next i value: " & firstValueParam.ToString() & " i currently equals : " & i.ToString())
+                Continue For
+            End If
+
+            Console.WriteLine("not an excluded control, i = " & i.ToString())
+            If Not i = firstValueParam Then valueParams += ","
 
             ctrlValue = getControlValue(ctrls(0))
 
@@ -656,7 +668,6 @@
 
             updateController.AddParams("@" & dataTable.Columns(i).ColumnName, ctrlValue)
             valueParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName
-            If Not i = dataTable.Columns.Count - 1 Then valueParams += ","
 
         Next
 
@@ -664,11 +675,18 @@
         Dim isKeyDefaultValue As Boolean = False
         Dim keyParams As String = String.Empty      ' Used after WHERE in query
 
+        Dim firstKeyParam As Integer = 0
+
         ' Add parameters for each value used (as key) in WHERE clause of query
         For i As Integer = 0 To dataTable.Columns.Count - 1
 
             ' First, ensure that this column in not in the excluded list
-            If excludedKeyColumns.Contains(dataTable.Columns(i).ColumnName) Then Continue For
+            If excludedKeyColumns.Contains(dataTable.Columns(i).ColumnName) Then
+                firstKeyParam = i + 1
+                Continue For
+            End If
+
+            If Not i = firstKeyParam Then keyParams += " AND "
 
             ' Get keyValue from DataTable
             keyValue = dataTable.Rows(dataTableRow)(dataTable.Columns(i).ColumnName)
@@ -690,19 +708,17 @@
             ' if it is, then we want to append a slightly different keyParam string that checks for EITHER: default value or NULL
             If isKeyDefaultValue Then
                 keyParams += "(" & dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & "Key" & " OR IsNull(" & dataTable.Columns(i).ColumnName & "))"
-                If Not i = dataTable.Columns.Count - 1 Then keyParams += " AND "
 
                 ' If not, append normal param string for WHERE clause
             Else
                 keyParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & "Key"
-                If Not i = dataTable.Columns.Count - 1 Then keyParams += " AND "
             End If
 
         Next
 
         ' Finally, build query
         query += "UPDATE " & tableName & " SET " & valueParams & " WHERE " & keyParams
-        'Console.WriteLine(query)
+        Console.WriteLine(query)
         updateController.ExecQuery(query)
 
     End Sub
@@ -961,11 +977,18 @@
         Dim isKeyDefaultValue As Boolean = False
         Dim keyParams As String = String.Empty      ' Used after WHERE in query
 
+        Dim firstKeyParam As Integer = 0
+
         ' Add parameters for each value used (as key) in WHERE clause of query
         For i As Integer = 0 To dataTable.Columns.Count - 1
 
             ' First, ensure that this column in not in the excluded list
-            If excludedKeyColumns.Contains(dataTable.Columns(i).ColumnName) Then Continue For
+            If excludedKeyColumns.Contains(dataTable.Columns(i).ColumnName) Then
+                firstKeyParam = i + 1
+                Continue For
+            End If
+
+            If Not i = firstKeyParam Then keyParams += " AND "
 
             ' Get keyValue from DataTable
             keyValue = dataTable.Rows(dataTableRow)(dataTable.Columns(i).ColumnName)
@@ -987,19 +1010,17 @@
             ' if it is, then we want to append a slightly different keyParam string that checks for EITHER: default value or NULL
             If isKeyDefaultValue Then
                 keyParams += "(" & dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & "Key" & " OR IsNull(" & dataTable.Columns(i).ColumnName & "))"
-                If Not i = dataTable.Columns.Count - 1 Then keyParams += " AND "
 
                 ' If not, append normal param string for WHERE clause
             Else
                 keyParams += dataTable.Columns(i).ColumnName & "=@" & dataTable.Columns(i).ColumnName & "Key"
-                If Not i = dataTable.Columns.Count - 1 Then keyParams += " AND "
             End If
 
         Next
 
         ' Finally, build query
         query += "DELETE FROM " & tableName & " WHERE " & keyParams
-        'Console.WriteLine(query)
+        Console.WriteLine(query)
         deleteController.ExecQuery(query)
 
     End Sub
