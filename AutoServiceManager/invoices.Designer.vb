@@ -130,8 +130,8 @@ Partial Class invoices
         Me.Notes_Value = New System.Windows.Forms.Label()
         Me.Complete_Value = New System.Windows.Forms.CheckBox()
         Me.TaxExempt_Textbox = New System.Windows.Forms.TextBox()
-        Me.nav = New AutoServiceManager.navigation()
         Me.ShopSupplies_Value = New System.Windows.Forms.CheckBox()
+        Me.nav = New AutoServiceManager.navigation()
         Me.CostTableLayoutPanel.SuspendLayout()
         Me.TotalPanel.SuspendLayout()
         Me.TaxPanel.SuspendLayout()
@@ -1450,15 +1450,6 @@ Partial Class invoices
         Me.TaxExempt_Textbox.Tag = "dataEditingControl"
         Me.TaxExempt_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'nav
-        '
-        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.nav.Location = New System.Drawing.Point(0, 0)
-        Me.nav.Name = "nav"
-        Me.nav.Size = New System.Drawing.Size(1182, 28)
-        Me.nav.TabIndex = 267
-        '
         'ShopSupplies_Value
         '
         Me.ShopSupplies_Value.AutoCheck = False
@@ -1469,6 +1460,15 @@ Partial Class invoices
         Me.ShopSupplies_Value.TabIndex = 323
         Me.ShopSupplies_Value.Tag = "dataViewingControl"
         Me.ShopSupplies_Value.UseVisualStyleBackColor = True
+        '
+        'nav
+        '
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(1182, 28)
+        Me.nav.TabIndex = 267
         '
         'invoices
         '

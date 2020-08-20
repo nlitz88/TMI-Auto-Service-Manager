@@ -2117,6 +2117,7 @@ Public Class invoices
     End Sub
 
 
+
     Private Sub invoices_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
 
         ' First, check if editing/adding, and if editing/adding, check if control values changed
@@ -2136,4 +2137,19 @@ Public Class invoices
         'If e.CloseReason = CloseReason.UserClosing Then
 
     End Sub
+
+
+
+    Private Sub tasksButton_Click(sender As Object, e As EventArgs) Handles tasksButton.Click
+
+        changeScreenHide(InvoiceTasks, Me)
+
+    End Sub
+
+    Private Sub paymentsButton_Click(sender As Object, e As EventArgs) Handles paymentsButton.Click
+
+    End Sub
+
+
+
 End Class
