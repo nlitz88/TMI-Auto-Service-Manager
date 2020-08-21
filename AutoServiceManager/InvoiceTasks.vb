@@ -28,7 +28,7 @@
 
     Private InvTaskRow As Integer
     Private InvTaskNbr As Integer
-    Private InvTaskId As Integer
+    'Private InvTaskId As Integer
 
     ' Row indexes for use with InvTaskLabor and InvTaskParts DataGridViews
     Private InvTaskLaborRow As Integer = -1
@@ -74,7 +74,7 @@
 
     ' Retrieves current InvTaskId corresponding to TaskValue
     Public Function GetTaskId() As Integer
-        Return InvTaskId
+        Return TaskId
     End Function
 
     ' Retrieves current TaskNbr corresponding to current selected Task
@@ -606,6 +606,42 @@
 
     ' Function that makes insertRow calls for all relevant DataTables
     Private Function insertInvTask() As Boolean
+
+        Console.WriteLine(NewTaskTaskNbr)
+
+        Dim additionalValues As New List(Of AdditionalValue) From {
+            New AdditionalValue("InvNbr", GetType(Long), InvId),
+            New AdditionalValue("TaskNbr", GetType(Integer), NewTaskTaskNbr),
+            New AdditionalValue("TaskId", GetType(Integer), TaskId)}
+
+        ' Then, make calls to insertRow to all relevant tables
+        insertRow(CRUD, InvTasksDbController.DbDataTable, "InvTask", "_", "dataEditingControl", Me, additionalValues)
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
+    Private Function insertInvTaskLabor() As Boolean
+
+        Console.WriteLine(NewTaskTaskNbr)
+
+        Dim excludedControls As New List(Of Control) From {}
+        Dim additionalValues As New List(Of AdditionalValue) From {}
+
+        ' Then, make calls to insertRow to all relevant tables
+        'insertRow(CRUD, InvTasksDbController.DbDataTable, "MasterTaskList", "_", "dataEditingControl", Me, excludedControls, additionalValues)
+        ' Then, return exception status of CRUD controller. Do this after each call
+        'If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
+    Private Function insertInvTaskParts() As Boolean
 
         Console.WriteLine(NewTaskTaskNbr)
 
