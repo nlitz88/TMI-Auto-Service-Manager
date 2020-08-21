@@ -997,7 +997,7 @@
                         End If
 
                     Else
-                        TaskComboBox.SelectedIndex = lastSelectedTask
+                        TaskComboBox.SelectedIndex = TaskComboBox.Items.IndexOf(lastSelectedTask)
                     End If
 
                     ' 5.) MOVE UI OUT OF Adding MODE

@@ -37,6 +37,7 @@
     ' Row index variables used for Master Task related DataTable lookups
     Private TaskRow As Integer
     Private TaskId As Integer
+    Private NewTaskTaskNbr As Integer
 
     Private TaskLaborRow As Integer = -1
     Private TaskPartsRow As Integer = -1
@@ -606,20 +607,18 @@
     ' Function that makes insertRow calls for all relevant DataTables
     Private Function insertInvTask() As Boolean
 
-        '' Lookup corresponding taskType symbol for valid taskType description first.
-        '' Exclude task type from updateTable, then add its swapped value as an additional value
-        'Dim TaskTypeSymbol As String = getRowValueWithKey(TaskTypesDbController.DbDataTable, "TaskType", "TaskDescription", TaskType_ComboBox.Text)
+        Console.WriteLine(NewTaskTaskNbr)
 
-        'Dim excludedControls As New List(Of Control) From {TaskType_ComboBox}
-        'Dim additionalValues As New List(Of AdditionalValue) From {New AdditionalValue("TaskType", GetType(String), TaskTypeSymbol)}
+        Dim excludedControls As New List(Of Control) From {}
+        Dim additionalValues As New List(Of AdditionalValue) From {}
 
-        '' Then, make calls to insertRow to all relevant tables
-        'insertRow(CRUD, MTL.DbDataTable, "MasterTaskList", "_", "dataEditingControl", Me, excludedControls, additionalValues)
-        '' Then, return exception status of CRUD controller. Do this after each call
+        ' Then, make calls to insertRow to all relevant tables
+        'insertRow(CRUD, InvTasksDbController.DbDataTable, "MasterTaskList", "_", "dataEditingControl", Me, excludedControls, additionalValues)
+        ' Then, return exception status of CRUD controller. Do this after each call
         'If CRUD.HasException() Then Return False
 
-        '' Otherwise, return true
-        'Return True
+        ' Otherwise, return true
+        Return True
 
     End Function
 
@@ -842,7 +841,7 @@
             ' Disable editing button
             editButton.Enabled = False
             deleteButton.Enabled = False
-
+            saveButton.Enabled = False
             validSelection = False
 
             Exit Sub
@@ -906,11 +905,13 @@
                 ctrl.Enabled = False
             Next
 
-            ' Enable editing and deleting button
-            editButton.Enabled = True
-            deleteButton.Enabled = True
+            ' Disable editing and deleting button, enable saveButton 
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+            saveButton.Enabled = True
 
             validSelection = True
+
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
@@ -923,7 +924,7 @@
             ' Disable editing button
             editButton.Enabled = False
             deleteButton.Enabled = False
-
+            saveButton.Enabled = False
             validSelection = False
 
         End If
@@ -1160,60 +1161,68 @@
 
                 ElseIf mode = "adding" Then
 
-                    '' 1.) VALIDATE DATAEDITING CONTROLS
-                    'If Not controlsValid() Then Exit Sub
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    If Not controlsValid() Then Exit Sub
 
-                    '' 2.) INSERT NEW ROW INTO MASTER TASK LIST
-                    'If Not insertMasterTask() Then
-                    '    MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    '    Exit Sub
-                    'Else
-                    '    MessageBox.Show("Successfully added " & TaskDescription_Textbox.Text & " to Master Task List")
-                    'End If
+                    ' 2.) GET NEW TASK TASK NUMBER (MAX EXISTING TASK NUMBER + 1)
+                    '       Because InvTask DataTable (containing only rows with InvNbr) is sorted in ascending order when loaded in,
+                    '       The largest (max) TaskNbr is going to be in the last row.
+                    '       This will be used for inserting, as well as looking up later on.
+                    NewTaskTaskNbr = InvTasksDbController.DbDataTable(InvTasksDbController.DbDataTable.Rows.Count - 1)("TaskNbr") + 1
 
-                    '' 3.) RELOAD DATATABLES FROM DATABASE
-                    'If Not loadMasterTaskListDataTable() Then
-                    '    MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    'End If
+                    ' 4.) INSERT NEW ROW INTO MASTER TASK LIST
+                    If Not insertInvTask() Then
+                        MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    Else
+                        MessageBox.Show("Successfully added " & TaskDescription_Textbox.Text & " to invoice")
+                    End If
 
-                    '' 4.) REINITIALIZE CONTROLS (based on index of newly inserted value)
-                    'InitializeTaskComboBox()
+                    ' Call another function here to insert the rows from MTL task labor and task parts to Invoice task labor and task parts
 
-                    '' Changing index of main combobox will also initialize respective dataViewing control values
+                    ' 5.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadInvTaskDataTable() Then
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
 
-                    '' First, lookup most recent CustomerId added to the table
-                    'CRUD.ExecQuery("SELECT TaskId FROM MasterTaskList WHERE TaskId=(SELECT max(TaskId) FROM MasterTaskList)")
-                    'Dim newTaskId As Integer
+                    ' 6.) SETUP FORM FOR INVOICE RELATED DATATABLES AGAIN
+                    ' Make InvTaskComboBox and label visible, and hide the others
+                    InvTaskComboBox.Visible = True
+                    InvTaskComboLabel.Visible = True
 
-                    'If CRUD.DbDataTable.Rows.Count <> 0 And Not CRUD.HasException(True) Then
+                    TaskComboBox.Visible = False
+                    TaskComboLabel.Visible = False
 
-                    '    ' Get new TaskId if query successful
-                    '    newTaskId = CRUD.DbDataTable.Rows(0)("TaskId")
-                    '    ' Get new ComboBox item from datatable using newly retrieved ID
-                    '    Dim newItem As String = getRowValueWithKeyEquals(MTL.DbDataTable, "TaskDescription", "TaskId", newTaskId)
+                    ' Setup/Configure gridviews for Invoice Labor and Invoice Parts
+                    SetupInvGridViews()
 
-                    '    ' Set ComboBox accordingly after one final check
-                    '    If newItem <> Nothing Then
-                    '        TaskComboBox.SelectedIndex = TaskComboBox.Items.IndexOf(newItem)
-                    '    Else
-                    '        TaskComboBox.SelectedIndex = TaskComboBox.Items.IndexOf(lastSelectedTask)
-                    '    End If
+                    ' 7.) REINITIALIZE CONTROLS (based on index of newly inserted value)
+                    InitializeInvTaskComboBox()
 
-                    'Else
-                    '    TaskComboBox.SelectedIndex = lastSelectedTask
-                    'End If
+                    ' 8.) SET SELECTED INDEX OF INVTASKCOMBOBOX (which will subsequently initialization form controls)
+                    '       Using MaxTaskId as a way of getting our recently inserted task won't work, as we could've inserted a task with a very old TaskId
+                    '       Instead, in our InvTask DataTable, because it is sorted by taskNumber, we can use the last row of the Datatable to get the values we need
+                    '       Use variable NewTaskTaskNbr to get the newest, furthest down task in the DataTable
+                    Dim newItem As String = getRowValueWithKeyEquals(InvTasksDbController.DbDataTable, "TNTD", "TaskNbr", NewTaskTaskNbr)
+                    If newItem <> Nothing Then
+                        InvTaskComboBox.SelectedIndex = InvTaskComboBox.Items.IndexOf(newItem)
+                    Else
+                        InvTaskComboBox.SelectedIndex = InvTaskComboBox.Items.IndexOf(lastSelectedInvTask)
+                        ' The last selected will already be the last selected, so must fire event to trigger initializations
+                        InvTaskComboBox_SelectedIndexChanged(InvTaskComboBox, New EventArgs())
+                    End If
 
-                    '' 5.) MOVE UI OUT OF Adding MODE
-                    'addButton.Enabled = True
-                    'cancelButton.Enabled = False
-                    'saveButton.Enabled = False
-                    'nav.EnableAll()
-                    'TaskComboBox.Enabled = True
 
-                    '' Re-enable all task-related buttons and datagridviews
-                    'For Each ctrl In getAllControlsWithTag("subTaskEditingControl", Me)
-                    '    ctrl.Enabled = True
-                    'Next
+                    ' 9.) RESTORE USER CONTROLS TO NON-ADDING STATE (only those that are controlled by "adding")
+                    InvTaskComboBox.Enabled = True
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+
+                    ' 10.) Re-enable all task-related buttons and datagridviews
+                    For Each ctrl In getAllControlsWithTag("subTaskEditingControl", Me)
+                        ctrl.Enabled = True
+                    Next
 
                 End If
 
