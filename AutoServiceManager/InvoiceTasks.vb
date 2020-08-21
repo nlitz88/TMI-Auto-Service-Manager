@@ -16,6 +16,9 @@
 
     ' Initialize instance(s) of initialValues class
     Private InitialInvTasksValues As New InitialValues()
+    ' Variable to track whether or not current selection is valid.
+    ' In this form, this will be used in place of initialvalues (when adding) to determine whether or not prompt user before cancelling/Closing
+    Private validSelection As Boolean
 
     'Variable to keep track of whether form fully loaded or not
     Private valuesInitialized As Boolean = True
@@ -192,6 +195,10 @@
 
         ' Manually add DataGridView columns corresponding to only desired columns from DataTable
 
+        ' First, clear both gridviews of any existing columns
+        InvTaskLaborGridView.Columns.Clear()
+        InvTaskPartsGridView.Columns.Clear()
+
         ' Invoice Task Labor GridView
         InvTaskLaborGridView.AutoGenerateColumns = False
         InvTaskLaborGridView.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Description", .DataPropertyName = "LaborDescription"})
@@ -332,25 +339,7 @@
     End Sub
 
 
-    ' Sub that will add formatting to already initialized dataViewingControls
-    ' NOTE: these subs only format controls that don't have their formatting handled by a separate sub
-    Private Sub formatDataViewingControls()
 
-        ' These three calculation based fields are formatted here after the fact, as otherwise, TotalTask can't parse the decimal values from TaskLabor and TaskParts
-        InvTaskLabor_Value.Text = FormatCurrency(InvTaskLabor_Value.Text)
-        InvTaskParts_Value.Text = FormatCurrency(InvTaskParts_Value.Text)
-        InvTotalTaskValue.Text = FormatCurrency(InvTotalTaskValue.Text)
-
-    End Sub
-
-    ' Sub that will add formatting to already initialized dataEditingControls
-    Private Sub formatDataEditingControls()
-
-        'TaskLabor_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TaskLabor_Textbox.Text))
-        'TaskParts_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TaskParts_Textbox.Text))
-        'TotalTask_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TotalTask_Textbox.Text))
-
-    End Sub
 
 
 
@@ -448,6 +437,10 @@
     Private Sub SetupMTLGridViews()
 
         ' Manually add DataGridView columns corresponding to only desired columns from DataTable
+
+        ' First, clear both gridviews of any existing columns
+        InvTaskLaborGridView.Columns.Clear()
+        InvTaskPartsGridView.Columns.Clear()
 
         ' Task Labor GridView
         InvTaskLaborGridView.AutoGenerateColumns = False
@@ -560,6 +553,32 @@
         formatDataViewingControls()
 
     End Sub
+
+
+
+
+    ' Sub that will add formatting to already initialized dataViewingControls.
+    ' NOTE: these subs only format controls that don't have their formatting handled by a separate sub
+    ' Used for both Invoice Tasks and Master Tasks
+    Private Sub formatDataViewingControls()
+
+        ' These three calculation based fields are formatted here after the fact, as otherwise, TotalTask can't parse the decimal values from TaskLabor and TaskParts
+        InvTaskLabor_Value.Text = FormatCurrency(InvTaskLabor_Value.Text)
+        InvTaskParts_Value.Text = FormatCurrency(InvTaskParts_Value.Text)
+        InvTotalTaskValue.Text = FormatCurrency(InvTotalTaskValue.Text)
+
+    End Sub
+
+    ' Sub that will add formatting to already initialized dataEditingControls
+    Private Sub formatDataEditingControls()
+
+        'TaskLabor_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TaskLabor_Textbox.Text))
+        'TaskParts_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TaskParts_Textbox.Text))
+        'TotalTask_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TotalTask_Textbox.Text))
+
+    End Sub
+
+
 
 
 
@@ -719,7 +738,7 @@
     End Sub
 
 
-    Private Sub InvTaskComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InvTaskComboBox.SelectedIndexChanged
+    Private Sub InvTaskComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles InvTaskComboBox.SelectedIndexChanged, InvTaskComboBox.TextChanged
 
         ' Ensure that InvTaskComboBox is only attempting to initialize values when on proper selected Index
         If InvTaskComboBox.SelectedIndex = -1 Then
@@ -810,6 +829,109 @@
 
 
 
+    Private Sub TaskComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TaskComboBox.SelectedIndexChanged, TaskComboBox.TextChanged
+
+        ' Ensure that TaskComboBox is only attempting to initialize values when on proper selected Index
+        If TaskComboBox.SelectedIndex = -1 Then
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            showHide(getAllControlsWithTag("subTaskEditingControl", Me), 0)
+            ' Disable editing button
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+
+            validSelection = False
+
+            Exit Sub
+
+        End If
+
+        ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid
+        TaskRow = getDataTableRow(MTLDbController.DbDataTable, "TaskDescription", TaskComboBox.Text)
+
+        ' If this query DOES return a valid row index, then initialize respective controls
+        If TaskRow <> -1 Then
+
+            ' Lookup TaskId based on selected TaskDescription
+            TaskId = MTLDbController.DbDataTable(TaskRow)("TaskId")
+
+            ' Initialize corresponding controls from DataTable values
+            valuesInitialized = False
+
+            ' Load TaskParts and TaskLabor datatables based on selected TaskId, then Initialize corresponding GridViews
+            If Not loadMTLDependentDataTables() Then
+                MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
+            ' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
+            ' This is because controls like TaskLaborCost (for instance) are calculated from those tables
+            InitializeAllMTLDataEditingControls()
+            ' Initialize corresponding DataGridViews after clearing them
+            InitializeMTLTaskLaborGridView()
+            InitializeMTLTaskPartsGridView()
+
+            valuesInitialized = True
+
+            ' Disable/Enable tlButtons for taskLaborGridView according to if rows present or not
+            If InvTaskLaborGridView.Rows.Count = 0 Then
+                InvTaskLaborRow = -1
+                tlDeleteButton.Enabled = False
+                tlEditButton.Enabled = False
+            Else
+                tlDeleteButton.Enabled = True
+                tlEditButton.Enabled = True
+            End If
+
+            ' Disable/Enable tlButtons for taskPartsGridView according to if rows present or not
+            If InvTaskPartsGridView.Rows.Count = 0 Then
+                InvTaskPartsRow = -1
+                tpDeleteButton.Enabled = False
+                tpEditButton.Enabled = False
+            Else
+                tpDeleteButton.Enabled = True
+                tpEditButton.Enabled = True
+            End If
+
+            ' Show labels and corresponding values
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 1)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+            showHide(getAllControlsWithTag("subTaskEditingControl", Me), 1)
+
+            ' Disable all subTaskEditingControls
+            For Each ctrl In getAllControlsWithTag("subTaskEditingControl", Me)
+                ctrl.Enabled = False
+            Next
+
+            ' Enable editing and deleting button
+            editButton.Enabled = True
+            deleteButton.Enabled = True
+
+            validSelection = True
+
+            'If it does = -1, that means that value Is either "Select one" Or some other anomoly
+        Else
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            showHide(getAllControlsWithTag("subTaskEditingControl", Me), 0)
+            ' Disable editing button
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+
+            validSelection = False
+
+        End If
+
+    End Sub
+
+
+
 
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
@@ -823,48 +945,25 @@
         TaskComboBox.Visible = True
         TaskComboLabel.Visible = True
 
+        ' Clear and setup gridviews for Master Task Labor and Parts Tables
+        SetupMTLGridViews()
+
+        ' Then, load Master Task DataTable
         loadMasterTaskListDataTable()
+        InitializeTaskComboBox()
+        TaskComboBox.SelectedIndex = 0
 
+        ' First, disable editButton, addButton, enable cancelButton, and disable nav
+        editButton.Enabled = False
+        addButton.Enabled = False
+        cancelButton.Enabled = True
 
-        '' Initialize values for dataEditingControls
-        'valuesInitialized = False
-        'clearControls(getAllControlsWithTag("dataEditingControl", Me))
-        '' Clear DataGridViews (on cancel/save, they will be reinitialized, so no problem)
-        'TaskLaborGridView.DataSource = Nothing
-        'TaskPartsGridView.DataSource = Nothing
-        '' Set TaskType ComboBox selected index = -1
-        'TaskType_ComboBox.SelectedIndex = -1
-        'valuesInitialized = True
-        '' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
-        'InitialMTLValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
-
-        '' First, disable editButton, addButton, enable cancelButton, and disable nav
-        'editButton.Enabled = False
-        'addButton.Enabled = False
-        'cancelButton.Enabled = True
-        'nav.DisableAll()
-        'TaskComboBox.Enabled = False
-
-        '' Disable all task-related buttons and datagridviews
-        'For Each ctrl In getAllControlsWithTag("subTaskEditingControl", Me)
-        '    ctrl.Enabled = False
-        'Next
-
-
-        '' Get lastSelected
-        'If getDataTableRow(MTL.DbDataTable, "TaskDescription", TaskComboBox.Text) <> -1 Then
-        '    lastSelectedTask = TaskComboBox.Text
-        'Else
-        '    lastSelectedTask = "Select One"
-        'End If
-
-        'TaskComboBox.SelectedIndex = 0
-
-        '' Hide/Show the dataViewingControls and dataEditingControls, respectively
-        'showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
-        'showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
-        'showHide(getAllControlsWithTag("dataLabel", Me), 1)
-        'showHide(getAllControlsWithTag("subTaskEditingControl", Me), 1)
+        ' Get lastSelected Invoice Task. This way we can switch back to the right invoice task we were viewing when we decided to add (if cancelling)
+        If getDataTableRow(InvTasksDbController.DbDataTable, "TNTD", InvTaskComboBox.Text) <> -1 Then
+            lastSelectedInvTask = InvTaskComboBox.Text
+        Else
+            lastSelectedInvTask = "Select One"
+        End If
 
     End Sub
 
@@ -939,52 +1038,71 @@
 
     Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
 
-        ' Check for changes before cancelling. Don't need function here that calls all, as only working with one datatable's values
-        If InitialInvTasksValues.CtrlValuesChanged() Then
 
-            Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-            ' If changes have been made, and the user selected that they don't want to cancel, then exit here.
-            If decision = DialogResult.No Then Exit Sub
 
-        End If
-
-        ' Otherwise, continue cancelling
         If mode = "editing" Then
 
-            ' RESTORE USER CONTROLS TO NON-EDITING STATE
+            ' 1.) Check for changes made to dataEditingControls
+            If InitialInvTasksValues.CtrlValuesChanged() Then
+
+                Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                ' If changes have been made, and the user selected that they don't want to cancel, then exit here.
+                If decision = DialogResult.No Then Exit Sub
+
+            End If    ' Otherwise, continue cancelling
+
+            ' 2.) RESTORE USER CONTROLS TO NON-EDITING STATE
             editButton.Enabled = True
             addButton.Enabled = True
             cancelButton.Enabled = False
             saveButton.Enabled = False
             InvTaskComboBox.Enabled = True
 
-            ' Re-enable all task-related buttons and datagridviews
+            ' 3.) Re-enable all task-related buttons and datagridviews
             For Each ctrl In getAllControlsWithTag("subTaskEditingControl", Me)
                 ctrl.Enabled = True
             Next
 
-            ' Show/Hide the dataViewingControls and dataEditingControls, respectively
+            ' 4.) Show/Hide the dataViewingControls and dataEditingControls, respectively
             showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
             showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
             showHide(getAllControlsWithTag("taskEditingButton", Me), 0)
 
         ElseIf mode = "adding" Then
 
-            ' 1.) SET CustomerComboBox BACKK TO LAST SELECTED ITEM/INDEX
+            ' 1.) Check to see if user could be in the process of adding a new task
+            If validSelection Then
+
+                Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                ' If changes have been made, and the user selected that they don't want to cancel, then exit here.
+                If decision = DialogResult.No Then Exit Sub
+
+            End If     ' Otherwise, continue cancelling
+
+            ' 2.) SETUP FORM FOR INVOICE RELATED DATATABLES AGAIN
+            ' Make InvTaskComboBox and label visible, and hide the others
+            InvTaskComboBox.Visible = True
+            InvTaskComboLabel.Visible = True
+
+            TaskComboBox.Visible = False
+            TaskComboLabel.Visible = False
+
+            ' Setup/Configure gridviews for Invoice Labor and Invoice Parts
+            SetupInvGridViews()
+
+            ' 3.) SET CustomerComboBox BACKK TO LAST SELECTED ITEM/INDEX
             InvTaskComboBox.SelectedIndex = InvTaskComboBox.Items.IndexOf(lastSelectedInvTask)
+            ' No matter the value, must fire selectedIndexChanged event, as selectedIndex shouldn't have changed on add.
+            ' Therefore, setting it to the same won't do anything. Thus, we must fire the event regarless
+            InvTaskComboBox_SelectedIndexChanged(InvTaskComboBox, New EventArgs())
 
-            ' 2.) IF LAST SELECTED WAS "SELECT ONE", Then simulate functionality from combobox text/selectedIndex changed
-            If lastSelectedInvTask = "Select One" Then
-                InvTaskComboBox_SelectedIndexChanged(InvTaskComboBox, New EventArgs())
-            End If
-
-            ' 3.) RESTORE USER CONTROLS TO NON-ADDING STATE (only those that are controlled by "adding")
+            ' 4.) RESTORE USER CONTROLS TO NON-ADDING STATE (only those that are controlled by "adding")
             InvTaskComboBox.Enabled = True
             addButton.Enabled = True
             cancelButton.Enabled = False
             saveButton.Enabled = False
 
-            ' Re-enable all task-related buttons and datagridviews
+            ' 5.) Re-enable all task-related buttons and datagridviews
             For Each ctrl In getAllControlsWithTag("subTaskEditingControl", Me)
                 ctrl.Enabled = True
             Next
