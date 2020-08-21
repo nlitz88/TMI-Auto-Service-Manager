@@ -152,7 +152,7 @@
 
 
     ' Function that will load all selection-dependent DataTables
-    Private Function loadDependentDataTables()
+    Private Function loadInvDependentDataTables()
 
         ' Loads rows from InvTaskLabor based on invNbr and selected TaskNbr
         InvTaskLaborDbController.AddParams("@invId", InvId)
@@ -188,7 +188,7 @@
     End Sub
 
     ' Sub that sets up both the InvTaskLaborDataGridView and InvTaskPartsDataGridView
-    Private Sub SetupGridViews()
+    Private Sub SetupInvGridViews()
 
         ' Manually add DataGridView columns corresponding to only desired columns from DataTable
 
@@ -292,7 +292,7 @@
 
 
     ' Sub that handles all initialization for dataEditingControls
-    Private Sub InitializeAllDataEditingControls()
+    Private Sub InitializeAllInvDataEditingControls()
 
         ' Reset calculated value variables
         InvTaskLaborSum = 0
@@ -313,7 +313,7 @@
     End Sub
 
     ' Sub that handles all initialization for dataViewingControls
-    Private Sub InitializeAllDataViewingControls()
+    Private Sub InitializeAllInvDataViewingControls()
 
         ' Reset calculated value variables
         InvTaskLaborSum = 0
@@ -407,7 +407,7 @@
 
 
     ' Function that will load all selection-dependent DataTables
-    Private Function loadDependentDataTables()
+    Private Function loadMTLDependentDataTables()
 
         ' Loads rows from MasterTaskLabor based on selected TaskId from MasterTaskList
         TaskLaborDbController.AddParams("@taskId", TaskId)
@@ -430,14 +430,14 @@
 
     ' Even though being used with Master Task related Data, we can still reuse the same DataGridViews
 
-    Private Sub InitializeInvTaskLaborGridView()
+    Private Sub InitializeMTLTaskLaborGridView()
 
         InvTaskLaborGridView.DataSource = TaskLaborDbController.DbDataTable
 
     End Sub
 
     ' Sub that initializes TaskPartsGridView
-    Private Sub InitializeInvTaskPartsGridView()
+    Private Sub InitializeMTLTaskPartsGridView()
 
         InvTaskPartsGridView.DataSource = TaskPartsDbController.DbDataTable
 
@@ -445,7 +445,7 @@
 
 
     ' Sub that sets up both the TaskLaborDataGridView and TaskPartsDataGridView
-    Private Sub SetupGridViews()
+    Private Sub SetupMTLGridViews()
 
         ' Manually add DataGridView columns corresponding to only desired columns from DataTable
 
@@ -471,7 +471,7 @@
 
 
     ' Sub that will initialize/Calculate Task Labor Cost based on the total cost of all the labor codes in MasterTaskLabor with current TaskId
-    Private Sub InitializeTaskLaborValue()
+    Private Sub InitializeMTLTaskLaborValue()
 
         ' All rows in MasterTaskLabor that are associated with the currently selectedTaskId will already be loaded into the datatable.
         ' So, to calculate the total, all we have to do is get the sum of the Amount Field in the Dependently loaded MasterTaskLabor DataTable
@@ -485,7 +485,7 @@
 
     End Sub
 
-    Private Sub InitializeTaskLaborTextbox()
+    Private Sub InitializeMTLTaskLaborTextbox()
 
         ' Calculate TaskLabor sum
         For Each row In TaskLaborDbController.DbDataTable.Rows
@@ -497,7 +497,7 @@
     End Sub
 
     ' Sub that will initialize/Calculate Task Part Cost based on the total cost of all the parts in MasterTaskParts with current TaskId
-    Private Sub InitializeTaskPartsValue()
+    Private Sub InitializeMTLTaskPartsValue()
 
         ' Calculate TaskParts sum
         For Each row In TaskPartsDbController.DbDataTable.Rows
@@ -509,7 +509,7 @@
 
     End Sub
 
-    Private Sub InitializeTaskPartsTextbox()
+    Private Sub InitializeMTLTaskPartsTextbox()
 
         ' Calculate TaskParts sum
         For Each row In TaskPartsDbController.DbDataTable.Rows
@@ -522,7 +522,7 @@
 
 
     ' Sub that handles all initialization for dataEditingControls
-    Private Sub InitializeAllDataEditingControls()
+    Private Sub InitializeAllMTLDataEditingControls()
 
         ' Reset calculated value variables
         InvTaskLaborSum = 0
@@ -532,8 +532,8 @@
         ' Automated initializations
         InitializeMTLDataEditingControls()
         ' Then, re-initialize and format any calculation based values
-        InitializeTaskLaborTextbox()
-        InitializeTaskPartsTextbox()
+        InitializeMTLTaskLaborTextbox()
+        InitializeMTLTaskPartsTextbox()
         InitializeInvTotalTaskTextbox()
         ' Then, format dataEditingControls
         formatDataEditingControls()
@@ -543,7 +543,7 @@
     End Sub
 
     ' Sub that handles all initialization for dataViewingControls
-    Private Sub InitializeAllDataViewingControls()
+    Private Sub InitializeAllMTLDataViewingControls()
 
         ' Reset calculated value variables
         InvTaskLaborSum = 0
@@ -553,8 +553,8 @@
         ' Automated initializations
         InitializeMTLDataViewingControls()
         ' Then, re-initialize and format any calculation based values
-        InitializeTaskLaborValue()
-        InitializeTaskPartsValue()
+        InitializeMTLTaskLaborValue()
+        InitializeMTLTaskPartsValue()
         InitializeInvTotalTaskValue()
         ' Then, format dataViewingControls
         formatDataViewingControls()
@@ -710,7 +710,7 @@
         End If
 
         ' Setup GridViews and initialize ComboBoxes for first time
-        SetupGridViews()
+        SetupInvGridViews()
 
         InitializeInvTaskComboBox()
         InvTaskComboBox.SelectedIndex = 0
@@ -749,13 +749,13 @@
             valuesInitialized = False
 
             ' Load TaskParts and TaskLabor datatables based on selected TaskId, then Initialize corresponding GridViews
-            If Not loadDependentDataTables() Then
+            If Not loadInvDependentDataTables() Then
                 MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
             ' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
             ' This is because controls like TaskLaborCost (for instance) are calculated from those tables
-            InitializeAllDataViewingControls()
+            InitializeAllInvDataViewingControls()
             ' Initialize corresponding DataGridViews
             InitializeInvTaskLaborGridView()
             InitializeInvTaskPartsGridView()
@@ -911,7 +911,7 @@
 
         ' Initialize values for dataEditingControls
         valuesInitialized = False
-        InitializeAllDataEditingControls()
+        InitializeAllInvDataEditingControls()
         valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialInvTasksValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
