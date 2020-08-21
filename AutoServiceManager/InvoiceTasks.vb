@@ -612,7 +612,7 @@
         Dim additionalValues As New List(Of AdditionalValue) From {
             New AdditionalValue("InvNbr", GetType(Long), InvId),
             New AdditionalValue("TaskNbr", GetType(Integer), NewTaskTaskNbr),
-            New AdditionalValue("TaskId", GetType(Integer), TaskId)}
+            New AdditionalValue("TaskID", GetType(Integer), TaskId)}
 
         ' Then, make calls to insertRow to all relevant tables
         insertRow(CRUD, InvTasksDbController.DbDataTable, "InvTask", "_", "dataEditingControl", Me, additionalValues)
@@ -624,36 +624,60 @@
 
     End Function
 
-    Private Function insertInvTaskLabor() As Boolean
+    ' Sub that copies all rows from master task labor table to invoice labor (InvLabor)
+    Private Function insertInvTaskLaborRows() As Boolean
 
-        Console.WriteLine(NewTaskTaskNbr)
+        ' For each row in TaskLaborDbController
+        For i As Integer = 0 To TaskLaborDbController.DbDataTable.Rows.Count - 1
 
-        Dim excludedControls As New List(Of Control) From {}
-        Dim additionalValues As New List(Of AdditionalValue) From {}
+            'Dim excludedControls As New List(Of Control) From {}
+            Dim additionalValues As New List(Of AdditionalValue) From {
+                New AdditionalValue("InvNbr", GetType(Long), InvId),
+                New AdditionalValue("TaskNbr", GetType(Integer), NewTaskTaskNbr),
+                New AdditionalValue("TaskID", GetType(Integer), TaskId),
+                New AdditionalValue("LaborCode", GetType(String), TaskLaborDbController.DbDataTable(i)("LaborCode")),
+                New AdditionalValue("LaborDescription", GetType(String), TaskLaborDbController.DbDataTable(i)("Description")),
+                New AdditionalValue("LaborRate", GetType(Decimal), TaskLaborDbController.DbDataTable(i)("Rate")),
+                New AdditionalValue("LaborHours", GetType(Integer), TaskLaborDbController.DbDataTable(i)("Hours")),
+                New AdditionalValue("LaborAmount", GetType(Decimal), TaskLaborDbController.DbDataTable(i)("Amount"))
+            }
 
-        ' Then, make calls to insertRow to all relevant tables
-        'insertRow(CRUD, InvTasksDbController.DbDataTable, "MasterTaskList", "_", "dataEditingControl", Me, excludedControls, additionalValues)
-        ' Then, return exception status of CRUD controller. Do this after each call
-        'If CRUD.HasException() Then Return False
+            ' Use none tag here to actually avoid getting values from any controls
+            insertRow(CRUD, TaskLaborDbController.DbDataTable, "InvLabor", "_", "none", Me, additionalValues)
+            If CRUD.HasException() Then Return False
+            ' Using insertRow here, as Nullhandling is handled rather seemlessly
 
-        ' Otherwise, return true
+        Next
+
         Return True
 
     End Function
 
-    Private Function insertInvTaskParts() As Boolean
+    ' Sub that copies all rows from master task parts table to invoice parts (InvParts)
+    Private Function insertInvTaskPartsRows() As Boolean
 
-        Console.WriteLine(NewTaskTaskNbr)
+        ' For each row in TaskPartsDbController
+        For i As Integer = 0 To TaskPartsDbController.DbDataTable.Rows.Count - 1
 
-        Dim excludedControls As New List(Of Control) From {}
-        Dim additionalValues As New List(Of AdditionalValue) From {}
+            'Dim excludedControls As New List(Of Control) From {}
+            Dim additionalValues As New List(Of AdditionalValue) From {
+                New AdditionalValue("InvNbr", GetType(Long), InvId),
+                New AdditionalValue("TaskNbr", GetType(Integer), NewTaskTaskNbr),
+                New AdditionalValue("TaskID", GetType(Integer), TaskId),
+                New AdditionalValue("PartNbr", GetType(String), TaskPartsDbController.DbDataTable(i)("PartNbr")),
+                New AdditionalValue("Qty", GetType(Integer), TaskPartsDbController.DbDataTable(i)("Qty")),
+                New AdditionalValue("PartDescription", GetType(String), TaskPartsDbController.DbDataTable(i)("PartDescription")),
+                New AdditionalValue("PartPrice", GetType(Decimal), TaskPartsDbController.DbDataTable(i)("PartPrice")),
+                New AdditionalValue("PartAmount", GetType(Decimal), TaskPartsDbController.DbDataTable(i)("PartAmount"))
+            }
 
-        ' Then, make calls to insertRow to all relevant tables
-        'insertRow(CRUD, InvTasksDbController.DbDataTable, "MasterTaskList", "_", "dataEditingControl", Me, excludedControls, additionalValues)
-        ' Then, return exception status of CRUD controller. Do this after each call
-        'If CRUD.HasException() Then Return False
+            ' Use none tag here to actually avoid getting values from any controls
+            insertRow(CRUD, TaskPartsDbController.DbDataTable, "InvParts", "_", "none", Me, additionalValues)
+            If CRUD.HasException() Then Return False
+            ' Using insertRow here, as Nullhandling is handled rather seemlessly
 
-        ' Otherwise, return true
+        Next
+
         Return True
 
     End Function
@@ -1207,7 +1231,7 @@
                     NewTaskTaskNbr = InvTasksDbController.DbDataTable(InvTasksDbController.DbDataTable.Rows.Count - 1)("TaskNbr") + 1
 
                     ' 4.) INSERT NEW ROW INTO MASTER TASK LIST
-                    If Not insertInvTask() Then
+                    If Not insertInvTask() Or Not insertInvTaskLaborRows() Or Not insertInvTaskPartsRows() Then
                         MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Exit Sub
                     Else
