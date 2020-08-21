@@ -674,7 +674,7 @@
             ' Use none tag here to actually avoid getting values from any controls
             insertRow(CRUD, TaskPartsDbController.DbDataTable, "InvParts", "_", "none", Me, additionalValues)
             If CRUD.HasException() Then Return False
-            ' Using insertRow here, as Nullhandling is handled rather seemlessly
+            ' Using insertRow here, as Nullhandling is handled rather seemlessly    
 
         Next
 
