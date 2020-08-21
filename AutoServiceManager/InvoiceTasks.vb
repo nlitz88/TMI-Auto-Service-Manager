@@ -1300,11 +1300,20 @@
 
         TaskDescription_Textbox.ForeColor = DefaultForeColor
 
-        If InitialInvTasksValues.CtrlValuesChanged() Then
-            saveButton.Enabled = True
-        Else
-            saveButton.Enabled = False
+        If mode = "editing" Then
+            If InitialInvTasksValues.CtrlValuesChanged() Then
+                saveButton.Enabled = True
+            Else
+                saveButton.Enabled = False
+            End If
+        ElseIf mode = "adding" Then
+            If validSelection Then
+                saveButton.Enabled = True
+            Else
+                saveButton.Enabled = False
+            End If
         End If
+
 
     End Sub
 
@@ -1314,10 +1323,18 @@
 
         Instructions_Textbox.ForeColor = DefaultForeColor
 
-        If InitialInvTasksValues.CtrlValuesChanged() Then
-            saveButton.Enabled = True
-        Else
-            saveButton.Enabled = False
+        If mode = "editing" Then
+            If InitialInvTasksValues.CtrlValuesChanged() Then
+                saveButton.Enabled = True
+            Else
+                saveButton.Enabled = False
+            End If
+        ElseIf mode = "adding" Then
+            If validSelection Then
+                saveButton.Enabled = True
+            Else
+                saveButton.Enabled = False
+            End If
         End If
 
     End Sub
