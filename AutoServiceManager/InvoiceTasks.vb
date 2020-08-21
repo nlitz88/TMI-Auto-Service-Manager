@@ -1228,14 +1228,25 @@
                     '       Because InvTask DataTable (containing only rows with InvNbr) is sorted in ascending order when loaded in,
                     '       The largest (max) TaskNbr is going to be in the last row.
                     '       This will be used for inserting, as well as looking up later on.
-                    NewTaskTaskNbr = InvTasksDbController.DbDataTable(InvTasksDbController.DbDataTable.Rows.Count - 1)("TaskNbr") + 1
+                    '       However, will also need to check if there are any existing tasks first
+                    If InvTasksDbController.DbDataTable.Rows.Count <> 0 Then
+                        NewTaskTaskNbr = InvTasksDbController.DbDataTable(InvTasksDbController.DbDataTable.Rows.Count - 1)("TaskNbr") + 1
+                    Else
+                        NewTaskTaskNbr = 1
+                    End If
+
 
                     ' 4.) INSERT NEW ROW INTO MASTER TASK LIST
-                    If Not insertInvTask() Or Not insertInvTaskLaborRows() Or Not insertInvTaskPartsRows() Then
+                    If Not insertInvTask() Then
                         MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Exit Sub
                     Else
                         MessageBox.Show("Successfully added " & TaskDescription_Textbox.Text & " to invoice")
+                    End If
+
+                    If Not insertInvTaskLaborRows() Or Not insertInvTaskPartsRows() Then
+                        MessageBox.Show("Inserting of corresponding labor codes and parts unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
                     End If
 
                     ' Call another function here to insert the rows from MTL task labor and task parts to Invoice task labor and task parts
