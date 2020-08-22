@@ -50,6 +50,8 @@ Public Class invoices
     Private SubTotal As Decimal = 0
     Private Tax As Decimal = 0
     Private InvTotalSum As Decimal = 0
+    Private Taxable As Decimal = 0
+    Private NonTaxable As Decimal = 0
     Private InvPaymentsSum As Decimal = 0
 
     ' Keeps track of whether or not user in "editing" or "adding" mode
@@ -592,6 +594,49 @@ Public Class invoices
     End Sub
 
 
+    ' Sub that initializes and calculates Taxable and NonTaxable. No validation needed, as values for viewing are all calculated
+    Private Sub CalculateTaxableNonTaxableViewing()
+
+        ' Get Tax Exempt Status From Customer DataTable (don't bother with the values here, as they don't change)
+        ' We can get it from Customer DT, as this isn't something that is changed on this form
+        Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
+
+        ' Calculate Taxable and NonTaxable
+        If TaxExempt Then
+            Taxable = 0
+            NonTaxable = InvTotalSum
+        Else
+            Taxable = InvLaborSum + InvPartsSum + ShopCharges
+            Dim gas As Decimal = InvDbController.DbDataTable(InvRow)("Gas")
+            Dim towing As Decimal = InvDbController.DbDataTable(InvRow)("Towing")
+            NonTaxable = gas + towing
+        End If
+
+    End Sub
+
+    ' Sub that initializes and calculates Taxable and NonTaxable. Validation required, as this may not be able to be calculated if invTotal invalid
+    Private Sub CalculateTaxableNonTaxableEditing()
+
+        ' Get Tax Exempt Status From Customer DataTable (don't bother with the values here, as they don't change)
+        ' We can get it from Customer DT, as this isn't something that is changed on this form
+        Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
+
+        If validCurrency("Invoice Total", True, InvTotal_Textbox.Text, String.Empty) Then
+            ' Calculate Taxable and NonTaxable
+            If TaxExempt Then
+                Taxable = 0
+                NonTaxable = Convert.ToDecimal(InvTotal_Textbox.Text)
+            Else
+                Taxable = Convert.ToDecimal(SubTotalTextbox.Text)
+                Dim gas As Decimal = Convert.ToDecimal(Gas_Textbox.Text)
+                Dim towing As Decimal = Convert.ToDecimal(Towing_Textbox.Text)
+                NonTaxable = gas + towing
+            End If
+        End If
+
+    End Sub
+
+
     ' Sub that intializes and calculates Invoice Total Paid amount based on the total of all of the payments in InvPayments with current InvId
     Private Sub InitializeInvPaymentsValue()
 
@@ -678,6 +723,8 @@ Public Class invoices
         SubTotal = 0
         Tax = 0
         InvTotalSum = 0
+        Taxable = 0
+        NonTaxable = 0
         InvPaymentsSum = 0
 
         ' Automated initializations
@@ -692,6 +739,7 @@ Public Class invoices
         InitializeSubTotalValue()
         InitializeTaxValue()
         InitializeTotalValue()
+        CalculateTaxableNonTaxableViewing()
         ' Additional Values that require initialization
         InitializeInvPaymentsValue()
         InitializeBalanceValue()
@@ -712,6 +760,8 @@ Public Class invoices
         SubTotal = 0
         Tax = 0
         InvTotalSum = 0
+        Taxable = 0
+        NonTaxable = 0
         InvPaymentsSum = 0
 
         ' Automated initializations
@@ -734,6 +784,7 @@ Public Class invoices
         formatDataEditingControls()
         ' This must be initialized after all currency based cost values are initialized and formatted properly
         InitializeTotalTextbox()
+        CalculateTaxableNonTaxableEditing()
         InitializeBalanceTextbox()
 
         ' Set forecolor if not already initially default
@@ -868,18 +919,6 @@ Public Class invoices
         ' We can get it from Customer DT, as this isn't something that is changed on this form
         Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
 
-        ' Calculate Taxable and NonTaxable
-        Dim Taxable, NonTaxable As Decimal
-        If TaxExempt Then
-            Taxable = 0
-            NonTaxable = Convert.ToDecimal(InvTotal_Textbox.Text)
-        Else
-            Taxable = Convert.ToDecimal(SubTotalTextbox.Text)
-            Dim gas As Decimal = Convert.ToDecimal(Gas_Textbox.Text)
-            Dim towing As Decimal = Convert.ToDecimal(Towing_Textbox.Text)
-            NonTaxable = gas + towing
-        End If
-
         ' First, separately insert Taxable and NonTaxable
         CRUD.AddParams("@taxable", Taxable)
         CRUD.AddParams("@nontaxable", NonTaxable)
@@ -933,18 +972,6 @@ Public Class invoices
         '   CustomerId, VehicleId
 
         Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
-
-        ' Calculate Taxable and NonTaxable
-        Dim Taxable, NonTaxable As Decimal
-        If TaxExempt Then
-            Taxable = 0
-            NonTaxable = Convert.ToDecimal(InvTotal_Textbox.Text)
-        Else
-            Taxable = Convert.ToDecimal(SubTotalTextbox.Text)
-            Dim gas As Decimal = Convert.ToDecimal(Gas_Textbox.Text)
-            Dim towing As Decimal = Convert.ToDecimal(Towing_Textbox.Text)
-            NonTaxable = gas + towing
-        End If
 
         ' Get inspection sticker and month from controls
         Dim InspectionSticker As String = InspectionSticker_Textbox.Text
@@ -1935,6 +1962,7 @@ Public Class invoices
 
         If Not valuesInitialized Then Exit Sub
 
+        CalculateTaxableNonTaxableEditing()
         InitializeBalanceTextbox()
 
         If InitialInvValues.CtrlValuesChanged() Then
