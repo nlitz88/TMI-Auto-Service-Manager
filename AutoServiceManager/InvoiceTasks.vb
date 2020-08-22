@@ -582,6 +582,87 @@
 
 
 
+    ' Public Function called after Master Task List table has been changed from Master Task Maintenance Form. MasterTaskList DataTable and dependent controls are re-initialized
+    Public Function reInitializeMTL() As Boolean
+
+        ' LOAD DATATABLES FROM DATABASE INITIALLY
+        If Not loadMasterTaskListDataTable() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
+
+        ' Then, initialize PartComboBox
+        InitializeTaskComboBox()
+        TaskComboBox.SelectedIndex = 0
+
+        Return True
+
+    End Function
+
+
+
+    ' Public Function called after InvParts or InvLabor tables have been changed that reinitializes dependent DataTables, corresponding DataGridViews,
+    ' And subTaskEditingControls. Can be called from the edit/adding InvTask forms, or from within this form
+    Public Function reinitializeDependents() As Boolean
+
+        'valuesInitialized = False
+
+        '' Load TaskParts and TaskLabor datatables based on selected TaskId, then Initialize corresponding GridViews
+        'If Not loadDependentDataTables() Then
+        '    MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    Return False
+        'End If
+
+        '' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
+        '' This is because controls like TaskLaborCost (for instance) are calculated from those tables
+        'InitializeAllDataViewingControls()
+        '' Initialize corresponding DataGridViews
+        'InitializeTaskLaborGridView()
+        'InitializeTaskPartsGridView()
+
+        'valuesInitialized = True
+
+        '' Disable/Enable tlButtons for taskLaborGridView according to if rows present or not
+        'If TaskLaborGridView.Rows.Count = 0 Then
+        '    TaskLaborRow = -1
+        '    tlDeleteButton.Enabled = False
+        '    tlEditButton.Enabled = False
+        'Else
+        '    tlDeleteButton.Enabled = True
+        '    tlEditButton.Enabled = True
+        'End If
+
+        '' Disable/Enable tlButtons for taskPartsGridView according to if rows present or not
+        'If TaskPartsGridView.Rows.Count = 0 Then
+        '    TaskPartsRow = -1
+        '    tpDeleteButton.Enabled = False
+        '    tpEditButton.Enabled = False
+        'Else
+        '    tpDeleteButton.Enabled = True
+        '    tpEditButton.Enabled = True
+        'End If
+
+
+        '' This sub will only be called if changes were made to database table.
+        '' So, as sum of amounts in either datagridview may have changed, the taskLaborCost and taskPartsCost values may have changed
+        '' We have decided that it is better to write these new calculated values to the database automatically on change, as the user can't edit/modify them anways.
+        '' So, we will write these values to the database table to row based on taskId
+
+        'CRUD.AddParams("@TaskLabor", TaskLaborSum)
+        'CRUD.AddParams("@TaskParts", TaskPartsSum)
+        'CRUD.AddParams("@TotalTask", TotalTaskSum)
+        'CRUD.AddParams("@TaskId", TaskId)   ' added last, as used last (thanks OleDB)
+
+        'CRUD.ExecQuery("UPDATE MasterTaskList SET TaskLabor=@TaskLabor, TaskParts=@TaskParts, TotalTask=@TotalTask WHERE TaskId=@TaskId")
+        'If CRUD.HasException() Then Return False
+
+        'Return True
+
+    End Function
+
+
+
+
 
 
 

@@ -1214,31 +1214,53 @@
                     Exit Sub
                 Else
 
-                    'Call REINITIALIZATION HERE
-                    'If Not addMasterTaskPart.reInitializeParts() Then
-                    '    MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    '    saveButton.Enabled = False
-                    '    Exit Sub
-                    'End If
+                    ' If coming from another screen, then change back to that screen
+                    If MyPreviousScreen IsNot Nothing Then
+                        If MyPreviousScreen Is invoiceTasks Then
 
-                    MeClosed = True
-                    changeScreen(MyPreviousScreen, Me)
-                    MyPreviousScreen = Nothing
+                            ' Call REINITIALIZATION HERE
+                            If Not invoiceTasks.reInitializeMTL() Then
+                                MessageBox.Show("Reloading of Invoice Tasks unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                saveButton.Enabled = False
+                                Exit Sub
+                            End If
+
+                        End If
+
+                        MeClosed = True
+                        changeScreen(MyPreviousScreen, Me)
+                        MyPreviousScreen = Nothing
+                        ' Otherwise, just exit the form
+                    Else
+                        MeClosed = True
+                        Me.Close()
+                    End If
 
                 End If
 
             Else
 
-                'Call REINITIALIZATION HERE
-                'If Not addMasterTaskPart.reInitializeParts() Then
-                '    MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                '    saveButton.Enabled = False
-                '    Exit Sub
-                'End If
+                ' If coming from another screen, then change back to that screen
+                If MyPreviousScreen IsNot Nothing Then
+                    If MyPreviousScreen Is invoiceTasks Then
 
-                MeClosed = True
-                changeScreen(MyPreviousScreen, Me)
-                MyPreviousScreen = Nothing
+                        ' Call REINITIALIZATION HERE
+                        If Not invoiceTasks.reInitializeMTL() Then
+                            MessageBox.Show("Reloading of Invoice Tasks unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            saveButton.Enabled = False
+                            Exit Sub
+                        End If
+
+                    End If
+
+                    MeClosed = True
+                    changeScreen(MyPreviousScreen, Me)
+                    MyPreviousScreen = Nothing
+                    ' Otherwise, just exit the form
+                Else
+                    MeClosed = True
+                    Me.Close()
+                End If
 
             End If
 
@@ -1263,12 +1285,12 @@
                     If MyPreviousScreen IsNot Nothing Then
                         If MyPreviousScreen Is invoiceTasks Then
 
-                            'Call REINITIALIZATION HERE
-                            'If Not addMasterTaskPart.reInitializeParts() Then
-                            '    MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            '    saveButton.Enabled = False
-                            '    Exit Sub
-                            'End If
+                            ' Call REINITIALIZATION HERE
+                            If Not invoiceTasks.reInitializeMTL() Then
+                                MessageBox.Show("Reloading of Invoice Tasks unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                saveButton.Enabled = False
+                                Exit Sub
+                            End If
 
                         End If
 
@@ -1289,12 +1311,12 @@
                 If MyPreviousScreen IsNot Nothing Then
                     If MyPreviousScreen Is invoiceTasks Then
 
-                        'Call REINITIALIZATION HERE
-                        'If Not addMasterTaskPart.reInitializeParts() Then
-                        '    MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        '    saveButton.Enabled = False
-                        '    Exit Sub
-                        'End If
+                        ' Call REINITIALIZATION HERE
+                        If Not invoiceTasks.reInitializeMTL() Then
+                            MessageBox.Show("Reloading of Invoice Tasks unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            saveButton.Enabled = False
+                            Exit Sub
+                        End If
 
                     End If
 
