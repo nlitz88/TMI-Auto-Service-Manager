@@ -1221,7 +1221,6 @@
                             ' Call REINITIALIZATION HERE
                             If Not invoiceTasks.reInitializeMTL() Then
                                 MessageBox.Show("Reloading of Invoice Tasks unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                                saveButton.Enabled = False
                                 Exit Sub
                             End If
 
@@ -1247,7 +1246,6 @@
                         ' Call REINITIALIZATION HERE
                         If Not invoiceTasks.reInitializeMTL() Then
                             MessageBox.Show("Reloading of Invoice Tasks unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            saveButton.Enabled = False
                             Exit Sub
                         End If
 
@@ -1288,7 +1286,6 @@
                             ' Call REINITIALIZATION HERE
                             If Not invoiceTasks.reInitializeMTL() Then
                                 MessageBox.Show("Reloading of Invoice Tasks unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                                saveButton.Enabled = False
                                 Exit Sub
                             End If
 
@@ -1314,7 +1311,6 @@
                         ' Call REINITIALIZATION HERE
                         If Not invoiceTasks.reInitializeMTL() Then
                             MessageBox.Show("Reloading of Invoice Tasks unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            saveButton.Enabled = False
                             Exit Sub
                         End If
 

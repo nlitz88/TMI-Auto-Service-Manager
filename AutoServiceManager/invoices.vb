@@ -869,15 +869,15 @@ Public Class invoices
         valuesInitialized = True
 
 
-        ' Update invoice TotalLabor, TotalParts, Tax, InvTotal, TotalPaid, Taxable, and NonTaxable
+        ' Update invoice TotalLabor, TotalParts, Tax, InvTotal, TotalPaid, Taxable, and NonTaxable based on InvNbr (stored in InvId)
 
         CRUD.AddParams("@totallabor", InvLaborSum)
         CRUD.AddParams("@totalparts", InvPartsSum)
         CRUD.AddParams("@tax", Tax)
         CRUD.AddParams("@invtotal", InvTotalSum)
         CRUD.AddParams("@totalpaid", InvPaymentsSum)
-        'CRUD.AddParams("@taxable", TaskId)
-        'CRUD.AddParams("@nontaxable", TaskId)
+        CRUD.AddParams("@taxable", Taxable)
+        CRUD.AddParams("@nontaxable", NonTaxable)
         CRUD.AddParams("@invid", InvId)
 
         CRUD.ExecQuery("UPDATE InvHdr SET TotalLabor=@totallabor, TotalParts=@totalparts, Tax=@tax, InvTotal=@invtotal, TotalPaid=@totalpaid, Taxable=@taxable, NonTaxable=@nontaxable " &
@@ -2221,7 +2221,8 @@ Public Class invoices
 
     Private Sub tasksButton_Click(sender As Object, e As EventArgs) Handles tasksButton.Click
 
-        changeScreenHide(invoiceTasks, Me)
+        previousScreen = Me
+        changeScreenHide(invoiceTasks, previousScreen)
 
     End Sub
 

@@ -847,6 +847,7 @@
 
     Private Sub InvoiceTasks_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+
     End Sub
 
 
@@ -1444,11 +1445,25 @@
                 If decision = DialogResult.No Then
                     Exit Sub
                 Else
+
+                    ' Call REINITIALIZATION HERE
+                    If Not invoices.reinitializeDependents() Then
+                        MessageBox.Show("Reloading of invoice unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    End If
+
                     MeClosed = True
                     changeScreen(invoices, Me)
+
                 End If
 
             Else
+
+                ' Call REINITIALIZATION HERE
+                If Not invoices.reinitializeDependents() Then
+                    MessageBox.Show("Reloading of invoice unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
 
                 MeClosed = True
                 changeScreen(invoices, Me)
