@@ -796,6 +796,53 @@ Public Class invoices
 
 
 
+
+
+    ' Public Function called after invoice task tables have been changed that reinitializes dependent DataTables, corresponding DataGridViews,
+    ' And subTaskEditingControls.
+    Public Function reinitializeDependents() As Boolean
+
+        valuesInitialized = False
+
+        ' Load TaskParts and TaskLabor datatables based on selected TaskId, then Initialize corresponding GridViews
+        If Not loadDependentDataTables() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
+
+        ' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
+        ' This is because controls like TaskLaborCost (for instance) are calculated from those tables
+        InitializeAllDataViewingControls()
+        ' Initialize corresponding DataGridViews
+
+        valuesInitialized = True
+
+
+        ' Update invoice TotalLabor, TotalParts, Tax, InvTotal, TotalPaid, Taxable, and NonTaxable
+
+        CRUD.AddParams("@totallabor", InvLaborSum)
+        CRUD.AddParams("@totalparts", InvPartsSum)
+        CRUD.AddParams("@tax", Tax)
+        CRUD.AddParams("@invtotal", InvTotalSum)
+        CRUD.AddParams("@totalpaid", InvPaymentsSum)
+        'CRUD.AddParams("@taxable", TaskId)
+        'CRUD.AddParams("@nontaxable", TaskId)
+        CRUD.AddParams("@invid", InvId)
+
+        CRUD.ExecQuery("UPDATE InvHdr SET TotalLabor=@totallabor, TotalParts=@totalparts, Tax=@tax, InvTotal=@invtotal, TotalPaid=@totalpaid, Taxable=@taxable, NonTaxable=@nontaxable " &
+                       "WHERE InvNbr=@invid")
+        If CRUD.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+
+
+
+
+
+
     ' ***************** CRUD SUBS *****************
     ' Remember to calculate and add non-taxable as a field to insert/update in the DataBase (Sum of towing, gas, and ONLY subtotal if Tax-Exempt)
     ' Add Taxable as a field as well (this is the SubTotal)
