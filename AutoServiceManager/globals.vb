@@ -1873,6 +1873,7 @@
 
     ' Public variable to keep track of the last screen in case a form needs to navigate back to it
     Public previousScreen As Form = Nothing
+    Public previousScreenName As String = String.Empty
 
 
     ' Function that handles switching screens

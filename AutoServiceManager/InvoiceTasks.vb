@@ -1006,6 +1006,9 @@
         TaskComboBox.Visible = True
         TaskComboLabel.Visible = True
 
+        orLabel.Visible = True
+        newMasterTaskButton.Visible = True
+
         ' Clear and setup gridviews for Master Task Labor and Parts Tables
         SetupMTLGridViews()
 
@@ -1148,6 +1151,9 @@
             TaskComboBox.Visible = False
             TaskComboLabel.Visible = False
 
+            orLabel.Visible = False
+            newMasterTaskButton.Visible = False
+
             ' Setup/Configure gridviews for Invoice Labor and Invoice Parts
             SetupInvGridViews()
 
@@ -1264,6 +1270,9 @@
                     TaskComboBox.Visible = False
                     TaskComboLabel.Visible = False
 
+                    orLabel.Visible = False
+                    newMasterTaskButton.Visible = False
+
                     ' Setup/Configure gridviews for Invoice Labor and Invoice Parts
                     SetupInvGridViews()
 
@@ -1305,6 +1314,13 @@
 
 
 
+    Private Sub newMasterTaskButton_Click(sender As Object, e As EventArgs) Handles newMasterTaskButton.Click
+
+        previousScreen = Me
+        previousScreenName = Me.Text
+        changeScreenHide(masterTaskMaintenance, previousScreen)
+
+    End Sub
 
 
 
@@ -1440,6 +1456,5 @@
     Private Sub InvTaskPartsGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles InvTaskPartsGridView.ColumnAdded
         e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
     End Sub
-
 
 End Class

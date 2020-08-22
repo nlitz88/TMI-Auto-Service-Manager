@@ -42,6 +42,12 @@
     ' Variable that allows certain keystrokes through restricted fields
     Private allowedKeystroke As Boolean = False
 
+    ' Boolean to keep track of whether or not this form has been closed
+    Private MeClosed As Boolean = False
+
+    ' Variable that maintains which screen this form came from. Useful if other forms are spawned then from this one
+    Private MyPreviousScreen As Form
+
 
 
 
@@ -599,6 +605,22 @@
 
         TaskType_ComboBox.Visible = True
         TaskType_ComboBox.Visible = False
+
+        ' FIRE ADDBUTTON EVENT IF ARRIVING HERE FROM INVOICETASKS
+        If previousScreen IsNot Nothing Then
+
+            MyPreviousScreen = previousScreen
+
+            If previousScreen Is invoiceTasks Then
+                nav.Visible = False
+                returnButton.Text = "Return To " & previousScreenName
+                returnButton.Visible = True
+                addButton_Click(addButton, New EventArgs())
+            End If
+
+        Else
+            returnButton.Visible = False
+        End If
 
     End Sub
 
@@ -1178,16 +1200,113 @@
 
 
 
+    Private Sub returnButton_Click(sender As Object, e As EventArgs) Handles returnButton.Click
+
+        ' Will need to call reinitialization Function here to reinitialize elements on invoiceTasks
+        If Not MeClosed Then
+
+            ' Only want to ask them if the ctrl values are currently being edited AND they're values have changed
+            If TaskDescription_Textbox.Visible And InitialMTLValues.CtrlValuesChanged() Then
+
+                Dim decision As DialogResult = MessageBox.Show("Return without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If decision = DialogResult.No Then
+                    Exit Sub
+                Else
+
+                    'Call REINITIALIZATION HERE
+                    'If Not addMasterTaskPart.reInitializeParts() Then
+                    '    MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    '    saveButton.Enabled = False
+                    '    Exit Sub
+                    'End If
+
+                    MeClosed = True
+                    changeScreen(MyPreviousScreen, Me)
+                    MyPreviousScreen = Nothing
+
+                End If
+
+            Else
+
+                'Call REINITIALIZATION HERE
+                'If Not addMasterTaskPart.reInitializeParts() Then
+                '    MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                '    saveButton.Enabled = False
+                '    Exit Sub
+                'End If
+
+                MeClosed = True
+                changeScreen(MyPreviousScreen, Me)
+                MyPreviousScreen = Nothing
+
+            End If
+
+        End If
+
+    End Sub
+
+
     Private Sub masterTaskMaintenance_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
 
-        ' Check if editing/adding, and if editing/adding, check if control values changed
-        If TaskDescription_Textbox.Visible And InitialMTLValues.CtrlValuesChanged() Then
+        If Not MeClosed Then
 
-            Dim decision As DialogResult = MessageBox.Show("Exit without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If TaskDescription_Textbox.Visible And InitialMTLValues.CtrlValuesChanged() Then
 
-            If decision = DialogResult.No Then
-                e.Cancel = True
-                Exit Sub
+                Dim decision As DialogResult = MessageBox.Show("Exit without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If decision = DialogResult.No Then
+                    e.Cancel = True
+                    Exit Sub
+                Else
+                    ' If coming from another screen, then change back to that screen
+                    If MyPreviousScreen IsNot Nothing Then
+                        If MyPreviousScreen Is invoiceTasks Then
+
+                            'Call REINITIALIZATION HERE
+                            'If Not addMasterTaskPart.reInitializeParts() Then
+                            '    MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            '    saveButton.Enabled = False
+                            '    Exit Sub
+                            'End If
+
+                        End If
+
+                        MeClosed = True
+                        changeScreen(MyPreviousScreen, Me)
+                        MyPreviousScreen = Nothing
+                        ' Otherwise, just exit the form
+                    Else
+                        MeClosed = True
+                        Me.Close()
+                    End If
+
+                End If
+
+            Else
+
+                ' If coming from another screen, then change back to that screen
+                If MyPreviousScreen IsNot Nothing Then
+                    If MyPreviousScreen Is invoiceTasks Then
+
+                        'Call REINITIALIZATION HERE
+                        'If Not addMasterTaskPart.reInitializeParts() Then
+                        '    MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        '    saveButton.Enabled = False
+                        '    Exit Sub
+                        'End If
+
+                    End If
+
+                    MeClosed = True
+                    changeScreen(MyPreviousScreen, Me)
+                    MyPreviousScreen = Nothing
+                    ' Otherwise, just exit the form
+                Else
+                    MeClosed = True
+                    Me.Close()
+                End If
+
             End If
 
         End If
