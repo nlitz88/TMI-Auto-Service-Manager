@@ -367,6 +367,7 @@ Partial Class addInvTaskLabor
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "addInvTaskLabor"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Add Invoice Labor"
         Me.ResumeLayout(False)
         Me.PerformLayout()
