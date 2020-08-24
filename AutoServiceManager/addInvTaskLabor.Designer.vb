@@ -57,9 +57,9 @@ Partial Class addInvTaskLabor
         Me.addInvTaskLaborLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.addInvTaskLaborLabel.Location = New System.Drawing.Point(94, 73)
         Me.addInvTaskLaborLabel.Name = "addInvTaskLaborLabel"
-        Me.addInvTaskLaborLabel.Size = New System.Drawing.Size(260, 32)
+        Me.addInvTaskLaborLabel.Size = New System.Drawing.Size(333, 32)
         Me.addInvTaskLaborLabel.TabIndex = 188
-        Me.addInvTaskLaborLabel.Text = "Add Invoice Labor"
+        Me.addInvTaskLaborLabel.Text = "Add Invoice Task Labor"
         '
         'cancelButton
         '
@@ -368,7 +368,7 @@ Partial Class addInvTaskLabor
         Me.MaximizeBox = False
         Me.Name = "addInvTaskLabor"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
-        Me.Text = "Add Invoice Labor"
+        Me.Text = "Add Invoice Task Labor"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -1,8 +1,8 @@
 ﻿Public Class addInvTaskLabor
 
     ' New Database Control instance for InvLabor DataTable
-    Private InvLaborDbController As New DbControl()
-    Private InvLaborRow As Integer
+    Private InvTaskLaborDbController As New DbControl()
+    Private InvTaskLaborRow As Integer
 
     ' Variable to maintain the TaskId of the current task we're adding to
     Private TaskId As Integer
@@ -93,6 +93,15 @@
         End If
 
     End Sub
+
+    Private Sub newLaborButton_Click(sender As Object, e As EventArgs) Handles newLaborButton.Click
+
+        previousScreen = Me
+        changeScreenHide(laborCodeMaintenance, previousScreen)
+
+    End Sub
+
+
 
 
 End Class
