@@ -735,19 +735,19 @@ Public Class laborCodeMaintenance
                 Else
 
                     If previousScreen Is addMasterTaskLabor Then
-                        'Call REINITIALIZATION HERE
+                        ' Call REINITIALIZATION HERE
                         If Not addMasterTaskLabor.reInitializeLaborCodes() Then
                             MessageBox.Show("Reloading of Add Task Labor unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                             saveButton.Enabled = False
                             Exit Sub
                         End If
                     ElseIf previousScreen Is addInvTaskLabor Then
-                        'Call REINITIALIZATION HERE
-                        'If Not addMasterTaskLabor.reInitializeLaborCodes() Then
-                        '    MessageBox.Show("Reloading of Add Task Labor unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        '    saveButton.Enabled = False
-                        '    Exit Sub
-                        'End If
+                        ' Call REINITIALIZATION HERE
+                        If Not addInvTaskLabor.reInitializeLaborCodes() Then
+                            MessageBox.Show("Reloading of Add Task Labor unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            saveButton.Enabled = False
+                            Exit Sub
+                        End If
                     End If
 
                     MeClosed = True
@@ -766,12 +766,12 @@ Public Class laborCodeMaintenance
                         Exit Sub
                     End If
                 ElseIf previousScreen Is addInvTaskLabor Then
-                    'Call REINITIALIZATION HERE
-                    'If Not addMasterTaskLabor.reInitializeLaborCodes() Then
-                    '    MessageBox.Show("Reloading of Add Task Labor unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    '    saveButton.Enabled = False
-                    '    Exit Sub
-                    'End If
+                    ' Call REINITIALIZATION HERE
+                    If Not addInvTaskLabor.reInitializeLaborCodes() Then
+                        MessageBox.Show("Reloading of Add Task Labor unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        saveButton.Enabled = False
+                        Exit Sub
+                    End If
                 End If
 
                 MeClosed = True
