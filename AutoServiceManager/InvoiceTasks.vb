@@ -1540,7 +1540,7 @@
 
     Private Sub tlAddButton_Click(sender As Object, e As EventArgs) Handles tlAddButton.Click
 
-
+        changeScreenHide(addInvTaskLabor, Me)
 
     End Sub
 

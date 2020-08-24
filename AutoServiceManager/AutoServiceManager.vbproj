@@ -73,6 +73,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="addInvTaskLabor.Designer.vb">
+      <DependentUpon>addInvTaskLabor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="addInvTaskLabor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="additionalValue.vb" />
     <Compile Include="addMasterTaskLabor.Designer.vb">
       <DependentUpon>addMasterTaskLabor.vb</DependentUpon>
@@ -228,6 +234,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="addInvTaskLabor.resx">
+      <DependentUpon>addInvTaskLabor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="addMasterTaskLabor.resx">
       <DependentUpon>addMasterTaskLabor.vb</DependentUpon>
     </EmbeddedResource>
