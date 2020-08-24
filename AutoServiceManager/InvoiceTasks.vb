@@ -1538,6 +1538,22 @@
     End Sub
 
 
+    Private Sub tlAddButton_Click(sender As Object, e As EventArgs) Handles tlAddButton.Click
+
+
+
+    End Sub
+
+    Private Sub tlDeleteButton_Click(sender As Object, e As EventArgs) Handles tlDeleteButton.Click
+
+    End Sub
+
+    Private Sub tlEditButton_Click(sender As Object, e As EventArgs) Handles tlEditButton.Click
+
+    End Sub
+
+
+
 
     ' **************** CONTROL SUBS FOR INVOICE TASK PARTS ****************
 
@@ -1551,5 +1567,19 @@
     Private Sub InvTaskPartsGridView_ColumnAdded(sender As Object, e As DataGridViewColumnEventArgs) Handles InvTaskPartsGridView.ColumnAdded
         e.Column.SortMode = DataGridViewColumnSortMode.NotSortable
     End Sub
+
+
+    Private Sub tpAddButton_Click(sender As Object, e As EventArgs) Handles tpAddButton.Click
+
+    End Sub
+
+    Private Sub tpDeleteButton_Click(sender As Object, e As EventArgs) Handles tpDeleteButton.Click
+
+    End Sub
+
+    Private Sub tpEditButton_Click(sender As Object, e As EventArgs) Handles tpEditButton.Click
+
+    End Sub
+
 
 End Class
