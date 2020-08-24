@@ -78,27 +78,27 @@
     End Function
 
     ' Retrieves current TaskNbr corresponding to current selected Task
-    Public Function GetTaskNbr() As Integer
+    Public Function GetInvTaskNbr() As Integer
         Return InvTaskNbr
     End Function
 
     ' Retrieves InvTaskLaborRow
-    Public Function GetTaskLaborRow() As Integer
+    Public Function GetInvTaskLaborRow() As Integer
         Return InvTaskLaborRow
     End Function
 
     ' Retrieves InvTaskPartsRow
-    Public Function GetTaskPartsRow() As Integer
+    Public Function GetInvTaskPartsRow() As Integer
         Return InvTaskPartsRow
     End Function
 
     ' Retrieves InvTaskLaborDbController Db controller
-    Public Function GetTaskLaborDbController() As DbControl
+    Public Function GetInvTaskLaborDbController() As DbControl
         Return InvTaskLaborDbController
     End Function
 
     ' Retrieves InvTaskPartsDbController Db controller
-    Public Function GetTaskPartsDbController() As DbControl
+    Public Function GetInvTaskPartsDbController() As DbControl
         Return InvTaskPartsDbController
     End Function
 
