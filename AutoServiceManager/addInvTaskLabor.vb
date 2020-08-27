@@ -143,7 +143,7 @@
         Dim additionalValues As New List(Of AdditionalValue) From {
             New AdditionalValue("InvNbr", GetType(Long), InvId),
             New AdditionalValue("TaskNbr", GetType(Integer), InvTaskNbr),
-            New AdditionalValue("TaskID", GetType(Int32), TaskId)
+            New AdditionalValue("TaskID", GetType(Integer), TaskId)
         }
 
         insertRow(CRUD, LaborCodesDbController.DbDataTable, "InvLabor", "_", "dataEditingControl", Me, additionalValues)
