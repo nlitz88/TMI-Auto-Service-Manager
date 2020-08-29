@@ -35,7 +35,7 @@
     Private Function loadLaborCodesDataTable() As Boolean
 
         LaborCodesDbController.ExecQuery("SELECT lc.Description + ' - ' + lc.LaborCode as LDLC, lc.LaborCode, lc.Description as LaborDescription, lc.Rate as LaborRate, lc.Hours as LaborHours, lc.Amount as LaborAmount " &
-                                         "FROM LaborCodes lc ORDER BY LaborDescription ASC")
+                                         "FROM LaborCodes lc ORDER BY lc.Description ASC")
         If LaborCodesDbController.HasException() Then Return False
 
         Return True
