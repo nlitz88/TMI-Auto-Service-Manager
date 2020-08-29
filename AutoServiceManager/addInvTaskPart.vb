@@ -292,6 +292,59 @@
 
     End Sub
 
+    Private Sub addInvTaskPart_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+
+        If Not MeClosed Then
+
+            If validSelection Then
+
+                Dim decision As DialogResult = MessageBox.Show("Cancel without adding part?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If decision = DialogResult.No Then
+                    e.Cancel = True
+                    Exit Sub
+                Else
+                    MeClosed = True
+                    changeScreen(invoiceTasks, Me)
+                End If
+
+            Else
+
+                MeClosed = True
+                changeScreen(invoiceTasks, Me)
+
+            End If
+
+        End If
+
+    End Sub
+
+
+    Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
+
+        If Not MeClosed Then
+
+            If validSelection Then
+
+                Dim decision As DialogResult = MessageBox.Show("Cancel without adding part?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If decision = DialogResult.No Then
+                    Exit Sub
+                Else
+                    MeClosed = True
+                    changeScreen(invoiceTasks, Me)
+                End If
+
+            Else
+
+                MeClosed = True
+                changeScreen(invoiceTasks, Me)
+
+            End If
+
+        End If
+
+    End Sub
 
 
 End Class
