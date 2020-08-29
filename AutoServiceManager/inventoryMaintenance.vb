@@ -704,7 +704,7 @@ Public Class inventoryMaintenance
                     If previousScreen Is addMasterTaskPart Then
                         ' Call REINITIALIZATION HERE
                         If Not addMasterTaskPart.reInitializeParts() Then
-                            MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)                            saveButton.Enabled = False
+                            MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                             saveButton.Enabled = False
                             Exit Sub
                         End If
@@ -728,14 +728,14 @@ Public Class inventoryMaintenance
                 If previousScreen Is addMasterTaskPart Then
                     ' Call REINITIALIZATION HERE
                     If Not addMasterTaskPart.reInitializeParts() Then
-                        MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)                            saveButton.Enabled = False
+                        MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         saveButton.Enabled = False
                         Exit Sub
                     End If
                 ElseIf previousScreen Is addInvTaskPart Then
                     ' Call REINITIALIZATION HERE
                     If Not addInvTaskPart.reInitializeParts() Then
-                        MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)                            saveButton.Enabled = False
+                        MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         saveButton.Enabled = False
                         Exit Sub
                     End If
