@@ -233,4 +233,65 @@
 
 
 
+    ' **************** CONTROL SUBS ****************
+
+
+    Private Sub PartComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PartComboBox.SelectedIndexChanged, PartComboBox.TextChanged
+
+        ' Ensure that PartComboBox is only attempting to initialize values when on proper selected Index
+        If PartComboBox.SelectedIndex = -1 Then
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+            ' If no valid selection has been made, then they have nothing to save
+            saveButton.Enabled = False
+            validSelection = False
+
+            Exit Sub
+
+        End If
+
+        ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid
+        PartRow = getDataTableRow(PartsDbController.DbDataTable, "PDPN", PartComboBox.Text)
+
+        ' If this query DOES return a valid row index, then initialize respective controls
+        If PartRow <> -1 Then
+
+            ' Initialize corresponding controls from DataTable values
+            valuesInitialized = False
+            ' Qty is a new value introduced here that is by default 0, so set this accordingly here
+            Qty_Textbox.Text = 0
+            InitializeAllDataEditingControls()
+            valuesInitialized = True
+
+            ' Show labels and corresponding values
+            showHide(getAllControlsWithTag("dataLabel", Me), 1)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+
+            ' If a valid selection is made, then they can save right away without making any changes.
+            saveButton.Enabled = True
+            validSelection = True
+
+
+            'If it does = -1, that means that value Is either "Select one" Or some other anomoly
+        Else
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+            ' If no valid selection has been made, then they have nothing to save
+            saveButton.Enabled = False
+            validSelection = False
+
+
+        End If
+
+
+    End Sub
+
+
+
 End Class
