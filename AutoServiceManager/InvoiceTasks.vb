@@ -605,55 +605,55 @@
     ' And subTaskEditingControls. Can be called from the edit/adding InvTask forms, or from within this form
     Public Function reinitializeDependents() As Boolean
 
-        'valuesInitialized = False
+        ' Initialize corresponding controls from DataTable values
+        valuesInitialized = False
 
-        '' Load InvParts and InvLabor datatables based on selected TaskId, then Initialize corresponding GridViews
-        'If Not loadInvDependentDataTables() Then
-        '    MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '    Return False
-        'End If
+        ' Load InvParts and InvLabor datatables based on selected InvNbr, then Initialize corresponding GridViews
+        If Not loadInvDependentDataTables() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
+        ' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
+        ' This is because controls like TaskLaborCost (for instance) are calculated from those tables
+        InitializeAllInvDataViewingControls()
+        ' Initialize corresponding DataGridViews
+        InitializeInvTaskLaborGridView()
+        InitializeInvTaskPartsGridView()
 
-        '' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
-        '' This is because controls like InvTaskLaborCost (for instance) are calculated from those tables
-        'InitializeAllInvDataViewingControls()
-        '' Initialize corresponding DataGridViews
-        'InitializeInvTaskLaborGridView()
-        'InitializeInvTaskPartsGridView()
+        valuesInitialized = True
 
-        'valuesInitialized = True
+        ' Disable/Enable tlButtons for taskLaborGridView according to if rows present or not
+        If InvTaskLaborGridView.Rows.Count = 0 Then
+            InvTaskLaborRow = -1
+            tlDeleteButton.Enabled = False
+            tlEditButton.Enabled = False
+        Else
+            tlDeleteButton.Enabled = True
+            tlEditButton.Enabled = True
+        End If
 
-        '' Disable/Enable tlButtons for taskLaborGridView according to if rows present or not
-        'If InvTaskLaborGridView.Rows.Count = 0 Then
-        '    TaskLaborRow = -1
-        '    tlDeleteButton.Enabled = False
-        '    tlEditButton.Enabled = False
-        'Else
-        '    tlDeleteButton.Enabled = True
-        '    tlEditButton.Enabled = True
-        'End If
-
-        '' Disable/Enable tlButtons for taskPartsGridView according to if rows present or not
-        'If InvTaskPartsGridView.Rows.Count = 0 Then
-        '    TaskPartsRow = -1
-        '    tpDeleteButton.Enabled = False
-        '    tpEditButton.Enabled = False
-        'Else
-        '    tpDeleteButton.Enabled = True
-        '    tpEditButton.Enabled = True
-        'End If
+        ' Disable/Enable tlButtons for taskPartsGridView according to if rows present or not
+        If InvTaskPartsGridView.Rows.Count = 0 Then
+            InvTaskPartsRow = -1
+            tpDeleteButton.Enabled = False
+            tpEditButton.Enabled = False
+        Else
+            tpDeleteButton.Enabled = True
+            tpEditButton.Enabled = True
+        End If
 
 
-        '' As the sum of amounts in either datagridview may have changed, the taskLaborCost and taskPartsCost values may have changed
-        '' We have decided that it is better to write these new calculated values to the database automatically on change, as the user can't edit/modify them anways.
-        '' So, we will write these values to the database table to row based on invoice number and task number
+        ' As the sum of amounts in either datagridview may have changed, the TaskLabor Cost and TaskParts Costs values may have changed
+        ' We have decided that it is better to write these new calculated values to the database automatically on change, as the user can't edit/modify them anyways.
+        ' So, we will write these values to the database table to row based on Invoice Number and TaskNbr
 
-        'CRUD.AddParams("@totallabor", TaskLaborSum)
-        'CRUD.AddParams("@totalparts", TaskPartsSum)
-        'CRUD.AddParams("@taxable", TotalTaskSum)
-        'CRUD.AddParams("@nontaxable", TaskId)   ' added last, as used last (thanks OleDB)
+        CRUD.AddParams("@totalLabor", InvTaskLaborSum)
+        CRUD.AddParams("@totalparts", InvTaskPartsSum)
+        CRUD.AddParams("@invid", InvId)
+        CRUD.AddParams("@tasknbr", InvTaskNbr)
 
-        'CRUD.ExecQuery("UPDATE MasterTaskList SET TaskLabor=@TaskLabor, TaskParts=@TaskParts, TotalTask=@TotalTask WHERE TaskId=@TaskId")
-        'If CRUD.HasException() Then Return False
+        CRUD.ExecQuery("UPDATE InvTask SET TaskLabor=@totalLabor, TaskParts=@totalparts WHERE InvNbr=@invid AND TaskNbr=@tasknbr")
+        If CRUD.HasException() Then Return False
 
         Return True
 
@@ -686,8 +686,6 @@
 
     ' Function that makes insertRow calls for all relevant DataTables
     Private Function insertInvTask() As Boolean
-
-        Console.WriteLine(NewTaskTaskNbr)
 
         Dim additionalValues As New List(Of AdditionalValue) From {
             New AdditionalValue("InvNbr", GetType(Long), InvId),
