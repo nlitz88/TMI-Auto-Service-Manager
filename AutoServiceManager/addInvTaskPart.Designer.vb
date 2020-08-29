@@ -247,9 +247,9 @@ Partial Class addInvTaskPart
         Me.addMasterTaskPartLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.addMasterTaskPartLabel.Location = New System.Drawing.Point(94, 73)
         Me.addMasterTaskPartLabel.Name = "addMasterTaskPartLabel"
-        Me.addMasterTaskPartLabel.Size = New System.Drawing.Size(206, 32)
+        Me.addMasterTaskPartLabel.Size = New System.Drawing.Size(311, 32)
         Me.addMasterTaskPartLabel.TabIndex = 187
-        Me.addMasterTaskPartLabel.Text = "Add Task Part"
+        Me.addMasterTaskPartLabel.Text = "Add Invoice Task Part"
         '
         'TaskValue
         '

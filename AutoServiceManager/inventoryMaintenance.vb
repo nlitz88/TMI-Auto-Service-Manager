@@ -236,7 +236,7 @@ Public Class inventoryMaintenance
         ' FIRE ADDBUTTON EVENT IF ARRIVING HERE FROM ADDMASTERTASKPART OR ADDINVTASKPART
         If previousScreen IsNot Nothing Then
 
-            If previousScreen Is addMasterTaskLabor Or previousScreen Is addInvTaskPart Then
+            If previousScreen Is addMasterTaskPart Or previousScreen Is addInvTaskPart Then
                 nav.Visible = False
                 returnButton.Visible = True
                 addButton_Click(addButton, New EventArgs())
@@ -783,7 +783,7 @@ Public Class inventoryMaintenance
                         End If
 
                         MeClosed = True
-                        changeScreen(addMasterTaskPart, Me)
+                        changeScreen(previousScreen, Me)
                         previousScreen = Nothing
 
                         ' Otherwise, just exit the form
@@ -816,7 +816,7 @@ Public Class inventoryMaintenance
                     End If
 
                     MeClosed = True
-                    changeScreen(addMasterTaskPart, Me)
+                    changeScreen(previousScreen, Me)
                     previousScreen = Nothing
 
                     ' Otherwise, just exit the form
