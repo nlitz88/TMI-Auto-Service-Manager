@@ -765,20 +765,27 @@ Public Class inventoryMaintenance
                 Else
                     ' If coming from another screen, then change back to that screen
                     If previousScreen IsNot Nothing Then
-                        If previousScreen Is addMasterTaskPart Then
 
-                            'Call REINITIALIZATION HERE
+                        If previousScreen Is addMasterTaskPart Then
+                            ' Call REINITIALIZATION HERE
                             If Not addMasterTaskPart.reInitializeParts() Then
                                 MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 saveButton.Enabled = False
                                 Exit Sub
                             End If
-
-                            MeClosed = True
-                            changeScreen(addMasterTaskPart, Me)
-                            previousScreen = Nothing
-
+                        ElseIf previousScreen Is addInvTaskPart Then
+                            ' Call REINITIALIZATION HERE
+                            If Not addInvTaskPart.reInitializeParts() Then
+                                MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                saveButton.Enabled = False
+                                Exit Sub
+                            End If
                         End If
+
+                        MeClosed = True
+                        changeScreen(addMasterTaskPart, Me)
+                        previousScreen = Nothing
+
                         ' Otherwise, just exit the form
                     Else
                         MeClosed = True
@@ -791,20 +798,27 @@ Public Class inventoryMaintenance
 
                 ' If coming from another screen, then change back to that screen
                 If previousScreen IsNot Nothing Then
-                    If previousScreen Is addMasterTaskPart Then
 
-                        'Call REINITIALIZATION HERE
+                    If previousScreen Is addMasterTaskPart Then
+                        ' Call REINITIALIZATION HERE
                         If Not addMasterTaskPart.reInitializeParts() Then
                             MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                             saveButton.Enabled = False
                             Exit Sub
                         End If
-
-                        MeClosed = True
-                        changeScreen(addMasterTaskPart, Me)
-                        previousScreen = Nothing
-
+                    ElseIf previousScreen Is addInvTaskPart Then
+                        ' Call REINITIALIZATION HERE
+                        If Not addInvTaskPart.reInitializeParts() Then
+                            MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            saveButton.Enabled = False
+                            Exit Sub
+                        End If
                     End If
+
+                    MeClosed = True
+                    changeScreen(addMasterTaskPart, Me)
+                    previousScreen = Nothing
+
                     ' Otherwise, just exit the form
                 Else
                     MeClosed = True
