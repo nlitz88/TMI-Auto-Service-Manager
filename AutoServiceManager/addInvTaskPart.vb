@@ -234,6 +234,7 @@
 
 
 
+
     ' **************** CONTROL SUBS ****************
 
 
@@ -380,6 +381,141 @@
 
         previousScreen = Me
         changeScreenHide(inventoryMaintenance, previousScreen)
+
+    End Sub
+
+
+
+
+    Private Sub PartDescription_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PartDescription_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        PartDescription_Textbox.ForeColor = DefaultForeColor
+
+    End Sub
+
+
+    Private Sub ListPrice_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles ListPrice_Textbox.KeyDown
+
+        ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
+            allowedKeystroke = True
+        End If
+
+    End Sub
+
+    Private Sub ListPrice_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ListPrice_Textbox.KeyPress
+
+        ' If certain keystroke exceptions allowed through, then skip input validation here
+        If allowedKeystroke Then
+            allowedKeystroke = False
+            Exit Sub
+        End If
+
+        If Not currencyInputValid(ListPrice_Textbox, e.KeyChar) Then
+            e.KeyChar = Chr(0)
+            e.Handled = True
+        End If
+
+    End Sub
+
+    Private Sub ListPrice_Textbox_TextChanged(sender As Object, e As EventArgs) Handles ListPrice_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        ListPrice_Textbox.ForeColor = DefaultForeColor
+
+        ' Handles pasting in invalid values/strings
+        Dim lastValidIndex As Integer = allValidChars(ListPrice_Textbox.Text, "1234567890.")
+        If lastValidIndex <> -1 Then
+            ListPrice_Textbox.Text = ListPrice_Textbox.Text.Substring(0, lastValidIndex)
+            ListPrice_Textbox.SelectionStart = lastValidIndex
+        End If
+
+    End Sub
+
+
+    Private Sub Qty_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles Qty_Textbox.KeyDown
+
+        ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
+            allowedKeystroke = True
+        End If
+
+    End Sub
+
+    Private Sub Qty_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Qty_Textbox.KeyPress
+
+        ' If certain keystroke exceptions allowed through, then skip input validation here
+        If allowedKeystroke Then
+            allowedKeystroke = False
+            Exit Sub
+        End If
+
+        If Not numericInputValid(Qty_Textbox, e.KeyChar, True) Then
+            e.KeyChar = Chr(0)
+            e.Handled = True
+        End If
+
+    End Sub
+
+    Private Sub Qty_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Qty_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        Qty_Textbox.ForeColor = DefaultForeColor
+
+        ' Handles pasting in invalid values/strings
+        Dim lastValidIndex As Integer = allValidChars(Qty_Textbox.Text, "1234567890")
+        If lastValidIndex <> -1 Then
+            Qty_Textbox.Text = Qty_Textbox.Text.Substring(0, lastValidIndex)
+            Qty_Textbox.SelectionStart = lastValidIndex
+        End If
+
+        InitializePartAmountTextbox()
+
+    End Sub
+
+
+    Private Sub PartPrice_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles PartPrice_Textbox.KeyDown
+
+        ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
+            allowedKeystroke = True
+        End If
+
+    End Sub
+
+    Private Sub PartPrice_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles PartPrice_Textbox.KeyPress
+
+        ' If certain keystroke exceptions allowed through, then skip input validation here
+        If allowedKeystroke Then
+            allowedKeystroke = False
+            Exit Sub
+        End If
+
+        If Not currencyInputValid(PartPrice_Textbox, e.KeyChar) Then
+            e.KeyChar = Chr(0)
+            e.Handled = True
+        End If
+
+    End Sub
+
+    Private Sub PartPrice_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PartPrice_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        PartPrice_Textbox.ForeColor = DefaultForeColor
+
+        ' Handles pasting in invalid values/strings
+        Dim lastValidIndex As Integer = allValidChars(PartPrice_Textbox.Text, "1234567890.")
+        If lastValidIndex <> -1 Then
+            PartPrice_Textbox.Text = PartPrice_Textbox.Text.Substring(0, lastValidIndex)
+            PartPrice_Textbox.SelectionStart = lastValidIndex
+        End If
+
+        InitializePartAmountTextbox()
 
     End Sub
 
