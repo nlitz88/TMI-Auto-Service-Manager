@@ -122,6 +122,12 @@
     <Compile Include="customerMaintenance.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="editInvTaskLabor.Designer.vb">
+      <DependentUpon>editInvTaskLabor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="editInvTaskLabor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="editMasterTaskLabor.Designer.vb">
       <DependentUpon>editMasterTaskLabor.vb</DependentUpon>
     </Compile>
@@ -266,6 +272,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="customerMaintenance.resx">
       <DependentUpon>customerMaintenance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="editInvTaskLabor.resx">
+      <DependentUpon>editInvTaskLabor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="editMasterTaskLabor.resx">
       <DependentUpon>editMasterTaskLabor.vb</DependentUpon>

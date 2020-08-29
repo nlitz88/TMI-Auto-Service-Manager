@@ -22,16 +22,16 @@ Partial Class editInvTaskLabor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Amount_Textbox = New System.Windows.Forms.TextBox()
+        Me.LaborAmount_Textbox = New System.Windows.Forms.TextBox()
         Me.AmountLabel = New System.Windows.Forms.Label()
         Me.Amount_Value = New System.Windows.Forms.Label()
         Me.Description_Value = New System.Windows.Forms.Label()
         Me.DescriptionLabel = New System.Windows.Forms.Label()
-        Me.Description_Textbox = New System.Windows.Forms.TextBox()
-        Me.Hours_Textbox = New System.Windows.Forms.TextBox()
+        Me.LaborDescription_Textbox = New System.Windows.Forms.TextBox()
+        Me.LaborHours_Textbox = New System.Windows.Forms.TextBox()
         Me.HoursLabel = New System.Windows.Forms.Label()
         Me.Hours_Value = New System.Windows.Forms.Label()
-        Me.Rate_Textbox = New System.Windows.Forms.TextBox()
+        Me.LaborRate_Textbox = New System.Windows.Forms.TextBox()
         Me.RateLabel = New System.Windows.Forms.Label()
         Me.Rate_Value = New System.Windows.Forms.Label()
         Me.LaborCode_Textbox = New System.Windows.Forms.TextBox()
@@ -46,15 +46,15 @@ Partial Class editInvTaskLabor
         Me.InvoiceValue = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'Amount_Textbox
+        'LaborAmount_Textbox
         '
-        Me.Amount_Textbox.Enabled = False
-        Me.Amount_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Amount_Textbox.Location = New System.Drawing.Point(518, 414)
-        Me.Amount_Textbox.Name = "Amount_Textbox"
-        Me.Amount_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.Amount_Textbox.TabIndex = 215
-        Me.Amount_Textbox.Tag = "dataEditingControl"
+        Me.LaborAmount_Textbox.Enabled = False
+        Me.LaborAmount_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LaborAmount_Textbox.Location = New System.Drawing.Point(518, 414)
+        Me.LaborAmount_Textbox.Name = "LaborAmount_Textbox"
+        Me.LaborAmount_Textbox.Size = New System.Drawing.Size(105, 27)
+        Me.LaborAmount_Textbox.TabIndex = 215
+        Me.LaborAmount_Textbox.Tag = "dataEditingControl"
         '
         'AmountLabel
         '
@@ -100,25 +100,25 @@ Partial Class editInvTaskLabor
         Me.DescriptionLabel.Tag = "dataLabel"
         Me.DescriptionLabel.Text = "Description :"
         '
-        'Description_Textbox
+        'LaborDescription_Textbox
         '
-        Me.Description_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Description_Textbox.Location = New System.Drawing.Point(190, 364)
-        Me.Description_Textbox.MaxLength = 100
-        Me.Description_Textbox.Name = "Description_Textbox"
-        Me.Description_Textbox.Size = New System.Drawing.Size(662, 27)
-        Me.Description_Textbox.TabIndex = 204
-        Me.Description_Textbox.Tag = "dataEditingControl"
+        Me.LaborDescription_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LaborDescription_Textbox.Location = New System.Drawing.Point(190, 364)
+        Me.LaborDescription_Textbox.MaxLength = 100
+        Me.LaborDescription_Textbox.Name = "LaborDescription_Textbox"
+        Me.LaborDescription_Textbox.Size = New System.Drawing.Size(662, 27)
+        Me.LaborDescription_Textbox.TabIndex = 204
+        Me.LaborDescription_Textbox.Tag = "dataEditingControl"
         '
-        'Hours_Textbox
+        'LaborHours_Textbox
         '
-        Me.Hours_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Hours_Textbox.Location = New System.Drawing.Point(333, 414)
-        Me.Hours_Textbox.MaxLength = 14
-        Me.Hours_Textbox.Name = "Hours_Textbox"
-        Me.Hours_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.Hours_Textbox.TabIndex = 206
-        Me.Hours_Textbox.Tag = "dataEditingControl"
+        Me.LaborHours_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LaborHours_Textbox.Location = New System.Drawing.Point(333, 414)
+        Me.LaborHours_Textbox.MaxLength = 14
+        Me.LaborHours_Textbox.Name = "LaborHours_Textbox"
+        Me.LaborHours_Textbox.Size = New System.Drawing.Size(105, 27)
+        Me.LaborHours_Textbox.TabIndex = 206
+        Me.LaborHours_Textbox.Tag = "dataEditingControl"
         '
         'HoursLabel
         '
@@ -142,14 +142,14 @@ Partial Class editInvTaskLabor
         Me.Hours_Value.TabIndex = 211
         Me.Hours_Value.Tag = "dataViewingControl"
         '
-        'Rate_Textbox
+        'LaborRate_Textbox
         '
-        Me.Rate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Rate_Textbox.Location = New System.Drawing.Point(149, 414)
-        Me.Rate_Textbox.Name = "Rate_Textbox"
-        Me.Rate_Textbox.Size = New System.Drawing.Size(105, 27)
-        Me.Rate_Textbox.TabIndex = 205
-        Me.Rate_Textbox.Tag = "dataEditingControl"
+        Me.LaborRate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LaborRate_Textbox.Location = New System.Drawing.Point(149, 414)
+        Me.LaborRate_Textbox.Name = "LaborRate_Textbox"
+        Me.LaborRate_Textbox.Size = New System.Drawing.Size(105, 27)
+        Me.LaborRate_Textbox.TabIndex = 205
+        Me.LaborRate_Textbox.Tag = "dataEditingControl"
         '
         'RateLabel
         '
@@ -295,16 +295,16 @@ Partial Class editInvTaskLabor
         Me.Controls.Add(Me.TaskNameLabel)
         Me.Controls.Add(Me.InvoiceLabel)
         Me.Controls.Add(Me.InvoiceValue)
-        Me.Controls.Add(Me.Amount_Textbox)
+        Me.Controls.Add(Me.LaborAmount_Textbox)
         Me.Controls.Add(Me.AmountLabel)
         Me.Controls.Add(Me.Amount_Value)
         Me.Controls.Add(Me.Description_Value)
         Me.Controls.Add(Me.DescriptionLabel)
-        Me.Controls.Add(Me.Description_Textbox)
-        Me.Controls.Add(Me.Hours_Textbox)
+        Me.Controls.Add(Me.LaborDescription_Textbox)
+        Me.Controls.Add(Me.LaborHours_Textbox)
         Me.Controls.Add(Me.HoursLabel)
         Me.Controls.Add(Me.Hours_Value)
-        Me.Controls.Add(Me.Rate_Textbox)
+        Me.Controls.Add(Me.LaborRate_Textbox)
         Me.Controls.Add(Me.RateLabel)
         Me.Controls.Add(Me.Rate_Value)
         Me.Controls.Add(Me.LaborCode_Textbox)
@@ -323,16 +323,16 @@ Partial Class editInvTaskLabor
 
     End Sub
 
-    Friend WithEvents Amount_Textbox As TextBox
+    Friend WithEvents LaborAmount_Textbox As TextBox
     Friend WithEvents AmountLabel As Label
     Friend WithEvents Amount_Value As Label
     Friend WithEvents Description_Value As Label
     Friend WithEvents DescriptionLabel As Label
-    Friend WithEvents Description_Textbox As TextBox
-    Friend WithEvents Hours_Textbox As TextBox
+    Friend WithEvents LaborDescription_Textbox As TextBox
+    Friend WithEvents LaborHours_Textbox As TextBox
     Friend WithEvents HoursLabel As Label
     Friend WithEvents Hours_Value As Label
-    Friend WithEvents Rate_Textbox As TextBox
+    Friend WithEvents LaborRate_Textbox As TextBox
     Friend WithEvents RateLabel As Label
     Friend WithEvents Rate_Value As Label
     Friend WithEvents LaborCode_Textbox As TextBox

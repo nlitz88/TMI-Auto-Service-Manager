@@ -1550,6 +1550,8 @@
 
     Private Sub tlEditButton_Click(sender As Object, e As EventArgs) Handles tlEditButton.Click
 
+        changeScreenHide(editInvTaskLabor, Me)
+
     End Sub
 
 

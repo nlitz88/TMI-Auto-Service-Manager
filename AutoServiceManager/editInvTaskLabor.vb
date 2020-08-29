@@ -39,17 +39,17 @@
     Private Sub InitializeAmountTextbox()
 
         ' First, Validate values that calculation is based on before attempting to parse and calculate
-        If validCurrency("Rate", True, Rate_Textbox.Text, String.Empty) And validNumber("Hours", True, Hours_Textbox.Text, String.Empty) Then
+        If validCurrency("Rate", True, LaborRate_Textbox.Text, String.Empty) And validNumber("Hours", True, LaborHours_Textbox.Text, String.Empty) Then
 
-            Dim Rate As Decimal = Convert.ToDecimal(Rate_Textbox.Text)
-            Dim Hours As Decimal = Convert.ToDecimal(Hours_Textbox.Text)
+            Dim Rate As Decimal = Convert.ToDecimal(LaborRate_Textbox.Text)
+            Dim Hours As Decimal = Convert.ToDecimal(LaborHours_Textbox.Text)
             Dim product As Decimal = Rate * Hours
 
             ' Then, assign and format calculated product
-            Amount_Textbox.Text = String.Format("{0:0.00}", product)
+            LaborAmount_Textbox.Text = String.Format("{0:0.00}", product)
 
         Else
-            Amount_Textbox.Text = String.Empty
+            LaborAmount_Textbox.Text = String.Empty
         End If
 
     End Sub
@@ -58,7 +58,7 @@
     ' Sub that will call formatting functions to add respective formats to already INITIALIZED DATAEDITINGCONTROLS (i.e. phone numbers, currency, etc.).
     Private Sub formatDataEditingControls()
 
-        Rate_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(Rate_Textbox.Text))
+        LaborRate_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(LaborRate_Textbox.Text))
 
     End Sub
 
@@ -90,8 +90,8 @@
         ' Add any initialization after the InitializeComponent() call.
 
         ' Get TaskLaborDbController here from invoiceTasks
-        InvTaskLaborDbController = masterTaskMaintenance.GetTaskLaborDbController()
-        InvTaskLaborRow = masterTaskMaintenance.GetTaskLaborRow()
+        InvTaskLaborDbController = invoiceTasks.GetInvTaskLaborDbController()
+        InvTaskLaborRow = invoiceTasks.GetInvTaskLaborRow()
 
         InvoiceValue.Text = invoices.GetINID
         TaskValue.Text = invoiceTasks.GetTask()
