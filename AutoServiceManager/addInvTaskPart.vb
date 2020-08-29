@@ -347,4 +347,19 @@
     End Sub
 
 
+    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+
+
+
+    End Sub
+
+
+    Private Sub newPartButton_Click(sender As Object, e As EventArgs) Handles newPartButton.Click
+
+        previousScreen = Me
+        changeScreenHide(inventoryMaintenance, previousScreen)
+
+    End Sub
+
+
 End Class

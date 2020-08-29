@@ -233,10 +233,10 @@ Public Class inventoryMaintenance
         PartComboBox.SelectedIndex = 0
 
 
-        ' FIRE ADDBUTTON EVENT IF ARRIVING HERE FROM ADDMASTERTASKPART
+        ' FIRE ADDBUTTON EVENT IF ARRIVING HERE FROM ADDMASTERTASKPART OR ADDINVTASKPART
         If previousScreen IsNot Nothing Then
 
-            If previousScreen Is addMasterTaskPart Then
+            If previousScreen Is addMasterTaskLabor Or previousScreen Is addInvTaskPart Then
                 nav.Visible = False
                 returnButton.Visible = True
                 addButton_Click(addButton, New EventArgs())
@@ -701,30 +701,48 @@ Public Class inventoryMaintenance
                     Exit Sub
                 Else
 
-                    'Call REINITIALIZATION HERE
-                    If Not addMasterTaskPart.reInitializeParts() Then
-                        MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        saveButton.Enabled = False
-                        Exit Sub
+                    If previousScreen Is addMasterTaskPart Then
+                        ' Call REINITIALIZATION HERE
+                        If Not addMasterTaskPart.reInitializeParts() Then
+                            MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)                            saveButton.Enabled = False
+                            saveButton.Enabled = False
+                            Exit Sub
+                        End If
+                    ElseIf previousScreen Is addInvTaskPart Then
+                        ' Call REINITIALIZATION HERE
+                        If Not addInvTaskPart.reInitializeParts() Then
+                            MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            saveButton.Enabled = False
+                            Exit Sub
+                        End If
                     End If
 
                     MeClosed = True
-                    changeScreen(addMasterTaskPart, Me)
+                    changeScreen(previousScreen, Me)
                     previousScreen = Nothing
 
                 End If
 
             Else
 
-                'Call REINITIALIZATION HERE
-                If Not addMasterTaskPart.reInitializeParts() Then
-                    MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    saveButton.Enabled = False
-                    Exit Sub
+                If previousScreen Is addMasterTaskPart Then
+                    ' Call REINITIALIZATION HERE
+                    If Not addMasterTaskPart.reInitializeParts() Then
+                        MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)                            saveButton.Enabled = False
+                        saveButton.Enabled = False
+                        Exit Sub
+                    End If
+                ElseIf previousScreen Is addInvTaskPart Then
+                    ' Call REINITIALIZATION HERE
+                    If Not addInvTaskPart.reInitializeParts() Then
+                        MessageBox.Show("Reloading of Add Task Part unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)                            saveButton.Enabled = False
+                        saveButton.Enabled = False
+                        Exit Sub
+                    End If
                 End If
 
                 MeClosed = True
-                changeScreen(addMasterTaskPart, Me)
+                changeScreen(previousScreen, Me)
                 previousScreen = Nothing
 
             End If
