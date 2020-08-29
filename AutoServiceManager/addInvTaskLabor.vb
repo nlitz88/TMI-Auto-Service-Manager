@@ -132,7 +132,7 @@
     ' ***************** CRUD SUBS *****************
 
 
-    Private Function InsertMasterTaskLabor() As Boolean
+    Private Function InsertInvTaskLabor() As Boolean
 
         ' Values that will automatically be grabbed from controls and inserted:
         '   LaborCode, LaborDescription, LaborRate, LaborHours, LaborAmount
@@ -352,7 +352,7 @@
         If Not controlsValid() Then Exit Sub
 
         ' 2.) WRITE CHANGES TO DATABASE TABLE
-        If Not InsertMasterTaskLabor() Then
+        If Not InsertInvTaskLabor() Then
             MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If

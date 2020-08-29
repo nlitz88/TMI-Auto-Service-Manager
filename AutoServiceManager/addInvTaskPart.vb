@@ -130,6 +130,29 @@
     ' ***************** CRUD SUBS *****************
 
 
+    Private Function InsertInvTaskPart() As Boolean
+
+        ' Values that will automatically be grabbed from controls and inserted:
+        '   PartNumber, PartDescription, PartPrice, and ListPrice
+        ' In adddition to these, we must also insert (into the row) these newly associated values:
+        '   InvNbr, TaskNbr, TaskID, Qty, PartAmount
+
+        ' No exclusions, just additionalValues
+        Dim additionalValues As New List(Of AdditionalValue) From {
+            New AdditionalValue("InvNbr", GetType(Long), InvId),
+            New AdditionalValue("TaskNbr", GetType(Integer), InvTaskNbr),
+            New AdditionalValue("TaskID", GetType(Integer), TaskId),
+            New AdditionalValue("Qty", GetType(Double), Qty_Textbox.Text),
+            New AdditionalValue("PartAmount", GetType(Decimal), PartAmount_Textbox.Text)
+        }
+
+        insertRow(CRUD, PartsDbController.DbDataTable, "InvParts", "_", "dataEditingControl", Me, additionalValues)
+
+        Return True
+
+    End Function
+
+
 
 
     ' **************** VALIDATION SUBS ****************
@@ -167,6 +190,9 @@
         Return True
 
     End Function
+
+
+
 
 
 
