@@ -349,7 +349,28 @@
 
     Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
 
+        ' No confirmation for additions at this time. May implement in the future.
 
+        ' 1.) VALIDATE DATAEDITING CONTROLS
+        If Not controlsValid() Then Exit Sub
+
+        ' 2.) WRITE CHANGES TO DATABASE TABLE
+        If Not InsertInvTaskPart() Then
+            MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        ' 3.) If this is successful, then:
+        '       a.) Reinitialize Dependents on InvoiceTasks
+        '       b.) If that is successful, then change screen
+        If Not invoiceTasks.reinitializeDependents() Then
+            MessageBox.Show("Reloading of invoice tasks unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            saveButton.Enabled = False
+            Exit Sub
+        End If
+
+        MeClosed = True
+        changeScreen(invoiceTasks, Me)
 
     End Sub
 

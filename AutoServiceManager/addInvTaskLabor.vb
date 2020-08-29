@@ -358,10 +358,10 @@
         End If
 
         ' 3.) If this is successful, then:
-        '       a.) Reinitialize Dependents on masterTaskMaintenance
+        '       a.) Reinitialize Dependents on InvoiceTasks
         '       b.) If that is successful, then change screen
         If Not invoiceTasks.reinitializeDependents() Then
-            MessageBox.Show("Reloading of invoice tasks Unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Reloading of invoice tasks unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             saveButton.Enabled = False
             Exit Sub
         End If
