@@ -901,6 +901,8 @@
 
             ' Lookup TaskNbr based on selected TaskDescription
             InvTaskNbr = InvTasksDbController.DbDataTable(InvTaskRow)("TaskNbr")
+            ' Also retrieve TaskId, as this is needed for adding new labor/parts to invoice task
+            TaskId = InvTasksDbController.DbDataTable(InvTaskRow)("TaskID")
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False

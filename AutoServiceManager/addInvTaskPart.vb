@@ -207,6 +207,7 @@
 
         InvId = invoices.GetInvId()
         InvTaskNbr = invoiceTasks.GetInvTaskNbr()
+        TaskId = invoiceTasks.GetTaskId()
 
         InvoiceValue.Text = invoices.GetINID()
         TaskValue.Text = invoiceTasks.GetTask()
