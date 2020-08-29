@@ -263,10 +263,11 @@ Public Class laborCodeMaintenance
         LCComboBox.SelectedIndex = 0
 
 
-        ' FIRE ADDBUTTON EVENT IF ARRIVING HERE FROM ADDMASTERTASKLABOR
+        ' FIRE ADDBUTTON EVENT IF ARRIVING HERE FROM ADDMASTERTASKLABOR OR ADDINVOICETASKLABOR
         If previousScreen IsNot Nothing Then
 
-            If previousScreen Is addMasterTaskLabor Then
+
+            If previousScreen Is addMasterTaskLabor Or previousScreen Is addInvTaskLabor Then
                 nav.Visible = False
                 returnButton.Visible = True
                 addButton_Click(addButton, New EventArgs())
