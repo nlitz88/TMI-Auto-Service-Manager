@@ -40,7 +40,7 @@ Partial Class addInvTaskPart
         Me.PartComboBox = New System.Windows.Forms.ComboBox()
         Me.cancelButton = New System.Windows.Forms.Button()
         Me.saveButton = New System.Windows.Forms.Button()
-        Me.addMasterTaskPartLabel = New System.Windows.Forms.Label()
+        Me.addInvTaskPartLabel = New System.Windows.Forms.Label()
         Me.TaskValue = New System.Windows.Forms.Label()
         Me.TaskNameLabel = New System.Windows.Forms.Label()
         Me.InvoiceLabel = New System.Windows.Forms.Label()
@@ -240,16 +240,16 @@ Partial Class addInvTaskPart
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
         '
-        'addMasterTaskPartLabel
+        'addInvTaskPartLabel
         '
-        Me.addMasterTaskPartLabel.AutoSize = True
-        Me.addMasterTaskPartLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.addMasterTaskPartLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.addMasterTaskPartLabel.Location = New System.Drawing.Point(94, 73)
-        Me.addMasterTaskPartLabel.Name = "addMasterTaskPartLabel"
-        Me.addMasterTaskPartLabel.Size = New System.Drawing.Size(311, 32)
-        Me.addMasterTaskPartLabel.TabIndex = 187
-        Me.addMasterTaskPartLabel.Text = "Add Invoice Task Part"
+        Me.addInvTaskPartLabel.AutoSize = True
+        Me.addInvTaskPartLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.addInvTaskPartLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.addInvTaskPartLabel.Location = New System.Drawing.Point(94, 73)
+        Me.addInvTaskPartLabel.Name = "addInvTaskPartLabel"
+        Me.addInvTaskPartLabel.Size = New System.Drawing.Size(311, 32)
+        Me.addInvTaskPartLabel.TabIndex = 187
+        Me.addInvTaskPartLabel.Text = "Add Invoice Task Part"
         '
         'TaskValue
         '
@@ -322,7 +322,7 @@ Partial Class addInvTaskPart
         Me.Controls.Add(Me.PartComboBox)
         Me.Controls.Add(Me.cancelButton)
         Me.Controls.Add(Me.saveButton)
-        Me.Controls.Add(Me.addMasterTaskPartLabel)
+        Me.Controls.Add(Me.addInvTaskPartLabel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "addInvTaskPart"
@@ -351,7 +351,7 @@ Partial Class addInvTaskPart
     Friend WithEvents PartComboBox As ComboBox
     Friend WithEvents cancelButton As Button
     Friend WithEvents saveButton As Button
-    Friend WithEvents addMasterTaskPartLabel As Label
+    Friend WithEvents addInvTaskPartLabel As Label
     Friend WithEvents TaskValue As Label
     Friend WithEvents TaskNameLabel As Label
     Friend WithEvents InvoiceLabel As Label
