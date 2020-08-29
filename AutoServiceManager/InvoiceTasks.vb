@@ -1569,6 +1569,8 @@
 
     Private Sub tpAddButton_Click(sender As Object, e As EventArgs) Handles tpAddButton.Click
 
+        changeScreenHide(addInvTaskPart, Me)
+
     End Sub
 
     Private Sub tpDeleteButton_Click(sender As Object, e As EventArgs) Handles tpDeleteButton.Click
