@@ -2,10 +2,23 @@
 
 Public Class home
 
-    Private Sub home_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
 
         ' Add event handler for when the application exits.
-        AddHandler Application.ApplicationExit, AddressOf OnApplicationExit
+        ' However, must first check if this event has already been handled using global flag.
+        If Not ApplicationExitHandled Then
+            AddHandler Application.ApplicationExit, AddressOf OnApplicationExit
+            ApplicationExitHandled = True
+        End If
+
+    End Sub
+
+    Private Sub home_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 
