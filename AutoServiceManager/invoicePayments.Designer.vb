@@ -48,6 +48,9 @@ Partial Class invoicePayments
         Me.Label1 = New System.Windows.Forms.Label()
         Me.CreditCardType_ComboBox = New System.Windows.Forms.ComboBox()
         Me.CreditCardType_Value = New System.Windows.Forms.Label()
+        Me.CheckNumber_Textbox = New System.Windows.Forms.TextBox()
+        Me.CheckNumberLabel = New System.Windows.Forms.Label()
+        Me.CheckNumber_Value = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'deleteButton
@@ -346,12 +349,49 @@ Partial Class invoicePayments
         Me.CreditCardType_Value.Tag = "dataViewingControl"
         Me.CreditCardType_Value.Visible = False
         '
+        'CheckNumber_Textbox
+        '
+        Me.CheckNumber_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckNumber_Textbox.Location = New System.Drawing.Point(494, 408)
+        Me.CheckNumber_Textbox.Name = "CheckNumber_Textbox"
+        Me.CheckNumber_Textbox.Size = New System.Drawing.Size(138, 27)
+        Me.CheckNumber_Textbox.TabIndex = 311
+        Me.CheckNumber_Textbox.Tag = "dataEditingControl"
+        Me.CheckNumber_Textbox.Visible = False
+        '
+        'CheckNumberLabel
+        '
+        Me.CheckNumberLabel.AutoSize = True
+        Me.CheckNumberLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.CheckNumberLabel.Location = New System.Drawing.Point(379, 414)
+        Me.CheckNumberLabel.Name = "CheckNumberLabel"
+        Me.CheckNumberLabel.Size = New System.Drawing.Size(109, 17)
+        Me.CheckNumberLabel.TabIndex = 313
+        Me.CheckNumberLabel.Tag = "dataLabel"
+        Me.CheckNumberLabel.Text = "Check Number :"
+        Me.CheckNumberLabel.Visible = False
+        '
+        'CheckNumber_Value
+        '
+        Me.CheckNumber_Value.AutoSize = True
+        Me.CheckNumber_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckNumber_Value.ForeColor = System.Drawing.Color.Black
+        Me.CheckNumber_Value.Location = New System.Drawing.Point(494, 411)
+        Me.CheckNumber_Value.Name = "CheckNumber_Value"
+        Me.CheckNumber_Value.Size = New System.Drawing.Size(0, 20)
+        Me.CheckNumber_Value.TabIndex = 312
+        Me.CheckNumber_Value.Tag = "dataViewingControl"
+        Me.CheckNumber_Value.Visible = False
+        '
         'invoicePayments
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.CheckNumber_Textbox)
+        Me.Controls.Add(Me.CheckNumberLabel)
+        Me.Controls.Add(Me.CheckNumber_Value)
         Me.Controls.Add(Me.CreditCardType_Value)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.CreditCardType_ComboBox)
@@ -414,4 +454,7 @@ Partial Class invoicePayments
     Friend WithEvents Label1 As Label
     Friend WithEvents CreditCardType_ComboBox As ComboBox
     Friend WithEvents CreditCardType_Value As Label
+    Friend WithEvents CheckNumber_Textbox As TextBox
+    Friend WithEvents CheckNumberLabel As Label
+    Friend WithEvents CheckNumber_Value As Label
 End Class
