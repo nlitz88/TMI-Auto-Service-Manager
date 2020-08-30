@@ -80,6 +80,64 @@
 
 
 
+    ' ***************** CRUD SUBS *****************
+
+
+    ' Function that will update row in InvParts (using function overload that uses DataTable values as keys)
+    Private Function updateMasterTaskLabor() As Boolean
+
+        Dim DT As DataTable = InvTaskLaborDbController.DbDataTable
+
+        ' Make list of excluded controls here
+        Dim excludedControls As New List(Of Control) From {LaborCode_Textbox}
+
+        updateTable(CRUD, DT, InvTaskLaborRow, New List(Of String), "MasterTaskLabor", "_", "dataEditingControl", Me, excludedControls)
+
+        If CRUD.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+
+
+
+    ' **************** VALIDATION SUBS ****************
+
+
+    ' Sub that runs validation for all form controls. Also handles error reporting
+    Private Function controlsValid() As Boolean
+
+        Dim errorMessage As String = String.Empty
+
+        ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
+
+
+        ' Description
+        If Not isValidLength("Description", False, LaborDescription_Textbox.Text, 100, errorMessage) Then LaborDescription_Textbox.ForeColor = Color.Red
+
+        ' Rate
+        If Not validCurrency("Rate", False, LaborRate_Textbox.Text, errorMessage) Then LaborRate_Textbox.ForeColor = Color.Red
+
+        ' Hours
+        If Not validNumber("Hours", False, LaborHours_Textbox.Text, errorMessage) Then LaborHours_Textbox.ForeColor = Color.Red
+
+
+        ' Check if any invalid input has been found
+        If Not String.IsNullOrEmpty(errorMessage) Then
+
+            MessageBox.Show(errorMessage, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+
+        End If
+
+        Return True
+
+    End Function
+
+
+
+
 
 
     Public Sub New()
