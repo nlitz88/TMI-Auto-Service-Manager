@@ -2229,7 +2229,7 @@ Public Class invoices
     Private Sub paymentsButton_Click(sender As Object, e As EventArgs) Handles paymentsButton.Click
 
         previousScreen = Me
-        changeScreenHide(invPayments, previousScreen)
+        changeScreenHide(invoicePayments, previousScreen)
 
     End Sub
 
