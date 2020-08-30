@@ -91,7 +91,7 @@
         ' Make list of excluded controls here
         Dim excludedControls As New List(Of Control) From {LaborCode_Textbox}
 
-        updateTable(CRUD, DT, InvTaskLaborRow, New List(Of String), "MasterTaskLabor", "_", "dataEditingControl", Me, excludedControls)
+        updateTable(CRUD, DT, InvTaskLaborRow, New List(Of String), "InvLabor", "_", "dataEditingControl", Me, excludedControls)
 
         If CRUD.HasException() Then Return False
 
