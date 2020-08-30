@@ -148,6 +148,19 @@
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+        InvTaskPartsDbController = invoiceTasks.GetInvTaskPartsDbController()
+        InvTaskPartsRow = invoiceTasks.GetInvTaskPartsRow()
+
+        InvoiceValue.Text = invoices.GetINID()
+        TaskValue.Text = invoiceTasks.GetTask()
+
+        ' For the editing forms, we won't be initializing our dataEditingControls from a selection. Instead, we will initialize them just once on load
+        valuesInitialized = False
+        ' Initialize all DataEditing Controls
+        InitializeAllDataEditingControls()
+        valuesInitialized = True
+        ' Establish initial values here, as we are exclusively editing on this form
+        InitialPartValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
     End Sub
 
