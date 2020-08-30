@@ -648,11 +648,11 @@
             End If
             If excludedControls.Contains(ctrls(0)) Then
                 firstValueParam = i + 1
-                Console.WriteLine("First value param bumped up to the next i value: " & firstValueParam.ToString() & " i currently equals : " & i.ToString())
+                'Console.WriteLine("First value param bumped up to the next i value: " & firstValueParam.ToString() & " i currently equals : " & i.ToString())
                 Continue For
             End If
 
-            Console.WriteLine("not an excluded control, i = " & i.ToString())
+            'Console.WriteLine("not an excluded control, i = " & i.ToString())
             If Not i = firstValueParam Then valueParams += ","
 
             ctrlValue = getControlValue(ctrls(0))
