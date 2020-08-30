@@ -84,7 +84,7 @@
 
 
     ' Function that will update row in InvParts (using function overload that uses DataTable values as keys)
-    Private Function updateMasterTaskLabor() As Boolean
+    Private Function updateInvTaskLabor() As Boolean
 
         Dim DT As DataTable = InvTaskLaborDbController.DbDataTable
 
@@ -229,8 +229,145 @@
     End Sub
 
 
+    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+
+        ' No confirmation for edits at this time. May implement in the future.
+
+        ' 1.) VALIDATE DATAEDITING CONTROLS
+        If Not controlsValid() Then Exit Sub
+
+        ' 2.) WRITE CHANGES TO DATABASE TABLE
+        If Not updateInvTaskLabor() Then
+            MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        ' 3.) If this is successful, then:
+        '       a.) Reinitialize Dependents on masterTaskMaintenance
+        '       b.) If that is successful, then change screen
+        If Not invoiceTasks.reinitializeDependents() Then
+            MessageBox.Show("Reloading of invoice tasks Unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            saveButton.Enabled = False
+            Exit Sub
+        End If
+
+        MeClosed = True
+        changeScreen(invoiceTasks, Me)
+
+    End Sub
 
 
+
+
+    Private Sub LaborDescription_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LaborDescription_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        LaborDescription_Textbox.ForeColor = DefaultForeColor
+
+        If InitialLaborValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+
+    Private Sub LaborRate_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles LaborRate_Textbox.KeyDown
+
+        ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
+            allowedKeystroke = True
+        End If
+
+    End Sub
+
+    Private Sub LaborRate_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles LaborRate_Textbox.KeyPress
+
+        ' If certain keystroke exceptions allowed through, then skip input validation here
+        If allowedKeystroke Then
+            allowedKeystroke = False
+            Exit Sub
+        End If
+
+        If Not currencyInputValid(LaborRate_Textbox, e.KeyChar) Then
+            e.KeyChar = Chr(0)
+            e.Handled = True
+        End If
+
+    End Sub
+
+    Private Sub LaborRate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LaborRate_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        LaborRate_Textbox.ForeColor = DefaultForeColor
+
+        ' Handles pasting in invalid values/strings
+        Dim lastValidIndex As Integer = allValidChars(LaborRate_Textbox.Text, "1234567890.")
+        If lastValidIndex <> -1 Then
+            LaborRate_Textbox.Text = LaborRate_Textbox.Text.Substring(0, lastValidIndex)
+            LaborRate_Textbox.SelectionStart = lastValidIndex
+        End If
+
+        InitializeAmountTextbox()
+
+        If InitialLaborValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+
+    Private Sub LaborHours_Textbox_KeyDown(sender As Object, e As KeyEventArgs) Handles LaborHours_Textbox.KeyDown
+
+        ' Check to see ctrl+A, ctrl+C, or ctrl+V were used. If so, don't worry about checking which Keys Pressed
+        If ((e.KeyCode = Keys.A And e.Control) Or (e.KeyCode = Keys.C And e.Control) Or (e.KeyCode = Keys.V And e.Control)) Then
+            allowedKeystroke = True
+        End If
+
+    End Sub
+
+    Private Sub LaborHours_Textbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles LaborHours_Textbox.KeyPress
+
+        ' If certain keystroke exceptions allowed through, then skip input validation here
+        If allowedKeystroke Then
+            allowedKeystroke = False
+            Exit Sub
+        End If
+
+        If Not numericInputValid(LaborHours_Textbox, e.KeyChar) Then
+            e.KeyChar = Chr(0)
+            e.Handled = True
+        End If
+
+    End Sub
+
+    Private Sub LaborHours_Textbox_TextChanged(sender As Object, e As EventArgs) Handles LaborHours_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        LaborHours_Textbox.ForeColor = DefaultForeColor
+
+        ' Handles pasting in invalid values/strings
+        Dim lastValidIndex As Integer = allValidChars(LaborHours_Textbox.Text, "1234567890.")
+        If lastValidIndex <> -1 Then
+            LaborHours_Textbox.Text = LaborHours_Textbox.Text.Substring(0, lastValidIndex)
+            LaborHours_Textbox.SelectionStart = lastValidIndex
+        End If
+
+        InitializeAmountTextbox()
+
+        If InitialLaborValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
 
 
 End Class
