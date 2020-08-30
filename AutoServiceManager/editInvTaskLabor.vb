@@ -1,6 +1,6 @@
 ﻿Public Class editInvTaskLabor
 
-    ' DataTable that will maintain the DataTable passed to it from masterTaskMainentance
+    ' DataTable that will maintain the DataTable passed to it from InvoiceTasks
     Private InvTaskLaborDbController As New DbControl()
     Private InvTaskLaborRow As Integer
     ' New Database control instance for updating, inserting, and deleting
@@ -27,7 +27,7 @@
     ' No need for dataTable loading function here, as we are only going to use the dataTable associated with the controller that we receive from invoiceTasks
 
 
-    ' Sub that initializes all dataEditingcontrols corresponding with values from the MasterTaskLabor DataTable
+    ' Sub that initializes all dataEditingcontrols corresponding with values from the InvLabor DataTable
     Private Sub InitializeInvTaskLaborDataEditingControls()
 
         initializeControlsFromRow(InvTaskLaborDbController.DbDataTable, InvTaskLaborRow, "dataEditingControl", "_", Me)
@@ -243,7 +243,7 @@
         End If
 
         ' 3.) If this is successful, then:
-        '       a.) Reinitialize Dependents on masterTaskMaintenance
+        '       a.) Reinitialize Dependents on invoiceTasks
         '       b.) If that is successful, then change screen
         If Not invoiceTasks.reinitializeDependents() Then
             MessageBox.Show("Reloading of invoice tasks Unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
