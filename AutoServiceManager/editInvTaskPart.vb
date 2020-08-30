@@ -164,13 +164,110 @@
 
     End Sub
 
-
-
     Private Sub editInvTaskPart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
 
     End Sub
+
+
+
+
+    ' **************** CONTROL SUBS ****************
+
+
+    Private Sub editInvTaskPart_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+
+        If Not MeClosed Then
+
+            If InitialPartValues.CtrlValuesChanged() Then
+
+                Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If decision = DialogResult.No Then
+                    e.Cancel = True
+                    Exit Sub
+                Else
+                    MeClosed = True
+                    changeScreen(invoiceTasks, Me)
+                End If
+
+            Else
+
+                MeClosed = True
+                changeScreen(invoiceTasks, Me)
+
+            End If
+
+        End If
+
+    End Sub
+
+
+    Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
+
+        If Not MeClosed Then
+
+            If InitialPartValues.CtrlValuesChanged() Then
+
+                Dim decision As DialogResult = MessageBox.Show("Cancel without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If decision = DialogResult.No Then
+                    Exit Sub
+                Else
+                    MeClosed = True
+                    changeScreen(invoiceTasks, Me)
+                End If
+
+            Else
+
+                MeClosed = True
+                changeScreen(invoiceTasks, Me)
+
+            End If
+
+        End If
+
+    End Sub
+
+
+    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+
+        ' No confirmation for edits at this time. May implement in the future.
+
+        ' 1.) VALIDATE DATAEDITING CONTROLS
+        If Not controlsValid() Then Exit Sub
+
+        ' 2.) WRITE CHANGES TO DATABASE TABLE
+        If Not updateInvParts() Then
+            MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        ' 3.) If this is successful, then:
+        '       a.) Reinitialize Dependents on invoiceTasks
+        '       b.) If that is successful, then change screen
+        If Not invoiceTasks.reinitializeDependents() Then
+            MessageBox.Show("Reloading of invoice tasks Unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            saveButton.Enabled = False
+            Exit Sub
+        End If
+
+        MeClosed = True
+        changeScreen(invoiceTasks, Me)
+
+    End Sub
+
+
+
+
+
+
+
+
+
+
+
 
 
 End Class

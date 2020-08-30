@@ -84,7 +84,7 @@
 
 
     ' Function that will update row in InvParts (using function overload that uses DataTable values as keys)
-    Private Function updateInvTaskLabor() As Boolean
+    Private Function updateInvLabor() As Boolean
 
         Dim DT As DataTable = InvTaskLaborDbController.DbDataTable
 
@@ -237,7 +237,7 @@
         If Not controlsValid() Then Exit Sub
 
         ' 2.) WRITE CHANGES TO DATABASE TABLE
-        If Not updateInvTaskLabor() Then
+        If Not updateInvLabor() Then
             MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
