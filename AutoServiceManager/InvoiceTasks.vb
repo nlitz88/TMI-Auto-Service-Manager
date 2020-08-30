@@ -1546,6 +1546,16 @@
 
     Private Sub tlDeleteButton_Click(sender As Object, e As EventArgs) Handles tlDeleteButton.Click
 
+        If Not deleteInvTaskLabor() Then
+            MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If Not reinitializeDependents() Then
+            MessageBox.Show("Reloading of Invoice Tasks Unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
     End Sub
 
     Private Sub tlEditButton_Click(sender As Object, e As EventArgs) Handles tlEditButton.Click
@@ -1578,6 +1588,16 @@
     End Sub
 
     Private Sub tpDeleteButton_Click(sender As Object, e As EventArgs) Handles tpDeleteButton.Click
+
+        If Not deleteInvTaskPart() Then
+            MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If Not reinitializeDependents() Then
+            MessageBox.Show("Reloading of Invoice Tasks Unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
 
     End Sub
 
