@@ -48,7 +48,7 @@
         '     
         '   
         InvPaymentsDbController.AddParams("@invid", InvId)
-        InvPaymentsDbController.ExecQuery("SELECT CSTR(IIF(ISNULL(ip.InvPayKey), 0, ip.InvPayKey)) + ' - ' + CSTR(IIF(ISNULL(ip.PayDate), '', ip.PayDate)) + ' - ' + CSTR(IIF(ISNULL(ip.PayAmount), '', '$' + CSTR(ip.PayAmount))) as PKPD, " &
+        InvPaymentsDbController.ExecQuery("SELECT CSTR(IIF(ISNULL(ip.InvPayKey), 0, ip.InvPayKey)) + ' - ' + CSTR(IIF(ISNULL(ip.PayDate), '', CSTR(ip.PayDate) + ' - ')) + CSTR(IIF(ISNULL(ip.PayAmount), '', '$' + CSTR(ip.PayAmount))) as PKPD, " &
                                        "ip.InvNbr, ip.InvPayKey, ip.PayDate, ip.PayAmount, ip.PaymentNotes, ip.PayType, ip.CheckNumber, ip.CreditCardType " &
                                        "FROM InvPayments ip " &
                                        "WHERE InvNbr=@invid " &
