@@ -75,6 +75,11 @@ Public Class invoices
         Return InvId
     End Function
 
+    ' Retrieves current Invoice Sum/Total to be used for balance calculations in InvPayments
+    Public Function GetInvTotalSum() As Decimal
+        Return InvTotalSum
+    End Function
+
 
 
 
