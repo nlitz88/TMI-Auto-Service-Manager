@@ -164,12 +164,19 @@
 
         Select Case InvPaymentsDbController.DbDataTable(InvPaymentsRow)("PayType")
             Case "Credit"
+                ' Make CreditCardType_Value and label visible, and conversely hide checkNumber controls
                 CreditCardType_Value.Visible = True
                 CreditCardTypeLabel.Visible = True
+                CheckNumber_Value.Visible = False
+                CheckNumberLabel.Visible = False
             Case "Check"
+                ' Make CheckNumber_Value and label visible, and conversely hide CreditCard controls
                 CheckNumber_Value.Visible = True
                 CheckNumberLabel.Visible = True
+                CreditCardType_Value.Visible = False
+                CreditCardTypeLabel.Visible = False
             Case Else
+                ' Hide all corresponding controls, as they do not apply
                 CreditCardType_Value.Visible = False
                 CreditCardTypeLabel.Visible = False
                 CheckNumber_Value.Visible = False
@@ -187,9 +194,13 @@
             Case "Credit"
                 CreditCardType_ComboBox.Visible = True
                 CreditCardTypeLabel.Visible = True
+                CheckNumber_Textbox.Visible = False
+                CheckNumberLabel.Visible = False
             Case "Check"
                 CheckNumber_Textbox.Visible = True
                 CheckNumberLabel.Visible = True
+                CreditCardType_ComboBox.Visible = False
+                CreditCardTypeLabel.Visible = False
             Case Else
                 CreditCardType_ComboBox.Visible = False
                 CreditCardTypeLabel.Visible = False
@@ -222,7 +233,7 @@
         ' Automated initializations
         InitializeInvPaymentsDataViewingControls()
         ' Call sub here that hides/shows proper combobox/textbox based on current payment type
-        ShowCorrespondingPaymentViewingControls()
+        'ShowCorrespondingPaymentViewingControls()
         ' Then, format dataViewingControls
         formatDataViewingControls()
 
@@ -346,6 +357,9 @@
             showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
             showHide(getAllControlsWithTag("dataLabel", Me), 1)
             showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+            ' This must be called after dataViewingControls have been made visible, as some must be hidden again
+            ShowCorrespondingPaymentViewingControls()
 
             ' Enable editing and deleting button
             editButton.Enabled = True
