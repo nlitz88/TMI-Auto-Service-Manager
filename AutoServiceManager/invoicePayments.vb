@@ -73,6 +73,56 @@
     End Sub
 
 
+
+    ' Loads datatable from PaymentTypes
+    Private Function loadPaymentTypesDataTable()
+
+        PTDbController.ExecQuery("SELECT p.PaymentType FROM PaymentTypes p ORDER BY p.PaymentType ASC")
+        If PTDbController.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+    ' Sub to initialize PaymentTypes ComboBox
+    Private Sub initializePayTypeComboBox()
+
+        PayType_ComboBox.Items.Clear()
+        PayType_ComboBox.BeginUpdate()
+        For Each row In PTDbController.DbDataTable.Rows
+            PayType_ComboBox.Items.Add(row("PaymentType"))
+        Next
+        PayType_ComboBox.EndUpdate()
+
+    End Sub
+
+
+    ' Loads datatable from CreditCardsAccepted
+    Private Function loadCreditCardsDataTable()
+
+        PTDbController.ExecQuery("SELECT c.CreditCard FROM CreditCardsAccepted c ORDER BY c.CreditCard ASC")
+        If PTDbController.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+    ' Sub to initialize CreditCardType ComboBox
+    Private Sub initializeCreditCardTypeComboBox()
+
+        PayType_ComboBox.Items.Clear()
+        PayType_ComboBox.BeginUpdate()
+        For Each row In PTDbController.DbDataTable.Rows
+            PayType_ComboBox.Items.Add(row("CreditCard"))
+        Next
+        PayType_ComboBox.EndUpdate()
+
+    End Sub
+
+    ' Will need to implement logic in paymentTypes combobox selected change event (like automake in vehicleMaintenance)
+
+
+
     ' Sub that initializes all dataEditingcontrols corresponding with values from the InvTask DataTable
     Private Sub InitializeInvPaymentsDataEditingControls()
 
@@ -87,10 +137,6 @@
 
     End Sub
 
-
-
-    ' Make subs here that initialize (and make visible) credit card/check number controls
-    ' based on what is selected in paymentType
 
 
     ' Sub that calculates balance based on Invoice Total (cost) and current sum of payments for this invoice
@@ -137,6 +183,7 @@
 
 
 
+
     ' ***************** VALIDATION SUBS *****************
 
 
@@ -165,11 +212,23 @@
         PaymentComboBox.SelectedIndex = 0
 
 
+        If Not loadPaymentTypesDataTable() Then
+            MessageBox.Show("Failed to load payment types table; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+        initializePayTypeComboBox()
+
+        If Not loadCreditCardsDataTable() Then
+            MessageBox.Show("Failed to load credit cards table; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+        initializeCreditCardTypeComboBox()
+
+
         InitializeBalance()     ' This function will also be called after saving a payment (as the balance would then need to be recalculated)
 
 
-        ' loadCreditCardsDataTable() or something like this
-        ' InitializeCreditCardTypeComboBox()
+
 
     End Sub
 
@@ -185,6 +244,75 @@
 
 
 
+
+    ' **************** CONTROL SUBS ****************
+
+
+    Private Sub PaymentComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PaymentComboBox.SelectedIndexChanged, PaymentComboBox.TextChanged
+
+        ' Ensure that ComboBox is only attempting to initialize values when on proper selected Index
+        If PaymentComboBox.SelectedIndex = -1 Then
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            ' Disable editing button
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+            Exit Sub
+
+        End If
+
+        ' First, Lookup newly changed value in respective dataTable to see if the selected value exists And Is valid
+        InvPaymentsRow = getDataTableRow(InvPaymentsDbController.DbDataTable, "PKPD", PaymentComboBox.Text)
+
+        ' If the lookup DOES find the value in the DataTable
+        If InvPaymentsRow <> -1 Then
+
+            ' Initialize corresponding controls from DataTable values
+            valuesInitialized = False
+            InitializeInvPaymentsDataViewingControls()
+            valuesInitialized = True
+
+            ' Show labels and corresponding values
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 1)
+            showHide(getAllControlsWithTag("dataLabel", Me), 1)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+
+            ' Enable editing and deleting button
+            editButton.Enabled = True
+            deleteButton.Enabled = True
+
+            'If it does = -1, that means that value Is either "Select one" Or some other anomoly
+        Else
+
+            ' Have all labels and corresponding values hidden
+            showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+            showHide(getAllControlsWithTag("dataLabel", Me), 0)
+            showHide(getAllControlsWithTag("dataEditingControl", Me), 0)
+            ' Disable editing button
+            editButton.Enabled = False
+            deleteButton.Enabled = False
+
+        End If
+
+    End Sub
+
+
+
+    Private Sub PayType_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PayType_ComboBox.SelectedIndexChanged
+
+        ' Check here for selection type
+        ' if selection is valid:
+        '   if selection is credit card:
+        '       then make credit card comboBox visible
+        '   else if selection is check
+        '       then make check number textbox visible
+        '   else
+        '       hide creditcard ComboBox and checkNumber textbox
+
+    End Sub
 
 
 End Class

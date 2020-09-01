@@ -238,6 +238,7 @@ Partial Class invoicePayments
         Me.PaymentTypeLabel.Name = "PaymentTypeLabel"
         Me.PaymentTypeLabel.Size = New System.Drawing.Size(107, 17)
         Me.PaymentTypeLabel.TabIndex = 282
+        Me.PaymentTypeLabel.Tag = "dataLabel"
         Me.PaymentTypeLabel.Text = "Payment Type :"
         '
         'PayType_ComboBox
@@ -250,6 +251,7 @@ Partial Class invoicePayments
         Me.PayType_ComboBox.Name = "PayType_ComboBox"
         Me.PayType_ComboBox.Size = New System.Drawing.Size(138, 28)
         Me.PayType_ComboBox.TabIndex = 281
+        Me.PayType_ComboBox.Tag = "dataEditingControl"
         '
         'PayAmount_Textbox
         '
@@ -322,6 +324,7 @@ Partial Class invoicePayments
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(87, 17)
         Me.Label1.TabIndex = 309
+        Me.Label1.Tag = "dataLabel"
         Me.Label1.Text = "Credit Card :"
         Me.Label1.Visible = False
         '
@@ -335,6 +338,7 @@ Partial Class invoicePayments
         Me.CreditCardType_ComboBox.Name = "CreditCardType_ComboBox"
         Me.CreditCardType_ComboBox.Size = New System.Drawing.Size(138, 28)
         Me.CreditCardType_ComboBox.TabIndex = 308
+        Me.CreditCardType_ComboBox.Tag = "dataEditingControl"
         Me.CreditCardType_ComboBox.Visible = False
         '
         'CreditCardType_Value
