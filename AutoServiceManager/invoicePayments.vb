@@ -159,6 +159,49 @@
     End Sub
 
 
+    ' Sub that hides/shows proper dataEditing controls corresponding to each PaymentType
+    Private Sub ShowCorrespondingPaymentViewingControls()
+
+        Select Case InvPaymentsDbController.DbDataTable(InvPaymentsRow)("PayType")
+            Case "Credit"
+                CreditCardType_Value.Visible = True
+                CreditCardTypeLabel.Visible = True
+            Case "Check"
+                CheckNumber_Value.Visible = True
+                CheckNumberLabel.Visible = True
+            Case Else
+                CreditCardType_Value.Visible = False
+                CreditCardTypeLabel.Visible = False
+                CheckNumber_Value.Visible = False
+                CheckNumberLabel.Visible = False
+        End Select
+
+    End Sub
+
+
+    ' Sub that hides/shows proper dataViewing controls corresponding to each PaymentType
+    Private Sub ShowCorrespondingPaymentEditingControls()
+
+        Select Case PayType_ComboBox.Text
+
+            Case "Credit"
+                CreditCardType_ComboBox.Visible = True
+                CreditCardTypeLabel.Visible = True
+            Case "Check"
+                CheckNumber_Textbox.Visible = True
+                CheckNumberLabel.Visible = True
+            Case Else
+                CreditCardType_ComboBox.Visible = False
+                CreditCardTypeLabel.Visible = False
+                CheckNumber_Textbox.Visible = False
+                CheckNumberLabel.Visible = False
+
+        End Select
+
+    End Sub
+
+
+
     ' Sub that will call formatting functions to add respective formats to already INITIALIZED DATAVIEWINGCONTROLS (i.e. phone numbers, currency, etc.).
     Private Sub formatDataViewingControls()
 
@@ -172,6 +215,32 @@
         PayAmount_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(PayAmount_Textbox.Text))
 
     End Sub
+
+
+    Private Sub InitializeAllDataViewingControls()
+
+        ' Automated initializations
+        InitializeInvPaymentsDataViewingControls()
+        ' Call sub here that hides/shows proper combobox/textbox based on current payment type
+        ShowCorrespondingPaymentViewingControls()
+        ' Then, format dataViewingControls
+        formatDataViewingControls()
+
+    End Sub
+
+
+    Private Sub InitializeAllDataEditingControls()
+
+        ' Automated initializations
+        InitializeInvPaymentsDataEditingControls()
+        ' Then, format dataEditingControls
+        formatDataEditingControls()
+        ' Set forecolor if not already initially default
+        setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
+
+    End Sub
+
+
 
 
 
@@ -226,8 +295,6 @@
 
 
         InitializeBalance()     ' This function will also be called after saving a payment (as the balance would then need to be recalculated)
-
-
 
 
     End Sub
@@ -301,7 +368,7 @@
 
 
 
-    Private Sub PayType_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PayType_ComboBox.SelectedIndexChanged
+    Private Sub PayType_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PayType_ComboBox.SelectedIndexChanged, PayType_ComboBox.TextChanged
 
         ' Check here for selection type
         ' if selection is valid:
@@ -311,6 +378,87 @@
         '       then make check number textbox visible
         '   else
         '       hide creditcard ComboBox and checkNumber textbox
+
+        If Not valuesInitialized Then Exit Sub
+
+        PayType_ComboBox.ForeColor = DefaultForeColor
+
+
+        ShowCorrespondingPaymentEditingControls()
+
+
+    End Sub
+
+
+
+
+    Private Sub invoicePayments_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+
+        If Not MeClosed Then
+
+            ' Check if editing/adding, and if editing/adding, check if control values changed
+            If PayDate_Textbox.Visible And InitialPaymentValues.CtrlValuesChanged() Then
+
+                Dim decision As DialogResult = MessageBox.Show("Return to invoice without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If decision = DialogResult.No Then
+                    e.Cancel = True
+                    Exit Sub
+                Else
+                    MeClosed = True
+                    changeScreen(invoices, Me)
+                End If
+
+            Else
+
+                MeClosed = True
+                changeScreen(invoices, Me)
+
+            End If
+
+        End If
+
+    End Sub
+
+
+    Private Sub returnButton_Click(sender As Object, e As EventArgs) Handles returnButton.Click
+
+        If Not MeClosed Then
+
+            ' Check if editing/adding, and if editing/adding, check if control values changed
+            If PayDate_Textbox.Visible And InitialPaymentValues.CtrlValuesChanged() Then
+
+                Dim decision As DialogResult = MessageBox.Show("Return to invoice without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If decision = DialogResult.No Then
+                    Exit Sub
+                Else
+
+                    ' Call REINITIALIZATION HERE
+                    If Not invoices.reinitializeDependents() Then
+                        MessageBox.Show("Reloading of invoice unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    End If
+
+                    MeClosed = True
+                    changeScreen(invoices, Me)
+
+                End If
+
+            Else
+
+                ' Call REINITIALIZATION HERE
+                If Not invoices.reinitializeDependents() Then
+                    MessageBox.Show("Reloading of invoice unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
+
+                MeClosed = True
+                changeScreen(invoices, Me)
+
+            End If
+
+        End If
 
     End Sub
 

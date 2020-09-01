@@ -45,12 +45,14 @@ Partial Class invoicePayments
         Me.PaymentNotes_Textbox = New System.Windows.Forms.TextBox()
         Me.PaymentNotes_Value = New System.Windows.Forms.Label()
         Me.PaymentNotesLabel = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.CreditCardTypeLabel = New System.Windows.Forms.Label()
         Me.CreditCardType_ComboBox = New System.Windows.Forms.ComboBox()
         Me.CreditCardType_Value = New System.Windows.Forms.Label()
         Me.CheckNumber_Textbox = New System.Windows.Forms.TextBox()
         Me.CheckNumberLabel = New System.Windows.Forms.Label()
         Me.CheckNumber_Value = New System.Windows.Forms.Label()
+        Me.PayTape_Value = New System.Windows.Forms.Label()
+        Me.returnButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'deleteButton
@@ -316,17 +318,17 @@ Partial Class invoicePayments
         Me.PaymentNotesLabel.Tag = "dataLabel"
         Me.PaymentNotesLabel.Text = "Payment Notes :"
         '
-        'Label1
+        'CreditCardTypeLabel
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(379, 414)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(87, 17)
-        Me.Label1.TabIndex = 309
-        Me.Label1.Tag = "dataLabel"
-        Me.Label1.Text = "Credit Card :"
-        Me.Label1.Visible = False
+        Me.CreditCardTypeLabel.AutoSize = True
+        Me.CreditCardTypeLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.CreditCardTypeLabel.Location = New System.Drawing.Point(379, 414)
+        Me.CreditCardTypeLabel.Name = "CreditCardTypeLabel"
+        Me.CreditCardTypeLabel.Size = New System.Drawing.Size(87, 17)
+        Me.CreditCardTypeLabel.TabIndex = 309
+        Me.CreditCardTypeLabel.Tag = "dataLabel"
+        Me.CreditCardTypeLabel.Text = "Credit Card :"
+        Me.CreditCardTypeLabel.Visible = False
         '
         'CreditCardType_ComboBox
         '
@@ -387,17 +389,42 @@ Partial Class invoicePayments
         Me.CheckNumber_Value.Tag = "dataViewingControl"
         Me.CheckNumber_Value.Visible = False
         '
+        'PayTape_Value
+        '
+        Me.PayTape_Value.AutoSize = True
+        Me.PayTape_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PayTape_Value.ForeColor = System.Drawing.Color.Black
+        Me.PayTape_Value.Location = New System.Drawing.Point(210, 411)
+        Me.PayTape_Value.Name = "PayTape_Value"
+        Me.PayTape_Value.Size = New System.Drawing.Size(0, 20)
+        Me.PayTape_Value.TabIndex = 314
+        Me.PayTape_Value.Tag = "dataViewingControl"
+        '
+        'returnButton
+        '
+        Me.returnButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.returnButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.returnButton.ForeColor = System.Drawing.Color.White
+        Me.returnButton.Location = New System.Drawing.Point(680, 120)
+        Me.returnButton.Name = "returnButton"
+        Me.returnButton.Size = New System.Drawing.Size(197, 30)
+        Me.returnButton.TabIndex = 315
+        Me.returnButton.Text = "Return To Invoice"
+        Me.returnButton.UseVisualStyleBackColor = False
+        '
         'invoicePayments
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.returnButton)
+        Me.Controls.Add(Me.PayTape_Value)
         Me.Controls.Add(Me.CheckNumber_Textbox)
         Me.Controls.Add(Me.CheckNumberLabel)
         Me.Controls.Add(Me.CheckNumber_Value)
         Me.Controls.Add(Me.CreditCardType_Value)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.CreditCardTypeLabel)
         Me.Controls.Add(Me.CreditCardType_ComboBox)
         Me.Controls.Add(Me.PaymentNotes_Textbox)
         Me.Controls.Add(Me.PaymentNotes_Value)
@@ -455,10 +482,12 @@ Partial Class invoicePayments
     Friend WithEvents PaymentNotes_Textbox As TextBox
     Friend WithEvents PaymentNotes_Value As Label
     Friend WithEvents PaymentNotesLabel As Label
-    Friend WithEvents Label1 As Label
+    Friend WithEvents CreditCardTypeLabel As Label
     Friend WithEvents CreditCardType_ComboBox As ComboBox
     Friend WithEvents CreditCardType_Value As Label
     Friend WithEvents CheckNumber_Textbox As TextBox
     Friend WithEvents CheckNumberLabel As Label
     Friend WithEvents CheckNumber_Value As Label
+    Friend WithEvents PayTape_Value As Label
+    Friend WithEvents returnButton As Button
 End Class
