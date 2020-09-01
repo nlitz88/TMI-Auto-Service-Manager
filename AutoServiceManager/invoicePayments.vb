@@ -339,7 +339,7 @@
 
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
-            InitializeInvPaymentsDataViewingControls()
+            InitializeAllDataViewingControls()
             valuesInitialized = True
 
             ' Show labels and corresponding values
