@@ -384,9 +384,72 @@
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
 
+        mode = "adding"
+
+        ' Initialize values for dataEditingControls
+        valuesInitialized = False
+        clearControls(getAllControlsWithTag("dataEditingControl", Me))
+        valuesInitialized = True
+        ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
+        InitialPaymentValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
+
+        ' First, disable editButton, addButton, enable cancelButton, and disable nav
+        editButton.Enabled = False
+        addButton.Enabled = False
+        cancelButton.Enabled = True
+        PaymentComboBox.Enabled = False
+
+        ' Get lastSelected
+        If getDataTableRow(InvPaymentsDbController.DbDataTable, "PKPD", PaymentComboBox.Text) <> -1 Then
+            lastSelected = PaymentComboBox.Text
+        Else
+            lastSelected = "Select One"
+        End If
+
+        PaymentComboBox.SelectedIndex = 0
+
+        ' Hide/Show the dataViewingControls and dataEditingControls, respectively
+        showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+        showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+        showHide(getAllControlsWithTag("dataLabel", Me), 1)
+
+        ' This must be called after dataEditingControls have been made visible, as some must be hidden again
+        ShowCorrespondingPaymentEditingControls()
+
     End Sub
 
     Private Sub deleteButton_Click(sender As Object, e As EventArgs) Handles deleteButton.Click
+
+        Dim decision As DialogResult = MessageBox.Show("Are you sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                ' 1.) Delete value from database
+                'If Not deleteAll() Then
+                '    MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                'Else
+                '    MessageBox.Show("Successfully deleted " & LCComboBox.Text & " from Labor Codes")
+                'End If
+
+                ' 2.) RELOAD DATATABLES FROM DATABASE
+                If Not loadInvPaymentsDataTable() Then
+                    MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
+                ' 3.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                InitializePaymentComboBox()
+                PaymentComboBox.SelectedIndex = 0
+
+                ' 4.) RESTORE USER CONTROLS TO NON-EDITING/SELECTING STATE
+                PaymentComboBox.Enabled = True
+                addButton.Enabled = True
+                cancelButton.Enabled = False
+                saveButton.Enabled = False
+
+            Case DialogResult.No
+
+        End Select
 
     End Sub
 
@@ -470,6 +533,13 @@
 
 
     Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+
+        '' for adding:
+
+        ' GET NEW PAYKEY (find the largest one that exists in the dataTable and +1)
+        ' Insert new payment
+        ' Reload payments table
+        ' Then, select combobox entry with PKPD corresponding with paykey (for that invoice)
 
     End Sub
 
