@@ -304,8 +304,8 @@
 
         ' PRE-DRAW PRE-LOADED (Preliminary) COMBOBOXES. 
         ' This way, we don't have to wait for them to draw on first edit/add
-        CreditCardType_ComboBox.Visible = False
         CreditCardType_ComboBox.Visible = True
+        CreditCardType_ComboBox.Visible = False
 
     End Sub
 
