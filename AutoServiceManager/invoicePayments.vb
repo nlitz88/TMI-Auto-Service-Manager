@@ -382,6 +382,58 @@
 
 
 
+    Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
+
+    End Sub
+
+    Private Sub deleteButton_Click(sender As Object, e As EventArgs) Handles deleteButton.Click
+
+    End Sub
+
+
+
+    Private Sub editButton_Click(sender As Object, e As EventArgs) Handles editButton.Click
+
+        mode = "editing"
+
+        ' Initialize values for dataEditingControls
+        valuesInitialized = False
+        InitializeAllDataEditingControls()
+
+        valuesInitialized = True
+        ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
+        InitialPaymentValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
+
+        ' Store the last selected item in the ComboBox (in case update fails and it must revert)
+        lastSelected = PaymentComboBox.Text
+
+        ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
+        editButton.Enabled = False
+        addButton.Enabled = False
+        cancelButton.Enabled = True
+        PaymentComboBox.Enabled = False
+
+        ' Hide/Show the dataViewingControls and dataEditingControls, respectively
+        showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
+        showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+
+        ' This must be called after dataEditingControls have been made visible, as some must be hidden again
+        ShowCorrespondingPaymentEditingControls()
+
+    End Sub
+
+
+    Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
+
+    End Sub
+
+
+    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+
+    End Sub
+
+
+
     Private Sub PayType_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PayType_ComboBox.SelectedIndexChanged, PayType_ComboBox.TextChanged
 
         ' Check here for selection type
