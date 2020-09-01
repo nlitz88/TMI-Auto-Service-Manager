@@ -100,8 +100,8 @@
     ' Loads datatable from CreditCardsAccepted
     Private Function loadCreditCardsDataTable()
 
-        PTDbController.ExecQuery("SELECT c.CreditCard FROM CreditCardsAccepted c ORDER BY c.CreditCard ASC")
-        If PTDbController.HasException() Then Return False
+        CCDbController.ExecQuery("SELECT c.CreditCard FROM CreditCardsAccepted c ORDER BY c.CreditCard ASC")
+        If CCDbController.HasException() Then Return False
 
         Return True
 
@@ -110,12 +110,12 @@
     ' Sub to initialize CreditCardType ComboBox
     Private Sub initializeCreditCardTypeComboBox()
 
-        PayType_ComboBox.Items.Clear()
-        PayType_ComboBox.BeginUpdate()
-        For Each row In PTDbController.DbDataTable.Rows
-            PayType_ComboBox.Items.Add(row("CreditCard"))
+        CreditCardType_ComboBox.Items.Clear()
+        CreditCardType_ComboBox.BeginUpdate()
+        For Each row In CCDbController.DbDataTable.Rows
+            CreditCardType_ComboBox.Items.Add(row("CreditCard"))
         Next
-        PayType_ComboBox.EndUpdate()
+        CreditCardType_ComboBox.EndUpdate()
 
     End Sub
 
