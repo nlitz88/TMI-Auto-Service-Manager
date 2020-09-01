@@ -51,7 +51,7 @@ Partial Class invoicePayments
         Me.CheckNumber_Textbox = New System.Windows.Forms.TextBox()
         Me.CheckNumberLabel = New System.Windows.Forms.Label()
         Me.CheckNumber_Value = New System.Windows.Forms.Label()
-        Me.PayTape_Value = New System.Windows.Forms.Label()
+        Me.PayType_Value = New System.Windows.Forms.Label()
         Me.returnButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
@@ -389,16 +389,16 @@ Partial Class invoicePayments
         Me.CheckNumber_Value.Tag = "dataViewingControl"
         Me.CheckNumber_Value.Visible = False
         '
-        'PayTape_Value
+        'PayType_Value
         '
-        Me.PayTape_Value.AutoSize = True
-        Me.PayTape_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PayTape_Value.ForeColor = System.Drawing.Color.Black
-        Me.PayTape_Value.Location = New System.Drawing.Point(210, 411)
-        Me.PayTape_Value.Name = "PayTape_Value"
-        Me.PayTape_Value.Size = New System.Drawing.Size(0, 20)
-        Me.PayTape_Value.TabIndex = 314
-        Me.PayTape_Value.Tag = "dataViewingControl"
+        Me.PayType_Value.AutoSize = True
+        Me.PayType_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PayType_Value.ForeColor = System.Drawing.Color.Black
+        Me.PayType_Value.Location = New System.Drawing.Point(210, 411)
+        Me.PayType_Value.Name = "PayType_Value"
+        Me.PayType_Value.Size = New System.Drawing.Size(0, 20)
+        Me.PayType_Value.TabIndex = 314
+        Me.PayType_Value.Tag = "dataViewingControl"
         '
         'returnButton
         '
@@ -419,7 +419,7 @@ Partial Class invoicePayments
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
         Me.Controls.Add(Me.returnButton)
-        Me.Controls.Add(Me.PayTape_Value)
+        Me.Controls.Add(Me.PayType_Value)
         Me.Controls.Add(Me.CheckNumber_Textbox)
         Me.Controls.Add(Me.CheckNumberLabel)
         Me.Controls.Add(Me.CheckNumber_Value)
@@ -488,6 +488,6 @@ Partial Class invoicePayments
     Friend WithEvents CheckNumber_Textbox As TextBox
     Friend WithEvents CheckNumberLabel As Label
     Friend WithEvents CheckNumber_Value As Label
-    Friend WithEvents PayTape_Value As Label
+    Friend WithEvents PayType_Value As Label
     Friend WithEvents returnButton As Button
 End Class
