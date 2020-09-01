@@ -46,13 +46,13 @@ Partial Class invoicePayments
         Me.PaymentNotes_Value = New System.Windows.Forms.Label()
         Me.PaymentNotesLabel = New System.Windows.Forms.Label()
         Me.CreditCardTypeLabel = New System.Windows.Forms.Label()
-        Me.CreditCardType_ComboBox = New System.Windows.Forms.ComboBox()
         Me.CreditCardType_Value = New System.Windows.Forms.Label()
         Me.CheckNumber_Textbox = New System.Windows.Forms.TextBox()
         Me.CheckNumberLabel = New System.Windows.Forms.Label()
         Me.CheckNumber_Value = New System.Windows.Forms.Label()
         Me.PayType_Value = New System.Windows.Forms.Label()
         Me.returnButton = New System.Windows.Forms.Button()
+        Me.CreditCardType_ComboBox = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'deleteButton
@@ -330,19 +330,6 @@ Partial Class invoicePayments
         Me.CreditCardTypeLabel.Text = "Credit Card :"
         Me.CreditCardTypeLabel.Visible = False
         '
-        'CreditCardType_ComboBox
-        '
-        Me.CreditCardType_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.CreditCardType_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.CreditCardType_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
-        Me.CreditCardType_ComboBox.FormattingEnabled = True
-        Me.CreditCardType_ComboBox.Location = New System.Drawing.Point(472, 408)
-        Me.CreditCardType_ComboBox.Name = "CreditCardType_ComboBox"
-        Me.CreditCardType_ComboBox.Size = New System.Drawing.Size(138, 28)
-        Me.CreditCardType_ComboBox.TabIndex = 308
-        Me.CreditCardType_ComboBox.Tag = "dataEditingControl"
-        Me.CreditCardType_ComboBox.Visible = False
-        '
         'CreditCardType_Value
         '
         Me.CreditCardType_Value.AutoSize = True
@@ -358,7 +345,7 @@ Partial Class invoicePayments
         'CheckNumber_Textbox
         '
         Me.CheckNumber_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheckNumber_Textbox.Location = New System.Drawing.Point(494, 408)
+        Me.CheckNumber_Textbox.Location = New System.Drawing.Point(494, 409)
         Me.CheckNumber_Textbox.Name = "CheckNumber_Textbox"
         Me.CheckNumber_Textbox.Size = New System.Drawing.Size(138, 27)
         Me.CheckNumber_Textbox.TabIndex = 311
@@ -412,12 +399,25 @@ Partial Class invoicePayments
         Me.returnButton.Text = "Return To Invoice"
         Me.returnButton.UseVisualStyleBackColor = False
         '
+        'CreditCardType_ComboBox
+        '
+        Me.CreditCardType_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CreditCardType_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.CreditCardType_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
+        Me.CreditCardType_ComboBox.FormattingEnabled = True
+        Me.CreditCardType_ComboBox.Location = New System.Drawing.Point(472, 408)
+        Me.CreditCardType_ComboBox.Name = "CreditCardType_ComboBox"
+        Me.CreditCardType_ComboBox.Size = New System.Drawing.Size(138, 28)
+        Me.CreditCardType_ComboBox.TabIndex = 316
+        Me.CreditCardType_ComboBox.Tag = "dataEditingControl"
+        '
         'invoicePayments
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.CreditCardType_ComboBox)
         Me.Controls.Add(Me.returnButton)
         Me.Controls.Add(Me.PayType_Value)
         Me.Controls.Add(Me.CheckNumber_Textbox)
@@ -425,7 +425,6 @@ Partial Class invoicePayments
         Me.Controls.Add(Me.CheckNumber_Value)
         Me.Controls.Add(Me.CreditCardType_Value)
         Me.Controls.Add(Me.CreditCardTypeLabel)
-        Me.Controls.Add(Me.CreditCardType_ComboBox)
         Me.Controls.Add(Me.PaymentNotes_Textbox)
         Me.Controls.Add(Me.PaymentNotes_Value)
         Me.Controls.Add(Me.PaymentNotesLabel)
@@ -483,11 +482,11 @@ Partial Class invoicePayments
     Friend WithEvents PaymentNotes_Value As Label
     Friend WithEvents PaymentNotesLabel As Label
     Friend WithEvents CreditCardTypeLabel As Label
-    Friend WithEvents CreditCardType_ComboBox As ComboBox
     Friend WithEvents CreditCardType_Value As Label
     Friend WithEvents CheckNumber_Textbox As TextBox
     Friend WithEvents CheckNumberLabel As Label
     Friend WithEvents CheckNumber_Value As Label
     Friend WithEvents PayType_Value As Label
     Friend WithEvents returnButton As Button
+    Friend WithEvents CreditCardType_ComboBox As ComboBox
 End Class
