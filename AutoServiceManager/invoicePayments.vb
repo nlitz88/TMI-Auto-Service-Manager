@@ -537,6 +537,8 @@
         '' for adding:
 
         ' GET NEW PAYKEY (find the largest one that exists in the dataTable and +1)
+        '       This may need to be done with SQL call instead of datatable call. but we'll figure this out. Shouldn't be too hard.
+        '       could really just iterate through datatable, as they should be relatively small
         ' Insert new payment
         ' Reload payments table
         ' Then, select combobox entry with PKPD corresponding with paykey (for that invoice)

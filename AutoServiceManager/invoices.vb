@@ -889,6 +889,10 @@ Public Class invoices
                        "WHERE InvNbr=@invid")
         If CRUD.HasException() Then Return False
 
+
+        ' THIS IS WHERE CALLS COULD BE MADE TO UPDATE INVHDR BASED ON PAYMENT DATA THAT MAY HAVE BEEN ADDED.
+
+
         Return True
 
     End Function
