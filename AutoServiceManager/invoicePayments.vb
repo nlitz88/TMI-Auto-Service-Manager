@@ -217,6 +217,7 @@
     Private Sub formatDataViewingControls()
 
         PayAmount_Value.Text = FormatCurrency(PayAmount_Value.Text)
+        PayDate_Value.Text = formatDate(PayDate_Value.Text)
 
     End Sub
 
@@ -224,6 +225,7 @@
     Private Sub formatDataEditingControls()
 
         PayAmount_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(PayAmount_Textbox.Text))
+        PayDate_Textbox.Text = formatDate(InvPaymentsDbController.DbDataTable(InvPaymentsRow)("PayDate"))
 
     End Sub
 
