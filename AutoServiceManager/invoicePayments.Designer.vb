@@ -410,7 +410,7 @@ Partial Class invoicePayments
         Me.CreditCardType_ComboBox.Location = New System.Drawing.Point(472, 408)
         Me.CreditCardType_ComboBox.MaxLength = 50
         Me.CreditCardType_ComboBox.Name = "CreditCardType_ComboBox"
-        Me.CreditCardType_ComboBox.Size = New System.Drawing.Size(138, 28)
+        Me.CreditCardType_ComboBox.Size = New System.Drawing.Size(191, 28)
         Me.CreditCardType_ComboBox.TabIndex = 316
         Me.CreditCardType_ComboBox.Tag = "dataEditingControl"
         '
