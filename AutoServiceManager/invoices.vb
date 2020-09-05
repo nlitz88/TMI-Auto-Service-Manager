@@ -353,7 +353,7 @@ Public Class invoices
                                   "i.Gas, i.ShopCharges, i.Tax, i.InvTotal, i.TotalPaid, i.PayDate, i.ShopSupplies " &
                                   "FROM InvHdr i " &
                                   "WHERE i.VehicleId=@vehicleId " &
-                                  "ORDER BY i.InvNbr ASC")
+                                  "ORDER BY i.InvDate DESC")
 
         If InvDbController.HasException() Then Return False
 
