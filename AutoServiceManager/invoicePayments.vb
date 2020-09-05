@@ -269,6 +269,54 @@
     ' ***************** VALIDATION SUBS *****************
 
 
+    Private Function controlsValid() As Boolean
+
+        Dim errorMessage As String = String.Empty
+
+        ' REQUIRED: PayDate and PayAmount
+        ' If not empty, must ensure that payment type selected is valid (exists)
+        ' If not empty, then we also must ensure that credit card (company) is valid (exists)
+
+
+        ' Payment Date (REQUIRED)
+        If Not validDateTime("Payment Date", False, PayDate_Textbox.Text, errorMessage) Then
+            PayDate_Textbox.ForeColor = Color.Red
+        End If
+
+        ' PayType ComboBox
+        If Not isValidLength("Payment Type", False, PayType_ComboBox.Text, 15, errorMessage) Then
+            PayType_ComboBox.ForeColor = Color.Red
+        ElseIf Not String.IsNullOrWhiteSpace(PayType_ComboBox.Text) And Not valueExists("Payment Type", PayType_ComboBox.Text, PTDbController.DbDataTable) Then
+            errorMessage += "ERROR: " & PayType_ComboBox.Text & " is not a valid payment type" & vbNewLine
+            PayType_ComboBox.ForeColor = Color.Red
+        End If
+
+        ' CreditCardType ComboBox
+        If Not isValidLength("Credit Card", False, CreditCardType_ComboBox.Text, 50, errorMessage) Then
+            CreditCardType_ComboBox.ForeColor = Color.Red
+        ElseIf Not String.IsNullOrWhiteSpace(CreditCardType_ComboBox.Text) And Not valueExists("Credit Card", CreditCardType_ComboBox.Text, CCDbController.DbDataTable) Then
+            errorMessage += "ERROR: " & CreditCardType_ComboBox.Text & " is not a valid credit card" & vbNewLine
+            CreditCardType_ComboBox.ForeColor = Color.Red
+        End If
+
+        ' Payment Amount (REQUIRED)
+        If Not validCurrency("Payment Amount", True, PayAmount_Textbox.Text, errorMessage) Then
+            PayAmount_Textbox.ForeColor = Color.Red
+        End If
+
+
+        ' Check if any invalid input has been found
+        If Not String.IsNullOrEmpty(errorMessage) Then
+
+            MessageBox.Show(errorMessage, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+
+        End If
+
+        Return True
+
+
+    End Function
 
 
 
@@ -391,6 +439,9 @@
         ' Initialize values for dataEditingControls
         valuesInitialized = False
         clearControls(getAllControlsWithTag("dataEditingControl", Me))
+
+        ' Set payment date to current date.now()
+
         valuesInitialized = True
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialPaymentValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
@@ -549,26 +600,7 @@
 
 
 
-    Private Sub PayType_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PayType_ComboBox.SelectedIndexChanged, PayType_ComboBox.TextChanged
 
-        ' Check here for selection type
-        ' if selection is valid:
-        '   if selection is credit card:
-        '       then make credit card comboBox visible
-        '   else if selection is check
-        '       then make check number textbox visible
-        '   else
-        '       hide creditcard ComboBox and checkNumber textbox
-
-        If Not valuesInitialized Then Exit Sub
-
-        PayType_ComboBox.ForeColor = DefaultForeColor
-
-
-        ShowCorrespondingPaymentEditingControls()
-
-
-    End Sub
 
 
 
@@ -642,6 +674,35 @@
         End If
 
     End Sub
+
+
+
+
+    Private Sub PayType_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PayType_ComboBox.SelectedIndexChanged, PayType_ComboBox.TextChanged
+
+        ' Check here for selection type
+        ' if selection is valid:
+        '   if selection is credit card:
+        '       then make credit card comboBox visible
+        '   else if selection is check
+        '       then make check number textbox visible
+        '   else
+        '       hide creditcard ComboBox and checkNumber textbox
+
+        If Not valuesInitialized Then Exit Sub
+
+        PayType_ComboBox.ForeColor = DefaultForeColor
+
+
+        ShowCorrespondingPaymentEditingControls()
+
+
+    End Sub
+
+
+
+    ' CHECK NUMBER only numbers??? (Maybe just leave this be; not critical)
+
 
 
 End Class

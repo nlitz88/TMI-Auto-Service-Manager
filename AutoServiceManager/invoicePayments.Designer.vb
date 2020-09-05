@@ -250,6 +250,7 @@ Partial Class invoicePayments
         Me.PayType_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.PayType_ComboBox.FormattingEnabled = True
         Me.PayType_ComboBox.Location = New System.Drawing.Point(210, 408)
+        Me.PayType_ComboBox.MaxLength = 15
         Me.PayType_ComboBox.Name = "PayType_ComboBox"
         Me.PayType_ComboBox.Size = New System.Drawing.Size(138, 28)
         Me.PayType_ComboBox.TabIndex = 281
@@ -346,6 +347,7 @@ Partial Class invoicePayments
         '
         Me.CheckNumber_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CheckNumber_Textbox.Location = New System.Drawing.Point(494, 409)
+        Me.CheckNumber_Textbox.MaxLength = 50
         Me.CheckNumber_Textbox.Name = "CheckNumber_Textbox"
         Me.CheckNumber_Textbox.Size = New System.Drawing.Size(138, 27)
         Me.CheckNumber_Textbox.TabIndex = 311
@@ -406,6 +408,7 @@ Partial Class invoicePayments
         Me.CreditCardType_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.CreditCardType_ComboBox.FormattingEnabled = True
         Me.CreditCardType_ComboBox.Location = New System.Drawing.Point(472, 408)
+        Me.CreditCardType_ComboBox.MaxLength = 50
         Me.CreditCardType_ComboBox.Name = "CreditCardType_ComboBox"
         Me.CreditCardType_ComboBox.Size = New System.Drawing.Size(138, 28)
         Me.CreditCardType_ComboBox.TabIndex = 316
