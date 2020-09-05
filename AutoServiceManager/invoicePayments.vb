@@ -677,6 +677,39 @@
                     NewInvPayKey = InvPaymentsDbController.DbDataTable.Compute("Max(InvPayKey)", "") + 1
 
 
+                    ' 3.) INSERT NEW ROW (NEW PAYMENT) INTO INVPAYMENTS
+                    'If Not insertInvPayment() Then
+                    '    MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    '    Exit Sub
+                    'Else
+                    '    MessageBox.Show("Successfully added payment " & PayDate_Textbox.Text & " - $" & PayAmount_Textbox.Text & " to invoice")
+                    'End If
+
+                    ' 4.) RELOAD INVPAYMENTS FROM DATABASE
+                    If Not loadInvPaymentsDataTable() Then
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+
+                    ' 4.) REINITIALIZE CONTROLS (based on index of newly inserted value)
+                    InitializePaymentComboBox()
+
+                    ' 5.) SET SELECTED INDEX OF PAYMENTCOMBOBOX (which will subsequently initialize form controls)
+                    '       Use NewInvPayKey as key for looking up new PKPD to set PaymentComboBox to
+                    Dim newItem As String = getRowValueWithKeyEquals(InvPaymentsDbController.DbDataTable, "PKPD", "InvPayKey", NewInvPayKey)
+                    If newItem <> Nothing Then
+                        PaymentComboBox.SelectedIndex = PaymentComboBox.Items.IndexOf(newItem)
+                    Else
+                        PaymentComboBox.SelectedIndex = PaymentComboBox.Items.IndexOf(lastSelected)
+                        ' The last selected will already be the last selected, so must fire event to trigger initializations
+                        PaymentComboBox_SelectedIndexChanged(PaymentComboBox, New EventArgs())
+                    End If
+
+                    ' 9.) RESTORE USER CONTROLS TO NON-ADDING STATE
+                    PaymentComboBox.Enabled = True
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+
 
                 End If
 
