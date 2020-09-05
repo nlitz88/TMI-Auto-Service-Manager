@@ -691,7 +691,6 @@
                     Dim updatedItem As String = getRowValueWithKeyEquals(InvPaymentsDbController.DbDataTable, "PKPD", "InvPayKey", InvPayKey)
                     If updatedItem <> Nothing Then
                         PaymentComboBox.SelectedIndex = PaymentComboBox.Items.IndexOf(updatedItem)
-                        Console.WriteLine("Selecting updatedItem with PKPD" & updatedItem)
                     Else
                         PaymentComboBox.SelectedIndex = PaymentComboBox.Items.IndexOf(lastSelected)
                     End If
@@ -856,11 +855,51 @@
         '   else
         '       hide creditcard ComboBox and checkNumber textbox
 
+        ' Also, include valid selection checking. Only want to showCorresponding controls when selectedIndexChanged
+
         If Not valuesInitialized Then Exit Sub
 
         PayType_ComboBox.ForeColor = DefaultForeColor
 
-        ShowCorrespondingPaymentEditingControls()
+
+        ' If value selected/typed in exists in the comboBox (and thus, in the datatable, as no 'select one' here), then the selected index <> -1
+        ' ONLY show corresponding controls (and select them) if valid payment type has been selected. If not, then hide them.
+        If PayType_ComboBox.SelectedIndex <> -1 Then
+
+            If PayType_ComboBox.Text = "Credit" Then
+
+                CreditCardType_ComboBox.Visible = True
+                CreditCardTypeLabel.Visible = True
+                CheckNumber_Textbox.Visible = False
+                CheckNumberLabel.Visible = False
+                CreditCardType_ComboBox.Select()
+
+            ElseIf PayType_ComboBox.Text = "Check" Then
+
+                CheckNumber_Textbox.Visible = True
+                CheckNumberLabel.Visible = True
+                CreditCardType_ComboBox.Visible = False
+                CreditCardTypeLabel.Visible = False
+                CheckNumber_Textbox.Select()
+
+            Else
+                ' If valid selection made, but not credit or check
+                CreditCardType_ComboBox.Visible = False
+                CreditCardTypeLabel.Visible = False
+                CheckNumber_Textbox.Visible = False
+                CheckNumberLabel.Visible = False
+
+            End If
+
+        Else
+            ' If no valid selection has been made
+            CreditCardType_ComboBox.Visible = False
+            CreditCardTypeLabel.Visible = False
+            CheckNumber_Textbox.Visible = False
+            CheckNumberLabel.Visible = False
+
+        End If
+
 
         If InitialPaymentValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
