@@ -53,7 +53,7 @@
                                        "ip.InvNbr, ip.InvPayKey, ip.PayDate, ip.PayAmount, ip.PaymentNotes, ip.PayType, ip.CheckNumber, ip.CreditCardType " &
                                        "FROM InvPayments ip " &
                                        "WHERE InvNbr=@invid " &
-                                       "ORDER BY ip.PayDate ASC")
+                                       "ORDER BY ip.PayDate DESC")
         If InvPaymentsDbController.HasException() Then Return False
 
         Return True
@@ -448,6 +448,9 @@
         ' If the lookup DOES find the value in the DataTable
         If InvPaymentsRow <> -1 Then
 
+            ' Get Corresponding InvPayKey based on selected PKPD
+            InvPayKey = InvPaymentsDbController.DbDataTable(InvPaymentsRow)("InvPayKey")
+
             ' Initialize corresponding controls from DataTable values
             valuesInitialized = False
             InitializeAllDataViewingControls()
@@ -669,6 +672,7 @@
                     Dim updatedItem As String = getRowValueWithKeyEquals(InvPaymentsDbController.DbDataTable, "PKPD", "InvPayKey", InvPayKey)
                     If updatedItem <> Nothing Then
                         PaymentComboBox.SelectedIndex = PaymentComboBox.Items.IndexOf(updatedItem)
+                        Console.WriteLine("Selecting updatedItem with PKPD" & updatedItem)
                     Else
                         PaymentComboBox.SelectedIndex = PaymentComboBox.Items.IndexOf(lastSelected)
                     End If
