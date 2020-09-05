@@ -739,6 +739,7 @@
 
 
 
+
     Private Sub PayType_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PayType_ComboBox.SelectedIndexChanged, PayType_ComboBox.TextChanged
 
         ' Check here for selection type
@@ -754,9 +755,13 @@
 
         PayType_ComboBox.ForeColor = DefaultForeColor
 
-
         ShowCorrespondingPaymentEditingControls()
 
+        If InitialPaymentValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
