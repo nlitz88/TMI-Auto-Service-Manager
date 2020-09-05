@@ -300,6 +300,22 @@
     End Function
 
 
+    ' Function that deletes row (payment) from InvPayments
+    Private Function deleteInvPayment() As Boolean
+
+        ' Columns that will not be included in the WHERE clause the query
+        Dim excludedKeyColumns As New List(Of String) From {"PKPD", "PayDate", "PayAmount", "PaymentNotes", "PayType", "CheckNumber", "CreditCardType"}
+
+        deleteRow(CRUD, InvPaymentsDbController.DbDataTable, InvPaymentsRow, excludedKeyColumns, "InvPayments")
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
+
 
 
 
@@ -534,11 +550,11 @@
             Case DialogResult.Yes
 
                 ' 1.) Delete value from database
-                'If Not deleteAll() Then
-                '    MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                'Else
-                '    MessageBox.Show("Successfully deleted " & LCComboBox.Text & " from Labor Codes")
-                'End If
+                If Not deleteInvPayment() Then
+                    MessageBox.Show("Delete unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    MessageBox.Show("Successfully deleted payment from invoice")
+                End If
 
                 ' 2.) RELOAD DATATABLES FROM DATABASE
                 If Not loadInvPaymentsDataTable() Then
