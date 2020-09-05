@@ -286,7 +286,7 @@
         ' PayType ComboBox
         If Not isValidLength("Payment Type", False, PayType_ComboBox.Text, 15, errorMessage) Then
             PayType_ComboBox.ForeColor = Color.Red
-        ElseIf Not String.IsNullOrWhiteSpace(PayType_ComboBox.Text) And Not valueExists("Payment Type", PayType_ComboBox.Text, PTDbController.DbDataTable) Then
+        ElseIf Not String.IsNullOrWhiteSpace(PayType_ComboBox.Text) And Not valueExists("PaymentType", PayType_ComboBox.Text, PTDbController.DbDataTable) Then
             errorMessage += "ERROR: " & PayType_ComboBox.Text & " is not a valid payment type" & vbNewLine
             PayType_ComboBox.ForeColor = Color.Red
         End If
@@ -294,7 +294,7 @@
         ' CreditCardType ComboBox
         If Not isValidLength("Credit Card", False, CreditCardType_ComboBox.Text, 50, errorMessage) Then
             CreditCardType_ComboBox.ForeColor = Color.Red
-        ElseIf Not String.IsNullOrWhiteSpace(CreditCardType_ComboBox.Text) And Not valueExists("Credit Card", CreditCardType_ComboBox.Text, CCDbController.DbDataTable) Then
+        ElseIf Not String.IsNullOrWhiteSpace(CreditCardType_ComboBox.Text) And Not valueExists("CreditCard", CreditCardType_ComboBox.Text, CCDbController.DbDataTable) Then
             errorMessage += "ERROR: " & CreditCardType_ComboBox.Text & " is not a valid credit card" & vbNewLine
             CreditCardType_ComboBox.ForeColor = Color.Red
         End If
@@ -596,6 +596,55 @@
         ' Reload payments table
         ' Then, select combobox entry with PKPD corresponding with paykey (for that invoice)
 
+        Dim decision As DialogResult = MessageBox.Show("Save Changes?", "Confirm Changes", MessageBoxButtons.YesNo)
+
+        Select Case decision
+            Case DialogResult.Yes
+
+                If mode = "editing" Then
+
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    If Not controlsValid() Then Exit Sub
+
+                    '' 2.) UPDATE INVOICE PAYMENTS TABLE HERE
+                    'If Not updateInvTask() Then
+                    '    MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    '    Exit Sub
+                    'Else
+                    '    MessageBox.Show("Successfully updated invoice task")
+                    'End If
+
+                    ' 3.) RELOAD DATATABLES FROM DATABASE
+                    If Not loadInvPaymentsDataTable() Then
+                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+
+                    ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
+                    InitializePaymentComboBox()
+                    ' Look up new ComboBox value corresponding to the new value in the datatable and set the selected index of the re-initialized ComboBox accordingly
+                    ' If update failed, then revert selected back to lastSelected
+                    Dim updatedItem As String = getRowValueWithKeyEquals(InvPaymentsDbController.DbDataTable, "PKPD", "InvPayKey", InvPayKey)
+                    If updatedItem <> Nothing Then
+                        PaymentComboBox.SelectedIndex = PaymentComboBox.Items.IndexOf(updatedItem)
+                    Else
+                        PaymentComboBox.SelectedIndex = PaymentComboBox.Items.IndexOf(lastSelected)
+                    End If
+
+                    ' 5.) MOVE UI OUT OF EDITING MODE
+                    addButton.Enabled = True
+                    cancelButton.Enabled = False
+                    saveButton.Enabled = False
+                    PaymentComboBox.Enabled = True
+
+                ElseIf mode = "adding" Then
+
+                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    If Not controlsValid() Then Exit Sub
+
+                End If
+
+        End Select
+
     End Sub
 
 
@@ -696,6 +745,21 @@
 
         ShowCorrespondingPaymentEditingControls()
 
+
+    End Sub
+
+
+    Private Sub CreditCardType_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CreditCardType_ComboBox.SelectedIndexChanged, CreditCardType_ComboBox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        CreditCardType_ComboBox.ForeColor = DefaultForeColor
+
+        If InitialPaymentValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
 
