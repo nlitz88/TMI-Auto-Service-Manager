@@ -568,7 +568,10 @@
                 InitializePaymentComboBox()
                 PaymentComboBox.SelectedIndex = 0
 
-                ' 4.) RESTORE USER CONTROLS TO NON-EDITING/SELECTING STATE
+                ' 4.) REINITIALIZE BALANCE
+                InitializeBalance()
+
+                ' 5.) RESTORE USER CONTROLS TO NON-EDITING/SELECTING STATE
                 PaymentComboBox.Enabled = True
                 addButton.Enabled = True
                 cancelButton.Enabled = False
