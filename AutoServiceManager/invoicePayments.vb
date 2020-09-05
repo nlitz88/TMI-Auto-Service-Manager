@@ -19,6 +19,7 @@
 
     Private InvPaymentsRow As Integer
     Private InvPayKey As Integer
+    Private NewInvPayKey As Integer
 
     Private lastSelected As String
 
@@ -669,6 +670,13 @@
 
                     ' 1.) VALIDATE DATAEDITING CONTROLS
                     If Not controlsValid() Then Exit Sub
+
+                    ' 2.) GET NEW INVOICE PAYMENT KEY (InvPayKey).
+                    '       Determine max of InvPayKeys in current dataTableRows. NewInvPayKey will be that +1
+                    '       Going to use simple built in DataTable method Compute to find max, then will add 1 to that
+                    NewInvPayKey = InvPaymentsDbController.DbDataTable.Compute("Max(InvPayKey)", "") + 1
+
+
 
                 End If
 
