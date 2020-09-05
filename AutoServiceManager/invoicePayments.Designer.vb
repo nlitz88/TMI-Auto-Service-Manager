@@ -64,7 +64,7 @@ Partial Class invoicePayments
         Me.deleteButton.Location = New System.Drawing.Point(216, 120)
         Me.deleteButton.Name = "deleteButton"
         Me.deleteButton.Size = New System.Drawing.Size(110, 30)
-        Me.deleteButton.TabIndex = 125
+        Me.deleteButton.TabIndex = 8
         Me.deleteButton.Text = "Delete"
         Me.deleteButton.UseVisualStyleBackColor = False
         '
@@ -88,7 +88,7 @@ Partial Class invoicePayments
         Me.editButton.Location = New System.Drawing.Point(332, 120)
         Me.editButton.Name = "editButton"
         Me.editButton.Size = New System.Drawing.Size(110, 30)
-        Me.editButton.TabIndex = 126
+        Me.editButton.TabIndex = 9
         Me.editButton.Text = "Edit"
         Me.editButton.UseVisualStyleBackColor = False
         '
@@ -101,7 +101,7 @@ Partial Class invoicePayments
         Me.cancelButton.Location = New System.Drawing.Point(564, 120)
         Me.cancelButton.Name = "cancelButton"
         Me.cancelButton.Size = New System.Drawing.Size(110, 30)
-        Me.cancelButton.TabIndex = 128
+        Me.cancelButton.TabIndex = 11
         Me.cancelButton.Text = "Cancel"
         Me.cancelButton.UseVisualStyleBackColor = False
         '
@@ -114,7 +114,7 @@ Partial Class invoicePayments
         Me.saveButton.Location = New System.Drawing.Point(448, 120)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(110, 30)
-        Me.saveButton.TabIndex = 127
+        Me.saveButton.TabIndex = 10
         Me.saveButton.Text = "Save"
         Me.saveButton.UseVisualStyleBackColor = False
         '
@@ -126,7 +126,7 @@ Partial Class invoicePayments
         Me.addButton.Location = New System.Drawing.Point(100, 120)
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(110, 30)
-        Me.addButton.TabIndex = 124
+        Me.addButton.TabIndex = 7
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = False
         '
@@ -192,7 +192,7 @@ Partial Class invoicePayments
         Me.PaymentComboBox.Location = New System.Drawing.Point(174, 299)
         Me.PaymentComboBox.Name = "PaymentComboBox"
         Me.PaymentComboBox.Size = New System.Drawing.Size(362, 28)
-        Me.PaymentComboBox.TabIndex = 237
+        Me.PaymentComboBox.TabIndex = 0
         '
         'PayDate_Textbox
         '
@@ -205,7 +205,7 @@ Partial Class invoicePayments
         Me.PayDate_Textbox.Name = "PayDate_Textbox"
         Me.PayDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.PayDate_Textbox.Size = New System.Drawing.Size(132, 27)
-        Me.PayDate_Textbox.TabIndex = 278
+        Me.PayDate_Textbox.TabIndex = 1
         Me.PayDate_Textbox.Tag = "dataEditingControl"
         Me.PayDate_Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
         Me.PayDate_Textbox.ValidatingType = GetType(Date)
@@ -253,7 +253,7 @@ Partial Class invoicePayments
         Me.PayType_ComboBox.MaxLength = 15
         Me.PayType_ComboBox.Name = "PayType_ComboBox"
         Me.PayType_ComboBox.Size = New System.Drawing.Size(138, 28)
-        Me.PayType_ComboBox.TabIndex = 281
+        Me.PayType_ComboBox.TabIndex = 2
         Me.PayType_ComboBox.Tag = "dataEditingControl"
         '
         'PayAmount_Textbox
@@ -262,7 +262,7 @@ Partial Class invoicePayments
         Me.PayAmount_Textbox.Location = New System.Drawing.Point(167, 454)
         Me.PayAmount_Textbox.Name = "PayAmount_Textbox"
         Me.PayAmount_Textbox.Size = New System.Drawing.Size(138, 27)
-        Me.PayAmount_Textbox.TabIndex = 283
+        Me.PayAmount_Textbox.TabIndex = 5
         Me.PayAmount_Textbox.Tag = "dataEditingControl"
         '
         'AmountLabel
@@ -295,7 +295,7 @@ Partial Class invoicePayments
         Me.PaymentNotes_Textbox.Multiline = True
         Me.PaymentNotes_Textbox.Name = "PaymentNotes_Textbox"
         Me.PaymentNotes_Textbox.Size = New System.Drawing.Size(459, 105)
-        Me.PaymentNotes_Textbox.TabIndex = 305
+        Me.PaymentNotes_Textbox.TabIndex = 6
         Me.PaymentNotes_Textbox.Tag = "dataEditingControl"
         '
         'PaymentNotes_Value
@@ -350,7 +350,7 @@ Partial Class invoicePayments
         Me.CheckNumber_Textbox.MaxLength = 50
         Me.CheckNumber_Textbox.Name = "CheckNumber_Textbox"
         Me.CheckNumber_Textbox.Size = New System.Drawing.Size(138, 27)
-        Me.CheckNumber_Textbox.TabIndex = 311
+        Me.CheckNumber_Textbox.TabIndex = 4
         Me.CheckNumber_Textbox.Tag = "dataEditingControl"
         Me.CheckNumber_Textbox.Visible = False
         '
@@ -397,7 +397,7 @@ Partial Class invoicePayments
         Me.returnButton.Location = New System.Drawing.Point(680, 120)
         Me.returnButton.Name = "returnButton"
         Me.returnButton.Size = New System.Drawing.Size(197, 30)
-        Me.returnButton.TabIndex = 315
+        Me.returnButton.TabIndex = 12
         Me.returnButton.Text = "Return To Invoice"
         Me.returnButton.UseVisualStyleBackColor = False
         '
@@ -411,7 +411,7 @@ Partial Class invoicePayments
         Me.CreditCardType_ComboBox.MaxLength = 50
         Me.CreditCardType_ComboBox.Name = "CreditCardType_ComboBox"
         Me.CreditCardType_ComboBox.Size = New System.Drawing.Size(191, 28)
-        Me.CreditCardType_ComboBox.TabIndex = 316
+        Me.CreditCardType_ComboBox.TabIndex = 3
         Me.CreditCardType_ComboBox.Tag = "dataEditingControl"
         '
         'invoicePayments
