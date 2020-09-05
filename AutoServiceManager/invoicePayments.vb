@@ -465,11 +465,13 @@
 
         ' Initialize values for dataEditingControls
         valuesInitialized = False
-        clearControls(getAllControlsWithTag("dataEditingControl", Me))
 
-        ' Set payment date to current date.now()
+        clearControls(getAllControlsWithTag("dataEditingControl", Me))
+        ' Set payment date to current date and then format
+        PayDate_Textbox.Text = formatDate(Date.Now)
 
         valuesInitialized = True
+
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialPaymentValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
