@@ -299,10 +299,22 @@
             CreditCardType_ComboBox.ForeColor = Color.Red
         End If
 
+        ' Check Number
+        If Not isValidLength("Check Number", False, CheckNumber_Textbox.Text, 50, errorMessage) Then
+            CheckNumber_Textbox.ForeColor = Color.Red
+        End If
+
+        ' Payment Notes
+        If Not isValidLength("Payment Notes", False, PaymentNotes_Textbox.Text, 255, errorMessage) Then
+            PaymentNotes_Textbox.ForeColor = Color.Red
+        End If
+
         ' Payment Amount (REQUIRED)
         If Not validCurrency("Payment Amount", True, PayAmount_Textbox.Text, errorMessage) Then
             PayAmount_Textbox.ForeColor = Color.Red
         End If
+
+
 
 
         ' Check if any invalid input has been found
@@ -754,6 +766,63 @@
         If Not valuesInitialized Then Exit Sub
 
         CreditCardType_ComboBox.ForeColor = DefaultForeColor
+
+        If InitialPaymentValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+
+    Private Sub CheckNumber_Textbox_TextChanged(sender As Object, e As EventArgs) Handles CheckNumber_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        CheckNumber_Textbox.ForeColor = DefaultForeColor
+
+        If InitialPaymentValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub PayAmount_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PayAmount_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        PayAmount_Textbox.ForeColor = DefaultForeColor
+
+        If InitialPaymentValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub PaymentNotes_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PaymentNotes_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        PaymentNotes_Textbox.ForeColor = DefaultForeColor
+
+        If InitialPaymentValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub PayDate_Textbox_TextChanged(sender As Object, e As EventArgs) Handles PayDate_Textbox.TextChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        PayDate_Textbox.ForeColor = DefaultForeColor
 
         If InitialPaymentValues.CtrlValuesChanged() Then
             saveButton.Enabled = True
