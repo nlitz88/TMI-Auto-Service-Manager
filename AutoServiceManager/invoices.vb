@@ -885,6 +885,11 @@ Public Class invoices
         CRUD.AddParams("@nontaxable", NonTaxable)
         CRUD.AddParams("@invid", InvId)
 
+        ' Also  update invoice PayDate with MOST RECENT payDate
+
+        'CRUD.AddParams("@paydate")
+        ' MUST REDESIGN INITIALIZATION BEFORE i CAN ADD THIS
+
         CRUD.ExecQuery("UPDATE InvHdr SET TotalLabor=@totallabor, TotalParts=@totalparts, Tax=@tax, InvTotal=@invtotal, TotalPaid=@totalpaid, Taxable=@taxable, NonTaxable=@nontaxable " &
                        "WHERE InvNbr=@invid")
         If CRUD.HasException() Then Return False
