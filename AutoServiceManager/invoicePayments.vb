@@ -258,9 +258,24 @@
 
 
 
-
-
     ' ***************** CRUD SUBS *****************
+
+
+    ' Function that updates a row in InvPayments based on InvNbr and InvPayKey
+    Private Function updateInvPayment() As Boolean
+
+        ' Columns that will not be included in the WHERE clause the UPDATE query (all columns not being used as key)
+        Dim excludedKeyColumns As New List(Of String) From {"PKPD", "PayDate", "PayAmount", "PaymentNotes", "PayType", "CheckNumber", "CreditCardType"}
+
+        updateTable(CRUD, InvPaymentsDbController.DbDataTable, InvPaymentsRow, excludedKeyColumns, "InvPayments", "_", "dataEditingControl", Me, New List(Of Control))
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
 
 
 
@@ -618,13 +633,13 @@
                     ' 1.) VALIDATE DATAEDITING CONTROLS
                     If Not controlsValid() Then Exit Sub
 
-                    '' 2.) UPDATE INVOICE PAYMENTS TABLE HERE
-                    'If Not updateInvTask() Then
-                    '    MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    '    Exit Sub
-                    'Else
-                    '    MessageBox.Show("Successfully updated invoice task")
-                    'End If
+                    ' 2.) UPDATE INVOICE PAYMENTS TABLE HERE
+                    If Not updateInvPayment() Then
+                        MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    Else
+                        MessageBox.Show("Successfully updated invoice payment")
+                    End If
 
                     ' 3.) RELOAD DATATABLES FROM DATABASE
                     If Not loadInvPaymentsDataTable() Then
