@@ -1415,14 +1415,27 @@
                 Dim decision As DialogResult = MessageBox.Show("Return to invoice without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
                 If decision = DialogResult.No Then
-                    e.Cancel = True
                     Exit Sub
                 Else
+
+                    ' Call REINITIALIZATION HERE
+                    If Not invoices.reinitializeDependents() Then
+                        MessageBox.Show("Reloading of invoice unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    End If
+
                     MeClosed = True
                     changeScreen(invoices, Me)
+
                 End If
 
             Else
+
+                ' Call REINITIALIZATION HERE
+                If Not invoices.reinitializeDependents() Then
+                    MessageBox.Show("Reloading of invoice unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
 
                 MeClosed = True
                 changeScreen(invoices, Me)
