@@ -278,6 +278,24 @@
     End Function
 
 
+    ' Function that inserts new row (new payment) in InvPayments
+    Private Function insertInvPayment() As Boolean
+
+        Dim additionalValues As New List(Of AdditionalValue) From {
+            New AdditionalValue("InvNbr", GetType(Long), InvId),
+            New AdditionalValue("InvPayKey", GetType(Integer), NewInvPayKey)}
+
+        ' Then, make calls to insertRow to all relevant tables
+        insertRow(CRUD, InvPaymentsDbController.DbDataTable, "InvPayments", "_", "dataEditingControl", Me, additionalValues)
+        ' Then, return exception status of CRUD controller. Do this after each call
+        If CRUD.HasException() Then Return False
+
+        ' Otherwise, return true
+        Return True
+
+    End Function
+
+
 
 
 
@@ -617,15 +635,6 @@
 
     Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
 
-        '' for adding:
-
-        ' GET NEW PAYKEY (find the largest one that exists in the dataTable and +1)
-        '       This may need to be done with SQL call instead of datatable call. but we'll figure this out. Shouldn't be too hard.
-        '       could really just iterate through datatable, as they should be relatively small
-        ' Insert new payment
-        ' Reload payments table
-        ' Then, select combobox entry with PKPD corresponding with paykey (for that invoice)
-
         Dim decision As DialogResult = MessageBox.Show("Save Changes?", "Confirm Changes", MessageBoxButtons.YesNo)
 
         Select Case decision
@@ -674,44 +683,49 @@
                     ' 2.) GET NEW INVOICE PAYMENT KEY (InvPayKey).
                     '       Determine max of InvPayKeys in current dataTableRows. NewInvPayKey will be that +1
                     '       Going to use simple built in DataTable method Compute to find max, then will add 1 to that
-                    NewInvPayKey = InvPaymentsDbController.DbDataTable.Compute("Max(InvPayKey)", "") + 1
+                    Dim MaxKey As Object = InvPaymentsDbController.DbDataTable.Compute("Max(InvPayKey)", "")
+                    If MaxKey IsNot DBNull.Value Then
+                        NewInvPayKey = MaxKey + 1
+                    Else
+                        NewInvPayKey = 1
+                    End If
 
 
                     ' 3.) INSERT NEW ROW (NEW PAYMENT) INTO INVPAYMENTS
-                    'If Not insertInvPayment() Then
-                    '    MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    '    Exit Sub
-                    'Else
-                    '    MessageBox.Show("Successfully added payment " & PayDate_Textbox.Text & " - $" & PayAmount_Textbox.Text & " to invoice")
-                    'End If
+                    If Not insertInvPayment() Then
+                            MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            Exit Sub
+                        Else
+                            MessageBox.Show("Successfully added payment " & PayDate_Textbox.Text & " - $" & PayAmount_Textbox.Text & " to invoice")
+                        End If
 
-                    ' 4.) RELOAD INVPAYMENTS FROM DATABASE
-                    If Not loadInvPaymentsDataTable() Then
-                        MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        ' 4.) RELOAD INVPAYMENTS FROM DATABASE
+                        If Not loadInvPaymentsDataTable() Then
+                            MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End If
+
+                        ' 4.) REINITIALIZE CONTROLS (based on index of newly inserted value)
+                        InitializePaymentComboBox()
+
+                        ' 5.) SET SELECTED INDEX OF PAYMENTCOMBOBOX (which will subsequently initialize form controls)
+                        '       Use NewInvPayKey as key for looking up new PKPD to set PaymentComboBox to
+                        Dim newItem As String = getRowValueWithKeyEquals(InvPaymentsDbController.DbDataTable, "PKPD", "InvPayKey", NewInvPayKey)
+                        If newItem <> Nothing Then
+                            PaymentComboBox.SelectedIndex = PaymentComboBox.Items.IndexOf(newItem)
+                        Else
+                            PaymentComboBox.SelectedIndex = PaymentComboBox.Items.IndexOf(lastSelected)
+                            ' The last selected will already be the last selected, so must fire event to trigger initializations
+                            PaymentComboBox_SelectedIndexChanged(PaymentComboBox, New EventArgs())
+                        End If
+
+                        ' 9.) RESTORE USER CONTROLS TO NON-ADDING STATE
+                        PaymentComboBox.Enabled = True
+                        addButton.Enabled = True
+                        cancelButton.Enabled = False
+                        saveButton.Enabled = False
+
+
                     End If
-
-                    ' 4.) REINITIALIZE CONTROLS (based on index of newly inserted value)
-                    InitializePaymentComboBox()
-
-                    ' 5.) SET SELECTED INDEX OF PAYMENTCOMBOBOX (which will subsequently initialize form controls)
-                    '       Use NewInvPayKey as key for looking up new PKPD to set PaymentComboBox to
-                    Dim newItem As String = getRowValueWithKeyEquals(InvPaymentsDbController.DbDataTable, "PKPD", "InvPayKey", NewInvPayKey)
-                    If newItem <> Nothing Then
-                        PaymentComboBox.SelectedIndex = PaymentComboBox.Items.IndexOf(newItem)
-                    Else
-                        PaymentComboBox.SelectedIndex = PaymentComboBox.Items.IndexOf(lastSelected)
-                        ' The last selected will already be the last selected, so must fire event to trigger initializations
-                        PaymentComboBox_SelectedIndexChanged(PaymentComboBox, New EventArgs())
-                    End If
-
-                    ' 9.) RESTORE USER CONTROLS TO NON-ADDING STATE
-                    PaymentComboBox.Enabled = True
-                    addButton.Enabled = True
-                    cancelButton.Enabled = False
-                    saveButton.Enabled = False
-
-
-                End If
 
         End Select
 
