@@ -517,6 +517,9 @@
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialPaymentValues.SetInitialValues(getAllControlsWithTag("dataEditingControl", Me))
 
+        ' Set paymentAmount = to the current balance (as this is typically what the payment will be)
+        PayAmount_Textbox.Text = String.Format("{0:0.00}", balance)
+
         ' First, disable editButton, addButton, enable cancelButton, and disable nav
         editButton.Enabled = False
         addButton.Enabled = False
