@@ -49,10 +49,13 @@ Public Class invoices
     Private ShopCharges As Decimal = 0
     Private SubTotal As Decimal = 0
     Private Tax As Decimal = 0
+    Private Gas As Decimal = 0
+    Private Towing As Decimal = 0
     Private InvTotalSum As Decimal = 0
     Private Taxable As Decimal = 0
     Private NonTaxable As Decimal = 0
     Private InvPaymentsSum As Decimal = 0
+    Private Balance As Decimal = 0
 
     ' Keeps track of whether or not user in "editing" or "adding" mode
     Private mode As String
@@ -174,33 +177,14 @@ Public Class invoices
     End Sub
 
 
-    ' Sub that initializes all dataViewingControls corresponding to values in Vehicle DataTable (TaxExempt)
-    Private Sub InitializeCustomerDataViewingControls()
-
-        'initializeControlsFromRow(CustomerDbController.DbDataTable, CustomerRow, "dataViewingControl", "_", Me)
-
-        ' We are only initializing TaxExempt from Customer DataTable, so do this here manually to set value to textual alternative
-        Dim TaxExemptStatus As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
-        Select Case TaxExemptStatus
-            Case True
-                TaxExempt_Value.Text = "Tax Exempt"
-            Case False
-                TaxExempt_Value.Text = "Not Tax Exempt"
-        End Select
-
-    End Sub
     ' Sub that initializes all dataEditingControls corresponding to values in Vehicle DataTable (TaxExempt)
-    Private Sub InitializeCustomerDataEditingControls()
+    ' Only used to initialize textbox when ADDING a NEW INVOICE
+    Private Sub InitializeTaxExemptFromCustomer()
 
         'initializeControlsFromRow(CustomerDbController.DbDataTable, CustomerRow, "dataEditingControl", "_", Me)
-        ' We are only initializing TaxExempt from Customer DataTable, so do this here manually to set value to textual alternative
+        ' We are only initializing TaxExempt from Customer DataTable, so do this small operation here manually.
         Dim TaxExemptStatus As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
-        Select Case TaxExemptStatus
-            Case True
-                TaxExempt_Textbox.Text = "Tax Exempt"
-            Case False
-                TaxExempt_Textbox.Text = "Not Tax Exempt"
-        End Select
+        TaxExempt_CheckBox.Checked = TaxExemptStatus
 
     End Sub
 
@@ -350,7 +334,7 @@ Public Class invoices
         InvDbController.AddParams("@vehicleId", VehicleId)
         InvDbController.ExecQuery("SELECT CSTR(IIF(ISNULL(i.InvNbr), 0, i.InvNbr)) + ' - ' + CSTR(IIF(ISNULL(i.InvDate), '', i.InvDate)) as INID, " &
                                   "i.InvNbr, i.CustomerId, i.VehicleId, i.Mileage, i.InvDate, i.Complete, i.NbrTasks, i.WorkDate, i.ApptDate, i.ContactName, i.ContactPhone1, i.ContactPhone2, i.Notes, i.TotalLabor, i.TotalParts, i.Towing, " &
-                                  "i.Gas, i.ShopCharges, i.Tax, i.InvTotal, i.TotalPaid, i.PayDate, i.ShopSupplies " &
+                                  "i.Gas, i.ShopCharges, i.Tax, i.InvTotal, i.TotalPaid, i.PayDate, i.TaxExempt, i.ShopSupplies, i.InspectionSticker, i.InspectionMonth, i.Taxable, i.NonTaxable " &
                                   "FROM InvHdr i " &
                                   "WHERE i.VehicleId=@vehicleId " &
                                   "ORDER BY i.InvDate DESC")
@@ -423,6 +407,8 @@ Public Class invoices
         Return True
 
     End Function
+
+
 
 
     ' Sub that initializes and calculates Invoice Labor Cost based on the total cost of all of the labor codes in InvLabor with current InvId
@@ -718,79 +704,76 @@ Public Class invoices
 
 
 
-    ' Sub that calls all individual dataViewingControl initialization subs in one (These can be used individually if desired)
+
+
+
+    ' Sub that calls all individual dataViewingControl initialization subs in one
+    ' Used only for viewing invoices (not when addign/editing)
     Private Sub InitializeAllDataViewingControls()
 
         ' Reset calculated values
-        InvLaborSum = 0
-        InvPartsSum = 0
-        ShopCharges = 0
-        SubTotal = 0
-        Tax = 0
-        InvTotalSum = 0
-        Taxable = 0
-        NonTaxable = 0
-        InvPaymentsSum = 0
+        ' I SHOULD BE ABLE TO REMOVE THIS; AS NO CALCULATIONS SHOULD BE OCCURRING WHILE VIEWING
+
+        'InvLaborSum = 0
+        'InvPartsSum = 0
+        'ShopCharges = 0
+        'SubTotal = 0
+        'Tax = 0
+        'Gas = 0
+        'Towing = 0
+        'InvTotalSum = 0
+        'Taxable = 0
+        'NonTaxable = 0
+        'InvPaymentsSum = 0
+        'Balance = 0
 
         ' Automated initializations
         InitializeInvoiceDataViewingControls()
-        InitializeVehicleDataViewingControls()
-        correctInspectionMonthValue()    ' Correction for value initialized from Vehicle DataTable
-        InitializeCustomerDataViewingControls()
+        correctInspectionMonthValue()       ' Correction for value initialized from Vehicle DataTable
         ' Then, re-initialize and format any calculation based values
-        InitializeInvLaborValue()
-        InitializeInvPartsValue()
-        InitializeShopChargesValue()
-        InitializeSubTotalValue()
-        InitializeTaxValue()
-        InitializeTotalValue()
-        CalculateTaxableNonTaxableViewing()
-        ' Additional Values that require initialization
-        InitializeInvPaymentsValue()
-        InitializeBalanceValue()
-        InitializeNumberTasksValue()
+        'InitializeInvLaborValue()
+        'InitializeInvPartsValue()
+        'InitializeShopChargesValue()
+        'InitializeSubTotalValue()
+        'InitializeTaxValue()
+        'InitializeTotalValue()
+        'CalculateTaxableNonTaxableViewing()
+        '' Additional Values that require initialization
+        'InitializeInvPaymentsValue()
+        'InitializeBalanceValue()
+        'InitializeNumberTasksValue()
 
         ' Then, format dataViewingControls
         formatDataViewingControls()
 
     End Sub
 
-    ' Sub that calls all individual dataEditingControl initialization subs in one (These can be used individually if desired)
+    ' Sub that calls all individual dataEditingControl initialization subs in one
+    ' This is used ONLY for when EDITING an invoice. When adding, editing controls are initialized with DIFFERENT sub
     Private Sub InitializeAllDataEditingControls()
 
-        ' Reset calculated values
-        InvLaborSum = 0
-        InvPartsSum = 0
-        ShopCharges = 0
-        SubTotal = 0
-        Tax = 0
-        InvTotalSum = 0
-        Taxable = 0
-        NonTaxable = 0
-        InvPaymentsSum = 0
+
 
         ' Automated initializations
         InitializeInvoiceDataEditingControls()
-        InitializeVehicleDataEditingControls()
         correctInspectionMonthComboBox()    ' Correction for value initialized from Vehicle DataTable
-        InitializeCustomerDataEditingControls()
         ' Then, re-initialize and format any calculation based values
-        InitializeInvLaborTextbox()
-        InitializeInvPartsTextbox()
-        InitializeShopChargesTextbox()
-        InitializeSubTotalTextbox()
-        InitializeTaxTextbox()
-        ' Additional Values that require initialization
-        InitializeInvPaymentsTextbox()
-        InitializeNumberTasksTextbox()
+        'InitializeInvLaborTextbox()
+        'InitializeInvPartsTextbox()
+        'InitializeShopChargesTextbox()
+        'InitializeSubTotalTextbox()
+        'InitializeTaxTextbox()
+        '' Additional Values that require initialization
+        'InitializeInvPaymentsTextbox()
+        'InitializeNumberTasksTextbox()
         'InitializeContactPhone1ComboBox()
         'InitializeContactPhone2ComboBox()
         ' Then, format dataEditingControls
         formatDataEditingControls()
         ' This must be initialized after all currency based cost values are initialized and formatted properly
-        InitializeTotalTextbox()
-        CalculateTaxableNonTaxableEditing()
-        InitializeBalanceTextbox()
+        'InitializeTotalTextbox()
+        'CalculateTaxableNonTaxableEditing()
+        'InitializeBalanceTextbox()
 
         ' Set forecolor if not already initially default
         setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
@@ -848,6 +831,57 @@ Public Class invoices
         Towing_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(Towing_Textbox.Text))
 
     End Sub
+
+
+    ' temp sub to maintain the various functions that must be called when adding a new invoice
+    Private Sub tempAdding()
+
+        'InitializeTaxExemptFromCustomer()
+        'InitializeVehicleDataEditingControls()
+    End Sub
+
+
+    ' Sub that resets variables that maintain each calculated value.
+    Private Sub resetCalculatedValues()
+
+        InvLaborSum = 0
+        InvPartsSum = 0
+        ShopCharges = 0
+        SubTotal = 0
+        Tax = 0
+        Gas = 0
+        Towing = 0
+        InvTotalSum = 0
+        Taxable = 0
+        NonTaxable = 0
+        InvPaymentsSum = 0
+        Balance = 0
+
+    End Sub
+
+    ' Sub that assigns calculated values to their corresponding controls where appropriate.
+    ' This will be called AFTER all values have undergone calculations in other functions
+    Private Sub InitializeCalculatedValues()
+
+        TotalLabor_Textbox.Text = String.Format("{0:0.00}", InvLaborSum)
+        TotalParts_Textbox.Text = String.Format("{0:0.00}", InvPartsSum)
+        ShopCharges_Textbox.Text = String.Format("{0:0.00}", ShopCharges)
+        SubTotalTextbox.Text = String.Format("{0:0.00}", SubTotal)
+        Tax_Textbox.Text = String.Format("{0:0.00}", Tax)
+        Gas_Textbox.Text = String.Format("{0:0.00}", Gas)
+        Towing_Textbox.Text = String.Format("{0:0.00}", Towing)
+        InvTotal_Textbox.Text = String.Format("{0:0.00}", InvTotalSum)
+        TotalPaid_Textbox.Text = String.Format("{0:0.00}", InvPaymentsSum)
+        BalanceTextbox.Text = String.Format("{0:0.00}", Balance)
+
+    End Sub
+
+
+    ' ADD CALCULATION FUNCTIONS FOR EACH VALUE HERE.
+    '   Each should be called for its respective control's textchange event or equivalent
+    '   If one value is dependent on another that is input, and the other is INVALID, then simply reset this value, and don't calculate.
+    '       In this scenario, the textchange event would need to check whether or not to calculate based on if the dependent values are valid or not (Currently set up this way, no worries)
+
 
 
 
@@ -920,7 +954,7 @@ Public Class invoices
     Private Function updateInvoice() As Boolean
 
         ' Excluded Value List
-        '   TaxExempt, ContactPhone1, ContactPhone2, and InvNbr (InvNbr primary auto-increment key, can't be updated)
+        '   ContactPhone1, ContactPhone2, and InvNbr (InvNbr primary auto-increment key, can't be updated)
 
         ' Additional Values:
         '   Taxable, NonTaxable, ContactPhone1, ContactPhone2, TaxExempt, InspectionSticker, and InspectionMonth
@@ -928,10 +962,6 @@ Public Class invoices
         '       TaxExempt, InspectionSticker, and InspectionMonth are all values that are stored in other datatables, and are therefore
         '       not used to initialize our values here. However, they still need to be written to this DataTable. So we add them as additionals
 
-
-        ' Get Tax Exempt Status From Customer DataTable (don't bother with the values here, as they don't change)
-        ' We can get it from Customer DT, as this isn't something that is changed on this form
-        Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
 
         ' First, separately insert Taxable and NonTaxable
         CRUD.AddParams("@taxable", Taxable)
@@ -948,11 +978,10 @@ Public Class invoices
         Dim ContactPhone1 As String = removeInvalidChars(ContactPhone1_ComboBox.Text, "0123456789")
         Dim ContactPhone2 As String = removeInvalidChars(ContactPhone2_ComboBox.Text, "0123456789")
 
-        Dim excludedControls As New List(Of Control) From {TaxExempt_Textbox, ContactPhone1_ComboBox, ContactPhone2_ComboBox, InvNbr_Textbox}
+        Dim excludedControls As New List(Of Control) From {ContactPhone1_ComboBox, ContactPhone2_ComboBox, InvNbr_Textbox}
         Dim additionalValues As New List(Of AdditionalValue) From {
             New AdditionalValue("ContactPhone1", GetType(String), ContactPhone1),
             New AdditionalValue("ContactPhone2", GetType(String), ContactPhone2),
-            New AdditionalValue("TaxExempt", GetType(Boolean), TaxExempt),
             New AdditionalValue("InspectionSticker", GetType(String), InspectionSticker),
             New AdditionalValue("InspectionMonth", GetType(String), InspectionMonth)}
 
@@ -983,9 +1012,8 @@ Public Class invoices
     Private Function insertInvoice() As Boolean
 
         ' Other additional values that were not included in update that are needed here:
-        '   CustomerId, VehicleId
+        '   VehicleId
 
-        Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
 
         ' Get inspection sticker and month from controls
         Dim InspectionSticker As String = InspectionSticker_Textbox.Text
@@ -995,13 +1023,12 @@ Public Class invoices
         Dim ContactPhone1 As String = removeInvalidChars(ContactPhone1_ComboBox.Text, "0123456789")
         Dim ContactPhone2 As String = removeInvalidChars(ContactPhone2_ComboBox.Text, "0123456789")
 
-        Dim excludedControls As New List(Of Control) From {TaxExempt_Textbox, ContactPhone1_ComboBox, ContactPhone2_ComboBox, InvNbr_Textbox}
+        Dim excludedControls As New List(Of Control) From {ContactPhone1_ComboBox, ContactPhone2_ComboBox, InvNbr_Textbox}
         Dim additionalValues As New List(Of AdditionalValue) From {
             New AdditionalValue("CustomerId", GetType(Integer), CustomerId),
             New AdditionalValue("VehicleId", GetType(Integer), VehicleId),
             New AdditionalValue("ContactPhone1", GetType(String), ContactPhone1),
             New AdditionalValue("ContactPhone2", GetType(String), ContactPhone2),
-            New AdditionalValue("TaxExempt", GetType(Boolean), TaxExempt),
             New AdditionalValue("InspectionSticker", GetType(String), InspectionSticker),
             New AdditionalValue("InspectionMonth", GetType(String), InspectionMonth)}
 
@@ -1420,7 +1447,7 @@ Public Class invoices
         ' Initialize values from Customer and Vehicle
         InitializeVehicleDataEditingControls()
         correctInspectionMonthComboBox()
-        InitializeCustomerDataEditingControls()
+        InitializeTaxExemptFromCustomer()
         ' setup ComboBoxes
         ContactPhone1_ComboBox.SelectedIndex = -1
         ContactPhone2_ComboBox.SelectedIndex = -1
@@ -1428,32 +1455,28 @@ Public Class invoices
         InvDate_Textbox.Text = formatDate(DateTime.Now)
         ApptDate_Textbox.Text = formatDate(DateTime.Now)
         WorkDate_Textbox.Text = formatDate(DateTime.Now)
-        ' Reset calculated values
-        InvLaborSum = 0
-        InvPartsSum = 0
-        ShopCharges = 0
-        SubTotal = 0
-        Tax = 0
-        InvTotalSum = 0
-        InvPaymentsSum = 0
+
+        ' RESET CALCULATED VALUES AND INITIALIZE ALL CALCULATION BASED DATAEDITING CONTROLS
+        resetCalculatedValues()
+        InitializeCalculatedValues()
 
         InvRow = -1
         InvId = -1
 
         ' Load any dependent DataTables that might be used for initial calculations (should all return 0)
-        loadDependentDataTables()
+        'loadDependentDataTables()
         ' Make Initialization Calls. Should all amount to zero initially.
-        InitializeInvLaborTextbox()
-        InitializeInvPartsTextbox()
-        InitializeShopChargesTextbox()
-        InitializeSubTotalTextbox()
-        InitializeTaxTextbox()
-        InitializeInvPaymentsTextbox()
-        InitializeNumberTasksTextbox()
-        Gas_Textbox.Text = String.Format("{0:0.00}", 0)
-        Towing_Textbox.Text = String.Format("{0:0.00}", 0)
-        InitializeTotalTextbox()
-        InitializeBalanceTextbox()
+        'InitializeInvLaborTextbox()
+        'InitializeInvPartsTextbox()
+        'InitializeShopChargesTextbox()
+        'InitializeSubTotalTextbox()
+        'InitializeTaxTextbox()
+        'InitializeInvPaymentsTextbox()
+        'InitializeNumberTasksTextbox()
+        'Gas_Textbox.Text = String.Format("{0:0.00}", 0)
+        'Towing_Textbox.Text = String.Format("{0:0.00}", 0)
+        'InitializeTotalTextbox()
+        'InitializeBalanceTextbox()
 
 
         valuesInitialized = True
