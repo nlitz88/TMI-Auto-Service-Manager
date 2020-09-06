@@ -649,8 +649,6 @@ Public Class invoices
     ' This is used ONLY for when EDITING an invoice. When adding, editing controls are initialized with DIFFERENT sub
     Private Sub InitializeAllDataEditingControls()
 
-
-
         ' Automated initializations
         InitializeInvoiceDataEditingControls()
         correctInspectionMonthComboBox()    ' Correction for value initialized from Vehicle DataTable
@@ -666,13 +664,12 @@ Public Class invoices
         Dim tp As Decimal = InvDbController.DbDataTable(InvRow)("TotalParts")
         Dim sc As Decimal = InvDbController.DbDataTable(InvRow)("ShopCharges")
         SubTotal = tl + tp + sc
-        SubTotalTextbox.Text = String.Format("{0:0.00}", SubTotal)
+        SubTotalTextbox.Text = SubTotal
 
         Dim tot As Decimal = InvDbController.DbDataTable(InvRow)("InvTotal")
         Dim totpaid As Decimal = InvDbController.DbDataTable(InvRow)("TotalPaid")
         Balance = tot - totpaid
-        BalanceTextbox.Text = String.Format("{0:0.00}", Balance)
-
+        BalanceTextbox.Text = Balance
 
         formatDataEditingControls()
 
@@ -727,9 +724,17 @@ Public Class invoices
         ContactPhone1_ComboBox.Text = formatPhoneNumber(ContactPhone1_ComboBox.Text)
         ContactPhone2_ComboBox.Text = formatPhoneNumber(ContactPhone2_ComboBox.Text)
 
-        ' Initial formatting for currency values that may be modified
+        ' Initial formatting for currency values initialized from invHdr
+        TotalLabor_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TotalLabor_Textbox.Text))
+        TotalParts_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TotalParts_Textbox.Text))
+        ShopCharges_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(ShopCharges_Textbox.Text))
+        SubTotalTextbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(SubTotalTextbox.Text))
+        Tax_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(Tax_Textbox.Text))
         Gas_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(Gas_Textbox.Text))
         Towing_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(Towing_Textbox.Text))
+        InvTotal_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(InvTotal_Textbox.Text))
+        TotalPaid_Textbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(TotalPaid_Textbox.Text))
+        BalanceTextbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(BalanceTextbox.Text))
 
     End Sub
 
