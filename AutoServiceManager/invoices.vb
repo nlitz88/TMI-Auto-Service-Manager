@@ -654,17 +654,27 @@ Public Class invoices
         ' Automated initializations
         InitializeInvoiceDataEditingControls()
         correctInspectionMonthComboBox()    ' Correction for value initialized from Vehicle DataTable
-        ' Then, re-initialize and format any calculation based values that ARE NOT FROM invHdr table
+
+        ' Then, re-initialize and format any calculation based values that ARE NOT IN invHdr table
         resetCalculatedValues()
-        ' Calls subs necessarry to calculate SubTotal and Balance
+
         ' **** INITIALLY (now), subtotal and balance will be calculated from the values in the invHdr row, NOT using their respective calculation/initialization subs.
-        '       This is to pursue goal of reflecting the data of the invoice, not of the database currently (sounds dumb, but how it is).
+        '       This is because we want to ensure that we are displaying the data in the invoice, not what the data should be.
+        '       So, manually calculate and initialize SubTotal and Balance here based on InvHdr row values.
+
+        Dim tl As Decimal = InvDbController.DbDataTable(InvRow)("TotalLabor")
+        Dim tp As Decimal = InvDbController.DbDataTable(InvRow)("TotalParts")
+        Dim sc As Decimal = InvDbController.DbDataTable(InvRow)("ShopCharges")
+        SubTotal = tl + tp + sc
+        SubTotalTextbox.Text = String.Format("{0:0.00}", SubTotal)
+
+        Dim tot As Decimal = InvDbController.DbDataTable(InvRow)("InvTotal")
+        Dim totpaid As Decimal = InvDbController.DbDataTable(InvRow)("TotalPaid")
+        Balance = tot - totpaid
+        BalanceTextbox.Text = String.Format("{0:0.00}", Balance)
+
 
         formatDataEditingControls()
-        ' This must be initialized after all currency based cost values are initialized and formatted properly
-        'InitializeTotalTextbox()
-        'CalculateTaxableNonTaxableEditing()
-        'InitializeBalanceTextbox()
 
         ' Set forecolor if not already initially default
         setForeColor(getAllControlsWithTag("dataEditingControl", Me), DefaultForeColor)
