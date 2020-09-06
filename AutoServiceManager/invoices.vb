@@ -410,96 +410,38 @@ Public Class invoices
 
 
 
+    ' Sub that initializes Total Labor sum
+    Private Sub InitializeTotalLaborTextbox()
 
-    ' Sub that initializes and calculates Invoice Labor Cost based on the total cost of all of the labor codes in InvLabor with current InvId
-    Private Sub InitializeInvLaborValue()
-
-        For Each row In InvLaborDbController.DbDataTable.Rows
-            InvLaborSum += row("LaborAmount")
-        Next
-
-        TotalLabor_Value.Text = InvLaborSum
-
-    End Sub
-
-    Private Sub InitializeInvLaborTextbox()
-
-        For Each row In InvLaborDbController.DbDataTable.Rows
-            InvLaborSum += row("LaborAmount")
-        Next
-
+        calcInvLaborSum()
         TotalLabor_Textbox.Text = String.Format("{0:0.00}", InvLaborSum)
 
     End Sub
 
-    ' Sub that initializes and calculates Invoice Parts Cost based on the total cost of all of the Parts in InvParts with current InvId
-    Private Sub InitializeInvPartsValue()
 
-        For Each row In InvPartsDbController.DbDataTable.Rows
-            InvPartsSum += row("PartAmount")
-        Next
+    ' Sub that initializes Total Parts sum
+    Private Sub InitializeTotalPartsTextbox()
 
-        TotalParts_Value.Text = InvPartsSum
-
-    End Sub
-
-    Private Sub InitializeInvPartsTextbox()
-
-        For Each row In InvPartsDbController.DbDataTable.Rows
-            InvPartsSum += row("PartAmount")
-        Next
-
+        calcInvPartsSum()
         TotalParts_Textbox.Text = String.Format("{0:0.00}", InvPartsSum)
 
     End Sub
 
 
-    ' Sub that initializes and calculates Shop Charges based TotalLabor, TotalParts IF Shop Supplies checked
-    Private Sub InitializeShopChargesValue()
-
-        Dim shopSupplies As Boolean = InvDbController.DbDataTable(InvRow)("ShopSupplies")
-
-        If shopSupplies Then
-            Dim shopSupplyCharge As Decimal = CMDbController.DbDataTable.Rows(CMRow)("ShopSupplyCharge")
-            Dim laborPartsTotal As Decimal = InvLaborSum + InvPartsSum
-            ShopCharges = Math.Round((shopSupplyCharge * laborPartsTotal), 2)
-        Else
-            ShopCharges = 0
-        End If
-
-        ShopCharges_Value.Text = ShopCharges
-
-    End Sub
-
+    ' Sub that initializes Shop Charges based TotalLabor, TotalParts IF Shop Supplies checked
     Private Sub InitializeShopChargesTextbox()
 
-        Dim shopSupplies As Boolean = ShopSupplies_CheckBox.Checked
-
-        If shopSupplies Then
-            Dim shopSupplyCharge As Decimal = CMDbController.DbDataTable.Rows(CMRow)("ShopSupplyCharge")
-            Dim laborPartsTotal As Decimal = InvLaborSum + InvPartsSum
-            ShopCharges = Math.Round((shopSupplyCharge * laborPartsTotal), 2)
-        Else
-            ShopCharges = 0
-        End If
-
+        calcShopCharges()
         ShopCharges_Textbox.Text = String.Format("{0:0.00}", ShopCharges)
 
     End Sub
 
 
-    ' Sub that initializes and calculates SubTotal TotalLabor and TotalParts
-    Private Sub InitializeSubTotalValue()
-
-        SubTotal = InvLaborSum + InvPartsSum + ShopCharges
-        SubTotalValue.Text = SubTotal
-
-    End Sub
-
+    ' Sub that initializes (and subsequently caclulates) SubTotal textbox based on valid shop charges
     Private Sub InitializeSubTotalTextbox()
 
         If validCurrency("Shop Charges", True, ShopCharges_Textbox.Text, String.Empty) Then
-            SubTotal = InvLaborSum + InvPartsSum + Convert.ToDecimal(ShopCharges_Textbox.Text)
+            calcSubTotal()
             SubTotalTextbox.Text = String.Format("{0:0.00}", SubTotal)
         Else
             SubTotalTextbox.Text = String.Empty
@@ -509,43 +451,15 @@ Public Class invoices
     End Sub
 
 
-    ' Sub that initializes and calculates Tax from SubTotal and TaxRate
-    Private Sub InitializeTaxValue()
-
-        ' Check if tax exempt first
-        Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
-
-        If Not TaxExempt Then
-            Dim TaxRate As Decimal = CMDbController.DbDataTable(CMRow)("TaxRate")
-            Tax = Math.Round(TaxRate * SubTotal, 2)
-        Else
-            Tax = 0
-        End If
-
-        Tax_Value.Text = Tax
-
-    End Sub
-
+    ' Sub that initializes Tax Textbox
     Private Sub InitializeTaxTextbox()
 
-        ' Check if tax exempt first
-        Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
-
         If validCurrency("SubTotal", True, SubTotalTextbox.Text, String.Empty) Then
-
-            If Not TaxExempt Then
-                Dim TaxRate As Decimal = CMDbController.DbDataTable(CMRow)("TaxRate")
-                Tax = Math.Round(TaxRate * Convert.ToDecimal(SubTotalTextbox.Text), 2)
-            Else
-                Tax = 0
-            End If
-
+            calcTax()
             Tax_Textbox.Text = String.Format("{0:0.00}", Tax)
-
         Else
             Tax_Textbox.Text = String.Empty
         End If
-
 
     End Sub
 
@@ -714,34 +628,17 @@ Public Class invoices
         ' Reset calculated values
         ' I SHOULD BE ABLE TO REMOVE THIS; AS NO CALCULATIONS SHOULD BE OCCURRING WHILE VIEWING
 
-        'InvLaborSum = 0
-        'InvPartsSum = 0
-        'ShopCharges = 0
-        'SubTotal = 0
-        'Tax = 0
-        'Gas = 0
-        'Towing = 0
-        'InvTotalSum = 0
-        'Taxable = 0
-        'NonTaxable = 0
-        'InvPaymentsSum = 0
-        'Balance = 0
-
         ' Automated initializations
         InitializeInvoiceDataViewingControls()
         correctInspectionMonthValue()       ' Correction for value initialized from Vehicle DataTable
-        ' Then, re-initialize and format any calculation based values
-        'InitializeInvLaborValue()
-        'InitializeInvPartsValue()
-        'InitializeShopChargesValue()
-        'InitializeSubTotalValue()
-        'InitializeTaxValue()
-        'InitializeTotalValue()
-        'CalculateTaxableNonTaxableViewing()
-        '' Additional Values that require initialization
-        'InitializeInvPaymentsValue()
-        'InitializeBalanceValue()
-        'InitializeNumberTasksValue()
+
+
+        ' Then, re-initialize and format any calculation based values that ARE NOT FROM invHdr table
+        resetCalculatedValues()
+        ' Calls subs necessarry to calculate SubTotal and Balance
+
+
+
 
         ' Then, format dataViewingControls
         formatDataViewingControls()
@@ -757,18 +654,12 @@ Public Class invoices
         ' Automated initializations
         InitializeInvoiceDataEditingControls()
         correctInspectionMonthComboBox()    ' Correction for value initialized from Vehicle DataTable
-        ' Then, re-initialize and format any calculation based values
-        'InitializeInvLaborTextbox()
-        'InitializeInvPartsTextbox()
-        'InitializeShopChargesTextbox()
-        'InitializeSubTotalTextbox()
-        'InitializeTaxTextbox()
-        '' Additional Values that require initialization
-        'InitializeInvPaymentsTextbox()
-        'InitializeNumberTasksTextbox()
-        'InitializeContactPhone1ComboBox()
-        'InitializeContactPhone2ComboBox()
-        ' Then, format dataEditingControls
+        ' Then, re-initialize and format any calculation based values that ARE NOT FROM invHdr table
+        resetCalculatedValues()
+        ' Calls subs necessarry to calculate SubTotal and Balance
+        ' **** INITIALLY (now), subtotal and balance will be calculated from the values in the invHdr row, NOT using their respective calculation/initialization subs.
+        '       This is to pursue goal of reflecting the data of the invoice, not of the database currently (sounds dumb, but how it is).
+
         formatDataEditingControls()
         ' This must be initialized after all currency based cost values are initialized and formatted properly
         'InitializeTotalTextbox()
@@ -881,6 +772,85 @@ Public Class invoices
     '   Each should be called for its respective control's textchange event or equivalent
     '   If one value is dependent on another that is input, and the other is INVALID, then simply reset this value, and don't calculate.
     '       In this scenario, the textchange event would need to check whether or not to calculate based on if the dependent values are valid or not (Currently set up this way, no worries)
+    '       ALSO: could change these so that they reset the value they calculate before hand here rather than in a separate sub
+
+
+    ' Sub that calculates Invoice Labor Cost based on the total cost of all of the labor codes in InvLabor with current InvId
+    Private Sub calcInvLaborSum()
+
+        For Each row In InvLaborDbController.DbDataTable.Rows
+            InvLaborSum += row("LaborAmount")
+        Next
+
+    End Sub
+
+
+    ' Sub that calculates Invoice Parts Cost based on the total cost of all of the Parts in InvParts with current InvId
+    Private Sub calcInvPartsSum()
+
+        For Each row In InvPartsDbController.DbDataTable.Rows
+            InvPartsSum += row("PartAmount")
+        Next
+
+    End Sub
+
+
+    ' Sub that calculates Shop charges based on whether or not shop supplies checked, and if so, then on the ShopSupplyCharge rate from Company Master
+    Private Sub calcShopCharges()
+
+        Dim shopSupplies As Boolean = ShopSupplies_CheckBox.Checked
+
+        If shopSupplies Then
+            Dim shopSupplyCharge As Decimal = CMDbController.DbDataTable.Rows(CMRow)("ShopSupplyCharge")
+            Dim laborPartsTotal As Decimal = InvLaborSum + InvPartsSum
+            ShopCharges = Math.Round((shopSupplyCharge * laborPartsTotal), 2)
+        Else
+            ShopCharges = 0
+        End If
+
+    End Sub
+
+
+    ' Sub that calculates SubTotal based on InvLaborSum, InvPartsSum, and Shop Charges
+    Private Sub calcSubTotal()
+
+        SubTotal = InvLaborSum + InvPartsSum + ShopCharges
+
+    End Sub
+
+
+    ' Sub that calculates Tax based on whether or not Tax Exempt is checked, and if so, then the TaxRate from Company Master * SubTotal.
+    Private Sub calcTax()
+
+        Dim taxExempt As Boolean = TaxExempt_CheckBox.Checked
+
+        If taxExempt Then
+            Tax = 0
+        Else
+            Dim taxRate As Decimal = CMDbController.DbDataTable.Rows(CMRow)("")
+            Tax = Math.Round((SubTotal * ), 2)
+        End If
+
+
+        ' Check if tax exempt first
+        Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
+
+        If validCurrency("SubTotal", True, SubTotalTextbox.Text, String.Empty) Then
+
+            If Not taxExempt Then
+                Dim TaxRate As Decimal = CMDbController.DbDataTable(CMRow)("TaxRate")
+                Tax = Math.Round(TaxRate * Convert.ToDecimal(SubTotalTextbox.Text), 2)
+            Else
+                Tax = 0
+            End If
+
+            Tax_Textbox.Text = String.Format("{0:0.00}", Tax)
+
+        Else
+            Tax_Textbox.Text = String.Empty
+        End If
+
+    End Sub
 
 
 
@@ -1403,7 +1373,7 @@ Public Class invoices
                 Exit Sub
             End If
 
-            ' Recalculate and Reinitialize dependent controls
+            ' Reinitialize all dataViewingControls
             InitializeAllDataViewingControls()
 
             valuesInitialized = True
