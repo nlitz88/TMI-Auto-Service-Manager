@@ -393,7 +393,7 @@ Public Class invoices
 
         ' Loads rows from InvPayments based on seleceted InvNbr from InvHdr
         InvPaymentsDbController.AddParams("@invId", InvId)
-        InvPaymentsDbController.ExecQuery("SELECT ip.PayAmount " &
+        InvPaymentsDbController.ExecQuery("SELECT ip.PayAmount, ip.PayDate " &
                                         "FROM InvPayments ip " &
                                         "WHERE ip.InvNbr=@invId")
         If InvPaymentsDbController.HasException() Then Return False
@@ -852,22 +852,59 @@ Public Class invoices
     Public Function reinitializeDependents() As Boolean
 
 
+        ' Alternate option: Don't recalc shopcharges if custom value already entered
+        Dim calculateShopCharges As Boolean = True
+        Dim properShopCharge As Decimal
+        Dim shopChargeRate As Decimal = CMDbController.DbDataTable.Rows(CMRow)("ShopSupplyCharge")
+        Dim laborPartsTotal As Decimal = InvLaborSum + InvPartsSum
+        properShopCharge = Math.Round((shopChargeRate * laborPartsTotal), 2)
 
-        ' Must recalculate InvLaborSum, InvPartsSum, InvPaymentsSum, and NbrTasks
+        If ShopCharges <> properShopCharge Then
+            ' This must mean there is a custom value, so do not recalculate shop charges
+            calculateShopCharges = False
+        End If
+
+
+        ' 1.) Recalculate values that may have changed from forms outside of this one. I.e. InvLaborSum, InvPartsSum, InvPaymentsSum, and NbrTasks.
         calcInvLaborSum()
         calcInvPartsSum()
         calcInvPaymentsSum()
         getNbrTasks()
-        ' Then insert these new values into the InvHdr row
-        ' Then, controls can be initialized again as if we were just opening up the invoice for the first time,
-        ' and all of the values would be up to date.
 
-        ' Also, all values should technically be recalculated here. So will have to go through those steps.
+        ' 2.) As these values contribute to the InvTotal cost and other calculations like subtotal, tax, balance, etc., we must recalculate all of those values.
+        '       Because these forms can only be accessed while not editing other invoice data values, we can use the values currently in the table for our calculations
+        '       Because all of these values are already stored in variables, we can use our calculation subs to recalculate the values that are dependendent on
+        '       a.) InvLaborSum     b.) InvPartsSum     c.) InvPaymentsSum
 
+        'If calculateShopCharges Then calcShopCharges()
+        calcShopCharges()
+        calcSubTotal()
+        calcTax()
+        calcInvTotalSum()
 
+        ' 3.) Also, determine date of the most recent payment in InvPayments
+        Dim mostRecentDate As Object
+        mostRecentDate = InvPaymentsDbController.DbDataTable.Compute("Max(PayDate)", "")
 
+        ' 4.) Add these newly calculated values as parameters
+        CRUD.AddParams("@totallabor", InvLaborSum)
+        CRUD.AddParams("@totalparts", InvPartsSum)
+        CRUD.AddParams("@shopcharges", ShopCharges)
+        CRUD.AddParams("@tax", Tax)
+        CRUD.AddParams("@invtotal", InvTotalSum)
+        CRUD.AddParams("@totalpaid", InvPaymentsSum)
+        CRUD.AddParams("@paydate", mostRecentDate)
+        CRUD.AddParams("@taxable", Taxable)
+        CRUD.AddParams("@nontaxable", NonTaxable)
+        CRUD.AddParams("@invid", InvId)
 
+        ' 5.) Then insert these new values into the InvHdr row
+        CRUD.ExecQuery("UPDATE InvHdr SET TotalLabor=@totallabor, TotalParts=@totalparts, ShopCharges=@shopcharges, Tax=@tax, InvTotal=@invtotal, TotalPaid=@totalpaid, " &
+                       "PayDate=@paydate, Taxable=@taxable, NonTaxable=@nontaxable " &
+                       "WHERE InvNbr=@invid")
+        If CRUD.HasException() Then Return False
 
+        ' 6.) Then, controls can be initialized again as if we were just opening up the invoice for the first time, and all of the values will be up to date.
         valuesInitialized = False
 
         ' Load TaskParts and TaskLabor datatables based on selected TaskId, then Initialize corresponding GridViews
@@ -877,11 +914,15 @@ Public Class invoices
         End If
 
         ' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
-        ' This is because controls like TaskLaborCost (for instance) are calculated from those tables
         InitializeAllDataViewingControls()
         ' Initialize corresponding DataGridViews
 
         valuesInitialized = True
+
+
+
+
+
 
 
         ' Update invoice TotalLabor, TotalParts, Tax, InvTotal, TotalPaid, Taxable, and NonTaxable based on InvNbr (stored in InvId)
@@ -900,9 +941,7 @@ Public Class invoices
         'CRUD.AddParams("@paydate")
         ' MUST REDESIGN INITIALIZATION BEFORE i CAN ADD THIS
 
-        CRUD.ExecQuery("UPDATE InvHdr SET TotalLabor=@totallabor, TotalParts=@totalparts, Tax=@tax, InvTotal=@invtotal, TotalPaid=@totalpaid, Taxable=@taxable, NonTaxable=@nontaxable " &
-                       "WHERE InvNbr=@invid")
-        If CRUD.HasException() Then Return False
+
 
 
         ' THIS IS WHERE CALLS COULD BE MADE TO UPDATE INVHDR BASED ON PAYMENT DATA THAT MAY HAVE BEEN ADDED.
@@ -1227,7 +1266,10 @@ Public Class invoices
             InitializeContactPhone2ComboBox()
 
             ' Then, load the vehicleDataTable and initialize vehicleComboBox based on this newfound CustomerId
-            loadVehicleDataTable()
+            If Not loadVehicleDataTable() Then
+                MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
             InitializeVehicleComboBox()
             VehicleComboBox.Visible = True
             VehicleLabel.Visible = True
@@ -1290,7 +1332,10 @@ Public Class invoices
             VehicleId = VehicleDbController.DbDataTable(VehicleRow)("VehicleId")
 
             ' Then, load the Invoice DataTable and initialize InvComboBox based on this newfound VehicleId
-            loadInvoiceDataTable()
+            If Not loadInvoiceDataTable() Then
+                MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
             InitializeInvoiceNumComboBox()
             InvoiceComboBox.Visible = True
             invoiceLabel.Visible = True
