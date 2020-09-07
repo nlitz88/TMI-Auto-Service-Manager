@@ -455,6 +455,13 @@ Public Class invoices
     Private Sub InitializeSubTotalTextbox()
 
         If validCurrency("Shop Charges", True, ShopCharges_Textbox.Text, String.Empty) Then
+
+            ' Because Shop Charges can be edited by user OR be automatically calculated by ShopSupplyCharge Rate, we will capture its value again here.
+            ' This will allow us to get the value whether the user checked the Shop Supplies Checkbox and automatically calculated it, OR if they simply typed in
+            ' a new valid dollar amount that they would like to use instead.
+            ' Then, this captured value will be the one used in the calculation of subtotal
+            ShopCharges = Convert.ToDecimal(ShopCharges_Textbox.Text)
+
             calcSubTotal()
             SubTotalTextbox.Text = String.Format("{0:0.00}", SubTotal)
         Else
@@ -463,6 +470,8 @@ Public Class invoices
 
 
     End Sub
+
+
 
 
     ' Sub that initializes Tax Textbox
@@ -904,11 +913,6 @@ Public Class invoices
 
 
     ' ***************** CRUD SUBS *****************
-    ' Remember to calculate and add non-taxable as a field to insert/update in the DataBase (Sum of towing, gas, and ONLY subtotal if Tax-Exempt)
-    ' Add Taxable as a field as well (this is the SubTotal)
-
-    ' Update InspectionNbr and Inspection month for vehicle to Vehicle Table
-    ' IF we decide they can change this here (For whatever justification that may be), then update TaxExempt in Customer Table as well
 
 
     ' UPDATING CRUD SUBS
@@ -918,22 +922,9 @@ Public Class invoices
         '   ContactPhone1, ContactPhone2, and InvNbr (InvNbr primary auto-increment key, can't be updated)
 
         ' Additional Values:
-        '   Taxable, NonTaxable, ContactPhone1, ContactPhone2, TaxExempt, InspectionSticker, and InspectionMonth
-        '       All of these either need calculated or their formatting changed in some way before formatting
-        '       TaxExempt, InspectionSticker, and InspectionMonth are all values that are stored in other datatables, and are therefore
-        '       not used to initialize our values here. However, they still need to be written to this DataTable. So we add them as additionals
+        '   Taxable, NonTaxable, ContactPhone1, ContactPhone2
 
-
-        ' First, separately insert Taxable and NonTaxable
-        CRUD.AddParams("@taxable", Taxable)
-        CRUD.AddParams("@nontaxable", NonTaxable)
-        CRUD.AddParams("@invId", InvId)
-        CRUD.ExecQuery("UPDATE InvHdr SET Taxable=@taxable, NonTaxable=@nontaxable WHERE InvNbr=@invId")
-        If CRUD.HasException() Then Return False
-
-        ' Get inspection sticker and month from controls
-        Dim InspectionSticker As String = InspectionSticker_Textbox.Text
-        Dim InspectionMonth As String = InspectionMonth_ComboBox.Text
+        ' First, in order to avoid getting Taxable and NonTaxable values being potentially inserted 
 
         ' Get stripped versions of Contact Phone Numbers
         Dim ContactPhone1 As String = removeInvalidChars(ContactPhone1_ComboBox.Text, "0123456789")
@@ -942,9 +933,8 @@ Public Class invoices
         Dim excludedControls As New List(Of Control) From {ContactPhone1_ComboBox, ContactPhone2_ComboBox, InvNbr_Textbox}
         Dim additionalValues As New List(Of AdditionalValue) From {
             New AdditionalValue("ContactPhone1", GetType(String), ContactPhone1),
-            New AdditionalValue("ContactPhone2", GetType(String), ContactPhone2),
-            New AdditionalValue("InspectionSticker", GetType(String), InspectionSticker),
-            New AdditionalValue("InspectionMonth", GetType(String), InspectionMonth)}
+            New AdditionalValue("ContactPhone2", GetType(String), ContactPhone2)}
+
 
         updateTable(CRUD, InvDbController.DbDataTable, "InvHdr", InvId, "InvNbr", "_", "dataEditingControl", Me, excludedControls, additionalValues)
         If CRUD.HasException() Then Return False
@@ -1006,6 +996,8 @@ Public Class invoices
             Return False
         End If
 
+
+        ' THIS IS DONE SEPARATELY DOWN HERE, so as to avoid getting 0.00 being ignored and entered as a DBNull in the insertRowFunction.
         CRUD.AddParams("@taxable", Taxable)
         CRUD.AddParams("@nontaxable", NonTaxable)
         CRUD.AddParams("@invId", newInvNbr)
@@ -1639,21 +1631,17 @@ Public Class invoices
                     If Not controlsValid() Then Exit Sub
 
                     ' 2.) UPDATE MASTER TASK LIST VALUES
-                    If Not updateInvoice() Or Not updateVehicle() Then
+                    If Not updateInvoice() Then
                         MessageBox.Show("Update unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Exit Sub
                     Else
                         MessageBox.Show("Successfully updated invoice")
                     End If
 
-                    ' 3.) RELOAD DATATABLES FROM DATABASE
-                    If Not loadInvoiceDataTable() Or Not loadVehicleDataTable() Then ' And Not loadCustomerDataTable
+                    ' 3.) RELOAD DATATABLE FROM DATABASE
+                    If Not loadInvoiceDataTable() Then
                         MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
-                    ' If values changed in vehicle DataTable, must reload here so that controls can be initialized with updated values.
-                    ' If vehicles was in loaddependentDataTables, then this wouldn't be necessary. However, it serves more than one purpose
-
-                    ' ALso going to have to reload CustomerDataTable (if TaxExempt Editable)
 
                     ' 4.) REINITIALIZE CONTROLS FROM THIS POINT (still from selection index, however)
                     InitializeInvoiceNumComboBox()
