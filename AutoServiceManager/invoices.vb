@@ -859,11 +859,10 @@ Public Class invoices
         Dim laborPartsTotal As Decimal = InvLaborSum + InvPartsSum
         properShopCharge = Math.Round((shopChargeRate * laborPartsTotal), 2)
 
-        If ShopCharges <> properShopCharge Then
+        If ShopSupplies_CheckBox.Checked And ShopCharges <> 0 And ShopCharges <> properShopCharge Then
             ' This must mean there is a custom value, so do not recalculate shop charges
             calculateShopCharges = False
         End If
-
 
         ' 1.) Recalculate values that may have changed from forms outside of this one. I.e. InvLaborSum, InvPartsSum, InvPaymentsSum, and NbrTasks.
         calcInvLaborSum()
@@ -876,8 +875,8 @@ Public Class invoices
         '       Because all of these values are already stored in variables, we can use our calculation subs to recalculate the values that are dependendent on
         '       a.) InvLaborSum     b.) InvPartsSum     c.) InvPaymentsSum
 
-        'If calculateShopCharges Then calcShopCharges()
-        calcShopCharges()
+        If calculateShopCharges Then calcShopCharges()
+        'calcShopCharges()
         calcSubTotal()
         calcTax()
         calcInvTotalSum()
