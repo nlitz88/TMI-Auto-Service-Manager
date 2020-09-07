@@ -409,23 +409,24 @@ Public Class invoices
     End Function
 
 
+    ' THESE TWO AREN'T NECESSARRY, AS THEY WILL NEVER BE CALLED. THEIR VALUES ARE INSERTED INTO THE INVHDR ROW, AND ARE INITIALIZED FROM THERE UPON REINITIALIZING
 
-    ' Sub that initializes Total Labor sum
-    Private Sub InitializeTotalLaborTextbox()
+    '' Sub that initializes Total Labor sum
+    'Private Sub InitializeTotalLaborTextbox()
 
-        calcInvLaborSum()
-        TotalLabor_Textbox.Text = String.Format("{0:0.00}", InvLaborSum)
+    '    calcInvLaborSum()
+    '    TotalLabor_Textbox.Text = String.Format("{0:0.00}", InvLaborSum)
 
-    End Sub
+    'End Sub
 
 
-    ' Sub that initializes Total Parts sum
-    Private Sub InitializeTotalPartsTextbox()
+    '' Sub that initializes Total Parts sum
+    'Private Sub InitializeTotalPartsTextbox()
 
-        calcInvPartsSum()
-        TotalParts_Textbox.Text = String.Format("{0:0.00}", InvPartsSum)
+    '    calcInvPartsSum()
+    '    TotalParts_Textbox.Text = String.Format("{0:0.00}", InvPartsSum)
 
-    End Sub
+    'End Sub
 
 
     ' Sub that initializes Shop Charges based TotalLabor, TotalParts IF Shop Supplies checked
@@ -542,26 +543,13 @@ Public Class invoices
     End Sub
 
 
-    ' Sub that intializes and calculates Invoice Total Paid amount based on the total of all of the payments in InvPayments with current InvId
-    Private Sub InitializeInvPaymentsValue()
+    ' Sub that intializes Invoice Total Paid amount based on the total of all of the payments in InvPayments with current InvId
+    'Private Sub InitializeInvPaymentsTextbox()
 
-        For Each row In InvPaymentsDbController.DbDataTable.Rows
-            InvPaymentsSum += row("PayAmount")
-        Next
+    '    calcInvPaymentsSum()
+    '    TotalPaid_Textbox.Text = String.Format("{0:0.00}", InvPaymentsSum)
 
-        TotalPaid_Value.Text = InvPaymentsSum
-
-    End Sub
-
-    Private Sub InitializeInvPaymentsTextbox()
-
-        For Each row In InvPaymentsDbController.DbDataTable.Rows
-            InvPaymentsSum += row("PayAmount")
-        Next
-
-        TotalPaid_Textbox.Text = String.Format("{0:0.00}", InvPaymentsSum)
-
-    End Sub
+    'End Sub
 
 
     ' Sub that initializes Balance based on Total Paid (Total of Payments made) and the total
@@ -808,6 +796,7 @@ Public Class invoices
     ' Sub that calculates Invoice Labor Cost based on the total cost of all of the labor codes in InvLabor with current InvId
     Private Sub calcInvLaborSum()
 
+        InvLaborSum = 0      ' Must zero this here, as this value is being re-calculated
         For Each row In InvLaborDbController.DbDataTable.Rows
             InvLaborSum += row("LaborAmount")
         Next
@@ -818,6 +807,7 @@ Public Class invoices
     ' Sub that calculates Invoice Parts Cost based on the total cost of all of the Parts in InvParts with current InvId
     Private Sub calcInvPartsSum()
 
+        InvPartsSum = 0      ' Must zero this here, as this value is being re-calculated
         For Each row In InvPartsDbController.DbDataTable.Rows
             InvPartsSum += row("PartAmount")
         Next
@@ -864,8 +854,64 @@ Public Class invoices
     End Sub
 
 
+    ' Sub that GETS Gas value.
+    ' This will be called only in the InitializeInvTotal Sub (after checking that the value in Gas_Textbox is valid currency) alongside getTowing()
+    Private Sub getGas()
+
+        Gas = Convert.ToDecimal(Gas_Textbox.Text)
+
+    End Sub
+
+    Private Sub getTowing()
+
+        Towing = Convert.ToDecimal(Towing_Textbox.Text)
+
+    End Sub
 
 
+    ' Sub that calculates InvTotalSum based on Subtotal, Tax, Gas, and Towing
+    '   Reminder that this sub will only be called if the values it depends on are valid (validation done in InitializeInvTotal()
+    Private Sub calcInvTotalSum()
+
+        InvTotalSum = SubTotal + Tax + Gas + Towing
+
+    End Sub
+
+
+    ' Sub that calculates InvPaymentsSum based on the sum of the PayAmounts in each row of InvPayments corresponding to current invoice InvId
+    Private Sub calcInvPaymentsSum()
+
+        InvPaymentsSum = 0      ' Must zero this here, as this value is being re-calculated
+        For Each row In InvPaymentsDbController.DbDataTable.Rows
+            InvPaymentsSum += row("PayAmount")
+        Next
+
+    End Sub
+
+
+    ' Sub that calculates Balance based on InvTotalSum and InvPaymentsSum
+    Private Sub calcBalance()
+
+        Balance = InvTotalSum - InvPaymentsSum
+
+    End Sub
+
+
+    ' Sub that calculates Taxable and NonTaxable. This will be called InitializeInvTotal()
+    Private Sub calcTaxableNonTaxable()
+
+        Dim taxExempt As Boolean = TaxExempt_CheckBox.Checked
+
+        ' Calculate Taxable and NonTaxable
+        If taxExempt Then
+            Taxable = 0
+            NonTaxable = InvTotalSum
+        Else
+            Taxable = SubTotal
+            NonTaxable = Gas + Towing
+        End If
+
+    End Sub
 
 
 
