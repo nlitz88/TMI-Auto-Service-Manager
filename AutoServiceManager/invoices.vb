@@ -632,13 +632,24 @@ Public Class invoices
         InitializeInvoiceDataViewingControls()
         correctInspectionMonthValue()       ' Correction for value initialized from Vehicle DataTable
 
-
         ' Then, re-initialize and format any calculation based values that ARE NOT FROM invHdr table
         resetCalculatedValues()
-        ' Calls subs necessarry to calculate SubTotal and Balance
 
+        ' Calculate SubTotal and Balance based on values of invoice (from InvHdr) instead of calculating them live
+        ' INSTEAD of calculating these values, these values will START as their initial values from the InvHdr DataTable row
+        InvLaborSum = InvDbController.DbDataTable(InvRow)("TotalLabor")
+        InvPartsSum = InvDbController.DbDataTable(InvRow)("TotalParts")
+        ShopCharges = InvDbController.DbDataTable(InvRow)("ShopCharges")
+        SubTotal = InvLaborSum + InvPartsSum + ShopCharges
+        Tax = InvDbController.DbDataTable(InvRow)("Tax")
+        Gas = InvDbController.DbDataTable(InvRow)("Gas")
+        Towing = InvDbController.DbDataTable(InvRow)("Towing")
+        InvTotalSum = InvDbController.DbDataTable(InvRow)("InvTotal")
+        InvPaymentsSum = InvDbController.DbDataTable(InvRow)("TotalPaid")
+        Balance = InvTotalSum - InvPaymentsSum
 
-
+        SubTotalValue.Text = SubTotal
+        BalanceValue.Text = Balance
 
         ' Then, format dataViewingControls
         formatDataViewingControls()
@@ -660,15 +671,21 @@ Public Class invoices
         '       This is because we want to ensure that we are displaying the data in the invoice, not what the data should be.
         '       So, manually calculate and initialize SubTotal and Balance here based on InvHdr row values.
 
-        Dim tl As Decimal = InvDbController.DbDataTable(InvRow)("TotalLabor")
-        Dim tp As Decimal = InvDbController.DbDataTable(InvRow)("TotalParts")
-        Dim sc As Decimal = InvDbController.DbDataTable(InvRow)("ShopCharges")
-        SubTotal = tl + tp + sc
-        SubTotalTextbox.Text = SubTotal
+        ' Calculate SubTotal and Balance based on values of invoice (from InvHdr) instead of calculating them live.
+        ' INSTEAD of calculating these values, these values will START as their initial values from the InvHdr DataTable row.
+        ' Then, on a textchange event, for instance, some of these values will be recalculated.
+        InvLaborSum = InvDbController.DbDataTable(InvRow)("TotalLabor")
+        InvPartsSum = InvDbController.DbDataTable(InvRow)("TotalParts")
+        ShopCharges = InvDbController.DbDataTable(InvRow)("ShopCharges")
+        SubTotal = InvLaborSum + InvPartsSum + ShopCharges
+        Tax = InvDbController.DbDataTable(InvRow)("Tax")
+        Gas = InvDbController.DbDataTable(InvRow)("Gas")
+        Towing = InvDbController.DbDataTable(InvRow)("Towing")
+        InvTotalSum = InvDbController.DbDataTable(InvRow)("InvTotal")
+        InvPaymentsSum = InvDbController.DbDataTable(InvRow)("TotalPaid")
+        Balance = InvTotalSum - InvPaymentsSum
 
-        Dim tot As Decimal = InvDbController.DbDataTable(InvRow)("InvTotal")
-        Dim totpaid As Decimal = InvDbController.DbDataTable(InvRow)("TotalPaid")
-        Balance = tot - totpaid
+        SubTotalTextbox.Text = SubTotal
         BalanceTextbox.Text = Balance
 
         formatDataEditingControls()
@@ -698,14 +715,12 @@ Public Class invoices
         ' Calculation based fields are formatted here
         TotalLabor_Value.Text = FormatCurrency(TotalLabor_Value.Text)
         TotalParts_Value.Text = FormatCurrency(TotalParts_Value.Text)
-
         ShopCharges_Value.Text = FormatCurrency(ShopCharges_Value.Text)
         SubTotalValue.Text = FormatCurrency(SubTotalValue.Text)
         Tax_Value.Text = FormatCurrency(Tax_Value.Text)
         Gas_Value.Text = FormatCurrency(Gas_Value.Text)
         Towing_Value.Text = FormatCurrency(Towing_Value.Text)
         InvTotal_Value.Text = FormatCurrency(InvTotal_Value.Text)
-
         TotalPaid_Value.Text = FormatCurrency(TotalPaid_Value.Text)
         BalanceValue.Text = FormatCurrency(BalanceValue.Text)
 
@@ -843,29 +858,11 @@ Public Class invoices
             Tax = 0
         Else
             Dim taxRate As Decimal = CMDbController.DbDataTable.Rows(CMRow)("")
-            Tax = Math.Round((SubTotal * ), 2)
-        End If
-
-
-        ' Check if tax exempt first
-        Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
-
-        If validCurrency("SubTotal", True, SubTotalTextbox.Text, String.Empty) Then
-
-            If Not taxExempt Then
-                Dim TaxRate As Decimal = CMDbController.DbDataTable(CMRow)("TaxRate")
-                Tax = Math.Round(TaxRate * Convert.ToDecimal(SubTotalTextbox.Text), 2)
-            Else
-                Tax = 0
-            End If
-
-            Tax_Textbox.Text = String.Format("{0:0.00}", Tax)
-
-        Else
-            Tax_Textbox.Text = String.Empty
+            Tax = Math.Round((taxRate * SubTotal), 2)
         End If
 
     End Sub
+
 
 
 
