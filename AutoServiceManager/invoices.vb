@@ -930,8 +930,14 @@ Public Class invoices
         ' Additional Values:
         '   Taxable, NonTaxable, ContactPhone1, ContactPhone2
 
-        ' First, in order to avoid getting Taxable and NonTaxable values being potentially inserted 
+        ' 1. ) THIS IS DONE SEPARATELY HERE, so as to avoid getting 0.00 being ignored and entered as a DBNull in the updateTable function.
+        CRUD.AddParams("@taxable", Taxable)
+        CRUD.AddParams("@nontaxable", NonTaxable)
+        CRUD.AddParams("@invId", InvId)
+        CRUD.ExecQuery("UPDATE InvHdr SET Taxable=@taxable, NonTaxable=@nontaxable WHERE InvNbr=@invId")
+        If CRUD.HasException() Then Return False
 
+        ' 2.) THEN UPDATE INVOICE AS USUAL
         ' Get stripped versions of Contact Phone Numbers
         Dim ContactPhone1 As String = removeInvalidChars(ContactPhone1_ComboBox.Text, "0123456789")
         Dim ContactPhone2 As String = removeInvalidChars(ContactPhone2_ComboBox.Text, "0123456789")
@@ -941,7 +947,6 @@ Public Class invoices
             New AdditionalValue("ContactPhone1", GetType(String), ContactPhone1),
             New AdditionalValue("ContactPhone2", GetType(String), ContactPhone2)}
 
-
         updateTable(CRUD, InvDbController.DbDataTable, "InvHdr", InvId, "InvNbr", "_", "dataEditingControl", Me, excludedControls, additionalValues)
         If CRUD.HasException() Then Return False
 
@@ -949,7 +954,50 @@ Public Class invoices
 
     End Function
 
-    ' Update CRUD function used for updating vehicle values editable from invoice form here
+
+    ' INSERTING CRUD SUB
+    Private Function insertInvoice() As Boolean
+
+        ' Other additional values that were not included in update that are needed here:
+        '   VehicleId
+
+        ' Get stripped versions of Contact Phone Numbers
+        Dim ContactPhone1 As String = removeInvalidChars(ContactPhone1_ComboBox.Text, "0123456789")
+        Dim ContactPhone2 As String = removeInvalidChars(ContactPhone2_ComboBox.Text, "0123456789")
+
+        Dim excludedControls As New List(Of Control) From {ContactPhone1_ComboBox, ContactPhone2_ComboBox, InvNbr_Textbox}
+        Dim additionalValues As New List(Of AdditionalValue) From {
+            New AdditionalValue("CustomerId", GetType(Integer), CustomerId),
+            New AdditionalValue("VehicleId", GetType(Integer), VehicleId),
+            New AdditionalValue("ContactPhone1", GetType(String), ContactPhone1),
+            New AdditionalValue("ContactPhone2", GetType(String), ContactPhone2)}
+
+        insertRow(CRUD, InvDbController.DbDataTable, "InvHdr", "_", "dataEditingControl", Me, excludedControls, additionalValues)
+        If CRUD.HasException() Then Return False
+
+        ' Then, in new row, manually insert Taxable and NonTaxable
+        CRUD.ExecQuery("SELECT InvNbr FROM InvHdr WHERE InvNbr=(SELECT max(InvNbr) FROM InvHdr)")
+        Dim newInvNbr As Long
+        If CRUD.DbDataTable.Rows.Count <> 0 And Not CRUD.HasException(True) Then
+            ' Get new InvNbr if query successful
+            newInvNbr = CRUD.DbDataTable.Rows(0)("InvNbr")
+        Else
+            Return False
+        End If
+
+        ' THIS IS DONE SEPARATELY DOWN HERE, so as to avoid getting 0.00 being ignored and entered as a DBNull in the insertRowFunction.
+        CRUD.AddParams("@taxable", Taxable)
+        CRUD.AddParams("@nontaxable", NonTaxable)
+        CRUD.AddParams("@invId", newInvNbr)
+        CRUD.ExecQuery("UPDATE InvHdr SET Taxable=@taxable, NonTaxable=@nontaxable WHERE InvNbr=@invId")
+        If CRUD.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+
+    ' Update CRUD function used for updating Inspection Month and Sticker Number of vehicle ONLY when adding a NEW INVOICE
     Private Function updateVehicle() As Boolean
 
         ' Because inspectionSticker is queried with a different column name, we must exclude it and add it as an additional value where we can customize its column name
@@ -965,58 +1013,7 @@ Public Class invoices
     End Function
 
 
-    ' INSERTING CRUD SUB
-    Private Function insertInvoice() As Boolean
-
-        ' Other additional values that were not included in update that are needed here:
-        '   VehicleId
-
-
-        ' Get inspection sticker and month from controls
-        Dim InspectionSticker As String = InspectionSticker_Textbox.Text
-        Dim InspectionMonth As String = InspectionMonth_ComboBox.Text
-
-        ' Get stripped versions of Contact Phone Numbers
-        Dim ContactPhone1 As String = removeInvalidChars(ContactPhone1_ComboBox.Text, "0123456789")
-        Dim ContactPhone2 As String = removeInvalidChars(ContactPhone2_ComboBox.Text, "0123456789")
-
-        Dim excludedControls As New List(Of Control) From {ContactPhone1_ComboBox, ContactPhone2_ComboBox, InvNbr_Textbox}
-        Dim additionalValues As New List(Of AdditionalValue) From {
-            New AdditionalValue("CustomerId", GetType(Integer), CustomerId),
-            New AdditionalValue("VehicleId", GetType(Integer), VehicleId),
-            New AdditionalValue("ContactPhone1", GetType(String), ContactPhone1),
-            New AdditionalValue("ContactPhone2", GetType(String), ContactPhone2),
-            New AdditionalValue("InspectionSticker", GetType(String), InspectionSticker),
-            New AdditionalValue("InspectionMonth", GetType(String), InspectionMonth)}
-
-        insertRow(CRUD, InvDbController.DbDataTable, "InvHdr", "_", "dataEditingControl", Me, excludedControls, additionalValues)
-        If CRUD.HasException() Then Return False
-
-        ' Then, in new row, manually insert Taxable and NonTaxable
-        CRUD.ExecQuery("SELECT InvNbr FROM InvHdr WHERE InvNbr=(SELECT max(InvNbr) FROM InvHdr)")
-        Dim newInvNbr As Long
-        If CRUD.DbDataTable.Rows.Count <> 0 And Not CRUD.HasException(True) Then
-            ' Get new InvNbr if query successful
-            newInvNbr = CRUD.DbDataTable.Rows(0)("InvNbr")
-        Else
-            Return False
-        End If
-
-
-        ' THIS IS DONE SEPARATELY DOWN HERE, so as to avoid getting 0.00 being ignored and entered as a DBNull in the insertRowFunction.
-        CRUD.AddParams("@taxable", Taxable)
-        CRUD.AddParams("@nontaxable", NonTaxable)
-        CRUD.AddParams("@invId", newInvNbr)
-        CRUD.ExecQuery("UPDATE InvHdr SET Taxable=@taxable, NonTaxable=@nontaxable WHERE InvNbr=@invId")
-        If CRUD.HasException() Then Return False
-
-        Return True
-
-    End Function
-    ' No additional for inserting vehicle, as the user can only update certain existing vehicle information on this form (even when adding a new invoice)
-
-
-    ' Function that makes deleteRow calls for all relevant DataTables
+    ' DELETE CRUD SUB
     Private Function deleteInvoice() As Boolean
 
         deleteRow(CRUD, "InvHdr", InvId, "InvNbr")
@@ -1397,9 +1394,9 @@ Public Class invoices
 
         mode = "adding"
 
+
         ' Initialize values for dataEditingControls
         valuesInitialized = False
-
 
         clearControls(getAllNestedControlsWithTag("dataEditingControl", Me))
 
@@ -1407,7 +1404,6 @@ Public Class invoices
         InitializeVehicleDataEditingControls()
         correctInspectionMonthComboBox()
         InitializeTaxExemptFromCustomer()
-        InitializeVehicleDataEditingControls()
         ' setup ComboBoxes
         ContactPhone1_ComboBox.SelectedIndex = -1
         ContactPhone2_ComboBox.SelectedIndex = -1
@@ -1423,11 +1419,8 @@ Public Class invoices
         InvRow = -1
         InvId = -1
 
-
-
-
-
         valuesInitialized = True
+
 
         ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
         InitialInvValues.SetInitialValues(getAllNestedControlsWithTag("dataEditingControl", Me))
@@ -1681,7 +1674,7 @@ Public Class invoices
                     If Not controlsValid() Then Exit Sub
 
                     ' 2.) INSERT NEW ROW INTO MASTER TASK LIST
-                    ' We use update vehicle here, as we're not inserting a new vehicle, but we may be updating vehicle values when editing this form
+                    ' We use update vehicle here, as we're not inserting a new vehicle, but we may be updating vehicle values when inserting a new invoice
                     If Not insertInvoice() Or Not updateVehicle() Then
                         MessageBox.Show("Insert unsuccessful; Changes not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Exit Sub
@@ -1690,7 +1683,7 @@ Public Class invoices
                     End If
 
                     ' 3.) RELOAD DATATABLES FROM DATABASE
-                    If Not loadInvoiceDataTable() Or Not loadVehicleDataTable() Then  ' And Not loadCustomerDataTable
+                    If Not loadInvoiceDataTable() Or Not loadVehicleDataTable() Then
                         MessageBox.Show("Loading updated information failed; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
 
