@@ -754,7 +754,7 @@ Public Class invoices
         If taxExempt Then
             Tax = 0
         Else
-            Dim taxRate As Decimal = CMDbController.DbDataTable.Rows(CMRow)("")
+            Dim taxRate As Decimal = CMDbController.DbDataTable.Rows(CMRow)("TaxRate")
             Tax = Math.Round((taxRate * SubTotal), 2)
         End If
 
@@ -1426,20 +1426,7 @@ Public Class invoices
         InvId = -1
 
 
-        ' Load any dependent DataTables that might be used for initial calculations (should all return 0)
-        'loadDependentDataTables()
-        ' Make Initialization Calls. Should all amount to zero initially.
-        'InitializeInvLaborTextbox()
-        'InitializeInvPartsTextbox()
-        'InitializeShopChargesTextbox()
-        'InitializeSubTotalTextbox()
-        'InitializeTaxTextbox()
-        'InitializeInvPaymentsTextbox()
-        'InitializeNumberTasksTextbox()
-        'Gas_Textbox.Text = String.Format("{0:0.00}", 0)
-        'Towing_Textbox.Text = String.Format("{0:0.00}", 0)
-        'InitializeTotalTextbox()
-        'InitializeBalanceTextbox()
+
 
 
         valuesInitialized = True
@@ -1763,6 +1750,9 @@ Public Class invoices
 
 
 
+
+
+
     Private Sub ShopSupplies_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles ShopSupplies_CheckBox.CheckedChanged
 
         If Not valuesInitialized Then Exit Sub
@@ -1843,9 +1833,20 @@ Public Class invoices
     End Sub
 
 
-    Private Sub TaxExempt_CheckBox_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub TaxExempt_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles TaxExempt_CheckBox.CheckedChanged
+
+        If Not valuesInitialized Then Exit Sub
+
+        InitializeTaxTextbox()
+
+        If InitialInvValues.CtrlValuesChanged() Then
+            saveButton.Enabled = True
+        Else
+            saveButton.Enabled = False
+        End If
 
     End Sub
+
 
     Private Sub Tax_Textbox_TextChanged(sender As Object, e As EventArgs) Handles Tax_Textbox.TextChanged
 
@@ -1962,7 +1963,6 @@ Public Class invoices
 
         If Not valuesInitialized Then Exit Sub
 
-        CalculateTaxableNonTaxableEditing()
         InitializeBalanceTextbox()
 
         If InitialInvValues.CtrlValuesChanged() Then
@@ -1985,6 +1985,8 @@ Public Class invoices
         End If
 
     End Sub
+
+
 
 
 
