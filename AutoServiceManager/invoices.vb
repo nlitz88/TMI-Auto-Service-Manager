@@ -56,6 +56,7 @@ Public Class invoices
     Private NonTaxable As Decimal = 0
     Private InvPaymentsSum As Decimal = 0
     Private Balance As Decimal = 0
+    Private NbrTasks As Decimal = 0
 
     ' Keeps track of whether or not user in "editing" or "adding" mode
     Private mode As String
@@ -820,6 +821,15 @@ Public Class invoices
     End Sub
 
 
+    ' Sub that gets the number of tasks associated with the invoice
+    Private Sub getNbrTasks()
+
+        NbrTasks = InvTaskDbController.DbDataTable.Rows.Count
+
+    End Sub
+
+
+
 
 
     ' Public Function called after invoice task tables have been changed that reinitializes dependent DataTables, corresponding DataGridViews,
@@ -829,6 +839,10 @@ Public Class invoices
 
 
         ' Must recalculate InvLaborSum, InvPartsSum, InvPaymentsSum, and NbrTasks
+        calcInvLaborSum()
+        calcInvPartsSum()
+        calcInvPaymentsSum()
+        getNbrTasks()
         ' Then insert these new values into the InvHdr row
         ' Then, controls can be initialized again as if we were just opening up the invoice for the first time,
         ' and all of the values would be up to date.
