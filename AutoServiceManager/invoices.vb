@@ -313,13 +313,6 @@ Public Class invoices
     End Sub
 
 
-    ' Sub that initializes all dataViewingControls corresponding to values in Vehicle DataTable (inspection month, inspection sticker number)
-    Private Sub InitializeVehicleDataViewingControls()
-
-        initializeControlsFromRow(VehicleDbController.DbDataTable, VehicleRow, "dataViewingControl", "_", Me)
-
-    End Sub
-
     ' Sub that initializes all dataEditingControls corresponding to values in Vehicle DataTable (inspection month, inspection sticker number)
     Private Sub InitializeVehicleDataEditingControls()
 
@@ -409,7 +402,9 @@ Public Class invoices
     End Function
 
 
-    ' THESE TWO AREN'T NECESSARRY, AS THEY WILL NEVER BE CALLED. THEIR VALUES ARE INSERTED INTO THE INVHDR ROW, AND ARE INITIALIZED FROM THERE UPON REINITIALIZING
+
+
+    ' THESE FOUR AREN'T NECESSARRY, AS THEY WILL NEVER BE CALLED. THEIR VALUES ARE INSERTED INTO THE INVHDR ROW, AND ARE INITIALIZED FROM THERE UPON REINITIALIZING
 
     '' Sub that initializes Total Labor sum
     'Private Sub InitializeTotalLaborTextbox()
@@ -428,8 +423,25 @@ Public Class invoices
 
     'End Sub
 
+    ' Sub that initializes Number of Tasks
+    'Private Sub InitializeNumberTasksTextbox()
 
-    ' Sub that initializes Shop Charges based TotalLabor, TotalParts IF Shop Supplies checked
+    '    Dim NbrTasks As Integer = InvTaskDbController.DbDataTable.Rows.Count
+    '    NbrTasks_Textbox.Text = NbrTasks
+
+    'End Sub
+
+    ' Sub that intializes Invoice Total Paid amount based on the total of all of the payments in InvPayments with current InvId
+    'Private Sub InitializeInvPaymentsTextbox()
+
+    '    calcInvPaymentsSum()
+    '    TotalPaid_Textbox.Text = String.Format("{0:0.00}", InvPaymentsSum)
+
+    'End Sub
+
+
+
+    ' Sub that initializes Shop Charges based TotalLabor, TotalParts. Initializes to zero if Shop Supplies not checked
     Private Sub InitializeShopChargesTextbox()
 
         calcShopCharges()
@@ -465,18 +477,9 @@ Public Class invoices
     End Sub
 
 
-    ' Sub that initializes and calculates InvTotal from SubTotal and Tax
-    Private Sub InitializeTotalValue()
-
-        ' No need for currency validation here, as the values for Gas and Towing should/will always be valid from the DataTable
-        Dim GasCost As Decimal = InvDbController.DbDataTable(InvRow)("Gas")
-        Dim TowingCost As Decimal = InvDbController.DbDataTable(InvRow)("Towing")
-
-        InvTotalSum = SubTotal + Tax + GasCost + TowingCost
-        InvTotal_Value.Text = InvTotalSum
-
-    End Sub
-
+    ' Sub that initializes InvTotalTextbox only if SubTotal, Tax, Gas, and Towing are all in a valid currency form.
+    ' If so, this will calculate InvTotalSum using Subtotal, Tax, and Gas and Towing using their respective functions to get their values.
+    ' Will also call for the calculation of Taxable and NonTaxable, as if this is being calculated, all of the values that they depend on are valid, and can also be calculated.
     Private Sub InitializeTotalTextbox()
 
         ' Add validation checking for Gas and Towing Cost Inputs
@@ -485,13 +488,12 @@ Public Class invoices
             validCurrency("Tax", True, Tax_Textbox.Text, String.Empty) And
             validCurrency("SubTotal", True, SubTotalTextbox.Text, String.Empty) Then
 
-            Dim GasCost As Decimal = Convert.ToDecimal(Gas_Textbox.Text)
-            Dim TowingCost As Decimal = Convert.ToDecimal(Towing_Textbox.Text)
-            Dim SubTotalFromTextbox As Decimal = Convert.ToDecimal(SubTotalTextbox.Text)
-            Dim TaxFromTextbox As Decimal = Convert.ToDecimal(Tax)
-
-            InvTotalSum = SubTotalFromTextbox + TaxFromTextbox + GasCost + TowingCost
+            getGas()
+            getTowing()
+            InvTotalSum = SubTotal + Tax + Gas + Towing
             InvTotal_Textbox.Text = String.Format("{0:0.00}", InvTotalSum)
+
+            calcTaxableNonTaxable()
 
         Else
             InvTotal_Textbox.Text = String.Empty
@@ -500,79 +502,14 @@ Public Class invoices
     End Sub
 
 
-    ' Sub that initializes and calculates Taxable and NonTaxable. No validation needed, as values for viewing are all calculated
-    Private Sub CalculateTaxableNonTaxableViewing()
-
-        ' Get Tax Exempt Status From Customer DataTable (don't bother with the values here, as they don't change)
-        ' We can get it from Customer DT, as this isn't something that is changed on this form
-        Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
-
-        ' Calculate Taxable and NonTaxable
-        If TaxExempt Then
-            Taxable = 0
-            NonTaxable = InvTotalSum
-        Else
-            Taxable = InvLaborSum + InvPartsSum + ShopCharges
-            Dim gas As Decimal = InvDbController.DbDataTable(InvRow)("Gas")
-            Dim towing As Decimal = InvDbController.DbDataTable(InvRow)("Towing")
-            NonTaxable = gas + towing
-        End If
-
-    End Sub
-
-    ' Sub that initializes and calculates Taxable and NonTaxable. Validation required, as this may not be able to be calculated if invTotal invalid
-    Private Sub CalculateTaxableNonTaxableEditing()
-
-        ' Get Tax Exempt Status From Customer DataTable (don't bother with the values here, as they don't change)
-        ' We can get it from Customer DT, as this isn't something that is changed on this form
-        Dim TaxExempt As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
-
-        If validCurrency("Invoice Total", True, InvTotal_Textbox.Text, String.Empty) Then
-            ' Calculate Taxable and NonTaxable
-            If TaxExempt Then
-                Taxable = 0
-                NonTaxable = Convert.ToDecimal(InvTotal_Textbox.Text)
-            Else
-                Taxable = Convert.ToDecimal(SubTotalTextbox.Text)
-                Dim gas As Decimal = Convert.ToDecimal(Gas_Textbox.Text)
-                Dim towing As Decimal = Convert.ToDecimal(Towing_Textbox.Text)
-                NonTaxable = gas + towing
-            End If
-        End If
-
-    End Sub
-
-
-    ' Sub that intializes Invoice Total Paid amount based on the total of all of the payments in InvPayments with current InvId
-    'Private Sub InitializeInvPaymentsTextbox()
-
-    '    calcInvPaymentsSum()
-    '    TotalPaid_Textbox.Text = String.Format("{0:0.00}", InvPaymentsSum)
-
-    'End Sub
-
-
-    ' Sub that initializes Balance based on Total Paid (Total of Payments made) and the total
-    Private Sub InitializeBalanceValue()
-
-        Dim balance As Decimal = InvTotalSum - InvPaymentsSum
-        BalanceValue.Text = balance
-
-    End Sub
-
+    ' Sub that initializes Balance based on InvPaymentsSum and InvTotalSum. Will only initialize if InvTotal is in a valid currency form.
     Private Sub InitializeBalanceTextbox()
 
-        Dim balance As Decimal
-
-        ' Will need to validate Total as a currency
         If validCurrency("InvTotal", True, InvTotal_Textbox.Text, String.Empty) And
             validCurrency("Total Paid", True, TotalPaid_Textbox.Text, String.Empty) Then
 
-            Dim TotalFromTextbox As Decimal = Convert.ToDecimal(InvTotal_Textbox.Text)
-            Dim PaymentsSumFromTextbox As Decimal = Convert.ToDecimal(TotalPaid_Textbox.Text)
-
-            balance = TotalFromTextbox - PaymentsSumFromTextbox
-            BalanceTextbox.Text = String.Format("{0:0.00}", balance)
+            calcBalance()
+            BalanceTextbox.Text = String.Format("{0:0.00}", Balance)
 
         Else
             BalanceTextbox.Text = String.Empty
@@ -581,27 +518,8 @@ Public Class invoices
     End Sub
 
 
-    ' Sub that initializes Number of Tasks
-    Private Sub InitializeNumberTasksValue()
 
-        Dim NbrTasks As Integer = InvTaskDbController.DbDataTable.Rows.Count
-        NbrTasks_Value.Text = NbrTasks
 
-    End Sub
-
-    Private Sub InitializeNumberTasksTextbox()
-
-        Dim NbrTasks As Integer = InvTaskDbController.DbDataTable.Rows.Count
-        NbrTasks_Textbox.Text = NbrTasks
-
-    End Sub
-
-    ' Calculation based initialization subs here for:
-    '   (DONE) Shop Charges        Make sure to call this whenever Shop Supplies CheckBox checked
-    '   (DONE) SubTotal
-    '   (DONE) Tax
-    '   (DONE) Total
-    '   (DONE) Number of Tasks
 
 
 
@@ -742,12 +660,6 @@ Public Class invoices
     End Sub
 
 
-    ' temp sub to maintain the various functions that must be called when adding a new invoice
-    'Private Sub tempAdding()
-
-    '    'InitializeTaxExemptFromCustomer()
-    '    'InitializeVehicleDataEditingControls()
-    'End Sub
 
 
     ' Sub that resets variables that maintain each calculated value.
@@ -768,8 +680,7 @@ Public Class invoices
 
     End Sub
 
-    ' Sub that assigns calculated values to their corresponding controls where appropriate.
-    ' This will be called AFTER all values have undergone calculations in other functions
+    ' Sub that is used to assign 0 to all calculation based controls upon adding a new invoice
     Private Sub InitializeCalculatedOnAdd()
 
         TotalLabor_Textbox.Text = String.Format("{0:0.00}", InvLaborSum)
@@ -919,6 +830,18 @@ Public Class invoices
     ' Public Function called after invoice task tables have been changed that reinitializes dependent DataTables, corresponding DataGridViews,
     ' And subTaskEditingControls.
     Public Function reinitializeDependents() As Boolean
+
+
+
+        ' Must recalculate InvLaborSum, InvPartsSum, InvPaymentsSum, and NbrTasks
+        ' Then insert these new values into the InvHdr row
+        ' Then, controls can be initialized again as if we were just opening up the invoice for the first time,
+        ' and all of the values would be up to date.
+
+
+
+
+
 
         valuesInitialized = False
 
@@ -1476,6 +1399,7 @@ Public Class invoices
         InitializeVehicleDataEditingControls()
         correctInspectionMonthComboBox()
         InitializeTaxExemptFromCustomer()
+        InitializeVehicleDataEditingControls()
         ' setup ComboBoxes
         ContactPhone1_ComboBox.SelectedIndex = -1
         ContactPhone2_ComboBox.SelectedIndex = -1
@@ -1490,6 +1414,7 @@ Public Class invoices
 
         InvRow = -1
         InvId = -1
+
 
         ' Load any dependent DataTables that might be used for initial calculations (should all return 0)
         'loadDependentDataTables()
