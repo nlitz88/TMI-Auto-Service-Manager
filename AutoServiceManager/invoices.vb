@@ -905,7 +905,14 @@ Public Class invoices
         If CRUD.HasException() Then Return False
 
         ' 6.) Then, controls can be initialized again as if we were just opening up the invoice for the first time, and all of the values will be up to date.
+
         valuesInitialized = False
+
+        ' Reload InvHdr rows
+        If Not loadInvoiceDataTable() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
 
         ' Load TaskParts and TaskLabor datatables based on selected TaskId, then Initialize corresponding GridViews
         If Not loadDependentDataTables() Then
@@ -913,38 +920,10 @@ Public Class invoices
             Return False
         End If
 
-        ' Initialize all dataEditingControls (must do this after dependent datatables loaded, however)
+        ' Initialize all dataEditingControls
         InitializeAllDataViewingControls()
-        ' Initialize corresponding DataGridViews
 
         valuesInitialized = True
-
-
-
-
-
-
-
-        ' Update invoice TotalLabor, TotalParts, Tax, InvTotal, TotalPaid, Taxable, and NonTaxable based on InvNbr (stored in InvId)
-
-        CRUD.AddParams("@totallabor", InvLaborSum)
-        CRUD.AddParams("@totalparts", InvPartsSum)
-        CRUD.AddParams("@tax", Tax)
-        CRUD.AddParams("@invtotal", InvTotalSum)
-        CRUD.AddParams("@totalpaid", InvPaymentsSum)
-        CRUD.AddParams("@taxable", Taxable)
-        CRUD.AddParams("@nontaxable", NonTaxable)
-        CRUD.AddParams("@invid", InvId)
-
-        ' Also  update invoice PayDate with MOST RECENT payDate
-
-        'CRUD.AddParams("@paydate")
-        ' MUST REDESIGN INITIALIZATION BEFORE i CAN ADD THIS
-
-
-
-
-        ' THIS IS WHERE CALLS COULD BE MADE TO UPDATE INVHDR BASED ON PAYMENT DATA THAT MAY HAVE BEEN ADDED.
 
 
         Return True
