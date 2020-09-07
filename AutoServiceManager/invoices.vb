@@ -490,7 +490,7 @@ Public Class invoices
 
             getGas()
             getTowing()
-            InvTotalSum = SubTotal + Tax + Gas + Towing
+            calcInvTotalSum()
             InvTotal_Textbox.Text = String.Format("{0:0.00}", InvTotalSum)
 
             calcTaxableNonTaxable()
@@ -516,9 +516,6 @@ Public Class invoices
         End If
 
     End Sub
-
-
-
 
 
 
@@ -561,6 +558,7 @@ Public Class invoices
         formatDataViewingControls()
 
     End Sub
+
 
     ' Sub that calls all individual dataEditingControl initialization subs in one
     ' This is used ONLY for when EDITING an invoice. When adding, editing controls are initialized with DIFFERENT sub
@@ -632,6 +630,7 @@ Public Class invoices
 
     End Sub
 
+
     ' Sub that will add formatting to already initialized dataEditingControls
     Private Sub formatDataEditingControls()
 
@@ -658,6 +657,7 @@ Public Class invoices
         BalanceTextbox.Text = String.Format("{0:0.00}", Convert.ToDecimal(BalanceTextbox.Text))
 
     End Sub
+
 
 
 
@@ -697,11 +697,6 @@ Public Class invoices
     End Sub
 
 
-    ' ADD CALCULATION FUNCTIONS FOR EACH VALUE HERE.
-    '   Each should be called for its respective control's textchange event or equivalent
-    '   If one value is dependent on another that is input, and the other is INVALID, then simply reset this value, and don't calculate.
-    '       In this scenario, the textchange event would need to check whether or not to calculate based on if the dependent values are valid or not (Currently set up this way, no worries)
-    '       ALSO: could change these so that they reset the value they calculate before hand here rather than in a separate sub
 
 
     ' Sub that calculates Invoice Labor Cost based on the total cost of all of the labor codes in InvLabor with current InvId
@@ -838,6 +833,7 @@ Public Class invoices
         ' Then, controls can be initialized again as if we were just opening up the invoice for the first time,
         ' and all of the values would be up to date.
 
+        ' Also, all values should technically be recalculated here. So will have to go through those steps.
 
 
 
