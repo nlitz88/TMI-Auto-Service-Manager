@@ -755,11 +755,11 @@ Public Class invoices
 
 
     ' temp sub to maintain the various functions that must be called when adding a new invoice
-    Private Sub tempAdding()
+    'Private Sub tempAdding()
 
-        'InitializeTaxExemptFromCustomer()
-        'InitializeVehicleDataEditingControls()
-    End Sub
+    '    'InitializeTaxExemptFromCustomer()
+    '    'InitializeVehicleDataEditingControls()
+    'End Sub
 
 
     ' Sub that resets variables that maintain each calculated value.
@@ -782,7 +782,7 @@ Public Class invoices
 
     ' Sub that assigns calculated values to their corresponding controls where appropriate.
     ' This will be called AFTER all values have undergone calculations in other functions
-    Private Sub InitializeCalculatedValues()
+    Private Sub InitializeCalculatedOnAdd()
 
         TotalLabor_Textbox.Text = String.Format("{0:0.00}", InvLaborSum)
         TotalParts_Textbox.Text = String.Format("{0:0.00}", InvPartsSum)
@@ -1440,7 +1440,7 @@ Public Class invoices
 
         ' RESET CALCULATED VALUES AND INITIALIZE ALL CALCULATION BASED DATAEDITING CONTROLS
         resetCalculatedValues()
-        InitializeCalculatedValues()
+        InitializeCalculatedOnAdd() ' Initializes controls of all calculated values to ZERO
 
         InvRow = -1
         InvId = -1
