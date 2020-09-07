@@ -761,6 +761,12 @@ Public Class invoices
         Dim taxExempt As Boolean = TaxExempt_CheckBox.Checked
 
         If taxExempt Then
+
+            ' If marked as tax exempt, and changes made to shop charges or similar, then Tax will remain unaffected at 0.00
+            ' As a result, InvTotal will not be calculated, as taxEventTextChanged never fires and InvTotal is never initialized
+            ' So, if we find that TaxExempt is true, we will manually fire the TaxTextBox_TextChanged event
+            Tax_Textbox_TextChanged(Tax_Textbox, New EventArgs())
+
             Tax = 0
         Else
             Dim taxRate As Decimal = CMDbController.DbDataTable.Rows(CMRow)("TaxRate")
