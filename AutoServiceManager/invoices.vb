@@ -1362,6 +1362,7 @@ Public Class invoices
             ' Disable editing button
             modifyInvButton.Enabled = False
             deleteInvButton.Enabled = False
+            printInvButton.Enabled = False
 
             Exit Sub
 
@@ -1397,6 +1398,7 @@ Public Class invoices
             ' Enable editing and deleting button
             modifyInvButton.Enabled = True
             deleteInvButton.Enabled = True
+            printInvButton.Enabled = True
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
@@ -1408,6 +1410,7 @@ Public Class invoices
             ' Disable editing button
             modifyInvButton.Enabled = False
             deleteInvButton.Enabled = False
+            printInvButton.Enabled = False
 
         End If
 
@@ -1455,6 +1458,7 @@ Public Class invoices
         VehicleComboBox.Enabled = False
         InvoiceComboBox.Enabled = False
         modifyInvButton.Enabled = False
+        printInvButton.Enabled = False
         newInvButton.Enabled = False
         cancelButton.Enabled = True
         nav.DisableAll()
@@ -1515,6 +1519,7 @@ Public Class invoices
                 newInvButton.Enabled = True
                 cancelButton.Enabled = False
                 saveButton.Enabled = False
+                printInvButton.Enabled = False
                 nav.EnableAll()
 
                 ' Re-Enable Task and Payment Buttons
@@ -1550,6 +1555,7 @@ Public Class invoices
         ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
         modifyInvButton.Enabled = False
         newInvButton.Enabled = False
+        printInvButton.Enabled = False
         cancelButton.Enabled = True
         nav.DisableAll()
         CustomerComboBox.Enabled = False
@@ -1591,6 +1597,7 @@ Public Class invoices
             VehicleComboBox.Enabled = True
             InvoiceComboBox.Enabled = True
             modifyInvButton.Enabled = True
+            printInvButton.Enabled = True
             newInvButton.Enabled = True
             cancelButton.Enabled = False
             saveButton.Enabled = False
@@ -1624,6 +1631,7 @@ Public Class invoices
             VehicleComboBox.Enabled = True
             InvoiceComboBox.Enabled = True
             newInvButton.Enabled = True
+            printInvButton.Enabled = True
             cancelButton.Enabled = False
             saveButton.Enabled = False
             nav.EnableAll()
@@ -1683,6 +1691,7 @@ Public Class invoices
                     newInvButton.Enabled = True
                     cancelButton.Enabled = False
                     saveButton.Enabled = False
+                    printInvButton.Enabled = True
                     nav.EnableAll()
                     CustomerComboBox.Enabled = True
                     VehicleComboBox.Enabled = True
@@ -1743,6 +1752,7 @@ Public Class invoices
                     newInvButton.Enabled = True
                     cancelButton.Enabled = False
                     saveButton.Enabled = False
+                    printInvButton.Enabled = True
                     nav.EnableAll()
                     CustomerComboBox.Enabled = True
                     VehicleComboBox.Enabled = True
@@ -1769,7 +1779,8 @@ Public Class invoices
         Try
             AcccessInstance.Visible = False
             AcccessInstance.OpenCurrentDatabase(filepath)
-            AcccessInstance.DoCmd.OpenReport(ReportName:="Invoice", Microsoft.Office.Interop.Access.AcView.acViewPreview)
+            AcccessInstance.DoCmd.OpenReport(ReportName:="Invoice", Microsoft.Office.Interop.Access.AcView.acViewPreview, FilterName:="InvNbr", WhereCondition:="InvNbr=" + CStr(InvId))
+            ' DoCmd.OpenReport stDocName, acNormal, , "InvNbr=" + CStr(InvNbr)
 
         Catch ex As Exception
 
