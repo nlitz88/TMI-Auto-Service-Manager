@@ -852,7 +852,6 @@ Public Class invoices
     Public Function reinitializeDependents() As Boolean
 
 
-
         ' 1.) Determine how shopCharges will be inserted
         ' Alternate option: Don't recalc shopcharges if custom value already entered
         Dim calculateShopCharges As Boolean = True

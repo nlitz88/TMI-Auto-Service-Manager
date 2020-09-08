@@ -100,7 +100,7 @@
         changeScreen(masterTaskMaintenance, Me.ParentForm)
     End Sub
 
-    Private Sub InvoiceMaintenanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InvoiceMaintenanceToolStripMenuItem.Click
+    Private Sub InvoicesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InvoicesToolStripMenuItem.Click
         If Me.ParentForm Is invoices Then Exit Sub
         changeScreen(invoices, Me.ParentForm)
     End Sub

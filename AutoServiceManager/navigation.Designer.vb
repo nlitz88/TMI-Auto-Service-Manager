@@ -24,8 +24,7 @@ Partial Class navigation
     Private Sub InitializeComponent()
         Me.mainMs = New System.Windows.Forms.MenuStrip()
         Me.HomeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NewInvoiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.InvoiceMaintenanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InvoicesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FileMaintenanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CompanySetupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AutomobileManufacturersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -49,7 +48,7 @@ Partial Class navigation
         '
         Me.mainMs.BackColor = System.Drawing.Color.White
         Me.mainMs.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.mainMs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HomeToolStripMenuItem, Me.NewInvoiceToolStripMenuItem, Me.InvoiceMaintenanceToolStripMenuItem, Me.FileMaintenanceToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.LogoutToolStripMenuItem})
+        Me.mainMs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HomeToolStripMenuItem, Me.InvoicesToolStripMenuItem, Me.FileMaintenanceToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.LogoutToolStripMenuItem})
         Me.mainMs.Location = New System.Drawing.Point(0, 0)
         Me.mainMs.Name = "mainMs"
         Me.mainMs.Size = New System.Drawing.Size(1000, 28)
@@ -62,17 +61,11 @@ Partial Class navigation
         Me.HomeToolStripMenuItem.Size = New System.Drawing.Size(64, 24)
         Me.HomeToolStripMenuItem.Text = "Home"
         '
-        'NewInvoiceToolStripMenuItem
+        'InvoicesToolStripMenuItem
         '
-        Me.NewInvoiceToolStripMenuItem.Name = "NewInvoiceToolStripMenuItem"
-        Me.NewInvoiceToolStripMenuItem.Size = New System.Drawing.Size(104, 24)
-        Me.NewInvoiceToolStripMenuItem.Text = "New Invoice"
-        '
-        'InvoiceMaintenanceToolStripMenuItem
-        '
-        Me.InvoiceMaintenanceToolStripMenuItem.Name = "InvoiceMaintenanceToolStripMenuItem"
-        Me.InvoiceMaintenanceToolStripMenuItem.Size = New System.Drawing.Size(159, 24)
-        Me.InvoiceMaintenanceToolStripMenuItem.Text = "Invoice Maintenance"
+        Me.InvoicesToolStripMenuItem.Name = "InvoicesToolStripMenuItem"
+        Me.InvoicesToolStripMenuItem.Size = New System.Drawing.Size(76, 24)
+        Me.InvoicesToolStripMenuItem.Text = "Invoices"
         '
         'FileMaintenanceToolStripMenuItem
         '
@@ -188,8 +181,7 @@ Partial Class navigation
 
     Friend WithEvents mainMs As MenuStrip
     Friend WithEvents HomeToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NewInvoiceToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents InvoiceMaintenanceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents InvoicesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FileMaintenanceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CompanySetupToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReportsToolStripMenuItem As ToolStripMenuItem
