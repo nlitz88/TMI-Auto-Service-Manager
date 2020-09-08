@@ -1763,24 +1763,17 @@ Public Class invoices
 
     Private Sub printInvButton_Click(sender As Object, e As EventArgs) Handles printInvButton.Click
 
-        Dim oAccess As New Microsoft.Office.Interop.Access.Application()
-        Dim FPath As String = "F:\Schweikarth\TMI-ServiceMgr.mdb"
-
-
+        Dim AcccessInstance As New Microsoft.Office.Interop.Access.Application()
+        Dim filepath As String = readINI("AutoServiceManagerParams.ini", "PRIMARY-DATABASE-FILEPATH=")
 
         Try
-
-            oAccess.Visible = False
-
-            oAccess.OpenCurrentDatabase(FPath)
-
-            oAccess.DoCmd.OpenReport(ReportName:="CompanyMaster", Microsoft.Office.Interop.Access.AcView.acViewPreview)
-
+            AcccessInstance.Visible = False
+            AcccessInstance.OpenCurrentDatabase(filepath)
+            AcccessInstance.DoCmd.OpenReport(ReportName:="Invoice", Microsoft.Office.Interop.Access.AcView.acViewPreview)
 
         Catch ex As Exception
 
-            MsgBox(ex.Message)
-
+            MessageBox.Show("Viewing print preview unsuccessful. Ensure Database has not been moved and retry.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
 
         End Try
