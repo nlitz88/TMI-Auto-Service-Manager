@@ -852,6 +852,8 @@ Public Class invoices
     Public Function reinitializeDependents() As Boolean
 
 
+
+        ' 1.) Determine how shopCharges will be inserted
         ' Alternate option: Don't recalc shopcharges if custom value already entered
         Dim calculateShopCharges As Boolean = True
         Dim properShopCharge As Decimal
@@ -864,13 +866,19 @@ Public Class invoices
             calculateShopCharges = False
         End If
 
-        ' 1.) Recalculate values that may have changed from forms outside of this one. I.e. InvLaborSum, InvPartsSum, InvPaymentsSum, and NbrTasks.
+        ' 2.) Reload dependent datatables (InvTask and InvPayments). Must do this before recalculating InvTask and InvPayment values
+        If Not loadDependentDataTables() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
+
+        ' 3.) Recalculate values that may have changed from forms outside of this one. I.e. InvLaborSum, InvPartsSum, InvPaymentsSum, and NbrTasks.
         calcInvLaborSum()
         calcInvPartsSum()
         calcInvPaymentsSum()
         getNbrTasks()
 
-        ' 2.) As these values contribute to the InvTotal cost and other calculations like subtotal, tax, balance, etc., we must recalculate all of those values.
+        ' 4.) As these values contribute to the InvTotal cost and other calculations like subtotal, tax, balance, etc., we must recalculate all of those values.
         '       Because these forms can only be accessed while not editing other invoice data values, we can use the values currently in the table for our calculations
         '       Because all of these values are already stored in variables, we can use our calculation subs to recalculate the values that are dependendent on
         '       a.) InvLaborSum     b.) InvPartsSum     c.) InvPaymentsSum
@@ -881,11 +889,12 @@ Public Class invoices
         calcTax()
         calcInvTotalSum()
 
-        ' 3.) Also, determine date of the most recent payment in InvPayments
+        ' 5.) Also, determine date of the most recent payment in InvPayments
         Dim mostRecentDate As Object
         mostRecentDate = InvPaymentsDbController.DbDataTable.Compute("Max(PayDate)", "")
 
-        ' 4.) Add these newly calculated values as parameters
+        ' 6.) Add these newly calculated values as parameters
+        CRUD.AddParams("@nbrtasks", NbrTasks)
         CRUD.AddParams("@totallabor", InvLaborSum)
         CRUD.AddParams("@totalparts", InvPartsSum)
         CRUD.AddParams("@shopcharges", ShopCharges)
@@ -897,24 +906,18 @@ Public Class invoices
         CRUD.AddParams("@nontaxable", NonTaxable)
         CRUD.AddParams("@invid", InvId)
 
-        ' 5.) Then insert these new values into the InvHdr row
-        CRUD.ExecQuery("UPDATE InvHdr SET TotalLabor=@totallabor, TotalParts=@totalparts, ShopCharges=@shopcharges, Tax=@tax, InvTotal=@invtotal, TotalPaid=@totalpaid, " &
+        ' 7.) Then insert these new values into the InvHdr row
+        CRUD.ExecQuery("UPDATE InvHdr SET NbrTasks=@nbrtasks, TotalLabor=@totallabor, TotalParts=@totalparts, ShopCharges=@shopcharges, Tax=@tax, InvTotal=@invtotal, TotalPaid=@totalpaid, " &
                        "PayDate=@paydate, Taxable=@taxable, NonTaxable=@nontaxable " &
                        "WHERE InvNbr=@invid")
         If CRUD.HasException() Then Return False
 
-        ' 6.) Then, controls can be initialized again as if we were just opening up the invoice for the first time, and all of the values will be up to date.
+        ' 8.) Then, controls can be initialized again as if we were just opening up the invoice for the first time, and all of the values will be up to date.
 
         valuesInitialized = False
 
         ' Reload InvHdr rows
         If Not loadInvoiceDataTable() Then
-            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return False
-        End If
-
-        ' Load TaskParts and TaskLabor datatables based on selected TaskId, then Initialize corresponding GridViews
-        If Not loadDependentDataTables() Then
             MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         End If
