@@ -1777,10 +1777,31 @@ Public Class invoices
         Dim filepath As String = readINI("AutoServiceManagerParams.ini", "PRIMARY-DATABASE-FILEPATH=")
 
         Try
+
             AcccessInstance.Visible = False
             AcccessInstance.OpenCurrentDatabase(filepath)
-            AcccessInstance.DoCmd.OpenReport(ReportName:="Invoice", Microsoft.Office.Interop.Access.AcView.acViewPreview, FilterName:="InvNbr", WhereCondition:="InvNbr=" + CStr(InvId))
-            ' DoCmd.OpenReport stDocName, acNormal, , "InvNbr=" + CStr(InvNbr)
+            AcccessInstance.DoCmd.OpenReport(ReportName:="Invoice", Microsoft.Office.Interop.Access.AcView.acViewPreview, , WhereCondition:="InvNbr=" & CStr(InvId))
+
+        Catch ex As Exception
+
+            MessageBox.Show("Viewing print preview unsuccessful. Ensure Database has not been moved and retry.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+
+        End Try
+
+    End Sub
+
+
+    Private Sub vehicleHistoryButton_Click(sender As Object, e As EventArgs) Handles vehicleHistoryButton.Click
+
+        Dim AcccessInstance As New Microsoft.Office.Interop.Access.Application()
+        Dim filepath As String = readINI("AutoServiceManagerParams.ini", "PRIMARY-DATABASE-FILEPATH=")
+
+        Try
+
+            AcccessInstance.Visible = False
+            AcccessInstance.OpenCurrentDatabase(filepath)
+            AcccessInstance.DoCmd.OpenReport(ReportName:="CustomerHistory", Microsoft.Office.Interop.Access.AcView.acViewPreview, , WhereCondition:="CustomerID=" & CStr(CustomerId) & " and VehicleId=" & CStr(VehicleId))
 
         Catch ex As Exception
 
