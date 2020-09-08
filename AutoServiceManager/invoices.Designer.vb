@@ -129,9 +129,9 @@ Partial Class invoices
         Me.Notes_Value = New System.Windows.Forms.Label()
         Me.Complete_Value = New System.Windows.Forms.CheckBox()
         Me.ShopSupplies_Value = New System.Windows.Forms.CheckBox()
-        Me.nav = New AutoServiceManager.navigation()
         Me.TaxExempt_Value = New System.Windows.Forms.CheckBox()
         Me.TaxExempt_CheckBox = New System.Windows.Forms.CheckBox()
+        Me.nav = New AutoServiceManager.navigation()
         Me.CostTableLayoutPanel.SuspendLayout()
         Me.TotalPanel.SuspendLayout()
         Me.TaxPanel.SuspendLayout()
@@ -1438,15 +1438,6 @@ Partial Class invoices
         Me.ShopSupplies_Value.Tag = "dataViewingControl"
         Me.ShopSupplies_Value.UseVisualStyleBackColor = True
         '
-        'nav
-        '
-        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.nav.Location = New System.Drawing.Point(0, 0)
-        Me.nav.Name = "nav"
-        Me.nav.Size = New System.Drawing.Size(1182, 28)
-        Me.nav.TabIndex = 267
-        '
         'TaxExempt_Value
         '
         Me.TaxExempt_Value.AutoCheck = False
@@ -1467,6 +1458,15 @@ Partial Class invoices
         Me.TaxExempt_CheckBox.TabIndex = 324
         Me.TaxExempt_CheckBox.Tag = "dataEditingControl"
         Me.TaxExempt_CheckBox.UseVisualStyleBackColor = True
+        '
+        'nav
+        '
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(1182, 28)
+        Me.nav.TabIndex = 267
         '
         'invoices
         '

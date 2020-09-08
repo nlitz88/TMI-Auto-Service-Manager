@@ -1761,6 +1761,32 @@ Public Class invoices
     End Sub
 
 
+    Private Sub printInvButton_Click(sender As Object, e As EventArgs) Handles printInvButton.Click
+
+        Dim oAccess As New Microsoft.Office.Interop.Access.Application()
+        Dim FPath As String = "F:\Schweikarth\TMI-ServiceMgr.mdb"
+
+
+
+        Try
+
+            oAccess.Visible = False
+
+            oAccess.OpenCurrentDatabase(FPath)
+
+            oAccess.DoCmd.OpenReport(ReportName:="CompanyMaster", Microsoft.Office.Interop.Access.AcView.acViewPreview)
+
+
+        Catch ex As Exception
+
+            MsgBox(ex.Message)
+
+            Exit Sub
+
+        End Try
+
+    End Sub
+
 
 
 
@@ -2246,7 +2272,6 @@ Public Class invoices
         changeScreenHide(invoicePayments, previousScreen)
 
     End Sub
-
 
 
 End Class
