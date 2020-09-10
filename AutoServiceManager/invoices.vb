@@ -1853,6 +1853,11 @@ Public Class invoices
                     tasksButton.Enabled = True
                     paymentsButton.Enabled = True
 
+                    ' Re-Enable all licensePlate searching controls
+                    For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
+                        ctrl.Enabled = True
+                    Next
+
 
                 ElseIf mode = "adding" Then
 
@@ -1913,6 +1918,11 @@ Public Class invoices
                     ' Re-Enable Task and Payment Buttons
                     tasksButton.Enabled = True
                     paymentsButton.Enabled = True
+
+                    ' Re-Enable all licensePlate searching controls
+                    For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
+                        ctrl.Enabled = True
+                    Next
 
                 End If
 
