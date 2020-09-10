@@ -1255,6 +1255,10 @@ Public Class invoices
             VehicleLabel.Visible = True
             VehicleComboBox.SelectedIndex = 0
 
+            ' Now that valid Customer selected, move user to vehicleCombobox
+            CustomerComboBox.SelectionLength = 0
+            VehicleComboBox.Select()
+
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
 
@@ -1325,6 +1329,10 @@ Public Class invoices
             newInvButton.Enabled = True
             ' User may now also view vehicle history of the selected vehicle
             vehicleHistoryButton.Visible = True
+
+            ' Now that valid vehicle selected, move user to invoice combobox
+            VehicleComboBox.SelectionLength = 0
+            InvoiceComboBox.Select()
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
@@ -1399,6 +1407,10 @@ Public Class invoices
             modifyInvButton.Enabled = True
             deleteInvButton.Enabled = True
             printInvButton.Enabled = True
+
+            ' Now that valid invoice selected, move user to first field (contact)
+            InvoiceComboBox.SelectionLength = 0
+            ContactName_Textbox.Select()
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
