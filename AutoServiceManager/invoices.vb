@@ -1045,6 +1045,23 @@ Public Class invoices
 
 
 
+    ' Function used to query vehicles table based on LicenseState and LicensePlate
+    Private Function searchVehicles() As Boolean
+
+        CRUD.AddParams("@licensestate", LicenseStateComboBox.Text)
+        CRUD.AddParams("@licenseplate", LicensePlateTextbox.Text)
+        CRUD.ExecQuery("SELECT v.CustomerId, v.VehicleId, v.LicenseState, v.LicensePlate " &
+                                       "FROM Vehicle v " &
+                                       "WHERE LicenseState=@licensestate AND LicensePlate=@licenseplate " &
+                                       "ORDER BY v.VehicleId ASC")
+        If CRUD.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+
+
 
     ' **************** VALIDATION SUBS ****************
 
@@ -1154,6 +1171,41 @@ Public Class invoices
 
 
 
+    Private Function LicenseSearchControlsValid() As Boolean
+
+        Dim errorMessage As String = String.Empty
+
+        ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
+
+
+        ' License State
+        If Not isValidLength("License State", True, LicenseStateComboBox.Text, 2, errorMessage) Then
+            LicenseStateComboBox.ForeColor = Color.Red
+        ElseIf Not String.IsNullOrWhiteSpace(LicenseStateComboBox.Text) And Not valueExists("State", LicenseStateComboBox.Text, StateDbController.DbDataTable) Then
+            errorMessage += "ERROR: " & LicenseStateComboBox.Text & " is not a valid State" & vbNewLine
+            LicenseStateComboBox.ForeColor = Color.Red
+        End If
+
+        ' License Plate
+        If Not isValidLength("License Plate", True, LicensePlateTextbox.Text, 10, errorMessage) Then
+            LicensePlateTextbox.ForeColor = Color.Red
+        End If
+
+
+        ' Check if any invalid input has been found
+        If Not String.IsNullOrEmpty(errorMessage) Then
+
+            MessageBox.Show(errorMessage, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+
+        End If
+
+        Return True
+
+    End Function
+
+
+
 
     Public Sub New()
 
@@ -1225,6 +1277,68 @@ Public Class invoices
         backupDb()
 
     End Sub
+
+
+
+
+
+    ' **************** LICENSE PLATE SEARCH CONTROL SUBS ****************
+
+    ' Must lookup vehicle based on License State and LicensePlate
+    ' Will have to use Database CRUD call for this
+    Private Sub licensePlateSearchButton_Click(sender As Object, e As EventArgs) Handles licensePlateSearchButton.Click
+
+        ' 1.) Validate that both LicenseState and LicensePlate fields are populated
+        If Not LicenseSearchControlsValid() Then Exit Sub
+
+        ' 2.) If valid, then attempt to lookup License Plate in vehicles table
+        If Not searchVehicles() Then
+            MessageBox.Show("Failed to search database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        ' 3.) If query was successful, analyze the resulting rows
+
+        ' If vehicle not found, 0 rows will be returned. Report this to user.
+        If CRUD.DbDataTable.Rows.Count = 0 Then
+            MessageBox.Show("No vehicle found with license plate " & LicensePlateTextbox.Text & " in " & LicenseStateComboBox.Text, "Vehicle Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        ElseIf CRUD.DbDataTable.Rows.Count > 0 Then
+
+            ' Get data from the first row that it returns. Should only return one row, but just in case multiple are, only get the first.
+            CustomerId = CRUD.DbDataTable.Rows(0)("CustomerId")
+            VehicleId = CRUD.DbDataTable.Rows(0)("VehicleId")
+
+            ' First, use CustomerId to get associated Customer
+            Dim CLFA As String = getRowValueWithKeyEquals(CustomerDbController.DbDataTable, "CLFA", "CustomerId", CustomerId)
+            ' If associated CLFA found, then select that CLFA in the CustomerComboBox
+            If CLFA <> Nothing Then
+                CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(CLFA)
+
+                ' Then, as CLFA selected, we can select the vehicle that corresponds with the VehicleId we have
+                Dim YMML As String = getRowValueWithKeyEquals(VehicleDbController.DbDataTable, "YMML", "VehicleId", VehicleId)
+                ' If associated YMML found, then select that YMML in the VehicleComboBox
+                If YMML <> Nothing Then
+                    VehicleComboBox.SelectedIndex = VehicleComboBox.Items.IndexOf(YMML)
+                    ' Done
+                Else
+                    MessageBox.Show("Vehicle found, but unable to select it", "Can't Select Vehicle", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Exit Sub
+                End If
+
+            Else
+                MessageBox.Show("Vehicle found, but unable to find owner", "Owner Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit Sub
+            End If
+
+        End If
+
+
+        ' If vehicle found, then will need to select Customer and Vehicle in respective ComboBoxes
+
+
+    End Sub
+
 
 
 
@@ -2333,6 +2447,21 @@ Public Class invoices
 
         previousScreen = Me
         changeScreenHide(invoicePayments, previousScreen)
+
+    End Sub
+
+
+
+
+    Private Sub LicenseStateComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LicenseStateComboBox.SelectedIndexChanged
+
+        LicenseStateComboBox.ForeColor = DefaultForeColor
+
+    End Sub
+
+    Private Sub LicensePlateTextbox_TextChanged(sender As Object, e As EventArgs) Handles LicensePlateTextbox.TextChanged
+
+        LicensePlateTextbox.ForeColor = DefaultForeColor
 
     End Sub
 
