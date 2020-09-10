@@ -12,7 +12,7 @@
 
     Private Sub loginButton_Click(sender As Object, e As EventArgs) Handles loginButton.Click
 
-        changeScreen(home, Me)
+        changeScreen(invoices, Me)
 
     End Sub
 

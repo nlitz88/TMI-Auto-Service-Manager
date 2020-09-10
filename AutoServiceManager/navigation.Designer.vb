@@ -23,7 +23,6 @@ Partial Class navigation
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.mainMs = New System.Windows.Forms.MenuStrip()
-        Me.HomeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InvoicesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FileMaintenanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CompanySetupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -48,18 +47,12 @@ Partial Class navigation
         '
         Me.mainMs.BackColor = System.Drawing.Color.White
         Me.mainMs.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.mainMs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HomeToolStripMenuItem, Me.InvoicesToolStripMenuItem, Me.FileMaintenanceToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.LogoutToolStripMenuItem})
+        Me.mainMs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InvoicesToolStripMenuItem, Me.FileMaintenanceToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.LogoutToolStripMenuItem})
         Me.mainMs.Location = New System.Drawing.Point(0, 0)
         Me.mainMs.Name = "mainMs"
         Me.mainMs.Size = New System.Drawing.Size(1000, 28)
         Me.mainMs.TabIndex = 46
         Me.mainMs.Text = "MenuStrip1"
-        '
-        'HomeToolStripMenuItem
-        '
-        Me.HomeToolStripMenuItem.Name = "HomeToolStripMenuItem"
-        Me.HomeToolStripMenuItem.Size = New System.Drawing.Size(64, 24)
-        Me.HomeToolStripMenuItem.Text = "Home"
         '
         'InvoicesToolStripMenuItem
         '
@@ -180,7 +173,6 @@ Partial Class navigation
     End Sub
 
     Friend WithEvents mainMs As MenuStrip
-    Friend WithEvents HomeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents InvoicesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FileMaintenanceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CompanySetupToolStripMenuItem As ToolStripMenuItem

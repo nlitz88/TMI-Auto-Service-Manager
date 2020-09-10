@@ -30,10 +30,10 @@
     End Sub
 
 
-    Private Sub HomeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HomeToolStripMenuItem.Click
-        If Me.ParentForm Is home Then Exit Sub
-        changeScreen(home, Me.ParentForm)
-    End Sub
+    'Private Sub HomeToolStripMenuItem_Click(sender As Object, e As EventArgs)
+    '    If Me.ParentForm Is home Then Exit Sub
+    '    changeScreen(home, Me.ParentForm)
+    'End Sub
 
     Private Sub CompanySetupToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompanySetupToolStripMenuItem.Click
         If Me.ParentForm Is companyInfo Then Exit Sub ' Dont change if already on this screen

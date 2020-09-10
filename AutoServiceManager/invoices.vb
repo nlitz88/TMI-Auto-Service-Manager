@@ -1161,6 +1161,23 @@ Public Class invoices
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+
+
+
+
+        ' INVOICES IS THE HOME SCREEN --> THIS SECTION WILL CONTAIN HOME-RELATED PROCESSES
+
+        ' Add event handler for when the application exits.
+        ' However, must first check if this event has already been handled using global flag.
+        If Not ApplicationExitHandled Then
+            AddHandler Application.ApplicationExit, AddressOf OnApplicationExit
+            ApplicationExitHandled = True
+        End If
+
+
+
+
+        ' NORMAL INVOICES OPERATIONS HERE
         If Not checkDbConn() Then Exit Sub
 
         If Not loadCustomerDataTable() Then
@@ -1197,6 +1214,15 @@ Public Class invoices
 
         InspectionMonth_ComboBox.Visible = True
         InspectionMonth_ComboBox.Visible = False
+
+    End Sub
+
+
+    ' EVENT HANDLER FOR APPLICATION EXIT EVENT
+    Private Sub OnApplicationExit(ByVal sender As Object, ByVal e As EventArgs)
+
+        ' Before the application closes, backup current database and prune existing backups
+        backupDb()
 
     End Sub
 
