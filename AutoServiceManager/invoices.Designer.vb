@@ -693,7 +693,7 @@ Partial Class invoices
         Me.licensePlateSearchButton.Location = New System.Drawing.Point(596, 192)
         Me.licensePlateSearchButton.Name = "licensePlateSearchButton"
         Me.licensePlateSearchButton.Size = New System.Drawing.Size(250, 30)
-        Me.licensePlateSearchButton.TabIndex = 289
+        Me.licensePlateSearchButton.TabIndex = 26
         Me.licensePlateSearchButton.Tag = "licensePlateSearchControl"
         Me.licensePlateSearchButton.Text = "License Plate Search"
         Me.licensePlateSearchButton.UseVisualStyleBackColor = False
