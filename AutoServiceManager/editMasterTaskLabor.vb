@@ -167,6 +167,9 @@ Public Class editMasterTaskLabor
 
     Private Sub editMasterTaskLabor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ' Select first editing control
+        Description_Textbox.Select()
+
     End Sub
 
 

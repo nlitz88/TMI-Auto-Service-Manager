@@ -168,6 +168,8 @@ Public Class editMasterTaskPart
 
     Private Sub masterTaskPartsMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ' Select first editing control
+        PartDescription_Textbox.Select()
 
     End Sub
 

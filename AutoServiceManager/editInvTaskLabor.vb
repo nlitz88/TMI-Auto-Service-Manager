@@ -166,6 +166,9 @@
 
     Private Sub editInvTaskLabor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ' Select first editing control
+        LaborDescription_Textbox.Select()
+
     End Sub
 
 
