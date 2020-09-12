@@ -287,6 +287,9 @@ Public Class insuranceMaintenance
         showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
         showHide(getAllControlsWithTag("dataLabel", Me), 1)
 
+        ' Select first editing control
+        CompanyName_Textbox.Focus()
+
     End Sub
 
 
@@ -356,6 +359,9 @@ Public Class insuranceMaintenance
         ' Hide/Show the dataViewingControls and dataEditingControls, respectively
         showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
         showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+
+        ' Select first editing control
+        CompanyName_Textbox.Focus()
 
     End Sub
 
