@@ -252,7 +252,7 @@ Public Class invoices
     Private Function loadVehicleDataTable() As Boolean
 
         VehicleDbController.AddParams("@customerId", CustomerId)
-        VehicleDbController.ExecQuery("SELECT CSTR(IIF(ISNULL(v.makeYear), 0, v.makeYear)) + ' ' + IIF(ISNULL(v.Make), '', v.Make) + ' ' + IIF(ISNULL(v.Model), '', v.Model) + '  -  ' + IIF(ISNULL(v.LicensePlate), '', v.LicensePlate) as YMML, " &
+        VehicleDbController.ExecQuery("SELECT CSTR(IIF(ISNULL(v.makeYear), 0, v.makeYear)) + ' ' + IIF(ISNULL(v.Make), '', v.Make) + ' ' + IIF(ISNULL(v.Model), '', v.Model) + IIF(ISNULL(v.LicensePlate) OR v.LicensePlate = '', '', '  -  ' + v.LicensePlate) as YMML, " &
                                       "v.VehicleId, v.InspectionStickerNbr as InspectionSticker, v.InspectionMonth " &
                                       "FROM Vehicle v " &
                                       "WHERE v.CustomerId=@customerId " &
