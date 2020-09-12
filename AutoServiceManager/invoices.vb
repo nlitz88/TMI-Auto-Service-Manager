@@ -93,7 +93,7 @@ Public Class invoices
     ' Sub that loads Customer DataTable
     Private Function loadCustomerDataTable() As Boolean
 
-        CustomerDbController.ExecQuery("SELECT IIF(ISNULL(c.LastName), '', c.LastName) + ', ' + IIF(ISNULL(c.FirstName), '', c.FirstName) + ' @ ' + IIF(ISNULL(c.Address), '', c.Address) as CLFA, c.CustomerId, c.LastName, c.HomePhone, c.WorkPhone, c.CellPhone1, c.CellPhone2, c.TaxExempt " &
+        CustomerDbController.ExecQuery("SELECT IIF(ISNULL(c.LastName), '', c.LastName) + ', ' + IIF(ISNULL(c.FirstName), '', c.FirstName) + IIF(ISNULL(c.Address) OR c.Address = '', '', ' @ ' + c.Address) as CLFA, c.CustomerId, c.LastName, c.HomePhone, c.WorkPhone, c.CellPhone1, c.CellPhone2, c.TaxExempt " &
                                        "FROM Customer c " &
                                        "WHERE Trim(LastName) <> '' " &
                                        "ORDER BY c.LastName ASC")
