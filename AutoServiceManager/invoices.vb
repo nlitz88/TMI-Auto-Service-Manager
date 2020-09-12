@@ -1399,7 +1399,7 @@ Public Class invoices
 
             ' Now that valid Customer selected, move user to vehicleCombobox
             CustomerComboBox.SelectionLength = 0
-            VehicleComboBox.Select()
+            VehicleComboBox.Focus()
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
@@ -1474,7 +1474,7 @@ Public Class invoices
 
             ' Now that valid vehicle selected, move user to invoice combobox
             VehicleComboBox.SelectionLength = 0
-            InvoiceComboBox.Select()
+            InvoiceComboBox.Focus()
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
@@ -1552,7 +1552,7 @@ Public Class invoices
 
             ' Now that valid invoice selected, move user to first field (contact)
             InvoiceComboBox.SelectionLength = 0
-            ContactName_Textbox.Select()
+            ContactName_Textbox.Focus()
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else

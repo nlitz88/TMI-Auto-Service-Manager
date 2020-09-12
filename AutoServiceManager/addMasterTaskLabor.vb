@@ -259,7 +259,7 @@ Public Class addMasterTaskLabor
 
             ' Now that valid selection made, select next control
             LaborCodesComboBox.SelectionLength = 0
-            Description_Textbox.Select()
+            Description_Textbox.Focus()
 
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly

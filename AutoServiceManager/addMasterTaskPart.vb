@@ -267,7 +267,7 @@ Public Class addMasterTaskPart
 
             ' Now that valid selection made, select next control
             PartComboBox.SelectionLength = 0
-            PartDescription_Textbox.Select()
+            PartDescription_Textbox.Focus()
 
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly

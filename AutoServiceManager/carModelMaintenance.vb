@@ -259,6 +259,10 @@
             ' Enable user to Add new model under valid manufacturer
             addButton.Enabled = True
 
+            ' Now that valid selection made, select next control
+            AutoMakeComboBox.SelectionLength = 0
+            CarModelComboBox.Focus()
+
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
 
