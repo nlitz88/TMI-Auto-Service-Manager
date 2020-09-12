@@ -795,6 +795,9 @@
         showHide(getAllControlsWithTag("dataLabel", Me), 1)
         showHide(getAllControlsWithTag("subTaskEditingControl", Me), 1)
 
+        ' Select first editing control
+        TaskDescription_Textbox.Focus()
+
     End Sub
 
 
@@ -866,6 +869,9 @@
         ' Show/Hide various control types accordingly
         showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
         showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+
+        ' Select first editing control
+        TaskDescription_Textbox.Focus()
 
     End Sub
 

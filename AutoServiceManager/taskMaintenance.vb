@@ -291,6 +291,9 @@ Public Class taskMaintenance
         showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
         showHide(getAllControlsWithTag("dataLabel", Me), 1)
 
+        ' Select first editing control
+        TaskType_Textbox.Focus()
+
     End Sub
 
 
@@ -361,6 +364,9 @@ Public Class taskMaintenance
         ' Hide/Show the dataViewingControls and dataEditingControls, respectively
         showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
         showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+
+        ' Select first editing control
+        TaskType_Textbox.Focus()
 
     End Sub
 

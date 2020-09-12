@@ -677,6 +677,10 @@
             ' Enable user to Add new model under valid manufacturer
             addButton.Enabled = True
 
+            ' Now that valid selection made, put focus on vehicleComboBox\
+            CustomerComboBox.SelectionLength = 0
+            VehicleComboBox.Focus()
+
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
 
@@ -785,6 +789,9 @@
         showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
         showHide(getAllControlsWithTag("dataLabel", Me), 1)
 
+        ' Select first editing control
+        Make_ComboBox.Focus()
+
     End Sub
 
 
@@ -855,6 +862,9 @@
         ' Hide/Show the dataViewingControls and dataEditingControls, respectively
         showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
         showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+
+        ' Select first editing control
+        Make_ComboBox.Focus()
 
     End Sub
 

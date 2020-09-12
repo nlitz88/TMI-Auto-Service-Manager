@@ -1550,10 +1550,6 @@ Public Class invoices
             deleteInvButton.Enabled = True
             printInvButton.Enabled = True
 
-            ' Now that valid invoice selected, move user to first field (contact)
-            InvoiceComboBox.SelectionLength = 0
-            ContactName_Textbox.Focus()
-
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
 
