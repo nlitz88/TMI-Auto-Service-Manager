@@ -12,6 +12,9 @@
 
     Private Sub loginButton_Click(sender As Object, e As EventArgs) Handles loginButton.Click
 
+        ' CHECK DATABASE CONNECTION BEFORE PROCEEDING
+        If Not checkDbConn() Then Exit Sub
+
         changeScreen(invoices, Me)
 
     End Sub
