@@ -863,6 +863,8 @@ Public Class invoices
         If ShopSupplies_CheckBox.Checked And ShopCharges <> 0 And ShopCharges <> properShopCharge Then
             ' This must mean there is a custom value, so do not recalculate shop charges
             calculateShopCharges = False
+            ' In order that we don't overwrite the custom value, ensure that ShopCharges is set to the current custom Shop Charges value from invoice row.
+            ShopCharges = InvDbController.DbDataTable.Rows(InvRow)("ShopCharges")
         End If
 
         ' 2.) Reload dependent datatables (InvTask and InvPayments). Must do this before recalculating InvTask and InvPayment values
