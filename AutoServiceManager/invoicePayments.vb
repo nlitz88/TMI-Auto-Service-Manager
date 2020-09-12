@@ -543,6 +543,9 @@
         ' This must be called after dataEditingControls have been made visible, as some must be hidden again
         ShowCorrespondingPaymentEditingControls()
 
+        ' Select first editing control
+        PayType_ComboBox.Focus()
+
     End Sub
 
     Private Sub deleteButton_Click(sender As Object, e As EventArgs) Handles deleteButton.Click
@@ -612,6 +615,9 @@
 
         ' This must be called after dataEditingControls have been made visible, as some must be hidden again
         ShowCorrespondingPaymentEditingControls()
+
+        ' Select first editing control
+        PayType_ComboBox.Focus()
 
     End Sub
 

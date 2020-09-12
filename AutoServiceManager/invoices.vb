@@ -1640,6 +1640,9 @@ Public Class invoices
         showHide(getAllNestedControlsWithTag("dataEditingControl", Me), 1)
         showHide(getAllNestedControlsWithTag("dataLabel", Me), 1)
 
+        ' Select first editing control
+        ContactName_Textbox.Focus()
+
     End Sub
 
 
@@ -1728,6 +1731,9 @@ Public Class invoices
         ' Hide/Show the dataViewingControls and dataEditingControls, respectively
         showHide(getAllNestedControlsWithTag("dataViewingControl", Me), 0)
         showHide(getAllNestedControlsWithTag("dataEditingControl", Me), 1)
+
+        ' Select first editing control
+        ContactName_Textbox.Focus()
 
     End Sub
 
