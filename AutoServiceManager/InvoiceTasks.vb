@@ -1053,6 +1053,8 @@
 
             validSelection = True
 
+            ' Select first editing control
+            TaskDescription_Textbox.Focus()
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
@@ -1109,6 +1111,9 @@
         Else
             lastSelectedInvTask = "Select One"
         End If
+
+        ' Select first editing control
+        TaskDescription_Textbox.Focus()
 
     End Sub
 
@@ -1177,6 +1182,9 @@
         ' Show/Hide various control types accordingly
         showHide(getAllControlsWithTag("dataViewingControl", Me), 0)
         showHide(getAllControlsWithTag("dataEditingControl", Me), 1)
+
+        ' Select first editing control
+        TaskDescription_Textbox.Focus()
 
     End Sub
 
