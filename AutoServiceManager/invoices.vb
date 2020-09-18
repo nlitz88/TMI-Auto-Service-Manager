@@ -865,10 +865,7 @@ Public Class invoices
         Dim properShopCharge As Decimal
         Dim shopChargeRate As Decimal = CMDbController.DbDataTable.Rows(CMRow)("ShopSupplyCharge")
         Dim laborPartsTotal As Decimal = InvLaborSum + InvPartsSum
-        Console.WriteLine("Labor Parts Total: " & laborPartsTotal)
         properShopCharge = Math.Round((shopChargeRate * laborPartsTotal), 2)
-        Console.WriteLine("Proper Shop Charge: " & properShopCharge)
-        Console.WriteLine("Shop Charges before any calculations made: " & ShopCharges)
 
         ' Use shopSupplies_value here, as no changes being made while editing
         If ShopSupplies_Value.Checked And ShopCharges <> 0 And ShopCharges <> properShopCharge Then
