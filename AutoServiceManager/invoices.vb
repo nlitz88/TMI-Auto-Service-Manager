@@ -734,7 +734,14 @@ Public Class invoices
     ' Sub that calculates Shop charges based on whether or not shop supplies checked, and if so, then on the ShopSupplyCharge rate from Company Master
     Private Sub calcShopCharges()
 
-        Dim shopSupplies As Boolean = ShopSupplies_CheckBox.Checked
+        Dim shopSupplies As Boolean
+        ' If in editing, then get shopSupplies value from ShopSupplies_CheckBox
+        If Not modifyInvButton.Enabled Then
+            shopSupplies = ShopSupplies_CheckBox.Checked
+            ' Otherwise, get it from ShopSupplies_Value
+        Else
+            shopSupplies = ShopSupplies_Value.Checked
+        End If
 
         If shopSupplies Then
             Dim shopSupplyCharge As Decimal = CMDbController.DbDataTable.Rows(CMRow)("ShopSupplyCharge")
@@ -858,9 +865,13 @@ Public Class invoices
         Dim properShopCharge As Decimal
         Dim shopChargeRate As Decimal = CMDbController.DbDataTable.Rows(CMRow)("ShopSupplyCharge")
         Dim laborPartsTotal As Decimal = InvLaborSum + InvPartsSum
+        Console.WriteLine("Labor Parts Total: " & laborPartsTotal)
         properShopCharge = Math.Round((shopChargeRate * laborPartsTotal), 2)
+        Console.WriteLine("Proper Shop Charge: " & properShopCharge)
+        Console.WriteLine("Shop Charges before any calculations made: " & ShopCharges)
 
-        If ShopSupplies_CheckBox.Checked And ShopCharges <> 0 And ShopCharges <> properShopCharge Then
+        ' Use shopSupplies_value here, as no changes being made while editing
+        If ShopSupplies_Value.Checked And ShopCharges <> 0 And ShopCharges <> properShopCharge Then
             ' This must mean there is a custom value, so do not recalculate shop charges
             calculateShopCharges = False
             ' In order that we don't overwrite the custom value, ensure that ShopCharges is set to the current custom Shop Charges value from invoice row.
