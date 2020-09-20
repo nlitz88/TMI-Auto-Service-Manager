@@ -40,6 +40,9 @@ Partial Class navigation
         Me.MasterTaskListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UnpaidInvoicesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DailyReceiptsReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MonthlyTaxReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mainMs.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -147,6 +150,7 @@ Partial Class navigation
         '
         'ReportsToolStripMenuItem
         '
+        Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UnpaidInvoicesToolStripMenuItem, Me.DailyReceiptsReportToolStripMenuItem, Me.MonthlyTaxReportToolStripMenuItem})
         Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
         Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(74, 24)
         Me.ReportsToolStripMenuItem.Text = "Reports"
@@ -157,6 +161,24 @@ Partial Class navigation
         Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
         Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(70, 24)
         Me.LogoutToolStripMenuItem.Text = "Logout"
+        '
+        'UnpaidInvoicesToolStripMenuItem
+        '
+        Me.UnpaidInvoicesToolStripMenuItem.Name = "UnpaidInvoicesToolStripMenuItem"
+        Me.UnpaidInvoicesToolStripMenuItem.Size = New System.Drawing.Size(246, 26)
+        Me.UnpaidInvoicesToolStripMenuItem.Text = "Unpaid Invoices Report"
+        '
+        'DailyReceiptsReportToolStripMenuItem
+        '
+        Me.DailyReceiptsReportToolStripMenuItem.Name = "DailyReceiptsReportToolStripMenuItem"
+        Me.DailyReceiptsReportToolStripMenuItem.Size = New System.Drawing.Size(246, 26)
+        Me.DailyReceiptsReportToolStripMenuItem.Text = "Daily Receipts Report"
+        '
+        'MonthlyTaxReportToolStripMenuItem
+        '
+        Me.MonthlyTaxReportToolStripMenuItem.Name = "MonthlyTaxReportToolStripMenuItem"
+        Me.MonthlyTaxReportToolStripMenuItem.Size = New System.Drawing.Size(246, 26)
+        Me.MonthlyTaxReportToolStripMenuItem.Text = "Monthly Tax Report"
         '
         'navigation
         '
@@ -190,4 +212,7 @@ Partial Class navigation
     Friend WithEvents CustomerVehiclesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MasterTaskListToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LogoutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UnpaidInvoicesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DailyReceiptsReportToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MonthlyTaxReportToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -317,6 +317,7 @@ Partial Class inventoryMaintenance
         Me.Controls.Add(Me.saveButton)
         Me.Controls.Add(Me.addButton)
         Me.Controls.Add(Me.nav)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "inventoryMaintenance"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual

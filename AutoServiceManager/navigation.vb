@@ -105,5 +105,10 @@
         changeScreen(invoices, Me.ParentForm)
     End Sub
 
+    Private Sub DailyReceiptsReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DailyReceiptsReportToolStripMenuItem.Click
+        If Me.ParentForm Is dailyReceiptsReport Then Exit Sub
+        changeScreen(dailyReceiptsReport, Me.ParentForm)
+    End Sub
+
 
 End Class
