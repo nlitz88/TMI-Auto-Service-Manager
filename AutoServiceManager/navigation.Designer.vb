@@ -39,10 +39,10 @@ Partial Class navigation
         Me.CustomerVehiclesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MasterTaskListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UnpaidInvoicesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DailyReceiptsReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MonthlyTaxReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mainMs.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -155,13 +155,6 @@ Partial Class navigation
         Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(74, 24)
         Me.ReportsToolStripMenuItem.Text = "Reports"
         '
-        'LogoutToolStripMenuItem
-        '
-        Me.LogoutToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
-        Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(70, 24)
-        Me.LogoutToolStripMenuItem.Text = "Logout"
-        '
         'UnpaidInvoicesToolStripMenuItem
         '
         Me.UnpaidInvoicesToolStripMenuItem.Name = "UnpaidInvoicesToolStripMenuItem"
@@ -179,6 +172,13 @@ Partial Class navigation
         Me.MonthlyTaxReportToolStripMenuItem.Name = "MonthlyTaxReportToolStripMenuItem"
         Me.MonthlyTaxReportToolStripMenuItem.Size = New System.Drawing.Size(246, 26)
         Me.MonthlyTaxReportToolStripMenuItem.Text = "Monthly Tax Report"
+        '
+        'LogoutToolStripMenuItem
+        '
+        Me.LogoutToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
+        Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(70, 24)
+        Me.LogoutToolStripMenuItem.Text = "Logout"
         '
         'navigation
         '

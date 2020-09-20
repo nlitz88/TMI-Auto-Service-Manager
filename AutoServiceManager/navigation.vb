@@ -110,5 +110,9 @@
         changeScreen(dailyReceiptsReport, Me.ParentForm)
     End Sub
 
+    Private Sub UnpaidInvoicesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnpaidInvoicesToolStripMenuItem.Click
+        If Me.ParentForm Is unpaidInvoicesReport Then Exit Sub
+        changeScreen(unpaidInvoicesReport, Me.ParentForm)
+    End Sub
 
 End Class
