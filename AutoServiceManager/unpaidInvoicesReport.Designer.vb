@@ -82,6 +82,7 @@ Partial Class unpaidInvoicesReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
         Me.Controls.Add(Me.ReportDateTextbox)
         Me.Controls.Add(Me.ReportDateLabel)
