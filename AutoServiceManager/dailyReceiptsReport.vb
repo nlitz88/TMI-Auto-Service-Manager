@@ -41,6 +41,8 @@
         ' On load, populate ReportDateTextbox with current date
         ReportDateTextbox.Text = formatDate(DateTime.Now())
 
+        If Not checkDbConn() Then Exit Sub
+
     End Sub
 
 
