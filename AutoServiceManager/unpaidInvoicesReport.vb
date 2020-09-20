@@ -12,6 +12,8 @@
     ' **************** VALIDATION SUBS ****************
 
 
+
+
     Private Function controlsValid() As Boolean
 
         Dim errorMessage As String = String.Empty
@@ -45,6 +47,7 @@
         StartDateTextbox.Text = formatDate(DateTime.Now())
 
     End Sub
+
 
     Private Sub previewReportButton_Click(sender As Object, e As EventArgs) Handles previewReportButton.Click
 
