@@ -152,6 +152,12 @@
     <Compile Include="home.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="incompleteInvoicesReport.Designer.vb">
+      <DependentUpon>incompleteInvoicesReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="incompleteInvoicesReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="initialValues.vb" />
     <Compile Include="companyInfo.Designer.vb">
       <DependentUpon>companyInfo.vb</DependentUpon>
@@ -311,6 +317,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="home.resx">
       <DependentUpon>home.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="incompleteInvoicesReport.resx">
+      <DependentUpon>incompleteInvoicesReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="insuranceMaintenance.resx">
       <DependentUpon>insuranceMaintenance.vb</DependentUpon>

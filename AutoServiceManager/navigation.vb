@@ -115,4 +115,9 @@
         changeScreen(unpaidInvoicesReport, Me.ParentForm)
     End Sub
 
+    Private Sub IncompleteInvoicesReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IncompleteInvoicesReportToolStripMenuItem.Click
+        If Me.ParentForm Is incompleteInvoicesReport Then Exit Sub
+        changeScreen(incompleteInvoicesReport, Me.ParentForm)
+    End Sub
+
 End Class
