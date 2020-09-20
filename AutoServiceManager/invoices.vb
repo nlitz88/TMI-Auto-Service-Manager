@@ -1520,7 +1520,7 @@ Public Class invoices
             ' Disable editing button
             modifyInvButton.Enabled = False
             deleteInvButton.Enabled = False
-            printInvButton.Enabled = False
+            previewInvButton.Enabled = False
 
             Exit Sub
 
@@ -1556,7 +1556,7 @@ Public Class invoices
             ' Enable editing and deleting button
             modifyInvButton.Enabled = True
             deleteInvButton.Enabled = True
-            printInvButton.Enabled = True
+            previewInvButton.Enabled = True
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
@@ -1568,7 +1568,7 @@ Public Class invoices
             ' Disable editing button
             modifyInvButton.Enabled = False
             deleteInvButton.Enabled = False
-            printInvButton.Enabled = False
+            previewInvButton.Enabled = False
 
         End If
 
@@ -1616,7 +1616,7 @@ Public Class invoices
         VehicleComboBox.Enabled = False
         InvoiceComboBox.Enabled = False
         modifyInvButton.Enabled = False
-        printInvButton.Enabled = False
+        previewInvButton.Enabled = False
         newInvButton.Enabled = False
         cancelButton.Enabled = True
         nav.DisableAll()
@@ -1680,7 +1680,7 @@ Public Class invoices
                 newInvButton.Enabled = True
                 cancelButton.Enabled = False
                 saveButton.Enabled = False
-                printInvButton.Enabled = False
+                previewInvButton.Enabled = False
                 nav.EnableAll()
 
                 ' Re-Enable Task and Payment Buttons
@@ -1716,7 +1716,7 @@ Public Class invoices
         ' Disable editButton, disable addButton, enable cancel button, disable navigation, and disable main selection combobox
         modifyInvButton.Enabled = False
         newInvButton.Enabled = False
-        printInvButton.Enabled = False
+        previewInvButton.Enabled = False
         cancelButton.Enabled = True
         nav.DisableAll()
         CustomerComboBox.Enabled = False
@@ -1761,7 +1761,7 @@ Public Class invoices
             VehicleComboBox.Enabled = True
             InvoiceComboBox.Enabled = True
             modifyInvButton.Enabled = True
-            printInvButton.Enabled = True
+            previewInvButton.Enabled = True
             newInvButton.Enabled = True
             cancelButton.Enabled = False
             saveButton.Enabled = False
@@ -1795,7 +1795,7 @@ Public Class invoices
             VehicleComboBox.Enabled = True
             InvoiceComboBox.Enabled = True
             newInvButton.Enabled = True
-            printInvButton.Enabled = True
+            previewInvButton.Enabled = True
             cancelButton.Enabled = False
             saveButton.Enabled = False
             nav.EnableAll()
@@ -1855,7 +1855,7 @@ Public Class invoices
                     newInvButton.Enabled = True
                     cancelButton.Enabled = False
                     saveButton.Enabled = False
-                    printInvButton.Enabled = True
+                    previewInvButton.Enabled = True
                     nav.EnableAll()
                     CustomerComboBox.Enabled = True
                     VehicleComboBox.Enabled = True
@@ -1921,7 +1921,7 @@ Public Class invoices
                     newInvButton.Enabled = True
                     cancelButton.Enabled = False
                     saveButton.Enabled = False
-                    printInvButton.Enabled = True
+                    previewInvButton.Enabled = True
                     nav.EnableAll()
                     CustomerComboBox.Enabled = True
                     VehicleComboBox.Enabled = True
@@ -1945,7 +1945,7 @@ Public Class invoices
     End Sub
 
 
-    Private Sub printInvButton_Click(sender As Object, e As EventArgs) Handles printInvButton.Click
+    Private Sub previewInvButton_Click(sender As Object, e As EventArgs) Handles previewInvButton.Click
 
         Dim AcccessInstance As New Microsoft.Office.Interop.Access.Application()
         Dim filepath As String = readINI("AutoServiceManagerParams.ini", "PRIMARY-DATABASE-FILEPATH=")

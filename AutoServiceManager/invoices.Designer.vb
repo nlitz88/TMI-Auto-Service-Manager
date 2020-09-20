@@ -86,7 +86,7 @@ Partial Class invoices
         Me.ShopSupplies_CheckBox = New System.Windows.Forms.CheckBox()
         Me.ShopSuppliesLabel = New System.Windows.Forms.Label()
         Me.TaxExemptLabel = New System.Windows.Forms.Label()
-        Me.printInvButton = New System.Windows.Forms.Button()
+        Me.previewInvButton = New System.Windows.Forms.Button()
         Me.CostTableLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
         Me.TotalPanel = New System.Windows.Forms.Panel()
         Me.InvTotal_Textbox = New System.Windows.Forms.TextBox()
@@ -883,18 +883,18 @@ Partial Class invoices
         Me.TaxExemptLabel.Tag = "dataLabel"
         Me.TaxExemptLabel.Text = "Tax Exempt :"
         '
-        'printInvButton
+        'previewInvButton
         '
-        Me.printInvButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.printInvButton.Enabled = False
-        Me.printInvButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.printInvButton.ForeColor = System.Drawing.Color.White
-        Me.printInvButton.Location = New System.Drawing.Point(790, 120)
-        Me.printInvButton.Name = "printInvButton"
-        Me.printInvButton.Size = New System.Drawing.Size(132, 30)
-        Me.printInvButton.TabIndex = 23
-        Me.printInvButton.Text = "Print Invoice"
-        Me.printInvButton.UseVisualStyleBackColor = False
+        Me.previewInvButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.previewInvButton.Enabled = False
+        Me.previewInvButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.previewInvButton.ForeColor = System.Drawing.Color.White
+        Me.previewInvButton.Location = New System.Drawing.Point(790, 120)
+        Me.previewInvButton.Name = "previewInvButton"
+        Me.previewInvButton.Size = New System.Drawing.Size(132, 30)
+        Me.previewInvButton.TabIndex = 23
+        Me.previewInvButton.Text = "Preview Invoice"
+        Me.previewInvButton.UseVisualStyleBackColor = False
         '
         'CostTableLayoutPanel
         '
@@ -1485,7 +1485,7 @@ Partial Class invoices
         Me.Controls.Add(Me.LicenseStateLabel)
         Me.Controls.Add(Me.Notes_Textbox)
         Me.Controls.Add(Me.CostTableLayoutPanel)
-        Me.Controls.Add(Me.printInvButton)
+        Me.Controls.Add(Me.previewInvButton)
         Me.Controls.Add(Me.TaxExemptLabel)
         Me.Controls.Add(Me.ShopSupplies_CheckBox)
         Me.Controls.Add(Me.ShopSuppliesLabel)
@@ -1645,7 +1645,7 @@ Partial Class invoices
     Friend WithEvents ShopSupplies_CheckBox As CheckBox
     Friend WithEvents ShopSuppliesLabel As Label
     Friend WithEvents TaxExemptLabel As Label
-    Friend WithEvents printInvButton As Button
+    Friend WithEvents previewInvButton As Button
     Friend WithEvents CostTableLayoutPanel As TableLayoutPanel
     Friend WithEvents ShopChargesLabel As Label
     Friend WithEvents PartsLabel As Label
