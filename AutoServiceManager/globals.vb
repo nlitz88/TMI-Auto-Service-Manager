@@ -1779,6 +1779,20 @@
     End Function
 
 
+    ' Alternate version that uses equals operator
+    Public Function valueExistsEquals(ByVal valueColumn As String, ByVal value As Object, ByVal dataTable As DataTable) As Boolean
+
+        Dim dataRows() As DataRow = dataTable.Select(valueColumn & "='" & value & "'")
+
+        If dataRows.Count = 0 Then
+            Return False
+        End If
+
+        Return True
+
+    End Function
+
+
     ' Function that determines if there are any invalid chars in a given value. The valid chars are provided as a string.
     ' Will return -1 if no invalid chars were found
     ' Will return the index of the first invalid char it encounters

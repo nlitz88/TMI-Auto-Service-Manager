@@ -33,15 +33,18 @@
         Dim errorMessage As String = String.Empty
 
 
-        '' Month (REQUIRED)
-        'If Not validDateTime("Report Date", True, ReportDateTextbox.Text, errorMessage) Then
-        '    ReportDateTextbox.ForeColor = Color.Red
-        'End If
+        ' Month (REQUIRED)
+        If Not validNumber("Month", True, MonthTextbox.Text, errorMessage, True) Then
+            MonthTextbox.ForeColor = Color.Red
+        ElseIf Not valueExistsEquals("IntMonth", Convert.ToInt32(MonthTextbox.Text), monthDbController.DbDataTable) Then
+            errorMessage += "ERROR: " & MonthTextbox.Text & " is not a valid month" & vbNewLine
+            MonthTextbox.ForeColor = Color.Red
+        End If
 
-        '' Year (REQUIRED)
-        'If Not validDateTime("Report Date", True, ReportDateTextbox.Text, errorMessage) Then
-        '    ReportDateTextbox.ForeColor = Color.Red
-        'End If
+        ' Year (REQUIRED)
+        If Not validNumber("Year", True, YearTextbox.Text, errorMessage, True) Then
+            YearTextbox.ForeColor = Color.Red
+        End If
 
 
         ' Check if any invalid input has been found
@@ -80,7 +83,10 @@
 
     Private Sub previewReportButton_Click(sender As Object, e As EventArgs) Handles previewReportButton.Click
 
+        ' 1.) Validate date
+        If Not controlsValid() Then Exit Sub
 
+        ' 2.)
 
     End Sub
 
