@@ -1,4 +1,4 @@
-﻿Public Class dailyReceiptsReport
+﻿Public Class dailyCompletedInvoicesReport
 
 
     ' New Database control instance used for getting number of receipts
@@ -8,6 +8,8 @@
 
 
     ' **************** VALIDATION SUBS ****************
+
+
 
 
     Private Function controlsValid() As Boolean
@@ -36,7 +38,7 @@
 
 
 
-    Private Sub dailyReceiptsReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub incompleteInvoicesReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ' On load, populate ReportDateTextbox with current date
         ReportDateTextbox.Text = formatDate(DateTime.Now())
@@ -51,18 +53,14 @@
 
         Try
 
-            ' 2.) Check if any payments were made on valid date
+            ' 2.) Check if any invoices after provided date
 
-            ' Query variables
-            Dim receiptCount As Integer
-
-            ' Use CRUD to see if there is any receipt history for the provided date
-            CRUD.AddParams("@receiptdate", ReportDateTextbox.Text)
-            CRUD.ExecQuery("select * from InvPayments where PayDate=@receiptdate")
+            ' Use CRUD to see if there are any invoices after the provided date
+            CRUD.AddParams("@reportdate", ReportDateTextbox.Text)
+            CRUD.ExecQuery("select * from InvPayments where PayDate=@reportdate")
 
             If Not CRUD.HasException(True) Then
-                receiptCount = CRUD.DbDataTable.Rows.Count
-                If receiptCount <> 0 Then
+                If CRUD.DbDataTable.Rows.Count <> 0 Then
 
                     ' 3.) Open report preview if entries made on provided date
                     Dim AcccessInstance As New Microsoft.Office.Interop.Access.Application()
@@ -71,13 +69,13 @@
                     AcccessInstance.Visible = False
                     AcccessInstance.OpenCurrentDatabase(filepath)
 
-                    AcccessInstance.DoCmd.OpenReport(ReportName:="DailyReceipts", Microsoft.Office.Interop.Access.AcView.acViewPreview, , WhereCondition:="PayDate=#" & CStr(ReportDateTextbox.Text) & "#")
+                    AcccessInstance.DoCmd.OpenReport(ReportName:="CompletedInvoices", Microsoft.Office.Interop.Access.AcView.acViewPreview, , WhereCondition:="PayDate=#" & CStr(ReportDateTextbox.Text) & "#")
 
                 Else
-                    MessageBox.Show("No payments found on " & ReportDateTextbox.Text & ".", "No Payments Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    MessageBox.Show("No invoices found on " & ReportDateTextbox.Text & ".", "No invoices Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 End If
             Else
-                MessageBox.Show("Unable to load payments. Please restart and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("Unable to load invoices. Please restart and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
 
         Catch ex As Exception
@@ -86,18 +84,6 @@
             Exit Sub
 
         End Try
-
-
-    End Sub
-
-
-
-
-    ' **************** CONTROL SUBS ****************
-
-    Private Sub ReportDateTextbox_TextChanged(sender As Object, e As EventArgs) Handles ReportDateTextbox.TextChanged
-
-        ReportDateTextbox.ForeColor = DefaultForeColor
 
     End Sub
 

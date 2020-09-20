@@ -120,4 +120,9 @@
         changeScreen(incompleteInvoicesReport, Me.ParentForm)
     End Sub
 
+    Private Sub CompleteInvoiceReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompleteInvoiceReportToolStripMenuItem.Click
+        If Me.ParentForm Is dailyCompletedInvoicesReport Then Exit Sub
+        changeScreen(dailyCompletedInvoicesReport, Me.ParentForm)
+    End Sub
+
 End Class

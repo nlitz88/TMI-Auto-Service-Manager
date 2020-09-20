@@ -42,8 +42,9 @@ Partial Class navigation
         Me.UnpaidInvoicesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DailyReceiptsReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MonthlyTaxReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IncompleteInvoicesReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CompleteInvoiceReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mainMs.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -151,7 +152,7 @@ Partial Class navigation
         '
         'ReportsToolStripMenuItem
         '
-        Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UnpaidInvoicesToolStripMenuItem, Me.DailyReceiptsReportToolStripMenuItem, Me.MonthlyTaxReportToolStripMenuItem, Me.IncompleteInvoicesReportToolStripMenuItem})
+        Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UnpaidInvoicesToolStripMenuItem, Me.DailyReceiptsReportToolStripMenuItem, Me.MonthlyTaxReportToolStripMenuItem, Me.IncompleteInvoicesReportToolStripMenuItem, Me.CompleteInvoiceReportToolStripMenuItem})
         Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
         Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(74, 24)
         Me.ReportsToolStripMenuItem.Text = "Reports"
@@ -174,6 +175,12 @@ Partial Class navigation
         Me.MonthlyTaxReportToolStripMenuItem.Size = New System.Drawing.Size(273, 26)
         Me.MonthlyTaxReportToolStripMenuItem.Text = "Monthly Tax Report"
         '
+        'IncompleteInvoicesReportToolStripMenuItem
+        '
+        Me.IncompleteInvoicesReportToolStripMenuItem.Name = "IncompleteInvoicesReportToolStripMenuItem"
+        Me.IncompleteInvoicesReportToolStripMenuItem.Size = New System.Drawing.Size(273, 26)
+        Me.IncompleteInvoicesReportToolStripMenuItem.Text = "Incomplete Invoices Report"
+        '
         'LogoutToolStripMenuItem
         '
         Me.LogoutToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
@@ -181,11 +188,11 @@ Partial Class navigation
         Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(70, 24)
         Me.LogoutToolStripMenuItem.Text = "Logout"
         '
-        'IncompleteInvoicesReportToolStripMenuItem
+        'CompleteInvoiceReportToolStripMenuItem
         '
-        Me.IncompleteInvoicesReportToolStripMenuItem.Name = "IncompleteInvoicesReportToolStripMenuItem"
-        Me.IncompleteInvoicesReportToolStripMenuItem.Size = New System.Drawing.Size(273, 26)
-        Me.IncompleteInvoicesReportToolStripMenuItem.Text = "Incomplete Invoices Report"
+        Me.CompleteInvoiceReportToolStripMenuItem.Name = "CompleteInvoiceReportToolStripMenuItem"
+        Me.CompleteInvoiceReportToolStripMenuItem.Size = New System.Drawing.Size(273, 26)
+        Me.CompleteInvoiceReportToolStripMenuItem.Text = "Completed Invoices Report"
         '
         'navigation
         '
@@ -223,4 +230,5 @@ Partial Class navigation
     Friend WithEvents DailyReceiptsReportToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MonthlyTaxReportToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents IncompleteInvoicesReportToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CompleteInvoiceReportToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -110,6 +110,12 @@
     <Compile Include="colorMaintenance.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dailyCompletedInvoicesReport.Designer.vb">
+      <DependentUpon>dailyCompletedInvoicesReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dailyCompletedInvoicesReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="creditCardMaintenance.Designer.vb">
       <DependentUpon>creditCardMaintenance.vb</DependentUpon>
     </Compile>
@@ -296,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="companyInfo.resx">
       <DependentUpon>companyInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dailyCompletedInvoicesReport.resx">
+      <DependentUpon>dailyCompletedInvoicesReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="creditCardMaintenance.resx">
       <DependentUpon>creditCardMaintenance.vb</DependentUpon>

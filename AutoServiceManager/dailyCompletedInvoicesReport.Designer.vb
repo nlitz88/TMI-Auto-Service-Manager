@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class incompleteInvoicesReport
+Partial Class dailyCompletedInvoicesReport
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,49 +22,22 @@ Partial Class incompleteInvoicesReport
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.StartDateTextbox = New System.Windows.Forms.MaskedTextBox()
-        Me.ReportDateLabel = New System.Windows.Forms.Label()
         Me.previewReportButton = New System.Windows.Forms.Button()
         Me.UnpaidInvoicesReportLabel = New System.Windows.Forms.Label()
         Me.nav = New AutoServiceManager.navigation()
+        Me.ReportDateTextbox = New System.Windows.Forms.MaskedTextBox()
+        Me.ReportDateLabel = New System.Windows.Forms.Label()
         Me.SuspendLayout()
-        '
-        'StartDateTextbox
-        '
-        Me.StartDateTextbox.AllowPromptAsInput = False
-        Me.StartDateTextbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
-        Me.StartDateTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
-        Me.StartDateTextbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
-        Me.StartDateTextbox.Location = New System.Drawing.Point(269, 138)
-        Me.StartDateTextbox.Mask = "00/00/0000"
-        Me.StartDateTextbox.Name = "StartDateTextbox"
-        Me.StartDateTextbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.StartDateTextbox.Size = New System.Drawing.Size(132, 27)
-        Me.StartDateTextbox.TabIndex = 285
-        Me.StartDateTextbox.Tag = "dataEditingControl"
-        Me.StartDateTextbox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
-        Me.StartDateTextbox.ValidatingType = GetType(Date)
-        '
-        'ReportDateLabel
-        '
-        Me.ReportDateLabel.AutoSize = True
-        Me.ReportDateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.ReportDateLabel.Location = New System.Drawing.Point(97, 144)
-        Me.ReportDateLabel.Name = "ReportDateLabel"
-        Me.ReportDateLabel.Size = New System.Drawing.Size(166, 17)
-        Me.ReportDateLabel.TabIndex = 288
-        Me.ReportDateLabel.Tag = "dataLabel"
-        Me.ReportDateLabel.Text = "Report in Invoices since :"
         '
         'previewReportButton
         '
         Me.previewReportButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.previewReportButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.previewReportButton.ForeColor = System.Drawing.Color.White
-        Me.previewReportButton.Location = New System.Drawing.Point(407, 137)
+        Me.previewReportButton.Location = New System.Drawing.Point(334, 137)
         Me.previewReportButton.Name = "previewReportButton"
         Me.previewReportButton.Size = New System.Drawing.Size(183, 30)
-        Me.previewReportButton.TabIndex = 287
+        Me.previewReportButton.TabIndex = 291
         Me.previewReportButton.Text = "Preview Report"
         Me.previewReportButton.UseVisualStyleBackColor = False
         '
@@ -75,9 +48,9 @@ Partial Class incompleteInvoicesReport
         Me.UnpaidInvoicesReportLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.UnpaidInvoicesReportLabel.Location = New System.Drawing.Point(94, 73)
         Me.UnpaidInvoicesReportLabel.Name = "UnpaidInvoicesReportLabel"
-        Me.UnpaidInvoicesReportLabel.Size = New System.Drawing.Size(383, 32)
-        Me.UnpaidInvoicesReportLabel.TabIndex = 286
-        Me.UnpaidInvoicesReportLabel.Text = "Incomplete Invoices Report"
+        Me.UnpaidInvoicesReportLabel.Size = New System.Drawing.Size(458, 32)
+        Me.UnpaidInvoicesReportLabel.TabIndex = 290
+        Me.UnpaidInvoicesReportLabel.Text = "Daily Completed Invoices Report"
         '
         'nav
         '
@@ -87,32 +60,57 @@ Partial Class incompleteInvoicesReport
         Me.nav.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.nav.Name = "nav"
         Me.nav.Size = New System.Drawing.Size(982, 28)
-        Me.nav.TabIndex = 289
+        Me.nav.TabIndex = 293
         '
-        'incompleteInvoicesReport
+        'ReportDateTextbox
+        '
+        Me.ReportDateTextbox.AllowPromptAsInput = False
+        Me.ReportDateTextbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
+        Me.ReportDateTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
+        Me.ReportDateTextbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
+        Me.ReportDateTextbox.Location = New System.Drawing.Point(196, 138)
+        Me.ReportDateTextbox.Mask = "00/00/0000"
+        Me.ReportDateTextbox.Name = "ReportDateTextbox"
+        Me.ReportDateTextbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.ReportDateTextbox.Size = New System.Drawing.Size(132, 27)
+        Me.ReportDateTextbox.TabIndex = 294
+        Me.ReportDateTextbox.Tag = "dataEditingControl"
+        Me.ReportDateTextbox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
+        Me.ReportDateTextbox.ValidatingType = GetType(Date)
+        '
+        'ReportDateLabel
+        '
+        Me.ReportDateLabel.AutoSize = True
+        Me.ReportDateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.ReportDateLabel.Location = New System.Drawing.Point(97, 144)
+        Me.ReportDateLabel.Name = "ReportDateLabel"
+        Me.ReportDateLabel.Size = New System.Drawing.Size(93, 17)
+        Me.ReportDateLabel.TabIndex = 295
+        Me.ReportDateLabel.Tag = "dataLabel"
+        Me.ReportDateLabel.Text = "Report Date :"
+        '
+        'completedInvoicesReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
-        Me.Controls.Add(Me.nav)
-        Me.Controls.Add(Me.StartDateTextbox)
+        Me.Controls.Add(Me.ReportDateTextbox)
         Me.Controls.Add(Me.ReportDateLabel)
+        Me.Controls.Add(Me.nav)
         Me.Controls.Add(Me.previewReportButton)
         Me.Controls.Add(Me.UnpaidInvoicesReportLabel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.MaximizeBox = False
-        Me.Name = "incompleteInvoicesReport"
+        Me.Name = "completedInvoicesReport"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
-        Me.Text = "Incomplete Invoices Report"
+        Me.Text = "Daily Completed Invoices Report"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents StartDateTextbox As MaskedTextBox
-    Friend WithEvents ReportDateLabel As Label
     Friend WithEvents previewReportButton As Button
     Friend WithEvents UnpaidInvoicesReportLabel As Label
     Friend WithEvents nav As navigation
+    Friend WithEvents ReportDateTextbox As MaskedTextBox
+    Friend WithEvents ReportDateLabel As Label
 End Class
