@@ -29,6 +29,7 @@ Partial Class monthlyTaxReport
         Me.Label1 = New System.Windows.Forms.Label()
         Me.YearTextbox = New System.Windows.Forms.TextBox()
         Me.MonthTextbox = New System.Windows.Forms.TextBox()
+        Me.nav = New AutoServiceManager.navigation()
         Me.SuspendLayout()
         '
         'MonthLabel
@@ -108,12 +109,23 @@ Partial Class monthlyTaxReport
         Me.MonthTextbox.TabIndex = 0
         Me.MonthTextbox.Tag = "dataEditingControl"
         '
+        'nav
+        '
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(982, 28)
+        Me.nav.TabIndex = 304
+        '
         'monthlyTaxReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.nav)
         Me.Controls.Add(Me.MonthTextbox)
         Me.Controls.Add(Me.makeYear_Value)
         Me.Controls.Add(Me.Label1)
@@ -122,7 +134,9 @@ Partial Class monthlyTaxReport
         Me.Controls.Add(Me.previewReportButton)
         Me.Controls.Add(Me.UnpaidInvoicesReportLabel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
         Me.Name = "monthlyTaxReport"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Montly Tax Report"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -135,4 +149,5 @@ Partial Class monthlyTaxReport
     Friend WithEvents Label1 As Label
     Friend WithEvents YearTextbox As TextBox
     Friend WithEvents MonthTextbox As TextBox
+    Friend WithEvents nav As navigation
 End Class
