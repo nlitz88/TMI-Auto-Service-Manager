@@ -88,4 +88,11 @@
     End Sub
 
 
+    Private Sub ReportDateTextbox_TextChanged(sender As Object, e As EventArgs) Handles ReportDateTextbox.TextChanged
+
+        ReportDateTextbox.ForeColor = DefaultForeColor
+
+    End Sub
+
+
 End Class

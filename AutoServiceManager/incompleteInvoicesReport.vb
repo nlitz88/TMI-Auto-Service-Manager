@@ -90,4 +90,11 @@
     End Sub
 
 
+    Private Sub StartDateTextbox_TextChanged(sender As Object, e As EventArgs) Handles StartDateTextbox.TextChanged
+
+        StartDateTextbox.ForeColor = DefaultForeColor
+
+    End Sub
+
+
 End Class

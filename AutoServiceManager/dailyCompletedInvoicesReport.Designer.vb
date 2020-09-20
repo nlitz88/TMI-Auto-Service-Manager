@@ -24,9 +24,9 @@ Partial Class dailyCompletedInvoicesReport
     Private Sub InitializeComponent()
         Me.previewReportButton = New System.Windows.Forms.Button()
         Me.UnpaidInvoicesReportLabel = New System.Windows.Forms.Label()
-        Me.nav = New AutoServiceManager.navigation()
         Me.ReportDateTextbox = New System.Windows.Forms.MaskedTextBox()
         Me.ReportDateLabel = New System.Windows.Forms.Label()
+        Me.nav = New AutoServiceManager.navigation()
         Me.SuspendLayout()
         '
         'previewReportButton
@@ -51,16 +51,6 @@ Partial Class dailyCompletedInvoicesReport
         Me.UnpaidInvoicesReportLabel.Size = New System.Drawing.Size(458, 32)
         Me.UnpaidInvoicesReportLabel.TabIndex = 290
         Me.UnpaidInvoicesReportLabel.Text = "Daily Completed Invoices Report"
-        '
-        'nav
-        '
-        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.nav.Location = New System.Drawing.Point(0, 0)
-        Me.nav.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.nav.Name = "nav"
-        Me.nav.Size = New System.Drawing.Size(982, 28)
-        Me.nav.TabIndex = 293
         '
         'ReportDateTextbox
         '
@@ -89,7 +79,17 @@ Partial Class dailyCompletedInvoicesReport
         Me.ReportDateLabel.Tag = "dataLabel"
         Me.ReportDateLabel.Text = "Report Date :"
         '
-        'completedInvoicesReport
+        'nav
+        '
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(982, 28)
+        Me.nav.TabIndex = 293
+        '
+        'dailyCompletedInvoicesReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -101,7 +101,7 @@ Partial Class dailyCompletedInvoicesReport
         Me.Controls.Add(Me.previewReportButton)
         Me.Controls.Add(Me.UnpaidInvoicesReportLabel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Name = "completedInvoicesReport"
+        Me.Name = "dailyCompletedInvoicesReport"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Daily Completed Invoices Report"
         Me.ResumeLayout(False)
