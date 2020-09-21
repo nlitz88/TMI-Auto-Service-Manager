@@ -93,7 +93,7 @@ Public Class invoices
     ' Sub that loads Customer DataTable
     Private Function loadCustomerDataTable() As Boolean
 
-        CustomerDbController.ExecQuery("SELECT IIF(ISNULL(c.LastName), '', c.LastName) + ', ' + IIF(ISNULL(c.FirstName), '', c.FirstName) + IIF(ISNULL(c.Address) OR c.Address = '', '', ' @ ' + c.Address) as CLFA, c.CustomerId, c.LastName, c.HomePhone, c.WorkPhone, c.CellPhone1, c.CellPhone2, c.TaxExempt " &
+        CustomerDbController.ExecQuery("SELECT IIF(ISNULL(c.LastName), '', c.LastName) + ', ' + IIF(ISNULL(c.FirstName), '', c.FirstName) + IIF(ISNULL(c.Address) OR c.Address = '', '', ' @ ' + c.Address) as CLFA, c.CustomerId, c.LastName, c.FirstName, c.HomePhone, c.WorkPhone, c.CellPhone1, c.CellPhone2, c.TaxExempt " &
                                        "FROM Customer c " &
                                        "WHERE Trim(LastName) <> '' " &
                                        "ORDER BY c.LastName ASC")
@@ -178,14 +178,16 @@ Public Class invoices
     End Sub
 
 
-    ' Sub that initializes all dataEditingControls corresponding to values in Vehicle DataTable (TaxExempt)
+    ' Sub that initializes all dataEditingControls corresponding to values in Customer DataTable (TaxExempt)(Contact)(CellPhone1)
     ' Only used to initialize textbox when ADDING a NEW INVOICE
-    Private Sub InitializeTaxExemptFromCustomer()
+    Private Sub InitializeFromCustomer()
 
         'initializeControlsFromRow(CustomerDbController.DbDataTable, CustomerRow, "dataEditingControl", "_", Me)
-        ' We are only initializing TaxExempt from Customer DataTable, so do this small operation here manually.
+        ' We are only initializing TaxExempt, Contact, and CellPhone1 from Customer DataTable, so do this small operation here manually.
         Dim TaxExemptStatus As Boolean = CustomerDbController.DbDataTable(CustomerRow)("TaxExempt")
         TaxExempt_CheckBox.Checked = TaxExemptStatus
+        Dim Contact As String = CustomerDbController.DbDataTable(CustomerRow)("FirstName")
+        ContactName_Textbox.Text = Contact
 
     End Sub
 
@@ -1589,9 +1591,13 @@ Public Class invoices
         ' Initialize values from Customer and Vehicle
         InitializeVehicleDataEditingControls()
         correctInspectionMonthComboBox()
-        InitializeTaxExemptFromCustomer()
+        InitializeFromCustomer()
         ' setup ComboBoxes
-        ContactPhone1_ComboBox.SelectedIndex = -1
+        If ContactPhone1_ComboBox.Items.Count > 0 Then
+            ContactPhone1_ComboBox.SelectedIndex = 0
+        Else
+            ContactPhone1_ComboBox.SelectedIndex = -1
+        End If
         ContactPhone2_ComboBox.SelectedIndex = -1
         ' Initialize Invoice Date, AppointDate, and WorkDates as today's date
         InvDate_Textbox.Text = formatDate(DateTime.Now)
