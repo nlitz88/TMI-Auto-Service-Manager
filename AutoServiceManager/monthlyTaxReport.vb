@@ -5,6 +5,10 @@
     ' New Database control instance used for getting number of receipts
     Private CRUD As New DbControl()
 
+    ' Variables that maintain current and custom dates
+    Private startDate As DateTime
+    Private endDate As DateTime
+
     ' Variable that allows certain keystrokes through restricted fields
     Private allowedKeystroke As Boolean = False
 
@@ -76,10 +80,12 @@
             Exit Sub
         End If
 
-        ' 2.) Initialize MonthTextbox and Year with current month and year
-        MonthTextbox.Text = DateTime.Now.Month - 1
-        YearTextbox.Text = DateTime.Now.Year
+        ' 2.) Initialize MonthTextbox and Year with previous month and year
 
+        startDate = DateAdd(DateInterval.Month, -1, New Date(Year(Now), Month(Now), 1))
+        endDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, startDate))
+        MonthTextbox.Text = startDate.Month
+        YearTextbox.Text = startDate.Year
 
     End Sub
 
@@ -89,39 +95,43 @@
         ' 1.) Validate date
         If Not controlsValid() Then Exit Sub
 
-        'Try
+        Try
 
-        '    ' 2.) Check if any invoices after provided date
+            ' 2.) Check if any Payments within month window
+            ' Get startdate again, as user may have changed these values since initialization
+            startDate = New DateTime(YearTextbox.Text, MonthTextbox.Text, 1)
+            endDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, startDate))
 
-        '    ' Use CRUD to see if there are any invoices after the provided date
-        '    CRUD.AddParams("@reportdate", ReportDateTextbox.Text)
-        '    CRUD.ExecQuery("select * from InvPayments where PayDate=@reportdate")
+            ' Use CRUD to see if there are any invoices after the provided date
+            CRUD.AddParams("@startdate", startDate)
+            CRUD.AddParams("@enddate", endDate)
+            CRUD.ExecQuery("SELECT * FROM InvPayments WHERE PayDate >= startdate AND PayDate <= @enddate")
 
-        '    If Not CRUD.HasException(True) Then
-        '        If CRUD.DbDataTable.Rows.Count <> 0 Then
+            If Not CRUD.HasException(True) Then
+                If CRUD.DbDataTable.Rows.Count <> 0 Then
 
-        '            ' 3.) Open report preview if entries made on provided date
-        '            Dim AcccessInstance As New Microsoft.Office.Interop.Access.Application()
-        '            Dim filepath As String = readINI("AutoServiceManagerParams.ini", "PRIMARY-DATABASE-FILEPATH=")
+                    ' 3.) Open report preview if entries made on provided date
+                    Dim AcccessInstance As New Microsoft.Office.Interop.Access.Application()
+                    Dim filepath As String = readINI("AutoServiceManagerParams.ini", "PRIMARY-DATABASE-FILEPATH=")
 
-        '            AcccessInstance.Visible = False
-        '            AcccessInstance.OpenCurrentDatabase(filepath)
+                    AcccessInstance.Visible = False
+                    AcccessInstance.OpenCurrentDatabase(filepath)
 
-        '            AcccessInstance.DoCmd.OpenReport(ReportName:="CompletedInvoices", Microsoft.Office.Interop.Access.AcView.acViewPreview, , WhereCondition:="PayDate=#" & CStr(ReportDateTextbox.Text) & "#")
+                    AcccessInstance.DoCmd.OpenReport(ReportName:="MonthlyTaxReport", Microsoft.Office.Interop.Access.AcView.acViewPreview, , WhereCondition:="PayDate>=#" & CStr(startDate) & "# and PayDate<=#" & CStr(endDate) + "#")
 
-        '        Else
-        '            MessageBox.Show("No invoices found on " & ReportDateTextbox.Text & ".", "No invoices Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        '        End If
-        '    Else
-        '        MessageBox.Show("Unable to load invoices. Please restart and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '    End If
+                Else
+                    MessageBox.Show("No payments found from " & startDate & " to " & endDate & ".", "No payments Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
+            Else
+                MessageBox.Show("Unable to load payments. Please restart and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
 
-        'Catch ex As Exception
+        Catch ex As Exception
 
-        '    MessageBox.Show("Viewing preview unsuccessful. Ensure Database has not been moved and retry.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '    Exit Sub
+            MessageBox.Show("Viewing preview unsuccessful. Ensure Database has not been moved and retry.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
 
-        'End Try
+        End Try
 
     End Sub
 
