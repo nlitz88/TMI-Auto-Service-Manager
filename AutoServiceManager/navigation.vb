@@ -125,4 +125,9 @@
         changeScreen(dailyCompletedInvoicesReport, Me.ParentForm)
     End Sub
 
+    Private Sub MonthlyTaxReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MonthlyTaxReportToolStripMenuItem.Click
+        If Me.ParentForm Is monthlyTaxReport Then Exit Sub
+        changeScreen(monthlyTaxReport, Me.ParentForm)
+    End Sub
+
 End Class
