@@ -858,7 +858,15 @@ Public Class invoices
     ' Public Function that will reload the customer table and reinitialize customer dependent controls after returning from customer maintenance
     Public Function reinitializeCustomers() As Boolean
 
+        ' First, reload customer datatable
+        If Not loadCustomerDataTable() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
 
+        ' Then, if successfully reloaded, initialize CustomerComboBox
+        InitializeCustomerComboBox()
+        CustomerComboBox.SelectedIndex = 0
 
         Return True
 
