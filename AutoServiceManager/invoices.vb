@@ -2020,14 +2020,32 @@ Public Class invoices
 
     Private Sub vehicleHistoryButton_Click(sender As Object, e As EventArgs) Handles vehicleHistoryButton.Click
 
-        Dim AcccessInstance As New Microsoft.Office.Interop.Access.Application()
-        Dim filepath As String = readINI("AutoServiceManagerParams.ini", "PRIMARY-DATABASE-FILEPATH=")
-
         Try
 
-            AcccessInstance.Visible = False
-            AcccessInstance.OpenCurrentDatabase(filepath)
-            AcccessInstance.DoCmd.OpenReport(ReportName:="CustomerHistory", Microsoft.Office.Interop.Access.AcView.acViewPreview, , WhereCondition:="CustomerID=" & CStr(CustomerId) & " and VehicleId=" & CStr(VehicleId))
+            ' 1.) First, ensure that there are invoices for this vehicle. Otherwise, report will fail
+            CRUD.AddParams("@vehicleid", VehicleId)
+            CRUD.ExecQuery("select * from InvHdr where VehicleId=@vehicleid")
+
+            If Not CRUD.HasException(True) Then
+
+                If CRUD.DbDataTable.Rows.Count <> 0 Then
+
+                    Dim AcccessInstance As New Microsoft.Office.Interop.Access.Application()
+                    Dim filepath As String = readINI("AutoServiceManagerParams.ini", "PRIMARY-DATABASE-FILEPATH=")
+
+                    AcccessInstance.Visible = False
+                    AcccessInstance.OpenCurrentDatabase(filepath)
+                    AcccessInstance.DoCmd.OpenReport(ReportName:="CustomerHistory", Microsoft.Office.Interop.Access.AcView.acViewPreview, , WhereCondition:="CustomerID=" & CStr(CustomerId) & " and VehicleId=" & CStr(VehicleId))
+
+                Else
+                    MessageBox.Show("No invoices found for this " & VehicleComboBox.Text & ".", "No History Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
+
+            Else
+                MessageBox.Show("Unable to load invoices. Please restart and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
+
 
         Catch ex As Exception
 
