@@ -131,9 +131,11 @@ Partial Class invoices
         Me.ShopSupplies_Value = New System.Windows.Forms.CheckBox()
         Me.TaxExempt_Value = New System.Windows.Forms.CheckBox()
         Me.TaxExempt_CheckBox = New System.Windows.Forms.CheckBox()
-        Me.nav = New AutoServiceManager.navigation()
         Me.orLabel = New System.Windows.Forms.Label()
         Me.newCustomerButton = New System.Windows.Forms.Button()
+        Me.orVehicleLabel = New System.Windows.Forms.Label()
+        Me.newVehicleButton = New System.Windows.Forms.Button()
+        Me.nav = New AutoServiceManager.navigation()
         Me.CostTableLayoutPanel.SuspendLayout()
         Me.TotalPanel.SuspendLayout()
         Me.TaxPanel.SuspendLayout()
@@ -514,7 +516,7 @@ Partial Class invoices
         Me.vehicleHistoryButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.vehicleHistoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.vehicleHistoryButton.ForeColor = System.Drawing.Color.White
-        Me.vehicleHistoryButton.Location = New System.Drawing.Point(552, 282)
+        Me.vehicleHistoryButton.Location = New System.Drawing.Point(767, 282)
         Me.vehicleHistoryButton.Name = "vehicleHistoryButton"
         Me.vehicleHistoryButton.Size = New System.Drawing.Size(211, 30)
         Me.vehicleHistoryButton.TabIndex = 12
@@ -1461,15 +1463,6 @@ Partial Class invoices
         Me.TaxExempt_CheckBox.Tag = "dataEditingControl"
         Me.TaxExempt_CheckBox.UseVisualStyleBackColor = True
         '
-        'nav
-        '
-        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.nav.Location = New System.Drawing.Point(0, 0)
-        Me.nav.Name = "nav"
-        Me.nav.Size = New System.Drawing.Size(1182, 28)
-        Me.nav.TabIndex = 267
-        '
         'orLabel
         '
         Me.orLabel.AutoSize = True
@@ -1492,12 +1485,45 @@ Partial Class invoices
         Me.newCustomerButton.Text = "New Customer"
         Me.newCustomerButton.UseVisualStyleBackColor = False
         '
+        'orVehicleLabel
+        '
+        Me.orVehicleLabel.AutoSize = True
+        Me.orVehicleLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.orVehicleLabel.Location = New System.Drawing.Point(537, 289)
+        Me.orVehicleLabel.Name = "orVehicleLabel"
+        Me.orVehicleLabel.Size = New System.Drawing.Size(47, 17)
+        Me.orVehicleLabel.TabIndex = 329
+        Me.orVehicleLabel.Text = "- OR -"
+        '
+        'newVehicleButton
+        '
+        Me.newVehicleButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.newVehicleButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.newVehicleButton.ForeColor = System.Drawing.Color.White
+        Me.newVehicleButton.Location = New System.Drawing.Point(590, 282)
+        Me.newVehicleButton.Name = "newVehicleButton"
+        Me.newVehicleButton.Size = New System.Drawing.Size(163, 30)
+        Me.newVehicleButton.TabIndex = 328
+        Me.newVehicleButton.Text = "New Vehicle"
+        Me.newVehicleButton.UseVisualStyleBackColor = False
+        '
+        'nav
+        '
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(1182, 28)
+        Me.nav.TabIndex = 267
+        '
         'invoices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1182, 903)
+        Me.Controls.Add(Me.orVehicleLabel)
+        Me.Controls.Add(Me.newVehicleButton)
         Me.Controls.Add(Me.orLabel)
         Me.Controls.Add(Me.newCustomerButton)
         Me.Controls.Add(Me.TaxExempt_Value)
@@ -1718,4 +1744,6 @@ Partial Class invoices
     Friend WithEvents TaxExempt_CheckBox As CheckBox
     Friend WithEvents orLabel As Label
     Friend WithEvents newCustomerButton As Button
+    Friend WithEvents orVehicleLabel As Label
+    Friend WithEvents newVehicleButton As Button
 End Class

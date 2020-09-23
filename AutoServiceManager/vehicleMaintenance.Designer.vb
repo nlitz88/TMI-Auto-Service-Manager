@@ -87,6 +87,7 @@ Partial Class vehicleMaintenance
         Me.ABS_Value = New System.Windows.Forms.CheckBox()
         Me.AirBags_Value = New System.Windows.Forms.CheckBox()
         Me.AC_Value = New System.Windows.Forms.CheckBox()
+        Me.returnButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'deleteButton
@@ -869,12 +870,25 @@ Partial Class vehicleMaintenance
         Me.AC_Value.UseVisualStyleBackColor = True
         Me.AC_Value.Visible = False
         '
+        'returnButton
+        '
+        Me.returnButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.returnButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.returnButton.ForeColor = System.Drawing.Color.White
+        Me.returnButton.Location = New System.Drawing.Point(680, 120)
+        Me.returnButton.Name = "returnButton"
+        Me.returnButton.Size = New System.Drawing.Size(199, 30)
+        Me.returnButton.TabIndex = 326
+        Me.returnButton.Text = "Return To Invoice"
+        Me.returnButton.UseVisualStyleBackColor = False
+        '
         'vehicleMaintenance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.returnButton)
         Me.Controls.Add(Me.AC_Value)
         Me.Controls.Add(Me.AirBags_Value)
         Me.Controls.Add(Me.ABS_Value)
@@ -1015,4 +1029,5 @@ Partial Class vehicleMaintenance
     Friend WithEvents ABS_Value As CheckBox
     Friend WithEvents AirBags_Value As CheckBox
     Friend WithEvents AC_Value As CheckBox
+    Friend WithEvents returnButton As Button
 End Class

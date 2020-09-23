@@ -84,6 +84,10 @@ Public Class invoices
         Return InvTotalSum
     End Function
 
+    ' Function that retrieves CustomerId for use with vehicleMaintenance form when adding a new vehicle
+    Public Function GetCustomerId() As Integer
+        Return CustomerId
+    End Function
 
 
 
@@ -876,7 +880,15 @@ Public Class invoices
     ' Public Function that will reload the vehicle table and reinitialize vehicle dependent controls after returning from vehicle maintenance
     Public Function reinitializeVehicles() As Boolean
 
+        ' First, reload vehicle datatable
+        If Not loadVehicleDataTable() Then
+            MessageBox.Show("Failed to connect to database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
 
+        ' Then, if successfully reloaded, initialize CustomerComboBox
+        InitializeVehicleComboBox()
+        VehicleComboBox.SelectedIndex = 0
 
         Return True
 
@@ -1398,6 +1410,8 @@ Public Class invoices
             End If
             VehicleComboBox.Visible = False
             VehicleLabel.Visible = False
+            orVehicleLabel.Visible = False
+            newVehicleButton.Visible = False
 
             VehicleComboBox.SelectedIndex = -1
             VehicleComboBox_SelectedIndexChanged(VehicleComboBox, New EventArgs())
@@ -1433,6 +1447,8 @@ Public Class invoices
             InitializeVehicleComboBox()
             VehicleComboBox.Visible = True
             VehicleLabel.Visible = True
+            orVehicleLabel.Visible = True
+            newVehicleButton.Visible = True
             VehicleComboBox.SelectedIndex = 0
 
             ' Now that valid Customer selected, move user to vehicleCombobox
@@ -1449,6 +1465,8 @@ Public Class invoices
             End If
             VehicleComboBox.Visible = False
             VehicleLabel.Visible = False
+            orVehicleLabel.Visible = False
+            newVehicleButton.Visible = False
 
             VehicleComboBox.SelectedIndex = -1
             VehicleComboBox_SelectedIndexChanged(VehicleComboBox, New EventArgs())
@@ -2030,6 +2048,14 @@ Public Class invoices
     End Sub
 
 
+    Private Sub newVehicleButton_Click(sender As Object, e As EventArgs) Handles newVehicleButton.Click
+
+        previousScreen = Me
+        changeScreenHide(vehicleMaintenance, previousScreen)
+
+    End Sub
+
+
 
 
 
@@ -2529,5 +2555,6 @@ Public Class invoices
         LicensePlateTextbox.ForeColor = DefaultForeColor
 
     End Sub
+
 
 End Class
