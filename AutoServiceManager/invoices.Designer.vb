@@ -132,6 +132,8 @@ Partial Class invoices
         Me.TaxExempt_Value = New System.Windows.Forms.CheckBox()
         Me.TaxExempt_CheckBox = New System.Windows.Forms.CheckBox()
         Me.nav = New AutoServiceManager.navigation()
+        Me.orLabel = New System.Windows.Forms.Label()
+        Me.newCustomerButton = New System.Windows.Forms.Button()
         Me.CostTableLayoutPanel.SuspendLayout()
         Me.TotalPanel.SuspendLayout()
         Me.TaxPanel.SuspendLayout()
@@ -1468,12 +1470,36 @@ Partial Class invoices
         Me.nav.Size = New System.Drawing.Size(1182, 28)
         Me.nav.TabIndex = 267
         '
+        'orLabel
+        '
+        Me.orLabel.AutoSize = True
+        Me.orLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.orLabel.Location = New System.Drawing.Point(693, 247)
+        Me.orLabel.Name = "orLabel"
+        Me.orLabel.Size = New System.Drawing.Size(47, 17)
+        Me.orLabel.TabIndex = 327
+        Me.orLabel.Text = "- OR -"
+        '
+        'newCustomerButton
+        '
+        Me.newCustomerButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.newCustomerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.newCustomerButton.ForeColor = System.Drawing.Color.White
+        Me.newCustomerButton.Location = New System.Drawing.Point(746, 240)
+        Me.newCustomerButton.Name = "newCustomerButton"
+        Me.newCustomerButton.Size = New System.Drawing.Size(163, 30)
+        Me.newCustomerButton.TabIndex = 326
+        Me.newCustomerButton.Text = "New Customer"
+        Me.newCustomerButton.UseVisualStyleBackColor = False
+        '
         'invoices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1182, 903)
+        Me.Controls.Add(Me.orLabel)
+        Me.Controls.Add(Me.newCustomerButton)
         Me.Controls.Add(Me.TaxExempt_Value)
         Me.Controls.Add(Me.TaxExempt_CheckBox)
         Me.Controls.Add(Me.ShopSupplies_Value)
@@ -1690,4 +1716,6 @@ Partial Class invoices
     Friend WithEvents ShopSupplies_Value As CheckBox
     Friend WithEvents TaxExempt_Value As CheckBox
     Friend WithEvents TaxExempt_CheckBox As CheckBox
+    Friend WithEvents orLabel As Label
+    Friend WithEvents newCustomerButton As Button
 End Class

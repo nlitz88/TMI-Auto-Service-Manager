@@ -855,6 +855,26 @@ Public Class invoices
 
 
 
+    ' Public Function that will reload the customer table and reinitialize customer dependent controls after returning from customer maintenance
+    Public Function reinitializeCustomers() As Boolean
+
+
+
+        Return True
+
+    End Function
+
+
+    ' Public Function that will reload the vehicle table and reinitialize vehicle dependent controls after returning from vehicle maintenance
+    Public Function reinitializeVehicles() As Boolean
+
+
+
+        Return True
+
+    End Function
+
+
 
     ' Public Function called after invoice task tables have been changed that reinitializes dependent DataTables, corresponding DataGridViews,
     ' And subTaskEditingControls.
@@ -1994,6 +2014,15 @@ Public Class invoices
 
 
 
+    Private Sub newCustomerButton_Click(sender As Object, e As EventArgs) Handles newCustomerButton.Click
+
+        previousScreen = Me
+        changeScreenHide(customerMaintenance, previousScreen)
+
+    End Sub
+
+
+
 
 
     Private Sub ShopSupplies_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles ShopSupplies_CheckBox.CheckedChanged
@@ -2492,6 +2521,5 @@ Public Class invoices
         LicensePlateTextbox.ForeColor = DefaultForeColor
 
     End Sub
-
 
 End Class

@@ -70,6 +70,7 @@ Partial Class customerMaintenance
         Me.CustomerId_Textbox = New System.Windows.Forms.TextBox()
         Me.nav = New AutoServiceManager.navigation()
         Me.TaxExempt_Value = New System.Windows.Forms.CheckBox()
+        Me.returnButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'LastName_Value
@@ -633,12 +634,25 @@ Partial Class customerMaintenance
         Me.TaxExempt_Value.Tag = "dataViewingControl"
         Me.TaxExempt_Value.UseVisualStyleBackColor = True
         '
+        'returnButton
+        '
+        Me.returnButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.returnButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.returnButton.ForeColor = System.Drawing.Color.White
+        Me.returnButton.Location = New System.Drawing.Point(680, 120)
+        Me.returnButton.Name = "returnButton"
+        Me.returnButton.Size = New System.Drawing.Size(199, 30)
+        Me.returnButton.TabIndex = 323
+        Me.returnButton.Text = "Return To Invoice"
+        Me.returnButton.UseVisualStyleBackColor = False
+        '
         'customerMaintenance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(982, 753)
+        Me.Controls.Add(Me.returnButton)
         Me.Controls.Add(Me.TaxExempt_Value)
         Me.Controls.Add(Me.CustomerId_Textbox)
         Me.Controls.Add(Me.TaxExempt_CheckBox)
@@ -746,4 +760,5 @@ Partial Class customerMaintenance
     Friend WithEvents TaxExempt_CheckBox As CheckBox
     Friend WithEvents CustomerId_Textbox As TextBox
     Friend WithEvents TaxExempt_Value As CheckBox
+    Friend WithEvents returnButton As Button
 End Class

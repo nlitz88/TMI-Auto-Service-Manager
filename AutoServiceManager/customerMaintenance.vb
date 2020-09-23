@@ -24,6 +24,9 @@
     ' Variable that allows certain keystrokes through restricted fields
     Private allowedKeystroke As Boolean = False
 
+    ' Boolean to keep track of whether or not this form has been closed (needed, as this form can be accessed by other)
+    Private MeClosed As Boolean = False
+
 
 
 
@@ -385,6 +388,21 @@
         ' Implement this in companyMaster, Vehicles, and MTL as well
         ZipCode_ComboBox.Visible = True
         ZipCode_ComboBox.Visible = False
+
+
+        ' IF ARRIVING FROM INVOICES SCREEN, FIRE ADDCUSTOMER EVENT AND SHOW RETURN BUTTON
+        If previousScreen IsNot Nothing Then
+
+            ' Just ensure that the previous screen is invoices before acting
+            If previousScreen Is invoices Then
+                nav.Visible = False
+                returnButton.Visible = True
+                addButton_Click(addButton, New EventArgs())
+            End If
+
+        Else
+            returnButton.Visible = False
+        End If
 
     End Sub
 
@@ -925,21 +943,129 @@
 
 
 
-    Private Sub customerMaintenance_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub returnButton_Click(sender As Object, e As EventArgs) Handles returnButton.Click
 
-        ' Check if editing/adding, and if editing/adding, check if control values changed
-        If CustomerId_Textbox.Visible And InitialCustomerValues.CtrlValuesChanged() Then
+        If Not MeClosed Then
 
-            Dim decision As DialogResult = MessageBox.Show("Exit without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            ' Only want to ask them if the ctrl values are currently being edited AND they're values have changed
+            If LastName_Textbox.Visible And InitialCustomerValues.CtrlValuesChanged() Then
 
-            If decision = DialogResult.No Then
-                e.Cancel = True
-                Exit Sub
+                Dim decision As DialogResult = MessageBox.Show("Return without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If decision = DialogResult.No Then
+                    Exit Sub
+                Else
+
+                    If previousScreen Is invoices Then
+                        ' Call REINITIALIZATION HERE
+                        If Not invoices.reinitializeCustomers() Then
+                            MessageBox.Show("Reloading of customers unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            saveButton.Enabled = False
+                            Exit Sub
+                        End If
+                    End If
+
+                    MeClosed = True
+                    changeScreen(previousScreen, Me)
+                    previousScreen = Nothing
+
+                End If
+
+            Else
+
+                If previousScreen Is invoices Then
+                    ' Call REINITIALIZATION HERE
+                    If Not invoices.reinitializeCustomers() Then
+                        MessageBox.Show("Reloading of customers unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        saveButton.Enabled = False
+                        Exit Sub
+                    End If
+                End If
+
+                MeClosed = True
+                changeScreen(previousScreen, Me)
+                previousScreen = Nothing
+
             End If
 
         End If
 
     End Sub
+
+
+
+
+    Private Sub customerMaintenance_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+
+        If Not MeClosed Then
+
+            ' Only want to ask them if the ctrl values are currently being edited AND they're values have changed
+            If LastName_Textbox.Visible And InitialCustomerValues.CtrlValuesChanged() Then
+
+                Dim decision As DialogResult = MessageBox.Show("Return without saving changes?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If decision = DialogResult.No Then
+                    Exit Sub
+                Else
+
+                    ' If coming from another screen, then change back to that screen
+                    If previousScreen IsNot Nothing Then
+
+                        If previousScreen Is invoices Then
+                            ' Call REINITIALIZATION HERE
+                            If Not invoices.reinitializeCustomers() Then
+                                MessageBox.Show("Reloading of customers unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                saveButton.Enabled = False
+                                Exit Sub
+                            End If
+                        End If
+
+                        MeClosed = True
+                        changeScreen(previousScreen, Me)
+                        previousScreen = Nothing
+
+                        ' If not coming from another form, then exit normally
+                    Else
+                        MeClosed = True
+                        Me.Close()
+                    End If
+
+                End If
+
+            Else
+
+                ' If coming from another screen, then change back to that screen
+                If previousScreen IsNot Nothing Then
+
+                    If previousScreen Is invoices Then
+                        ' Call REINITIALIZATION HERE
+                        If Not invoices.reinitializeCustomers() Then
+                            MessageBox.Show("Reloading of customers unsuccessful; Old values will be reflected. Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            saveButton.Enabled = False
+                            Exit Sub
+                        End If
+                    End If
+
+                    MeClosed = True
+                    changeScreen(previousScreen, Me)
+                    previousScreen = Nothing
+
+                    ' If not coming from another form, then exit normally
+                Else
+                    MeClosed = True
+                    Me.Close()
+                End If
+
+            End If
+
+        End If
+
+    End Sub
+
+
+
+
+
 
 
 End Class
