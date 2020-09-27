@@ -699,7 +699,7 @@ Partial Class invoices
         Me.licensePlateSearchButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.licensePlateSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.licensePlateSearchButton.ForeColor = System.Drawing.Color.White
-        Me.licensePlateSearchButton.Location = New System.Drawing.Point(488, 23)
+        Me.licensePlateSearchButton.Location = New System.Drawing.Point(493, 67)
         Me.licensePlateSearchButton.Name = "licensePlateSearchButton"
         Me.licensePlateSearchButton.Size = New System.Drawing.Size(188, 30)
         Me.licensePlateSearchButton.TabIndex = 26
@@ -1365,7 +1365,7 @@ Partial Class invoices
         Me.LicenseStateComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.LicenseStateComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LicenseStateComboBox.FormattingEnabled = True
-        Me.LicenseStateComboBox.Location = New System.Drawing.Point(118, 24)
+        Me.LicenseStateComboBox.Location = New System.Drawing.Point(123, 68)
         Me.LicenseStateComboBox.MaxLength = 2
         Me.LicenseStateComboBox.Name = "LicenseStateComboBox"
         Me.LicenseStateComboBox.Size = New System.Drawing.Size(61, 28)
@@ -1377,7 +1377,7 @@ Partial Class invoices
         Me.LicenseState_Value.AutoSize = True
         Me.LicenseState_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LicenseState_Value.ForeColor = System.Drawing.Color.Black
-        Me.LicenseState_Value.Location = New System.Drawing.Point(118, 27)
+        Me.LicenseState_Value.Location = New System.Drawing.Point(123, 71)
         Me.LicenseState_Value.Name = "LicenseState_Value"
         Me.LicenseState_Value.Size = New System.Drawing.Size(0, 20)
         Me.LicenseState_Value.TabIndex = 318
@@ -1387,7 +1387,7 @@ Partial Class invoices
         '
         Me.LicenseStateLabel.AutoSize = True
         Me.LicenseStateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.LicenseStateLabel.Location = New System.Drawing.Point(10, 30)
+        Me.LicenseStateLabel.Location = New System.Drawing.Point(15, 74)
         Me.LicenseStateLabel.Name = "LicenseStateLabel"
         Me.LicenseStateLabel.Size = New System.Drawing.Size(102, 17)
         Me.LicenseStateLabel.TabIndex = 317
@@ -1398,7 +1398,7 @@ Partial Class invoices
         '
         Me.LicensePlateLabel.AutoSize = True
         Me.LicensePlateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.LicensePlateLabel.Location = New System.Drawing.Point(197, 30)
+        Me.LicensePlateLabel.Location = New System.Drawing.Point(202, 74)
         Me.LicensePlateLabel.Name = "LicensePlateLabel"
         Me.LicensePlateLabel.Size = New System.Drawing.Size(101, 17)
         Me.LicensePlateLabel.TabIndex = 320
@@ -1408,7 +1408,7 @@ Partial Class invoices
         'LicensePlateTextbox
         '
         Me.LicensePlateTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LicensePlateTextbox.Location = New System.Drawing.Point(304, 24)
+        Me.LicensePlateTextbox.Location = New System.Drawing.Point(309, 68)
         Me.LicensePlateTextbox.MaxLength = 10
         Me.LicensePlateTextbox.Name = "LicensePlateTextbox"
         Me.LicensePlateTextbox.Size = New System.Drawing.Size(178, 27)
@@ -1524,12 +1524,12 @@ Partial Class invoices
         'lookupGroup
         '
         Me.lookupGroup.Controls.Add(Me.findInvoiceButton)
-        Me.lookupGroup.Controls.Add(Me.Lookup_InvNbrTextbox)
-        Me.lookupGroup.Controls.Add(Me.Lookup_InvNbrLabel)
         Me.lookupGroup.Controls.Add(Me.LicenseStateLabel)
         Me.lookupGroup.Controls.Add(Me.licensePlateSearchButton)
+        Me.lookupGroup.Controls.Add(Me.Lookup_InvNbrTextbox)
         Me.lookupGroup.Controls.Add(Me.LicenseState_Value)
         Me.lookupGroup.Controls.Add(Me.LicenseStateComboBox)
+        Me.lookupGroup.Controls.Add(Me.Lookup_InvNbrLabel)
         Me.lookupGroup.Controls.Add(Me.LicensePlateTextbox)
         Me.lookupGroup.Controls.Add(Me.LicensePlateLabel)
         Me.lookupGroup.Location = New System.Drawing.Point(101, 172)
@@ -1544,7 +1544,7 @@ Partial Class invoices
         Me.findInvoiceButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.findInvoiceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.findInvoiceButton.ForeColor = System.Drawing.Color.White
-        Me.findInvoiceButton.Location = New System.Drawing.Point(314, 66)
+        Me.findInvoiceButton.Location = New System.Drawing.Point(319, 23)
         Me.findInvoiceButton.Name = "findInvoiceButton"
         Me.findInvoiceButton.Size = New System.Drawing.Size(188, 30)
         Me.findInvoiceButton.TabIndex = 330
@@ -1555,7 +1555,7 @@ Partial Class invoices
         'Lookup_InvNbrTextbox
         '
         Me.Lookup_InvNbrTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Lookup_InvNbrTextbox.Location = New System.Drawing.Point(130, 67)
+        Me.Lookup_InvNbrTextbox.Location = New System.Drawing.Point(135, 24)
         Me.Lookup_InvNbrTextbox.MaxLength = 10
         Me.Lookup_InvNbrTextbox.Name = "Lookup_InvNbrTextbox"
         Me.Lookup_InvNbrTextbox.Size = New System.Drawing.Size(178, 27)
@@ -1566,7 +1566,7 @@ Partial Class invoices
         '
         Me.Lookup_InvNbrLabel.AutoSize = True
         Me.Lookup_InvNbrLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.Lookup_InvNbrLabel.Location = New System.Drawing.Point(10, 73)
+        Me.Lookup_InvNbrLabel.Location = New System.Drawing.Point(15, 30)
         Me.Lookup_InvNbrLabel.Name = "Lookup_InvNbrLabel"
         Me.Lookup_InvNbrLabel.Size = New System.Drawing.Size(114, 17)
         Me.Lookup_InvNbrLabel.TabIndex = 331
