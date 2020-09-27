@@ -135,11 +135,11 @@ Partial Class invoices
         Me.newCustomerButton = New System.Windows.Forms.Button()
         Me.orVehicleLabel = New System.Windows.Forms.Label()
         Me.newVehicleButton = New System.Windows.Forms.Button()
-        Me.nav = New AutoServiceManager.navigation()
         Me.lookupGroup = New System.Windows.Forms.GroupBox()
         Me.findInvoiceButton = New System.Windows.Forms.Button()
         Me.Lookup_InvNbrTextbox = New System.Windows.Forms.TextBox()
         Me.Lookup_InvNbrLabel = New System.Windows.Forms.Label()
+        Me.nav = New AutoServiceManager.navigation()
         Me.CostTableLayoutPanel.SuspendLayout()
         Me.TotalPanel.SuspendLayout()
         Me.TaxPanel.SuspendLayout()
@@ -1512,15 +1512,6 @@ Partial Class invoices
         Me.newVehicleButton.Text = "New Vehicle"
         Me.newVehicleButton.UseVisualStyleBackColor = False
         '
-        'nav
-        '
-        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.nav.Location = New System.Drawing.Point(0, 0)
-        Me.nav.Name = "nav"
-        Me.nav.Size = New System.Drawing.Size(1182, 28)
-        Me.nav.TabIndex = 267
-        '
         'lookupGroup
         '
         Me.lookupGroup.Controls.Add(Me.findInvoiceButton)
@@ -1556,7 +1547,7 @@ Partial Class invoices
         '
         Me.Lookup_InvNbrTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Lookup_InvNbrTextbox.Location = New System.Drawing.Point(135, 24)
-        Me.Lookup_InvNbrTextbox.MaxLength = 10
+        Me.Lookup_InvNbrTextbox.MaxLength = 0
         Me.Lookup_InvNbrTextbox.Name = "Lookup_InvNbrTextbox"
         Me.Lookup_InvNbrTextbox.Size = New System.Drawing.Size(178, 27)
         Me.Lookup_InvNbrTextbox.TabIndex = 329
@@ -1572,6 +1563,15 @@ Partial Class invoices
         Me.Lookup_InvNbrLabel.TabIndex = 331
         Me.Lookup_InvNbrLabel.Tag = ""
         Me.Lookup_InvNbrLabel.Text = "Invoice Number :"
+        '
+        'nav
+        '
+        Me.nav.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.nav.Location = New System.Drawing.Point(0, 0)
+        Me.nav.Name = "nav"
+        Me.nav.Size = New System.Drawing.Size(1182, 28)
+        Me.nav.TabIndex = 267
         '
         'invoices
         '

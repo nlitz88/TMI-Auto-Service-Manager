@@ -1260,6 +1260,34 @@ Public Class invoices
 
 
 
+    Private Function InvoiceLookupControlsValid() As Boolean
+
+        Dim errorMessage As String = String.Empty
+
+        ' Use "Required" parameter to control whether or not a Null string value will cause an error to be reported
+
+
+        ' Invoice Number
+        If Not validNumber("Invoice Number", True, Lookup_InvNbrTextbox.Text, String.Empty, True) Then
+            errorMessage += "ERROR: Must enter a invoice number before searching" & vbNewLine
+            Lookup_InvNbrTextbox.ForeColor = Color.Red
+        End If
+
+
+        ' Check if any invalid input has been found
+        If Not String.IsNullOrEmpty(errorMessage) Then
+
+            MessageBox.Show(errorMessage, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+
+        End If
+
+        Return True
+
+    End Function
+
+
+
 
     Public Sub New()
 
@@ -1338,6 +1366,7 @@ Public Class invoices
 
     ' **************** LICENSE PLATE SEARCH CONTROL SUBS ****************
 
+
     ' Must lookup vehicle based on License State and LicensePlate
     ' Will have to use Database CRUD call for this
     Private Sub licensePlateSearchButton_Click(sender As Object, e As EventArgs) Handles licensePlateSearchButton.Click
@@ -1393,6 +1422,18 @@ Public Class invoices
 
     End Sub
 
+
+
+    ' **************** INVOICE LOOKUP CONTROL SUBS ****************
+
+    Private Sub findInvoiceButton_Click(sender As Object, e As EventArgs) Handles findInvoiceButton.Click
+
+        ' 1.) Validate invoice number
+        If Not InvoiceLookupControlsValid() Then Exit Sub
+
+
+
+    End Sub
 
 
 
@@ -2564,6 +2605,12 @@ Public Class invoices
     End Sub
 
 
+
+    Private Sub Lookup_InvNbrTextbox_TextChanged(sender As Object, e As EventArgs) Handles Lookup_InvNbrTextbox.TextChanged
+
+        Lookup_InvNbrTextbox.ForeColor = DefaultForeColor
+
+    End Sub
 
 
     Private Sub LicenseStateComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LicenseStateComboBox.SelectedIndexChanged
