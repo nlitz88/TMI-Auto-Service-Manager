@@ -1113,6 +1113,22 @@ Public Class invoices
     End Function
 
 
+    ' Function used to query InvHdr table based on InvNbr
+    Private Function searchInvoices() As Boolean
+
+        CRUD.AddParams("@invid", Lookup_InvNbrTextbox.Text)
+        CRUD.ExecQuery("SELECT i.InvNbr, i.CustomerId, i.VehicleId, i.InvDate " &
+                                       "FROM InvHdr i " &
+                                       "WHERE InvNbr=@invid " &
+                                       "ORDER BY i.InvDate DESC")
+        If CRUD.HasException() Then Return False
+
+        Return True
+
+    End Function
+
+
+
 
 
     ' **************** VALIDATION SUBS ****************
@@ -1431,6 +1447,61 @@ Public Class invoices
         ' 1.) Validate invoice number
         If Not InvoiceLookupControlsValid() Then Exit Sub
 
+        ' 2.) If valid, then attempt to lookup invoice number in InvHdr
+        If Not searchInvoices() Then
+            MessageBox.Show("Failed to search database; Please restart and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        ' 3.) If query was successful, analyze the resulting rows
+
+        ' If Invoice not found, 0 rows will be returned. Report this to user.
+        If CRUD.DbDataTable.Rows.Count = 0 Then
+            MessageBox.Show("No invoice found with invoice number " & Lookup_InvNbrTextbox.Text, "Invoice Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        ElseIf CRUD.DbDataTable.Rows.Count > 0 Then
+
+            ' Get data from the first row that it returns. Should only return one row, but just in case multiple are, only get the first.
+            CustomerId = CRUD.DbDataTable.Rows(0)("CustomerId")
+            VehicleId = CRUD.DbDataTable.Rows(0)("VehicleId")
+            InvId = CRUD.DbDataTable.Rows(0)("InvNbr")          ' This could also be accomplished by just doing a conversion of the text in Lookup_InvNbrTextbox, but this might be safer
+
+            ' First, use CustomerId to get associated Customer
+            Dim CLFA As String = getRowValueWithKeyEquals(CustomerDbController.DbDataTable, "CLFA", "CustomerId", CustomerId)
+            ' If associated CLFA found, then select that CLFA in the CustomerComboBox
+            If CLFA <> Nothing Then
+                CustomerComboBox.SelectedIndex = CustomerComboBox.Items.IndexOf(CLFA)
+
+                ' Then, as CLFA selected, we can select the vehicle that corresponds with the VehicleId we have
+                Dim YMML As String = getRowValueWithKeyEquals(VehicleDbController.DbDataTable, "YMML", "VehicleId", VehicleId)
+                ' If associated YMML found, then select that YMML in the VehicleComboBox
+                If YMML <> Nothing Then
+                    VehicleComboBox.SelectedIndex = VehicleComboBox.Items.IndexOf(YMML)
+
+                    ' Then, as YMML selected, we can select the particular invoice we are interested in. Select this based on INID that corresponds to InvNbr
+                    Dim INID As String = getRowValueWithKeyEquals(InvDbController.DbDataTable, "INID", "InvNbr", InvId)
+
+                    ' If associated INID found, then select that INID in the InvoiceComboBox
+                    If INID <> Nothing Then
+                        InvoiceComboBox.SelectedIndex = InvoiceComboBox.Items.IndexOf(INID)
+                        ' Done
+
+                    Else
+                        MessageBox.Show("Invoice found, but unable to select it. Please try to navigate to invoice manually. ", "Can't Select Invoice", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        Exit Sub
+                    End If
+
+                Else
+                    MessageBox.Show("Invoice found, but unable to find vehicle. Please try to navigate to invoice manually. ", "Vehicle Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Exit Sub
+                End If
+
+            Else
+                MessageBox.Show("Invoice found, but unable to find owner. Please try to navigate to invoice manually.", "Owner Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit Sub
+            End If
+
+        End If
 
 
     End Sub
