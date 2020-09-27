@@ -1231,7 +1231,8 @@ Public Class invoices
 
 
         ' License State
-        If Not isValidLength("License State", True, LicenseStateComboBox.Text, 2, errorMessage) Then
+        If Not isValidLength("License State", True, LicenseStateComboBox.Text, 2, String.Empty) Then
+            errorMessage += "ERROR: Must enter a valid License State before searching" & vbNewLine
             LicenseStateComboBox.ForeColor = Color.Red
         ElseIf Not String.IsNullOrWhiteSpace(LicenseStateComboBox.Text) And Not valueExists("State", LicenseStateComboBox.Text, StateDbController.DbDataTable) Then
             errorMessage += "ERROR: " & LicenseStateComboBox.Text & " is not a valid State" & vbNewLine
@@ -1239,7 +1240,8 @@ Public Class invoices
         End If
 
         ' License Plate
-        If Not isValidLength("License Plate", True, LicensePlateTextbox.Text, 10, errorMessage) Then
+        If Not isValidLength("License Plate", True, LicensePlateTextbox.Text, 10, String.Empty) Then
+            errorMessage += "ERROR: Must enter a valid License Plate before searching" & vbNewLine
             LicensePlateTextbox.ForeColor = Color.Red
         End If
 
