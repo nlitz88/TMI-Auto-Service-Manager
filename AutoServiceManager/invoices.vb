@@ -1285,7 +1285,7 @@ Public Class invoices
 
         ' Invoice Number
         If Not validNumber("Invoice Number", True, Lookup_InvNbrTextbox.Text, String.Empty, True) Then
-            errorMessage += "ERROR: Must enter a invoice number before searching" & vbNewLine
+            errorMessage += "ERROR: Must enter a valid invoice number before searching" & vbNewLine
             Lookup_InvNbrTextbox.ForeColor = Color.Red
         End If
 
