@@ -703,7 +703,7 @@ Partial Class invoices
         Me.licensePlateSearchButton.Name = "licensePlateSearchButton"
         Me.licensePlateSearchButton.Size = New System.Drawing.Size(188, 30)
         Me.licensePlateSearchButton.TabIndex = 26
-        Me.licensePlateSearchButton.Tag = "licensePlateSearchControl"
+        Me.licensePlateSearchButton.Tag = "lookupControl"
         Me.licensePlateSearchButton.Text = "Find Vehicle"
         Me.licensePlateSearchButton.UseVisualStyleBackColor = False
         '
@@ -1370,7 +1370,7 @@ Partial Class invoices
         Me.LicenseStateComboBox.Name = "LicenseStateComboBox"
         Me.LicenseStateComboBox.Size = New System.Drawing.Size(61, 28)
         Me.LicenseStateComboBox.TabIndex = 24
-        Me.LicenseStateComboBox.Tag = "licensePlateSearchControl"
+        Me.LicenseStateComboBox.Tag = "lookupControl"
         '
         'LicenseState_Value
         '
@@ -1413,7 +1413,7 @@ Partial Class invoices
         Me.LicensePlateTextbox.Name = "LicensePlateTextbox"
         Me.LicensePlateTextbox.Size = New System.Drawing.Size(178, 27)
         Me.LicensePlateTextbox.TabIndex = 25
-        Me.LicensePlateTextbox.Tag = "licensePlateSearchControl"
+        Me.LicensePlateTextbox.Tag = "lookupControl"
         '
         'Notes_Value
         '
@@ -1548,7 +1548,7 @@ Partial Class invoices
         Me.findInvoiceButton.Name = "findInvoiceButton"
         Me.findInvoiceButton.Size = New System.Drawing.Size(188, 30)
         Me.findInvoiceButton.TabIndex = 330
-        Me.findInvoiceButton.Tag = "licensePlateSearchControl"
+        Me.findInvoiceButton.Tag = "lookupControl"
         Me.findInvoiceButton.Text = "Find Invoice"
         Me.findInvoiceButton.UseVisualStyleBackColor = False
         '
@@ -1560,7 +1560,7 @@ Partial Class invoices
         Me.Lookup_InvNbrTextbox.Name = "Lookup_InvNbrTextbox"
         Me.Lookup_InvNbrTextbox.Size = New System.Drawing.Size(178, 27)
         Me.Lookup_InvNbrTextbox.TabIndex = 329
-        Me.Lookup_InvNbrTextbox.Tag = "licensePlateSearchControl"
+        Me.Lookup_InvNbrTextbox.Tag = "lookupControl"
         '
         'Lookup_InvNbrLabel
         '

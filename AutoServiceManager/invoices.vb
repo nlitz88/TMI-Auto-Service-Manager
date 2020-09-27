@@ -1636,6 +1636,9 @@ Public Class invoices
 
         clearControls(getAllNestedControlsWithTag("dataEditingControl", Me))
 
+        ' Establish initial values now, as user may want to save an invoice right away and then make changes later.
+        InitialInvValues.SetInitialValues(getAllNestedControlsWithTag("dataEditingControl", Me))
+
         ' Initialize values from Customer and Vehicle
         InitializeVehicleDataEditingControls()
         correctInspectionMonthComboBox()
@@ -1661,10 +1664,6 @@ Public Class invoices
 
         valuesInitialized = True
 
-
-        ' Establish initial values. Doing this here, as unless changes are about to be made, we don't need to set initial values
-        InitialInvValues.SetInitialValues(getAllNestedControlsWithTag("dataEditingControl", Me))
-
         ' First, disable editButton, addButton, enable cancelButton, and disable nav
         CustomerComboBox.Enabled = False
         VehicleComboBox.Enabled = False
@@ -1675,12 +1674,15 @@ Public Class invoices
         cancelButton.Enabled = True
         nav.DisableAll()
 
+        ' Also, enable save button, as user may want to save new invoice right away
+        saveButton.Enabled = True
+
         ' Disable Task and Payment Buttons
         tasksButton.Enabled = False
         paymentsButton.Enabled = False
 
         ' Disable all licensePlate searching controls
-        For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
+        For Each ctrl In getAllNestedControlsWithTag("lookupControl", Me)
             ctrl.Enabled = False
         Next
 
@@ -1742,7 +1744,7 @@ Public Class invoices
                 paymentsButton.Enabled = True
 
                 ' Re-Enable all licensePlate searching controls
-                For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
+                For Each ctrl In getAllNestedControlsWithTag("lookupControl", Me)
                     ctrl.Enabled = True
                 Next
 
@@ -1782,7 +1784,7 @@ Public Class invoices
         paymentsButton.Enabled = False
 
         ' Disable all licensePlate searching controls
-        For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
+        For Each ctrl In getAllNestedControlsWithTag("lookupControl", Me)
             ctrl.Enabled = False
         Next
 
@@ -1826,7 +1828,7 @@ Public Class invoices
             paymentsButton.Enabled = True
 
             ' Re-Enable all licensePlate searching controls
-            For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
+            For Each ctrl In getAllNestedControlsWithTag("lookupControl", Me)
                 ctrl.Enabled = True
             Next
 
@@ -1859,7 +1861,7 @@ Public Class invoices
             paymentsButton.Enabled = True
 
             ' Re-Enable all licensePlate searching controls
-            For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
+            For Each ctrl In getAllNestedControlsWithTag("lookupControl", Me)
                 ctrl.Enabled = True
             Next
 
@@ -1920,7 +1922,7 @@ Public Class invoices
                     paymentsButton.Enabled = True
 
                     ' Re-Enable all licensePlate searching controls
-                    For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
+                    For Each ctrl In getAllNestedControlsWithTag("lookupControl", Me)
                         ctrl.Enabled = True
                     Next
 
@@ -1986,7 +1988,7 @@ Public Class invoices
                     paymentsButton.Enabled = True
 
                     ' Re-Enable all licensePlate searching controls
-                    For Each ctrl In getAllNestedControlsWithTag("licensePlateSearchControl", Me)
+                    For Each ctrl In getAllNestedControlsWithTag("lookupControl", Me)
                         ctrl.Enabled = True
                     Next
 
