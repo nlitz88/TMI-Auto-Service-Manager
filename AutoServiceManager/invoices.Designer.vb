@@ -136,6 +136,10 @@ Partial Class invoices
         Me.orVehicleLabel = New System.Windows.Forms.Label()
         Me.newVehicleButton = New System.Windows.Forms.Button()
         Me.nav = New AutoServiceManager.navigation()
+        Me.lookupGroup = New System.Windows.Forms.GroupBox()
+        Me.findInvoiceButton = New System.Windows.Forms.Button()
+        Me.Lookup_InvNbrTextbox = New System.Windows.Forms.TextBox()
+        Me.Lookup_InvNbrLabel = New System.Windows.Forms.Label()
         Me.CostTableLayoutPanel.SuspendLayout()
         Me.TotalPanel.SuspendLayout()
         Me.TaxPanel.SuspendLayout()
@@ -145,6 +149,7 @@ Partial Class invoices
         Me.ShopChargesPanel.SuspendLayout()
         Me.TowingPanel.SuspendLayout()
         Me.GasPanel.SuspendLayout()
+        Me.lookupGroup.SuspendLayout()
         Me.SuspendLayout()
         '
         'deleteInvButton
@@ -226,7 +231,7 @@ Partial Class invoices
         '
         Me.invoiceLabel.AutoSize = True
         Me.invoiceLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.invoiceLabel.Location = New System.Drawing.Point(97, 332)
+        Me.invoiceLabel.Location = New System.Drawing.Point(98, 395)
         Me.invoiceLabel.Name = "invoiceLabel"
         Me.invoiceLabel.Size = New System.Drawing.Size(60, 17)
         Me.invoiceLabel.TabIndex = 143
@@ -238,7 +243,7 @@ Partial Class invoices
         Me.InvoiceComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.InvoiceComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.InvoiceComboBox.FormattingEnabled = True
-        Me.InvoiceComboBox.Location = New System.Drawing.Point(179, 326)
+        Me.InvoiceComboBox.Location = New System.Drawing.Point(180, 389)
         Me.InvoiceComboBox.Name = "InvoiceComboBox"
         Me.InvoiceComboBox.Size = New System.Drawing.Size(213, 28)
         Me.InvoiceComboBox.TabIndex = 2
@@ -247,7 +252,7 @@ Partial Class invoices
         '
         Me.CustomerComboLabel.AutoSize = True
         Me.CustomerComboLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.CustomerComboLabel.Location = New System.Drawing.Point(97, 247)
+        Me.CustomerComboLabel.Location = New System.Drawing.Point(98, 310)
         Me.CustomerComboLabel.Name = "CustomerComboLabel"
         Me.CustomerComboLabel.Size = New System.Drawing.Size(76, 17)
         Me.CustomerComboLabel.TabIndex = 142
@@ -259,7 +264,7 @@ Partial Class invoices
         Me.CustomerComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CustomerComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.CustomerComboBox.FormattingEnabled = True
-        Me.CustomerComboBox.Location = New System.Drawing.Point(179, 241)
+        Me.CustomerComboBox.Location = New System.Drawing.Point(180, 304)
         Me.CustomerComboBox.Name = "CustomerComboBox"
         Me.CustomerComboBox.Size = New System.Drawing.Size(508, 28)
         Me.CustomerComboBox.TabIndex = 0
@@ -270,7 +275,7 @@ Partial Class invoices
         Me.InvDate_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
         Me.InvDate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.InvDate_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
-        Me.InvDate_Textbox.Location = New System.Drawing.Point(461, 388)
+        Me.InvDate_Textbox.Location = New System.Drawing.Point(462, 451)
         Me.InvDate_Textbox.Mask = "00/00/0000"
         Me.InvDate_Textbox.Name = "InvDate_Textbox"
         Me.InvDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -285,7 +290,7 @@ Partial Class invoices
         Me.InvDate_Value.AutoSize = True
         Me.InvDate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.InvDate_Value.ForeColor = System.Drawing.Color.Black
-        Me.InvDate_Value.Location = New System.Drawing.Point(460, 391)
+        Me.InvDate_Value.Location = New System.Drawing.Point(461, 454)
         Me.InvDate_Value.Name = "InvDate_Value"
         Me.InvDate_Value.Size = New System.Drawing.Size(0, 20)
         Me.InvDate_Value.TabIndex = 242
@@ -295,7 +300,7 @@ Partial Class invoices
         '
         Me.InvoiceDateLabel.AutoSize = True
         Me.InvoiceDateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.InvoiceDateLabel.Location = New System.Drawing.Point(361, 394)
+        Me.InvoiceDateLabel.Location = New System.Drawing.Point(362, 457)
         Me.InvoiceDateLabel.Name = "InvoiceDateLabel"
         Me.InvoiceDateLabel.Size = New System.Drawing.Size(94, 17)
         Me.InvoiceDateLabel.TabIndex = 241
@@ -307,7 +312,7 @@ Partial Class invoices
         Me.InvNbr_Value.AutoSize = True
         Me.InvNbr_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.InvNbr_Value.ForeColor = System.Drawing.Color.Black
-        Me.InvNbr_Value.Location = New System.Drawing.Point(217, 391)
+        Me.InvNbr_Value.Location = New System.Drawing.Point(218, 454)
         Me.InvNbr_Value.Name = "InvNbr_Value"
         Me.InvNbr_Value.Size = New System.Drawing.Size(0, 20)
         Me.InvNbr_Value.TabIndex = 247
@@ -317,7 +322,7 @@ Partial Class invoices
         '
         Me.InvoiceNumberLabel.AutoSize = True
         Me.InvoiceNumberLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.InvoiceNumberLabel.Location = New System.Drawing.Point(97, 394)
+        Me.InvoiceNumberLabel.Location = New System.Drawing.Point(98, 457)
         Me.InvoiceNumberLabel.Name = "InvoiceNumberLabel"
         Me.InvoiceNumberLabel.Size = New System.Drawing.Size(114, 17)
         Me.InvoiceNumberLabel.TabIndex = 246
@@ -328,7 +333,7 @@ Partial Class invoices
         '
         Me.InvNbr_Textbox.Enabled = False
         Me.InvNbr_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.InvNbr_Textbox.Location = New System.Drawing.Point(217, 388)
+        Me.InvNbr_Textbox.Location = New System.Drawing.Point(218, 451)
         Me.InvNbr_Textbox.MaxLength = 10
         Me.InvNbr_Textbox.Name = "InvNbr_Textbox"
         Me.InvNbr_Textbox.Size = New System.Drawing.Size(126, 27)
@@ -338,7 +343,7 @@ Partial Class invoices
         'Complete_CheckBox
         '
         Me.Complete_CheckBox.AutoSize = True
-        Me.Complete_CheckBox.Location = New System.Drawing.Point(693, 395)
+        Me.Complete_CheckBox.Location = New System.Drawing.Point(694, 458)
         Me.Complete_CheckBox.Name = "Complete_CheckBox"
         Me.Complete_CheckBox.Size = New System.Drawing.Size(18, 17)
         Me.Complete_CheckBox.TabIndex = 5
@@ -349,7 +354,7 @@ Partial Class invoices
         '
         Me.CompleteLabel.AutoSize = True
         Me.CompleteLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.CompleteLabel.Location = New System.Drawing.Point(612, 394)
+        Me.CompleteLabel.Location = New System.Drawing.Point(613, 457)
         Me.CompleteLabel.Name = "CompleteLabel"
         Me.CompleteLabel.Size = New System.Drawing.Size(75, 17)
         Me.CompleteLabel.TabIndex = 252
@@ -361,7 +366,7 @@ Partial Class invoices
         Me.ContactName_Value.AutoSize = True
         Me.ContactName_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ContactName_Value.ForeColor = System.Drawing.Color.Black
-        Me.ContactName_Value.Location = New System.Drawing.Point(167, 436)
+        Me.ContactName_Value.Location = New System.Drawing.Point(168, 499)
         Me.ContactName_Value.Name = "ContactName_Value"
         Me.ContactName_Value.Size = New System.Drawing.Size(0, 20)
         Me.ContactName_Value.TabIndex = 256
@@ -371,7 +376,7 @@ Partial Class invoices
         '
         Me.ContactLabel.AutoSize = True
         Me.ContactLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.ContactLabel.Location = New System.Drawing.Point(97, 439)
+        Me.ContactLabel.Location = New System.Drawing.Point(98, 502)
         Me.ContactLabel.Name = "ContactLabel"
         Me.ContactLabel.Size = New System.Drawing.Size(64, 17)
         Me.ContactLabel.TabIndex = 255
@@ -381,7 +386,7 @@ Partial Class invoices
         'ContactName_Textbox
         '
         Me.ContactName_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ContactName_Textbox.Location = New System.Drawing.Point(167, 433)
+        Me.ContactName_Textbox.Location = New System.Drawing.Point(168, 496)
         Me.ContactName_Textbox.MaxLength = 25
         Me.ContactName_Textbox.Name = "ContactName_Textbox"
         Me.ContactName_Textbox.Size = New System.Drawing.Size(315, 27)
@@ -392,7 +397,7 @@ Partial Class invoices
         '
         Me.Phone1Label.AutoSize = True
         Me.Phone1Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.Phone1Label.Location = New System.Drawing.Point(501, 439)
+        Me.Phone1Label.Location = New System.Drawing.Point(502, 502)
         Me.Phone1Label.Name = "Phone1Label"
         Me.Phone1Label.Size = New System.Drawing.Size(69, 17)
         Me.Phone1Label.TabIndex = 260
@@ -405,7 +410,7 @@ Partial Class invoices
         Me.ContactPhone1_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.ContactPhone1_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.ContactPhone1_ComboBox.FormattingEnabled = True
-        Me.ContactPhone1_ComboBox.Location = New System.Drawing.Point(576, 433)
+        Me.ContactPhone1_ComboBox.Location = New System.Drawing.Point(577, 496)
         Me.ContactPhone1_ComboBox.MaxLength = 20
         Me.ContactPhone1_ComboBox.Name = "ContactPhone1_ComboBox"
         Me.ContactPhone1_ComboBox.Size = New System.Drawing.Size(181, 28)
@@ -417,7 +422,7 @@ Partial Class invoices
         Me.ContactPhone1_Value.AutoSize = True
         Me.ContactPhone1_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ContactPhone1_Value.ForeColor = System.Drawing.Color.Black
-        Me.ContactPhone1_Value.Location = New System.Drawing.Point(576, 436)
+        Me.ContactPhone1_Value.Location = New System.Drawing.Point(577, 499)
         Me.ContactPhone1_Value.Name = "ContactPhone1_Value"
         Me.ContactPhone1_Value.Size = New System.Drawing.Size(0, 20)
         Me.ContactPhone1_Value.TabIndex = 261
@@ -428,7 +433,7 @@ Partial Class invoices
         Me.ContactPhone2_Value.AutoSize = True
         Me.ContactPhone2_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ContactPhone2_Value.ForeColor = System.Drawing.Color.Black
-        Me.ContactPhone2_Value.Location = New System.Drawing.Point(852, 436)
+        Me.ContactPhone2_Value.Location = New System.Drawing.Point(853, 499)
         Me.ContactPhone2_Value.Name = "ContactPhone2_Value"
         Me.ContactPhone2_Value.Size = New System.Drawing.Size(0, 20)
         Me.ContactPhone2_Value.TabIndex = 264
@@ -438,7 +443,7 @@ Partial Class invoices
         '
         Me.Phone2Label.AutoSize = True
         Me.Phone2Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.Phone2Label.Location = New System.Drawing.Point(777, 439)
+        Me.Phone2Label.Location = New System.Drawing.Point(778, 502)
         Me.Phone2Label.Name = "Phone2Label"
         Me.Phone2Label.Size = New System.Drawing.Size(69, 17)
         Me.Phone2Label.TabIndex = 263
@@ -451,7 +456,7 @@ Partial Class invoices
         Me.ContactPhone2_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.ContactPhone2_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.ContactPhone2_ComboBox.FormattingEnabled = True
-        Me.ContactPhone2_ComboBox.Location = New System.Drawing.Point(852, 433)
+        Me.ContactPhone2_ComboBox.Location = New System.Drawing.Point(853, 496)
         Me.ContactPhone2_ComboBox.MaxLength = 20
         Me.ContactPhone2_ComboBox.Name = "ContactPhone2_ComboBox"
         Me.ContactPhone2_ComboBox.Size = New System.Drawing.Size(181, 28)
@@ -462,7 +467,7 @@ Partial Class invoices
         '
         Me.VehicleLabel.AutoSize = True
         Me.VehicleLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.VehicleLabel.Location = New System.Drawing.Point(97, 289)
+        Me.VehicleLabel.Location = New System.Drawing.Point(98, 352)
         Me.VehicleLabel.Name = "VehicleLabel"
         Me.VehicleLabel.Size = New System.Drawing.Size(62, 17)
         Me.VehicleLabel.TabIndex = 266
@@ -474,7 +479,7 @@ Partial Class invoices
         Me.VehicleComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.VehicleComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.VehicleComboBox.FormattingEnabled = True
-        Me.VehicleComboBox.Location = New System.Drawing.Point(179, 283)
+        Me.VehicleComboBox.Location = New System.Drawing.Point(180, 346)
         Me.VehicleComboBox.Name = "VehicleComboBox"
         Me.VehicleComboBox.Size = New System.Drawing.Size(352, 28)
         Me.VehicleComboBox.TabIndex = 1
@@ -484,7 +489,7 @@ Partial Class invoices
         Me.Mileage_Value.AutoSize = True
         Me.Mileage_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Mileage_Value.ForeColor = System.Drawing.Color.Black
-        Me.Mileage_Value.Location = New System.Drawing.Point(763, 481)
+        Me.Mileage_Value.Location = New System.Drawing.Point(764, 544)
         Me.Mileage_Value.Name = "Mileage_Value"
         Me.Mileage_Value.Size = New System.Drawing.Size(0, 20)
         Me.Mileage_Value.TabIndex = 270
@@ -494,7 +499,7 @@ Partial Class invoices
         '
         Me.MileageLabel.AutoSize = True
         Me.MileageLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.MileageLabel.Location = New System.Drawing.Point(692, 484)
+        Me.MileageLabel.Location = New System.Drawing.Point(693, 547)
         Me.MileageLabel.Name = "MileageLabel"
         Me.MileageLabel.Size = New System.Drawing.Size(65, 17)
         Me.MileageLabel.TabIndex = 269
@@ -504,7 +509,7 @@ Partial Class invoices
         'Mileage_Textbox
         '
         Me.Mileage_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Mileage_Textbox.Location = New System.Drawing.Point(763, 478)
+        Me.Mileage_Textbox.Location = New System.Drawing.Point(764, 541)
         Me.Mileage_Textbox.MaxLength = 14
         Me.Mileage_Textbox.Name = "Mileage_Textbox"
         Me.Mileage_Textbox.Size = New System.Drawing.Size(146, 27)
@@ -516,7 +521,7 @@ Partial Class invoices
         Me.vehicleHistoryButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.vehicleHistoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.vehicleHistoryButton.ForeColor = System.Drawing.Color.White
-        Me.vehicleHistoryButton.Location = New System.Drawing.Point(767, 282)
+        Me.vehicleHistoryButton.Location = New System.Drawing.Point(768, 345)
         Me.vehicleHistoryButton.Name = "vehicleHistoryButton"
         Me.vehicleHistoryButton.Size = New System.Drawing.Size(211, 30)
         Me.vehicleHistoryButton.TabIndex = 12
@@ -530,7 +535,7 @@ Partial Class invoices
         Me.ApptDate_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
         Me.ApptDate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.ApptDate_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
-        Me.ApptDate_Textbox.Location = New System.Drawing.Point(232, 522)
+        Me.ApptDate_Textbox.Location = New System.Drawing.Point(233, 585)
         Me.ApptDate_Textbox.Mask = "00/00/0000"
         Me.ApptDate_Textbox.Name = "ApptDate_Textbox"
         Me.ApptDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -545,7 +550,7 @@ Partial Class invoices
         Me.ApptDate_Value.AutoSize = True
         Me.ApptDate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ApptDate_Value.ForeColor = System.Drawing.Color.Black
-        Me.ApptDate_Value.Location = New System.Drawing.Point(231, 525)
+        Me.ApptDate_Value.Location = New System.Drawing.Point(232, 588)
         Me.ApptDate_Value.Name = "ApptDate_Value"
         Me.ApptDate_Value.Size = New System.Drawing.Size(0, 20)
         Me.ApptDate_Value.TabIndex = 274
@@ -555,7 +560,7 @@ Partial Class invoices
         '
         Me.AppointmentDate_Label.AutoSize = True
         Me.AppointmentDate_Label.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.AppointmentDate_Label.Location = New System.Drawing.Point(97, 528)
+        Me.AppointmentDate_Label.Location = New System.Drawing.Point(98, 591)
         Me.AppointmentDate_Label.Name = "AppointmentDate_Label"
         Me.AppointmentDate_Label.Size = New System.Drawing.Size(129, 17)
         Me.AppointmentDate_Label.TabIndex = 273
@@ -568,7 +573,7 @@ Partial Class invoices
         Me.WorkDate_Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
         Me.WorkDate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.WorkDate_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
-        Me.WorkDate_Textbox.Location = New System.Drawing.Point(475, 522)
+        Me.WorkDate_Textbox.Location = New System.Drawing.Point(476, 585)
         Me.WorkDate_Textbox.Mask = "00/00/0000"
         Me.WorkDate_Textbox.Name = "WorkDate_Textbox"
         Me.WorkDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -583,7 +588,7 @@ Partial Class invoices
         Me.WorkDate_Value.AutoSize = True
         Me.WorkDate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.WorkDate_Value.ForeColor = System.Drawing.Color.Black
-        Me.WorkDate_Value.Location = New System.Drawing.Point(474, 525)
+        Me.WorkDate_Value.Location = New System.Drawing.Point(475, 588)
         Me.WorkDate_Value.Name = "WorkDate_Value"
         Me.WorkDate_Value.Size = New System.Drawing.Size(0, 20)
         Me.WorkDate_Value.TabIndex = 277
@@ -593,7 +598,7 @@ Partial Class invoices
         '
         Me.WorkDateLabel.AutoSize = True
         Me.WorkDateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.WorkDateLabel.Location = New System.Drawing.Point(386, 528)
+        Me.WorkDateLabel.Location = New System.Drawing.Point(387, 591)
         Me.WorkDateLabel.Name = "WorkDateLabel"
         Me.WorkDateLabel.Size = New System.Drawing.Size(83, 17)
         Me.WorkDateLabel.TabIndex = 276
@@ -605,7 +610,7 @@ Partial Class invoices
         Me.NbrTasks_Value.AutoSize = True
         Me.NbrTasks_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NbrTasks_Value.ForeColor = System.Drawing.Color.Black
-        Me.NbrTasks_Value.Location = New System.Drawing.Point(768, 562)
+        Me.NbrTasks_Value.Location = New System.Drawing.Point(769, 625)
         Me.NbrTasks_Value.Name = "NbrTasks_Value"
         Me.NbrTasks_Value.Size = New System.Drawing.Size(0, 20)
         Me.NbrTasks_Value.TabIndex = 280
@@ -615,7 +620,7 @@ Partial Class invoices
         '
         Me.NbrTasksLabel.AutoSize = True
         Me.NbrTasksLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.NbrTasksLabel.Location = New System.Drawing.Point(638, 565)
+        Me.NbrTasksLabel.Location = New System.Drawing.Point(639, 628)
         Me.NbrTasksLabel.Name = "NbrTasksLabel"
         Me.NbrTasksLabel.Size = New System.Drawing.Size(124, 17)
         Me.NbrTasksLabel.TabIndex = 279
@@ -627,7 +632,7 @@ Partial Class invoices
         Me.InspectionSticker_Value.AutoSize = True
         Me.InspectionSticker_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.InspectionSticker_Value.ForeColor = System.Drawing.Color.Black
-        Me.InspectionSticker_Value.Location = New System.Drawing.Point(450, 481)
+        Me.InspectionSticker_Value.Location = New System.Drawing.Point(451, 544)
         Me.InspectionSticker_Value.Name = "InspectionSticker_Value"
         Me.InspectionSticker_Value.Size = New System.Drawing.Size(0, 20)
         Me.InspectionSticker_Value.TabIndex = 283
@@ -637,7 +642,7 @@ Partial Class invoices
         '
         Me.InspectionStickerLabel.AutoSize = True
         Me.InspectionStickerLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.InspectionStickerLabel.Location = New System.Drawing.Point(317, 484)
+        Me.InspectionStickerLabel.Location = New System.Drawing.Point(318, 547)
         Me.InspectionStickerLabel.Name = "InspectionStickerLabel"
         Me.InspectionStickerLabel.Size = New System.Drawing.Size(127, 17)
         Me.InspectionStickerLabel.TabIndex = 282
@@ -647,7 +652,7 @@ Partial Class invoices
         'InspectionSticker_Textbox
         '
         Me.InspectionSticker_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.InspectionSticker_Textbox.Location = New System.Drawing.Point(450, 478)
+        Me.InspectionSticker_Textbox.Location = New System.Drawing.Point(451, 541)
         Me.InspectionSticker_Textbox.MaxLength = 15
         Me.InspectionSticker_Textbox.Name = "InspectionSticker_Textbox"
         Me.InspectionSticker_Textbox.Size = New System.Drawing.Size(229, 27)
@@ -660,7 +665,7 @@ Partial Class invoices
         Me.InspectionMonth_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.InspectionMonth_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.InspectionMonth_ComboBox.FormattingEnabled = True
-        Me.InspectionMonth_ComboBox.Location = New System.Drawing.Point(226, 478)
+        Me.InspectionMonth_ComboBox.Location = New System.Drawing.Point(227, 541)
         Me.InspectionMonth_ComboBox.MaxLength = 3
         Me.InspectionMonth_ComboBox.Name = "InspectionMonth_ComboBox"
         Me.InspectionMonth_ComboBox.Size = New System.Drawing.Size(73, 28)
@@ -672,7 +677,7 @@ Partial Class invoices
         Me.InspectionMonth_Value.AutoSize = True
         Me.InspectionMonth_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.InspectionMonth_Value.ForeColor = System.Drawing.Color.Black
-        Me.InspectionMonth_Value.Location = New System.Drawing.Point(226, 481)
+        Me.InspectionMonth_Value.Location = New System.Drawing.Point(227, 544)
         Me.InspectionMonth_Value.Name = "InspectionMonth_Value"
         Me.InspectionMonth_Value.Size = New System.Drawing.Size(0, 20)
         Me.InspectionMonth_Value.TabIndex = 286
@@ -682,7 +687,7 @@ Partial Class invoices
         '
         Me.InspectionMonthLabel.AutoSize = True
         Me.InspectionMonthLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.InspectionMonthLabel.Location = New System.Drawing.Point(97, 484)
+        Me.InspectionMonthLabel.Location = New System.Drawing.Point(98, 547)
         Me.InspectionMonthLabel.Name = "InspectionMonthLabel"
         Me.InspectionMonthLabel.Size = New System.Drawing.Size(123, 17)
         Me.InspectionMonthLabel.TabIndex = 285
@@ -694,12 +699,12 @@ Partial Class invoices
         Me.licensePlateSearchButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.licensePlateSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.licensePlateSearchButton.ForeColor = System.Drawing.Color.White
-        Me.licensePlateSearchButton.Location = New System.Drawing.Point(596, 192)
+        Me.licensePlateSearchButton.Location = New System.Drawing.Point(488, 23)
         Me.licensePlateSearchButton.Name = "licensePlateSearchButton"
-        Me.licensePlateSearchButton.Size = New System.Drawing.Size(250, 30)
+        Me.licensePlateSearchButton.Size = New System.Drawing.Size(188, 30)
         Me.licensePlateSearchButton.TabIndex = 26
         Me.licensePlateSearchButton.Tag = "licensePlateSearchControl"
-        Me.licensePlateSearchButton.Text = "License Plate Search"
+        Me.licensePlateSearchButton.Text = "Find Vehicle"
         Me.licensePlateSearchButton.UseVisualStyleBackColor = False
         '
         'tasksButton
@@ -707,7 +712,7 @@ Partial Class invoices
         Me.tasksButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.tasksButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.tasksButton.ForeColor = System.Drawing.Color.White
-        Me.tasksButton.Location = New System.Drawing.Point(637, 521)
+        Me.tasksButton.Location = New System.Drawing.Point(638, 584)
         Me.tasksButton.Name = "tasksButton"
         Me.tasksButton.Size = New System.Drawing.Size(189, 30)
         Me.tasksButton.TabIndex = 15
@@ -720,7 +725,7 @@ Partial Class invoices
         Me.paymentsButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.paymentsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.paymentsButton.ForeColor = System.Drawing.Color.White
-        Me.paymentsButton.Location = New System.Drawing.Point(873, 521)
+        Me.paymentsButton.Location = New System.Drawing.Point(874, 584)
         Me.paymentsButton.Name = "paymentsButton"
         Me.paymentsButton.Size = New System.Drawing.Size(189, 30)
         Me.paymentsButton.TabIndex = 16
@@ -733,7 +738,7 @@ Partial Class invoices
         Me.PayDate_Value.AutoSize = True
         Me.PayDate_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PayDate_Value.ForeColor = System.Drawing.Color.Black
-        Me.PayDate_Value.Location = New System.Drawing.Point(950, 562)
+        Me.PayDate_Value.Location = New System.Drawing.Point(951, 625)
         Me.PayDate_Value.Name = "PayDate_Value"
         Me.PayDate_Value.Size = New System.Drawing.Size(0, 20)
         Me.PayDate_Value.TabIndex = 293
@@ -743,7 +748,7 @@ Partial Class invoices
         '
         Me.PayDateLabel.AutoSize = True
         Me.PayDateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.PayDateLabel.Location = New System.Drawing.Point(870, 565)
+        Me.PayDateLabel.Location = New System.Drawing.Point(871, 628)
         Me.PayDateLabel.Name = "PayDateLabel"
         Me.PayDateLabel.Size = New System.Drawing.Size(74, 17)
         Me.PayDateLabel.TabIndex = 292
@@ -755,7 +760,7 @@ Partial Class invoices
         Me.TotalPaid_Value.AutoSize = True
         Me.TotalPaid_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TotalPaid_Value.ForeColor = System.Drawing.Color.Black
-        Me.TotalPaid_Value.Location = New System.Drawing.Point(950, 597)
+        Me.TotalPaid_Value.Location = New System.Drawing.Point(951, 660)
         Me.TotalPaid_Value.Name = "TotalPaid_Value"
         Me.TotalPaid_Value.Size = New System.Drawing.Size(0, 20)
         Me.TotalPaid_Value.TabIndex = 295
@@ -765,7 +770,7 @@ Partial Class invoices
         '
         Me.TotalPaidLabel.AutoSize = True
         Me.TotalPaidLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.TotalPaidLabel.Location = New System.Drawing.Point(870, 600)
+        Me.TotalPaidLabel.Location = New System.Drawing.Point(871, 663)
         Me.TotalPaidLabel.Name = "TotalPaidLabel"
         Me.TotalPaidLabel.Size = New System.Drawing.Size(80, 17)
         Me.TotalPaidLabel.TabIndex = 294
@@ -776,7 +781,7 @@ Partial Class invoices
         '
         Me.NbrTasks_Textbox.Enabled = False
         Me.NbrTasks_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NbrTasks_Textbox.Location = New System.Drawing.Point(768, 559)
+        Me.NbrTasks_Textbox.Location = New System.Drawing.Point(769, 622)
         Me.NbrTasks_Textbox.MaxLength = 14
         Me.NbrTasks_Textbox.Name = "NbrTasks_Textbox"
         Me.NbrTasks_Textbox.Size = New System.Drawing.Size(58, 27)
@@ -790,7 +795,7 @@ Partial Class invoices
         Me.PayDate_Textbox.Enabled = False
         Me.PayDate_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.PayDate_Textbox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert
-        Me.PayDate_Textbox.Location = New System.Drawing.Point(950, 559)
+        Me.PayDate_Textbox.Location = New System.Drawing.Point(951, 622)
         Me.PayDate_Textbox.Mask = "00/00/0000"
         Me.PayDate_Textbox.Name = "PayDate_Textbox"
         Me.PayDate_Textbox.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -804,7 +809,7 @@ Partial Class invoices
         '
         Me.TotalPaid_Textbox.Enabled = False
         Me.TotalPaid_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TotalPaid_Textbox.Location = New System.Drawing.Point(956, 594)
+        Me.TotalPaid_Textbox.Location = New System.Drawing.Point(957, 657)
         Me.TotalPaid_Textbox.MaxLength = 14
         Me.TotalPaid_Textbox.Name = "TotalPaid_Textbox"
         Me.TotalPaid_Textbox.Size = New System.Drawing.Size(106, 27)
@@ -815,7 +820,7 @@ Partial Class invoices
         '
         Me.BalanceTextbox.Enabled = False
         Me.BalanceTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BalanceTextbox.Location = New System.Drawing.Point(943, 629)
+        Me.BalanceTextbox.Location = New System.Drawing.Point(944, 692)
         Me.BalanceTextbox.MaxLength = 14
         Me.BalanceTextbox.Name = "BalanceTextbox"
         Me.BalanceTextbox.Size = New System.Drawing.Size(119, 27)
@@ -827,7 +832,7 @@ Partial Class invoices
         Me.BalanceValue.AutoSize = True
         Me.BalanceValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BalanceValue.ForeColor = System.Drawing.Color.Black
-        Me.BalanceValue.Location = New System.Drawing.Point(943, 632)
+        Me.BalanceValue.Location = New System.Drawing.Point(944, 695)
         Me.BalanceValue.Name = "BalanceValue"
         Me.BalanceValue.Size = New System.Drawing.Size(0, 20)
         Me.BalanceValue.TabIndex = 300
@@ -837,7 +842,7 @@ Partial Class invoices
         '
         Me.BalanceLabel.AutoSize = True
         Me.BalanceLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.BalanceLabel.Location = New System.Drawing.Point(870, 635)
+        Me.BalanceLabel.Location = New System.Drawing.Point(871, 698)
         Me.BalanceLabel.Name = "BalanceLabel"
         Me.BalanceLabel.Size = New System.Drawing.Size(67, 17)
         Me.BalanceLabel.TabIndex = 299
@@ -848,7 +853,7 @@ Partial Class invoices
         '
         Me.NotesLabel.AutoSize = True
         Me.NotesLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.NotesLabel.Location = New System.Drawing.Point(638, 684)
+        Me.NotesLabel.Location = New System.Drawing.Point(639, 747)
         Me.NotesLabel.Name = "NotesLabel"
         Me.NotesLabel.Size = New System.Drawing.Size(53, 17)
         Me.NotesLabel.TabIndex = 303
@@ -858,7 +863,7 @@ Partial Class invoices
         'ShopSupplies_CheckBox
         '
         Me.ShopSupplies_CheckBox.AutoSize = True
-        Me.ShopSupplies_CheckBox.Location = New System.Drawing.Point(514, 678)
+        Me.ShopSupplies_CheckBox.Location = New System.Drawing.Point(515, 741)
         Me.ShopSupplies_CheckBox.Name = "ShopSupplies_CheckBox"
         Me.ShopSupplies_CheckBox.Size = New System.Drawing.Size(18, 17)
         Me.ShopSupplies_CheckBox.TabIndex = 307
@@ -869,7 +874,7 @@ Partial Class invoices
         '
         Me.ShopSuppliesLabel.AutoSize = True
         Me.ShopSuppliesLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.ShopSuppliesLabel.Location = New System.Drawing.Point(401, 677)
+        Me.ShopSuppliesLabel.Location = New System.Drawing.Point(402, 740)
         Me.ShopSuppliesLabel.Name = "ShopSuppliesLabel"
         Me.ShopSuppliesLabel.Size = New System.Drawing.Size(107, 17)
         Me.ShopSuppliesLabel.TabIndex = 306
@@ -880,7 +885,7 @@ Partial Class invoices
         '
         Me.TaxExemptLabel.AutoSize = True
         Me.TaxExemptLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.TaxExemptLabel.Location = New System.Drawing.Point(401, 736)
+        Me.TaxExemptLabel.Location = New System.Drawing.Point(402, 799)
         Me.TaxExemptLabel.Name = "TaxExemptLabel"
         Me.TaxExemptLabel.Size = New System.Drawing.Size(89, 17)
         Me.TaxExemptLabel.TabIndex = 309
@@ -923,7 +928,7 @@ Partial Class invoices
         Me.CostTableLayoutPanel.Controls.Add(Me.LaborLabel, 0, 0)
         Me.CostTableLayoutPanel.Controls.Add(Me.ShopChargesLabel, 0, 2)
         Me.CostTableLayoutPanel.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize
-        Me.CostTableLayoutPanel.Location = New System.Drawing.Point(100, 612)
+        Me.CostTableLayoutPanel.Location = New System.Drawing.Point(101, 675)
         Me.CostTableLayoutPanel.Name = "CostTableLayoutPanel"
         Me.CostTableLayoutPanel.RowCount = 8
         Me.CostTableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
@@ -1346,7 +1351,7 @@ Partial Class invoices
         'Notes_Textbox
         '
         Me.Notes_Textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Notes_Textbox.Location = New System.Drawing.Point(697, 678)
+        Me.Notes_Textbox.Location = New System.Drawing.Point(698, 741)
         Me.Notes_Textbox.MaxLength = 255
         Me.Notes_Textbox.Multiline = True
         Me.Notes_Textbox.Name = "Notes_Textbox"
@@ -1360,7 +1365,7 @@ Partial Class invoices
         Me.LicenseStateComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.LicenseStateComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LicenseStateComboBox.FormattingEnabled = True
-        Me.LicenseStateComboBox.Location = New System.Drawing.Point(205, 194)
+        Me.LicenseStateComboBox.Location = New System.Drawing.Point(118, 24)
         Me.LicenseStateComboBox.MaxLength = 2
         Me.LicenseStateComboBox.Name = "LicenseStateComboBox"
         Me.LicenseStateComboBox.Size = New System.Drawing.Size(61, 28)
@@ -1372,7 +1377,7 @@ Partial Class invoices
         Me.LicenseState_Value.AutoSize = True
         Me.LicenseState_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LicenseState_Value.ForeColor = System.Drawing.Color.Black
-        Me.LicenseState_Value.Location = New System.Drawing.Point(205, 197)
+        Me.LicenseState_Value.Location = New System.Drawing.Point(118, 27)
         Me.LicenseState_Value.Name = "LicenseState_Value"
         Me.LicenseState_Value.Size = New System.Drawing.Size(0, 20)
         Me.LicenseState_Value.TabIndex = 318
@@ -1382,7 +1387,7 @@ Partial Class invoices
         '
         Me.LicenseStateLabel.AutoSize = True
         Me.LicenseStateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.LicenseStateLabel.Location = New System.Drawing.Point(97, 200)
+        Me.LicenseStateLabel.Location = New System.Drawing.Point(10, 30)
         Me.LicenseStateLabel.Name = "LicenseStateLabel"
         Me.LicenseStateLabel.Size = New System.Drawing.Size(102, 17)
         Me.LicenseStateLabel.TabIndex = 317
@@ -1393,7 +1398,7 @@ Partial Class invoices
         '
         Me.LicensePlateLabel.AutoSize = True
         Me.LicensePlateLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.LicensePlateLabel.Location = New System.Drawing.Point(286, 199)
+        Me.LicensePlateLabel.Location = New System.Drawing.Point(197, 30)
         Me.LicensePlateLabel.Name = "LicensePlateLabel"
         Me.LicensePlateLabel.Size = New System.Drawing.Size(101, 17)
         Me.LicensePlateLabel.TabIndex = 320
@@ -1403,7 +1408,7 @@ Partial Class invoices
         'LicensePlateTextbox
         '
         Me.LicensePlateTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LicensePlateTextbox.Location = New System.Drawing.Point(393, 193)
+        Me.LicensePlateTextbox.Location = New System.Drawing.Point(304, 24)
         Me.LicensePlateTextbox.MaxLength = 10
         Me.LicensePlateTextbox.Name = "LicensePlateTextbox"
         Me.LicensePlateTextbox.Size = New System.Drawing.Size(178, 27)
@@ -1414,7 +1419,7 @@ Partial Class invoices
         '
         Me.Notes_Value.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Notes_Value.ForeColor = System.Drawing.Color.Black
-        Me.Notes_Value.Location = New System.Drawing.Point(697, 681)
+        Me.Notes_Value.Location = New System.Drawing.Point(698, 744)
         Me.Notes_Value.Name = "Notes_Value"
         Me.Notes_Value.Size = New System.Drawing.Size(365, 165)
         Me.Notes_Value.TabIndex = 304
@@ -1424,7 +1429,7 @@ Partial Class invoices
         '
         Me.Complete_Value.AutoCheck = False
         Me.Complete_Value.AutoSize = True
-        Me.Complete_Value.Location = New System.Drawing.Point(693, 395)
+        Me.Complete_Value.Location = New System.Drawing.Point(694, 458)
         Me.Complete_Value.Name = "Complete_Value"
         Me.Complete_Value.Size = New System.Drawing.Size(18, 17)
         Me.Complete_Value.TabIndex = 321
@@ -1435,7 +1440,7 @@ Partial Class invoices
         '
         Me.ShopSupplies_Value.AutoCheck = False
         Me.ShopSupplies_Value.AutoSize = True
-        Me.ShopSupplies_Value.Location = New System.Drawing.Point(514, 678)
+        Me.ShopSupplies_Value.Location = New System.Drawing.Point(515, 741)
         Me.ShopSupplies_Value.Name = "ShopSupplies_Value"
         Me.ShopSupplies_Value.Size = New System.Drawing.Size(18, 17)
         Me.ShopSupplies_Value.TabIndex = 323
@@ -1446,7 +1451,7 @@ Partial Class invoices
         '
         Me.TaxExempt_Value.AutoCheck = False
         Me.TaxExempt_Value.AutoSize = True
-        Me.TaxExempt_Value.Location = New System.Drawing.Point(496, 736)
+        Me.TaxExempt_Value.Location = New System.Drawing.Point(497, 799)
         Me.TaxExempt_Value.Name = "TaxExempt_Value"
         Me.TaxExempt_Value.Size = New System.Drawing.Size(18, 17)
         Me.TaxExempt_Value.TabIndex = 325
@@ -1456,7 +1461,7 @@ Partial Class invoices
         'TaxExempt_CheckBox
         '
         Me.TaxExempt_CheckBox.AutoSize = True
-        Me.TaxExempt_CheckBox.Location = New System.Drawing.Point(496, 736)
+        Me.TaxExempt_CheckBox.Location = New System.Drawing.Point(497, 799)
         Me.TaxExempt_CheckBox.Name = "TaxExempt_CheckBox"
         Me.TaxExempt_CheckBox.Size = New System.Drawing.Size(18, 17)
         Me.TaxExempt_CheckBox.TabIndex = 324
@@ -1467,7 +1472,7 @@ Partial Class invoices
         '
         Me.orLabel.AutoSize = True
         Me.orLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.orLabel.Location = New System.Drawing.Point(693, 247)
+        Me.orLabel.Location = New System.Drawing.Point(694, 310)
         Me.orLabel.Name = "orLabel"
         Me.orLabel.Size = New System.Drawing.Size(47, 17)
         Me.orLabel.TabIndex = 327
@@ -1478,7 +1483,7 @@ Partial Class invoices
         Me.newCustomerButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.newCustomerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.newCustomerButton.ForeColor = System.Drawing.Color.White
-        Me.newCustomerButton.Location = New System.Drawing.Point(746, 240)
+        Me.newCustomerButton.Location = New System.Drawing.Point(747, 303)
         Me.newCustomerButton.Name = "newCustomerButton"
         Me.newCustomerButton.Size = New System.Drawing.Size(163, 30)
         Me.newCustomerButton.TabIndex = 326
@@ -1489,7 +1494,7 @@ Partial Class invoices
         '
         Me.orVehicleLabel.AutoSize = True
         Me.orVehicleLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.orVehicleLabel.Location = New System.Drawing.Point(537, 289)
+        Me.orVehicleLabel.Location = New System.Drawing.Point(538, 352)
         Me.orVehicleLabel.Name = "orVehicleLabel"
         Me.orVehicleLabel.Size = New System.Drawing.Size(47, 17)
         Me.orVehicleLabel.TabIndex = 329
@@ -1500,7 +1505,7 @@ Partial Class invoices
         Me.newVehicleButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
         Me.newVehicleButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.newVehicleButton.ForeColor = System.Drawing.Color.White
-        Me.newVehicleButton.Location = New System.Drawing.Point(590, 282)
+        Me.newVehicleButton.Location = New System.Drawing.Point(591, 345)
         Me.newVehicleButton.Name = "newVehicleButton"
         Me.newVehicleButton.Size = New System.Drawing.Size(163, 30)
         Me.newVehicleButton.TabIndex = 328
@@ -1516,12 +1521,65 @@ Partial Class invoices
         Me.nav.Size = New System.Drawing.Size(1182, 28)
         Me.nav.TabIndex = 267
         '
+        'lookupGroup
+        '
+        Me.lookupGroup.Controls.Add(Me.findInvoiceButton)
+        Me.lookupGroup.Controls.Add(Me.Lookup_InvNbrTextbox)
+        Me.lookupGroup.Controls.Add(Me.Lookup_InvNbrLabel)
+        Me.lookupGroup.Controls.Add(Me.LicenseStateLabel)
+        Me.lookupGroup.Controls.Add(Me.licensePlateSearchButton)
+        Me.lookupGroup.Controls.Add(Me.LicenseState_Value)
+        Me.lookupGroup.Controls.Add(Me.LicenseStateComboBox)
+        Me.lookupGroup.Controls.Add(Me.LicensePlateTextbox)
+        Me.lookupGroup.Controls.Add(Me.LicensePlateLabel)
+        Me.lookupGroup.Location = New System.Drawing.Point(101, 172)
+        Me.lookupGroup.Name = "lookupGroup"
+        Me.lookupGroup.Size = New System.Drawing.Size(963, 110)
+        Me.lookupGroup.TabIndex = 330
+        Me.lookupGroup.TabStop = False
+        Me.lookupGroup.Text = "Quick Access Lookups"
+        '
+        'findInvoiceButton
+        '
+        Me.findInvoiceButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.findInvoiceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.findInvoiceButton.ForeColor = System.Drawing.Color.White
+        Me.findInvoiceButton.Location = New System.Drawing.Point(314, 66)
+        Me.findInvoiceButton.Name = "findInvoiceButton"
+        Me.findInvoiceButton.Size = New System.Drawing.Size(188, 30)
+        Me.findInvoiceButton.TabIndex = 330
+        Me.findInvoiceButton.Tag = "licensePlateSearchControl"
+        Me.findInvoiceButton.Text = "Find Invoice"
+        Me.findInvoiceButton.UseVisualStyleBackColor = False
+        '
+        'Lookup_InvNbrTextbox
+        '
+        Me.Lookup_InvNbrTextbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Lookup_InvNbrTextbox.Location = New System.Drawing.Point(130, 67)
+        Me.Lookup_InvNbrTextbox.MaxLength = 10
+        Me.Lookup_InvNbrTextbox.Name = "Lookup_InvNbrTextbox"
+        Me.Lookup_InvNbrTextbox.Size = New System.Drawing.Size(178, 27)
+        Me.Lookup_InvNbrTextbox.TabIndex = 329
+        Me.Lookup_InvNbrTextbox.Tag = "licensePlateSearchControl"
+        '
+        'Lookup_InvNbrLabel
+        '
+        Me.Lookup_InvNbrLabel.AutoSize = True
+        Me.Lookup_InvNbrLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
+        Me.Lookup_InvNbrLabel.Location = New System.Drawing.Point(10, 73)
+        Me.Lookup_InvNbrLabel.Name = "Lookup_InvNbrLabel"
+        Me.Lookup_InvNbrLabel.Size = New System.Drawing.Size(114, 17)
+        Me.Lookup_InvNbrLabel.TabIndex = 331
+        Me.Lookup_InvNbrLabel.Tag = ""
+        Me.Lookup_InvNbrLabel.Text = "Invoice Number :"
+        '
         'invoices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1182, 903)
+        Me.ClientSize = New System.Drawing.Size(1182, 984)
+        Me.Controls.Add(Me.lookupGroup)
         Me.Controls.Add(Me.orVehicleLabel)
         Me.Controls.Add(Me.newVehicleButton)
         Me.Controls.Add(Me.orLabel)
@@ -1530,11 +1588,6 @@ Partial Class invoices
         Me.Controls.Add(Me.TaxExempt_CheckBox)
         Me.Controls.Add(Me.ShopSupplies_Value)
         Me.Controls.Add(Me.Complete_Value)
-        Me.Controls.Add(Me.LicensePlateLabel)
-        Me.Controls.Add(Me.LicensePlateTextbox)
-        Me.Controls.Add(Me.LicenseStateComboBox)
-        Me.Controls.Add(Me.LicenseState_Value)
-        Me.Controls.Add(Me.LicenseStateLabel)
         Me.Controls.Add(Me.Notes_Textbox)
         Me.Controls.Add(Me.CostTableLayoutPanel)
         Me.Controls.Add(Me.previewInvButton)
@@ -1555,7 +1608,6 @@ Partial Class invoices
         Me.Controls.Add(Me.PayDateLabel)
         Me.Controls.Add(Me.paymentsButton)
         Me.Controls.Add(Me.tasksButton)
-        Me.Controls.Add(Me.licensePlateSearchButton)
         Me.Controls.Add(Me.InspectionMonth_ComboBox)
         Me.Controls.Add(Me.InspectionMonth_Value)
         Me.Controls.Add(Me.InspectionMonthLabel)
@@ -1627,6 +1679,8 @@ Partial Class invoices
         Me.TowingPanel.PerformLayout()
         Me.GasPanel.ResumeLayout(False)
         Me.GasPanel.PerformLayout()
+        Me.lookupGroup.ResumeLayout(False)
+        Me.lookupGroup.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1746,4 +1800,8 @@ Partial Class invoices
     Friend WithEvents newCustomerButton As Button
     Friend WithEvents orVehicleLabel As Label
     Friend WithEvents newVehicleButton As Button
+    Friend WithEvents lookupGroup As GroupBox
+    Friend WithEvents findInvoiceButton As Button
+    Friend WithEvents Lookup_InvNbrTextbox As TextBox
+    Friend WithEvents Lookup_InvNbrLabel As Label
 End Class
