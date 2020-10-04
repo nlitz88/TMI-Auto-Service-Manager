@@ -1994,10 +1994,21 @@
         Dim NewDate As String
         Dim NewCopy As String = String.Empty
 
+
+
         Try
 
             FileToCopy = readINI("AutoServiceManagerParams.ini", "PRIMARY-DATABASE-FILEPATH=")
             BackupDirectory = readINI("AutoServiceManagerParams.ini", "BACKUP-DIRECTORY=")
+
+            ' Check if BackupDirectory exists. If it doesn't prompt the user.
+            If Not System.IO.Directory.Exists(BackupDirectory) Then
+                Dim decision As DialogResult = MessageBox.Show("Please ensure backup device is connected/plugged into the computer. Press 'Retry' once device is connected to continue with backup. Press 'Cancel' if you are unable to backup at this time.", "Backup Device Not Found", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning)
+                If decision = DialogResult.Retry Then
+                    backupDb()
+                    Exit Sub
+                End If
+            End If
 
             ' First, ensure that there was a valid entry in the INI
             If FileToCopy <> String.Empty Then
@@ -2033,7 +2044,7 @@
             MessageBox.Show("Database backup created successfully at " & vbNewLine & NewCopy)
             pruneBackups()
         Else
-            MessageBox.Show("Database backup unsuccessful." & vbNewLine & "Please ensure that the filepath to the primary database is correct and that the backup directory is a valid path", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Database backup unsuccessful." & vbNewLine & "Please ensure that the filepath to the primary database is correct and that the backup device is connected.", "Backup Unsuccessful", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 
     End Sub
