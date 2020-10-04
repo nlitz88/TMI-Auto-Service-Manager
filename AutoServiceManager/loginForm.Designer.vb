@@ -86,7 +86,6 @@ Partial Class loginPage
         'loginButton
         '
         Me.loginButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(46, Byte), Integer))
-        Me.loginButton.Enabled = False
         Me.loginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.loginButton.ForeColor = System.Drawing.Color.White
         Me.loginButton.Location = New System.Drawing.Point(604, 291)
