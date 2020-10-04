@@ -553,7 +553,7 @@
             PolicyNumber_Textbox.ForeColor = Color.Red
         End If
 
-        ' Expiration Date
+        ' Insurance Expiration Date
         If Not validDateTime("Expiration Date", False, ExpirationDate_Textbox.Text, errorMessage) Then
             ExpirationDate_Textbox.ForeColor = Color.Red
         End If
@@ -576,6 +576,51 @@
             Return False
 
         End If
+
+        Return True
+
+    End Function
+
+
+
+    ' Function that can be used to warn user about non-critical errors. These errors can be ignored if the user desires, but should still be reported.
+    Private Function nonCriticalErrors() As Boolean
+
+        Dim errorMessage As String = String.Empty
+
+
+        ' Insurance Expiration Date
+        If Not validDateTime("Expiration Date", False, ExpirationDate_Textbox.Text, errorMessage) Then
+            ExpirationDate_Textbox.ForeColor = Color.Red
+            ' If valid DateTime, then ensure that it is greater than current Date. Don't try to check, however, if the date has been left empty
+        ElseIf Not ExpirationDate_Textbox.Text.Replace(" ", "0") = "00/00/0000" Then
+            Try
+                ' Try implemented here just in case datetime conversion fails unexpectedly
+                Dim ExpDate As Date = Convert.ToDateTime(ExpirationDate_Textbox.Text)
+                If ExpDate < Date.Now() Then
+                    ExpirationDate_Textbox.ForeColor = Color.Red
+                    errorMessage += "ERROR: Insurance policy expired." & vbNewLine
+                End If
+            Catch ex As Exception
+
+            End Try
+        End If
+
+
+        ' Check if any errors has been found
+        If Not String.IsNullOrEmpty(errorMessage) Then
+
+            errorMessage += vbNewLine
+            errorMessage += "Continue and ignore errors?"
+
+            Dim Decision As DialogResult = MessageBox.Show(errorMessage, "Non-Critical Errors Encountered", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+
+            If Decision = DialogResult.No Then
+                Return False
+            End If
+
+        End If
+
 
         Return True
 
@@ -964,8 +1009,9 @@
 
                 If mode = "editing" Then
 
-                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    ' 1.) VALIDATE DATAEDITING CONTROLS AND CHECK FOR NON-CRITICAL ERRORS
                     If Not controlsValid() Then Exit Sub
+                    If Not nonCriticalErrors() Then Exit Sub
 
                     ' 2.) UPDATE DATATABLE(S), THEN UPDATE DATABASE
                     If Not updateAll() Then
@@ -1005,8 +1051,9 @@
 
                 ElseIf mode = "adding" Then
 
-                    ' 1.) VALIDATE DATAEDITING CONTROLS
+                    ' 1.) VALIDATE DATAEDITING CONTROLS AND CHECK FOR NON-CRITICAL ERRORS
                     If Not controlsValid() Then Exit Sub
+                    If Not nonCriticalErrors() Then Exit Sub
 
                     ' 2.) INSERT NEW ROW INTO DATABASE
                     If Not insertAll() Then
