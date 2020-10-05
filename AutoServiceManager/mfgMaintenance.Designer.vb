@@ -100,7 +100,7 @@ Partial Class mfgMaintenance
         '
         'AutoMakeComboBox
         '
-        Me.AutoMakeComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.AutoMakeComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.AutoMakeComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.AutoMakeComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.AutoMakeComboBox.FormattingEnabled = True

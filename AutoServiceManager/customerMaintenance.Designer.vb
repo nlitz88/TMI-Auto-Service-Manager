@@ -188,7 +188,7 @@ Partial Class customerMaintenance
         '
         'CustomerComboBox
         '
-        Me.CustomerComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CustomerComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.CustomerComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CustomerComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.CustomerComboBox.FormattingEnabled = True

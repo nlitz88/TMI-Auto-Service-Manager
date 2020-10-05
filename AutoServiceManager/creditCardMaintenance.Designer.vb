@@ -102,7 +102,7 @@ Partial Class creditCardMaintenance
         '
         'CCComboBox
         '
-        Me.CCComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CCComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.CCComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CCComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.CCComboBox.FormattingEnabled = True

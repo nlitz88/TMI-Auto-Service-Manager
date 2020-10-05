@@ -299,7 +299,7 @@ Partial Class addMasterTaskLabor
         '
         'LaborCodesComboBox
         '
-        Me.LaborCodesComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.LaborCodesComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.LaborCodesComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.LaborCodesComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.LaborCodesComboBox.FormattingEnabled = True

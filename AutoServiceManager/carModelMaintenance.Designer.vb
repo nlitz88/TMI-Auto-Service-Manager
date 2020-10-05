@@ -98,7 +98,7 @@ Partial Class carModelMaintenance
         '
         'AutoMakeComboBox
         '
-        Me.AutoMakeComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.AutoMakeComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.AutoMakeComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.AutoMakeComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.AutoMakeComboBox.FormattingEnabled = True
@@ -181,7 +181,7 @@ Partial Class carModelMaintenance
         '
         'CarModelComboBox
         '
-        Me.CarModelComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CarModelComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.CarModelComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CarModelComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.CarModelComboBox.FormattingEnabled = True

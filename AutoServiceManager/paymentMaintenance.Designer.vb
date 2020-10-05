@@ -102,7 +102,7 @@ Partial Class paymentMaintenance
         '
         'PTComboBox
         '
-        Me.PTComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.PTComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.PTComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.PTComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.PTComboBox.FormattingEnabled = True

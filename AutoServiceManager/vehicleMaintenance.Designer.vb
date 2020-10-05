@@ -177,7 +177,7 @@ Partial Class vehicleMaintenance
         '
         'VehicleComboBox
         '
-        Me.VehicleComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.VehicleComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.VehicleComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.VehicleComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.VehicleComboBox.FormattingEnabled = True
@@ -198,7 +198,7 @@ Partial Class vehicleMaintenance
         '
         'CustomerComboBox
         '
-        Me.CustomerComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CustomerComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.CustomerComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CustomerComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.CustomerComboBox.FormattingEnabled = True
@@ -315,7 +315,7 @@ Partial Class vehicleMaintenance
         '
         'Make_ComboBox
         '
-        Me.Make_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.Make_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.Make_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.Make_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Make_ComboBox.FormattingEnabled = True
@@ -329,7 +329,7 @@ Partial Class vehicleMaintenance
         '
         'Model_ComboBox
         '
-        Me.Model_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.Model_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.Model_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.Model_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Model_ComboBox.FormattingEnabled = True
@@ -378,7 +378,7 @@ Partial Class vehicleMaintenance
         '
         'Color_ComboBox
         '
-        Me.Color_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.Color_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.Color_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.Color_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Color_ComboBox.FormattingEnabled = True
@@ -416,7 +416,7 @@ Partial Class vehicleMaintenance
         '
         'LicenseState_ComboBox
         '
-        Me.LicenseState_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.LicenseState_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.LicenseState_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.LicenseState_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LicenseState_ComboBox.FormattingEnabled = True
@@ -527,7 +527,7 @@ Partial Class vehicleMaintenance
         '
         'InsuranceCompany_ComboBox
         '
-        Me.InsuranceCompany_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.InsuranceCompany_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.InsuranceCompany_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.InsuranceCompany_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.InsuranceCompany_ComboBox.FormattingEnabled = True

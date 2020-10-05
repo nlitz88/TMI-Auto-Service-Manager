@@ -185,7 +185,7 @@ Partial Class invoicePayments
         '
         'PaymentComboBox
         '
-        Me.PaymentComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.PaymentComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.PaymentComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.PaymentComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.PaymentComboBox.FormattingEnabled = True
@@ -403,7 +403,7 @@ Partial Class invoicePayments
         '
         'CreditCardType_ComboBox
         '
-        Me.CreditCardType_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CreditCardType_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.CreditCardType_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CreditCardType_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.CreditCardType_ComboBox.FormattingEnabled = True

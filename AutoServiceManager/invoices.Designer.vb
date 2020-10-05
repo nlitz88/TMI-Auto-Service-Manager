@@ -239,7 +239,7 @@ Partial Class invoices
         '
         'InvoiceComboBox
         '
-        Me.InvoiceComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.InvoiceComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.InvoiceComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.InvoiceComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.InvoiceComboBox.FormattingEnabled = True
@@ -260,7 +260,7 @@ Partial Class invoices
         '
         'CustomerComboBox
         '
-        Me.CustomerComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CustomerComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.CustomerComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CustomerComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.CustomerComboBox.FormattingEnabled = True
@@ -406,7 +406,7 @@ Partial Class invoices
         '
         'ContactPhone1_ComboBox
         '
-        Me.ContactPhone1_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.ContactPhone1_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.ContactPhone1_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.ContactPhone1_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.ContactPhone1_ComboBox.FormattingEnabled = True
@@ -452,7 +452,7 @@ Partial Class invoices
         '
         'ContactPhone2_ComboBox
         '
-        Me.ContactPhone2_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.ContactPhone2_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.ContactPhone2_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.ContactPhone2_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.ContactPhone2_ComboBox.FormattingEnabled = True
@@ -475,7 +475,7 @@ Partial Class invoices
         '
         'VehicleComboBox
         '
-        Me.VehicleComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.VehicleComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.VehicleComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.VehicleComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.VehicleComboBox.FormattingEnabled = True
@@ -661,7 +661,7 @@ Partial Class invoices
         '
         'InspectionMonth_ComboBox
         '
-        Me.InspectionMonth_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.InspectionMonth_ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.InspectionMonth_ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.InspectionMonth_ComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.InspectionMonth_ComboBox.FormattingEnabled = True

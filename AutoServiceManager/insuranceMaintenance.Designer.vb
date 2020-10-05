@@ -123,7 +123,7 @@ Partial Class insuranceMaintenance
         '
         'ICComboBox
         '
-        Me.ICComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.ICComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.ICComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.ICComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.ICComboBox.FormattingEnabled = True

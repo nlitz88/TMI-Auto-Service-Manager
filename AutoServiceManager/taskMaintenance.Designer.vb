@@ -96,7 +96,7 @@ Partial Class taskMaintenance
         '
         'TTComboBox
         '
-        Me.TTComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.TTComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.TTComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.TTComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.TTComboBox.FormattingEnabled = True

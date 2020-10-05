@@ -201,7 +201,7 @@ Partial Class laborCodeMaintenance
         '
         'LCComboBox
         '
-        Me.LCComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.LCComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.LCComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.LCComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.LCComboBox.FormattingEnabled = True

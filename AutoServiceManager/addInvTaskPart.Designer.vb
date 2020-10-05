@@ -206,7 +206,7 @@ Partial Class addInvTaskPart
         '
         'PartComboBox
         '
-        Me.PartComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.PartComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.PartComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.PartComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.PartComboBox.FormattingEnabled = True

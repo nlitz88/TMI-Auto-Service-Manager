@@ -102,7 +102,7 @@ Partial Class colorMaintenance
         '
         'ACComboBox
         '
-        Me.ACComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.ACComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.ACComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.ACComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!)
         Me.ACComboBox.FormattingEnabled = True
