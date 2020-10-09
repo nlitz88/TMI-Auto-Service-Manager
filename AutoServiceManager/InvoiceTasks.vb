@@ -1053,8 +1053,8 @@
 
             validSelection = True
 
-            ' Select first editing control
-            TaskDescription_Textbox.Focus()
+            '' Select first editing control
+            'TaskDescription_Textbox.Focus()
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
@@ -1112,8 +1112,8 @@
             lastSelectedInvTask = "Select One"
         End If
 
-        ' Select first editing control
-        TaskDescription_Textbox.Focus()
+        '' Select first editing control
+        'TaskDescription_Textbox.Focus()
 
     End Sub
 
