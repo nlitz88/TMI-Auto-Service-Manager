@@ -758,9 +758,9 @@
             ' Enable user to Add new model under valid manufacturer
             addButton.Enabled = True
 
-            ' Now that valid selection made, put focus on vehicleComboBox\
-            CustomerComboBox.SelectionLength = 0
-            VehicleComboBox.Focus()
+            '' Now that valid selection made, put focus on vehicleComboBox
+            'CustomerComboBox.SelectionLength = 0
+            'VehicleComboBox.Focus()
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
