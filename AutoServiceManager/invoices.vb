@@ -1566,8 +1566,8 @@ Public Class invoices
             VehicleComboBox.SelectedIndex = 0
 
             ' Now that valid Customer selected, move user to vehicleCombobox
-            CustomerComboBox.SelectionLength = 0
-            VehicleComboBox.Focus()
+            'CustomerComboBox.SelectionLength = 0
+            'VehicleComboBox.Focus()
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
@@ -1643,8 +1643,8 @@ Public Class invoices
             vehicleHistoryButton.Visible = True
 
             ' Now that valid vehicle selected, move user to invoice combobox
-            VehicleComboBox.SelectionLength = 0
-            InvoiceComboBox.Focus()
+            'VehicleComboBox.SelectionLength = 0
+            'InvoiceComboBox.Focus()
 
             'If it does = -1, that means that value Is either "Select one" Or some other anomoly
         Else
