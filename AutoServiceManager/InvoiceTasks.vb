@@ -764,12 +764,26 @@
     ' Function that makes deleteRow calls for all relevant DataTables
     Private Function deleteInvTask() As Boolean
 
+
+        ' First, make calls to delete all CORRESPONDING invoice task parts
+        CRUD.AddParams("@invnbr", InvId)
+        CRUD.AddParams("@tasknbr", InvTaskNbr)
+        CRUD.ExecQuery("DELETE FROM InvParts WHERE InvNbr=@invnbr AND TaskNbr=@tasknbr")
+        If CRUD.HasException() Then Return False
+
+        ' Repeat to delete all CORRESPONDING invoice task labor codes
+        CRUD.AddParams("@invnbr", InvId)
+        CRUD.AddParams("@tasknbr", InvTaskNbr)
+        CRUD.ExecQuery("DELETE FROM InvLabor WHERE InvNbr=@invnbr AND TaskNbr=@tasknbr")
+        If CRUD.HasException() Then Return False
+
         ' Columns that will not be included in the WHERE clause the query
         Dim excludedKeyColumns As New List(Of String) From {"TNTD", "TaskID", "TaskDescription", "Instructions", "TaskLabor", "TaskParts"}
 
         deleteRow(CRUD, InvTasksDbController.DbDataTable, InvTaskRow, excludedKeyColumns, "InvTask")
         ' Then, return exception status of CRUD controller. Do this after each call
         If CRUD.HasException() Then Return False
+
 
         ' Otherwise, return true
         Return True
